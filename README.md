@@ -1,7 +1,7 @@
 # omikhleia-sile-packages
 Packages and classes for the SILE typesetter
 
-I wanted to give a try to the [SILE](https://github.com/sile-typesetter/sile) typesetting system. If I had to typeset a book, however, the current version of SILE (0.10.15 at the initial time of writing) lacks many supporting packages for the sort of things I usually write. Here is my attempt at providing packages or classes the would fit my needs.
+I wanted to give a try to the [SILE](https://github.com/sile-typesetter/sile) typesetting system. If I had to typeset a book, however, the current version of SILE (0.10.15 at the initial time of writing) lacks many supporting packages for the sort of things I usually write. Here is my attempt at providing packages or classes that would fit my needs.
 
 Some of the things I may (or not) provide here:
 - [X] epigraphs
@@ -14,5 +14,5 @@ Some of the things I may (or not) provide here:
   - [X] Temporary command redefinition (save and restore)
 
 Progress status:
-- **epigraph** package: inspired (loosely) from the LaTeX package by the same name, with minimal set of useful features
+- **epigraph** package: inspired (loosely) from the LaTeX package by the same name, with minimal set of useful features. Internal implementation details may change as my knowledge of SILE improves, but the user interface should be ok and the package does a decent job.
 - **redefine** package: considered as a beta-version at best.
