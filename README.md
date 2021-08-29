@@ -10,4 +10,9 @@ Some of the things I may (or not) provide here:
 - [ ] side notes (a.k.a margin notes)
 - [ ] figures (with captions, etc.)
 - [ ] layout for dictionaries (two colum, running headers, etc.)
-- [ ] other minor styles
+- [ ] other minor styles and hacks (details to be provided as my knowledge of SILE improves)
+  - [X] Temporary command redefinition (save and restore)
+
+Progress status:
+- **epigraph** package: inspired (loosely) from the LaTeX package by the same name, with minimal set of useful features
+- **redefine** package: considered as a beta-version at best.
