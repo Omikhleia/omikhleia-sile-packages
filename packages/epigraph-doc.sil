@@ -34,7 +34,7 @@ Without source:
   \randomtext
 \end{epigraph}
 
-The default width for the epigraph block is \keyword{epigraph.width}.  
+The default width for the epigraph block is \keyword{epigraph.width}.
 A \keyword{width} option is also provided to override it on a single
 epigraph\footnote{Basically, all global settings are also available as
 command options (or reciprocally!), with the same name but the namespace left

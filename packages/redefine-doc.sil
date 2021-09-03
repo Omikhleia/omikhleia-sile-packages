@@ -1,0 +1,55 @@
+\begin[papersize=6in x 9in, class=book]{document}
+\language[main=en]
+\script[src=packages/redefine]
+
+\define[command=keyword]{\font[family=Linux Biolinum O, weight=600]{\process}}
+\define[command=code]{\font[family=Linux Biolinum O, weight=600]{\process}}
+\define[command=codes]{\par\medskip\code{\process}\par\medskip}
+\define[command=args]{⟨\em{\process}⟩}
+\font[family=Linux Libertine O]
+
+\center{A (basic) command-redefinition package for SILE}
+\bigskip
+
+The \keyword{redefine} package can be used to easily redefine a command under a new name.
+
+Sometimes one may want to redefine a command (e.g. a font switching hook for some other
+command, etc.), but would also want to restore the initial command definition afterwards
+at some point, or to invoke the original definition from the newly redefined one.
+
+This package is just some sort of quick "hack" in order to it in an easy way. It's far from perfect,
+it likely has implications if users starts saving and restoring commands in a disordered way, but
+it can do the magic in some fairly reasonable symmetric cases.
+
+The first syntax below allows one to change the definition of command \args{name} to
+new \args{content}, but saving the previous definition to \args{saved-name}:
+
+\begin{codes}
+\\redefine[command=\args{name}, as=\args{saved-name}]\{\args{content}\}
+\end{codes}
+
+From now on, invoking \code{\\\args{name}} will result in the new definition to be applied,
+while \code{\\\args{save-name}} will invoke the previous definition, whatever it was.
+
+Of course, be sure to use a unique save name – otherwise, if overwriting an existing command,
+you will get a warning, at your own risks...
+
+If invoked without \args{content}, the redefinition will just define an alias to the current
+command:
+
+\begin{codes}
+\\redefine[command=\args{name}, as=\args{saved-name}]
+\end{codes}
+
+The following syntax allows one to restore command \args{name} to whatever was saved
+in \args{saved-name}, and to clear the latter:
+
+\begin{codes}
+\\redefine[command=\args{name}, from=\args{saved-name}]
+\end{codes}
+
+So now on \code{\\\args{name}} is restore to whatever was saved, and \code{\\\args{saved-name}}
+is no longer defined. Again, if the saved name corresponded to some existing command in a broader
+scope, things may break.
+
+\end{document}

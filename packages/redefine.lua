@@ -3,29 +3,43 @@
 -- Omikhleia, 2021
 -- License: MIT
 --
--- Somehow a "hack", see description at the bottom of the file.
+-- Somehow a "hack", see description.
 --
 -- \redefine[command=command-name, as=saved-command-name]{content}
+-- Or
+-- \redefine[command=command-name, as=saved-command-name]
 -- ...
--- \redefine[command=command-name, from=saved-command-name}
+-- \redefine[command=command-name, from=saved-command-name]
 --
 SILE.registerCommand("redefine", function (options, content)
   SU.required(options, "command", "defining command")
 
   if options.as then
-    -- Case: \redefine[command=command-name, as=saved-command-name]{content}
+    if options.as == options.command then
+      SU.error("Command " .. option.command .. "should not be redefined as itself.")
+    end
+
+    -- Case: \redefine[command=command-name, as=saved-command-name]
     if SILE.Commands[options.as] ~= nil then
-      SU.warn("Command " .. options.as .. " will be overwritten, are you sure?")
+      SU.warn("Command " .. options.as .. " is overwritten, are you sure? At your risks...")
     end
     local cmd = SILE.Commands[options.command]
     if cmd == nil then
       SU.error("Command " .. option.command .. "does not exist!")
     end
     SILE.Commands[options.as] = cmd
-    SILE.call("define", { command = options.command }, content) 
+
+    -- Sub-case: \redefine[command=command-name, as=saved-command-name]{content}
+    if content and (type(content) ~= "table" or #content ~= 0) then
+      SILE.call("define", { command = options.command }, content)
+    end
   elseif options.from then
-    -- Case \redefine[command=command-name, from=saved-command-name}
-    if content and type(content) == "table" and #content ~= 0 then
+    if options.from == options.command then
+      SU.error("Command " .. option.command .. "should not be restored from itself, ignoring.")
+    end
+
+    -- Case \redefine[command=command-name, from=saved-command-name]
+    if content and (type(content) ~= "table" or #content ~= 0) then
       SU.warn("Extraneous content in " .. options.command .. " redefinition is ignored!")
     end
     local cmd = SILE.Commands[options.from]
@@ -40,19 +54,8 @@ SILE.registerCommand("redefine", function (options, content)
 end, "Redefines a command saving the old version with another name, or restore it")
 
 return {
-  documentation = [[
-  \begin{document}
-    This package can be used to redefine a command under a new name.
-
-    Sometimes one wants to redefine a command (e.g. a font swiching
-    hook for some other command, etc.) but would also want to
-    restore the initial command definition afterwards, or invoke
-    the original definition from the newly redefined one.
-
-    I didn't find a standard way for doing this, so ended up with this
-    small "hack" package, that allows keeping the old definition
-    under a new user-defined name, and later restoring
-    it (clearing the saved version).
+  documentation = [[\begin{document}
+    \include[src=packages/redefine-doc.sil]
   \end{document}]]
 }
 
