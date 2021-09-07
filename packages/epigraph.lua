@@ -4,6 +4,7 @@
 -- License: MIT
 -- 
 SILE.require("packages/rules")
+local styles = SILE.require("packages/styles").exports
 SILE.require("packages/omikhleia-utils")
 
 SILE.settings.declare({
@@ -62,6 +63,9 @@ SILE.settings.declare({
     help = "Whether an epigraph is ragged (defaults to false)."
   })
 
+styles.defineStyle("epigraph:style", {}, { font = { size = -1 } })
+styles.defineStyle("epigraph:source:style", {}, { font = { style="italic" } })
+
 SILE.registerCommand("epigraph:font", function (_, _)
   SILE.call("font", { size = SILE.settings.get("font.size") - 1 })
 end, "Font used for an epigraph")
@@ -118,7 +122,7 @@ SILE.registerCommand("epigraph", function (options, content)
     end 
  
     SILE.settings.set("document.parindent", parindent)
-    SILE.call("epigraph:font")
+    SILE.call("style:apply", { name = "epigraph:style" }, function()
     SILE.process(content)
     if rule:tonumber() ~= 0 then
       SILE.typesetter:leaveHmode()
@@ -129,12 +133,14 @@ SILE.registerCommand("epigraph", function (options, content)
     end
     if source then
       SILE.typesetter:leaveHmode(1)
-      SILE.call("epigraph:source:font")
       if rule:tonumber() == 0 then
         SILE.typesetter:pushVglue(sourceskipamount)
       end
-      SILE.call("raggedleft", {}, source)
+      SILE.call("style:apply", { name = "epigraph:source:style" }, function()
+        SILE.call("raggedleft", {}, source)
+      end)
     end
+end)
     SILE.typesetter:leaveHmode()
     SILE.typesetter:pushVglue(afterskipamount)
   end)
