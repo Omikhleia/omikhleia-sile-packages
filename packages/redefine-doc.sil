@@ -48,7 +48,7 @@ in \args{saved-name}, and to clear the latter:
 \\redefine[command=\args{name}, from=\args{saved-name}]
 \end{codes}
 
-So now on \code{\\\args{name}} is restore to whatever was saved, and \code{\\\args{saved-name}}
+So now on \code{\\\args{name}} is restored to whatever was saved, and \code{\\\args{saved-name}}
 is no longer defined. Again, if the saved name corresponds to some existing command in a broader
 scope, things may break.
 

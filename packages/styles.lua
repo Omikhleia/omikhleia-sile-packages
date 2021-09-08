@@ -3,7 +3,7 @@
 -- Omikhleia, 2021
 -- License: MIT
 -- 
--- Rough API ! Unstable ! Real quick'n dirty !!!!!!!!!!!!
+-- Rough API ! Experimental and unstable ! Real quick'n dirty :)
 -- 
 --  % Applies a font (same as \font), but additionaly supporting relative sizes (e.g. -1)
 --  \style:font[family=...]{...} 
@@ -25,7 +25,7 @@
 --  }
 
 
--- \style:redefine[name, as]{....} % TODO SUPPORT inherit=true ???
+-- \style:redefine[name, as, inherit]{....}
 -- \style:redefine[name, from]{....}
 
 -- NOT YET....
@@ -192,7 +192,7 @@ return {
     end
   },
   documentation = [[\begin{document}
-  % \include[src=packages/styles-doc.sil]
+  \include[src=packages/styles-doc.sil]
 \end{document}]]
 }
 
