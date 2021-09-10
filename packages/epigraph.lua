@@ -63,6 +63,13 @@ SILE.settings.declare({
     help = "Whether an epigraph is ragged (defaults to false)."
   })
 
+SILE.settings.declare({
+  parameter = "epigraph.margin",
+  type = "length",
+  default = SILE.length("0"),
+  help = "Margin (indent) for an epigraph (defaults to 0)."
+})
+
 styles.defineStyle("epigraph:style", {}, { font = { size = -1 } })
 styles.defineStyle("epigraph:source:style", {}, { font = { style="italic" } })
 
@@ -100,10 +107,13 @@ SILE.registerCommand("epigraph", function (options, content)
     local ragged =
       options.ragged ~= nil and SU.cast("boolean", options.ragged)
       or SILE.settings.get("epigraph.ragged")
+    local margin =
+      options.margin ~= nil and SU.cast("length", options.margin)
+      or SILE.settings.get("epigraph.margin")
 
     local framew = SILE.typesetter.frame:width()
     local epigraphw = width:absolute()
-    local skip = framew - epigraphw
+    local skip = framew - epigraphw - margin
     local source = omikhleia.extractFromTree(content, "source")
     SILE.typesetter:leaveHmode()
     SILE.typesetter:leaveHmode()
@@ -115,10 +125,10 @@ SILE.registerCommand("epigraph", function (options, content)
     local glue = SILE.nodefactory.glue({ width = l })
     if align == "left" then
       SILE.settings.set("document.rskip", glue)
-      SILE.settings.set("document.lskip", 0)
+      SILE.settings.set("document.lskip", margin)
     else
       SILE.settings.set("document.lskip", glue)
-      SILE.settings.set("document.rskip", 0)
+      SILE.settings.set("document.rskip", margin)
     end 
  
     SILE.settings.set("document.parindent", parindent)

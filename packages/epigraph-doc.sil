@@ -118,6 +118,14 @@ epigraphs, so we can of course tweak them at convenience.
   \source{\randomsource}
 \end{epigraph}
 
+It is also possible to offset the epigraph from the side (left or right) it is attached to, with the
+\keyword{margin} option, e.g. \keyword{0.5cm}:
+
+\begin[margin=0.5cm, rule=0.4pt]{epigraph}
+  \randomtext
+  \source{\randomsource}
+\end{epigraph}
+
 If you want to specify what styling the epigraph environment should use, you
 can redefine the \keyword{epigraph:style} style. By default it will be the same
 as the surrounding document, just smaller.
