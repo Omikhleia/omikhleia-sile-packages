@@ -86,8 +86,10 @@ SILE.registerCommand("style:font", function (options, content)
   if size then 
     opts.size = SILE.settings.get("font.size") + size
   end
+
   SILE.call("font", opts, content)
-end, "Applies a font, with support for relative sizes.")
+end, "Applies a font, with additional support for relative sizes.")
+
 
 SILE.registerCommand("style:define", function (options, content)
   local name = SU.required(options, "name", "style:define")
