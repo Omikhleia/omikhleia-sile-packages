@@ -10,7 +10,9 @@ Some of the things I may (or not) provide here:
 - [ ] proper page masters (a.k.a an extended book template for print)
 - [ ] side notes (a.k.a margin notes)
 - [ ] figures (with captions, etc.)
-- [ ] layout for dictionaries (two colum, running headers, etc.)
+- [ ] dictionaries
+  - [X] XML TEI dictionary support (subset, as used in the HSD project)
+  - [ ] layout for dictionaries (two colum, running headers, etc.)
 - [ ] other minor styles and hacks (details to be provided as my knowledge of SILE improves)
   - [X] Temporary command redefinition (save and restore)
   - [X] Styles
@@ -19,3 +21,4 @@ Progress status:
 - **epigraph** package: inspired (loosely) from the LaTeX package by the same name, with minimal set of useful features. Internal implementation details may change as my knowledge of SILE improves, but the user interface should be ok and the package does a decent job.
 - **redefine** package: considered as a beta-version at best.
 - **styles** package: an experimental idea inspired by LibreOffice and Co. Considered as an alpha-version at best.
+- **teidict** package: does a fairly good job on the HSD dictionary
