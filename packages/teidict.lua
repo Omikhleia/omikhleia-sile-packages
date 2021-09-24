@@ -7,24 +7,44 @@
 -- as suitable for the HSD project, and assumes a similar structure to the latter,
 -- see https://omikhleia.github.io/sindict/manual/DATA_MODEL.html
 --
--- Requires packages: pdf, color, styles
+-- Requires packages: pdf, color, styles, infonodes, inputfilter, raiselower, rules
 
--- Styles
+-- SETTINGS
+
+SILE.settings.declare({
+  -- The source dictionary may contain notes in several languages, we do not
+  -- want them all. On the other hand, it may contain several sense information
+  -- in several language too, but this setting does apply to them.
+  parameter = "teidict.mainLanguage",
+  type = "string or nil",
+  default = nil,
+  help = "Main definition language (to filter out some notes etc.)"
+})
+
+-- STYLES
 
 local styles = SILE.require("packages/styles").exports
-styles.defineStyle("tei:orth", {}, { font = { family="Libertinus Sans", weight = 700 } })
-styles.defineStyle("tei:bibl", {}, { font = { size = -2 } })
+styles.defineStyle("tei:orth", {}, { font = { family = "Libertinus Sans", weight = 700 } })
+styles.defineStyle("tei:bibl", {}, { font = { language = "und", size = -2 } })
 styles.defineStyle("tei:note", {}, { font = { size = -1.5 } })
 styles.defineStyle("tei:mentioned", {}, { font = { style = "italic" } })
 styles.defineStyle("tei:pos", {}, { font = { style = "italic", size = -1 } })
 styles.defineStyle("tei:hint", {}, { font = { style = "italic" } })
---styles.defineStyle("tei:milestone", {}, { font = { family= "Yinit", size = 20 } })
 styles.defineStyle("tei:milestone", {}, { font = { family= "Eileen Caps Black", size = 20 } })
 styles.defineStyle("tei:entry:main", {}, {})
 styles.defineStyle("tei:entry:xref", { inherit = "tei:entry:main" }, { color = { color = "dimgray" }})
 styles.defineStyle("tei:entry:numbering", {}, { font = { family = "Libertinus Sans", size = -2 }})
+styles.defineStyle("tei:corr", {}, { color = { color = "dimgray" }})
 
--- Utilities
+local italicCorr = function (stylename)
+  local spec = SILE.scratch.styles[stylename]
+  if spec == nil then SU.error("Unknown style "..stylename) end
+  if spec.style and spec.style.font and spec.style.font.style == "italic" then
+    SILE.call("kern", { width = "0.1em" }) -- Hand-made italic correction
+  end
+end
+
+-- UTILITIES
 
 local trimLeft = function (str)
   return (str:gsub("^%s*", ""))
@@ -93,6 +113,20 @@ end
 
 local refs = {}
 
+local function shallowcopy(orig)
+  local orig_type = type(orig)
+  local copy
+  if orig_type == 'table' then
+      copy = {}
+      for orig_key, orig_value in pairs(orig) do
+          copy[orig_key] = orig_value
+      end
+  else -- number, string, boolean, etc
+      copy = orig
+  end
+  return copy
+end
+
 local buildPtrReferences = function (content)
   io.stderr:write("<...building references...>")
   local count = 0
@@ -102,7 +136,14 @@ local buildPtrReferences = function (content)
       if ent.options.id then
         local headword = getFirstEntryOrth(ent)
         headword.options.n = ent.options.n
-        refs[ent.options.id] = headword        
+        -- No need for a deepcopy, just down to the options,
+        -- so that we can mark the headword afterwards
+        local refent = shallowcopy(headword)
+        refent.options = shallowcopy(headword.options)
+        refs[ent.options.id] = refent
+        -- Now mark it, so when processed, it knows it is a headword
+        -- and will register an infonode...
+        headword.options.isHeadword = true
         count = count + 1
       end
     end
@@ -110,11 +151,11 @@ local buildPtrReferences = function (content)
   io.stderr:write("<..."..count.." references collected...>\n")
 end
 
--- Document level tags
+-- DOCUMENT LEVEL TAGS
 
-SILE.call("xmltricks:ignore", {}, { "teiHeader etym corr index"}) -- FIXME provided some support for these, later
+SILE.call("xmltricks:ignore", {}, { "teiHeader etym index"}) -- FIXME provided some support for these, later
 
-SILE.call("xmltricks:passthru", {}, { "text body "})
+SILE.call("xmltricks:passthru", {}, { "text body"})
 
 SILE.registerCommand("div0", function (options, content)
   local t = SU.required(options, "type", "TEI.div0")
@@ -126,8 +167,8 @@ SILE.registerCommand("div0", function (options, content)
 
   SILE.typesetter:leaveHmode()
   SILE.settings.temporarily(function()
-    SILE.settings.set("document.lskip", "2em")
-    SILE.settings.set("document.parindent", "-2em")
+    SILE.settings.set("document.lskip", "1em")
+    SILE.settings.set("document.parindent", "-1em")
     SILE.process(content)
   end)
 end)
@@ -137,10 +178,13 @@ SILE.registerCommand("milestone", function (options, content)
   SILE.call("bigskip")
   SILE.call("style:apply", { name = "tei:milestone" }, { options.n })
   SILE.typesetter:leaveHmode()
+  SILE.call("novbreak")
   SILE.call("medskip")
+  SILE.call("novbreak")
+  SILE.typesetter:inhibitLeading()
 end)
 
--- Entry level tags
+-- ENTRY LEVEL TAGS
 
 SILE.registerCommand("entry", function (options, content)
   local nSense = countElementByTag("sense", content)
@@ -181,7 +225,7 @@ SILE.registerCommand("re", function (options, content)
   end
 end)
 
--- Form level tags
+-- FORM LEVEL TAGS
 
 SILE.registerCommand("form", function (options, content)
   local nForms = countElementByTag("form", content)
@@ -213,11 +257,8 @@ SILE.registerCommand("form", function (options, content)
     end
     for i=1, #content do
       if type(content[i]) == "table" then
-        iElem = iElem + 1
-        -- Not needed:
-        -- Actually when we built the ptr references we already have the parentType
-        -- set.
-        -- content[i].options.parentType = options.type
+        iElem = iElem + 1.
+        content[i].options.parentType = options.type
         SILE.process({ content[i] })
         if iElem < nElem then
           SILE.typesetter:typeset(" ")
@@ -230,7 +271,7 @@ SILE.registerCommand("form", function (options, content)
   end
 end)
 
--- Orth level tags
+-- ORTH/PRON LEVEL TAGS
 
 local orthPrefix = {
   deduced = "#",
@@ -240,20 +281,38 @@ local orthPrefix = {
 }
  
 SILE.registerCommand("orth", function (options, content)
-   local t = options.parentType and orthPrefix[options.parentType]
-   if t then
-     SILE.typesetter:typeset(t)
-   end
-   SILE.call("style:apply", { name = "tei:orth" }, content)
-   if options.n then
+  if options.isHeadword then
+    SILE.call("info", { category = "dictentry", value = content }, {})
+  end
+  local t = options.parentType and orthPrefix[options.parentType]
+  if t then
+    SILE.typesetter:typeset(t)
+  end
+  SILE.call("style:apply", { name = "tei:orth" }, content)
+  if options.n then
     SILE.call("style:apply", { name = "tei:entry:numbering" }, function()
       SILE.typesetter:typeset(" "..SILE.formatCounter({
         value = options.n,
         display = "ROMAN" })
       )
     end)
-   end
- end)
+  end
+end)
+
+SILE.registerCommand("corr", function (options, content)
+  local sic = SU.required(options, "sic", "TEI.corr")
+  SILE.process(content)
+  SILE.typesetter:typeset(" ")
+  SILE.call("style:apply", { name = "tei:corr" }, function()
+    -- Struck out the "sic" correction
+    local hbox = SILE.call("hbox", {}, { sic })
+    local gl = SILE.length() - hbox.width
+    SILE.call("raise", { height = "0.475ex" }, function()
+      SILE.call("hrule", { width = gl.length, height = "0.4pt" })
+    end)
+    SILE.typesetter:pushGlue({ width = hbox.width })
+  end)
+end)
 
 -- This only supports a subset of X-SAMPA latin representation of IPA.
 local xSampaSubset = {
@@ -305,19 +364,40 @@ local toIpa = function (str)
   local special = string.gsub(str, "r\\_0", "ɹ̥") -- 0279 0325 reverser r, vl.
   local ipa = string.gsub(special, ".", xSampaSubset)
   return ipa
- end
+end
 
 SILE.registerCommand("pron", function (options, content)
   SILE.typesetter:typeset("[")
   SILE.typesetter:typeset(toIpa(content[1]))
   SILE.typesetter:typeset("]")
 end)
- 
+
+local inputfilter = SILE.require("packages/inputfilter").exports
+
+-- Helper to insert breakpoints in unwieldy bibliographic references
+local biblFilter = function (node, content)
+  if type(node) == "table" then return node end
+  local result = {}
+  for token in SU.gtoke(node, '[:/,%-]') do
+    if token.string then
+      result[#result+1] = token.string
+    else
+        result[#result+1] = token.separator
+        result[#result+1] = inputfilter.createCommand(
+          content.pos, content.col, content.line,
+          "penalty", { penalty = 200 }, nil
+        )
+    end
+  end
+  return result
+end
+
 SILE.registerCommand("bibl", function (options, content)
-  SILE.call("style:apply", { name = "tei:bibl" }, content)
+  local transformed = inputfilter.transformContent(content, biblFilter)
+  SILE.call("style:apply", { name = "tei:bibl" }, transformed)
 end)
 
--- Sense leve tags
+-- SENSE LEVEL TAGS
 
 SILE.registerCommand("sense", function (options, content)
   local nTrans = countElementByTag("trans", content)
@@ -362,7 +442,7 @@ SILE.registerCommand("def", function (options, content)
   SILE.process(trimContent(content))
 end)
  
--- Grammatical and usage level tags
+-- GRAMMATICAL AND USAGE LEVEL TAGS
 
 SILE.registerCommand("gramGrp", function (options, content)
   for i=1, #content do
@@ -386,6 +466,7 @@ SILE.registerCommand("usg", function (options, content)
   if t == "hint" then
     SILE.typesetter:typeset("(")
     SILE.call("style:apply", { name = "tei:hint" }, content)
+    italicCorr("tei:hint")
     SILE.typesetter:typeset(")")
   elseif t == "lang" then
     -- SILE.typesetter:typeset(" ")
@@ -404,7 +485,7 @@ SILE.registerCommand("usg", function (options, content)
   end  
 end)
 
--- Linking tags
+-- LINKING TAGS
 
 SILE.registerCommand("xr", function (options, content)
   if options.type == "analogy" then
@@ -436,7 +517,7 @@ SILE.registerCommand("ptr", function (options, content)
   end)
 end)
 
--- Other support tags
+-- OTHER MISCELLANEOUS TAGS
 
 SILE.registerCommand("note", function (options, content)
   local t = options.type
@@ -456,12 +537,20 @@ SILE.registerCommand("note", function (options, content)
         SILE.process(content)
       end)
     elseif t == "comment" then
-      SILE.call("style:apply", { name = "tei:note" }, function()
-        SILE.typesetter:leaveHmode()
-        SILE.typesetter:typeset("◆ ") -- Note: U+25C6 black diamond
-        -- SILE.typesetter:typeset("◈ ") -- Note: U+25C8 white diamond containing black small diamond
-                                        -- Absent from Libertinus.
-        SILE.process(trimContent(content))
+      local mainLang = SILE.settings.get("teidict.mainLanguage")
+      if mainLang and options.lang and options.lang ~= mainLang then
+        return -- Ignore comment note.
+      end
+      SILE.settings.temporarily(function()
+        SILE.settings.set("document.language", options.lang)
+        SILE.call("style:apply", { name = "tei:note" }, function()
+          SILE.typesetter:leaveHmode()
+          SILE.typesetter:typeset("◆ ") -- Note: U+25C6 black diamond
+          -- SILE.typesetter:typeset("◈ ") -- Note: U+25C8 white diamond containing black small diamond
+                                          -- Absent from Libertinus.
+          SILE.process(trimContent(content))
+          SILE.typesetter:leaveHmode()
+        end)
       end)
     else
       SU.error("Unsupported type in TEI:note: "..t)
@@ -477,4 +566,4 @@ SILE.registerCommand("mentioned", function (options, content)
   SILE.call("style:apply", { name = "tei:mentioned" }, content)
 end)
 
--- All done.
+-- ALL DONE.
