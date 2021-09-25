@@ -1,0 +1,27 @@
+\begin[papersize=7.44in x 9.68in, class=teibook]{document}
+%
+% This is a preamble for (XML) TEI dictionaries.
+% Usage: sile -I preamble/dict-sd-en-preamble.sil someteidictionary.sil
+%
+% Papersize 7.44in x 9.68in is the "Crown Quarto" (at least as per Lulu.com's
+% definition of it)
+%
+% Two columns with dictionary entries and bibliographic refs are a mess
+% to justify. Depending on the source material, you may need to test
+% what looks best for you...
+%
+\set[parameter=linebreak.emergencyStretch, value=0.5cm]
+%
+% Set a few globals (main font, default language, paragraph indent).
+% Note that other fonts (e.g. for entries, etc.) are defined via styles.
+%
+\language[main=en]
+\font[family=Libertinus Serif, size=10pt]
+\set[parameter=document.parindent, value=1.25em]
+%
+% In the case of multi-lingual dictionaries, some elements can be
+% filtered out.
+%
+\set[parameter=teidict.mainLanguage,value=en]% English notes only for now.
+
+\end{document}
