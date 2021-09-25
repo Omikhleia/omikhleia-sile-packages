@@ -19,7 +19,7 @@
 \font[family=Libertinus Serif, size=10pt]
 \set[parameter=document.parindent, value=1.25em]
 %
-% In the case of multi-lingual dictionaries, some elements can be
+% In the case of multilingual dictionaries, some elements can be
 % filtered out.
 %
 \set[parameter=teidict.mainLanguage,value=en]% English notes only for now.

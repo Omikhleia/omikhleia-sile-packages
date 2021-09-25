@@ -4,7 +4,7 @@
 -- License: MIT
 --
 -- This is the book-like class for (X%L) TEI dictionaries.
--- It just define the appropriate page masters, sectionning hooks
+-- It just defines the appropriate page masters, sectionning hooks
 -- and loads all needed packages. The hard work processing the
 -- XML content is done in the "teidict" package.
 --

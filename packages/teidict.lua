@@ -171,9 +171,9 @@ SILE.registerCommand("tei:passthru:asParagraph", function (_, content)
   end
 end)
 
--- These nodes are just structure nodes, they should have any
+-- These nodes are just structure nodes, they shouldn't have any
 -- text children (or just spaces, due to XML indentation...), so we
--- ignore them.
+-- ignore these.
 SILE.registerCommand("tei:passthru:asStructure", function (options, content)
   for token in SU.gtoke(content[1]) do
     if token.string then
@@ -487,10 +487,8 @@ end
 SILE.registerCommand("pron", function (options, content)
   -- Convert to IPA, then typeset in an hbox to avoid line breaks
   local pron = SU.contentToString(content)
+  -- Put in an hbox, to avoid breaks in the pronunciation
   SILE.call("hbox", {}, { "["..toIpa(pron).."]" })
-    -- SILE.typesetter:typeset("[")
-    -- SILE.typesetter:typeset("["..toIpa(content[1]))
-    -- SILE.typesetter:typeset("]")
 end)
 
 local inputfilter = SILE.require("packages/inputfilter").exports
