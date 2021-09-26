@@ -290,9 +290,13 @@ SILE.registerCommand("div0", function (options, content)
 end)
 
 SILE.registerCommand("milestone", function (options, content)
+  local title = SU.required(options, "n", "TEI.milestone")
+  local dest = "tei_milestone_"..options.n
   SILE.typesetter:leaveHmode()
   SILE.call("goodbreak")
   SILE.call("bigskip")
+  SILE.call("pdf:destination", { name = dest })
+  SILE.call("pdf:bookmark", { title = title, dest = dest, level = 1 })
   SILE.call("style:apply", { name = "tei:milestone" }, { options.n })
   SILE.call("novbreak")
   SILE.call("medskip")
