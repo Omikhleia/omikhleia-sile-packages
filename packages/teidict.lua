@@ -651,17 +651,12 @@ SILE.registerCommand("note", function (options, content)
   SILE.settings.temporarily(function()
     SILE.settings.set("document.parindent", "0em")
     if t == "source" then
-      SILE.call("style:apply", { name = "tei:note" }, function()
-        -- SILE.typesetter:leaveHmode()
-        SILE.typesetter:typeset(" ◇ ") -- U+25C7 white diamond
-        SILE.process(content)
-      end)
+      SILE.typesetter:typeset(" ◇ ") -- U+25C7 white diamond
+      SILE.process(content)
     elseif t == "source,deduced" then
-      SILE.call("style:apply", { name = "tei:note" }, function()
-        -- SILE.typesetter:leaveHmode()
-        SILE.typesetter:typeset(" ← ") -- U+2190 leftward arrow
-        SILE.process(content)
-      end)
+      SILE.typesetter:typeset(" ←") -- U+2190 leftward arrow
+      SILE.call("kern", { width = "0.25em" })
+      SILE.process(content)
     elseif t == "comment" then
       local mainLang = SILE.settings.get("teidict.mainLanguage")
       if mainLang and options.lang and options.lang ~= mainLang then
