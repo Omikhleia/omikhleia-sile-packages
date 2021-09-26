@@ -11,6 +11,21 @@
 -- Required packages: xmltricks, pdf, color, infonodes, raiselower, rules
 -- Required class support: teibook
 --
+-- KNOWN ISSUES:
+--   There are a number of unsatisfying "hacks" regarding how spaces and
+--   parenthesises are added to some content (alternative forms, part of
+--   speech, etc.). = see FIXME HACK comments...
+--   The main issue at stakes is that a dictionary is a heavily "semantic"
+--   structured mark-up (i.e. a "lexical view" rather than an "editorial view")
+--   and that XML nodes may contain many things we need to cancel (such as spaces)
+--   or supplement (such as punctuations, and again, proper spaces where needed), even
+--   sometimes re-order...
+--   And the current logic is mostly broken to that respect. I'd need to step
+--   back here, and find a clever way to solve it - But I failed too for the HTML
+--   output via XSLT (ending up in a quick and dirty final pass with Node.js to
+--   "fix" these things). And without XPath (to check previous siblings), this
+--   might require a different approach anyway...
+--
 
 -- SETTINGS
 
@@ -38,6 +53,7 @@ styles.defineStyle("tei:hint", {}, { font = { style = "italic" } })
 styles.defineStyle("tei:entry:main", {}, {})
 styles.defineStyle("tei:entry:xref", { inherit = "tei:entry:main" }, { color = { color = "dimgray" } })
 styles.defineStyle("tei:entry:numbering", { inherit = "tei:orth:base" }, { font = { size = -2 } })
+styles.defineStyle("tei:sense:numbering", {}, { font = { weight = 700 } })
 styles.defineStyle("tei:corr", {}, { color = { color = "dimgray" } })
 styles.defineStyle("tei:header:legalese", {}, { font = { size = -1 } })
 
@@ -64,7 +80,7 @@ end
 local trimContent = function (content)
   -- Remove leading and trailing spaces
   -- FIXME maybe not very robust, should do the trick in most cases though
-  -- POORLY CODED LOL
+  -- POORLY CODED LOL :) Changed it some many times that it can wait for refactor...
   for i=1, #content do
     if i == 1 and type(content[i]) == "string" then
       content[i] = trimLeft(content[i])
@@ -209,6 +225,12 @@ SILE.registerCommand("teiHeader", function (options, content)
   local fileDesc = SILE.findInTree(content, "fileDesc") or SU.error("Structure error, no TEI.fileDesc")
   local titleStmt = SILE.findInTree(fileDesc, "titleStmt") or SU.error("Structure error, no TEI.titleStmt")
   local title = SILE.findInTree(titleStmt, "title") or SU.error("Structure error, no TEI.title")
+
+  -- FIXME HACK so the top title page appears in the outline
+  -- My reader automatically jumps to the first topic, and I don't want that.
+  SILE.call("pdf:destination", { name = "tei_cover" })
+  SILE.call("pdf:bookmark", { title = "-", dest = "tei_cover", level = 1 })
+
   SILE.call("teibook:titlepage", {}, title)
 
   SILE.call("teibook:header")
@@ -309,6 +331,8 @@ end)
 SILE.registerCommand("entry", function (options, content)
   local nSense = countElementByTag("sense", content)
   local iSense = 0
+  local nRe = countElementByTag("re", content)
+  local iRe = 0
 
   SILE.typesetter:leaveHmode()
   SILE.call("smallskip")
@@ -324,6 +348,11 @@ SILE.registerCommand("entry", function (options, content)
         if content[i].command == "sense" and nSense > 1 then
           iSense = iSense + 1
           content[i].options.n = iSense
+        elseif content[i].command == "re" then
+          -- FIXME HACK trying to address a spacing issue later, but this is not a clean way
+          -- to do it. I am lacking faith here, should be done another way.
+          iRe = iRe + 1
+          content[i].options.n = iRe
         end
         SILE.process({ content[i] })
       end
@@ -334,11 +363,35 @@ SILE.registerCommand("entry", function (options, content)
 end)
 
 SILE.registerCommand("re", function (options, content)
-  SILE.typesetter:typeset(" ◇ ") -- U+25C7 white diamond https://unicode-table.com/fr/25C7/
+  -- FIXME HACK: Trying to cope with an inconsistency in the HSD, where related entries
+  -- can have nested forms (as regular entries), or direct forms (direct list of alternatives),
+  -- and we want to apply correct parentheses/commas around the alternatives...
+  -- On the other hand, this is a perfectly legit TEI construct, so it should not be handled
+  -- this way, and here... and it could even occur theotically at other entry levels so would
+  -- need some generalization
+  local firstForm = SILE.findInTree(content, "form")
+  local hasNestedForms = (SILE.findInTree(firstForm, "form") ~= nil)
+  local nForms = countElementByTag("form", content)
+  local iForms = 0
+
+  if options.n == 1 then
+    -- FIXME HACK, see above. It all relies on pos markers to insert an extra space. Bad.
+    SILE.typesetter:typeset(" ")
+  end
+
+  SILE.typesetter:typeset("◇ ") -- U+25C7 white diamond https://unicode-table.com/fr/25C7/
   -- SILE.typesetter:typeset("◈" ) -- 25C8 white diamond containing black small diamond
                                    -- Absent from Libertinus :(
   for i=1, #content do
     if type(content[i]) == "table" then
+      if (not hasNestedForms) and content[i].command == "form" then
+          iForms = iForms + 1
+          if nForms > 1 then
+            content[i].options.alt = (iForms > 1) and (iForms - 1)
+            content[i].options.altLast = (i > 1 and iForms == nForms)
+          end
+          content[i].options.last = (iForms == nForms)
+      end
       SILE.process({ content[i] })
     end
     -- All text nodes in <re> (normally only spaces) are ignored
@@ -528,9 +581,16 @@ SILE.registerCommand("sense", function (options, content)
 
   if options.n then
     if options.n == 1 then
-      SILE.typesetter:typeset(options.n..". ")
+      SILE.call("style:apply", { name = "tei:sense:numbering"}, function()
+        SILE.typesetter:typeset(""..options.n)
+      end)
+      SILE.typesetter:typeset(". ")
     else
-      SILE.typesetter:typeset(" ○ "..options.n..". ") -- Note: U+25CB ○ white circle
+      SILE.typesetter:typeset(" ○ ") -- Note: U+25CB ○ white circle
+      SILE.call("style:apply", { name = "tei:sense:numbering"}, function()
+        SILE.typesetter:typeset(""..options.n)
+      end)
+      SILE.typesetter:typeset(". ")
     end
   end
   for i=1, #content do
