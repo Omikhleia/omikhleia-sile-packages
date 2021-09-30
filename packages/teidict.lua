@@ -59,6 +59,7 @@ styles.defineStyle("tei:entry:numbering", { inherit = "tei:orth:base" }, { font 
 styles.defineStyle("tei:sense:numbering", {}, { font = { weight = 700 } })
 styles.defineStyle("tei:corr", {}, { color = { color = "dimgray" } })
 styles.defineStyle("tei:header:legalese", {}, { font = { size = -1 } })
+styles.defineStyle("tei:q", {}, { font = { style = "italic" } })
 
 -- UTILITIES
 
@@ -518,6 +519,7 @@ local orthPrefix = {
   deduced = "#",
   normalized= "^",
   deleted = "×", -- U+00D7 multiplication sign
+  historic = "†", -- U+2020 dagger
   coined = "‡" -- U+2021 double Dagger
 }
 
@@ -753,7 +755,17 @@ end)
 
 -- FIXME ignored for now (at least we don't break on them, but they would
 -- need some support)
-SILE.call("xmltricks:ignore", {}, { "eg q" })
+
+SILE.call("tei:passthru:asStructure", { spacing = true }, { "eg" })
+
+SILE.registerCommand("q", function (options, content)
+  doSpacing(options)
+  SILE.typesetter:typeset("◦ ") -- Note: U+25E6 white bullet
+  SILE.call("style:apply", { name = "tei:q" }, function ()
+    SILE.process(trimContent(content))
+    SILE.typesetter:typeset(",")
+  end)
+end)
 
 -- LINKING TAGS
 
