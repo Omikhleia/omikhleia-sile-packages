@@ -8,7 +8,7 @@
 -- latter, see https://omikhleia.github.io/sindict/manual/DATA_MODEL.html
 --
 -- Loaded packages: styles, inputfilter
--- Required packages: xmltricks, pdf, color, infonodes, raiselower, rules
+-- Required packages: xmltricks, pdf, color, infonodes, raiselower, rules, url
 -- Required class support: teibook
 --
 -- KNOWN ISSUES:
@@ -30,13 +30,23 @@
 -- SETTINGS
 
 SILE.settings.declare({
-  -- The source dictionary may contain notes in several languages, we do not
+  -- The source dictionary may contain notes etc. in several languages, we do not
   -- want them all. On the other hand, it may contain several sense information
   -- in several language too, but this setting does apply to them.
   parameter = "teidict.mainLanguage",
   type = "string or nil",
   default = nil,
   help = "Main definition language (to filter out some notes etc.)"
+})
+
+SILE.settings.declare({
+  -- So for sense information, for now, use them all (if setting is nil)
+  -- or use only the specified one. FIXME works for bilingual dictionaries
+  -- but not general...
+  parameter = "teidict.transLanguage",
+  type = "string or nil",
+  default = nil,
+  help = "Sense language (to filter out some sense information etc.)"
 })
 
 -- STYLES
@@ -132,6 +142,18 @@ local function getFirstEntryOrth (content)
   SU.error("Sructure error, TEI.orth not found in nested TEI.form")
 end
 
+local function findInTreeWithLang(content, element)
+  -- Find the first occurrence without language or with same language
+  -- as our main language
+  local mainLang = SILE.settings.get("teidict.mainLanguage")
+  for i=1, #content do
+    if type(content[i]) == "table" and content[i].command == element 
+        and (content[i].options.lang == nil or content[i].options.lang == mainLang) then
+      return content[i]
+    end
+  end  
+end
+
 local function shallowcopy(orig)
   local orig_type = type(orig)
   local copy
@@ -176,24 +198,30 @@ end
 -- Leverage xmltricks:passthru with more specialized commands.
 
 -- These nodes are just paragraph containers
-SILE.registerCommand("tei:passthru:asParagraph", function (_, content)
+-- (The filter boolean option will skip them if not in the proper main language.)
+SILE.registerCommand("tei:passthru:asParagraph", function (options, content)
   for token in SU.gtoke(content[1]) do
     if token.string then
-      SILE.registerCommand(token.string, function(_, cmd)
+      SILE.registerCommand(token.string, function(opts, cmd)
+        local mainLang = SILE.settings.get("teidict.mainLanguage")
+        if options.filter and mainLang and opts.lang and opts.lang ~= mainLang then
+          return -- Ignore
+        end
         SILE.process(cmd)
         SILE.typesetter:leaveHmode()
-      end)
+        end)
     end
   end
 end)
 
--- These nodes are just structure nodes, they shouldn't have any
--- text children (or just spaces, due to XML indentation...), so we
--- ignore these.
+-- These nodes are just structure nodes,
+-- (The filter boolean option will skip them if not in the proper main language.)
+-- They shouldn't have any text children (or just spaces, due to XML indentation...), 
+-- so we ignore these.
 SILE.registerCommand("tei:passthru:asStructure", function (options, content)
   for token in SU.gtoke(content[1]) do
     if token.string then
-      SILE.registerCommand(token.string, function(_, cmd)
+      SILE.registerCommand(token.string, function(opts, cmd)
         for i=1, #cmd do
           if type(cmd[i]) == "table" then
             SILE.process({ cmd[i] })
@@ -224,7 +252,7 @@ end)
 SILE.registerCommand("teiHeader", function (options, content)
   local fileDesc = SILE.findInTree(content, "fileDesc") or SU.error("Structure error, no TEI.fileDesc")
   local titleStmt = SILE.findInTree(fileDesc, "titleStmt") or SU.error("Structure error, no TEI.titleStmt")
-  local title = SILE.findInTree(titleStmt, "title") or SU.error("Structure error, no TEI.title")
+  local title = findInTreeWithLang(titleStmt, "title") or SU.error("Structure error, no TEI.title")
 
   -- FIXME HACK so the top title page appears in the outline
   -- My reader automatically jumps to the first topic, and I don't want that.
@@ -242,15 +270,19 @@ SILE.registerCommand("teiHeader", function (options, content)
   end
 end)
 
-SILE.call("xmltricks:ignore", {}, { "encodingDesc profileDesc" })
+SILE.call("xmltricks:ignore", {}, { "encodingDesc profileDesc sourceDesc" })
 SILE.call("tei:passthru:asStructure", {}, { "fileDesc titleStmt" })
 
-SILE.call("tei:passthru:asStructure", { skipafter = true }, { "editionStmt respStmt notesStmt sourceDesc" })
+SILE.call("tei:passthru:asStructure", { skipafter = true }, { "editionStmt respStmt notesStmt" })
 
-SILE.call("tei:passthru:asParagraph", {}, { "resp" })
+SILE.call("tei:passthru:asParagraph", { filter = true }, { "resp" })
 SILE.call("tei:passthru:asStructure", {}, { "availability" })
 
 SILE.registerCommand("title", function(options, content)
+  local mainLang = SILE.settings.get("teidict.mainLanguage")
+  if mainLang and options.lang and options.lang ~= mainLang then
+    return -- Ignore comment note.
+  end
   SILE.call("noindent")
   SILE.call("em", {}, content)
   SILE.typesetter:leaveHmode()
@@ -259,7 +291,7 @@ end)
 SILE.registerCommand("edition", function (options, content)
   SILE.call("noindent")
   SILE.process(content)
-  SILE.typesetter:typeset(" ("..options.n..")")
+  SILE.typesetter:typeset("[Edition "..options.n.."]")
 end)
 
 SILE.call("tei:passthru:asParagraph", {}, { "p" })
@@ -267,8 +299,9 @@ SILE.call("xmltricks:passthru", {}, { "name" })
 
 SILE.registerCommand("publicationStmt", function (options, content)
   local publisher = SILE.findInTree(content, "publisher")
-  local availability = SILE.findInTree(content, "availability")
+  if publisher == nil then SU.error("Structure error, no publisher in TEI.publicationStmt") end
   local date = SILE.findInTree(content, "date")
+  if date == nil then SU.error("Structure error, no date TEI.publicationStmt") end
 
   SILE.call("vfill")
   SILE.typesetter:leaveHmode()
@@ -282,7 +315,11 @@ SILE.registerCommand("publicationStmt", function (options, content)
       SILE.typesetter:leaveHmode()
     end)
     SILE.call("medskip")
-    SILE.call("availability", {}, availability)
+    
+    -- Loop over availability elements until find one in our language
+    local availability = findInTreeWithLang(content, "availability")
+    if availability == nil then SU.error("Stucture eror: no availability found in TEI.publicationStmt") end
+    SILE.call("availability", availability.options, availability)
   end)
   SILE.call("break")
 end)
@@ -576,6 +613,7 @@ end)
 -- SENSE LEVEL TAGS
 
 SILE.registerCommand("sense", function (options, content)
+  local transLang = SILE.settings.get("teidict.transLanguage")
   local nTrans = countElementByTag("trans", content)
   local iTrans = 0
 
@@ -596,10 +634,14 @@ SILE.registerCommand("sense", function (options, content)
   for i=1, #content do
     if type(content[i]) == "table" then
       if content[i].command == "trans" and nTrans > 1 then
-        iTrans = iTrans + 1
-        content[i].options.n = iTrans
+        if not(transLang and content[i].options.lang and content[i].options.lang ~= transLang) then
+          iTrans = iTrans + 1
+          content[i].options.n = iTrans
+          SILE.process({ content[i] })
+        end
+      else
+        SILE.process({ content[i] })
       end
-      SILE.process({ content[i] })
     end
     -- All text nodes in <sense> (normally only spaces) are ignored
   end
@@ -612,7 +654,7 @@ SILE.registerCommand("trans", function (options, content)
     SILE.typesetter:typeset(" — ") -- Note: U+2014 — em dash
   end
   SILE.settings.temporarily(function()
-    SILE.settings.set("document.language", options.lang)
+    SILE.settings.set("document.language", lang)
     SILE.process(trimContent(content))
   end)
 end)
@@ -622,6 +664,12 @@ SILE.registerCommand("gloss", function (options, content)
 end)
 
 SILE.registerCommand("def", function (options, content)
+  SILE.process(trimContent(content))
+end)
+
+SILE.registerCommand("tr", function (options, content)
+  -- The HSD uses <def> (definition) everywhere, but for multilingual
+  -- dictionaries, <tr> (translation) is rather expected. 
   SILE.process(trimContent(content))
 end)
 
@@ -668,6 +716,12 @@ SILE.registerCommand("usg", function (options, content)
   end
 end)
 
+-- EXAMPLE TAGS
+
+-- FIXME ignored for now (at least we don't break on them, but they would
+-- need some support)
+SILE.call("xmltricks:ignore", {}, { "eg q" })
+
 -- LINKING TAGS
 
 SILE.registerCommand("xr", function (options, content)
@@ -706,8 +760,17 @@ SILE.registerCommand("note", function (options, content)
   local t = options.type
 
   if t == nil then
-    -- Notes in the teiHeader/fileDesc/notesStmt = paragraphs
-    SILE.process(content)
+    -- Notes in the teiHeader/fileDesc/notesStmt = contain several paragraphs
+    local mainLang = SILE.settings.get("teidict.mainLanguage")
+    if mainLang and options.lang and options.lang ~= mainLang then
+      return -- Ignore
+    end
+    for i=1, #content do
+      if type(content[i]) == "table" then
+        SILE.process({ content[i] })
+      end
+      -- All text nodes in ignored in structure tags
+    end
     SILE.typesetter:leaveHmode()
     return
   end
@@ -750,6 +813,14 @@ end)
 
 SILE.registerCommand("mentioned", function (options, content)
   SILE.call("style:apply", { name = "tei:mentioned" }, content)
+end)
+
+SILE.registerCommand("xref", function (options, content)
+  SILE.call("url", {}, content)
+end)
+-- Override default URL font...
+SILE.registerCommand("code", function (options, content)
+  SILE.process(content)
 end)
 
 -- ALL DONE.

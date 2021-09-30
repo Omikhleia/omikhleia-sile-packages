@@ -4,7 +4,7 @@
 -- License: MIT
 --
 -- This is the book-like class for (X%L) TEI dictionaries.
--- It just defines the appropriate page masters, sectionning hooks
+-- It just defines the appropriate page masters, sectioning hooks
 -- and loads all needed packages. The hard work processing the
 -- XML content is done in the "teidict" package.
 --
@@ -186,6 +186,7 @@ function teibook:init ()
   -- And all other packages needed by the teidict package
   self:loadPackage("infonode")
   self:loadPackage("pdf")
+  self:loadPackage("url")
   self:loadPackage("color")
   self:loadPackage("raiselower")
   self:loadPackage("rules")
