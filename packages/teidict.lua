@@ -11,20 +11,13 @@
 -- Required packages: xmltricks, pdf, color, infonodes, raiselower, rules, url
 -- Required class support: teibook
 --
--- KNOWN ISSUES:
---   There are a number of unsatisfying "hacks" regarding how spaces and
---   parenthesises are added to some content (alternative forms, part of
---   speech, etc.). = see FIXME HACK comments...
---   The main issue at stakes is that a dictionary is a heavily "semantic"
---   structured mark-up (i.e. a "lexical view" rather than an "editorial view")
---   and that XML nodes may contain many things we need to cancel (such as spaces)
---   or supplement (such as punctuations, and again, proper spaces where needed), even
---   sometimes re-order...
---   And the current logic is mostly broken to that respect. I'd need to step
---   back here, and find a clever way to solve it - But I failed too for the HTML
---   output via XSLT (ending up in a quick and dirty final pass with Node.js to
---   "fix" these things). And without XPath (to check previous siblings), this
---   might require a different approach anyway...
+-- The ùmain pain point is that such a dictionary is a heavily "semantic" structured
+-- mark-up (i.e. a "lexical view", encoding structure information such as part-of-speech
+-- etc. without much concern for its exact textual representation in print form),
+-- much more than a "presentational" mark-up. Some XML nodes may contain many things
+-- we need to ignore (such as spaces, mostly) or supplement (such as punctuation,
+---parentheses, numbering... and again, proper spaces where needed). Without XPath to
+-- check siblings, ascendants or descendants, it may become somewhat hard to get a nice
 --
 
 -- SETTINGS
@@ -67,6 +60,8 @@ styles.defineStyle("tei:sense:numbering", {}, { font = { weight = 700 } })
 styles.defineStyle("tei:corr", {}, { color = { color = "dimgray" } })
 styles.defineStyle("tei:header:legalese", {}, { font = { size = -1 } })
 
+-- UTILITIES
+
 local italicCorr = function (stylename)
   local spec = SILE.scratch.styles[stylename]
   if spec == nil then SU.error("Unknown style "..stylename) end
@@ -74,8 +69,6 @@ local italicCorr = function (stylename)
     SILE.call("kern", { width = "0.1em" }) -- Hand-made italic correction
   end
 end
-
--- UTILITIES
 
 local trimLeft = function (str)
   return (str:gsub("^%s*", ""))
@@ -87,17 +80,16 @@ local trim = function (str)
   return trimRight(trimLeft(str))
 end
 
+-- UTILITIES APPLYTHING TO THE AST
+
 local trimContent = function (content)
   -- Remove leading and trailing spaces
-  -- FIXME maybe not very robust, should do the trick in most cases though
-  -- POORLY CODED LOL :) Changed it some many times that it can wait for refactor...
-  for i=1, #content do
-    if i == 1 and type(content[i]) == "string" then
-      content[i] = trimLeft(content[i])
-    end
-    if i == #content and type(content[i]) == "string" then
-      content[i] = trimRight(content[i])
-    end
+  if #content == 0 then return end
+  if type(content[1]) == "string" then
+    content[1] = trimLeft(content[1])
+  end
+  if type(content[#content]) == "string" then
+    content[#content] = trimRight(content[#content])
   end
   return content
 end
@@ -123,7 +115,7 @@ local countElementByTag = function (tag, content)
 end
 
 local function getFirstEntryOrth (content)
-  -- Recurse into first forms until last level
+  -- Recurse into first forms until last level.
   local form = SILE.findInTree(content, "form")
   if form then
     return getFirstEntryOrth(form)
@@ -133,8 +125,8 @@ local function getFirstEntryOrth (content)
   if orth then
     -- Yay, we got the main "headword".
     -- Enrich the orth with its (form) parent type as it will be in charge of
-    -- the formatting (i.e. is the form deduced, etc.)
-    orth.options.parentType = content.options.type
+    -- the formatting (i.e. it will need to know whether the form is deduced, etc.)
+    orth.options._parentType = content.options.type
     return orth
   end
   -- All entries should have an orth eventually, or I don't know what a
@@ -142,28 +134,28 @@ local function getFirstEntryOrth (content)
   SU.error("Sructure error, TEI.orth not found in nested TEI.form")
 end
 
-local function findInTreeWithLang(content, element)
+local function findInTreeWithLang (content, element)
   -- Find the first occurrence without language or with same language
-  -- as our main language
+  -- as our main language.
   local mainLang = SILE.settings.get("teidict.mainLanguage")
   for i=1, #content do
-    if type(content[i]) == "table" and content[i].command == element 
+    if type(content[i]) == "table" and content[i].command == element
         and (content[i].options.lang == nil or content[i].options.lang == mainLang) then
       return content[i]
     end
-  end  
+  end
 end
 
-local function shallowcopy(orig)
+local function shallowcopy (orig)
   local orig_type = type(orig)
   local copy
   if orig_type == 'table' then
-      copy = {}
-      for orig_key, orig_value in pairs(orig) do
-          copy[orig_key] = orig_value
-      end
+    copy = {}
+    for orig_key, orig_value in pairs(orig) do
+        copy[orig_key] = orig_value
+    end
   else -- number, string, boolean, etc
-      copy = orig
+    copy = orig
   end
   return copy
 end
@@ -180,13 +172,13 @@ local buildPtrReferences = function (content)
         local headword = getFirstEntryOrth(ent)
         headword.options.n = ent.options.n
         -- No need for a deepcopy, just down to the options,
-        -- so that we can mark the headword afterwards
+        -- so that we can mark the headword afterwards.
         local refent = shallowcopy(headword)
         refent.options = shallowcopy(headword.options)
         refs[ent.options.id] = refent
         -- Now mark it, so when processed, it knows it is a headword
-        -- and will register an infonode...
-        headword.options.isHeadword = true
+        -- and will register an infonode.
+        headword.options._isHeadword = true
         count = count + 1
       end
     end
@@ -194,44 +186,77 @@ local buildPtrReferences = function (content)
   io.stderr:write("<..."..count.." references collected...>\n")
 end
 
+local function doSpacing(options)
+  if options._pos == nil then
+    -- orth, bibl can notably be in this case when used notes, pointers, etc.
+    return
+  end
+  if options._pos > 1 then
+    SILE.typesetter:typeset(" ")
+  end
+end
+
+-- These nodes are just structure nodes.
+-- The filter boolean option will skip them if not in the proper main language.
+-- Ortherwise, they should not have any text children (or just spaces, due to XML
+-- indentation), so we ignore these.
+-- The spacing boolean indicates whether we have to check for spaces before the
+-- structure.
+local function walkAsStructure(walkOptions, options, content)
+  local mainLang = SILE.settings.get("teidict.mainLanguage")
+  if walkOptions.filter and mainLang and options.lang and options.lang ~= mainLang then
+    return -- Ignore
+  end
+
+  if walkOptions.spacing then
+    doSpacing(options)
+  end
+
+  local iElem = 0
+  for i = 1, #content do
+    if type(content[i]) == "table" then
+      iElem = iElem + 1
+      content[i].options._pos = iElem
+      SILE.process({ content[i] })
+    end
+    -- All text nodes in ignored in structure tags.
+  end
+  if SU.boolean(walkOptions.skipafter, false) then
+    SILE.typesetter:leaveHmode()
+    SILE.call("medskip")
+  end
+end
+
+-- These nodes are just paragraph containers.
+-- The filter boolean option will skip them if not in the proper main language.
+-- Otherwise, process them and end the paragraph.
+local function walkAsParagraph(walkOptions, options, content)
+  local mainLang = SILE.settings.get("teidict.mainLanguage")
+  if walkOptions.filter and mainLang and options.lang and options.lang ~= mainLang then
+    return -- Ignore
+  end
+  SILE.process(content)
+  SILE.typesetter:leaveHmode()
+end
+
 -- HELPER COMMANDS
 -- Leverage xmltricks:passthru with more specialized commands.
 
--- These nodes are just paragraph containers
--- (The filter boolean option will skip them if not in the proper main language.)
 SILE.registerCommand("tei:passthru:asParagraph", function (options, content)
   for token in SU.gtoke(content[1]) do
     if token.string then
-      SILE.registerCommand(token.string, function(opts, cmd)
-        local mainLang = SILE.settings.get("teidict.mainLanguage")
-        if options.filter and mainLang and opts.lang and opts.lang ~= mainLang then
-          return -- Ignore
-        end
-        SILE.process(cmd)
-        SILE.typesetter:leaveHmode()
-        end)
+      SILE.registerCommand(token.string, function(cOptions, cContent)
+        walkAsParagraph(options, cOptions, cContent)
+      end)
     end
   end
 end)
 
--- These nodes are just structure nodes,
--- (The filter boolean option will skip them if not in the proper main language.)
--- They shouldn't have any text children (or just spaces, due to XML indentation...), 
--- so we ignore these.
 SILE.registerCommand("tei:passthru:asStructure", function (options, content)
   for token in SU.gtoke(content[1]) do
     if token.string then
-      SILE.registerCommand(token.string, function(opts, cmd)
-        for i=1, #cmd do
-          if type(cmd[i]) == "table" then
-            SILE.process({ cmd[i] })
-          end
-          -- All text nodes in ignored in structure tags
-        end
-        if SU.boolean(options.skipafter, false) then
-          SILE.typesetter:leaveHmode()
-          SILE.call("medskip")
-        end
+      SILE.registerCommand(token.string, function(cOptions, cContent)
+        walkAsStructure(options, cOptions, cContent)
       end)
     end
   end
@@ -249,30 +274,23 @@ end)
 
 -- HEADER LEVEL TAGS
 
-SILE.registerCommand("teiHeader", function (options, content)
+SILE.registerCommand("teiHeader", function (_, content)
   local fileDesc = SILE.findInTree(content, "fileDesc") or SU.error("Structure error, no TEI.fileDesc")
   local titleStmt = SILE.findInTree(fileDesc, "titleStmt") or SU.error("Structure error, no TEI.titleStmt")
   local title = findInTreeWithLang(titleStmt, "title") or SU.error("Structure error, no TEI.title")
 
-  -- FIXME HACK so the top title page appears in the outline
-  -- My reader automatically jumps to the first topic, and I don't want that.
+  -- Some hack so that the top title page appears in the PDF outline.
+  -- (My reader automatically jumps to the first topic, and I don't want that.)
   SILE.call("pdf:destination", { name = "tei_cover" })
   SILE.call("pdf:bookmark", { title = "-", dest = "tei_cover", level = 1 })
 
   SILE.call("teibook:titlepage", {}, title)
 
-  SILE.call("teibook:header")
-  for i=1, #content do
-    if type(content[i]) == "table" then
-      SILE.process({ content[i] })
-    end
-    -- All text nodes in ignored in structure tags
-  end
+  walkAsStructure({}, {}, content)
 end)
 
 SILE.call("xmltricks:ignore", {}, { "encodingDesc profileDesc sourceDesc" })
 SILE.call("tei:passthru:asStructure", {}, { "fileDesc titleStmt" })
-
 SILE.call("tei:passthru:asStructure", { skipafter = true }, { "editionStmt respStmt notesStmt" })
 
 SILE.call("tei:passthru:asParagraph", { filter = true }, { "resp" })
@@ -301,7 +319,7 @@ SILE.registerCommand("publicationStmt", function (options, content)
   local publisher = SILE.findInTree(content, "publisher")
   if publisher == nil then SU.error("Structure error, no publisher in TEI.publicationStmt") end
   local date = SILE.findInTree(content, "date")
-  if date == nil then SU.error("Structure error, no date TEI.publicationStmt") end
+  if date == nil then SU.error("Structure error, no date in TEI.publicationStmt") end
 
   SILE.call("vfill")
   SILE.typesetter:leaveHmode()
@@ -315,7 +333,7 @@ SILE.registerCommand("publicationStmt", function (options, content)
       SILE.typesetter:leaveHmode()
     end)
     SILE.call("medskip")
-    
+
     -- Loop over availability elements until find one in our language
     local availability = findInTreeWithLang(content, "availability")
     if availability == nil then SU.error("Stucture eror: no availability found in TEI.publicationStmt") end
@@ -325,8 +343,6 @@ SILE.registerCommand("publicationStmt", function (options, content)
 end)
 
 -- DOCUMENT LEVEL TAGS
-
-SILE.call("xmltricks:ignore", {}, { "etym index" }) -- FIXME provide some support for these, later
 
 SILE.call("tei:passthru:asStructure", {}, { "text body" })
 
@@ -380,8 +396,11 @@ SILE.registerCommand("entry", function (options, content)
 
   local style = (options.type == "xref") and "tei:entry:xref" or "tei:entry:main"
   SILE.call("style:apply", { name = style }, function()
+    local iElem = 0
     for i=1, #content do
       if type(content[i]) == "table" then
+        iElem = iElem + 1
+        content[i].options._pos = iElem
         if content[i].command == "sense" and nSense > 1 then
           iSense = iSense + 1
           content[i].options.n = iSense
@@ -411,16 +430,15 @@ SILE.registerCommand("re", function (options, content)
   local nForms = countElementByTag("form", content)
   local iForms = 0
 
-  if options.n == 1 then
-    -- FIXME HACK, see above. It all relies on pos markers to insert an extra space. Bad.
-    SILE.typesetter:typeset(" ")
-  end
-
+  doSpacing(options)
   SILE.typesetter:typeset("◇ ") -- U+25C7 white diamond https://unicode-table.com/fr/25C7/
   -- SILE.typesetter:typeset("◈" ) -- 25C8 white diamond containing black small diamond
                                    -- Absent from Libertinus :(
+  local iElem = 0
   for i=1, #content do
     if type(content[i]) == "table" then
+      iElem = iElem + 1
+      content[i].options._pos = iElem
       if (not hasNestedForms) and content[i].command == "form" then
           iForms = iForms + 1
           if nForms > 1 then
@@ -441,10 +459,15 @@ SILE.registerCommand("form", function (options, content)
   local nForms = countElementByTag("form", content)
 
   if nForms > 0 then
+    doSpacing(options)
+
     -- Case: toplevel form (containing other forms)
     local iForms = 0
+    local iElem = 0
     for i=1, #content do
       if type(content[i]) == "table" then
+        iElem = iElem + 1
+        content[i].options._pos = iElem
         if content[i].command == "form" then
           iForms = iForms + 1
           if nForms > 1 then
@@ -459,25 +482,33 @@ SILE.registerCommand("form", function (options, content)
     end
   else
     -- Case: final form (inner, containing actual word forms)
+    if options.alt then
+      if options.alt == 1 then
+        doSpacing(options)
+        SILE.typesetter:typeset("(")
+      else
+        SILE.typesetter:typeset(", ")
+      end
+    else
+      doSpacing(options)
+    end
     local nElem = countElements(content)
     local iElem = 0
     options.last = (options.last == nil and true or options.last)
-    if options.alt then
-        SILE.typesetter:typeset(options.alt == 1 and " (" or ", ")
-    end
     for i=1, #content do
       if type(content[i]) == "table" then
         iElem = iElem + 1.
-        content[i].options.parentType = options.type
+        content[i].options._pos = iElem
+        content[i].options._parentType = options.type
         SILE.process({ content[i] })
         if iElem < nElem then
-          SILE.typesetter:typeset(" ")
+     --     SILE.typesetter:typeset(" ")
         end
       end
       -- All text nodes in <form> (normally only spaces) are ignored
     end
     if options.altLast then SILE.typesetter:typeset(")") end
-    if options.last then SILE.typesetter:typeset(" ") end
+    -- if options.last then SILE.typesetter:typeset(" ") end
   end
 end)
 
@@ -491,10 +522,11 @@ local orthPrefix = {
 }
 
 SILE.registerCommand("orth", function (options, content)
-  if options.isHeadword then
+  doSpacing(options)
+  if options._isHeadword then
     SILE.call("info", { category = "teientry", value = content }, {})
   end
-  local t = options.parentType and orthPrefix[options.parentType]
+  local t = options._parentType and orthPrefix[options._parentType]
   if t then
     SILE.typesetter:typeset(t)
   end
@@ -581,6 +613,7 @@ end
 SILE.registerCommand("pron", function (options, content)
   -- Convert to IPA, then typeset in an hbox to avoid line breaks
   local pron = SU.contentToString(content)
+  doSpacing(options)
   -- Put in an hbox, to avoid breaks in the pronunciation
   SILE.call("hbox", {}, { "["..toIpa(pron).."]" })
 end)
@@ -589,7 +622,7 @@ local inputfilter = SILE.require("packages/inputfilter").exports
 
 -- Helper to insert breakpoints in unwieldy bibliographic references
 local biblFilter = function (node, content)
-  if type(node) == "table" then return node end
+  if type(node) == "table" then return SU.error("Structure error: TEI.bibl expected to containt text") end
   local result = {}
   for token in SU.gtoke(node, '[:/,%-]') do
     if token.string then
@@ -607,6 +640,7 @@ end
 
 SILE.registerCommand("bibl", function (options, content)
   local transformed = inputfilter.transformContent(content, biblFilter)
+  doSpacing(options)
   SILE.call("style:apply", { name = "tei:bibl" }, transformed)
 end)
 
@@ -617,6 +651,7 @@ SILE.registerCommand("sense", function (options, content)
   local nTrans = countElementByTag("trans", content)
   local iTrans = 0
 
+  doSpacing(options)
   if options.n then
     if options.n == 1 then
       SILE.call("style:apply", { name = "tei:sense:numbering"}, function()
@@ -624,15 +659,18 @@ SILE.registerCommand("sense", function (options, content)
       end)
       SILE.typesetter:typeset(". ")
     else
-      SILE.typesetter:typeset(" ○ ") -- Note: U+25CB ○ white circle
+      SILE.typesetter:typeset("○ ") -- Note: U+25CB ○ white circle
       SILE.call("style:apply", { name = "tei:sense:numbering"}, function()
         SILE.typesetter:typeset(""..options.n)
       end)
       SILE.typesetter:typeset(". ")
     end
   end
+  local iElem = 0
   for i=1, #content do
     if type(content[i]) == "table" then
+      iElem = iElem + 1
+      content[i].options._pos = iElem
       if content[i].command == "trans" and nTrans > 1 then
         if not(transLang and content[i].options.lang and content[i].options.lang ~= transLang) then
           iTrans = iTrans + 1
@@ -650,8 +688,9 @@ end)
 SILE.registerCommand("trans", function (options, content)
   local lang = SU.required(options, "lang", "TEI.trans")
 
+  doSpacing(options)
   if options.n and options.n > 1 then
-    SILE.typesetter:typeset(" — ") -- Note: U+2014 — em dash
+    SILE.typesetter:typeset("— ") -- Note: U+2014 — em dash
   end
   SILE.settings.temporarily(function()
     SILE.settings.set("document.language", lang)
@@ -669,26 +708,19 @@ end)
 
 SILE.registerCommand("tr", function (options, content)
   -- The HSD uses <def> (definition) everywhere, but for multilingual
-  -- dictionaries, <tr> (translation) is rather expected. 
+  -- dictionaries, <tr> (translation) is rather expected.
   SILE.process(trimContent(content))
 end)
 
 -- GRAMMATICAL AND USAGE LEVEL TAGS
 
-SILE.registerCommand("gramGrp", function (options, content)
-  for i=1, #content do
-    if type(content[i]) == "table" then
-      SILE.process({ content[i] })
-    end
-    -- All text nodes in <gramGrp> (normally only spaces) are ignored
-  end
-end)
+SILE.call("tei:passthru:asStructure", { spacing = true }, { "gramGrp" })
 
 for _, pos in ipairs({ "pos", "mood", "per", "tns", "number", "gen", "subc", "itype", "lbl" }) do
   -- FIXME expand abbrevs?
   SILE.registerCommand(pos, function (options, content)
+    doSpacing(options)
     SILE.call("style:apply", { name = "tei:pos" }, content)
-    SILE.typesetter:typeset(" ")
   end)
 end
 
@@ -700,19 +732,20 @@ SILE.registerCommand("usg", function (options, content)
     italicCorr("tei:hint")
     SILE.typesetter:typeset(")")
   elseif t == "lang" then
-    -- SILE.typesetter:typeset(" ")
+    doSpacing(options)
     local norm = SU.required(options, "norm", "TEI.usg (lang)")
     SILE.call("style:apply", { name = "tei:pos" }, { options.norm })
   elseif t == "cat" then
     -- ignored (FIXME shouldn't formally, but the HSD has them wrong)
   elseif t == "gram" or t == "ext" then
     -- FIXME expand abbr...
+    doSpacing(options)
     SILE.call("style:apply", { name = "tei:pos" }, content)
-    SILE.typesetter:typeset(", ")
+    SILE.typesetter:typeset(",")
   else
+    doSpacing(options)
     -- FIXME expand abbr...
     SILE.call("style:apply", { name = "tei:pos" }, content)
-    SILE.typesetter:typeset(" ")
   end
 end)
 
@@ -729,17 +762,21 @@ SILE.registerCommand("xr", function (options, content)
     SILE.settings.temporarily(function()
       SILE.settings.set("document.parindent", "0em")
       SILE.typesetter:leaveHmode()
-      SILE.typesetter:typeset("☞  ") -- Note: U+261E ☞ white right pointing index
+      SILE.typesetter:typeset("☞ ") -- Note: U+261E ☞ white right pointing index
       SILE.process(content)
     end)
   elseif options.type == "see" then
+    doSpacing(options)
     SILE.typesetter:typeset("→ ") -- Note: U+2192 → right arrow
     SILE.process(content)
   elseif options.type == "of" then
     -- FIXME abbrevs
-    SILE.typesetter:typeset("of ")
+    doSpacing(options)
+    -- FIXME expand abbr...
+    SILE.call("style:apply", { name = "tei:pos" }, { "of" })
+    SILE.typesetter:typeset(" ")
     SILE.process(content)
-    SILE.typesetter:typeset(", ")
+    SILE.typesetter:typeset(",")
   else
     SU.error("Unimplemented TEI.xr type: "..options.type)
   end
@@ -756,22 +793,14 @@ end)
 
 -- OTHER MISCELLANEOUS TAGS
 
+SILE.call("xmltricks:ignore", {}, { "etym index" }) -- FIXME provide some support for these, later
+
 SILE.registerCommand("note", function (options, content)
   local t = options.type
 
   if t == nil then
     -- Notes in the teiHeader/fileDesc/notesStmt = contain several paragraphs
-    local mainLang = SILE.settings.get("teidict.mainLanguage")
-    if mainLang and options.lang and options.lang ~= mainLang then
-      return -- Ignore
-    end
-    for i=1, #content do
-      if type(content[i]) == "table" then
-        SILE.process({ content[i] })
-      end
-      -- All text nodes in ignored in structure tags
-    end
-    SILE.typesetter:leaveHmode()
+    walkAsStructure({ filter = true }, options, content)
     return
   end
 

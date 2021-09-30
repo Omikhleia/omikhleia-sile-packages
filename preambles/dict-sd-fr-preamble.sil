@@ -15,13 +15,13 @@
 % Set a few globals (main font, default language, paragraph indent).
 % Note that other fonts (e.g. for entries, etc.) are defined via styles.
 %
-\language[main=en]
+\language[main=fr]
 \font[family=Libertinus Serif, size=10pt]
 \set[parameter=document.parindent, value=1.25em]
 %
 % In the case of multi-lingual dictionaries, some elements can be
 % filtered out.
 %
-\set[parameter=teidict.mainLanguage,value=en]
-\set[parameter=teidict.transLanguage,value=en]
+\set[parameter=teidict.mainLanguage,value=fr]
+
 \end{document}
