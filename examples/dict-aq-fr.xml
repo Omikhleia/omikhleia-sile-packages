@@ -1,0 +1,4769 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TEI.2 SYSTEM "xmldict.dtd"><TEI.2>
+<teiHeader>
+  <fileDesc>
+    <titleStmt>
+      <title>Lexique almaqerin</title>
+      <respStmt>
+        <resp>Pierre de Blancandre</resp>
+      </respStmt>
+    </titleStmt>
+
+    <editionStmt>
+      <edition n="0.1"/>
+    </editionStmt>
+
+    <publicationStmt>
+      <publisher>Emma Lenski’s testamentary executors</publisher>
+      <availability status="free">
+        <p><hi>Licence</hi>. Ce matériel ne peut être distribué que selon les termes et
+           conditions énoncés dans la licence Creative Commons Attribution, Non-Commercial,
+           Share-Alike, version 2.0 (<xref>http://creativecommons.org/licenses/by-nc-sa/2.0/</xref>).</p>
+      </availability>
+      <date>2021</date>
+    </publicationStmt>
+
+    <notesStmt>
+      <note lang="fr">
+        <p>Ce dictionnaire s’appuie sur le petit lexique thématique établi par Pierre de Blancandre
+           dans <hi>les Chroniques du Ptoliporthe &amp; autres récits d’Almaq</hi>,
+           La-Charité-sur-Loire, 1907. La graphie latine des
+           termes de la langue d’Almaq est cependant actualisée selon les usages en vigueur
+           à ce jour.</p>
+        <p>Ledit lexique, intitulé <hi>Hyeil an Tyesed Almaqerin</hi>, était organisé en sections
+           thématiques, de sorte que le vocabulaire présenté, quoique limité, couvre des domaines
+           divers et donne un assez bon aperçu de la langue d’Almaq. Sauf indication contraire,
+           les notes éditoriales sont de Pierre de Blancandre.</p>
+      </note>
+    </notesStmt>
+
+    <sourceDesc>
+      <bibl>Pierre de Blancandre, <hi>les Chroniques du Ptoliporthe &amp; autres récits d’Almaq</hi>,
+      La-Charité-sur-Loire, 1907</bibl>
+    </sourceDesc>
+  </fileDesc>
+
+  <profileDesc>
+    <langUsage>
+      <language id="fr">French</language>
+    </langUsage>
+  </profileDesc>
+</teiHeader>
+
+<text>
+  <body>
+
+<div0 xmlns:my="http://github.com/Omikhleia/sindict" type="dictionary">
+
+<milestone n="A" unit="part"/>
+
+<entry id="abuchinerin">
+  <form>
+    <orth>abuchinerin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>abuchinesrin</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>qui est relatif au rosier</def>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="buche"/>, <ptr target="buchin"/></xr>
+</entry>
+
+<entry id="abuferin">
+  <form>
+    <orth>abuferin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>abufesrin</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>à bogue, à coque</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="abveinerin">
+  <form>
+    <orth>abveinerin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>abveinserin</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>futur</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="acaragrin">
+  <form>
+    <orth>acaragrin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>acaragesrin</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>vieux, vénérable</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="adyureneth">
+  <form>
+    <orth>adyureneth</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~eithal</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>muté, adouci</def> <usg type="hint">se dit d’une consonne</usg>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="afoigerin">
+  <form>
+    <orth>afoigerin</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>qui a des noix</def>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="foigin"/>, <ptr target="gwaredh"/></xr>
+</entry>
+
+<entry id="agevelrin">
+  <form>
+    <orth>agevelrin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>agevelesrin</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>femelle, féminin</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="allas">
+  <form>
+    <orth>allas</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~en</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>chose, matière, sujet</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="Almaq">
+  <form>
+    <orth>Almaq</orth>
+  </form>
+  <gramGrp>
+    <pos>n. pr.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>la cité d’Almaq</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="almaqerin">
+  <form>
+    <orth>almaqerin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>almaqenrin</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>relatif à Almaq</def>
+    </trans>
+  </sense>
+  <sense>
+    <usg type="ext">by ext.</usg>
+    <trans lang="fr">
+      <def>la langue d’Almaq</def>
+    </trans>
+  </sense>
+  <note type="comment" lang="fr">
+    Sans autre précision, désigne la langue d’Almaq, <hi>tyesed almaqerin</hi>, de même que
+    <hi>tyesed</hi> « la langue », employé seul, est aussi implicitement celle d’Almaq.
+  </note>
+</entry>
+
+<entry id="almaqian">
+  <form>
+    <orth>almaqian</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>habitant d’Almaq</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="alormerin">
+  <form>
+    <orth>alormerin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>alormasrin</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>légal, qui suit les préceptes de la loi</def>
+    </trans>
+  </sense>
+  <sense>
+    <usg type="ext">by ext.</usg>
+    <trans lang="fr">
+      <def>loyal</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="amasrin">
+  <form>
+    <orth>amasrin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>amassenrin</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>voisé</def> <usg type="hint">se dit d’une consonne</usg>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="anafedrin">
+  <form>
+    <orth>anafedrin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>anafedesrin</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>verbal</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="anraq">
+  <form>
+    <orth>anraq</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~en</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>saucisse</def> <usg type="hint">en particulier sèche, par ex. saucisson</usg>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="anvath">
+  <form>
+    <orth>anvath</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~en</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>parent</def> <usg type="hint">biologique</usg>
+    </trans>
+  </sense>
+  <note type="comment" lang="fr">
+    Si les parents biologiques sont à l’origine du nom de l’enfant, ils se chargent rarement de
+    l’éducation de leur enfants. Ces derniers sont confiés à une matriarche - La notion même de
+    famille est élargie au matriarcat. Mère biologique et matriarche contribuent toutes deux à
+    définir la filiation et les droits à l’héritage. Sauf exception, le père ne lègue pas d’héritage
+    à ses propres enfants, mais à son matriarcat d’origine, qui se charge de la répartition des
+    biens entre tous les enfants dont il a la charge, sans notion de filiation.
+  </note>
+  <xr type="analogy"><ptr target="nechin"/></xr>
+</entry>
+
+<entry id="anvathrin">
+  <form>
+    <orth>anvathrin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>anvathenrin</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>parent</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="arbavath">
+  <form>
+    <orth>arbavath</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>polémarque, intendant à la guerre</def>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="arvadh"/></xr>
+</entry>
+
+<entry id="areigerin">
+  <form>
+    <orth>areigerin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>areigasrin</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>mensuel</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="arvadh">
+  <form>
+    <orth>arvadh</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~en</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>guerre, bataille</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="aserchrin">
+  <form>
+    <orth>aserchrin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>aserchasrin</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>grammatical</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="asevedrin">
+  <form>
+    <orth>asevedrin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>asevedesrin</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>avoisinant</def> <usg type="hint">ex. maison voisine, etc.</usg>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="avedhrin">
+  <form>
+    <orth>avedhrin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>avedhrasrin</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>mâle, masculin</def>
+    </trans>
+  </sense>
+</entry>
+
+<milestone n="B" unit="part"/>
+
+<entry id="barn">
+  <form>
+    <orth>barn</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>cité, ville</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="bavath">
+  <form>
+    <orth>bavath</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>intendant, régent</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="beir">
+  <form>
+    <orth>beir</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>le monde</def> <usg type="hint">au sens strict, ne s’employait pas pour désigner
+        le monde connu, qui est Silé, peu ou prou, mais tous les autres continents,
+        les terres inconnues et les mondes étrangers, y compris fictifs</usg>
+    </trans>
+  </sense>
+  <etym>[A l’origine, *beher (avec pl. *beheris), réinterprété par collusion avec un autre
+   mot plus ancien signifiant probablement « terre (ou masse continentale) ».]
+   [On trouve aussi un pluriel archaüque, beiras]
+  </etym>
+  <xr type="analogy"><ptr target="sile"/></xr>
+</entry>
+
+<entry id="beled">
+  <form>
+    <orth>beled</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>visage</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="binar">
+  <form>
+    <orth>binar</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>binras</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>être humain, homme ou femme</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="bolon">
+  <form>
+    <orth>bolon</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>poire</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="bolonin">
+  <form>
+    <orth>bolonin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>bolonenis</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>poirier</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="boxm">
+  <form>
+    <orth>boxm</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>champignon</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="brodh">
+  <form>
+    <orth>brodh</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~en</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>poème</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="brodhian">
+  <form>
+    <orth>brodhian</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>poète</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="brodhuid">
+  <form>
+    <orth>brodhuid</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>la poésie</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="brun">
+  <form>
+    <orth>brun</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~en</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>cane, canard</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="bruqian">
+  <form>
+    <orth>bruqian</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>tanneur</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="buche">
+  <form>
+    <orth>buche</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~m</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>rose</def>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="buchin"/></xr>
+</entry>
+
+<entry id="buchin">
+  <form>
+    <orth>buchin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>buchenis</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>rosier</def>
+    </trans>
+  </sense>
+  <sense>
+    <trans lang="fr">
+      <def>rose</def>
+    </trans>
+  </sense>
+  <note type="comment" lang="fr">
+    Comme mentionné, <hi>buchin</hi> désigne aussi la rose, lorsque le contexte est sans
+    ambiguïté. Autrement, la fleur est désignée par la formule <hi>gothon abuchinerin</hi>.
+    Étymologiquement, <hi>buchin</hi> désignait uniquement la rose. L’élargissement à l’arbuste est
+    sans doute une interprétation récente, par analogie avec la forme générale des noms
+    d’arbres (cf. la note à l’entrée <ptr target="gwaredh"/>).
+    Plus tardivement, la rose est aussi parfois désignée par <ptr target="buche"/>, une reconstruction
+    analogique encore.
+  </note>
+</entry>
+
+<entry id="bufed">
+  <form>
+    <orth>bufed</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>bogue, coque</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="buig">
+  <form>
+    <orth>buig</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>dent</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="bvein">
+  <form>
+    <orth>bvein</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~s</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>futur</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="bveinuid">
+  <form>
+    <orth>bveinuid</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>le temps futur</def> <usg type="hint">au sens linguistique</usg>
+    </trans>
+  </sense>
+</entry>
+
+<milestone n="C" unit="part"/>
+
+<entry id="cafnian">
+  <form>
+    <orth>cafnian</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>lingère</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="caledh">
+  <form>
+    <orth>caledh</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>(place du) marché</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="caledhian">
+  <form>
+    <orth>caledhian</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>marchand</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="calth">
+  <form>
+    <orth>calth</orth>
+  </form>
+  <form>
+    <gen>m.</gen>
+    <orth>colth</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <sense>
+    <gramGrp>
+      <pos>n.</pos> <gen>f.</gen>
+    </gramGrp>
+    <trans lang="fr">
+      <def>mère</def> <usg type="hint">biologique</usg>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="camr">
+  <form>
+    <orth>camr</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>jument, cheval</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="cannuid">
+  <form>
+    <orth>cannuid</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>farce, pièce comique, pamphlet</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="canth">
+  <form>
+    <orth>canth</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>chapeau, couvre-chef</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="carag">
+  <form>
+    <orth>carag</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>aïeul</def> <usg type="hint">en général grand-parent, c-à-d. grand-mère ou grand-père</usg>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="care">
+  <form>
+    <orth>care</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~m</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>main</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="carv">
+  <form>
+    <orth>carv</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>nourriture</def> <usg type="hint">en particulier à base de viande</usg>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="mexr"/></xr>
+</entry>
+
+<entry id="ceneithian">
+  <form>
+    <orth>ceneithian</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>potier</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="cenn">
+  <form>
+    <orth>cenn</orth>
+  </form>
+  <form>
+    <gen>m.</gen>
+    <orth>cann</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos> <gen>f.</gen>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>bouffon, farceur, plaisantin</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="chadhr">
+  <form>
+    <orth>chadhr</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>signe, lettre</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="chadhrave">
+  <form>
+    <orth>chadhrave</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~m</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>alphabet</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="chadhrelde">
+  <form>
+    <orth>chadhrelde</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~an</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>jeu de caractères, ensemble de symboles constituant un système</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="chadhruid">
+  <form>
+    <orth>chadhruid</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>système d’écriture</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="chelm">
+  <form>
+    <orth>chelm</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>trompette</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="cod">
+  <form>
+    <orth>cod</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>chêne</def>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="cofnin"/></xr>
+</entry>
+
+<entry id="cofn">
+  <form>
+    <orth>cofn</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>gland</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="cofnin">
+  <form>
+    <orth>cofnin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>cofnenis</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>chêne</def>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="cod"/></xr>
+</entry>
+
+<entry id="cothr">
+  <form>
+    <orth>cothr</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>steppe</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="cothrian">
+  <form>
+    <orth>cothrian</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>habitant des steppes</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="coxt">
+  <form>
+    <orth>coxt</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>terre, region</def>
+    </trans>
+  </sense>
+  <sense>
+    <usg type="ext">by ext.</usg>
+    <trans lang="fr">
+      <def>pays</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="crein">
+  <form>
+    <orth>crein</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~s</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>blé</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="crenbavath">
+  <form>
+    <orth>crenbavath</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>intendant au blé, responsable de l’alimentation de la cité</def>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="crein"/></xr>
+</entry>
+
+<milestone n="D" unit="part"/>
+
+<entry id="dane">
+  <form type="historic">
+    <orth>dane</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~m</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>notion de perfection</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="danuid">
+  <form>
+    <orth>danuid</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>le parfait</def> <usg type="hint">au sens linguistique</usg>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="defth">
+  <form>
+    <orth>defth</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>vêtement</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="defthian">
+  <form>
+    <orth>defthian</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>tailleur</def>
+      <usg type="hint">métier</usg>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="defthuid">
+  <form>
+    <orth>defthuid</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>habillement</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="dilif">
+  <form>
+    <orth>dilif</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>plumage</def>
+    </trans>
+  </sense>
+  <sense>
+    <trans lang="fr">
+      <def>chevelure, toison, duvet, etc.</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="dochor">
+  <form>
+    <orth>dochor</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>mitaine</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="dohon">
+  <form>
+    <orth>dohon</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>bouffon</def> <usg type="hint">dans une pièce de théâtre</usg>
+    </trans>
+  </sense>
+  <sense>
+    <trans lang="fr">
+      <def>arlequin, individu portant des vêtements bigarrés</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="dreil">
+  <form>
+    <orth>dreil</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~en</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>guérisseur</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="dumian">
+  <form>
+    <orth>dumian</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>charpentier</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="dunrian">
+  <form>
+    <orth>dunrian</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>lanternier</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="dyed">
+  <form>
+    <orth>dyed</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>art, talent</def>
+      <usg type="hint">relevant surtout d’une technique</usg>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="manthuid"/>, <ptr target="ferein"/></xr>
+</entry>
+
+<entry id="dyetesed">
+  <form>
+    <orth>dyetesed</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>proto-langue ou langue mère</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="dyofed">
+  <form>
+    <orth>dyofed</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>membre</def> <usg type="hint">au sens anatomique</usg>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="dyorn">
+  <form>
+    <orth>dyornas</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <sense>
+    <trans lang="fr">
+      <def>brique</def>
+    </trans>
+  </sense>
+  <sense>
+    <trans lang="fr">
+      <def>symbole du système d’écriture d’Almaq, le <ptr target="chadhruid"/>,
+        sorte d’encoche rectangulaire propre à ce système</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="dyured">
+  <form>
+    <orth>dyured</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>changement</def> <usg type="hint">de forme</usg>,
+      <def>mutation</def>
+    </trans>
+  </sense>
+  <sense>
+    <trans lang="fr">
+      <def>lénition, mutation consonantique initiale</def> <usg type="hint">en linguistique</usg>
+    </trans>
+  </sense>
+</entry>
+
+<milestone n="E" unit="part"/>
+
+<entry id="edanvath">
+  <form>
+    <orth>edanvath</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~en</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>orphelin</def> <usg type="hint">sans autre précision, des deux parents</usg>
+    </trans>
+    <eg>
+      <q>edanvath acalthrin</q>
+      <trans lang="fr">
+        <tr>orphelin de mère</tr>
+      </trans>
+    </eg>
+    <eg>
+      <q>edanvath acolthrin</q>
+      <trans lang="fr">
+        <tr>~ de père</tr>
+      </trans>
+    </eg>
+    <eg>
+      <q>edanvath anechinerin</q>
+      <trans lang="fr">
+        <tr>~ de matriarche</tr>
+      </trans>
+    </eg>
+  </sense>
+</entry>
+
+<entry id="elfein">
+  <form>
+    <orth>elfein</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~s</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>guilde, corporation</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="elfenbavath">
+  <form>
+    <orth>elfenbavath</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>intendant aux affaires des guildes</def>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="elfein"/></xr>
+</entry>
+
+<entry id="elfenian">
+  <form>
+    <orth>elfenian</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>représentant(e) d’une guilde</def>
+    </trans>
+  </sense>
+  <note type="comment" lang="fr">
+    Les corporations de commerçants sont représentées par l’<hi>elfeinachan acaledhrin</hi>,
+    sorte de syndicat patronal (on pourrait dire la « hanse »). Les corporations d’artisans
+    sont représentées par les <hi>elfeinechean an dyedas</hi>, groupe hétérogène qui représente
+    chaque métier (dont par ex. l’<hi>elfeinachan an girdhuid</hi>, confrérie des forgerons, etc.)
+  </note>
+</entry>
+
+<entry id="elfenuid">
+  <form>
+    <orth>elfenuid</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>le système des corporations ou guildes</def> <usg type="hint">comme entité politique</usg>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="ellormerin">
+  <form>
+    <orth>ellormerin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>ellormasrin</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>illégal</def>
+    </trans>
+  </sense>
+  <sense>
+    <usg type="ext">by ext.</usg>
+    <trans lang="fr">
+      <def>déloyal</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="endane">
+  <form>
+    <orth>endane</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~m</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>l’imparfait</def> <usg type="hint">au sens linguistique</usg>
+    </trans>
+  </sense>
+  <etym>*ed-dane</etym>
+</entry>
+
+<entry id="essevedrin">
+  <form>
+    <orth>essevedrin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>essevedesrin</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>en banlieue, en dehors du voisinage, extérieur au quartier</def>
+    </trans>
+  </sense>
+  <etym>*ed-seved « non-voisin », au sens de « en dehors du quartier »</etym>
+</entry>
+
+<entry id="essodhon">
+  <form>
+    <orth>essodhon</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>perdant</def> <usg type="hint">sp. aux cartes</usg>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="esteiv">
+  <form>
+    <orth>esteiv</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~en</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos> <gen>f.</gen>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>fille</def> <usg type="hint">en tant que filiation</usg>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="virl"/></xr>
+</entry>
+
+<entry id="eston">
+  <form>
+    <orth>eston</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~en</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>cœur</def>
+    </trans>
+  </sense>
+</entry>
+
+<milestone n="F" unit="part"/>
+
+<entry id="faled">
+  <form>
+    <orth>faled</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>doigt</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="farudh">
+  <form>
+    <orth>farudh</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>maison</def> <usg type="hint">de ville, et destinée à l’habitation</usg>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="talsh"/></xr>
+</entry>
+
+<entry id="favr">
+  <form>
+    <orth>favr</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~ein</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>bière</def> <usg type="hint">boisson</usg>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="favrian">
+  <form>
+    <orth>favrian</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>brasseur</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="felev">
+  <form>
+    <orth>felev</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>(petit) oiseau, passereau</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="ferein">
+  <form>
+    <orth>ferein</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~s</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>invention</def>
+      <usg type="hint">relevant de l’art plus que de la technique, par ex. une construction intellectuelle</usg>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="manthuid"/>, <ptr target="dyed"/></xr>
+</entry>
+
+<entry id="fesed">
+  <form>
+    <orth>fesed</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>renard</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="firth">
+  <form>
+    <orth>firth</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>pêche</def> <usg type="hint">fruit</usg>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="firthin">
+  <form>
+    <orth>firthin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>firthenis</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>pêcher</def> <usg type="hint">arbre</usg>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="foig">
+  <form>
+    <orth>foig</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>noix</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="foigin">
+  <form>
+    <orth>foigin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>foigenis</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>noyer</def> <usg type="hint">arbre</usg>
+    </trans>
+  </sense>
+</entry>
+
+<milestone n="G" unit="part"/>
+
+<entry id="gassuid">
+  <form>
+    <orth>gassuid</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>noblesse</def>
+    </trans>
+  </sense>
+  <note type="comment" lang="fr">
+    On distingue une noblesse aristocratique (<hi>gassuid adyerin</hi>, noblesse façonnée) d’une
+    noblesse héréditaire (<hi>gassuid afordherin</hi>, noblesse de naissance). La première s’obtient
+    par titre, la seconde se réduit aux vieilles familles d’Almaq et n’est pas gage de respect ni 
+    signe d’une richesse quelconque, mais témoigne d’un système à deux types de rangs sociaux
+    parallèles.
+  </note>
+</entry>
+
+<entry id="gaven">
+  <form>
+    <orth>gaven</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>lait</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="gerein">
+  <form>
+    <orth>gerein</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~s</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos> <gen>m.</gen>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>fils</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="gereth">
+  <form>
+    <orth>gereth</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>feuille</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="gesnargian">
+  <form>
+    <orth>gesnargian</orth>
+  </form>
+  <form>
+    <gen>m.</gen>
+    <orth>gasgornian</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos> <gen>f.</gen>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>la haute-reine, le haut-roi, du temps de la domination sitarienne</def>
+    </trans>
+  </sense>
+  <sense>
+    <trans lang="fr">
+      <def>l’impératrice, l’empereur, sous l’Empire siléen</def>
+    </trans>
+  </sense>
+    <sense>
+    <trans lang="fr">
+      <def>l’Impératrice et l’Empereur</def> <usg type="hint">figures du Tarot d’Almaq</usg>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="narg"/></xr>
+</entry>
+
+<entry id="gessevel">
+  <form>
+    <orth>gessevel</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos> <gen>f.</gen>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>dame, lit. « noble femme »</def>
+    </trans>
+  </sense>
+  <sense>
+    <trans lang="fr">
+      <def>princesse</def>
+    </trans>
+  </sense>
+  <note type="comment" lang="fr">
+    En période de paix, la princesse d’Almaq, <hi>i·hessevel</hi> est normalement choisie par tirage
+    au sort parmi les <hi>Gestirigis</hi> (« nobles jumelles »).
+    Le terme s’emploie aussi pour les princesses d’autres contrées, d’où la traduction proposée,
+    dans un sens large (selon ce qu’il recouvre par ailleurs pour dans les différents pays concernés).
+  </note>
+  <etym>*gess+gevel « noble femme »</etym>
+</entry>
+
+<entry id="gessian">
+  <form>
+    <orth>gessian</orth>
+  </form>
+  <form>
+    <gen>m.</gen>
+    <orth>gassian</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos> <gen>f.</gen>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>noble, personne de rang social élevé, possédant des titres de noblesse, etc.</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="gestirig">
+  <form>
+    <orth>gestirig</orth>
+  </form>
+  <form>
+    <gen>m.</gen>
+    <orth>gastirig</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos> <gen>f.</gen>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>premier-né</def> <usg type="hint">de jumeaux</usg>
+    </trans>
+  </sense>
+  <note type="comment" lang="fr">
+    Spécifiquement, la forme respective <hi>i·hestirig</hi> désigne la première-née de deux sœurs
+    jumelles, mais aussi l’enfant féminin dans le cas de (faux) jumeaux de sexe différent,
+    même lorsque le garçon est né en premier. Le terme ne désigne donc véritablement le premier-né
+    que dans le cas de vrais jumeaux. Au pluriel, <hi>i·Hestirigis</hi> (« nobles jumelles ») correspond
+    à l’ensemble des jumelles aînées, parmi lesquels la princesse, <hi>i·hessevel</hi> est en principe
+    choisie.
+  </note>
+  <etym>*gass/gess+tirig (avec absence de lénition interne), noble frère jumeau / noble sœur jumelle</etym>
+</entry>
+
+<entry id="gevel">
+  <form>
+    <orth>gevel</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos> <gen>f.</gen>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>femme</def>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="vedhr"/></xr>
+</entry>
+
+<entry id="gleidh">
+  <form>
+    <orth>gleidh</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~en</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>pain</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="gleidhian">
+  <form>
+    <orth>gleidhian</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>boulanger</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="gloth">
+  <form>
+    <orth>gloth</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~en</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>tour</def> <usg type="hint">construction</usg>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="glothei">
+  <form>
+    <orth>glothei</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>glothai</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>citadelle</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="gothon">
+  <form>
+    <orth>gothon</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>fleur</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="govr">
+  <form>
+    <orth>govr</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~ein</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>ânesse, âne</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="guvin">
+  <form>
+    <orth>guvin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>guvenis</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>jambe</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="gwaredh">
+  <form>
+    <orth>gwaredh</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>arbre</def> <usg type="hint">à feuilles caduques</usg>
+    </trans>
+  </sense>
+  <eg>
+    <q>gwaredh abuferin</q>
+    <trans lang="fr">
+      <tr>tout arbre font le fruit est à bogue ou coque</tr>
+    </trans>
+  </eg>
+  <eg>
+    <q>gwaredh afoigerin</q>
+    <trans lang="fr">
+      <tr>un arbre caduque à noix, un noyer</tr>
+    </trans>
+  </eg>  
+  <note type="comment" lang="fr">
+    Pour les arbres à feuilles caduques, l’usage général consiste aussi à désigner l’arbre à
+    partir de son fruit, mais avec la terminaison <hi>-in</hi> pl. <hi>-enis</hi>.
+    Cela n’exclut pas de trouver des constructions adjectivales.
+  </note>
+  <xr type="analogy"><ptr target="lavr"/></xr>
+</entry>
+
+<milestone n="H" unit="part"/>
+
+<entry id="herch">
+  <form>
+    <orth>herch</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>livre</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="herchallas">
+  <form>
+    <orth>herchallas</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~en</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>encyclopédie, lit. « livre de choses »</def>
+    </trans>
+    <eg>
+      <q>Herchallas e·Veiris</q>
+      <trans lang="fr">
+        <tr>« Encyclopédie des Mondes », titre d’une importante encyclopédie (prétendument composée
+        à Almaq au cours du VIIIe siècle)</tr>
+      </trans>
+    </eg>
+  </sense>
+</entry>
+
+<entry id="herchian">
+  <form>
+    <orth>herchian</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>libraire</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="herchuid">
+  <form>
+    <orth>herchuid</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>la littérature</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="horsh">
+  <form>
+    <orth>horsh</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>montagne</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="hyeil">
+  <form>
+    <orth>hyeil</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~en</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>lexique</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="hyol">
+  <form>
+    <orth>hyol</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~en</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>voyelle</def>
+    </trans>
+  </sense>
+</entry>
+
+<milestone n="I" unit="part"/>
+
+<entry id="inviq">
+  <form>
+    <orth>inviq</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~en</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>griffe, serre</def>
+    </trans>
+  </sense>
+</entry>
+
+<milestone n="L" unit="part"/>
+
+<entry id="lalch">
+  <form>
+    <orth>lalch</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>vallée</def>
+    </trans>
+  </sense>
+  <sense>
+    <trans lang="fr">
+      <def>plaine traversée de rivières</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="latheg">
+  <form>
+    <orth>latheg</orth>
+  </form>
+  <form>
+    <gen>m.</gen>
+    <orth>lotheg</orth>
+  </form>
+  <form>
+    <gen>m.</gen>
+    <orth>letheg</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>lathgas</orth>
+  </form>
+  <form type="inflected">
+    <gen>m.</gen> <number>pl.</number>
+    <orth>lothgas</orth>
+  </form>
+    <form type="inflected">
+    <gen>n.</gen> <number>pl.</number>
+    <orth>lethgas</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos> <gen>f.</gen>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>chatte, chat</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="lavam">
+  <form>
+    <orth>lavam</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>tête</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="lavr">
+  <form>
+    <orth>lavr</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~ein</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>arbre</def> <usg type="hint">à feuilles persistantes</usg>
+    </trans>
+  </sense>
+  <note type="comment" lang="fr">
+    Pour les arbres à feuilles persistantes, l’usage général consiste à designer l’arbre
+    à partir de son fruit, en apposition avec <hi>lavr</hi>. Par ex.
+    <hi>neveg lavr</hi>, pin (mais on trouvera aussi la construction <hi>neveg alavrin</hi>).
+  </note>
+  <xr type="analogy"><ptr target="gwaredh"/></xr>
+</entry>
+
+<entry id="led">
+  <form>
+    <orth>led</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>sexe</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="ledseil">
+  <form>
+    <orth>ledseil</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>accent mineur</def> <usg type="hint">en linguistique</usg>
+    </trans>
+  </sense>
+  <etym>*le(ne)+tseil « premier accent » (décompté depuis le début d’un mot)</etym>
+</entry>
+
+<entry id="levm">
+  <form>
+    <orth>levm</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>nez</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="lorm">
+  <form>
+    <orth>lorm</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>loi</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="lormian">
+  <form>
+    <orth>lormian</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>juriste</def>
+    </trans>
+  </sense>
+  <sense>
+    <usg type="ext">by ext.</usg>
+    <trans lang="fr">
+      <def>avocat ou toute personne interprétant la loi</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="lormuid">
+  <form>
+    <orth>lormuid</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>juriste</def>
+    </trans>
+  </sense>
+  <sense>
+    <usg type="ext">by ext.</usg>
+    <trans lang="fr">
+      <def>code ou système de lois, droit</def>
+    </trans>
+  </sense>
+</entry>
+
+<milestone n="M" unit="part"/>
+
+<entry id="month">
+  <form>
+    <orth>manth</orth>
+  </form>
+  <form>
+    <gen>m.</gen>
+    <orth>month</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+    <gen>f.</gen>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>artisan</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="manthuid">
+  <form>
+    <orth>manthuid</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>artisanat, savoir-faire</def>
+    </trans>
+  </sense>
+  <eg>
+    <q>manthuid abarnerin</q>
+    <trans lang="fr">
+      <tr>les métiers de la ville</tr>
+    </trans>
+  </eg>
+  <xr type="analogy"><ptr target="ferein"/>, <ptr target="dyed"/></xr>
+</entry>
+
+<entry id="mehenian">
+  <form>
+    <orth>mehenian</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>musicien</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="mein">
+  <form>
+    <orth>mein</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>musique</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="mexr">
+  <form>
+    <orth>mexr</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>viande</def>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="carv"/></xr>
+</entry>
+
+<entry id="moxt">
+  <form>
+    <orth>moxt</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>louve, loup</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="muxt">
+  <form>
+    <orth>muxt</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos> <gen>f.</gen>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>femme enceinte</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="muxtuid">
+  <form>
+    <orth>muxtuid</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>grossesse</def>
+    </trans>
+  </sense>
+  <note type="comment" lang="fr">
+    En part., <hi>muxtuid apenerin</hi>, grossesse géméllaire.
+    Le phénomène s’avère assez fréquent à Almaq, dans des proportions autrement plus
+    importantes que dans le reste du monde. Les jumeaux (<ptr target="pendirig"/>) sont
+    particulièrement vénérés et respectés, et sont à la base du système politique et
+    religieux d’Almaq.
+  </note>
+</entry>
+
+<milestone n="N" unit="part"/>
+
+<entry id="nafed">
+  <form>
+    <orth>nafed</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>verbe, forme verbale</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="nafuid">
+  <form>
+    <orth>nafuid</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>conjugaison</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="nahal">
+  <form>
+    <orth>nahal</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>peuple, classe populaire, plèbe</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="nahalian">
+  <form>
+    <orth>nahalian</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>homme ou femme du peuple, plébéien</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="nalath">
+  <form>
+    <orth>nalath</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>sel</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="nanar">
+  <form>
+    <orth>nanar</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>nanras</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>lapin</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="narg">
+  <form>
+    <orth>narg</orth>
+  </form>
+  <form>
+    <gen>m.</gen>
+    <orth>norg</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos> <gen>f.</gen>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>reine, roi</def>
+    </trans>
+  </sense>
+    <note type="comment" lang="fr">
+    Ces titres s’emploient pour les gouvernants des autres pays ou cités : La structure politique
+    de la cité d’Almaq, constituée d’une « princesse » et d’un conseil de nobles, ne connaît
+    pas ces distinctions.
+    Le masculin <hi>norg</hi> « roi » prend d’ailleurs aussi parfois le sens de « seigneur,
+    baron, etc. », et s’emploie ainsi pour divers titres en usages chez les Siléens, qui
+    disposaient d’un système de type féodal et patriarcal.
+  </note>
+</entry>
+
+<entry id="narl">
+  <form>
+    <orth>narl</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>personne jugée, ou condamnée</def>
+    </trans>
+  </sense>
+  <note type="comment" lang="fr">
+    Emprunt ancien au vieux siléen <hi>*naralâ</hi> « jugement », réinterprété comme une
+    racine *NÁRAL, par suite on rencontre aussi les formes genrées archaïques
+    <hi>narl</hi> m., <hi>nerl</hi> f.
+  </note>
+</entry>
+
+<entry id="narlian">
+  <form>
+    <orth>narlian</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>juge, arbitre</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="narluid">
+  <form>
+    <orth>narluid</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>jugement, condamnation</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="nechin">
+  <form>
+    <orth>nechin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>nechenis</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>famille</def> <usg type="hint">matriarcale</usg>,
+      <def>matriarcat</def>
+    </trans>
+  </sense>
+  <sense>
+    <gramGrp>
+      <gen>f.</gen>
+    </gramGrp>
+    <trans lang="fr">
+      <usg type="hint">employé au respectif</usg> <def>la matriarche, <hi>i-nechin</hi></def>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="virl"/></xr>
+</entry>
+
+<entry id="nedhr">
+  <form>
+    <orth>nedhr</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>logographe</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="nedhrian">
+  <form>
+    <orth>nedhrian</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>scribe</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="nefein">
+  <form>
+    <orth>nefein</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~s</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>baleine</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="nefl">
+  <form>
+    <orth>nefl</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>colline</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="nehesian">
+  <form>
+    <orth>nehesian</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>neisianes</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>luthiste, harpiste, etc.</def>
+    </trans>
+  </sense>
+  <sense>
+    <trans lang="fr">
+      <def>luthier, fabricant de luths</def> 
+    </trans>
+  </sense>
+  <note type="comment" lang="fr">
+    S’emploie tant pour le fabricant de tels instruments que pour celui ou celle qui les pratiquent.
+    S’il est besoin, l’artisan peut être désigné par <hi>month/manth aneiserin</hi> « artisan de luth ».
+  </note>
+</entry>
+
+<entry id="neis">
+  <form>
+    <orth>neis</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>luth, harpe, théorbe, instrument à cordes pincées</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="nerl">
+  <form>
+    <orth>nerl</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos> <gen>f.</gen>
+    <usg type="reg">Arch.</usg>
+  </gramGrp>
+  <xr type="see"><ptr target="narl"/></xr>
+</entry>
+
+<entry id="neveg">
+  <form>
+    <orth>neveg</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>pomme de pin</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="noph">
+  <form>
+    <orth>noph</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>oreille</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="noved">
+  <form>
+    <orth>noved</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>pied</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="nule">
+  <form>
+    <orth>nule</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~m</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>page</def> <usg type="hint">d’un livre</usg>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="nuvch">
+  <form>
+    <orth>nuvch</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~ein</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>dragon</def> <usg type="hint">animal mythologique, ver malfaisant et malveillant</usg>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="nyolon">
+  <form>
+    <orth>nyolon</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>conseil</def>
+    </trans>
+  </sense>
+  <sense>
+    <usg type="ext">by ext.</usg>
+    <trans lang="fr">
+      <def>parlement de la cité d’Almaq, groupe de représentants
+        sur lequel s’appuie la princesse pour gérer la cité</def>
+    </trans>
+  </sense>
+  <note type="comment" lang="fr">
+    En période de paix, la princesse d’Almaq, <hi>i·hessevel</hi> est normalement choisie par tirage
+    au sort parmi les <hi>Gestirigis</hi> (« nobles jumelles »).
+    Le terme s’emploie aussi pour les princesses d’autres contrées, d’où la traduction proposée,
+    dans un sens large (selon ce qu’il recouvre par ailleurs pour dans les différents pays concernés).
+  </note>
+</entry>
+
+<entry id="nyolonian">
+  <form>
+    <orth>nyolonian</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>conseiller</def>
+    </trans>
+  </sense>
+</entry>
+
+<milestone n="O" unit="part"/>
+
+<entry id="ollov">
+  <form>
+    <orth>ollov</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~en</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>année</def> <usg type="hint">par défaut, lunisolaire</usg>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="ondoq">
+  <form>
+    <orth>ondoq</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~en</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>chaussure</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="ondoqian">
+  <form>
+    <orth>ondoqian</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>cordonnier</def>
+    </trans>
+  </sense>
+</entry>
+
+<milestone n="P" unit="part"/>
+
+<entry id="pardh">
+  <form>
+    <orth>pardh</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>bouleau</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="pendirig">
+  <form>
+    <orth>pendirig</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>jumeau</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="pensyol">
+  <form>
+    <orth>pensyol</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~en</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>diphtongue</def>
+    </trans>
+  </sense>
+</entry>
+
+<milestone n="Q" unit="part"/>
+
+<entry id="qon">
+  <form>
+    <orth>qon</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~en</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos> <gen>m.</gen>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>garçon</def> <usg type="hint">mineur</usg>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="virl"/></xr>
+</entry>
+
+<milestone n="R" unit="part"/>
+
+<entry id="raig">
+  <form>
+    <orth>raig</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>mois lunaire</def>
+    </trans>
+  </sense>
+  <note type="comment" lang="fr">
+    Bien qu’étymologiquement féminin, ce terme n’exige pas l’emploi de la marque respective.
+  </note>
+  <xr type="analogy"><ptr target="reig"/></xr>
+</entry>
+
+<entry id="rathag">
+  <form>
+    <orth>rathag</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>oignon</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="reig">
+  <form>
+    <orth>reig</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>mois</def> <usg type="hint">dans tout système quelconque de calendrier</usg>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="raig"/>, <ptr target="roig"/></xr>
+</entry>
+
+<entry id="reigied">
+  <form>
+    <orth>reigied</orth>
+  </form>
+  <gramGrp>
+    <pos>adv.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>mensuellement</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="reiguid">
+  <form>
+    <orth>reiguid</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>calendrier</def>
+    </trans>
+  </sense>
+  <note type="comment" lang="fr">
+    Aussi <hi>roig~</hi>, <hi>raig~</hi> pour un calendrier solaire ou lunaire, 
+    respectivement ; à noter que le second s’emploie aussi avec la marque de 
+    respect, <hi>i·raiguid</hi>, dans le sens spécifique de la période de menstruation
+    (par ext. au sens élargi, pour tout mammifère).
+  </note>
+</entry>
+
+<entry id="retheg">
+  <form>
+    <orth>retheg</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>partenaire</def> <usg type="hint">comme membre d’un groupe informel de personnes
+        qui se rencontrent habituellement dans les mêmes lieux de la cité, tels que les tavernes
+        ou les jardins — aussi un compagnon de boisson, ou un partenaire aux jeux de cartes, etc.</usg>
+    </trans>
+  </sense>
+    <sense>
+    <trans lang="fr">
+      <def>voisin</def>
+    </trans>
+  </sense>
+  <!-- (pl. étym. rethegas),
+  [Étym. *rethg, réinterprété par analogie avec seved qui correspond à une division administrative
+  de la cité, tandis que le retheg relève d’une division sociale.]
+  -->
+  <xr type="analogy"><ptr target="sevedian"/></xr>
+
+</entry>
+
+<entry id="roig">
+  <form>
+    <orth>roig</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>mois solaire</def>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="reig"/></xr>
+</entry>
+
+<entry id="rome">
+  <form>
+    <orth>rome</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~m</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>vigne</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="rothl">
+  <form>
+    <orth>rothl</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos> 
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>enfant</def>
+    </trans>
+  </sense>
+</entry>
+
+<milestone n="S" unit="part"/>
+
+<entry id="safr">
+  <form>
+    <orth>safr</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>corneille ou corbeau</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="sale">
+  <form>
+    <orth>sale</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~m</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>aile</def> <usg type="hint">au sens anatomique</usg>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="scar">
+  <form>
+    <orth>scar</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~en</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>mot</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="seferuid">
+  <form>
+    <orth>seferuid</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>mode optatif-potentiel</def> <usg type="hint">en linguistique</usg>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="seig">
+  <form>
+    <orth>seig</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>chèvre, bouc</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="seigian">
+  <form>
+    <orth>seigian</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>berger, gardien de chèvres, chevrier</def>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="sussian"/>, <ptr target="tevchian"/></xr>
+</entry>
+
+<entry id="sene">
+  <form>
+    <orth>sene</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~m</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>son</def> <usg type="hint">au sens de production sonore</usg>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="seneve">
+  <form>
+    <orth>seneve</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~m</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>phonologie, étude des sons</def>
+    </trans>
+  </sense>
+  <note type="comment" lang="fr">
+    Dans un contexte moins formel, on utilise l’expression <hi>luchen asenerin</hi> « étude des sons ».
+  </note>
+  <xr type="analogy"><ptr target="senuid"/></xr>
+</entry>
+
+<entry id="senuid">
+  <form>
+    <orth>senuid</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>(système ou règle) phonétique</def>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="seneve"/></xr>
+</entry>
+
+<entry id="serch">
+  <form>
+    <orth>serch</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>grammaire</def>
+    </trans>
+  </sense>
+  <eg>
+    <q>serch amanthrin</q>
+    <trans lang="fr">
+      <tr>la grammaire bien-faite, i.e. l’usage jugé correct de la langue (par opposition
+      au langage familier)
+      </tr>
+    </trans>
+  </eg>
+  <eg>
+    <q>serch anahalrin</q>
+    <trans lang="fr">
+      <tr>la grammaire du langage familier, lit. du language du peuple</tr>
+    </trans>
+  </eg>
+</entry>
+
+<entry id="seved">
+  <form>
+    <orth>seved</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>quartier</def> <usg type="hint">division administrative de la cité</usg>
+    </trans>
+  </sense>
+  <sense>
+    <usg type="ext">by ext.</usg>
+    <trans lang="fr">
+      <def>voisinage</def>
+    </trans>
+  </sense>
+  <note type="comment" lang="fr">
+    A Almaq, s’applique aux quatre divisions correspondant à la Cité Basse, la Cité Médiane,
+    la Cité Haute et la Citadelle (ou l’Esplanade).
+  </note>
+</entry>
+
+<entry id="sevedian">
+  <form>
+    <orth>sevedian</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>voisin</def> <usg type="hint">habitant d’un même quartier</usg>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="retheg"/></xr>
+</entry>
+
+<entry id="sile">
+  <form>
+    <orth>sile</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~m</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>au sens originel, le monde (habité)</def>
+    </trans>
+  </sense>
+  <sense>
+    <trans lang="fr">
+      <def>au sens moderne restrictif, le continent où se trouve Almaq, et ses îles avoisinantes</def>
+    </trans>
+  </sense>
+   <sense>
+    <trans lang="fr">
+      <def>dans un sens encore plus strict, le continent, hors Almaq et ses environs proches</def>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="beir"/></xr>
+</entry>
+
+<entry id="sitheg">
+  <form>
+    <orth>sitheg</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>sithgas</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>souris</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="snath">
+  <form>
+    <orth>snath</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~en</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>jeu de cartes, en particulier Tarot</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="snathian">
+  <form>
+    <orth>snathian</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>joueur</def> <usg type="hint">aux cartes</usg>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="sodhon">
+  <form>
+    <orth>sodhon</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>gagnant</def> <usg type="hint">sp. aux cartes</usg>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="sorn">
+  <form>
+    <orth>sorn</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>hydre, chimère</def> <usg type="hint">animal mythologique</usg>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="suss">
+  <form>
+    <orth>suss</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~en</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>brebis, bélier, mouton</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="sussian">
+  <form>
+    <orth>sussian</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>berger, gardien de moutons</def>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="seigian"/>, <ptr target="tevchian"/></xr>
+</entry>
+
+<milestone n="T" unit="part"/>
+
+<entry id="talf">
+  <form>
+    <orth>talf</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>œil</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="talsh">
+  <form>
+    <orth>talsh</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>maison, tout bâtiment</def> <usg type="hint">destiné ou non à l’habitation</usg>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="farudh"/></xr>
+</entry>
+
+<entry id="tegeith">
+  <form>
+    <orth>tegeith</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~en</orth>
+  </form>
+  <sense>
+    <trans lang="fr">
+      <def>porteur</def>
+    </trans>
+  </sense>
+  <sense>
+    <trans lang="fr">
+      <def>symbole du système d’écriture d’Almaq, le <ptr target="chadhruid"/>,
+        lit. « porteur (de lettre) »</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="tevch">
+  <form>
+    <orth>tevch</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~ein</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>vache, taureau, bœuf</def>
+    </trans>
+  </sense>
+  <note type="comment" lang="fr">
+    Avec marque respective: vache, <hi>i-devch</hi> ; taureau, <hi>o-devch</hi> — sans
+    marque respective, taureau ou bœuf selon le contexte.
+  </note>
+</entry>
+
+<entry id="tevchian">
+  <form>
+    <orth>tevchian</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>vacher</def>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="seigian"/>, <ptr target="sussian"/></xr>
+</entry>
+
+<entry id="tevenian">
+  <form>
+    <orth>tevenian</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>jardinier</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="tevin">
+  <form>
+    <orth>tevin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>tevenis</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>jardin</def>
+    </trans>
+  </sense>
+  <note type="comment" lang="fr">
+    A Almaq, en particulier, le Petit Jardin, <hi>Sa-Devin</hi>, appartenant à la Cité Haute,
+    et les Grands Jardins, <hi>e-Tevenis</hi>, appartenant géographiquement à la Cité Médiane,
+    mais dont la jouissance est réservée, hors des périodes de fêtes, à la Princesse et à sa suite.
+  </note>
+</entry>
+
+<entry id="thlim">
+  <form>
+    <orth>thlim</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~en</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>consonne</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="thlovuid">
+  <form>
+    <orth>thlovuid</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>plaisanterie, moquerie</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="tichin">
+  <form>
+    <orth>tichin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>cape, capeline</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="tirig">
+  <form>
+    <orth>tirig</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>sœur ou frère</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="troch">
+  <form>
+    <orth>troch</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~en</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>jour</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="tseil">
+  <form>
+    <orth>tseil</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~en</orth>
+  </form>
+  <sense>
+    <trans lang="fr">
+      <def>accent</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="tseiluid">
+  <form>
+    <orth>tseiluid</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <sense>
+    <trans lang="fr">
+      <def>accentuation</def> <usg type="hint">dans un usage linguistique</usg>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="tuxm">
+  <form>
+    <orth>tuxm</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>queue</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="tyad">
+  <form>
+    <orth>tyad</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>dialecte</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="tyedhon">
+  <form>
+    <orth>tyedhon</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>fruit</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="tyesed">
+  <form>
+    <orth>tyesed</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>langue</def> <usg type="hint">au sens linguistique</usg>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="velsh"/>, <ptr target="tyad"/></xr>
+</entry>
+
+<milestone n="V" unit="part"/>
+
+<entry id="vanth">
+  <form>
+    <orth>vanth</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>passé (lointain)</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="vanthied">
+  <form>
+    <orth>vanthied</orth>
+  </form>
+  <gramGrp>
+    <pos>adv.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>jadis, dans les temps anciens</def> <usg type="hint">ou aussi dans les mythes</usg>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="vanthuid">
+  <form>
+    <orth>vanthuid</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <sense>
+    <trans lang="fr">
+      <def>temps narratif, passé historique</def> <usg type="hint">en linguistique</usg>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="vareg">
+  <form>
+    <orth>vareg</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~is</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>chienne, chien</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="vedhr">
+  <form>
+    <orth>vedhr</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>homme</def>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="gevel"/></xr>
+</entry>
+
+<entry id="veloq">
+  <form>
+    <orth>veloq</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~en</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>braies, pantalon</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="velsh">
+  <form>
+    <orth>velsh</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>langage</def>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="tyesed"/></xr>
+</entry>
+
+<entry id="virl">
+  <form>
+    <orth>virl</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos> <gen>f.</gen>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>fille</def> <usg type="hint">mineure</usg>
+    </trans>
+  </sense>
+  <eg>
+    <q>i-virl li qon eigin yunagare olloven cu pene vedh i-hevel li vedhr</q>
+    <trans lang="fr">
+      <tr>filles et garçons deviennent femmes et hommes à 17 ans</tr>
+    </trans>
+  </eg>
+  <xr type="analogy"><ptr target="qon"/></xr>
+</entry>
+
+<entry id="vrath">
+  <form>
+    <orth>vrath</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~en</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>éleveur</def>
+      <usg type="hint">d’animaux</usg>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="vron">
+  <form>
+    <orth>vron</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~en</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>poumon</def>
+    </trans>
+  </sense>
+</entry>
+
+<milestone n="Y" unit="part"/>
+
+<entry id="yudseil">
+  <form>
+    <orth>yudseil</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>accent majeur</def> <usg type="hint">en linguistique</usg>
+    </trans>
+  </sense>
+  <etym>*yu(ne)+tseil « troisième accent » (décompté depuis la fin d’un mot</etym>
+</entry>
+
+   </div0>
+  </body>
+</text>
+
+</TEI.2>
