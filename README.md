@@ -5,20 +5,22 @@ I wanted to give a try to the [SILE](https://github.com/sile-typesetter/sile) ty
 
 Some of the things I may (or not) provide here:
 - [X] epigraphs
+
+  The **epigraph** package is inspired (loosely) from the LaTeX package by the same name, with a minimal set of useful features.
+
 - [ ] quotations - the default "quote" package in SILE doesn't do the job for me.
 - [ ] labels and reference.
 - [ ] proper page masters (a.k.a an extended book template for print)
 - [ ] side notes (a.k.a margin notes)
 - [ ] figures (with captions, etc.)
-- [ ] dictionaries
-  - [X] XML TEI dictionary support (subset, as used in the HSD project)
-  - [X] layout for dictionaries (two columns, running headers, etc.)
-- [ ] other minor styles and hacks (details to be provided as my knowledge of SILE improves)
-  - [X] Temporary command redefinition (save and restore)
-  - [X] Styles
+- [X] XML TEI dictionaries 
 
-Progress status:
-- **epigraph** package: inspired (loosely) from the LaTeX package by the same name, with minimal set of useful features. Internal implementation details may change as my knowledge of SILE improves, but the user interface should be ok and the package does a decent job.
-- **redefine** package: considered as a beta-version at best.
-- **styles** package: an experimental idea inspired by LibreOffice and Co. Considered as an alpha-version at best.
-- **teidict** package ans **teibook** class: does a fairly good job on the HSD dictionary
+  The **teidict** package and the **teibook** class are intended for processing XML TEI P4 dictionaries.
+  They supports a decent subset of the [TEI P4](https://tei-c.org/Vault/P4/doc/html/) "Print Dictionaries"
+  specification, and define an appropriated layout for such dictionaries (entries on two columns, with
+  running page headers, etc.).
+
+- [X] Temporary command redefinition (save and restore): **redefine** package.
+- [X] Styles (IN PROGRESS): **styles** package.
+- [X] Common shorthands and abbreviations: **abbr** package. This package defines a few shorthands
+  and abbreviations that its author often uses in articles or book chapters
