@@ -355,7 +355,7 @@
   </sense>
   <note type="comment" lang="fr">
     Si les parents biologiques sont à l’origine du nom de l’enfant, ils se chargent rarement de
-    l’éducation de leur enfants. Ces derniers sont confiés à une matriarche - La notion même de
+    l’éducation de leur enfants. Ces derniers sont confiés à une matriarche — La notion même de
     famille est élargie au matriarcat. Mère biologique et matriarche contribuent toutes deux à
     définir la filiation et les droits à l’héritage. Sauf exception, le père ne lègue pas d’héritage
     à ses propres enfants, mais à son matriarcat d’origine, qui se charge de la répartition des
@@ -547,9 +547,10 @@
         les terres inconnues et les mondes étrangers, y compris fictifs</usg>
     </trans>
   </sense>
-  <etym>[A l’origine, *beher (avec pl. *beheris), réinterprété par collusion avec un autre
-   mot plus ancien signifiant probablement « terre (ou masse continentale) ».]
-   [On trouve aussi un pluriel archaüque, beiras]
+  <etym>À l’origine, <hi>*beher</hi> (avec pl. <hi>*beheris</hi>), réinterprété par collusion
+   avec un autre mot plus ancien signifiant probablement « terre (ou masse continentale) ».
+   On trouve aussi un pluriel archaïque, <hi>beiras</hi>, qui s’explique probablement de
+   la même manière.
   </etym>
   <xr type="analogy"><ptr target="sile"/></xr>
 </entry>
@@ -1799,7 +1800,7 @@
       <def>l’imparfait</def> <usg type="hint">au sens linguistique</usg>
     </trans>
   </sense>
-  <etym>*ed-dane</etym>
+  <etym><hi>*ed-dane</hi> « non-parfection »</etym>
 </entry>
 
 <entry id="essevedrin">
@@ -1818,7 +1819,7 @@
       <def>en banlieue, en dehors du voisinage, extérieur au quartier</def>
     </trans>
   </sense>
-  <etym>*ed-seved « non-voisin », au sens de « en dehors du quartier »</etym>
+  <etym><hi>*ed-seved</hi> « non-voisin », au sens de « en dehors du quartier »</etym>
 </entry>
 
 <entry id="essodhon">
@@ -2220,7 +2221,7 @@
     Le terme s’emploie aussi pour les princesses d’autres contrées, d’où la traduction proposée,
     dans un sens large (selon ce qu’il recouvre par ailleurs pour dans les différents pays concernés).
   </note>
-  <etym>*gess+gevel « noble femme »</etym>
+  <etym><hi>*gess+gevel</hi> « noble femme »</etym>
 </entry>
 
 <entry id="gessian">
@@ -2273,7 +2274,7 @@
     à l’ensemble des jumelles aînées, parmi lesquels la princesse, <hi>i·hessevel</hi> est en principe
     choisie.
   </note>
-  <etym>*gass/gess+tirig (avec absence de lénition interne), noble frère jumeau / noble sœur jumelle</etym>
+  <etym><hi>*gass/gess+tirig</hi> (avec absence de lénition interne), noble jumeau ou jumelle</etym>
 </entry>
 
 <entry id="gevel">
@@ -2646,7 +2647,7 @@
     <orth>lotheg</orth>
   </form>
   <form>
-    <gen>m.</gen>
+    <gen>n.</gen>
     <orth>letheg</orth>
   </form>
   <form type="inflected">
@@ -2743,7 +2744,7 @@
       <def>accent mineur</def> <usg type="hint">en linguistique</usg>
     </trans>
   </sense>
-  <etym>*le(ne)+tseil « premier accent » (décompté depuis le début d’un mot)</etym>
+  <etym><hi>*le(ne)+tseil</hi> « premier accent » (décompté depuis le début d’un mot)</etym>
 </entry>
 
 <entry id="levm">
@@ -2818,12 +2819,6 @@
     <pos>n.</pos>
   </gramGrp>
   <sense>
-    <trans lang="fr">
-      <def>juriste</def>
-    </trans>
-  </sense>
-  <sense>
-    <usg type="ext">by ext.</usg>
     <trans lang="fr">
       <def>code ou système de lois, droit</def>
     </trans>
@@ -3131,7 +3126,7 @@
     de la cité d’Almaq, constituée d’une « princesse » et d’un conseil de nobles, ne connaît
     pas ces distinctions.
     Le masculin <hi>norg</hi> « roi » prend d’ailleurs aussi parfois le sens de « seigneur,
-    baron, etc. », et s’emploie ainsi pour divers titres en usages chez les Siléens, qui
+    baron, etc. », et s’emploie ainsi pour divers titres en usage chez les Siléens, qui
     disposaient d’un système de type féodal et patriarcal.
   </note>
 </entry>
@@ -3317,7 +3312,7 @@
     </trans>
   </sense>
   <note type="comment" lang="fr">
-    S’emploie tant pour le fabricant de tels instruments que pour celui ou celle qui les pratiquent.
+    S’emploie tant pour le fabricant de tels instruments que pour celui ou celle qui les pratique.
     S’il est besoin, l’artisan peut être désigné par <hi>month/manth aneiserin</hi> « artisan de luth ».
   </note>
 </entry>
@@ -3472,7 +3467,7 @@
     En période de paix, la princesse d’Almaq, <hi>i·hessevel</hi> est normalement choisie par tirage
     au sort parmi les <hi>Gestirigis</hi> (« nobles jumelles »).
     Le terme s’emploie aussi pour les princesses d’autres contrées, d’où la traduction proposée,
-    dans un sens large (selon ce qu’il recouvre par ailleurs pour dans les différents pays concernés).
+    dans un sens large (selon ce qu’il recouvre par ailleursl dans les différents pays concernés).
   </note>
 </entry>
 
@@ -3749,10 +3744,9 @@
       <def>voisin</def>
     </trans>
   </sense>
-  <!-- (pl. étym. rethegas),
-  [Étym. *rethg, réinterprété par analogie avec seved qui correspond à une division administrative
-  de la cité, tandis que le retheg relève d’une division sociale.]
-  -->
+  <etym><hi>*rethg</hi> (d'où aussi un pl. étymologique <hi>rethegas</hi>), réinterprété par analogie
+     avec <hi>seved</hi> qui correspond à une division administrative de la cité, tandis que 
+     le <hi>retheg</hi> relève d’une division sociale.</etym>
   <xr type="analogy"><ptr target="sevedian"/></xr>
 
 </entry>
@@ -4005,7 +3999,7 @@
   <eg>
     <q>serch anahalrin</q>
     <trans lang="fr">
-      <tr>la grammaire du langage familier, lit. du language du peuple</tr>
+      <tr>la grammaire du langage familier, lit. du langage du peuple</tr>
     </trans>
   </eg>
 </entry>
@@ -4033,7 +4027,7 @@
     </trans>
   </sense>
   <note type="comment" lang="fr">
-    A Almaq, s’applique aux quatre divisions correspondant à la Cité Basse, la Cité Médiane,
+    À Almaq, s’applique aux quatre divisions correspondant à la Cité Basse, la Cité Médiane,
     la Cité Haute et la Citadelle (ou l’Esplanade).
   </note>
 </entry>
@@ -4075,7 +4069,7 @@
   </sense>
   <sense>
     <trans lang="fr">
-      <def>au sens moderne restrictif, le continent où se trouve Almaq, et ses îles avoisinantes</def>
+      <def>au sens moderne restrictif, le continent où se trouve Almaq et ses îles avoisinantes</def>
     </trans>
   </sense>
    <sense>
@@ -4293,7 +4287,7 @@
     </trans>
   </sense>
   <note type="comment" lang="fr">
-    Avec marque respective: vache, <hi>i-devch</hi> ; taureau, <hi>o-devch</hi> — sans
+    Avec marque respective : vache, <hi>i-devch</hi> et taureau, <hi>o-devch</hi> — sans
     marque respective, taureau ou bœuf selon le contexte.
   </note>
 </entry>
@@ -4352,7 +4346,7 @@
     </trans>
   </sense>
   <note type="comment" lang="fr">
-    A Almaq, en particulier, le Petit Jardin, <hi>Sa-Devin</hi>, appartenant à la Cité Haute,
+    À Almaq, en particulier, le Petit Jardin, <hi>Sa-Devin</hi>, appartenant à la Cité Haute,
     et les Grands Jardins, <hi>e-Tevenis</hi>, appartenant géographiquement à la Cité Médiane,
     mais dont la jouissance est réservée, hors des périodes de fêtes, à la Princesse et à sa suite.
   </note>
@@ -4759,7 +4753,7 @@
       <def>accent majeur</def> <usg type="hint">en linguistique</usg>
     </trans>
   </sense>
-  <etym>*yu(ne)+tseil « troisième accent » (décompté depuis la fin d’un mot</etym>
+  <etym><hi>*yu(ne)+tseil</hi> « troisième accent » (décompté depuis la fin d’un mot)</etym>
 </entry>
 
    </div0>
