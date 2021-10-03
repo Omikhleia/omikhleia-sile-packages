@@ -1,6 +1,6 @@
 --
 -- Utilities common to my packages for SILE
--- Omikhleia, 2021
+-- 2021, Didier Willis
 -- License: MIT
 --
 -- This file is not intended to be used directly in SILE documents

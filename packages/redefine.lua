@@ -1,6 +1,6 @@
 --
 -- A command redefinition package for SILE
--- Omikhleia, 2021
+-- 2021, Didier Willis
 -- License: MIT
 --
 -- Somehow a "hack", see description.
