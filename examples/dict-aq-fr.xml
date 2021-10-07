@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TEI.2 SYSTEM "xmldict.dtd"><TEI.2>
+<!DOCTYPE TEI.2 SYSTEM "dict.dtd"><TEI.2>
 <teiHeader>
   <fileDesc>
     <titleStmt>
@@ -10,7 +10,7 @@
     </titleStmt>
 
     <editionStmt>
-      <edition n="0.9"/>
+      <edition n="1.0"/>
     </editionStmt>
 
     <publicationStmt>
@@ -58,6 +58,20 @@
 <div0 type="dictionary">
 
 <milestone n="A" unit="part"/>
+
+<entry id="a-">
+  <form>
+    <orth>a-</orth>
+  </form>
+  <gramGrp>
+    <pos>pref.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>préfixe adjectival</def>
+    </trans>
+  </sense>
+</entry>
 
 <entry id="abaldhevern">
   <form>
@@ -154,6 +168,30 @@
     </trans>
   </sense>
   <xr type="analogy"><ptr target="anegevern"/></xr>
+</entry>
+
+<entry id="ablitherin">
+  <form>
+    <orth>ablitherin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>ablithenrin</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>reflété</def> <usg type="hint">en miroir</usg>
+    </trans>
+  </sense>
+  <sense>
+    <usg type="ext">by ext.</usg>
+    <trans lang="fr">
+      <def>opposé, symétrique, etc.</def>
+    </trans>
+  </sense>
 </entry>
 
 <entry id="abralerin">
@@ -337,6 +375,78 @@
   </sense>
 </entry>
 
+<entry id="acarbeneth">
+  <form>
+    <orth>acarbeneth</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~neithal</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos> <subc>ord.</subc>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>cinquième en partant de la fin</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="acarin">
+  <form>
+    <orth>acarin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>acaresrin</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>quintuple</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="acarsteneth">
+  <form>
+    <orth>acarsteneth</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~neithal</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos> <subc>ord.</subc>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>cinquième</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="acaruiterin">
+  <form>
+    <orth>acaruiterin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>acaruitesrin</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>un cinquième (⅕) de qqch.</def>
+    </trans>
+  </sense>
+</entry>
+
 <entry id="achadrin">
   <form>
     <orth>achadrin</orth>
@@ -407,6 +517,30 @@
       <def>rouge (sang)</def>
     </trans>
   </sense>
+</entry>
+
+<entry id="adavrin">
+  <form>
+    <orth>adavrin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>adavreinerin</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>mort, décédé</def>
+    </trans>
+  </sense>
+  <eg>
+    <q>selein adavrin</q>
+    <trans lang="fr">
+      <tr>la nouvelle lune, lit. « lune morte »</tr>
+    </trans>
+  </eg>
 </entry>
 
 <entry id="adohonevern">
@@ -598,6 +732,24 @@
   </sense>
 </entry>
 
+<entry id="afanerin">
+  <form>
+    <orth>afanerin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>afanesrin</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>multiple</def>
+    </trans>
+  </sense>
+</entry>
+
 <entry id="afathnerin">
   <form>
     <orth>afathnerin</orth>
@@ -671,7 +823,7 @@
     </trans>
   </sense>
   <eg>
-    <q>i-hevel afesedrin</q>
+    <q>i·hevel afesedrin</q>
     <trans lang="fr">
       <tr>dame renarde (surnom d’une princesse légendaire)</tr>
     </trans>
@@ -912,6 +1064,26 @@
   </sense>
 </entry>
 
+<entry id="agwarnerin">
+  <form>
+    <orth>agwarnerin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>agwarnasrin</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>mortel</def> <usg type="hint">qui est sujet à la mort</usg>,
+      <def>fatal</def> <usg type="hint">qui cause la mort</usg>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="adavrin"/></xr>
+</entry>
+
 <entry id="agwenethrin">
   <form>
     <orth>agwenethrin</orth>
@@ -952,7 +1124,7 @@
     </trans>
   </sense>
   <eg>
-    <q>e-sornas agwinchasrin</q>
+    <q>e·sornas agwinchasrin</q>
     <trans lang="fr">
       <tr>les hydres fabuleuses (nom d’un fragment de conte mythologique)</tr>
     </trans>
@@ -1030,6 +1202,24 @@
   </sense>
 </entry>
 
+<entry id="alembeneth">
+  <form>
+    <orth>alembeneth</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>alembeneithal</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos> <subc>ord.</subc>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>dernier</def>
+    </trans>
+  </sense>
+</entry>
+
 <entry id="alendalfrin">
   <form>
     <orth>alendalfrin</orth>
@@ -1049,6 +1239,42 @@
     </trans>
   </eg>
   <xr type="analogy"><ptr target="lene"/>, <ptr target="talf"/></xr>
+</entry>
+
+<entry id="alenerin">
+  <form>
+    <orth>alenerin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>alenesrin</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>unique</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="alensteneth">
+  <form>
+    <orth>alensteneth</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>alensteneithal</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos> <subc>ord.</subc>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>premier</def>
+    </trans>
+  </sense>
 </entry>
 
 <entry id="aleredrin">
@@ -1185,6 +1411,78 @@
   </sense>
 </entry>
 
+<entry id="alombeneth">
+  <form>
+    <orth>alombeneth</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~neithal</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos> <subc>ord.</subc>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>quatrième en partant de la fin</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="alonerin">
+  <form>
+    <orth>alonerin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>alonesrin</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>quadruple</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="alonsteneth">
+  <form>
+    <orth>alonsteneth</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~neithal</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos> <subc>ord.</subc>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>quatrième</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="alonuiterin">
+  <form>
+    <orth>alonuiterin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>alonuitesrin</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>un quart (¼) de qqch.</def>
+    </trans>
+  </sense>
+</entry>
+
 <entry id="alormerin">
   <form>
     <orth>alormerin</orth>
@@ -1223,6 +1521,28 @@
   <sense>
     <trans lang="fr">
       <def>ensoleillé</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="am">
+  <form>
+    <orth>am</orth>
+  </form>
+  <sense>
+    <gramGrp>
+      <pos>prep.</pos>
+    </gramGrp>
+    <trans lang="fr">
+      <def>préposition de liaison dans les degrés de comparaison</def>
+    </trans>
+  </sense>
+  <sense>
+    <gramGrp>
+      <pos>conj.</pos>
+    </gramGrp>
+    <trans lang="fr">
+      <def>conjonction de liaison ou élément suffixe de conjections</def>
     </trans>
   </sense>
 </entry>
@@ -1367,6 +1687,20 @@
   <sense>
     <trans lang="fr">
       <def>chaud</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="an">
+  <form>
+    <orth>an</orth>
+  </form>
+  <gramGrp>
+    <pos>prep.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>de</def> <usg type="hint">génitif ou partitif</usg>
     </trans>
   </sense>
 </entry>
@@ -1657,6 +1991,84 @@
   </sense>
 </entry>
 
+<entry id="apembeneth">
+  <form>
+    <orth>apembeneth</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>apembeneithal</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos> <subc>ord.</subc>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>avant-dernier, pénultième</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="apenerin">
+  <form>
+    <orth>apenerin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>apenesrin</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>double</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="apensteneth">
+  <form>
+    <orth>apensteneth</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>apensteneithal</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos> <subc>ord.</subc>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>deuxième, second</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="apenuiterin">
+  <form>
+    <orth>apenuiterin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>apenuitesrin</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>une moitié (½) de qqch.</def>
+    </trans>
+  </sense>
+  <eg>
+    <q>bolon apenuiterin</q>
+    <trans lang="fr">
+      <tr>une demi-poire</tr>
+    </trans>
+  </eg>
+</entry>
+
 <entry id="aph">
   <form>
     <orth>aph</orth>
@@ -1677,7 +2089,7 @@
     <orth>aphe</orth>
   </form>
   <form>
-    <number>f.</number>
+    <number>resp.</number>
     <orth>aiphe</orth>
   </form>
   <gramGrp>
@@ -1758,6 +2170,34 @@
   <sense>
     <trans lang="fr">
       <def>cyclique</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="arambeneth">
+  <form>
+    <orth>arambeneth</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>infini</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="aransteneth">
+  <form>
+    <orth>aransteneth</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>infinitésimal, en toute petite quantité</def>
     </trans>
   </sense>
 </entry>
@@ -2017,6 +2457,24 @@
   </sense>
 </entry>
 
+<entry id="atethlerin">
+  <form>
+    <orth>atethlerin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>atethlasrin</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>adverse</def>
+    </trans>
+  </sense>
+</entry>
+
 <entry id="athalerin">
   <form>
     <orth>athalerin</orth>
@@ -2035,20 +2493,20 @@
   </sense>
 </entry>
 
-<entry id="atethlerin">
+<entry id="athleiferin">
   <form>
-    <orth>atethlerin</orth>
+    <orth>athleiferin</orth>
   </form>
   <form type="inflected">
     <number>pl.</number>
-    <orth>atethlasrin</orth>
+    <orth>athleifenrin</orth>
   </form>
   <gramGrp>
     <pos>adj.</pos>
   </gramGrp>
   <sense>
     <trans lang="fr">
-      <def>adverse</def>
+      <def>rusé, trompeur, fourbe</def>
     </trans>
   </sense>
 </entry>
@@ -2237,6 +2695,78 @@
   </sense>
 </entry>
 
+<entry id="ayumbeneth">
+  <form>
+    <orth>ayumbeneth</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~neithal</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos> <subc>ord.</subc>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>antépénultième</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="ayunerin">
+  <form>
+    <orth>ayunerin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>ayunesrin</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>triple</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="ayunsteneth">
+  <form>
+    <orth>ayunsteneth</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~neithal</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos> <subc>ord.</subc>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>troisième</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="ayunuiterin">
+  <form>
+    <orth>ayunuiterin</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>ayunuitesrin</orth>
+  </form>
+  <gramGrp>
+    <pos>adj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>un tiers (⅓) de qqch.</def>
+    </trans>
+  </sense>
+</entry>
+
 <milestone n="B" unit="part"/>
 
 <entry id="baldh">
@@ -2416,6 +2946,48 @@
   <xr type="analogy"><ptr target="sile"/></xr>
 </entry>
 
+<entry id="beldham">
+  <form>
+    <orth>beldham</orth>
+  </form>
+  <gramGrp>
+    <pos>conj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>combien…</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="beldhuin">
+  <form>
+    <orth>beldhuin</orth>
+  </form>
+  <gramGrp>
+    <pos>pron.</pos> <subc>interr.</subc>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>combien ?</def> <usg type="hint">quantité</usg>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="bel">
+  <form>
+    <orth>bel</orth>
+  </form>
+  <gramGrp>
+    <pos>conj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>que…</def> <usg type="hint">objet</usg>
+    </trans>
+  </sense>
+</entry>
+
 <entry id="beled">
   <form>
     <orth>beled</orth>
@@ -2478,6 +3050,20 @@
     montré ou exprimé — et que, par conséquent, la proposition en opposition relève du non-dit, de ce qui
     est caché ou tu (« enterré »).
   </note>
+</entry>
+
+<entry id="beluin">
+  <form>
+    <orth>beluin</orth>
+  </form>
+  <gramGrp>
+    <pos>pron.</pos> <subc>interr.</subc>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>quoi ? que ?</def> <usg type="hint">objet</usg>
+    </trans>
+  </sense>
 </entry>
 
 <entry id="bened">
@@ -2599,6 +3185,25 @@
     </trans>
   </sense>
   <xr type="analogy"><ptr target="tyandh"/></xr>
+</entry>
+
+<entry id="blith">
+  <form>
+    <orth>blith</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~en</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>miroir</def>
+    </trans>
+  </sense>
+  <etym>BILÍT</etym>
 </entry>
 
 <entry id="bolon">
@@ -2967,6 +3572,34 @@
 
 <milestone n="C" unit="part"/>
 
+<entry id="cadam">
+  <form>
+    <orth>cadam</orth>
+  </form>
+  <gramGrp>
+    <pos>conj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>pour que…</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="caduin">
+  <form>
+    <orth>caduin</orth>
+  </form>
+  <gramGrp>
+    <pos>pron.</pos> <subc>interr.</subc>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>pourquoi ? pour quoi ?</def> <usg type="hint">but</usg>
+    </trans>
+  </sense>
+</entry>
+
 <entry id="cafn">
   <form>
     <orth>cafn</orth>
@@ -3075,6 +3708,7 @@
 
 <entry id="calth">
   <form>
+    <gen>f.</gen>
     <orth>calth</orth>
   </form>
   <form>
@@ -3087,7 +3721,7 @@
   </form>
   <sense>
     <gramGrp>
-      <pos>n.</pos> <gen>f.</gen>
+      <pos>n.</pos>
     </gramGrp>
     <trans lang="fr">
       <def>mère</def> <usg type="hint">biologique</usg>
@@ -3392,6 +4026,25 @@
   <etym>KEDÉL</etym>
 </entry>
 
+<entry id="ceneith">
+  <form>
+    <orth>ceneith</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~en</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>argile, grès</def>
+    </trans>
+  </sense>
+  <etym>KENÉT</etym>
+</entry>
+
 <entry id="ceneithian">
   <form>
     <orth>ceneithian</orth>
@@ -3412,6 +4065,7 @@
 
 <entry id="cenn">
   <form>
+    <gen>f.</gen>
     <orth>cenn</orth>
   </form>
   <form>
@@ -3423,7 +4077,7 @@
     <orth>~as</orth>
   </form>
   <gramGrp>
-    <pos>n.</pos> <gen>f.</gen>
+    <pos>n.</pos>
   </gramGrp>
   <sense>
     <trans lang="fr">
@@ -3435,6 +4089,7 @@
 
 <entry id="cenne">
   <form>
+    <gen>f.</gen>
     <orth>cenne</orth>
   </form>
   <form>
@@ -3442,13 +4097,57 @@
     <orth>canne</orth>
   </form>
   <gramGrp>
-    <pos>v.</pos> <gen>f.</gen>
+    <pos>v.</pos>
   </gramGrp>
   <sense>
     <trans lang="fr">
       <def>plaisanter, faire des farces</def>
     </trans>
   </sense>
+</entry>
+
+<entry id="cexm">
+  <form>
+    <orth>cexm</orth>
+  </form>
+  <gramGrp>
+    <pos>prep.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>à propos de</def> <usg type="hint">subjectif</usg>
+    </trans>
+  </sense>
+  <etym>KEKEM</etym>
+</entry>
+
+<entry id="cexmad">
+  <form>
+    <orth>cexmad</orth>
+  </form>
+  <gramGrp>
+    <pos>prep.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>concernant, à propos de</def> <usg type="hint">relatif</usg>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="cexmin">
+  <form>
+    <orth>cexmin</orth>
+  </form>
+  <gramGrp>
+    <pos>prep.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>basé sur</def> <usg type="hint">référentiel</usg>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="du"/></xr>
 </entry>
 
 <entry id="chad">
@@ -3607,6 +4306,58 @@
   <xr type="analogy"><ptr target="gweseil"/></xr>
 </entry>
 
+<entry id="clash">
+  <form>
+    <orth>clash</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~en</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>changement</def> <usg type="hint">dans un sens large</usg>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="dyured"/></xr>
+</entry>
+
+<entry id="clashe">
+  <form>
+    <orth>clashe</orth>
+  </form>
+  <gramGrp>
+    <pos>v.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>changer</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="cmeil">
+  <form>
+    <orth>cmeil</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~en</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>part, portion</def>
+    </trans>
+  </sense>
+  <etym>KEMÉL</etym>
+</entry>
+
 <entry id="cod">
   <form>
     <orth>cod</orth>
@@ -3663,6 +4414,25 @@
     </trans>
   </sense>
   <xr type="analogy"><ptr target="cod"/></xr>
+</entry>
+
+<entry id="corf">
+  <form>
+    <orth>corf</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>rempart, muraille</def>
+    </trans>
+  </sense>
+  <etym>KÓROP</etym>
 </entry>
 
 <entry id="cothr">
@@ -3763,6 +4533,20 @@
     </trans>
   </sense>
   <xr type="analogy"><ptr target="crein"/></xr>
+</entry>
+
+<entry id="cu">
+  <form>
+    <orth>cu</orth>
+  </form>
+  <gramGrp>
+    <pos>coord.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>et</def>
+    </trans>
+  </sense>
 </entry>
 
 <entry id="cuig">
@@ -3875,7 +4659,7 @@
   </sense>
   <sense>
     <trans lang="fr">
-      <def>étranger s’installant à Almaq, « aubain », métèque</def>
+      <def>étranger s’étant installé à Almaq, « aubain », métèque</def>
     </trans>
   </sense>
   <etym>DÓLET</etym>
@@ -4183,6 +4967,22 @@
   </note>
 </entry>
 
+<entry id="di">
+  <form>
+    <orth>di·</orth>
+  </form>
+  <gramGrp>
+    <pos>prep.</pos> <gen>resp.</gen>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>particule de négation (verbale)</def> <usg type="hint">sous forme respective, d’un usage
+        rare et précieux,</usg>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="na.1"/></xr>
+</entry>
+
 <entry id="dilif">
   <form>
     <orth>dilif</orth>
@@ -4465,6 +5265,25 @@
   </sense>
 </entry>
 
+<entry id="du">
+  <form>
+    <orth>du</orth>
+  </form>
+  <form>
+    <number>pl.</number>
+    <orth>me</orth>
+  </form>
+  <gramGrp>
+    <pos>prep.</pos> <subc>det.</subc>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>dans, en</def>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="eigin"/></xr>
+</entry>
+
 <entry id="dume">
   <form>
     <orth>dume</orth>
@@ -4711,6 +5530,20 @@
   <xr type="analogy"><ptr target="manthuid"/>, <ptr target="ferein"/></xr>
 </entry>
 
+<entry id="dyegad">
+  <form>
+    <orth>dyegad</orth>
+  </form>
+  <gramGrp>
+    <pos>prep.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>avant</def>
+    </trans>
+  </sense>
+</entry>
+
 <entry id="dyetesed">
   <form>
     <orth>dyetesed</orth>
@@ -4861,6 +5694,94 @@
 
 <milestone n="E" unit="part"/>
 
+<!-- <entry id="-elerd">
+  <form>
+    <orth>-(e)lerd</orth>
+  </form>
+  <gramGrp>
+    <pos>suff.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>suffixe adjectival d’odeur</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="-eneth">
+  <form>
+    <orth>-(e)neth</orth>
+  </form>
+   <form type="inflected">
+    <number>pl.</number>
+    <orth>~(e)neithal</orth>
+  </form>
+  <gramGrp>
+    <pos>suff.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>suffixe adjectival / participial</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="-enu">
+  <form>
+    <orth>-(e)nu</orth>
+  </form>
+  <gramGrp>
+    <pos>suff.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>suffixe adjectival de toucher</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="-erin">
+  <form>
+    <orth>-(e)rin</orth>
+  </form>
+  <gramGrp>
+    <pos>suff.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>suffixe adjectival régulier</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="-erinde">
+  <form>
+    <orth>-(e)rinde</orth>
+  </form>
+  <gramGrp>
+    <pos>suff.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>suffixe adjectival de toucher</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="-evern">
+  <form>
+    <orth>-(e)vern</orth>
+  </form>
+  <gramGrp>
+    <pos>suff.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>suffixe adjectival de couleur</def>
+    </trans>
+  </sense>
+</entry> -->
+
 <entry id="e.1" n="1">
   <form>
     <orth>e</orth>
@@ -4884,9 +5805,14 @@
   <form>
     <orth>e·</orth>
   </form>
+  <form>
+    <gen>resp.</gen>
+    <orth>ei·</orth>
+  </form>
   <gramGrp>
     <pos>det.</pos>
   </gramGrp>
+  <xr type="see"><ptr target="u"/></xr>
 </entry>
 
 <entry id="ed">
@@ -4937,6 +5863,139 @@
         <tr>~ de matriarche</tr>
       </trans>
     </eg>
+  </sense>
+</entry>
+
+<entry id="efane">
+  <form>
+    <orth>efane</orth>
+  </form>
+  <gramGrp>
+    <pos>det.</pos> <subc>card.</subc>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>plusieurs, beaucoup, une grande quantité</def>
+    </trans>
+  </sense>
+  <etym>PANE</etym>
+</entry>
+
+<entry id="eig">
+  <form>
+    <orth>eig</orth>
+  </form>
+  <gramGrp>
+    <pos>prep.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>dans</def> <usg type="hint">illatif</usg>,
+      <def>jusque</def> <usg type="hint">terminatif temporel</usg>
+    </trans>
+  </sense>
+  <etym>ENKE/'ÉNEG</etym>
+</entry>
+
+<entry id="eigad">
+  <form>
+    <orth>eigad</orth>
+  </form>
+  <gramGrp>
+    <pos>prep.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>hors de</def> <usg type="hint">elatif</usg>,
+      <def>depuis</def> <usg type="hint">origine temporelle</usg>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="Eigiad">
+  <form>
+    <orth>Eigiad</orth>
+  </form>
+  <gramGrp>
+    <pos>n. pr.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>l’Au-Dehors</def> <usg type="hint">façon populaire de désigner le monde
+        extérieur à la cité</usg>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="eigin">
+  <form>
+    <orth>eigin</orth>
+  </form>
+  <gramGrp>
+    <pos>prep.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>dans, en</def> <usg type="hint">inessif</usg>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="du"/></xr>
+</entry>
+
+<entry id="eigste">
+  <form>
+    <orth>eigste</orth>
+  </form>
+  <gramGrp>
+    <pos>prep.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>après</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="el">
+  <form>
+    <orth>el</orth>
+  </form>
+  <gramGrp>
+    <pos>prep.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>pour, à</def> <usg type="hint">intentionnel</usg>
+    </trans>
+  </sense>
+  <etym>EYLE-/ELE-</etym>
+</entry>
+
+<entry id="elad">
+  <form>
+    <orth>elad</orth>
+  </form>
+  <gramGrp>
+    <pos>prep.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>par</def> <usg type="hint">agent</usg>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="elfam">
+  <form>
+    <orth>elfam</orth>
+  </form>
+  <gramGrp>
+    <pos>conj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>quand…</def>
+    </trans>
   </sense>
 </entry>
 
@@ -5020,6 +6079,34 @@
   </sense>
 </entry>
 
+<entry id="elfuin">
+  <form>
+    <orth>elfuin</orth>
+  </form>
+  <gramGrp>
+    <pos>pron.</pos> <subc>interr.</subc>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>quand ?</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="elin">
+  <form>
+    <orth>elin</orth>
+  </form>
+  <gramGrp>
+    <pos>prep.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>pour, à</def> <usg type="hint">attributif</usg>
+    </trans>
+  </sense>
+</entry>
+
 <entry id="ellormerin">
   <form>
     <orth>ellormerin</orth>
@@ -5044,6 +6131,33 @@
   </sense>
 </entry>
 
+<entry id="elu">
+  <form>
+    <orth>elu·</orth>
+  </form>
+  <form>
+    <gen>resp.</gen>
+    <orth>elui·</orth>
+  </form>
+  <form>
+    <number>pl.</number>
+    <orth>ele·</orth>
+  </form>
+  <form>
+    <gen>resp.</gen>
+    <number>pl.</number>
+    <orth>eile·</orth>
+  </form>
+  <gramGrp>
+    <pos>det.</pos> <subc>art.</subc> <subc>dem.</subc> <per>3rd</per>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>sa, son, sien</def>
+    </trans>
+  </sense>
+</entry>
+
 <entry id="endane">
   <form>
     <orth>endane</orth>
@@ -5061,6 +6175,47 @@
     </trans>
   </sense>
   <etym><hi>*ed-dane</hi> « non-parfection »</etym>
+</entry>
+
+<entry id="ephied">
+  <form>
+    <orth>ephied</orth>
+  </form>
+  <gramGrp>
+    <pos>adv.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>de quelque manière que ce soit</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="eru">
+  <form>
+    <orth>eru·</orth>
+  </form>
+  <form>
+    <gen>resp.</gen>
+    <orth>erui·</orth>
+  </form>
+  <form>
+    <number>pl.</number>
+    <orth>ere·</orth>
+  </form>
+  <form>
+    <gen>resp.</gen>
+    <number>pl.</number>
+    <orth>eire·</orth>
+  </form>
+  <gramGrp>
+    <pos>det.</pos> <subc>art.</subc> <subc>dem.</subc> <per>1st</per>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>ma, mon, mien</def>
+    </trans>
+  </sense>
 </entry>
 
 <entry id="erwedhe">
@@ -5201,6 +6356,33 @@
   <etym>SÓTON</etym>
 </entry>
 
+<entry id="esu">
+  <form>
+    <orth>esu·</orth>
+  </form>
+  <form>
+    <gen>resp.</gen>
+    <orth>esui·</orth>
+  </form>
+  <form>
+    <number>pl.</number>
+    <orth>ese·</orth>
+  </form>
+  <form>
+    <gen>resp.</gen>
+    <number>pl.</number>
+    <orth>eise·</orth>
+  </form>
+  <gramGrp>
+    <pos>det.</pos> <subc>art.</subc> <subc>dem.</subc> <per>2nd</per>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>ta, ton, tien</def>
+    </trans>
+  </sense>
+</entry>
+
 <entry id="ethlan">
   <form>
     <orth>ethlan</orth>
@@ -5234,6 +6416,20 @@
   <sense>
     <trans lang="fr">
       <def>destructeur</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="evied">
+  <form>
+    <orth>evied</orth>
+  </form>
+  <gramGrp>
+    <pos>adv.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>encore</def>
     </trans>
   </sense>
 </entry>
@@ -5320,6 +6516,58 @@
         du démiurge (proverbe)</tr>
     </trans>
   </eg>
+</entry>
+
+<entry id="fanied">
+  <form>
+    <orth>fanied</orth>
+  </form>
+  <gramGrp>
+    <pos>adv.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>plusieurs fois</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="fanste">
+  <form>
+    <orth>fanste</orth>
+  </form>
+  <gramGrp>
+    <pos>adv.</pos> <subc>ord.</subc>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>énième</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="fanuid">
+  <form>
+    <orth>fanuid</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>multiplicité</def>
+    </trans>
+  </sense>
+  <sense>
+    <trans lang="fr">
+      <def>infinité non dénombrable</def> <usg type="hint">mathématique</usg>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="rambuid"/></xr>
 </entry>
 
 <entry id="farudh">
@@ -6083,6 +7331,7 @@
 
 <entry id="gesnargian">
   <form>
+    <gen>f.</gen>
     <orth>gesnargian</orth>
   </form>
   <form>
@@ -6094,7 +7343,7 @@
     <orth>~es</orth>
   </form>
   <gramGrp>
-    <pos>n.</pos> <gen>f.</gen>
+    <pos>n.</pos>
   </gramGrp>
   <sense>
     <trans lang="fr">
@@ -6168,6 +7417,7 @@
 
 <entry id="gessian">
   <form>
+    <gen>f.</gen>
     <orth>gessian</orth>
   </form>
   <form>
@@ -6179,7 +7429,7 @@
     <orth>~es</orth>
   </form>
   <gramGrp>
-    <pos>n.</pos> <gen>f.</gen>
+    <pos>n.</pos>
   </gramGrp>
   <sense>
     <trans lang="fr">
@@ -6190,6 +7440,7 @@
 
 <entry id="gestirig">
   <form>
+    <gen>f.</gen>
     <orth>gestirig</orth>
   </form>
   <form>
@@ -6201,7 +7452,7 @@
     <orth>~is</orth>
   </form>
   <gramGrp>
-    <pos>n.</pos> <gen>f.</gen>
+    <pos>n.</pos>
   </gramGrp>
   <sense>
     <trans lang="fr">
@@ -6309,7 +7560,7 @@
   </sense>
   <etym>GÍLIT</etym>
   <eg>
-    <q>na sorn, i-galth an gilthas</q>
+    <q>na sorn, i·galth an gilthas</q>
     <trans lang="fr">
       <tr>ô Chimère, mère des rêves (litanie)</tr>
     </trans>
@@ -6879,6 +8130,44 @@
   <xr type="analogy"><ptr target="lavr"/></xr>
 </entry>
 
+<entry id="gwarn">
+  <form>
+    <orth>gwarn</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~as</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>une personne défunte, un mort</def>
+    </trans>
+  </sense>
+  <etym>GWÁRAN</etym>
+  <xr type="analogy"><ptr target="davr"/></xr>
+</entry>
+
+<entry id="gwarnuid">
+  <form>
+    <orth>gwarnuid</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>mortalité</def>
+    </trans>
+  </sense>
+</entry>
+
 <entry id="gweneth">
   <form>
     <orth>gweneth</orth>
@@ -6903,7 +8192,7 @@
     <orth>Gwenetheiv</orth>
   </form>
   <gramGrp>
-    <pos>n. pr.</pos>
+    <pos>n. pr.</pos> <gen>f.</gen>
   </gramGrp>
   <sense>
     <trans lang="fr">
@@ -7018,7 +8307,7 @@
 
 <milestone n="H" unit="part"/>
 
-<entry id="harme-">
+<entry id="harme">
   <form>
     <orth>harme</orth>
   </form>
@@ -7308,6 +8597,63 @@
 
 <milestone n="I" unit="part"/>
 
+<!-- <entry id="-ied">
+  <form>
+    <orth>-ied</orth>
+  </form>
+  <gramGrp>
+    <pos>suff.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>suffixe des adverbes positionnels</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="-indo">
+  <form>
+    <orth>-indo</orth>
+  </form>
+  <gramGrp>
+    <pos>suff.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>suffixe des adverbes adjectivaux</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="-indoran">
+  <form>
+    <orth>-indoran</orth>
+  </form>
+  <gramGrp>
+    <pos>suff.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>degré de comparaison des adverbes adjectivaux</def>
+    </trans>
+  </sense>
+</entry> -->
+
+<entry id="i">
+  <form>
+    <orth>i·</orth>
+  </form>
+  <gramGrp>
+    <pos>det.</pos> <subc>resp.</subc>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>forme féminine de la particule de respect</def>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="o"/></xr>
+</entry>
+
 <entry id="imbe">
   <form>
     <orth>imbe</orth>
@@ -7460,16 +8806,218 @@
   <etym>LÁLAK</etym>
 </entry>
 
+<entry id="lann">
+  <form>
+    <orth>lann</orth>
+  </form>
+  <gramGrp>
+    <pos>pron.</pos> <per>3rd</per> <number>sg.</number>
+  </gramGrp>
+  <re>
+    <form>
+      <orth>lean</orth>
+    </form>
+    <gramGrp>
+      <per>3rd</per> <number>pl.</number>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>lenn</orth>
+    </form>
+    <gramGrp>
+      <per>3rd</per> <number>sg.</number> <per>1st</per> <gen>gen.</gen> <number>sg.</number>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>lenni</orth>
+    </form>
+    <gramGrp>
+      <per>3rd</per> <number>sg.</number> <per>1st</per> <gen>resp.</gen> <number>sg.</number>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>lennas</orth>
+    </form>
+    <gramGrp>
+      <per>3rd</per> <number>sg.</number> <per>1st</per> <gen>gen.</gen> <number>pl.</number>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>lennis</orth>
+    </form>
+    <gramGrp>
+      <per>3rd</per> <number>sg.</number><per>1st</per> <gen>resp.</gen> <number>pl.</number>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>lonn</orth>
+    </form>
+    <gramGrp>
+      <per>3rd</per> <number>sg.</number> <per>2nd</per> <gen>gen.</gen> <number>sg.</number>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>lonni</orth>
+    </form>
+    <gramGrp>
+      <per>3rd</per> <number>sg.</number> <per>2nd</per> <gen>resp.</gen> <number>sg.</number>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>lonnas</orth>
+    </form>
+    <gramGrp>
+      <per>3rd</per> <number>sg.</number> <per>2nd</per> <gen>gen.</gen> <number>pl.</number>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>lannas</orth>
+    </form>
+    <gramGrp>
+      <per>3rd</per> <number>sg.</number> <per>2nd</per> <gen>resp.</gen> <number>pl.</number>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>lanath</orth>
+    </form>
+    <gramGrp>
+      <per>3rd</per> <number>sg.</number> <per>3rd</per> <gen>gen.</gen> <number>sg.</number>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>leneth</orth>
+    </form>
+    <gramGrp>
+      <per>3rd</per> <number>sg.</number> <per>2nd</per> <gen>resp.</gen> <number>sg.</number>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>lonoth</orth>
+    </form>
+    <gramGrp>
+      <per>3rd</per> <number>sg.</number> <per>2nd</per> <subc>indet.</subc> <gen>gen.</gen> <number>sg.</number>
+    </gramGrp>
+  </re>
+
+  <re>
+    <form>
+      <orth>lantha</orth>
+    </form>
+    <gramGrp>
+      <per>3rd</per> <number>sg.</number> <per>3rd</per> <gen>gen.</gen> <number>pl.</number>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>lenthi</orth>
+    </form>
+    <gramGrp>
+      <per>3rd</per> <number>sg.</number> <per>2nd</per> <gen>resp.</gen> <number>pl.</number>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>lontha</orth>
+    </form>
+    <gramGrp>
+      <per>3rd</per> <number>sg.</number> <per>2nd</per> <subc>indet.</subc> <gen>gen.</gen> <number>pl.</number>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>lear</orth>
+    </form>
+    <gramGrp>
+      <per>3rd</per> <number>pl.</number> <per>1st</per> <number>sg.</number>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>(le)near</orth>
+    </form>
+    <gramGrp>
+      <per>3rd</per> <number>pl.</number> <per>1st</per> <number>pl.</number>  <per>incl.</per>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>(le)chear</orth>
+    </form>
+    <gramGrp>
+      <per>3rd</per> <number>pl.</number> <per>1st</per> <number>pl.</number>  <per>excl.</per>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>leas</orth>
+    </form>
+    <gramGrp>
+      <per>3rd</per> <number>pl.</number> <per>2nd</per> <number>sg.</number>>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>(le)neal</orth>
+    </form>
+    <gramGrp>
+      <per>3rd</per> <number>pl.</number> <per>2nd</per> <number>pl.</number>> <per>incl.</per>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>(le)cheal</orth>
+    </form>
+    <gramGrp>
+      <per>3rd</per> <number>pl.</number> <per>2nd</per> <number>pl.</number>> <per>excl.</per>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>l(e)ath</orth>
+    </form>
+    <gramGrp>
+      <per>3rd</per> <number>pl.</number> <per>3rd</per> <number>sg.</number>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>l(e)ach</orth>
+    </form>
+    <gramGrp>
+      <per>3rd</per> <number>pl.</number> <per>3rd</per> <number>pl.</number>
+    </gramGrp>
+  </re>
+</entry>
+
 <entry id="lam">
   <form>
     <orth>lam</orth>
   </form>
-  <gramGrp>
-    <pos>adv.</pos>
-  </gramGrp>
   <sense>
+    <gramGrp>
+      <pos>adv.</pos> <subc>coord.</subc>
+    </gramGrp>
     <trans lang="fr">
       <def>ainsi, alors</def>
+    </trans>
+  </sense>
+  <sense>
+    <gramGrp>
+      <pos>conj.</pos>
+    </gramGrp>
+    <trans lang="fr">
+      <def>dès lors que…</def>
     </trans>
   </sense>
   <etym>LAM-</etym>
@@ -7492,6 +9040,7 @@
 
 <entry id="latheg">
   <form>
+    <gen>f.</gen>
     <orth>latheg</orth>
   </form>
   <form>
@@ -7499,7 +9048,7 @@
     <orth>lotheg</orth>
   </form>
   <form>
-    <gen>n.</gen>
+    <gen>gen.</gen>
     <orth>letheg</orth>
   </form>
   <form type="inflected">
@@ -7511,11 +9060,11 @@
     <orth>lothgas</orth>
   </form>
     <form type="inflected">
-    <gen>n.</gen> <number>pl.</number>
+    <gen>gen.</gen> <number>pl.</number>
     <orth>lethgas</orth>
   </form>
   <gramGrp>
-    <pos>n.</pos> <gen>f.</gen>
+    <pos>n.</pos>
   </gramGrp>
   <sense>
     <trans lang="fr">
@@ -7783,6 +9332,34 @@
   </note>
 </entry>
 
+<entry id="lenindo">
+  <form>
+    <orth>lenindo</orth>
+  </form>
+  <gramGrp>
+    <pos>adv.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>uniquement</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="lensam">
+  <form>
+    <orth>lensam</orth>
+  </form>
+  <gramGrp>
+    <pos>conj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>où…</def>
+    </trans>
+  </sense>
+</entry>
+
 <entry id="lenste">
   <form>
     <orth>lenste</orth>
@@ -7793,6 +9370,20 @@
   <sense>
     <trans lang="fr">
       <def>premier</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="lensuin">
+  <form>
+    <orth>lensuin</orth>
+  </form>
+  <gramGrp>
+    <pos>pron.</pos> <subc>interr.</subc>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>où ?</def>
     </trans>
   </sense>
 </entry>
@@ -7948,7 +9539,7 @@
   </sense>
   <etym>LEWÉN</etym>
   <note type="comment" lang="fr">
-    On trouve aussi <hi>Elvein</hi>… On s’étonne de la ressemblance avec « elf »
+    On trouve aussi <hi>Elvein</hi>… On s’étonne de la ressemblance avec « elfe ».
   </note>
 </entry>
 
@@ -7988,6 +9579,20 @@
     </trans>
   </sense>
   <etym>LÉKET</etym>
+</entry>
+
+<entry id="li">
+  <form>
+    <orth>li</orth>
+  </form>
+  <gramGrp>
+    <pos>coord.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>ou</def>
+    </trans>
+  </sense>
 </entry>
 
 <entry id="lichis">
@@ -8253,6 +9858,7 @@
       <def>quatre</def>
     </trans>
   </sense>
+  <etym>LONE</etym>
 </entry>
 
 <entry id="lonied">
@@ -8426,6 +10032,7 @@
 
 <entry id="manth">
   <form>
+    <gen>f.</gen>
     <orth>manth</orth>
   </form>
   <form>
@@ -8438,7 +10045,6 @@
   </form>
   <gramGrp>
     <pos>n.</pos>
-    <gen>f.</gen>
   </gramGrp>
   <sense>
     <trans lang="fr">
@@ -8881,7 +10487,7 @@
   </note>
 </entry>
 
-<entry id="mwenere-">
+<entry id="mwener">
   <form>
     <orth>mwenere</orth>
   </form>
@@ -8915,7 +10521,7 @@
       <tr>Lenveth ne mange pas</tr>
     </trans>
   </eg>
-  <xr type="analogy"><ptr target="ed"/></xr>
+  <xr type="analogy"><ptr target="ed"/>, <ptr target="di"/></xr>
 </entry>
 
 <entry id="na.2" n="2">
@@ -8974,6 +10580,20 @@
       <def>ô Chimère, ô Dragon (litanie)</def>
     </trans>
   </eg>
+</entry>
+
+<entry id="nadan">
+  <form>
+    <orth>nadan</orth>
+  </form>
+  <gramGrp>
+    <pos>coord.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>mais</def>
+    </trans>
+  </sense>
 </entry>
 
 <entry id="nafed">
@@ -9146,6 +10766,7 @@
 
 <entry id="nardhe">
   <form>
+    <gen>f.</gen>
     <orth>nardhe</orth>
   </form>
   <form>
@@ -9153,7 +10774,7 @@
     <orth>nordhe</orth>
   </form>
   <gramGrp>
-    <pos>v.</pos> <gen>f.</gen>
+    <pos>v.</pos>
   </gramGrp>
   <sense>
     <trans lang="fr">
@@ -9183,6 +10804,7 @@
 
 <entry id="nardhian">
   <form>
+    <gen>f.</gen>
     <orth>nardhian</orth>
   </form>
   <form>
@@ -9194,7 +10816,7 @@
     <orth>~es</orth>
   </form>
   <gramGrp>
-    <pos>n.</pos> <gen>f.</gen>
+    <pos>n.</pos>
   </gramGrp>
   <sense>
     <trans lang="fr">
@@ -9211,18 +10833,23 @@
 
 <entry id="narg">
   <form>
+    <gen>f.</gen>
     <orth>narg</orth>
   </form>
   <form>
     <gen>m.</gen>
     <orth>norg</orth>
   </form>
+  <form type="historic">
+    <gen>gen.</gen>
+    <orth>nerg</orth>
+  </form>
   <form type="inflected">
     <number>pl.</number>
     <orth>~as</orth>
   </form>
   <gramGrp>
-    <pos>n.</pos> <gen>f.</gen>
+    <pos>n.</pos>
   </gramGrp>
   <sense>
     <trans lang="fr">
@@ -9367,7 +10994,7 @@
       <gen>f.</gen>
     </gramGrp>
     <trans lang="fr">
-      <usg type="hint">employé au respectif</usg> <def>la matriarche, <hi>i-nechin</hi></def>
+      <usg type="hint">employé au respectif</usg> <def>la matriarche, <hi>i·nechin</hi></def>
     </trans>
   </sense>
   <etym>NEKIN</etym>
@@ -9593,8 +11220,88 @@
   <etym>NEYEZ, <hi>*nehes</hi> &gt; <hi>neis</hi></etym>
 </entry>
 
+<entry id="nemed">
+  <form>
+    <orth>nemed</orth>
+  </form>
+  <sense>
+    <gramGrp>
+      <pos>coord.</pos>
+    </gramGrp>
+    <trans lang="fr">
+      <def>par conséquent, donc</def>
+    </trans>
+  </sense>
+  <sense>
+    <gramGrp>
+      <pos>conj.</pos>
+    </gramGrp>
+    <trans lang="fr">
+      <def>de sorte que…</def>
+    </trans>
+  </sense>
+  <etym>NEMET</etym>
+</entry>
+
+<entry id="neph">
+  <form>
+    <orth>neph</orth>
+  </form>
+  <gramGrp>
+    <pos>prep.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>au moyen de</def> <usg type="hint">instrumental</usg>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="nepham">
+  <form>
+    <orth>nepham</orth>
+  </form>
+  <gramGrp>
+    <pos>conj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>comment…</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="nephuin">
+  <form>
+    <orth>nephuin</orth>
+  </form>
+  <gramGrp>
+    <pos>pron.</pos> <subc>interr.</subc>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>comment ?</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="ner-">
+  <form>
+    <orth>ner-</orth>
+  </form>
+  <gramGrp>
+    <pos>pref.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>préfixe des adverbes de manière</def>
+    </trans>
+  </sense>
+</entry>
+
 <entry id="nerl">
   <form>
+    <gen>f.</gen>
     <orth>nerl</orth>
   </form>
   <form type="inflected">
@@ -9602,7 +11309,7 @@
     <orth>~as</orth>
   </form>
   <gramGrp>
-    <pos>n.</pos> <gen>f.</gen>
+    <pos>n.</pos>
   </gramGrp>
   <xr type="see"><ptr target="narl"/></xr>
 </entry>
@@ -9934,6 +11641,24 @@
   <xr type="analogy"><ptr target="nwephe"/></xr>
 </entry>
 
+<entry id="norgove">
+  <form>
+    <orth>norgove</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~m</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>sceptre</def>
+    </trans>
+  </sense>
+</entry>
+
 <entry id="nothe">
   <form>
     <orth>nothe</orth>
@@ -10055,6 +11780,25 @@
       <tr>carnets de voyage du poète Keldre</tr>
     </trans>
   </eg>
+</entry>
+
+<entry id="nurthe">
+  <form>
+    <orth>nurthe</orth>
+  </form>
+  <gramGrp>
+    <pos>v.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>effectuer, faire</def> <usg type="hint">une action</usg>
+    </trans>
+  </sense>
+  <sense>
+    <trans lang="fr">
+      <def>jouer</def> <usg type="hint">au théatre, en musique, etc.</usg>
+    </trans>
+  </sense>
 </entry>
 
 <entry id="nuvch">
@@ -10217,6 +11961,25 @@
 
 <milestone n="O" unit="part"/>
 
+<entry id="o">
+  <form>
+    <orth>o·</orth>
+  </form>
+  <gramGrp>
+    <pos>det.</pos> <subc>resp.</subc>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>forme masculine de la particule de respect</def>
+    </trans>
+  </sense>
+  <note type="comment" lang="fr">
+    Ne s’emploie plus que lorsque qu’il est nécessaire de préciser le genre,
+    ex. <hi>o·devch</hi>, taureau.
+  </note>
+  <xr type="analogy"><ptr target="i"/></xr>
+</entry>
+
 <entry id="ollov">
   <form>
     <orth>ollov</orth>
@@ -10306,6 +12069,20 @@
   </sense>
 </entry>
 
+<entry id="or-">
+  <form>
+    <orth>or-</orth>
+  </form>
+  <gramGrp>
+    <pos>pref.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>préfixe des adverbes de qualité</def>
+    </trans>
+  </sense>
+</entry>
+
 <entry id="orsyanindo">
   <form>
     <orth>orsyanindo</orth>
@@ -10389,6 +12166,7 @@
       <def>deux</def>
     </trans>
   </sense>
+  <etym>KWENE</etym>
   <eg>
     <q>pene vedhras</q>
     <trans lang="fr">
@@ -10658,6 +12436,50 @@
   <etym>KEVÉT</etym>
 </entry>
 
+<entry id="qetham">
+  <form>
+    <orth>qetham</orth>
+  </form>
+  <gramGrp>
+    <pos>conj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>parce que…</def> <usg type="hint">cause</usg>
+    </trans>
+  </sense>
+  <etym>KEVÉT</etym>
+</entry>
+
+<entry id="qethied">
+  <form>
+    <orth>qethied</orth>
+  </form>
+  <gramGrp>
+    <pos>adv.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>quoi qu’il en soit</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="qethuin">
+  <form>
+    <orth>qethuin</orth>
+  </form>
+  <gramGrp>
+    <pos>pron.</pos> <subc>interr.</subc>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>pourquoi ?</def> <usg type="hint">cause</usg>
+    </trans>
+  </sense>
+  <etym>KEVÉT</etym>
+</entry>
+
 <entry id="qere">
   <form>
     <orth>qere</orth>
@@ -10837,6 +12659,228 @@
     Bien qu’étymologiquement féminin, ce terme n’exige pas l’emploi de la marque respective.
   </note>
   <xr type="analogy"><ptr target="reig"/></xr>
+</entry>
+
+<entry id="rambe">
+  <form>
+    <form>
+      <orth>rambe</orth>
+    </form>
+  </form>
+  <gramGrp>
+    <pos>det.</pos> <subc>ord.</subc>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>infiniment</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="rambuid">
+  <form>
+    <form>
+      <orth>rambuid</orth>
+    </form>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>« une quantité infiniment grande »</def>
+    </trans>
+  </sense>
+  <sense>
+    <trans lang="fr">
+      <def>infini dénombrable</def> <usg type="hint">mathématique</usg>
+    </trans>
+  </sense>
+  <xr type="analogy"><ptr target="fanuid"/></xr>
+</entry>
+
+<entry id="rane">
+  <form>
+    <orth>rane</orth>
+  </form>
+  <gramGrp>
+    <pos>det.</pos> <subc>card.</subc>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>aucun, nul</def>
+    </trans>
+  </sense>
+  <sense>
+    <trans lang="fr">
+      <def>zéro</def>
+    </trans>
+  </sense>
+  <etym>ZANAD &gt; ZANE</etym>
+</entry>
+
+<entry id="ranied">
+  <form>
+    <form>
+      <orth>ranied</orth>
+    </form>
+    <form type="historic">
+      <orth>ranadhied</orth>
+    </form>
+  </form>
+  <gramGrp>
+    <pos>adv.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>jamais</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="rann">
+  <form>
+    <orth>rann</orth>
+  </form>
+  <gramGrp>
+    <pos>pron.</pos> <per>1st.</per> <number>sg.</number>
+  </gramGrp>
+  <re>
+    <form>
+      <orth>rean</orth>
+    </form>
+    <gramGrp>
+      <per>1st</per> <number>pl.</number> <per>incl.</per>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>reach</orth>
+    </form>
+    <gramGrp>
+      <per>1st</per> <number>pl.</number> <per>excl.</per>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>renn</orth>
+    </form>
+    <gramGrp>
+      <per>1st</per> <number>sg.</number> <per>2nd</per> <gen>gen.</gen> <number>sg.</number>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>renni</orth>
+    </form>
+    <gramGrp>
+      <per>1st</per> <number>sg.</number> <per>2nd</per> <gen>resp.</gen> <number>sg.</number>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>rennas</orth>
+    </form>
+    <gramGrp>
+      <per>1st</per> <number>sg.</number> <per>2nd</per> <gen>gen.</gen> <number>pl.</number>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>rennis</orth>
+    </form>
+    <gramGrp>
+      <per>1st</per> <number>sg.</number><per>2nd</per> <gen>resp.</gen> <number>pl.</number>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>ronn</orth>
+    </form>
+    <gramGrp>
+      <per>1st</per> <number>sg.</number> <per>3rd</per> <gen>gen.</gen> <number>sg.</number>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>ronni</orth>
+    </form>
+    <gramGrp>
+      <per>1st</per> <number>sg.</number> <per>3rd</per> <gen>resp.</gen> <number>sg.</number>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>ronnas</orth>
+    </form>
+    <gramGrp>
+      <per>1st</per> <number>sg.</number> <per>3rd</per> <gen>gen.</gen> <number>pl.</number>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>rannas</orth>
+    </form>
+    <gramGrp>
+      <per>1st</per> <number>sg.</number> <per>3rd</per> <gen>resp.</gen> <number>pl.</number>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>rachas</orth>
+    </form>
+    <gramGrp>
+      <per>1st</per> <number>pl.</number> <per>2nd</per> <number>sg.</number>  <per>excl.</per>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>reneas</orth>
+    </form>
+    <gramGrp>
+      <per>1st</per> <number>pl.</number> <per>2nd</per> <number>pl.</number> <per>incl.</per>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>recheas</orth>
+    </form>
+    <gramGrp>
+      <per>1st</per> <number>pl.</number> <per>2nd</per> <number>pl.</number> <per>excl.</per>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>ranal</orth>
+    </form>
+    <gramGrp>
+      <per>1st</per> <number>pl.</number> <per>3rd</per> <number>sg.</number> <per>incl.</per>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>rachal</orth>
+    </form>
+    <gramGrp>
+      <per>1st</per> <number>pl.</number> <per>3rd</per> <number>sg.</number> <per>excl.</per>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>reneal</orth>
+    </form>
+    <gramGrp>
+      <per>1st</per> <number>pl.</number> <per>3rd</per> <number>pl.</number> <per>incl.</per>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>recheal</orth>
+    </form>
+    <gramGrp>
+      <per>1st</per> <number>pl.</number> <per>3rd</per> <number>pl.</number> <per>excl.</per>
+    </gramGrp>
+  </re>
 </entry>
 
 <entry id="rathag">
@@ -11090,6 +13134,20 @@
 
 <milestone n="S" unit="part"/>
 
+<entry id="sa">
+  <form>
+    <orth>sa·</orth>
+  </form>
+  <gramGrp>
+    <pos>det.</pos> <usg type="reg">hypo.</usg>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>particule hypocoristique</def>
+    </trans>
+  </sense>
+</entry>
+
 <entry id="safr">
   <form>
     <orth>safr</orth>
@@ -11141,6 +13199,160 @@
     </trans>
   </sense>
   <etym>SÁLAB</etym>
+</entry>
+
+
+<entry id="sann">
+  <form>
+    <orth>sann</orth>
+  </form>
+  <gramGrp>
+    <pos>pron.</pos> <per>2nd</per> <number>sg.</number>
+  </gramGrp>
+  <re>
+    <form>
+      <orth>sean</orth>
+    </form>
+    <gramGrp>
+      <per>2nd</per> <number>pl.</number> <per>incl.</per>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>seach</orth>
+    </form>
+    <gramGrp>
+      <per>2nd</per> <number>pl.</number> <per>excl.</per>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>senn</orth>
+    </form>
+    <gramGrp>
+      <per>2nd</per> <number>sg.</number> <per>1st</per> <gen>gen.</gen> <number>sg.</number>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>senni</orth>
+    </form>
+    <gramGrp>
+      <per>2nd</per> <number>sg.</number> <per>1st</per> <gen>resp.</gen> <number>sg.</number>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>sennas</orth>
+    </form>
+    <gramGrp>
+      <per>2nd</per> <number>sg.</number> <per>1st</per> <gen>gen.</gen> <number>pl.</number>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>sennis</orth>
+    </form>
+    <gramGrp>
+      <per>2nd</per> <number>sg.</number><per>1st</per> <gen>resp.</gen> <number>pl.</number>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>sonn</orth>
+    </form>
+    <gramGrp>
+      <per>2nd</per> <number>sg.</number> <per>3rd</per> <gen>gen.</gen> <number>sg.</number>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>sonni</orth>
+    </form>
+    <gramGrp>
+      <per>2nd</per> <number>sg.</number> <per>3rd</per> <gen>resp.</gen> <number>sg.</number>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>sonnas</orth>
+    </form>
+    <gramGrp>
+      <per>2nd</per> <number>sg.</number> <per>3rd</per> <gen>gen.</gen> <number>pl.</number>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>sannas</orth>
+    </form>
+    <gramGrp>
+      <per>2nd</per> <number>sg.</number> <per>3rd</per> <gen>resp.</gen> <number>pl.</number>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>sanas</orth>
+    </form>
+    <gramGrp>
+      <per>2nd</per> <number>pl.</number> <per>1st</per> <number>sg.</number>  <per>incl.</per>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>sachas</orth>
+    </form>
+    <gramGrp>
+      <per>2nd</per> <number>pl.</number> <per>1st</per> <number>sg.</number>  <per>excl.</per>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>seneas</orth>
+    </form>
+    <gramGrp>
+      <per>2nd</per> <number>pl.</number> <per>1st</per> <number>pl.</number> <per>incl.</per>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>secheas</orth>
+    </form>
+    <gramGrp>
+      <per>2nd</per> <number>pl.</number> <per>1st</per> <number>pl.</number> <per>excl.</per>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>sanal</orth>
+    </form>
+    <gramGrp>
+      <per>2nd</per> <number>pl.</number> <per>3rd</per> <number>sg.</number> <per>incl.</per>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>sachal</orth>
+    </form>
+    <gramGrp>
+      <per>2nd</per> <number>pl.</number> <per>3rd</per> <number>sg.</number> <per>excl.</per>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>seneal</orth>
+    </form>
+    <gramGrp>
+      <per>2nd</per> <number>pl.</number> <per>3rd</per> <number>pl.</number> <per>incl.</per>
+    </gramGrp>
+  </re>
+  <re>
+    <form>
+      <orth>secheal</orth>
+    </form>
+    <gramGrp>
+      <per>2nd</per> <number>pl.</number> <per>3rd</per> <number>pl.</number> <per>excl.</per>
+    </gramGrp>
+  </re>
 </entry>
 
 <entry id="sanv">
@@ -11349,6 +13561,35 @@
   </sense>
 </entry>
 
+<entry id="seg">
+  <form>
+    <orth>seg</orth>
+  </form>
+  <gramGrp>
+    <pos>prep.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>vers, jusque</def> <usg type="hint">allatif</usg>
+    </trans>
+  </sense>
+  <etym>SEK-</etym>
+</entry>
+
+<entry id="segin">
+  <form>
+    <orth>segin</orth>
+  </form>
+  <gramGrp>
+    <pos>prep.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>à, en</def> <usg type="hint">adessif</usg>
+    </trans>
+  </sense>
+</entry>
+
 <entry id="sefer">
   <form>
     <orth>sefer</orth>
@@ -11413,6 +13654,20 @@
     </trans>
   </sense>
   <etym>SÉNEG</etym>
+</entry>
+
+<entry id="seigad">
+  <form>
+    <orth>seigad</orth>
+  </form>
+  <gramGrp>
+    <pos>prep.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>de</def> <usg type="hint">ablatif</usg>
+    </trans>
+  </sense>
 </entry>
 
 <entry id="seigian">
@@ -12143,6 +14398,75 @@
   </sense>
 </entry>
 
+<entry id="ten">
+  <form>
+    <orth>ten</orth>
+  </form>
+  <gramGrp>
+    <pos>conj.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>qui…</def> <usg type="hint">sujet</usg>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="tenu">
+  <form>
+    <orth>tenu·</orth>
+  </form>
+  <form>
+    <gen>resp.</gen>
+    <orth>tenui·</orth>
+  </form>
+  <form>
+    <number>pl.</number>
+    <orth>tene·</orth>
+  </form>
+  <form>
+    <gen>resp.</gen>
+    <number>pl.</number>
+    <orth>tenei·</orth>
+  </form>
+  <gramGrp>
+    <pos>det.</pos> <subc>art.</subc> <subc>dem.</subc>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>article démonstratif</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="tenuin">
+  <form>
+    <orth>tenuin</orth>
+  </form>
+  <gramGrp>
+    <pos>pron.</pos> <subc>interr.</subc>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>qui ?</def> <usg type="hint">sujet</usg>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="terfe">
+  <form>
+    <orth>terfe</orth>
+  </form>
+  <gramGrp>
+    <pos>v.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>priver</def>
+    </trans>
+  </sense>
+</entry>
+
 <entry id="tethl">
   <form>
     <orth>tethl</orth>
@@ -12212,7 +14536,7 @@
   </sense>
   <etym>TÉK/TÉWEK</etym>
   <note type="comment" lang="fr">
-    Avec marque respective : vache, <hi>i-devch</hi> et taureau, <hi>o-devch</hi> ; sans
+    Avec marque respective : vache, <hi>i·devch</hi> et taureau, <hi>o·devch</hi> ; sans
     marque respective, taureau ou bœuf selon le contexte.
   </note>
 </entry>
@@ -12290,8 +14614,8 @@
   </sense>
   <etym>TEBIN, sit. <hi>tebin</hi></etym>
   <note type="comment" lang="fr">
-    À Almaq, en particulier, le Petit Jardin, <hi>Sa-Devin</hi>, appartenant à la Cité Haute,
-    et les Grands Jardins, <hi>e-Devenis</hi>, appartenant géographiquement à la Cité Médiane,
+    À Almaq, en particulier, le Petit Jardin, <hi>Sa·Devin</hi>, appartenant à la Cité Haute,
+    et les Grands Jardins, <hi>e·Devenis</hi>, appartenant géographiquement à la Cité Médiane,
     mais dont la jouissance est réservée, hors des périodes de fêtes, à la Princesse et à sa suite.
   </note>
 </entry>
@@ -12314,6 +14638,57 @@
   </sense>
   <etym>SATÁL « tirer des flèches », cf. sit. <hi>stalî</hi> « flèche », <hi>mestelî</hi> « carquois », etc.</etym>
   <xr type="analogy"><ptr target="tuvurian"/></xr>
+</entry>
+
+<entry id="thleif">
+  <form>
+    <orth>thleif</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~en</orth>
+  </form>
+  <gramGrp>
+    <pos>n.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>tromperie, ruse, stratagème</def> <usg type="hint">visant à induire en erreur, etc.</usg>
+    </trans>
+  </sense>
+  <etym>KELÉP</etym>
+</entry>
+
+<entry id="thleife">
+  <form>
+    <orth>thleife</orth>
+  </form>
+  <gramGrp>
+    <pos>v.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>tromper, duper</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="thleifian">
+  <form>
+    <orth>thleifian</orth>
+  </form>
+  <form type="inflected">
+    <number>pl.</number>
+    <orth>~es</orth>
+  </form>
+  <gramGrp>
+    <pos>v.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>tricheur, escroc</def>
+    </trans>
+  </sense>
 </entry>
 
 <entry id="thlim">
@@ -12354,7 +14729,7 @@
   <xr type="analogy"><ptr target="logr"/></xr>
 </entry>
 
-<entry id="thlove-">
+<entry id="thlove">
   <form>
     <orth>thlove</orth>
   </form>
@@ -12387,7 +14762,7 @@
   </sense>
 </entry>
 
-<entry id="thuele-">
+<entry id="thuele">
   <form>
     <orth>thuele</orth>
   </form>
@@ -12418,6 +14793,20 @@
     </trans>
   </sense>
   <etym>TIKIN</etym>
+</entry>
+
+<entry id="tied">
+  <form>
+    <orth>tied</orth>
+  </form>
+  <gramGrp>
+    <pos>adv.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>peut-être</def>
+    </trans>
+  </sense>
 </entry>
 
 <entry id="tirig">
@@ -12784,7 +15173,7 @@
     </trans>
   </eg>
   <eg>
-    <q>tyandh an i-Dilinianes acurthasrin</q>
+    <q>tyandh an i·Dilinianes acurthasrin</q>
     <trans lang="fr">
       <tr>la faction des Crieuses Rouges</tr>
     </trans>
@@ -13029,11 +15418,54 @@
   </sense>
   <etym>KYUB[ET]</etym>
   <eg>
-    <q>i-fandh adirverin, edrinsh cu essedrin, narg an tyuvedis</q>
+    <q>i·fandh adirverin, edrinsh cu essedrin, narg an tyuvedis</q>
     <trans lang="fr">
       <tr>la déesse confuse, impie et menteuse, reine des souvenirs</tr>
     </trans>
   </eg>
+</entry>
+
+<milestone n="U" unit="part"/>
+
+<entry id="u">
+  <form>
+    <orth>u·</orth>
+  </form>
+  <form>
+    <gen>resp.</gen>
+    <orth>ui·</orth>
+  </form>
+  <form>
+    <number>pl.</number>
+    <orth>e·</orth>
+  </form>
+  <form>
+    <gen>resp.</gen>
+    <number>pl.</number>
+    <orth>ei·</orth>
+  </form>
+  <gramGrp>
+    <pos>det.</pos> <subc>art.</subc>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>article déictique</def>
+    </trans>
+  </sense>
+</entry>
+
+<entry id="uin">
+  <form>
+    <orth>uin</orth>
+  </form>
+  <gramGrp>
+    <pos>conj.</pos> <subc>interr.</subc>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>conjonction introduisant une interrogation directe</def>
+    </trans>
+  </sense>
 </entry>
 
 <milestone n="V" unit="part"/>
@@ -13144,6 +15576,39 @@
     </trans>
   </sense>
   <etym>WAREK</etym>
+</entry>
+
+<entry id="vedh">
+  <form>
+    <orth>vedh</orth>
+  </form>
+  <gramGrp>
+    <pos>prep.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>à travers</def> <usg type="hint">translatif</usg>,
+      <def>en, à</def> <usg type="hint">résultant</usg>,
+      <def>pendant</def> <usg type="hint">duratif mesurable</usg>
+    </trans>
+  </sense>
+  <etym>VED-</etym>
+</entry>
+
+<entry id="vedhin">
+  <form>
+    <orth>vedhin</orth>
+  </form>
+  <gramGrp>
+    <pos>prep.</pos>
+  </gramGrp>
+  <sense>
+    <trans lang="fr">
+      <def>comme</def> <usg type="hint">essif</usg>,
+      <def>fait de</def> <usg type="hint">constitutif</usg>,
+      <def>pendant</def> <usg type="hint">duratif imprécis</usg>
+    </trans>
+  </sense>
 </entry>
 
 <entry id="vedhr">
@@ -13379,7 +15844,7 @@
   </sense>
   <etym>WÍZIL</etym>
   <eg>
-    <q>i-virl li qon eigin yunagare olloven cu pene vedh i-hevel li vedhr</q>
+    <q>i·virl li qon eigin yunagare olloven cu pene vedh i·hevel li vedhr</q>
     <trans lang="fr">
       <tr>filles et garçons deviennent femmes et hommes à 17 ans</tr>
     </trans>
@@ -13591,7 +16056,7 @@
     <orth>Wembeneth</orth>
   </form>
   <gramGrp>
-    <pos>n. pr.</pos>
+    <pos>n. pr.</pos> <gen>f.</gen>
   </gramGrp>
   <sense>
     <trans lang="fr">
@@ -13671,11 +16136,17 @@
       <def>trois</def>
     </trans>
   </sense>
+  <etym>YUNE</etym>
 </entry>
 
-<entry id="yunied">
+<entry id="yuned">
   <form>
-    <orth>yunied</orth>
+    <form>
+      <orth>yuned</orth>
+    </form>
+    <form type="historic">
+      <orth>yunied</orth>
+    </form>
   </form>
   <gramGrp>
     <pos>adv.</pos>
