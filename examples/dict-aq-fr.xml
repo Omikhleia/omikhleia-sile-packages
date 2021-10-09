@@ -10,7 +10,7 @@
     </titleStmt>
 
     <editionStmt>
-      <edition n="1.0"/>
+      <edition n="1.0.1"/>
     </editionStmt>
 
     <publicationStmt>
@@ -40,8 +40,17 @@
     </notesStmt>
 
     <sourceDesc>
-      <bibl>Pierre de Blancandre, <hi>les Chroniques du Ptoliporthe &amp; autres récits d’Almaq</hi>,
-      La-Charité-sur-Loire, 1907</bibl>
+      <listBibl>
+        <bibl>Pierre de Blancandre, <hi>les Chroniques du Ptoliporthe &amp; autres récits d’Almaq</hi>,
+        La-Charité-sur-Loire, 1907.</bibl>
+        <bibl>Erich Wiegger, <hi>Chroniken von Almak</hi>, Leipzig, 1943.</bibl>
+        <bibl>Erich Wiegger, <hi>Das Baum und dher König</hi>, Hanovre, 1944.</bibl>
+        <bibl>Emma Lenski, <hi>The Chronicles of Alstre and Dongann by the poet Celdre</hi>,
+          Londres, (1937) 1962.</bibl>
+        <bibl>Sigriður Grimsdottir, <hi>Alster the Homeslayer and Dongann the Trickster</hi>,
+          thèse de l’université de Colorado Springs, 1963 ; VSNR Saga-Book, vol. XVI (inédit) ;
+          Penguin Books, 1969 (épuisé).</bibl>
+      </listBibl>
     </sourceDesc>
   </fileDesc>
 
@@ -4650,7 +4659,7 @@
     <orth>~as</orth>
   </form>
   <gramGrp>
-    <pos>n. f.</pos>
+    <pos>n.</pos> <gen>f.</gen>
   </gramGrp>
   <sense>
     <trans lang="fr">
@@ -12743,7 +12752,7 @@
     <orth>rann</orth>
   </form>
   <gramGrp>
-    <pos>pron.</pos> <per>1st.</per> <number>sg.</number>
+    <pos>pron.</pos> <per>1st</per> <number>sg.</number>
   </gramGrp>
   <re>
     <form>

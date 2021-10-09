@@ -7,7 +7,7 @@
 -- as suitable for the HSD project, and assumes a similar structure to the
 -- latter, see https://omikhleia.github.io/sindict/manual/DATA_MODEL.html
 --
--- Loaded packages: styles, inputfilter
+-- Loaded packages: styles, inputfilter, teiabbr
 -- Required packages: xmltricks, pdf, color, infonodes, raiselower, rules, url
 -- Required class support: teibook
 --
@@ -21,6 +21,8 @@
 --
 
 -- SETTINGS
+
+local teiabbr = SILE.require("packages/teiabbr").exports
 
 SILE.settings.declare({
   -- The source dictionary may contain notes etc. in several languages, we do not
@@ -290,8 +292,8 @@ SILE.registerCommand("teiHeader", function (_, content)
   walkAsStructure({}, {}, content)
 end)
 
-SILE.call("xmltricks:ignore", {}, { "encodingDesc profileDesc sourceDesc" })
-SILE.call("tei:passthru:asStructure", {}, { "fileDesc titleStmt" })
+SILE.call("xmltricks:ignore", {}, { "encodingDesc profileDesc" })
+SILE.call("tei:passthru:asStructure", {}, { "fileDesc titleStmt sourceDesc" })
 SILE.call("tei:passthru:asStructure", { skipafter = true }, { "editionStmt respStmt notesStmt" })
 
 SILE.call("tei:passthru:asParagraph", { filter = true }, { "resp" })
@@ -343,6 +345,12 @@ SILE.registerCommand("publicationStmt", function (options, content)
   SILE.call("break")
 end)
 
+local bibliography
+SILE.registerCommand("listBibl", function(options, content)
+  -- Store for processing in the backmatter
+  bibliography = content
+end)
+
 -- DOCUMENT LEVEL TAGS
 
 SILE.call("tei:passthru:asStructure", {}, { "text body" })
@@ -357,12 +365,19 @@ SILE.registerCommand("div0", function (options, content)
 
   SILE.call("tei:ornament")
   SILE.call("teibook:entries")
-  SILE.call("nofolios")
+  --SILE.call("nofolios")
   SILE.settings.temporarily(function()
     SILE.settings.set("document.lskip", "1em")
     SILE.settings.set("document.parindent", "-1em")
     SILE.process(content)
   end)
+
+  SILE.call("teibook:backmatter")
+  teiabbr.writeAbbr()
+  if bibliography then
+    teiabbr.writeBibl(bibliography)
+  end
+  teiabbr.writeImpressum()
 end)
 
 SILE.registerCommand("milestone", function (options, content)
@@ -515,20 +530,12 @@ end)
 
 -- ORTH/PRON LEVEL TAGS
 
-local orthPrefix = {
-  deduced = "#",
-  normalized= "^",
-  deleted = "×", -- U+00D7 multiplication sign
-  historic = "†", -- U+2020 dagger
-  coined = "‡" -- U+2021 double Dagger
-}
-
 SILE.registerCommand("orth", function (options, content)
   doSpacing(options)
   if options._isHeadword then
     SILE.call("info", { category = "teientry", value = content }, {})
   end
-  local t = options._parentType and orthPrefix[options._parentType]
+  local t = options._parentType and teiabbr.orthPrefix(options._parentType)
   if t then
     SILE.typesetter:typeset(t)
   end
@@ -719,10 +726,10 @@ end)
 SILE.call("tei:passthru:asStructure", { spacing = true }, { "gramGrp" })
 
 for _, pos in ipairs({ "pos", "mood", "per", "tns", "number", "gen", "subc", "itype", "lbl" }) do
-  -- FIXME expand abbrevs?
   SILE.registerCommand(pos, function (options, content)
     doSpacing(options)
-    SILE.call("style:apply", { name = "tei:pos" }, content)
+    local expandedAbbr = teiabbr.translateAbbr(content, pos)
+    SILE.call("style:apply", { name = "tei:pos" }, { expandedAbbr })
   end)
 end
 
@@ -740,14 +747,14 @@ SILE.registerCommand("usg", function (options, content)
   elseif t == "cat" then
     -- ignored (FIXME shouldn't formally, but the HSD has them wrong)
   elseif t == "gram" or t == "ext" then
-    -- FIXME expand abbr...
     doSpacing(options)
-    SILE.call("style:apply", { name = "tei:pos" }, content)
+    local expandedAbbr = teiabbr.translateAbbr(content, "usg")
+    SILE.call("style:apply", { name = "tei:pos" }, { expandedAbbr })
     SILE.typesetter:typeset(",")
   else
     doSpacing(options)
-    -- FIXME expand abbr...
-    SILE.call("style:apply", { name = "tei:pos" }, content)
+    local expandedAbbr = teiabbr.translateAbbr(content, "usg")
+    SILE.call("style:apply", { name = "tei:pos" }, { expandedAbbr })
   end
 end)
 
@@ -782,10 +789,9 @@ SILE.registerCommand("xr", function (options, content)
     SILE.typesetter:typeset("→ ") -- Note: U+2192 → right arrow
     SILE.process(content)
   elseif options.type == "of" then
-    -- FIXME abbrevs
     doSpacing(options)
-    -- FIXME expand abbr...
-    SILE.call("style:apply", { name = "tei:pos" }, { "of" })
+    local expandedAbbr = teiabbr.translateAbbr({ "of" }, "xr")
+    SILE.call("style:apply", { name = "tei:pos" }, { expandedAbbr })
     SILE.typesetter:typeset(" ")
     SILE.process(content)
     SILE.typesetter:typeset(",")

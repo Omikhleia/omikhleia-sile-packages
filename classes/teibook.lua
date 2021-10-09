@@ -170,12 +170,32 @@ function teibook:setPageStyleEntries ()
   pageStyle = "entries"
 end
 
+function teibook:setPageStyleBackmatter ()
+  self:twoColumnMaster()
+  self.switchMaster("right")
+  self.firstContentFrame = "contentA"
+
+  pageStyle = "backmatter"
+end
+
+function teibook:setPageStyleImpressum()
+  self:defineMaster({
+    id = "right",
+    firstContentFrame = "content",
+    frames = self.defaultFrameset
+  })
+  self:mirrorMaster("right", "left")
+  self.switchMaster(SILE.documentState.documentClass:oddPage() and "right" or "left")
+  self.firstContentFrame = "content"
+  pageStyle = "backmatter"
+end
+
 function teibook:init ()
   -- Page masters
   self:loadPackage("masters")
   self:defineMaster({
       id = "right",
-      firstContentFrame = self.firstContentFrame,
+      firstContentFrame = "content",
       frames = self.defaultFrameset
     })
   self.firstContentFrame = "content"
@@ -223,6 +243,7 @@ end, "Outputs the last entry reference on the page")
 
 local styles = SILE.require("packages/styles").exports
 styles.defineStyle("teibook:titlepage", {}, { font = { family = "Libertinus Sans", size = "20pt" } })
+styles.defineStyle("teibook:impressum", {}, { font = { style = "italic", features = "+hlig,+salt" } })
 
 SILE.registerCommand("teibook:titlepage", function (_, content)
   -- the content contains the title
@@ -259,9 +280,49 @@ SILE.registerCommand("teibook:entries", function (_, _)
   SILE.call("nofolios")
 end, "Enters the TEI dictionary section (i.e. a TEI.div0 typed as such).")
 
+SILE.registerCommand("teibook:backmatter", function (_, _)
+  SILE.typesetter:leaveHmode()
+  SILE.call("supereject")
+  if SILE.documentState.documentClass:oddPage() then
+    SILE.typesetter:typeset("")
+    SILE.typesetter:leaveHmode()
+    SILE.call("nofoliosthispage")
+    SILE.call("supereject")
+  end
+  SILE.typesetter:leaveHmode()
+  SILE.documentState.documentClass:setPageStyleBackmatter();
+  SILE.call("folios")
+end, "Enters the backmatter section (generated).")
+
+SILE.registerCommand("teibook:impressum", function (_, content)
+  -- the content contains the impressum
+  SILE.typesetter:leaveHmode()
+  SILE.call("supereject")
+  if SILE.documentState.documentClass:oddPage() then
+    SILE.typesetter:typeset("")
+    SILE.typesetter:leaveHmode()
+    SILE.call("nofoliosthispage")
+    SILE.call("supereject")
+  end
+  SILE.typesetter:leaveHmode()
+  SILE.documentState.documentClass:setPageStyleImpressum();
+  SILE.call("nofolios")
+
+  SILE.call("hbox", {}, {})
+  SILE.call("vfill")
+  SILE.typesetter:leaveHmode()
+  SILE.call("style:apply", { name = "teibook:impressum" }, function ()
+    SILE.call("center", {}, function()
+      SILE.process(content)
+    end)
+  end)
+  SILE.call("hbox", {}, {})
+  SILE.typesetter:leaveHmode()
+  SILE.call("break")
+end, "Enters the impressum section (generated).")
 
 teibook.endPage = function (self)
-  if pageStyle == "entries" then
+  if pageStyle == "entries" and SILE.scratch.info.thispage.teientry then
     -- Running headers in the dictionary section will have the following form:
     -- first-entry         - folio -       last-entry
     SILE.typesetNaturally(SILE.getFrame("header"), function ()
