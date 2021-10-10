@@ -11,13 +11,16 @@
 -- Required packages: xmltricks, pdf, color, infonodes, raiselower, rules, url
 -- Required class support: teibook
 --
--- The ùmain pain point is that such a dictionary is a heavily "semantic" structured
+-- The main pain point is that such a dictionary is a heavily "semantic" structured
 -- mark-up (i.e. a "lexical view", encoding structure information such as part-of-speech
 -- etc. without much concern for its exact textual representation in print form),
 -- much more than a "presentational" mark-up. Some XML nodes may contain many things
 -- we need to ignore (such as spaces, mostly) or supplement (such as punctuation,
 ---parentheses, numbering... and again, proper spaces where needed). Without XPath to
 -- check siblings, ascendants or descendants, it may become somewhat hard to get a nice
+-- automated output (and even with XPath, it is not the obvious). In other terms,
+-- the solution propose here is somewhat ad hoc for a specific type of lexical TEI
+-- dictionary and depends quite a lot on its structural organization.
 --
 
 -- SETTINGS
@@ -36,8 +39,8 @@ SILE.settings.declare({
 
 SILE.settings.declare({
   -- So for sense information, for now, use them all (if setting is nil)
-  -- or use only the specified one. FIXME works for bilingual dictionaries
-  -- but not general...
+  -- or use only the specified one.
+  -- FIXME works for bilingual dictionaries, but not general...
   parameter = "teidict.transLanguage",
   type = "string or nil",
   default = nil,

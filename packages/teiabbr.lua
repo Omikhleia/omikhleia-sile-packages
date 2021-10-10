@@ -1,13 +1,14 @@
 --
--- Abbreviations used in TEI dictionaries (EXPERIMENTAL, UNSTABLE)
+-- Abbreviations and localized information used in TEI dictionaries
+-- (EXPERIMENTAL, UNSTABLE)
 -- 2021, The Sindarin Dictionary Project, Omikhleia, Didier Willis
 -- License: MIT
 --
 -- Unfortunately TEI doesn't standardize values for parts of speech, tenses, moods, etc.
 -- And there's no easy way to make it generic, so many schemes could be used...
 --
--- THE CURRENT SOLUTION IS NOT GENERIC AT ALL
--- Here we just provide lists of "usual" terms, as were used in our
+-- THE CURRENT SOLUTION IS NOT GENERIC
+-- Here, we just provide lists of "usual" terms, as were used in our
 -- dictionaries.
 --
 SILE.scratch.teiabbr = {}
@@ -164,7 +165,7 @@ SILE.scratch.teiabbr.en = {
   titles = {
     abbreviations = "Symbols & Abbreviations",
     references = "References",
-    impressum = "This dictionary was generated with care & passion and the help of the SILE typesetting system."
+    impressum = "This dictionary was composed with care & passion and the help of the SILE typesetting system."
   },
   symbols = {
     ["deduced"] = { symbol = "#", full = "deduced form" },
@@ -294,11 +295,11 @@ SILE.scratch.teiabbr.fr = {
   titles = {
     abbreviations = "Symboles & Abréviations",
     references = "Références",
-    impressum = "Ce dictionnaire est généré avec soin & passion à l’aide du système de composition SILE."
+    impressum = "Ce dictionnaire est présenté avec soin & passion à l’aide du système de composition SILE."
   },
   symbols = {
     ["deduced"] = { symbol = "#", full = "form déduite" },
-    ["normalized"] = { symbol = "^", full = "forme normalisée ou reconstruit" },
+    ["normalized"] = { symbol = "^", full = "forme normalisée ou reconstruite" },
     ["deleted"] = { symbol = "×", full = "forme rayée" }, -- U+00D7 multiplication sign
     ["historic"] = { symbol = "†", full = "forme historique" }, -- U+2020 dagger
     ["coined"] = { symbol = "‡", full = "forme inventée" } -- U+2021 double Dagger

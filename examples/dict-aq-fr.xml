@@ -44,7 +44,7 @@
         <bibl>Pierre de Blancandre, <hi>les Chroniques du Ptoliporthe &amp; autres récits d’Almaq</hi>,
         La-Charité-sur-Loire, 1907.</bibl>
         <bibl>Erich Wiegger, <hi>Chroniken von Almak</hi>, Leipzig, 1943.</bibl>
-        <bibl>Erich Wiegger, <hi>Das Baum und dher König</hi>, Hanovre, 1944.</bibl>
+        <bibl>Erich Wiegger, <hi>Das Baum und der König</hi>, Hanovre, 1944.</bibl>
         <bibl>Emma Lenski, <hi>The Chronicles of Alstre and Dongann by the poet Celdre</hi>,
           Londres, (1937) 1962.</bibl>
         <bibl>Sigriður Grimsdottir, <hi>Alster the Homeslayer and Dongann the Trickster</hi>,
@@ -4648,6 +4648,7 @@
 
 <entry id="dalth">
   <form>
+    <gen>f.</gen>
     <orth>dalth</orth>
   </form>
   <form>
@@ -4659,7 +4660,7 @@
     <orth>~as</orth>
   </form>
   <gramGrp>
-    <pos>n.</pos> <gen>f.</gen>
+    <pos>n.</pos>
   </gramGrp>
   <sense>
     <trans lang="fr">
@@ -4676,6 +4677,7 @@
 
 <entry id="dalthe">
   <form>
+    <gen>f.</gen>
     <orth>dalthe</orth>
   </form>
   <form>
@@ -6158,7 +6160,7 @@
     <orth>eile·</orth>
   </form>
   <gramGrp>
-    <pos>det.</pos> <subc>art.</subc> <subc>dem.</subc> <per>3rd</per>
+    <pos>det.</pos> <subc>art.</subc> <subc>poss.</subc> <per>3rd</per>
   </gramGrp>
   <sense>
     <trans lang="fr">
@@ -6218,7 +6220,7 @@
     <orth>eire·</orth>
   </form>
   <gramGrp>
-    <pos>det.</pos> <subc>art.</subc> <subc>dem.</subc> <per>1st</per>
+    <pos>det.</pos> <subc>art.</subc> <subc>poss.</subc> <per>1st</per>
   </gramGrp>
   <sense>
     <trans lang="fr">
@@ -6383,7 +6385,7 @@
     <orth>eise·</orth>
   </form>
   <gramGrp>
-    <pos>det.</pos> <subc>art.</subc> <subc>dem.</subc> <per>2nd</per>
+    <pos>det.</pos> <subc>art.</subc> <subc>poss.</subc> <per>2nd</per>
   </gramGrp>
   <sense>
     <trans lang="fr">
@@ -7074,6 +7076,7 @@
 
 <entry id="garth">
   <form>
+    <gen>f.</gen>
     <orth>garth</orth>
   </form>
   <form type="historic">
@@ -7374,6 +7377,7 @@
 
 <entry id="gess">
   <form type="historic">
+    <gen>f.</gen>
     <orth>gess</orth>
   </form>
   <form type="historic">
