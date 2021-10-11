@@ -15,8 +15,8 @@ local counters = SILE.require("packages/counters").exports
 
 teibook.defaultFrameset = {
   content = {
-    left = "8.3%pw",
-    right = "86%pw",
+    left = "10%pw", -- was 8.3%pw
+    right = "87.7%pw", -- was 86%pw
     top = "11.6%ph",
     bottom = "top(footnotes)"
   },
@@ -47,7 +47,7 @@ function teibook:twoColumnMaster()
     firstContentFrame = "contentA",
     frames = {
       contentA = {
-        left = "8.3%pw",
+        left = "10%pw", -- was 8.3%pw
         right = "left(gutter)",
         top = "11.6%ph",
         bottom = "top(footnotesA)",
@@ -57,7 +57,7 @@ function teibook:twoColumnMaster()
       contentB = {
         left = "right(gutter)",
         width ="width(contentA)",
-        right = "86%pw",
+        right = "87.7%pw", -- was 86%pw
         top = "11.6%ph",
         bottom = "top(footnotesB)",
         balanced = true
@@ -98,7 +98,7 @@ function teibook:twoColumnMaster()
     firstContentFrame = "contentA",
     frames = {
       contentA = {
-        left = "14%pw",
+        left = "12.3%pw", -- was 14%pw
         right = "left(gutter)",
         top = "11.6%ph",
         bottom = "top(footnotesA)",
@@ -108,7 +108,7 @@ function teibook:twoColumnMaster()
       contentB = {
         left = "right(gutter)",
         width = "width(contentA)",
-        right = "91.7%pw",
+        right = "90%pw", -- was 91.7%pw,
         top = "11.6%ph",
         bottom = "top(footnotesB)",
         balanced = true
@@ -211,6 +211,7 @@ function teibook:init ()
   self:loadPackage("raiselower")
   self:loadPackage("rules")
   self:loadPackage("xmltricks")
+  self:loadPackage("svg")
   self:loadPackage("teidict")
 
   return plain.init(self)
@@ -225,6 +226,49 @@ end
 teibook.finish = function (self)
   local ret = plain.finish(self)
   return ret
+end
+
+teibook.endPage = function (self)
+  if pageStyle == "entries" and SILE.scratch.info.thispage.teientry then
+    -- Running headers in the dictionary section will have the following form:
+    -- first-entry         - folio -       last-entry
+    SILE.typesetNaturally(SILE.getFrame("header"), function ()
+      SILE.settings.pushState()
+      SILE.settings.toplevelState()
+      SILE.settings.set("current.parindent", SILE.nodefactory.glue())
+      SILE.settings.set("document.lskip", SILE.nodefactory.glue())
+      SILE.settings.set("document.rskip", SILE.nodefactory.glue())
+      local foliotext = "— "..SILE.formatCounter(SILE.scratch.counters.folio).." —" -- Note: U+2014 — em dash
+
+      -- Some boxing needed, so we can easilycenter the folio number in between
+      -- first and last references
+      local folio = SILE.call("hbox", {}, function()
+        SILE.typesetter:typeset(foliotext)
+      end)
+      table.remove(SILE.typesetter.state.nodes)
+      local first = SILE.call("hbox", {}, function ()
+        SILE.call("first-entry-reference")
+      end)
+      local l = SILE.length("100%lw"):tonumber()
+      SILE.typesetter:pushGlue({ width = l  / 2 - first.width:tonumber() - folio.width:tonumber() / 2 })
+
+      SILE.typesetter:typeset(foliotext)
+
+      SILE.call("hfill")
+      local last = SILE.call("hbox", {}, function ()
+        SILE.call("last-entry-reference")
+      end)
+      SILE.typesetter:leaveHmode()
+
+      SILE.settings.set("current.parindent", SILE.nodefactory.glue())
+      SILE.call("raise", { height = "0.475ex" }, function()
+        SILE.call("fullrule", { height = "0.33pt" })
+      end)
+      SILE.typesetter:leaveHmode()
+      SILE.settings.popState()
+    end)
+  end
+  return plain.endPage(self)
 end
 
 SILE.registerCommand("first-entry-reference", function (_, _)
@@ -321,47 +365,29 @@ SILE.registerCommand("teibook:impressum", function (_, content)
   SILE.call("break")
 end, "Enters the impressum section (generated).")
 
-teibook.endPage = function (self)
-  if pageStyle == "entries" and SILE.scratch.info.thispage.teientry then
-    -- Running headers in the dictionary section will have the following form:
-    -- first-entry         - folio -       last-entry
-    SILE.typesetNaturally(SILE.getFrame("header"), function ()
-      SILE.settings.pushState()
-      SILE.settings.toplevelState()
-      SILE.settings.set("current.parindent", SILE.nodefactory.glue())
-      SILE.settings.set("document.lskip", SILE.nodefactory.glue())
-      SILE.settings.set("document.rskip", SILE.nodefactory.glue())
-      local foliotext = "— "..SILE.formatCounter(SILE.scratch.counters.folio).." —" -- Note: U+2014 — em dash
+-- SKIPS
+-- Dictionaries are composed of plenty of small entry paragraphs, so we'd better
+-- have our own vertical spacing commands...
+--   teibook:smallskip is used between entries
+--   teibook:medskip is used after milestones (i.e. heading letters)
+--   teibook:bigskip is used before milestones
+local skips = {
+  small = "0.2em plus 0.15em minus 0.1em", -- regular smallskip is 3pt plus 1pt minus 1pt
+  med = "0.6em", -- fixed, regular medskip is 6pt plus 2pt minus 2pt
+  big = "1.8em plus 1.2em minus 0.6em" -- regular bigskip is 12pt plus 4pt minus 4pt
+}
 
-      -- Some boxing needed, so we can easilycenter the folio number in between
-      -- first and last references
-      local folio = SILE.call("hbox", {}, function()
-        SILE.typesetter:typeset(foliotext)
-      end)
-      table.remove(SILE.typesetter.state.nodes)
-      local first = SILE.call("hbox", {}, function ()
-        SILE.call("first-entry-reference")
-      end)
-      local l = SILE.length("100%lw"):tonumber()
-      SILE.typesetter:pushGlue({ width = l  / 2 - first.width:tonumber() - folio.width:tonumber() / 2 })
-
-      SILE.typesetter:typeset(foliotext)
-
-      SILE.call("hfill")
-      local last = SILE.call("hbox", {}, function ()
-        SILE.call("last-entry-reference")
-      end)
-      SILE.typesetter:leaveHmode()
-
-      SILE.settings.set("current.parindent", SILE.nodefactory.glue())
-      SILE.call("raise", { height = "0.475ex" }, function()
-        SILE.call("fullrule", { height = "0.33pt" })
-      end)
-      SILE.typesetter:leaveHmode()
-      SILE.settings.popState()
-    end)
-  end
-  return plain.endPage(self)
+for k, v in pairs(skips) do
+  SILE.settings.declare({
+      parameter = "teibook." .. k .. "skipamount",
+      type = "vglue",
+      default = SILE.nodefactory.vglue(v),
+      help = "Amount of a \\teibook:" .. k .. "skip"
+    })
+  SILE.registerCommand("teibook:"..k .. "skip", function (_, _)
+    SILE.typesetter:leaveHmode()
+    SILE.typesetter:pushExplicitVglue(SILE.settings.get("teibook." .. k .. "skipamount"))
+  end, "Skip vertically by a teibook:" .. k .. " amount")
 end
 
 return teibook

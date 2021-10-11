@@ -8,7 +8,7 @@
 -- latter, see https://omikhleia.github.io/sindict/manual/DATA_MODEL.html
 --
 -- Loaded packages: styles, inputfilter, teiabbr
--- Required packages: xmltricks, pdf, color, infonodes, raiselower, rules, url
+-- Required packages: xmltricks, pdf, color, infonodes, raiselower, rules, url, svg
 -- Required class support: teibook
 --
 -- The main pain point is that such a dictionary is a heavily "semantic" structured
@@ -51,7 +51,7 @@ SILE.settings.declare({
 
 local styles = SILE.require("packages/styles").exports
 styles.defineStyle("tei:orth:base", {}, { font = { family = "Libertinus Sans" } })
-styles.defineStyle("tei:milestone", {}, { font = { family= "Gingerbread Initials", size = 20 } })
+styles.defineStyle("tei:milestone", {}, { font = { family= "Gingerbread Initials", size = 30 } })
 styles.defineStyle("tei:orth", { inherit = "tei:orth:base"}, { font = { weight = 700 } })
 styles.defineStyle("tei:bibl", {}, { font = { language = "und", size = -2 } })
 styles.defineStyle("tei:note", {}, { font = { size = -1.5 } })
@@ -268,13 +268,12 @@ SILE.registerCommand("tei:passthru:asStructure", function (options, content)
   end
 end)
 
-SILE.registerCommand("tei:ornament", function (_, _)
-  SILE.call("font", { family = "Symbola" }, function ()
-    SILE.typesetter:leaveHmode()
-    SILE.call("smallskip")
-    SILE.call("center", {}, function()
-      SILE.typesetter:typeset("❦") -- Note: U+2766 floral heart
-    end)
+SILE.registerCommand("tei:ornament", function (options, _)
+  local alt = SU.boolean(options.alt, false)
+  local ornament = alt and "cul-de-lampe-2" or "cul-de-lampe-1"
+  SILE.typesetter:leaveHmode()
+  SILE.call("center", {}, function()
+    SILE.call("svg", { src = "packages/culs-de-lampe/"..ornament..".svg", height = "8pt" })
   end)
 end)
 
@@ -368,18 +367,23 @@ SILE.registerCommand("div0", function (options, content)
 
   SILE.call("tei:ornament")
   SILE.call("teibook:entries")
-  --SILE.call("nofolios")
   SILE.settings.temporarily(function()
     SILE.settings.set("document.lskip", "1em")
     SILE.settings.set("document.parindent", "-1em")
-    SILE.process(content)
+    walkAsStructure({}, {}, content)
   end)
+  SILE.typesetter:leaveHmode()
+  SILE.call("medskip")
+  SILE.call("tei:ornament", { alt = true })
 
   SILE.call("teibook:backmatter")
   teiabbr.writeAbbr()
   if bibliography then
     teiabbr.writeBibl(bibliography)
   end
+  SILE.call("medskip")
+  SILE.call("tei:ornament")
+
   teiabbr.writeImpressum()
 end)
 
@@ -388,12 +392,12 @@ SILE.registerCommand("milestone", function (options, content)
   local dest = "tei_milestone_"..options.n
   SILE.typesetter:leaveHmode()
   SILE.call("goodbreak")
-  SILE.call("bigskip")
+  SILE.call("teibook:bigskip")
   SILE.call("pdf:destination", { name = dest })
   SILE.call("pdf:bookmark", { title = title, dest = dest, level = 1 })
   SILE.call("style:apply", { name = "tei:milestone" }, { options.n })
   SILE.call("novbreak")
-  SILE.call("medskip")
+  SILE.call("teibook:medskip")
   SILE.call("novbreak")
   SILE.typesetter:inhibitLeading()
 end)
@@ -407,7 +411,7 @@ SILE.registerCommand("entry", function (options, content)
   local iRe = 0
 
   SILE.typesetter:leaveHmode()
-  SILE.call("smallskip")
+  SILE.call("teibook:smallskip")
 
   if options.id then
     SILE.call("pdf:destination", { name = options.id })
@@ -840,13 +844,13 @@ SILE.registerCommand("note", function (options, content)
         return -- Ignore comment note.
       end
       SILE.settings.temporarily(function()
-        SILE.settings.set("document.language", options.lang)
         SILE.call("style:apply", { name = "tei:note" }, function()
           SILE.typesetter:leaveHmode()
           SILE.typesetter:typeset("▶") -- Note: U+25B6 black right pointing triangle
           SILE.call("kern", { width = "0.25em" })
           -- SILE.typesetter:typeset("◈ ") -- Note: U+25C8 white diamond containing black small diamond
                                           -- Absent from Libertinus.
+          SILE.settings.set("document.language", options.lang)
           SILE.process(trimContent(content))
           SILE.typesetter:leaveHmode()
         end)
@@ -854,6 +858,15 @@ SILE.registerCommand("note", function (options, content)
     else
       SU.error("Unsupported type in TEI:note: "..t)
     end
+  end)
+end)
+
+SILE.registerCommand("foreign", function (options, content)
+  local lang = SU.required(options, "lang", "TEI.foreign")
+
+  SILE.settings.temporarily(function()
+    SILE.settings.set("document.language", lang)
+    SILE.process(content)
   end)
 end)
 

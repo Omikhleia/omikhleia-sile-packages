@@ -10,7 +10,7 @@
     </titleStmt>
 
     <editionStmt>
-      <edition n="1.0.1"/>
+      <edition n="1.0.2"/>
     </editionStmt>
 
     <publicationStmt>
@@ -27,7 +27,7 @@
       <note lang="fr">
         <p>Ce dictionnaire s’appuie sur le petit lexique établi par Pierre de Blancandre
            dans <hi>les Chroniques du Ptoliporthe &amp; autres récits d’Almaq</hi>,
-           La-Charité-sur-Loire, 1907. La graphie latine des
+           La Charité-sur-Loire, 1907. La graphie latine des
            termes de la langue d’Almaq est cependant actualisée selon les usages en vigueur
            à ce jour.</p>
         <p>Ledit lexique, intitulé <hi>Hyeil an Tyesed Almaqerin</hi>, était organisé en sections
@@ -42,13 +42,13 @@
     <sourceDesc>
       <listBibl>
         <bibl>Pierre de Blancandre, <hi>les Chroniques du Ptoliporthe &amp; autres récits d’Almaq</hi>,
-        La-Charité-sur-Loire, 1907.</bibl>
-        <bibl>Erich Wiegger, <hi>Chroniken von Almak</hi>, Leipzig, 1943.</bibl>
-        <bibl>Erich Wiegger, <hi>Das Baum und der König</hi>, Hanovre, 1944.</bibl>
-        <bibl>Emma Lenski, <hi>The Chronicles of Alstre and Dongann by the poet Celdre</hi>,
+        La Charité-sur-Loire, 1907.</bibl>
+        <bibl>Erich Wiegger, <hi><foreign lang="de">Chroniken von Almak</foreign></hi>, Leipzig, 1943.</bibl>
+        <bibl>Erich Wiegger, <hi><foreign lang="de">Das Baum und der König</foreign></hi>, Hanovre, 1944.</bibl>
+        <bibl>Emma Lenski, <hi><foreign lang="en">The Chronicles of Alstre and Dongann by the poet Celdre</foreign></hi>,
           Londres, (1937) 1962.</bibl>
-        <bibl>Sigriður Grimsdottir, <hi>Alster the Homeslayer and Dongann the Trickster</hi>,
-          thèse de l’université de Colorado Springs, 1963 ; VSNR Saga-Book, vol. XVI (inédit) ;
+        <bibl>Sigriður Grimsdottir, <hi><foreign lang="en">Alster the Homeslayer and Dongann the Trickster</foreign></hi>,
+          thèse de l’univ. de Colorado Springs, 1963 ; VSNR Saga-Book, vol. XVI (inédit) ;
           Penguin Books, 1969 (épuisé).</bibl>
       </listBibl>
     </sourceDesc>
@@ -57,6 +57,8 @@
   <profileDesc>
     <langUsage>
       <language id="fr">French</language>
+      <language id="en">English</language>
+      <language id="de">German</language>
     </langUsage>
   </profileDesc>
 </teiHeader>
@@ -3733,7 +3735,7 @@
       <pos>n.</pos>
     </gramGrp>
     <trans lang="fr">
-      <def>mère</def> <usg type="hint">biologique</usg>
+      <def>mère, père</def> <usg type="hint">biologique</usg>
     </trans>
   </sense>
   <etym>KÓLOT « ascendant »</etym>
@@ -4843,7 +4845,7 @@
   </note>
 </entry>
 
-<entry id="de">
+<entry id="de.aux">
   <form>
     <orth>de</orth>
   </form>
@@ -4988,7 +4990,7 @@
   <sense>
     <trans lang="fr">
       <def>particule de négation (verbale)</def> <usg type="hint">sous forme respective, d’un usage
-        rare et précieux,</usg>
+        rare et précieux</usg>
     </trans>
   </sense>
   <xr type="analogy"><ptr target="na.1"/></xr>
@@ -5402,7 +5404,7 @@
   <sense>
     <trans lang="fr">
       <def>chambre</def> <usg type="hint">à coucher</usg>,
-      <def>pièce de la maison ou l’on dort</def>
+      <def>pièce de la maison où l’on dort</def>
     </trans>
   </sense>
 </entry>
@@ -7155,7 +7157,7 @@
   </sense>
   <note type="comment" lang="fr">
     Le haut-clergé forme une caste sociale issue de la gémellité.
-    Le clergé régulier ou bas-clergé est, quant à lui formé, de volontaires, qui s’engagent
+    Le clergé régulier ou bas-clergé est, quant à lui, formé de volontaires, qui s’engagent
     dans cette activité pour une durée de leur choix. Si les prêtresses président aux naissances
     et les prêtres aux rituels des morts, le rôle des <hi>tyochanis</hi> dans la société du
     dixième siècle couvre des sphères principalement profanes et, dirait-on aujourd’hui,
@@ -8031,7 +8033,7 @@
     </trans>
   </eg>
   <eg>
-    <q>guir te lixrelonn,</q>
+    <q>guir te lixrelonn</q>
     <trans lang="fr">
       <tr>que puisse l’espoir-destin te garder (<hi>idem</hi>)</tr>
     </trans>
@@ -8103,7 +8105,7 @@
     </trans>
   </sense>
   <etym>GWALAD</etym>
-  <xr type="analogy"><ptr target="scal"/></xr>
+  <xr type="analogy"><ptr target="scal"/>, <ptr target="lext"/></xr>
 </entry>
 
 <entry id="gwaredh">
@@ -11112,7 +11114,7 @@
     </trans>
   </sense>
   <eg>
-    <q>afanrevern se negachan e qere</q>
+    <q>afanarevern se negachan e qere</q>
     <trans lang="fr">
       <tr>il tombe une neige gris-cendre</tr>
     </trans>
@@ -12576,7 +12578,7 @@
     </trans>
   </sense>
   <note type="comment" lang="fr">
-    Le temps dans la conception propre au gens d’Almaq, et à presque tous les peuples de Silé,
+    Le temps dans la conception propre aux gens d’Almaq, et à presque tous les peuples de Silé,
     est de nature cyclique, cf. <ptr target="arvadh"/>.
   </note>
 </entry>
@@ -13387,7 +13389,7 @@
   <etym>SÁNAB, sit. <hi>sambe</hi></etym>
   <note type="comment" lang="fr">
     En faisant abstraction de la famille Aduin (seul cas connu de lignée patrilinéaire),
-    Les natifs d’Almaq portent un nom de naissance (<hi>sanv afordherin</hi>), un nom
+    les natifs d’Almaq portent un nom de naissance (<hi>sanv afordherin</hi>), un nom
     d’adulte (<hi>sanvrineth</hi>), parfois un titre honorifique (<hi>sanv agasserin</hi>)
     et, enfin, un matronyme (<hi>sanv acaltherin</hi>, nom maternel) ou un nom héréditaire
     de lignée (<hi>sanv anechinerin</hi>, nom matriarcal).
@@ -13439,7 +13441,7 @@
     </trans>
   </sense>
   <etym>SAKÁL</etym>
-  <xr type="analogy"><ptr target="gwaladh"/></xr>
+  <xr type="analogy"><ptr target="gwaladh"/>, <ptr target="lext"/></xr>
 </entry>
 
 <entry id="Scaliad">

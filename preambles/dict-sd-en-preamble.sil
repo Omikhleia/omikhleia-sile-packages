@@ -12,6 +12,10 @@
 %
 \set[parameter=linebreak.emergencyStretch, value=0.5cm]
 %
+% Dictionaries are composed of short paragraphs.
+% They look best if the baseline is somewhat fixed.
+\set[parameter=document.baselineskip, value=1.2em]
+%
 % Set a few globals (main font, default language, paragraph indent).
 % Note that other fonts (e.g. for entries, etc.) are defined via styles.
 %
