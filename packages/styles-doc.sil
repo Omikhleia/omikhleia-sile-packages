@@ -2,69 +2,60 @@
 \language[main=en]
 \script[src=packages/styles]
 \script[src=packages/color]
+\script[src=packages/autodoc-extras]
 
-\define[command=keyword]{\font[family=Linux Biolinum O, weight=600]{\process}}
-\define[command=code]{\font[family=Linux Biolinum O, weight=600]{\process}}
-\define[command=codes]{\par\medskip\code{\process}\par\medskip}
-\define[command=args]{⟨\em{\process}⟩}
-\font[family=Linux Libertine O]
-
-\center{An (experimental) \keyword{styles} package for SILE}
-\bigskip
-
-The \keyword{styles} package can be used to easily define styling specifications. 
+The \doc:keyword{styles} package can be used to easily define styling specifications. 
 It is intended to be used by other packages or classes, rather than directly.
 
 If one looks at the default/standard packages or classes in SILE, something may
 seem wrong (though of course it is a matter of taste and could be debated):
-(1) Many commands have "hooks", such as \code{pullquote:font}, \code{book:chapterfont}, or
+(1) Many commands have “hooks”, such as \doc:code{pullquote:font}, \doc:code{book:chapterfont}, or
 whatever. But what if ones also wants, for instance, to specify a color?
-Of course, in many cases, the hook could be redefined to apply that wanted color to the content...
-But, er, isn't it called \code{xxx:font}? Something looks amiss.
+Of course, in many cases, the hook could be redefined to apply that wanted color to the content…
+But, er, isn’t it called \doc:code{xxx:font}? Something looks amiss.
 (2) Those hooks often have fixed definitions, e.g. footnote text at 9pt, chapter heading
-et 22pt. This doesn't depend on the document main font size. LaTeX, years before, was only
-a bit better here, defining different relative sizes (but assuming a book is typeset in 10pt, 11pt or 12pt).
+et 22pt. This doesn’t depend on the document main font size. LaTeX, years before, was only
+a bit better here, defining different relative sizes (but assuming a book is always typeset in 10pt, 11pt or 12pt).
 (3) Many commands, say book sectioning, rely on hard-coded vertical skips. But what if one wants a different
 vertical spacing? Two solutions come to mind, either redefining the relevant commands
-(say \code{\\chapter}) or temporarily redefining the skips (say, \code{\\bigskip})... In a way, 
-it all sounds very clumsy, cumbersome, somehow \em{ad hoc}, and... here, LaTeX-like. Which is not necessarily wrong
+(say \doc:code{\\chapter}) or temporarily redefining the skips (say, \doc:code{\\bigskip})… In a way, 
+it all sounds very clumsy, cumbersome, somehow \em{ad hoc}, and… here, LaTeX-like. Which is not necessarily wrong
 (there is no offense intended here), but why not try a different approach?
 
 Actually, this is what most modern word-processing software have been doing for a while,
-be it MS-Word, Libre/OpenOffice and cognates... They all introduce the concept of "styles",
+be it MS-Word, Libre/OpenOffice and cognates… They all introduce the concept of “styles”,
 in actually three forms at least: character styles, paragraph styles and page styles. But also,
 frame styles, list styles, and table styles, to list a few others.
 
 This package is an attempt at implementing such ideas, or a subset of them, in SILE.
 
-Let's have a look at some recent version of LibreOffice...
+Let’s have a look at some recent version of LibreOffice…
 
 Character styles include: font (family, style 
 and weight, size, language, features), font effects (color, decoration e.g. underlining and
-strikethrough, case), position (superscript, subscript), rotation... (and plenty of smaller
+strikethrough, case), position (superscript, subscript), rotation… (and plenty of smaller
 features, e.g. borders, which interest is a bit doubtful, heh!).
 
 Paragraph styles, in addition to the above, include: indent and spacing, alignment,
 outline & numbering, text flow (notably, breaks).
 
-Page styles include: page layout (a bit akin to SILE's masters), header and footers, folio 
+Page styles include: page layout (a bit akin to SILE’s masters), header and footers, folio 
 numbering, background and such fancy things. Column too, though this could be debatable.
 
-\break
+\bigskip
 
-
--- \em{Anything below this point is still experimental, and likely unstable.} --
+— \em{Anything below this point is still experimental, and likely unstable.} —
 
 \medskip
 To define a (character) style, one uses the following syntax (with any of the internal
 elements being optional):
 
-\begin{codes}
-\\style:define[name=\args{name}]\{
-\par\quad\\font[\args{font specification}]
-\par\quad\\color[color=\args{color}]
+\begin{doc:codes}
+\\style:define[name=\doc:args{name}]\{
+\par\quad\\font[\doc:args{font specification}]
+\par\quad\\color[color=\doc:args{color}]
 \par\}
-\end{codes}
+\end{doc:codes}
 
 \style:define[name=style@example]{
    \font[family=Linux Libertine O, features=+smcp, style=italic]
@@ -75,61 +66,61 @@ Can you guess how this \style:apply[name=style@example]{Style} was defined?
 
 A style can also inherit from a previously defined style:
 
-\begin{codes}
-\\style:define[name=\args{name}, inherit=\args{other-name}]\{
-\par\quad...
+\begin{doc:codes}
+\\style:define[name=\doc:args{name}, inherit=\doc:args{other-name}]\{
+\par\quad…
 \par\}
-\end{codes}
+\end{doc:codes}
 
 To apply a (character) style to some content, one just has to do:
 
-\begin{codes}
-\\style:apply[name=\args{name}]\{\args{content}\}
-\end{codes}
+\begin{doc:codes}
+\\style:apply[name=\doc:args{name}]\{\doc:args{content}\}
+\end{doc:codes}
 
 Regarding re-definitions now, the first syntax below allows one to change the definition
- of style \args{name} to new \args{content}, but saving the previous definition to \args{saved-name}:
+of style \doc:args{name} to new \doc:args{content}, but saving the previous definition to \doc:args{saved-name}:
 
-\begin{codes}
-\\style:redefine[name=\args{name}, as=\args{saved-name}]\{\args{content}\}
-\end{codes}
+\begin{doc:codes}
+\\style:redefine[name=\doc:args{name}, as=\doc:args{saved-name}]\{\doc:args{content}\}
+\end{doc:codes}
 
-From now on, style {\\\args{name}} corresponds to the new definition,
-while \code{\\\args{saved-name}} corresponds to previous definition, whatever it was.
+From now on, style {\\\doc:args{name}} corresponds to the new definition,
+while \doc:code{\\\doc:args{saved-name}} corresponds to previous definition, whatever it was.
 
-Another option is to add the \code{inherit} option to true, as show below:
-\begin{codes}
-\\style:redefine[name=\args{name}, as=\args{saved-name}, inherit=true]\{\args{content}\}
-\end{codes}
+Another option is to add the \doc:code{inherit} option to true, as show below:
+\begin{doc:codes}
+\\style:redefine[name=\doc:args{name}, as=\doc:args{saved-name}, inherit=true]\{\doc:args{content}\}
+\end{doc:codes}
 
-From now on, style {\\\args{name}} corresponds to the new definition as above, but
-also inherits from \code{\\\args{saved-name}} - in other terms, both are applied. This allows
+From now on, style {\\\doc:args{name}} corresponds to the new definition as above, but
+also inherits from \doc:code{\\\doc:args{saved-name}} — in other terms, both are applied. This allows
 one to only leverage the new definition, basing it on the older one.
 
-Note that if invoked without \args{content}, the redefinition will just define an alias to the current
-command (and in that case, obviously, the \code{inherit} flags is not supported).
+Note that if invoked without \doc:args{content}, the redefinition will just define an alias to the current
+command (and in that case, obviously, the \doc:code{inherit} flags is not supported).
 It is not clear whether there is an interesting use case for it (yet), but here you go:
 
-\begin{codes}
-\\style:redefine[name=\args{name}, as=\args{saved-name}]
-\end{codes}
+\begin{doc:codes}
+\\style:redefine[name=\doc:args{name}, as=\doc:args{saved-name}]
+\end{doc:codes}
 
-Finally, the following syntax allows one to restore style \args{name} to whatever was saved
-in \args{saved-name}, and to clear the latter:
+Finally, the following syntax allows one to restore style \doc:args{name} to whatever was saved
+in \doc:args{saved-name}, and to clear the latter:
 
-\begin{codes}
-\\style:redefine[name=\args{name}, from=\args{saved-name}]
-\end{codes}
+\begin{doc:codes}
+\\style:redefine[name=\doc:args{name}, from=\doc:args{saved-name}]
+\end{doc:codes}
 
-So now on \code{\\\args{name}} is restored to whatever was saved, and \code{\\\args{saved-name}}
+So now on \doc:code{\\\doc:args{name}} is restored to whatever was saved, and \doc:code{\\\doc:args{saved-name}}
 is no longer defined.
 
-The package also defines a \code{\\style:font} command, which is basically the same as the
-standard \code{\\font} command, but additionaly supports relative sizes with respect to
-the current \code{font.size}. It is actually the command used when applying a font style
-specification. For the sake of illustration, let's assume the following definitions:
+The package also defines a \doc:code{\\style:font} command, which is basically the same as the
+standard \doc:code{\\font} command, but additionaly supports relative sizes with respect to
+the current \doc:code{font.size}. It is actually the command used when applying a font style
+specification. For the sake of illustration, let’s assume the following definitions:
 
-\begin{codes}
+\begin{doc:codes}
 \\style:define[name=smaller]\{\\font[size=-1]\}
 
 \\style:define[name=bigger]\{\\font[size=+1]\}
@@ -137,7 +128,7 @@ specification. For the sake of illustration, let's assume the following definiti
 \\define[command=smaller]\{\\style:apply[name=smaller]\{\\process\}\}
 
 \\define[command=bigger]\{\\style:apply[name=bigger]\{\\process\}\}
-\end{codes}
+\end{doc:codes}
 
 \style:define[name=smaller]{\font[size=-1]}
 \style:define[name=bigger]{\font[size=+1]}
@@ -146,16 +137,16 @@ specification. For the sake of illustration, let's assume the following definiti
 
 Then:
 
-\begin{codes}
+\begin{doc:codes}
 Normal \\smaller\{Small \\smaller\{Tiny\}\},
 
 Normal \\bigger\{Big \\bigger\{Great\}\}.
-\end{codes}
+\end{doc:codes}
 
 Yields: Normal \smaller{Small \smaller{Tiny}}, Normal \bigger{Big \bigger{Great}}.
 
 \bigskip
-Where do we go now? Paragraph and page styles haven't been proposed. Character styles
+Where do we go now? Paragraph and page styles haven’t been proposed. Character styles
 could include other features. In other terms, this is an experimental work in progress!
 
 \end{document}

@@ -1,0 +1,40 @@
+\begin[papersize=6in x 9in, class=book]{document}
+\script[src=packages/autodoc]
+%\script[src=packages/url]
+\language[main=en]
+\font[family=Libertinus Serif]
+
+\hbox{}\vfill
+
+\begin{center}
+\font[size=20pt]{Omikhleia’s packages for SILE}
+\end{center}
+
+\vfill
+\break
+
+\tableofcontents
+
+\chapter{Packages}
+
+\section{epigraph: a lightweight epigraph environment}
+
+\package-documentation[src=packages/epigraph]
+
+\section{abbr: a few shorthands & abbreviations}
+
+\package-documentation[src=packages/abbr]
+
+\section{styles: (experimental) style specifications}
+
+\package-documentation[src=packages/styles]
+
+\section{redefine: (basic) command redefinition}
+
+\package-documentation[src=packages/redefine]
+
+\section{teidict: XML TEI P4 print dictionaries}
+
+\package-documentation[src=packages/teidict]
+
+\end{document}

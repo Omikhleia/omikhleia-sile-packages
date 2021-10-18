@@ -55,7 +55,49 @@ end, "Redefines a command saving the old version with another name, or restores 
 
 return {
   documentation = [[\begin{document}
-    \include[src=packages/redefine-doc.sil]
-  \end{document}]]
+\script[src=packages/redefine]
+\script[src=packages/autodoc-extras]
+
+The \doc:keyword{redefine} package can be used to easily redefine a command under a new name.
+
+Sometimes one may want to redefine a command (e.g. a font switching hook for some other
+command, etc.), but would also want to restore the initial command definition afterwards
+at some point, or to invoke the original definition from the newly redefined one.
+
+This package is just some sort of quick “hack” in order to do it in an easy way. It is far from perfect,
+it likely has implications if users starts saving and restoring commands in a disordered way, but
+it can do the magic in some fairly reasonable symmetric cases.
+
+The first syntax below allows one to change the definition of command \doc:args{name} to
+new \doc:args{content}, but saving the previous definition to \doc:args{saved-name}:
+
+\begin{doc:codes}
+\\redefine[command=\doc:args{name}, as=\doc:args{saved-name}]\{\doc:args{content}\}
+\end{doc:codes}
+
+From now on, invoking \doc:code{\\\doc:args{name}} will result in the new definition to be applied,
+while \doc:code{\\\doc:args{save-name}} will invoke the previous definition, whatever it was.
+
+Of course, be sure to use a unique save name: otherwise, if overwriting an existing command,
+you will get a warning, at your own risks...
+
+If invoked without \doc:args{content}, the redefinition will just define an alias to the current
+command:
+
+\begin{doc:codes}
+\\redefine[command=\doc:args{name}, as=\doc:args{saved-name}]
+\end{doc:codes}
+
+The following syntax allows one to restore command \doc:args{name} to whatever was saved
+in \doc:args{saved-name}, and to clear the latter:
+
+\begin{doc:codes}
+\\redefine[command=\doc:args{name}, from=\doc:args{saved-name}]
+\end{doc:codes}
+
+So now on \doc:code{\\\doc:args{name}} is restored to whatever was saved, and \doc:code{\\\doc:args{saved-name}}
+is no longer defined. Again, if the saved name corresponds to some existing command in a broader
+scope, things may break.
+\end{document}]]
 }
 

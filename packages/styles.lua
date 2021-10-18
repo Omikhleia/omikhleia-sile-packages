@@ -1,13 +1,13 @@
 --
 -- A style package for SILE
--- Omikhleia, 2021
+-- 2021, Didier Willis
 -- License: MIT
--- 
+--
 -- Rough API ! Experimental and unstable ! Real quick'n dirty :)
--- 
+--
 --  % Applies a font (same as \font), but additionaly supporting relative sizes (e.g. -1)
---  \style:font[family=...]{...} 
--- 
+--  \style:font[family=...]{...}
+--
 --  \style:define[name=<custom-style>, inherit=other:custom-name]{
 --      \font[family=...] % Actually uses \style:font
 --      \color[color=...]
@@ -21,7 +21,7 @@
 --           \set[parameter=document.spaceskip,value=0.5en]
 --           \set[parameter=current.parindent,value=0pt]
 --           \set[parameter=document.parindent,value=0pt]
---           \set[parameter=typesetter.parfillskip,value=0pt] 
+--           \set[parameter=typesetter.parfillskip,value=0pt]
 --  }
 
 
@@ -38,7 +38,7 @@
 --   color (nore, color, gradient, weird stuff) or image?
 --   header
         -- on off
-        -- same left right 
+        -- same left right
         -- same first page
         -- margins (left, right)
         -- spacing = rather where is that box
@@ -64,7 +64,89 @@ local function dump(o)
 end
 -- END STUFF FOR QUICK AND DIRTY DEBUG
 
-SILE.scratch.styles = {} 
+local textFeatCache = {}
+
+local _key = function (options, text)
+  return table.concat({
+      text,
+      options.family,
+      ("%d"):format(options.weight),
+      options.style,
+      options.variant,
+      options.features,
+      options.filename,
+    }, ";")
+end
+
+local textFeatCaching = function (options, text, status)
+  local key = _key(options, text)
+  if textFeatCache[key] == nil then
+    textFeatCache[key] = status
+  end
+  return status
+end
+
+local checkFontFeatures = function (features, content)
+  local text = SU.contentToString(content)
+  if tonumber(text) ~= nil then
+    -- Avoid caching any sequence of digits. Plus, we want
+    -- consistency here.
+    text="0123456789"
+  end
+  local fontOptions = SILE.font.loadDefaults({ features = features })
+  local supported = textFeatCache[_key(fontOptions, text)]
+  if supported ~= nil then
+    return supported
+  end
+
+  local items1 = SILE.shaper:shapeToken(text, fontOptions)
+  local items2 = SILE.shaper:shapeToken(text, SILE.font.loadDefaults({}))
+
+  -- Don't mix up characters supporting the features with those
+  -- not supporting them, as it would be ugly in most cases.
+  if #items1 ~= #items2 then
+    return textFeatCaching(fontOptions, text, false)
+  end
+  for i = 1, #items1 do
+    if items1[i].width == items2[i].width and items1[i].height == items2[i].height then
+      return textFeatCaching(fontOptions, text, false)
+    end
+  end
+  return textFeatCaching(fontOptions, text, true)
+end
+
+local scriptSubOffset = "0.33ex"
+local scriptSupOffset = "0.77ex"
+local scriptSize = "1.414ex"
+
+SILE.registerCommand("style:superscript", function (options, content)
+  if type(content) ~= "table" then SU.error("Expected a table content in style:superscript") end
+  if checkFontFeatures("+sups", content) then
+    SILE.call("font", { features="+sups" }, content)
+  else
+    SU.warn("No true superscripts for '"..SU.contentToString(content).."', fallback to scaling")
+    SILE.call("raise", { height = scriptSupOffset }, function ()
+      SILE.call("font", { size = scriptSize }, content)
+    end)
+  end
+end, "Typeset in superscript.")
+
+SILE.registerCommand("style:subscript", function (options, content)
+  if type(content) ~= "table" then SU.error("Expected a table content in style:superscript") end
+  if checkFontFeatures("+subs", content) then
+    SILE.call("font", { features="+subs" }, content)
+  elseif checkFontFeatures("+sinf") then
+    SU.warn("No true subscripts for '"..SU.contentToString(content).."', fallback to scientific inferiors")
+    SILE.call("font", { features="+sinf" }, content)
+  else
+    SU.warn("No true subscripts for '"..SU.contentToString(content).."', fallback to scaling")
+    SILE.call("lower", { height = scriptSubOffset}, function ()
+      SILE.call("font", { size = scriptSize }, content)
+    end)
+  end
+end, "Typeset in subscript.")
+
+SILE.scratch.styles = {}
 
 local function shallowcopy(orig)
   local orig_type = type(orig)
@@ -83,7 +165,7 @@ end
 SILE.registerCommand("style:font", function (options, content)
   local size = tonumber(options.size)
   local opts = shallowcopy(options)
-  if size then 
+  if size then
     opts.size = SILE.settings.get("font.size") + size
   end
 
@@ -123,7 +205,7 @@ local style1 = function (style, content)
   if style.font then
     SILE.call("style:font", style.font, function ()
       style2(style, content)
-    end)  
+    end)
   else
     style2(style, content)
   end
@@ -166,7 +248,7 @@ SILE.registerCommand("style:redefine", function (options, content)
     -- TODO We could accept another name in the inherit here? Use case?
     if content and (type(content) ~= "table" or #content ~= 0) then
       SILE.call("style:define", { name = options.name, inherit = SU.boolean(options.inherit, false) and options.as }, content)
-    end 
+    end
   elseif options.from then
     if options.from == options.name then
       SU.error("Style " .. option.name .. " should not be restored from itself, ignoring.")

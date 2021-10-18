@@ -7,23 +7,14 @@
 -- as suitable for the HSD project, and assumes a similar structure to the
 -- latter, see https://omikhleia.github.io/sindict/manual/DATA_MODEL.html
 --
--- Loaded packages: styles, inputfilter, teiabbr
--- Required packages: xmltricks, pdf, color, infonodes, raiselower, rules, url, svg
+-- Loaded packages: styles, inputfilter, teiabbr, xmltricks
+-- Required packages: pdf, color, infonodes, raiselower, rules, url, svg
 -- Required class support: teibook
---
--- The main pain point is that such a dictionary is a heavily "semantic" structured
--- mark-up (i.e. a "lexical view", encoding structure information such as part-of-speech
--- etc. without much concern for its exact textual representation in print form),
--- much more than a "presentational" mark-up. Some XML nodes may contain many things
--- we need to ignore (such as spaces, mostly) or supplement (such as punctuation,
----parentheses, numbering... and again, proper spaces where needed). Without XPath to
--- check siblings, ascendants or descendants, it may become somewhat hard to get a nice
--- automated output (and even with XPath, it is not the obvious). In other terms,
--- the solution propose here is somewhat ad hoc for a specific type of lexical TEI
--- dictionary and depends quite a lot on its structural organization.
 --
 
 -- SETTINGS
+
+SILE.require("packages/xmltricks")
 
 local teiabbr = SILE.require("packages/teiabbr").exports
 
@@ -155,7 +146,7 @@ end
 local function shallowcopy (orig)
   local orig_type = type(orig)
   local copy
-  if orig_type == 'table' then
+  if orig_type == "table" then
     copy = {}
     for orig_key, orig_value in pairs(orig) do
         copy[orig_key] = orig_value
@@ -640,7 +631,7 @@ local inputfilter = SILE.require("packages/inputfilter").exports
 local biblFilter = function (node, content)
   if type(node) == "table" then return SU.error("Structure error: TEI.bibl expected to containt text") end
   local result = {}
-  for token in SU.gtoke(node, '[:/,%-]') do
+  for token in SU.gtoke(node, "[:/,%-]") do
     if token.string then
       result[#result+1] = token.string
     else
@@ -885,5 +876,38 @@ end)
 SILE.registerCommand("code", function (options, content)
   SILE.process(content)
 end)
+
+return {
+  documentation = [[\begin{document}
+\script[src=packages/url]
+\script[src=packages/color]
+\script[src=packages/autodoc-extras]
+
+This package supports a subset of the (XML) TEI  P4 “Print Dictionary” standard,
+as suitable for the Sindarin Dictionary project, and assumes a similar structure to the
+latter, see \color[color=blue]{\href[src=https://omikhleia.github.io/sindict/manual/DATA_MODEL.html]{Data model}}.
+
+
+The main pain point is that such a dictionary is a heavily “semantic” structured
+mark-up (i.e. a “lexical view”, encoding structure information such as part-of-speech
+etc. without much concern for its exact textual representation in print form),
+much more than a “presentational” mark-up. Some XML nodes may contain many things
+one needs to ignore (such as spaces, mostly) or supplement (such as punctuation,
+parentheses, numbering… and again, proper spaces where needed). Without XPath to
+check siblings, ascendants or descendants, it may become somewhat hard to get a nice
+automated output (and even with XPath, it is not that obvious). In other terms,
+the solution proposed here is somewhat \em{ad hoc} for a specific type of lexical TEI
+dictionary and depends quite a lot on its structural organization.
+
+This package is not intended to be used as-is, but along with the \doc:code{teibook}
+class, which loads it as well as a number of extra packages. It itself relies
+on a few settings that one would usually define in a preamble document, e.g.:
+
+\begin{doc:codes}
+\doc:code{sile -I preambles/dict-sd-en-preamble.sil} \doc:args{dictionary.xml}
+\end{doc:codes}
+
+\end{document}]]
+}
 
 -- ALL DONE.

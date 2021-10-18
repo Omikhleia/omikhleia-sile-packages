@@ -116,38 +116,40 @@ end, "Formats an French century (siècle) as in IVe (but properly typeset)")
 
 return {
   documentation = [[\begin{document}
-    \script[src=packages/abbr]
-    This package defines a few shorthands and abbreviations that its author often
-    uses in articles or book chapters.
+\script[src=packages/abbr]
+\script[src=packages/autodoc-extras]
 
-    The \code{\\abbr:nbsp} command inserts a non-breakable space.
-    It is stretchable and shrinkable as a normal inter-word space by default,
-    unless setting the \code{fixed} option to true.
+This package defines a few shorthands and abbreviations that its author often
+uses in articles or book chapters.
 
-    The \code{\\abbr:no:fr} and \code{\\abbr:no:en} commands prepend a
-    correctly typeset issue number, for French and English respectively,
-    that is \abbr:no:fr{5} and \abbr:no:en{5}.
+The \doc:code{\\abbr:nbsp} command inserts a non-breakable space.
+It is stretchable and shrinkable as a normal inter-word space by default,
+unless setting the \doc:code{fixed} option to true.
 
-    The \code{\\abbr:nos:fr} and \code{\\abbr:nos:en} commands are the same
-    as the previous commands, but for the plural, as in
-    \abbr:nos:fr{5–6} and \abbr:nos:en{5–6}.
+The \doc:code{\\abbr:no:fr} and \doc:code{\\abbr:no:en} commands prepend a
+correctly typeset issue number, for French and English respectively,
+that is \abbr:no:fr{5} and \abbr:no:en{5}.
 
-    The \code{\\abbr:no} and \code{\\abbr:nos} invoke the appropriate
-    command depending on the current language, \abbr:nos{12, 13}.
+The \doc:code{\\abbr:nos:fr} and \doc:code{\\abbr:nos:en} commands are the same
+as the previous commands, but for the plural, as in
+\abbr:nos:fr{5–6} and \abbr:nos:en{5–6}.
 
-    The \code{\\abbr:vol} acts similarly for volume references, that
-    is \abbr:vol{4}, just ensuring the space in between is unbreakable.
+The \doc:code{\\abbr:no} and \doc:code{\\abbr:nos} invoke the appropriate
+command depending on the current language, \abbr:nos{12, 13}.
 
-    The \code{\\abbr:page} does the same for page references, as in
-    \abbr:page{159}, but also supports one of the following boolean
-    options: \code{sq}, \code{sqq} and \code{suiv}, to indicate
-    subsequent page(s) in the usual manner in English or French, as
-    in \abbr:page[sq=true]{159}, \abbr:page[sqq=true]{159} or
-    \abbr:page[suiv=true]{159}
-    Note that in these cases, a period is automatically added.
+The \doc:code{\\abbr:vol} acts similarly for volume references, that
+is \abbr:vol{4}, just ensuring the space in between is unbreakable.
 
-    The \code{\\abbr:siecle} command formats a century according to
-    the French typographical rules, as in \abbr:siecle{i} or
-    \abbr:siecle{iv}, \abbr:siecle{15} and \abbr:siecle{XIX}.
-  \end{document}]]
+The \doc:code{\\abbr:page} does the same for page references, as in
+\abbr:page{159}, but also supports one of the following boolean
+options: \doc:code{sq}, \doc:code{sqq} and \doc:code{suiv}, to indicate
+subsequent page(s) in the usual manner in English or French, as
+in \abbr:page[sq=true]{159}, \abbr:page[sqq=true]{159} or
+\abbr:page[suiv=true]{159}
+Note that in these cases, a period is automatically added.
+
+The \doc:code{\\abbr:siecle} command formats a century according to
+the French typographical rules, as in \abbr:siecle{i} or
+\abbr:siecle{iv}, \abbr:siecle{15} and \abbr:siecle{XIX}.
+\end{document}]]
 }
