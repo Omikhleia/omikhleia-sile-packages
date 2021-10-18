@@ -8,6 +8,11 @@ Some of the things I may (or not) provide here:
 
   The **epigraph** package is inspired (loosely) from the LaTeX package by the same name, with a minimal set of useful features.
 
+- [X] Common shorthands and abbreviations: **abbr** package. This package defines a few shorthands
+  and abbreviations that its author often uses in articles or book chapters
+- [X] Native superscripts and subscripts: **textsubsuper** package.
+- [X] Some printer's ornaments: **couyards** package.
+
 - [ ] quotations - the default "quote" package in SILE doesn't do the job for me.
 - [ ] labels and reference.
 - [ ] proper page masters (a.k.a an extended book template for print)
@@ -22,5 +27,3 @@ Some of the things I may (or not) provide here:
 
 - [X] Temporary command redefinition (save and restore): **redefine** package.
 - [X] Styles (IN PROGRESS): **styles** package.
-- [X] Common shorthands and abbreviations: **abbr** package. This package defines a few shorthands
-  and abbreviations that its author often uses in articles or book chapters

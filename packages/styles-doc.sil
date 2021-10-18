@@ -98,7 +98,7 @@ also inherits from \doc:code{\\\doc:args{saved-name}} — in other terms, both a
 one to only leverage the new definition, basing it on the older one.
 
 Note that if invoked without \doc:args{content}, the redefinition will just define an alias to the current
-command (and in that case, obviously, the \doc:code{inherit} flags is not supported).
+command (and in that case, obviously, the \doc:code{inherit} flag is not supported).
 It is not clear whether there is an interesting use case for it (yet), but here you go:
 
 \begin{doc:codes}

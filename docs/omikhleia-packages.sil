@@ -29,6 +29,10 @@
 
 \package-documentation[src=packages/abbr]
 
+\section{couyards: printer’s ornaments}
+
+\package-documentation[src=packages/couyards]
+
 \section{styles: (experimental) style specifications}
 
 \package-documentation[src=packages/styles]
