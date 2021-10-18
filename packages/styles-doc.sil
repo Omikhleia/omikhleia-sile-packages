@@ -58,7 +58,7 @@ elements being optional):
 \end{doc:codes}
 
 \style:define[name=style@example]{
-   \font[family=Linux Libertine O, features=+smcp, style=italic]
+   \font[family=Libertinus Serif, features=+smcp, style=italic]
    \color[color=blue]
 }
 
