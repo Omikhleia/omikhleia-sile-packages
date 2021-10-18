@@ -12,7 +12,6 @@ Some of the things I may (or not) provide here:
   and abbreviations that its author often uses in articles or book chapters
 - [X] Native superscripts and subscripts: **textsubsuper** package.
 - [X] Some printer's ornaments: **couyards** package.
-
 - [ ] quotations - the default "quote" package in SILE doesn't do the job for me.
 - [ ] labels and reference.
 - [ ] proper page masters (a.k.a an extended book template for print)
