@@ -14,7 +14,7 @@ whatever. But what if ones also wants, for instance, to specify a color?
 Of course, in many cases, the hook could be redefined to apply that wanted color to the content…
 But, er, isn’t it called \doc:code{xxx:font}? Something looks amiss.
 (2) Those hooks often have fixed definitions, e.g. footnote text at 9pt, chapter heading
-et 22pt. This doesn’t depend on the document main font size. LaTeX, years before, was only
+at 22pt. This doesn’t depend on the document main font size. LaTeX, years before, was only
 a bit better here, defining different relative sizes (but assuming a book is always typeset in 10pt, 11pt or 12pt).
 (3) Many commands, say book sectioning, rely on hard-coded vertical skips. But what if one wants a different
 vertical spacing? Two solutions come to mind, either redefining the relevant commands
@@ -39,8 +39,8 @@ features, e.g. borders, which interest is a bit doubtful, heh!).
 Paragraph styles, in addition to the above, include: indent and spacing, alignment,
 outline & numbering, text flow (notably, breaks).
 
-Page styles include: page layout (a bit akin to SILE’s masters), header and footers, folio 
-numbering, background and such fancy things. Column too, though this could be debatable.
+Page styles include: page layout (a bit akin to SILE’s masters), header and footer, folio 
+numbering, background and such fancy things. Columns too, though this could be debatable.
 
 \bigskip
 

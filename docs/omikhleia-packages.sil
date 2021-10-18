@@ -1,6 +1,6 @@
 \begin[papersize=6in x 9in, class=book]{document}
 \script[src=packages/autodoc]
-%\script[src=packages/url]
+\script[src=packages/url]
 \language[main=en]
 \font[family=Libertinus Serif]
 
@@ -20,6 +20,10 @@
 \section{epigraph: a lightweight epigraph environment}
 
 \package-documentation[src=packages/epigraph]
+
+\section{textsubsuper: native superscripts & subscripts}
+
+\package-documentation[src=packages/textsubsuper]
 
 \section{abbr: a few shorthands & abbreviations}
 

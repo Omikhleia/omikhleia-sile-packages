@@ -4,7 +4,7 @@
 -- License: MIT
 --
 
-SILE.require("packages/styles") -- for style:superscript
+SILE.require("packages/textsubsuper") -- for text:superscript
 
 SILE.registerCommand("abbr:nbsp", function (options, _)
   local fixed = SU.boolean(options.fixed, false)
@@ -22,7 +22,7 @@ end, "Inserts a non-breakable inter-word space (by default shrinkable and stretc
 
 SILE.registerCommand("abbr:no:fr", function (_, content)
   SILE.typesetter:typeset("n")
-  SILE.call("style:superscript", {}, { "o" })
+  SILE.call("text:superscript", {}, { "o" })
   SILE.call("abbr:nbsp")
   SILE.process(content)
 end, "Formats an French number as, in n° 5 (but properly typeset)")
@@ -45,7 +45,7 @@ end, "Formats an number, as in no. 5, but depending on language")
 
 SILE.registerCommand("abbr:nos:fr", function (_, content)
   SILE.typesetter:typeset("n")
-  SILE.call("style:superscript", {}, { "os" })
+  SILE.call("text:superscript", {}, { "os" })
   SILE.call("abbr:nbsp")
   SILE.process(content)
 end, "Formats French numbers (pluralized)")
@@ -108,9 +108,9 @@ SILE.registerCommand("abbr:siecle", function (_, content)
     SILE.typesetter:typeset(century)
   end)
   if century == "i" then
-    SILE.call("style:superscript", {}, { "er" })
+    SILE.call("text:superscript", {}, { "er" })
   else
-    SILE.call("style:superscript", {}, { "e" })
+    SILE.call("text:superscript", {}, { "e" })
   end
 end, "Formats an French century (siècle) as in IVe (but properly typeset)")
 
