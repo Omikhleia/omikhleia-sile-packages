@@ -194,7 +194,7 @@ return {
     end
   },
   documentation = [[\begin{document}
-  \include[src=packages/styles-doc.sil]
+\include[src=packages/styles-doc.sil]
 \end{document}]]
 }
 

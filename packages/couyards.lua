@@ -35,7 +35,7 @@ Typographers of the past relied on a number of ornaments to make their books loo
 A \em{cul-de-lampe} (plural \em{culs-de-lampe}) is a typographic ornament, sometimes called a
 \em{pendant}, marking the end of a section of text. The term comes from French, for “bottom of
 the lamp” (from the usual shape of the ornament). In French typography, they are also called
-\em{couillards} or \em{couyards} (apparenttly, erm… after a body part, really). It may be a
+\em{couillards} or \em{couyards} (apparently, erm… after a body part, really). It may be a
 single illustration or assembled from fleurons.
 
 A \em{fleuron} is a typographic element or glyph, used either as a punctuation mark or as an

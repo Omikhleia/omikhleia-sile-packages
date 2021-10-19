@@ -428,6 +428,24 @@ return {
     writeBibl = writeBibl,
     writeImpressum = writeImpressum,
     orthPrefix = orthPrefix
-  }
+  },
+  documentation = [[\begin{document}
+\script[src=packages/autodoc-extras]
+
+This utility package is loaded by the \doc:keyword{teidict} package and
+provides it with a few localized strings (currently for English
+and French).
+
+It also defines the routines for building and typesetting the
+list of used abbreviations, the references and the default “impressum”
+(colophon).
+
+In the current state of art, it is at best experimental (hence
+the reason for having these functions in a distinct package).
+The only reason why one could want to look at it and modify it
+would be to add new abbreviations (e.g. for grammatical categories)
+or their translations.
+
+\end{document}]]
 }
 -- ALL DONE

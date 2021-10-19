@@ -64,8 +64,9 @@ Sometimes one may want to redefine a command (e.g. a font switching hook for som
 command, etc.), but would also want to restore the initial command definition afterwards
 at some point, or to invoke the original definition from the newly redefined one.
 
-This package is just some sort of quick “hack” in order to do it in an easy way. It is far from perfect,
-it likely has implications if users starts saving and restoring commands in a disordered way, but
+This package is just some sort of quick “hack” in order to do it in an easy way from within
+a document in SILE language. It is far from perfect,
+it likely has implications if users start saving and restoring commands in a disordered way, but
 it can do the magic in some fairly reasonable symmetric cases.
 
 The first syntax below allows one to change the definition of command \doc:args{name} to

@@ -1,5 +1,4 @@
 \begin[papersize=6in x 9in, class=book]{document}
-\language[main=en]
 \script[src=packages/styles]
 \script[src=packages/color]
 \script[src=packages/autodoc-extras]

@@ -12,3 +12,9 @@ The folder contains a small XML (TEI) lexicon and the corresponding PDF.
 
 For a more complex project using the same tools, you may also check
 the [sindict](https://omikhleia.github.io/sindict/) repository.
+
+The PDF was generated as follows:
+
+```
+sile -I preambles/dict-sd-fr-preamble.sil examples/dict-aq-fr.xml -o examples/dict-aq-fr.pdf
+```

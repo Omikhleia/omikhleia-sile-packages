@@ -3,7 +3,7 @@
 -- 2021, The Sindarin Dictionary Project, Omikhleia, Didier Willis
 -- License: MIT
 --
--- This is the book-like class for (X%L) TEI dictionaries.
+-- This is the book-like class for (XML) TEI dictionaries.
 -- It just defines the appropriate page masters, sectioning hooks
 -- and loads all needed packages. The hard work processing the
 -- XML content is done in the "teidict" package.
