@@ -3,8 +3,8 @@
 \script[src=packages/autodoc-extras]
 \script[src=packages/url]
 \language[main=en]
-\footnote:rule
 \font[family=Libertinus Serif]
+\footnote:rule
 
 \hbox{}\vfill
 
@@ -58,6 +58,10 @@ class writers.
 
 \package-documentation[src=packages/omifootnotes]
 
+\subsection{omitableofcontents: revisited table of contents}
+
+\package-documentation[src=packages/omitableofcontents]
+
 \section{Specialized packages}
 
 \subsection{teidict: XML TEI P4 print dictionaries}
@@ -81,6 +85,7 @@ The sectioning commands (partially) obey styles (relying on the \doc:keyword{sty
 The chapter pages have page numbering. The page numbers, by the way, are
 flushed left or right depending on the page, rather than centered.
 The footnotes are based on the \doc:keyword{omifootnotes} package.
+The table of contents rely on the \doc:keyword{omitableofcontents} package.
 
 This very document uses it. As stated, it is far from finished, so anything
 that may look wrong here may show where we are heading to. And, obviously,
@@ -96,8 +101,8 @@ XML content is done in the \doc:keyword{teidict} package.
 
 This author does not intend to discuss it in full here.
 To see it action, you can refer to our small example in
-our \href[src=https://github.com/Omikhleia/omikhleia-sile-packages/tree/main/examples]{repository}.
+\href[src=https://github.com/Omikhleia/omikhleia-sile-packages/tree/main/examples]{our repository}.
 For a more complex project using the same tools, you may also check
-the \href[src=https://omikhleia.github.io/sindict/]{sindict} repository.
+the \href[src=https://omikhleia.github.io/sindict/]{sindict repository}.
 
 \end{document}

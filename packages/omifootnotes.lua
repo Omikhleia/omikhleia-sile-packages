@@ -139,7 +139,7 @@ afterskipamount=\doc:args{glue}, thickness=\doc:args{length}]
 \end{doc:codes}
 
 The default values for these options are, in order, \doc:code{25\%fw},
-\doc:code{2ex}, \doc:code{2ex} and \doc:code{0.5pt}.
+\doc:code{2ex}, \doc:code{1ex} and \doc:code{0.5pt}.
 
 It also redefines the way the footnote reference is formatted in the
 footnote itself (that is, the internal \doc:code{\\footnote:counter} command),

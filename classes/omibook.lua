@@ -56,7 +56,7 @@ function omibook:init ()
     })
   self:loadPackage("twoside", { oddPageMaster = "right", evenPageMaster = "left" })
   self:mirrorMaster("right", "left")
-  self:loadPackage("tableofcontents")
+  self:loadPackage("omitableofcontents")
   if not SILE.scratch.headers then SILE.scratch.headers = {} end
   self:loadPackage("omifootnotes", {
     insertInto = "footnotes",
