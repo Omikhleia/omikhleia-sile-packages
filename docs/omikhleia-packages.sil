@@ -1,48 +1,103 @@
-\begin[papersize=6in x 9in, class=book]{document}
+\begin[papersize=6in x 9in, class=omibook]{document}
 \script[src=packages/autodoc]
+\script[src=packages/autodoc-extras]
 \script[src=packages/url]
 \language[main=en]
+\footnote:rule
 \font[family=Libertinus Serif]
 
 \hbox{}\vfill
 
 \begin{center}
-\font[size=20pt]{Omikhleia’s packages for SILE}
+\font[size=20pt]{Omikhleia’s classes & packages for SILE}
 \end{center}
 
 \vfill
 \break
 
+\chapter[numbering=false, toc=false]{Table of Contents}
 \tableofcontents
 
 \chapter{Packages}
 
-\section{epigraph: a lightweight epigraph environment}
+\section{End-user packages}
+
+These are standalone packages users can use in their own documents.
+
+\subsection{epigraph: a lightweight epigraph environment}
 
 \package-documentation[src=packages/epigraph]
 
-\section{textsubsuper: native superscripts & subscripts}
+\subsection{textsubsuper: native superscripts & subscripts}
 
 \package-documentation[src=packages/textsubsuper]
 
-\section{abbr: a few shorthands & abbreviations}
+\subsection{abbr: a few shorthands & abbreviations}
 
 \package-documentation[src=packages/abbr]
 
-\section{couyards: printer’s ornaments}
+\subsection{couyards: printer’s ornaments}
 
 \package-documentation[src=packages/couyards]
 
-\section{styles: (experimental) style specifications}
-
-\package-documentation[src=packages/styles]
-
-\section{redefine: (basic) command redefinition}
+\subsection{redefine: (basic) command redefinition}
 
 \package-documentation[src=packages/redefine]
 
-\section{teidict: XML TEI P4 print dictionaries}
+\section{Technical packages}
+
+These packages are not intended to be used alone, but provide utilities
+for other packages. They are therefore mainly aimed at package and
+class writers.
+
+\subsection{styles: (experimental) style specifications}
+
+\package-documentation[src=packages/styles]
+
+\subsection{omifootnotes: footnotes redone}
+
+\package-documentation[src=packages/omifootnotes]
+
+\section{Specialized packages}
+
+\subsection{teidict: XML TEI P4 print dictionaries}
 
 \package-documentation[src=packages/teidict]
+
+\subsection{teiabbr: localized abbreviations for TEI dictionaries}
+
+\package-documentation[src=packages/teiabbr]
+
+\chapter{Classes}
+
+\section{omibook: a book class redone}
+
+This is a work in progress, gradually tuning the default book
+class from SILE to this author’s needs and taste.
+
+Regarding the differences for now, it has slightly different default page masters,
+as the gutter space was found to be too small.
+The sectioning commands (partially) obey styles (relying on the \doc:keyword{styles} package).
+The chapter pages have page numbering. The page numbers, by the way, are
+flushed left or right depending on the page, rather than centered.
+The footnotes are based on the \doc:keyword{omifootnotes} package.
+
+This very document uses it. As stated, it is far from finished, so anything
+that may look wrong here may show where we are heading to. And, obviously,
+as nothing is definitive yet, things may change or break.
+
+\section{teibook: XML TEI P4 print dictionaries}
+
+This is a book-like class for (XML) TEI dictionaries.
+
+It just defines the appropriate page masters, sectioning hooks
+and loads all needed packages. The hard work processing the
+XML content is done in the \doc:keyword{teidict} package.
+
+This author does not intend to discuss it in full here.
+To see it action, you can refer to our small example in
+our \href[src=https://github.com/Omikhleia/omikhleia-sile-packages/tree/main/examples]{repository}.
+For a more complex project using the same tools, you may also check
+the \href[src=https://omikhleia.github.io/sindict/]{sindict} repository.
 
 \end{document}
