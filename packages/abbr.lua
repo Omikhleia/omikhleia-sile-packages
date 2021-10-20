@@ -149,7 +149,7 @@ in \abbr:page[sq=true]{159}, \abbr:page[sqq=true]{159} or
 Note that in these cases, a period is automatically added.
 
 The \doc:code{\\abbr:siecle} command formats a century according to
-the French typographical rules, as in \abbr:siecle{i} or
+the French typographic rules, as in \abbr:siecle{i} or
 \abbr:siecle{iv}, \abbr:siecle{15} and \abbr:siecle{XIX}.
 \end{document}]]
 }

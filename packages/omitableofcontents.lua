@@ -98,15 +98,16 @@ return {
 The \doc:code{omitableofcontents} package is a wrapper around the \doc:code{tableofcontents} package,
 redefining some of its default behaviors.
 
-First, it clears the table header and cancel the language-dependent title that the
+First, it clears the table header and cancels the language-dependent title that the
 default implementation provides.
 This author thinks that such a package should only do one thing well: typesetting the table
 of contents, period. Any title (if one is even desired) should be left to the sole decision
 of the user, e.g. explicitely defined with a \doc:code{\\chapter[numbering=false]\{…\}}
-command or any other appropriate sectioning, and with whatever additional content
-one may want in between. Even if LaTeX did such a thing, it cannot be general: One could
+command or any other appropriate sectioning command, and with whatever additional content
+one may want in between. Even if LaTeX has a default title for the table of content,
+there is no strong reason to do the same. It cannot be general: One could
 want “Table of Contents”, “Contents”, “Summary”, “Topics”, etc. depending of the type of
-book, and it feels wrong and cumbersome to always get a default title and have to override
+book. It feels wrong and cumbersome to always get a default title and have to override
 it, while it is so simple to just add a consistently-styled section above the table…
 
 Moreover, this package overrides all the level formatting commands to rely on
@@ -115,11 +116,11 @@ TOC. The style specifications, besides the formatting of the text, also include:
 
 • Displaying the page number or not,
 
-• Filling the line with dots leaders (default) or not,
+• Filling the line with dots (default) or not,
 
 • Displaying the section number or not.
 
-Everything else from the standard package applies.
+Other than that, everything else from the standard package applies.
 
 \end{document}]]
 }

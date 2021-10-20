@@ -9,7 +9,7 @@ It is intended to be used by other packages or classes, rather than directly.
 If one looks at the default/standard packages or classes in SILE, something may
 seem wrong (though of course it is a matter of taste and could be debated):
 (1) Many commands have “hooks”, such as \doc:code{pullquote:font}, \doc:code{book:chapterfont}, or
-whatever. But what if ones also wants, for instance, to specify a color?
+whatever. But what if one also wants, for instance, to specify a color?
 Of course, in many cases, the hook could be redefined to apply that wanted color to the content…
 But, er, isn’t it called \doc:code{xxx:font}? Something looks amiss.
 (2) Those hooks often have fixed definitions, e.g. footnote text at 9pt, chapter heading
@@ -111,7 +111,7 @@ in \doc:args{saved-name}, and to clear the latter:
 \\style:redefine[name=\doc:args{name}, from=\doc:args{saved-name}]
 \end{doc:codes}
 
-So now on \doc:code{\\\doc:args{name}} is restored to whatever was saved, and \doc:code{\\\doc:args{saved-name}}
+So now on, \doc:code{\\\doc:args{name}} is restored to whatever was saved and \doc:code{\\\doc:args{saved-name}}
 is no longer defined.
 
 The package also defines a \doc:code{\\style:font} command, which is basically the same as the

@@ -54,8 +54,10 @@ hearts.)
 
 This author, however, wanted a bit more variety with some old-fashioned ornaments independent
 from the selected font. The present \doc:keyword{couyards} package
-therefore defines a few such ornaments, with the command \doc:code{\\couyard[type=\doc:args{n}]},
-where \em{n} is a number between 1 and 7.
+therefore defines a few such ornaments\footnote{These were converted to SVG from
+designs by Tartila \doc:url{https://fr.freepik.com/vecteurs-libre/diviseurs-fleurs-calligraphiques_10837974.htm},
+free for personal and commercial usage with proper attribution},
+with the command \doc:code{\\couyard[type=\doc:args{n}]}, where \em{n} is a number between 1 and 7.
 
 Without any other option, the ornaments have a fixed height which can
 be overridden with the \doc:code{height=\doc:args{length}} option, the default

@@ -67,7 +67,7 @@ at some point, or to invoke the original definition from the newly redefined one
 This package is just some sort of quick “hack” in order to do it in an easy way from within
 a document in SILE language. It is far from perfect,
 it likely has implications if users start saving and restoring commands in a disordered way, but
-it can do the magic in some fairly reasonable symmetric cases.
+it can do the magic in fairly reasonable symmetric cases.
 
 The first syntax below allows one to change the definition of command \doc:args{name} to
 new \doc:args{content}, but saving the previous definition to \doc:args{saved-name}:
@@ -96,7 +96,7 @@ in \doc:args{saved-name}, and to clear the latter:
 \\redefine[command=\doc:args{name}, from=\doc:args{saved-name}]
 \end{doc:codes}
 
-So now on \doc:code{\\\doc:args{name}} is restored to whatever was saved, and \doc:code{\\\doc:args{saved-name}}
+So now on, \doc:code{\\\doc:args{name}} is restored to whatever was saved and \doc:code{\\\doc:args{saved-name}}
 is no longer defined. Again, if the saved name corresponds to some existing command in a broader
 scope, things may break.
 \end{document}]]

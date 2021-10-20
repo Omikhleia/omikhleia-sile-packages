@@ -885,8 +885,8 @@ return {
 
 This package supports a subset of the (XML) TEI  P4 “Print Dictionary” standard,
 as suitable for the Sindarin Dictionary project, and assumes a similar structure to the
-latter, see \color[color=blue]{\href[src=https://omikhleia.github.io/sindict/manual/DATA_MODEL.html]{Data model}}.
-
+latter, see its \href[src=https://omikhleia.github.io/sindict/manual/DATA_MODEL.html]{Data
+Model}\footnote{\doc:url{https://omikhleia.github.io/sindict/manual/DATA_MODEL.html}}.
 
 The main pain point is that such a dictionary is a heavily “semantic” structured
 mark-up (i.e. a “lexical view”, encoding structure information such as part-of-speech
