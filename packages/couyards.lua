@@ -12,7 +12,7 @@ SILE.registerCommand("couyard", function (options, _)
   if width ~= nil and height ~= nil then SU.error("Specify only one of width or height") end
   if width == nil and height == nil then height = "0.9em" end
 
-  if n == nil or n < 0 or n > 7 then SU.error("Invalid culs-de-lampe type") end
+  if n == nil or n < 0 or n > 9 then SU.error("Invalid culs-de-lampe type") end
   local ornament = "cul-de-lampe-"..n
   SILE.typesetter:leaveHmode()
   SILE.call("center", {}, function()
@@ -54,15 +54,20 @@ hearts.)
 
 This author, however, wanted a bit more variety with some old-fashioned ornaments independent
 from the selected font. The present \doc:keyword{couyards} package
-therefore defines a few such ornaments\footnote{These were converted to SVG from
+therefore defines a few such ornaments\footnote{The first seven were converted to SVG from
 designs by Tartila \doc:url{https://fr.freepik.com/vecteurs-libre/diviseurs-fleurs-calligraphiques_10837974.htm},
-free for personal and commercial usage with proper attribution},
-with the command \doc:code{\\couyard[type=\doc:args{n}]}, where \em{n} is a number between 1 and 7.
+free for personal and commercial usage with proper attribution. Number 8 and 9 are public domain (CC0),
+from \doc:url{https://freesvg.org}, and look better at fixed width rather than height. There are hundreds
+of similar designs there and this author does not intend to have more than what he requires. The last two were
+actually added on a second thought only.},
+with the command \doc:code{\\couyard[type=\doc:args{n}]}, where \em{n} is a number between 1 and 9.
 
 Without any other option, the ornaments have a fixed height which can
 be overridden with the \doc:code{height=\doc:args{length}} option, the default
-being 0.9em (also corresponding to \doc:code{height=default}).
+being 0.9em (also corresponding to \doc:code{height=default}). Showing only the first
+seven:
 
+\smallskip
 \couyard[type=1]
 \couyard[type=2]
 \couyard[type=3]
@@ -83,6 +88,12 @@ either to some length value or to \doc:code{default} (7em).
 \couyard[type=5,width=default]
 \couyard[type=6,width=default]
 \couyard[type=7,width=default]
+
+\smallskip
+\couyard[type=8,width=default]
+
+\smallskip
+\couyard[type=9,width=default]
 
 \smallskip
 These two options are exclusive, so as to keep a proper aspect ratio.
