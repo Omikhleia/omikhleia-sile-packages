@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   height="1001"
+   width="1001"
+   version="1.1"
+   id="svg10"
+   sodipodi:docname="circle-debug.svg"
+   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs14" />
+  <sodipodi:namedview
+     id="namedview12"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="0.422"
+     inkscape:cx="735.78199"
+     inkscape:cy="517.77251"
+     inkscape:window-width="1848"
+     inkscape:window-height="1016"
+     inkscape:window-x="72"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg10"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <circle
+     cx="500.5"
+     cy="500.5"
+     stroke-width="0.5"
+     stroke="#808080"
+     fill="none"
+     id="circle2"
+     r="500"
+     style="fill:none;fill-opacity:1" />
+  <rect
+     x="0.5"
+     y="0.5"
+     width="1000"
+     height="1000"
+     stroke-width="1"
+     stroke="#000000"
+     fill="none"
+     id="rect4" />
+  <line
+     x1="0.5"
+     y1="500.5"
+     x2="1000.5"
+     y2="500.5"
+     stroke-width="1"
+     stroke="black"
+     id="line6"
+     style="stroke:#969696;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:1, 1;stroke-dashoffset:0;stroke-opacity:1" />
+  <line
+     x1="500.5"
+     y1="0.5"
+     x2="500.5"
+     y2="1000.5"
+     style="stroke:#969696;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:1, 1;stroke-dashoffset:0;stroke-opacity:1"
+     id="line8" />
+</svg>

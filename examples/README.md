@@ -14,6 +14,12 @@ published in _Tolkien, le façonnement d’un monde_, vol. 1, Le Dragon de Brume
 
 It is used as a "sample test" for the **omibook** class and related packages.
 
+## Decorated colophons
+
+A demonstration of the **colophon** package, as we did not want to show all these
+big examples in the main documentation. The text is somewhat nonsensical, with
+bits of actual explanations mixed with random quotes.
+
 ## Examples for the TEI dictionary class and package
 
 A small XML (TEI) lexicon (Almaqerin-French) and the corresponding PDF, to

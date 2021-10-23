@@ -46,6 +46,10 @@ These are standalone packages users can use in their own documents.
 
 \package-documentation[src=packages/couyards]
 
+\subsection{colophon: a shaped & decorated paragraph}
+
+\package-documentation[src=packages/colophon]
+
 \subsection{redefine: (basic) command redefinition}
 
 \package-documentation[src=packages/redefine]

@@ -1,0 +1,144 @@
+\begin[papersize=6in x 9in, class=omibook]{document}
+\script[src=packages/lorem]
+\script[src=packages/colophon]
+\language[main=en]
+\font[family=Libertinus Serif]
+\hyphenator:add-exceptions[lang=en]{iso-pe-ri-me-t-ric}% No idea where that weird word should really break.
+
+\begin{center}
+\font[weight=800,size=12pt]{Colophons /ˈkɒləfon/ & shaped paragraphs in SILE}
+\end{center}
+
+\medskip
+
+Where to start this document about colophons and paragraph shaping? Galileo, in 1638, wrote:
+
+\font[size=9pt]{%
+\colophon{%
+The area of a circle is a mean proportional
+between any two regular and similar polygons of which one
+circumscribes it and the other is isoperimetric with it.
+In addition, the area of the circle is less than that of any
+circumscribed polygon and greater than that of any
+isoperimetric polygon. And further, of these
+circumscribed polygons, the one that has the greater number of sides
+has a smaller area than the one that has a lesser number;
+but, on the other hand, the isoperimetric polygon that
+has the greater number of sides is the larger.}}
+
+It looks cool, perhaps, but typesetting text in a circle, however, is difficult.
+The first and last lines do not have much place to play with. Even with
+hyphenation, one is no guaranteed that the text can be broken at appropriate
+places. And one cannot be sure the last line, anyway, by nature incomplete,
+can fit well in a circle. What if, morevover, one wants do display some sort of
+ornament around a circular-shaped paragraph, not knowing beforehand how it will
+look? Spaces in a line can be streched or shrinked. Let us try and debug:
+
+\colophon[decoration=true,figure=debug]{\lorem{}.}
+
+This is not too bad, is it?
+
+\eject
+
+Quoting Wikipedia, a colophon (/ˈkɒləfon/) is a brief statement containing information about
+the publication of a book such as the place of publication, the publisher, and the date of publication.
+Colophons are usually printed at the ends of books. The term colophon derives from the Late Latin \em{colophōn},
+from the Greek \em{κολοφών} (meaning “summit” or “finishing touch”). The existence of colophons can be dated back
+to antiquity.
+
+It is quite common for colophons to be surrounded by some sort of ornament. While regular paragraphs
+are composed of square-shaped blocks, colophons may take various shapes. Can we automated their
+presentation with SILE in a successful way? Honestly, the ways to do so can be fragile, with a lot
+of underlying assumptions, and sometimes some manual “tweaks” may be needed. Let us quote Franz
+Kafka, from his \em{Diaries}, 1910–1923:
+
+\font[size=9pt]{%
+\colophon[decoration=true]{% 
+The life of society moves in a circle. \em{Only those burdened with a common affliction understand each other}.
+Thanks to their affliction they constitute a circle and provide each other mutual support. They glide along
+the inner borders of their circle, make way for or jostle one another gently in the crowd. Each encourages
+the other in the hope that it will react upon himself, or –and then it is done passionately– in the immediate
+enjoyment of this reaction. Each has only that experience which his affliction grants him; nevertheless one
+hears such comrades exchanging immensely varying experiences. ‘This is how you are,’ one says to the other;
+‘instead of complaining, thank God that this is how you are, for if this were not how you are, you would have
+this or that misfortune, this or that shame.’ How does this man know that? After all, he belongs –his statement
+betrays it –to the same circle as does the one to whom he spoke; he stands in the same need of comfort.}}
+
+It still looks decent? Obviously, any long text has more chances to look fine when shaped into a circle.
+This type of colophon might not be appropriate for short statements.
+
+\eject
+
+A few traditional colophons.
+
+\font[size=10pt, style=italic, features="+hlig,+salt"]{%
+\colophon[decoration=true,figure=decorative]{% 
+The editor wishes to thank all the the authors, reviewers
+& friends who contributed to this volume. John Doer
+designed the layout & provided helpful hints on how
+best to present these essays to our audience; Peter Font is an
+experimented proofreader, with an acute eye up to the
+decimal didot. Emma Lenski, as always, followed
+the project from its inception to its end. She
+cannot be thanked enough for all her efforts in such
+a small colophon.}}
+
+\font[size=11pt, style=italic, features="+hlig,+salt"]{%
+\colophon[decoration=true,figure=floral]{% 
+This book was prepared with SILE, an
+impressive & powerful typesetting system.
+As can be seen, it is composed in Libertinus, a nice font with a great taste.
+Written by Unknown, in October 2021.}}
+
+\eject
+
+Chief Black Elk was wise. He had someting to say regarding circles.
+
+\font[size=9pt]{%
+\colophon[decoration=true,figure=elegant,ratio=1.02]{%
+“Everything an Indian does is in a circle, and that is because the power of the World always
+works in circles, and everything tries to be round (…) The sky is round and I have heard the
+earth is round like a ball, and so are all the stars. The wind in its greatest power whirls,
+birds make their nest in circles, for theirs is the same religion as ours. The sun comes forth
+and goes down again in a circle. The moon does the same and both are round. Even the seasons
+form a great circle in their changing, and always come back again to where they were. Our teepees
+were round like the nests of birds. And they were always set in a circle, the nation’s hoop.”}}
+
+An expressive colophon, now.
+
+\font[size=10pt, style=italic, features="+hlig,+salt"]{%
+\colophon[decoration=true,figure=ornamental]{%
+As once said a poet, “every scribe who writes has fun, for writing scribes are
+happy ones.” ― This book was composed with all our dedication
+and passion. We hope you will enjoy its reading as much
+as we did writing it.}}
+
+\eject
+
+As Franz Kafka wrote in \em{Josephine the Singer, or the Mouse Folk}…
+
+\font[size=8pt]{%
+\colophon[decoration=true,figure=cornered]{%
+Cracking a nut is really not an art form, and so no one will dare to call an audience
+together and entertain it by cracking nuts. If he does it nevertheless, and does
+so successfully, then it must be a matter of something more than merely cracking nuts.
+Or it is cracking nuts, but we must have ignored some aspect of this art form because
+we mastered it too well and it took this new nutcracker to reveal its true nature to us,
+and it can even help its demonstration if he is a little less proficient at nutcracking than
+the rest of us. 
+}}
+
+
+\font[size=8.5pt, style=italic, features="+hlig,+salt"]{%
+\colophon[decoration=true,figure=delicate]{%
+Cracking a nut is really not an art form, and so no one will dare to call an audience
+together and entertain it by cracking nuts. If he does it nevertheless, and does
+so successfully, then it must be a matter of something more than merely cracking nuts.
+Or it is cracking nuts, but we must have ignored some aspect of this art form because
+we mastered it too well and it took this new nutcracker to reveal its true nature to us,
+and it can even help its demonstration if he is a little less proficient at nutcracking than
+the rest of us.}}
+
+And thus, we have finished.
+
+\end{document}
