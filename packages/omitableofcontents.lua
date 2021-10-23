@@ -104,7 +104,7 @@ This author thinks that such a package should only do one thing well: typesettin
 of contents, period. Any title (if one is even desired) should be left to the sole decision
 of the user, e.g. explicitely defined with a \doc:code{\\chapter[numbering=false]\{…\}}
 command or any other appropriate sectioning command, and with whatever additional content
-one may want in between. Even if LaTeX has a default title for the table of content,
+one may want in between. Even if LaTeX has a default title for the table of contents,
 there is no strong reason to do the same. It cannot be general: One could
 want “Table of Contents”, “Contents”, “Summary”, “Topics”, etc. depending of the type of
 book. It feels wrong and cumbersome to always get a default title and have to override

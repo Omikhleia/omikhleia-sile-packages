@@ -71,8 +71,8 @@ local function circleSetupLineLengths(options)
       local indent = self.hsize / 2 - chord
       internalScratch.parShapes[line] = {
         width = SILE.measurement(2 * chord),
-        left = indent,
-        right = indent
+        left = indent:tonumber(),
+        right = indent:tonumber()
       }
       -- print("SHAPE", line, internalScratch.parShapes[line].width, internalScratch.parShapes[line].left)
       return internalScratch.parShapes[line]
@@ -207,9 +207,9 @@ touch”). The existence of colophons can be dated back to antiquity.
 
 It is quite common for colophons to be surrounded by some sort of ornament. While regular
 paragraphs are composed of square-shaped blocks, colophons may take various fancy shapes.
-This is were the \doc:keyword{colophon} package may come into action. As one could have
+This is where the \doc:keyword{colophon} package may come into action. As one could have
 guessed by its name, it provides
-a \doc:code{\\colophon} command that attempts at shaping a paragraph into a circle,
+a \doc:code{\\colophon} command that attempts shaping a paragraph into a circle,
 which radius is \em{automatically} computed so that the text fills the circle.
 
 Typesetting text in a circle, however, can be tough. The first and last lines do not have
@@ -255,7 +255,7 @@ one single paragraph.
 
 To enable a decoration, set the \doc:code{decoration} option to true.
 The default ornament (logically called \doc:code{default}) is just
-a larger circle, i.e. an extra amount of space. One can select
+a larger circle, i.e. with an extra amount of space. One can select
 another ornamental figure by specifying the \doc:code{figure} option,
 with a figure name (see below). All of them vary on the amount of space
 they add around the circle, defined as a scaling ratio applied to the computed
