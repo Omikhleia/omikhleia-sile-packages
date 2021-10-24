@@ -275,10 +275,10 @@ number for a label in a footnote, with \doc:code{\\ref[marker=\doc:args{marker},
 For instance, let’s pretend with want to refer the reader to notes \ref[marker=fn:example,type=default]
 and \ref[marker=fn:example:with-mark].
 
-This \doc:code{number} type is actually the most general and the default one
-if you omit specifying a type. If the referenced label is not in a numbered object
-such as a footnote — or say, in the future, a figure or table caption — then the
-section number is printed. In other terms, you get the closest item numbering
+This \doc:code{default} type is actually the most general and, as its name implies,
+the default one if you omit specifying a type. If the referenced label is not in a
+numbered object such as a footnote — or say, in the future, a figure or table caption — then
+the section number is printed. In other terms, you get the closest item numbering
 value.
 
 This author knows some editors are pedantic and actually confesses the same guilt. This

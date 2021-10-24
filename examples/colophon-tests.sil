@@ -30,7 +30,7 @@ It looks cool, perhaps, but typesetting text in a circle, however, is difficult.
 The first and last lines do not have much place to play with. Even with
 hyphenation, one is no guaranteed that the text can be broken at appropriate
 places. And one cannot be sure the last line, anyway, by nature incomplete,
-can fit well in a circle. What if, morevover, one wants do display some sort of
+can fit well in a circle. What if, morevover, one wants to display some sort of
 ornament around a circular-shaped paragraph, not knowing beforehand how it will
 look? Spaces in a line can be streched or shrinked. Let us try and debug:
 
