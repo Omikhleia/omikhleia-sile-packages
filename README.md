@@ -13,10 +13,15 @@ Some of the things I may (or not) provide here:
 - [X] Native superscripts and subscripts: **textsubsuper** package.
 - [X] Some printer's ornaments: **couyards** package.
 - [ ] quotations - the default "quote" package in SILE doesn't do the job for me.
-- [ ] labels and reference.
-- [ ] proper page masters (a.k.a an extended book template for print)
+- [X] labels and reference.
+- [ ] proper page masters a.k.a an extended book template for print
 - [ ] side notes (a.k.a margin notes)
 - [ ] figures (with captions, etc.)
+- [X] colophons - circle-shape paragraphs with an ornamental decoration
+
+  The **colophon** package works but requires a specific version of the line breaking algorithm
+  not provided here (submitted for core inclusion in SILE).
+
 - [X] XML TEI dictionaries 
 
   The **teidict** package and the **teibook** class are intended for processing XML TEI P4 dictionaries.
