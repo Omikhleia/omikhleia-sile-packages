@@ -63,6 +63,8 @@ function omibook:init ()
     stealFrom = { "content" }
   })
 
+  self:loadPackage("omirefs")
+
   -- override foliostyle
   self:loadPackage("folio")
   SILE.registerCommand("foliostyle", function (_, content)
@@ -91,11 +93,13 @@ end
 omibook.finish = function (self)
   local ret = plain.finish(self)
   self:writeToc()
+  self:writeRefs()
   return ret
 end
 
 omibook.endPage = function (self)
   self:moveTocNodes()
+  self:moveRefs()
   if (self:oddPage() and SILE.scratch.headers.right) then
     SILE.typesetNaturally(SILE.getFrame("header"), function ()
       SILE.settings.set("current.parindent", SILE.nodefactory.glue())

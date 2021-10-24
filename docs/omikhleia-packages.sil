@@ -72,6 +72,10 @@ class writers.
 
 \package-documentation[src=packages/omitableofcontents]
 
+\subsection{omirefs: cross-references}
+
+\package-documentation[src=packages/omirefs]
+
 \section{Specialized packages}
 
 \subsection{teidict: XML TEI P4 print dictionaries}
@@ -96,6 +100,7 @@ The chapter pages have page numbering. The page numbers, by the way, are
 flushed left or right depending on the page, rather than centered.
 The footnotes are based on the \doc:keyword{omifootnotes} package.
 The table of contents relies on the \doc:keyword{omitableofcontents} package.
+It supports cross-references via the \doc:keyword{omirefs} package.
 
 This very document uses it. As stated, it is far from finished, so anything
 that may look wrong here may show where we are heading to. And, obviously,
