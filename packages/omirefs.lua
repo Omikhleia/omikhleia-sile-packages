@@ -101,6 +101,7 @@ SILE.registerCommand("refentry", function (options, content)
       title = content,
       section = options.section,
       footnote = options.footnote,
+      number = options.number, -- For other packages to tweak it.
       link = dest
       -- pageno is added when nodes are moved
     }
@@ -157,14 +158,21 @@ SILE.registerCommand("ref", function (options, content)
             SILE.process(node.title)
           end
         elseif t == "default" then
-          if not node.footnote then
-            if not node.section then
-              SILE.call("ref:unknown", options)
+          -- Sections can contains footnotes, and all of these
+          -- can contain other numbered elements. I don't think
+          -- we need more than that.
+          if not node.number then
+            if not node.footnote then
+              if not node.section then
+                SILE.call("ref:unknown", options)
+              else
+                SILE.typesetter:typeset(""..node.section)
+              end
             else
-              SILE.typesetter:typeset(""..node.section)
+              SILE.typesetter:typeset(""..node.footnote)
             end
           else
-            SILE.typesetter:typeset(""..node.footnote)
+            SILE.typesetter:typeset(""..node.number)
           end
         else
           SU.error("Unknown reference type '"..t.."'")

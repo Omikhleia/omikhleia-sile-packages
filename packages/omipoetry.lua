@@ -7,6 +7,8 @@ local inputfilter = SILE.require("packages/inputfilter").exports
 SILE.require("packages/rebox")
 SILE.require("packages/raiselower")
 
+local _currentNumber
+
 local function prosodyFilter(text, content, options)
   local result = {}
   local prosodyAnnotation
@@ -52,7 +54,7 @@ local function prosodyFilter(text, content, options)
     opts.name = prosodyAnnotation
     table.insert(result, inputfilter.createCommand(
       content.pos, content.col, content.line,
-      "omipoetry:ch", opts, currentText
+      "omipoetry:prosody", opts, currentText
     ))
     prosodyAnnotation = nil
   end
@@ -111,7 +113,7 @@ local function prosodyFilter(text, content, options)
   return result
 end
 
-SILE.registerCommand("omipoetry:ch", function (options, content)
+SILE.registerCommand("omipoetry:prosody", function (options, content)
   local prosodyBox
   local vadjust
 
@@ -211,6 +213,7 @@ SILE.registerCommand("poetry", function (options, content)
           if numbering and (iVerse % step == 0 or (iVerse == 1 and first)) then
             content[i].options.n = iVerse
           end
+          _currentNumber = iVerse
           content[i].options.mode = options.mode
           content[i].command = "omipoetry:v"
           SILE.process({ content[i] })
@@ -228,13 +231,11 @@ SILE.registerCommand("poetry", function (options, content)
         -- - Canto
         -- - Speaker
         -- - inside a \verse, \placehoder{text} to leave a blank space of that size?
-        -- - Verses that span on multiple lines (currently broken)
-        -- OTHER IDEA
-        -- Make this package works with omirefs so the verse number may be
-        -- retrieved
+        -- - Verses that span on multiple lines (currently not effort)
       end
       -- All text nodes in ignored
     end
+    _currentNumber = nil
     if not SU.boolean(options.prosody, false) then
       SILE.call("medskip")
     end
@@ -256,6 +257,15 @@ local typesetVerseNumber = function (mark)
         SILE.typesetter:pushGlue({ width = w - setback - h.width })
         SILE.typesetter:pushHbox(h)
       end)
+  end)
+end
+
+-- Subscribe to omirefs cross-references, if available
+if SILE.Commands["refentry"] then
+  local oldRefentry = SILE.Commands["refentry"]
+  SILE.registerCommand("refentry", function (options, content)
+    options.number = _currentNumber
+    oldRefentry(options, content)
   end)
 end
 
@@ -322,6 +332,24 @@ As can be seen, verses are automatically numbered, by default. This feature can 
 with the \doc:code{numbering} option set to false. The \doc:code{start} option
 may also be provided, to define the number of the initial verse, would it be
 different from one. Quoting \em{Beowulf}, chapter XI, starting at verse 710:
+\script{
+  -- Conditional in this documentation
+  if SILE.Commands["label"] and SILE.Commands["ref"] then
+    SILE.registerCommand("conditional:label", function(options, content)
+      SILE.call("label", options, content)
+    end)
+    SILE.registerCommand("conditional:ref", function(options, content)
+      SILE.call("ref", options, content)
+    end)
+  else
+    SILE.registerCommand("conditional:label", function(options, content)
+      -- ignore
+    end)
+    SILE.registerCommand("conditional:ref", function(options, content)
+      SILE.typesetter:typeset("[reference not available]")
+    end)
+  end
+}
 
 \begin[start=710]{poetry}
 \v{Ða com of more    \qquad      under misthleoþum}
@@ -331,7 +359,7 @@ different from one. Quoting \em{Beowulf}, chapter XI, starting at verse 710:
 \v{Wod under wolcnum \qquad      to þæs þe he winreced,}
 \v{goldsele gumena,  \qquad      gearwost wisse,}
 \v{fættum fahne.     \qquad      Ne wæs þæt forma sið}
-\v{þæt he Hroþgares  \qquad      ham gesohte;}
+\v{\conditional:label[marker=hrothgar]þæt he Hroþgares  \qquad      ham gesohte;}
 \v{næfre he on aldordagum \qquad ær ne siþðan}
 \v{heardran hæle,    \qquad      healðegnas fand.}
 \end{poetry}
@@ -381,7 +409,7 @@ between the brackets, but this package also aims at simplifying your efforts:
 the \doc:code{mode=times} option will automatically turn the x characters
 into ×.
 
-Let us check we can use other indicators without issue. In English, thythmic patterns “arise
+Let us check we can use other indicators without issue. In English, rhythmic patterns “arise
 from the regular repetition of sequences of stressed patterns syllables (S, strong) and
 untressed syllables (W, weak).”\footnote{Mark J. Jones & Rachael-Anne Knight, \em{The Bloomsbury
 Companion to Phonetics} A&C Black, 2013, p. 134}
@@ -458,7 +486,10 @@ the (lowered) breve.
 \v{πλ<->άγχθ<u>η, <u>ἐ|π<->εὶ Τρ<->οί|<->ης <u>ἱ<u>ε|ρ<->ὸν πτ<u>ολ<u>ί|<->εθρ<u>ον <u>ἔπ|<->ερσ<×>εν·}
 \v{π<->ολλ<->ῶν | δ᾽<->ἀνθρ<->ώ|π<->ων <u>ἴδ<u>εν | <->ἄστ<u>ε<u>α | κ<->αὶ ν<u>ό<u>ον | <->ἔγν<x>ω}
 \end{poetry}
-  
+
+This package supports cross-references as defined for instance by the \doc:keyword{omirefs} package, if it is
+loaded by the document class. In the \em{Beowulf} extract on page \conditional:ref[marker=hrothgar, type=page],
+Hrothgar was mentioned in verse \conditional:ref[marker=hrothgar].
 
 \end{document}]]
 }

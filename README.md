@@ -28,7 +28,7 @@ Some of the things I may (or not) provide here:
 
   The **teidict** package and the **teibook** class are intended for processing XML TEI P4 dictionaries.
   They supports a decent subset of the [TEI P4](https://tei-c.org/Vault/P4/doc/html/) "Print Dictionaries"
-  specification, and define an appropriated layout for such dictionaries (entries on two columns, with
+  specification, and define an appropriate layout for such dictionaries (entries on two columns, with
   running page headers, etc.).
 
 - [X] Temporary command redefinition (save and restore): **redefine** package.
