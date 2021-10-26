@@ -50,6 +50,10 @@ These are standalone packages users can use in their own documents.
 
 \package-documentation[src=packages/colophon]
 
+\subsection{omipoetry: a poetry environment}
+
+\package-documentation[src=packages/omipoetry]
+
 \subsection{redefine: (basic) command redefinition}
 
 \package-documentation[src=packages/redefine]

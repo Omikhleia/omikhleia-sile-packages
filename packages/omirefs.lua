@@ -38,7 +38,6 @@ local writeRefs = function ()
 end
 
 local readRefs = function ()
-  print("READING")
   local reffile,_ = io.open(SILE.masterFilename .. '.ref')
   if not reffile then
     return
@@ -228,9 +227,9 @@ return {
   end,
   documentation = [[\begin{document}
 \script[src=packages/autodoc-extras]
-\label[marker=omirefs:head]
-The \doc:keyword{omirefs} package provides tools for classes and packages to support
-cross-references within a document.
+
+The \label[marker=omirefs:head]\doc:keyword{omirefs} package provides tools for classes
+and packages to support cross-references within a document.
 It exports two Lua functions, \doc:code{moveRefs()} and \doc:code{writeRefs()}.
 The former should be called at the end of each page to collate label references.
 The latter should be called at the end of the document, to save the references to a file
