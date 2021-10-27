@@ -17,12 +17,15 @@ Some of the things I may (or not) provide here:
 - [ ] Proper page masters a.k.a an extended book template for print.
 - [ ] Side notes (a.k.a margin notes).
 - [ ] Figures (with captions, etc.).
-- [X] colophons - circle-shape paragraphs with an ornamental decoration.
+- [X] Colophons - circle-shape paragraphs with an ornamental decoration.
 
   The **colophon** package works but requires a specific version of the line breaking algorithm
   not provided here (submitted for core inclusion in SILE).
 
 - [X] Poetry: **omipoetry** package.
+
+- [X] Paragraph boxes: **parbox** package - as a building block for other more advance
+  concepts.
 
 - [X] XML TEI dictionaries 
 

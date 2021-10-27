@@ -452,10 +452,10 @@ in \em{Change de forme. Biologie et prosodie}, \em{op. cit.}}
 
 In Old Greek or Latin metre, you may of course use the macron and breve glyphs
 directly. Again, to simplify your typesetting, you may prefer using
-a minus sign (-) for long syllables, a simple u for short syllable and a
+a minus sign (-) for long syllables, a simple u for short syllables and a
 simple x for \em{anceps} or the \em{brevis in longo}. In that case, set the \doc:code{mode} option to
 \doc:code{classical}. The abovementioned characters will then automatically be replaced
-by a macron, a breve and the multiplication sign, respectively, as showned
+by a macron, a breve and the multiplication sign, respectively, as shown
 in the following example.\footnote{Homer, \em{The Odyssey}, book I, v. 1–3 (my own scansion).}
 
 \begin[prosody=true, mode=classical]{poetry}
@@ -464,7 +464,7 @@ in the following example.\footnote{Homer, \em{The Odyssey}, book I, v. 1–3 (my
 \v{π<->ολλ<->ῶν | δ᾽<->ἀνθρ<->ώ|π<->ων <u>ἴδ<u>εν | <->ἄστ<u>ε<u>α | κ<->αὶ ν<u>ό<u>ον | <->ἔγν<x>ω}
 \end{poetry}
 
-The resulting macron and breve signs are lowered by some somewhat arbitrary amount as an attempt to make the
+The resulting macron and breve signs are lowered by some arbitrary amount as an attempt to make the
 scansion line more regular visually. One would have hoped for the Unicode standard to define markers that fit right
 with each other and that would be implemented in good fonts…
 

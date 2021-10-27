@@ -54,6 +54,10 @@ These are standalone packages users can use in their own documents.
 
 \package-documentation[src=packages/omipoetry]
 
+\subsection{parbox: paragraphs in an horizontal box}
+
+\package-documentation[src=packages/parbox]
+
 \subsection{redefine: (basic) command redefinition}
 
 \package-documentation[src=packages/redefine]

@@ -1,6 +1,8 @@
 --
 -- Text superscript and subscript package for SILE
 -- 2021, Didier Willis
+-- Derived from the idea sketched by Simon Cozens
+-- in https://github.com/sile-typesetter/sile/issues/1258
 -- License: MIT
 --
 
