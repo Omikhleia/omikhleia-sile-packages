@@ -4,6 +4,8 @@
 -- 2021, Didier Willis
 -- License: MIT
 --
+SILE.require("packages/rebox")
+
 SILE.settings.declare({
   parameter = "parbox.strut.character",
   type = "string",
@@ -113,11 +115,11 @@ local parboxFraming = function (options, content)
   return innerVbox
 end
 
-local drawRectangle = function (x, y, w, h, border)
-  SILE.outputter:drawRule(x, y, w, border)
-  SILE.outputter:drawRule(x, y + h, w, border)
-  SILE.outputter:drawRule(x, y, border, h)
-  SILE.outputter:drawRule(x + w, y, border, h)
+local drawBorders = function (x, y, w, h, border)
+  if border[1] > 0 then SILE.outputter:drawRule(x, y, w, border[1]) end
+  if border[2] > 0 then SILE.outputter:drawRule(x, y + h, w, border[2]) end
+  if border[3] > 0 then SILE.outputter:drawRule(x, y, border[3], h) end
+  if border[4] > 0 then SILE.outputter:drawRule(x + w, y, border[4], h) end
 end
 
 local insertStruts = function (vboxlist, strut)
@@ -137,17 +139,30 @@ local insertStruts = function (vboxlist, strut)
   end
 end
 
+local parseBorder = function (borderspec)
+  local b = {}
+  for token in SU.gtoke(borderspec, "[, ]+") do
+    if(token.string) then
+      local value = SU.cast("length", token.string)
+      b[#b+1] = value:tonumber()
+    end
+  end
+  if #b == 1 then
+    return { b[1], b[1], b[1], b[1] }
+  end
+  if #b ~= 4 then SU.error("Invalid border specification") end
+  return b
+end
+
 SILE.registerCommand("parbox", function (options, content)
   local width = SU.required(options, "width", "parbox")
   local strut = options.strut or "none"
-  local border = options.border ~= nil and SU.cast("length", options.border)
-    or SILE.length()
+  local border = options.border and parseBorder(options.border) or { 0, 0, 0, 0 }
   local valign = options.valign or "top"
   local padding = options.padding ~= nil and SU.cast("length", options.padding)
     or SILE.length()
   width = SU.cast("length", width):absolute()
   padding = padding:absolute()
-  border = border:tonumber()
 
   local vboxes = parboxFraming({ width = width }, content)
 
@@ -200,15 +215,13 @@ SILE.registerCommand("parbox", function (options, content)
       local saveX = typesetter.frame.state.cursorX
 
       typesetter.frame.state.cursorY = saveY - self.height
-      if border > 0 then
-        drawRectangle(
-          typesetter.frame.state.cursorX:tonumber(),
-          typesetter.frame.state.cursorY:tonumber(),
-          self.width:tonumber(),
-          self.depth:tonumber() + self.height:tonumber(),
-          border
-        )
-      end
+      drawBorders(
+        typesetter.frame.state.cursorX:tonumber(),
+        typesetter.frame.state.cursorY:tonumber(),
+        self.width:tonumber(),
+        self.depth:tonumber() + self.height:tonumber(),
+        border
+      )
 
       -- Process each vbox
       typesetter.frame.state.cursorY = typesetter.frame.state.cursorY + self.padding
@@ -373,9 +386,8 @@ two}
 
 \smallskip
 
-And finally, all the above examples were all framed specifying a \doc:code{border} option\footnote{As
-for padding, it could be useful to specify the borders on each side.}
-(as a length, here set to 0.5pt), but obviously the border is not enabled by default, i.e. set to zero.
+And finally, all the above examples were all framed specifying a \doc:code{border} option
+(as a thickness length, here set to 0.5pt), but obviously the border is not enabled by default, i.e. set to zero.
 
 \smallskip
 
@@ -384,6 +396,9 @@ for padding, it could be useful to specify the borders on each side.}
 two}
 
 \smallskip
+
+This border can be specified as a single length (applying on all sides) or a (quoted-)string
+contaning a comma-separated list of four lengths (“top, bottom, left, right”).
 
 We have shown several examples but haven’t mentioned yet what could be one
 of the \em{most important concepts} underlying these paragraph boxes: each
