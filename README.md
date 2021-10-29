@@ -27,6 +27,8 @@ Some of the things I may (or not) provide here:
 - [X] Paragraph boxes: **parbox** package - as a building block for other more advance
   concepts.
 
+- [X] Tables: **ptable** package - decently complex tables with spanning cells, etc.
+
 - [X] XML TEI dictionaries 
 
   The **teidict** package and the **teibook** class are intended for processing XML TEI P4 dictionaries.

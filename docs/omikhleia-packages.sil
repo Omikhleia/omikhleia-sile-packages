@@ -58,6 +58,10 @@ These are standalone packages users can use in their own documents.
 
 \package-documentation[src=packages/parbox]
 
+\subsection{ptable: flexible tables}
+
+\package-documentation[src=packages/ptable]
+
 \subsection{redefine: (basic) command redefinition}
 
 \package-documentation[src=packages/redefine]
