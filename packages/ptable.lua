@@ -354,11 +354,11 @@ too.
 \novbreak
 
 For now, let us stick with regular cells. As stated, their content could
-be anything. Each cell can be regarded as an idenpendant mini-frame.
+be anything. Each cell can be regarded as an idenpendent mini-frame.
 Notably, the “frame width” within a cell is actually that of this cell,
 meaning that any command relying on it adapts correctly.\footnote{The
 “frame height” on the other hand is not known yet as the cells will
-vertically adapt automatically to the content}. That is true to for other
+vertically adapt automatically to the content.}. That is true to for other
 frame-related relative units, such as the line length.
 
 We could illustrate it with many commands, but allow us some \em{inception}
@@ -416,7 +416,7 @@ cell option may be used. Let’s set it to “top” for C and
 \novbreak
 
 By default, each cell takes up the width of one column.
-You can allow some cells to span multiple columns, using
+You can allow some cells to span over multiple columns, using
 the \doc:code{span} option with the appropriate value, e.g. 2 below
 on cell A. This is also what some office programs call “merging”.
 
@@ -434,7 +434,7 @@ So far, so easy. But what about spanning over multiple rows?
 Each cell takes up, by default, the height of one row… and in this
 table package, one cannot change that fact. 
 
-Instead of “merging”, we however have “splitting” instead, in that
+Instead of “merging”, we however have “splitting”, in that
 direction. You will still specify a \em{single cell}, but of a special type
 which turns out to be a (sub-)table. The command
 for that purpose is the abovementioned \doc:code{celltable}.
@@ -493,7 +493,7 @@ merged?}
 \em{Other considerations.}
 \novbreak
 
-Due to the way the table is build by assembling boxes,
+Due to the way the table is built by assembling boxes,
 page breaks may only occur between first-level rows.
 With tables involving cell splitting, it might be difficult
 to get a good break-point.
@@ -502,7 +502,7 @@ Each cell being a mini-frame, it resets its settings
 to their top-level (i.e. document) values. Some hook
 should likely be provided to alter the cell style (fonts, indents, etc.)
 Also, this package does not support a header row that would be repeated
-on each page\footnote{Patches are welcome.}
+on each page.\footnote{Patches are welcome.}
 
 \end{document}]]
 }
