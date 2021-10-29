@@ -87,7 +87,7 @@ local cellNode = pl.class({
       self.cellBox.offset = -adjustement / 2
     end
   end,
-  shipout = function(self)
+  shipout = function (self)
     SILE.typesetter:pushHbox(self.cellBox)
   end
 })
@@ -95,8 +95,10 @@ local cellNode = pl.class({
 local cellTableNode = pl.class({
   type = "celltablenode",
   rows = nil,
-  _init = function (self, rows)
+  width = nil,
+  _init = function (self, rows, width)
     self.rows = rows
+    self.width = width
   end,
   height = function(self)
     local h = 0
@@ -111,14 +113,14 @@ local cellTableNode = pl.class({
       self.rows[i]:adjustBy(adjustement / #self.rows)
     end
   end,
-  shipout = function(self, width)
-    SILE.call("parbox", { width = width, strut = "character", valign = "middle" }, function()
+  shipout = function (self)
+    SILE.call("parbox", { width = self.width, strut = "character", valign = "middle" }, function()
       temporarilyClearFragileSettings(function()
         for i = 1, #self.rows do
           -- Set up queue but avoid a newPar?
           -- Apparently not needed here.
           -- SILE.typesetter.state.nodes[#SILE.typesetter.state.nodes+1] = SILE.nodefactory.zerohbox()
-          self.rows[i]:shipout(width)
+          self.rows[i]:shipout()
         end
       end)
     end)
@@ -144,10 +146,9 @@ local rowNode = pl.class({
       self.cells[i]:adjustBy(minHeight - self.cells[i]:height())
     end
   end,
-  shipout = function (self, width)
-    -- A mere hbox suffices here, actually...
-    -- SILE.call("parbox", { width = width, strut = "character", valign = "middle" }, function()
-      SILE.call("hbox", { width = width }, function ()
+  shipout = function (self)
+      -- A regular hbox suffices here
+      SILE.call("hbox", {}, function ()
       -- Important hack or a parindent occurs sometimes: Set up queue but avoid a newPar.
       -- We had do to the same weird magic in the parbox package too at one step, see the
       -- comment there.
@@ -192,7 +193,6 @@ processTable["celltable"] = function (content, args, tablespecs)
     local span = SU.cast("integer", content.options.span or 1)
     local pad = tablespecs.cellborder
     local width = computeCellWidth(args.col, span, tablespecs.cols)
-
     local rows = {}
     for i = 1, #content do
       if type(content[i]) == "table" then
@@ -206,7 +206,7 @@ processTable["celltable"] = function (content, args, tablespecs)
       end
       -- All text nodes are silently ignored
     end
-    return cellTableNode(rows)
+    return cellTableNode(rows, width)
   end
 
 processTable["row"] = function (content, args, tablespecs)
@@ -275,7 +275,7 @@ SILE.registerCommand("ptable", function (options, content)
           local row = content[i]
           local node = processTable["row"](row, { width = totalWidth, row = iRow }, tablespecs)
           node:adjustBy(0)
-          node:shipout(totalWidth)
+          node:shipout()
           iRow = iRow + 1
         else
             SU.error("Unexpected '"..content[i].command.."' in table")
@@ -335,7 +335,7 @@ The other options are \doc:code{cellpadding} (defaults to 4pt) and
 the borders).
 
 A \doc:code{\\ptable} can only contain \doc:code{\\row} elements. Any other element causes
-and error to be reported, and any text content is silently ignored.
+an error to be reported, and any text content is silently ignored.
 
 In turn, a \doc:code{\\row} can only contain \doc:code{\\cell} or \doc:code{\\celltable}
 elements, with the same rules applying. It does not have any option.
@@ -361,8 +361,8 @@ meaning that any command relying on it adapts correctly.\footnote{The
 vertically adapt automatically to the content}. That is true to for other
 frame-related relative units, such as the line length.
 
-We could illustrated it with many commands, but allow us some \em{inception}
-with tables-within tables, all using “60\%fw 40\%fw” as column specification.
+We could illustrate it with many commands, but allow us some \em{inception}
+with tables-within-tables, all using “60\%fw 40\%fw” as column specification.
 
 \begin[cols=60%fw 40%fw]{ptable}
   \begin{row}
@@ -386,7 +386,7 @@ with tables-within tables, all using “60\%fw 40\%fw” as column specification
 \end{ptable}
 
 Notice how each embedded table is relative to its parent cell width,
-and the column heights were automatically adjusted. By default,
+and the column heights are automatically adjusted. By default,
 the content is middle-aligned but this is where the \doc:code{valign}
 cell option may be used. Let’s set it to “top” for C and
 “bottom” for D.
@@ -434,10 +434,10 @@ So far, so easy. But what about spanning over multiple rows?
 Each cell takes up, by default, the height of one row… and in this
 table package, one cannot change that fact. 
 
-Instead of “merging”, we however instead have “splitting”, in that
+Instead of “merging”, we however have “splitting” instead, in that
 direction. You will still specify a \em{single cell}, but of a special type
 which turns out to be a (sub-)table. The command
-for that purpose is the abovementioned \\doc:code{celltable}.
+for that purpose is the abovementioned \doc:code{celltable}.
 It can only contain rows, so it is really an inner table used
 as a cell.
 
@@ -499,7 +499,7 @@ With tables involving cell splitting, it might be difficult
 to get a good break-point.
 
 Each cell being a mini-frame, it resets its settings
-to their top-level (i.e. document level) values. Some hook
+to their top-level (i.e. document) values. Some hook
 should likely be provided to alter the cell style (fonts, indents, etc.)
 Also, this package does not support a header row that would be repeated
 on each page\footnote{Patches are welcome.}
