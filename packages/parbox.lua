@@ -37,7 +37,10 @@ SILE.registerCommand("strut", function (options, content)
       depth = SILE.settings.get("parbox.strut.ruledepth"):absolute(),
       width = SILE.length()
     }
-    SILE.call("rebox", { phantom = true, height = strut.height, depth = strut.depth, width = strut.width }, { "x" })
+    if show then
+      -- The "x" there could be anything, we just want to be sure we get a box
+      SILE.call("rebox", { phantom = true, height = strut.height, depth = strut.depth, width = strut.width }, { "x" })
+    end
   else
     strut = SILE.call("hbox", {}, { SILE.settings.get("parbox.strut.character") })
     table.remove(SILE.typesetter.state.nodes) -- steal it back
@@ -46,7 +49,7 @@ SILE.registerCommand("strut", function (options, content)
     end
   end
   return strut
-end, "Formats a strut box")
+end, "Formats a strut box.")
 
 local nb_ = 1
 local parboxTempFrame = function (options)
@@ -55,7 +58,7 @@ local parboxTempFrame = function (options)
     id = cFrame.id .. "_parbox_"..nb_
   })
   nb_ = nb_+1
-  -- We don't even need to register it.
+  -- We don't even need to register it, we just use it temporarily.
   -- SILE.documentState.thisPageTemplate.frames[newFrame.id] = newFrame
   newFrame:constrain("top", SILE.length())
   newFrame:constrain("bottom", SILE.length())
@@ -68,9 +71,22 @@ end
 -- a typesetter to another
 local moveMigrating = function (fromTypesetter, toTypesetter)
   local nodelist = fromTypesetter.state.nodes
+  
+  local hasStartedMigration = false
+  
   local i = 1
   while i <= #nodelist do
     if nodelist[i].is_migrating then
+      if not hasStartedMigration then
+        -- In some complex table scenario using lots of embedded parboxes, with parindent
+        -- enabled, something went wrong (weird extra spacing). There was no issue with
+        -- parindent to 0.
+        -- Found elsewhere in the code, about such zerobox: "Setup queue but avoid calling newPar"
+        -- and indeed, seems to fix my issue. Not sure what it really does, there might be dragons
+        -- here.
+        toTypesetter.state.nodes[#toTypesetter.state.nodes+1] = SILE.nodefactory.zerohbox()
+        hasStartedMigration = false
+      end
       toTypesetter:pushHorizontal(nodelist[i])
       table.remove(nodelist, i)
     else
@@ -93,7 +109,7 @@ local parboxFraming = function (options, content)
   parboxTypesetter.leaveHmode = function (self, _)
     -- Move migrating material
     moveMigrating(parboxTypesetter, oldTypesetter)
-    -- Never output, just gather the nodes, hence the 1 here.
+    -- NEVER output, just gather the nodes, hence the enforced 1 here.
     originalLeaveHmode(self, 1)
   end
   -- Finally we don't need to override the endline
@@ -116,19 +132,23 @@ local parboxFraming = function (options, content)
 end
 
 local drawBorders = function (x, y, w, h, border)
+  -- There's a little ugly tweak here, the bottom border is drawn below the box.
+  -- So that successive vertical parboxes have overlapping borders.
+  -- Tables (ptable package) rely on it... That's not perfect, but might be
+  -- too much noticeable with normal border thickness below 1pt...
   if border[1] > 0 then SILE.outputter:drawRule(x, y, w, border[1]) end
   if border[2] > 0 then SILE.outputter:drawRule(x, y + h, w, border[2]) end
-  if border[3] > 0 then SILE.outputter:drawRule(x, y, border[3], h) end
-  if border[4] > 0 then SILE.outputter:drawRule(x + w, y, border[4], h) end
+  if border[3] > 0 then SILE.outputter:drawRule(x, y, border[3], h + border[2]) end
+  if border[4] > 0 then SILE.outputter:drawRule(x + w, y, border[4], h + border[2]) end
 end
 
 local insertStruts = function (vboxlist, strut)
-  -- Base assumption is that first/last vboxes are actual text
-  -- line. Could be wrong...
+  -- The core assumption here is that first/last vboxes are actual text
+  -- lines. Could be wrong...
   for i = 1, #vboxlist do
     if vboxlist[i].is_vbox and vboxlist[i].height < strut.height then
       vboxlist[i].height = strut.height -- Hack height of first vbox
-      break 
+      break
     end
   end
   for i = #vboxlist, 1, - 1 do
@@ -141,7 +161,7 @@ end
 
 local parseBorder = function (borderspec)
   local b = {}
-  for token in SU.gtoke(borderspec, "[, ]+") do
+  for token in SU.gtoke(borderspec, "[ ]+") do
     if(token.string) then
       local value = SU.cast("length", token.string)
       b[#b+1] = value:tonumber()
@@ -159,8 +179,8 @@ SILE.registerCommand("parbox", function (options, content)
   local strut = options.strut or "none"
   local border = options.border and parseBorder(options.border) or { 0, 0, 0, 0 }
   local valign = options.valign or "top"
-  local padding = options.padding ~= nil and SU.cast("length", options.padding)
-    or SILE.length()
+  local padding = options.padding ~= nil and SU.cast("length", options.padding) or SILE.length()
+
   width = SU.cast("length", width):absolute()
   padding = padding:absolute()
 
@@ -180,7 +200,7 @@ SILE.registerCommand("parbox", function (options, content)
   local totalHeight = 0
   for i = 1, #vboxes do
     -- Try to cancel stretching/shrinking
-    -- But we don't inspect the content of the vboxes, maybe
+    -- But we don't inspect the internal content of the vboxes, maybe
     -- they could have stretching/shrinking too?
     vboxes[i].height = SILE.length(vboxes[i].height:tonumber())
     vboxes[i].depth = SILE.length(vboxes[i].depth:tonumber())
@@ -190,25 +210,25 @@ SILE.registerCommand("parbox", function (options, content)
 
   local z0 = SILE.length(0)
   local depth, height
-  if valign == "top" then
-    depth = totalHeight - strutDimen.height
-    height = z0 + strutDimen.height
+  if valign == "bottom" then
+    depth = z0 + strutDimen.depth
+    height = totalHeight - strutDimen.depth
   elseif valign == "middle" then
     depth = totalHeight / 2 - strutDimen.height / 2 + strutDimen.depth / 2
     height = totalHeight / 2 + strutDimen.height / 2 - strutDimen.depth / 2
-  else
-    -- Case valign = bottom
-    depth = z0 + strutDimen.depth
-    height = totalHeight - strutDimen.depth
+  else -- valign == top
+    depth = totalHeight - strutDimen.height
+    height = z0 + strutDimen.height
   end
 
-  SILE.typesetter:pushHbox({
+  return SILE.typesetter:pushHbox({
     width = width + 2 * padding,
     depth = depth:absolute() + padding,
     height = height:absolute() + padding,
     inner = vboxes,
     valign = valign,
     padding = padding,
+    offset = SILE.length(), -- INTERNAL: See comment below.
     border = border,
     outputYourself= function (self, typesetter, line)
       local saveY = typesetter.frame.state.cursorY
@@ -220,11 +240,11 @@ SILE.registerCommand("parbox", function (options, content)
         typesetter.frame.state.cursorY:tonumber(),
         self.width:tonumber(),
         self.depth:tonumber() + self.height:tonumber(),
-        border
+        self.border
       )
 
       -- Process each vbox
-      typesetter.frame.state.cursorY = typesetter.frame.state.cursorY + self.padding
+      typesetter.frame.state.cursorY = typesetter.frame.state.cursorY + self.padding - self.offset
       for i = 1, #self.inner do
         typesetter.frame.state.cursorX = saveX + self.padding
         self.inner[i]:outputYourself(SILE.typesetter, self.inner[i])
@@ -235,6 +255,10 @@ SILE.registerCommand("parbox", function (options, content)
       typesetter.frame:advanceWritingDirection(self.width)
     end
   })
+  -- The offset parameter in the pbox above is for INTERNAL use.
+  -- The "ptable" package (parbox-base tables) sets it to tweak and adjust cells.
+  -- Kind of a mixed concern here, but it's an easy trick to avoid re-implementing
+  -- a bunch of things.
 end)
 
 return {
@@ -397,8 +421,8 @@ two}
 
 \smallskip
 
-This border can be specified as a single length (applying on all sides) or a (quoted-)string
-contaning a comma-separated list of four lengths (“top, bottom, left, right”).
+This border can be specified as a single length (applying on all sides) or a string
+containing a space-separated list of four lengths (“top bottom left right”).
 
 We have shown several examples but haven’t mentioned yet what could be one
 of the \em{most important concepts} underlying these paragraph boxes: each
@@ -447,7 +471,8 @@ be stretched or shrinked. The implementation attempts at removing
 them on the first level, but deeply nested elements might cause
 issues. It is a powerful tool and it can be a basis for advanced
 box models or for tabular elements\footnote{Cells in complex tables
-can be regarded as a good use case for paragraph boxes. Just saying…}, etc.
+can be regarded as a good use case for paragraph boxes. See the
+\doc:keyword{ptable} package.}, etc.
 But be warned there could be some edge-cases. Also, it is worth noting
 the current implementation has not been experimented yet in right-to-left
 or vertical writing direction.
