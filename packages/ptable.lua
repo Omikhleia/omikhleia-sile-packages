@@ -37,7 +37,7 @@ local computeCellWidth = function (col, span, cols)
   return width
 end
 
--- Let's admit that these wall tables assembled from parboxes
+-- Let's admit that these whole tables assembled from parboxes
 -- can be pretty fragile if one starts messing up with glues,
 -- etc. There are a number of "dangerous" settings we want to
 -- disable temporarily where suitable... The parbox resets the
@@ -58,17 +58,54 @@ local temporarilyClearFragileSettings = function (callback)
   SILE.settings.popState()
 end
 
+-- Apply a background color an hbox:
+-- Assumes the hbox is not in the output queue.
+SILE.require("packages/color")
+local colorBox = function (hbox, color)
+  if not color then
+    SILE.typesetter:pushHbox(hbox)
+  else
+    SILE.typesetter:pushHbox({
+      inner = hbox,
+      color = color,
+      width = hbox.width,
+      height = hbox.height,
+      depth = hbox.depth,
+      outputYourself= function (self, typesetter, line)
+        local saveY = typesetter.frame.state.cursorY
+        local saveX = typesetter.frame.state.cursorX
+
+        SILE.outputter:pushColor(self.color)
+        SILE.outputter:drawRule(
+          saveX,
+          saveY - self.height,
+          self.width,
+          self.height + self.depth)
+        SILE.outputter:popColor()
+
+        self.inner:outputYourself(SILE.typesetter, line)
+
+        typesetter.frame.state.cursorY = saveY
+        typesetter.frame.state.cursorX = saveX
+        typesetter.frame:advanceWritingDirection(self.width)
+      end
+    })
+  end
+end
+
 -- CLASSES
 
--- Used for the re-shaping pass (see below)
+-- Used for the re-shaping and shipout passes (see below)
 
 local cellNode = pl.class({
   type = "cellnode",
   cellBox = nil,
   valign = nil,
-  _init = function (self, cellBox, valign)
+  color = nil,
+  _init = function (self, cellBox, valign, color)
     self.cellBox = cellBox
     self.valign = valign
+    self.color = color
   end,
   height = function (self)
     return self.cellBox.height + self.cellBox.depth
@@ -78,23 +115,23 @@ local cellNode = pl.class({
     -- so we distribute the adjustement evently
     self.cellBox.height = self.cellBox.height + adjustement / 2
     self.cellBox.depth = self.cellBox.depth + adjustement / 2
-    -- Handle the alignment opton on cells
+    -- Handle the alignment option on cells
     if self.valign == "top" then
       -- Nothing to do
     elseif self.valign == "bottom" then
-      self.cellBox.offset =  -adjustement
+      self.cellBox.offset = -adjustement
     else -- assume middle by default
       self.cellBox.offset = -adjustement / 2
     end
   end,
   shipout = function (self)
-    SILE.typesetter:pushHbox(self.cellBox)
+    colorBox(self.cellBox, self.color)
   end
 })
 
 local cellTableNode = pl.class({
   type = "celltablenode",
-  rows = nil,
+  rows = {},
   width = nil,
   _init = function (self, rows, width)
     self.rows = rows
@@ -108,7 +145,7 @@ local cellTableNode = pl.class({
     return h
   end,
   adjustBy = function(self, adjustement)
-    -- Distribute the adjustment evenly on all all rows
+    -- Distribute the adjustment evenly on all rows
     for i = 1, #self.rows do
       self.rows[i]:adjustBy(adjustement / #self.rows)
     end
@@ -130,8 +167,10 @@ local cellTableNode = pl.class({
 local rowNode = pl.class({
   type = "rownode",
   cells = {},
-  _init = function (self, cells)
+  color = nil,
+  _init = function (self, cells, color)
     self.cells = cells
+    self.color = color
   end,
   height = function (self)
     local h = 0
@@ -148,7 +187,11 @@ local rowNode = pl.class({
   end,
   shipout = function (self)
       -- A regular hbox suffices here
-      SILE.call("hbox", {}, function ()
+      -- Important hack or a parindent occurs sometimes: Set up queue but avoid a newPar.
+      -- We had do to the same weird magic in the parbox package too at one step, see the
+      -- comment there.
+      SILE.typesetter.state.nodes[#SILE.typesetter.state.nodes+1] = SILE.nodefactory.zerohbox()
+      local hbox = SILE.call("hbox", {}, function ()
       -- Important hack or a parindent occurs sometimes: Set up queue but avoid a newPar.
       -- We had do to the same weird magic in the parbox package too at one step, see the
       -- comment there.
@@ -158,6 +201,10 @@ local rowNode = pl.class({
         self.cells[i]:shipout(width)
       end
     end)
+    if self.color then
+      table.remove(SILE.typesetter.state.nodes) -- steal it back...
+      colorBox(hbox, self.color) -- ...and re-wrap it with color.
+    end
     SILE.typesetter:leaveHmode()
   end
 })
@@ -168,6 +215,7 @@ local processTable = {}
 
 processTable["cell"] = function (content, args, tablespecs)
     local span = SU.cast("integer", content.options.span or 1)
+    local color = content.options.background and SILE.colorparser(content.options.background)
     local pad = tablespecs.cellpadding
     local width = computeCellWidth(args.col, span, tablespecs.cols)
 
@@ -181,12 +229,12 @@ processTable["cell"] = function (content, args, tablespecs)
       end)
     end)
     table.remove(SILE.typesetter.state.nodes) -- .. but steal it back...
-    -- NOTE (reminder): when building the parbox, migrating nodes (e.g. footnote) 
+    -- NOTE (reminder): when building the parbox, migrating nodes (e.g. footnotes)
     -- have been moved to the parent typesetter. Stealing the resulting box,
     -- doens't change that. But it occurs before pushing all boxes, I am
     -- unsure where footnotes for long tables spanning over multiple
     -- pages will end up!
-    return cellNode(cellBox, content.options.valign)
+    return cellNode(cellBox, content.options.valign, color)
   end
 
 processTable["celltable"] = function (content, args, tablespecs)
@@ -210,6 +258,8 @@ processTable["celltable"] = function (content, args, tablespecs)
   end
 
 processTable["row"] = function (content, args, tablespecs)
+    local color = content.options.background and SILE.colorparser(content.options.background)
+
     SILE.settings.set("document.lineskip", SILE.length())
     local iCell = args.col and args.col or 1
     local cells = {}
@@ -227,7 +277,7 @@ processTable["row"] = function (content, args, tablespecs)
       end
       -- All text nodes are silently ignored
     end
-    return rowNode(cells)
+    return rowNode(cells, color)
   end
 
 -- COMMAND
@@ -235,17 +285,17 @@ processTable["row"] = function (content, args, tablespecs)
 -- The table building logic works as follows:
 --  1. Parse the AST
 --      - Computing widths, spans, etc. on the way
---      - Constructed an object hierarchy
+--      - Constructing an object hierarchy
 --      - Each true cell is pre-composed in a middle-aligned parbox that is
 --        stolen back from the output queue
 --  2. Adjust each element in the object hierarchy (= re-shaping)
 --      - All lines and cells have consistent height
---      - For cells, apply the alignment.
+--      - For cells, apply the alignment (valign)
 --  3. Shipout the resulting content
 --      - Building the boxes for rows and celltables
 --      - Re-using the adjusted boxes for cells.
 --
--- For developers, note that there is only one exposed command, "table".
+-- For developers, note that there is only one exposed command, "ptable".
 -- The "row", "cell", "celltable" are AST nodes without command in the global
 -- scope, so they only exist within the table.
 -- All parboxes are constructed middle-aligned, and with "character" strut,
@@ -338,15 +388,19 @@ A \doc:code{\\ptable} can only contain \doc:code{\\row} elements. Any other elem
 an error to be reported, and any text content is silently ignored.
 
 In turn, a \doc:code{\\row} can only contain \doc:code{\\cell} or \doc:code{\\celltable}
-elements, with the same rules applying. It does not have any option.
+elements, with the same rules applying. It only has one option, \doc:code{background}.
 
 The \doc:code{\\cell} is the final element containing text or actually anything
 you may want, including complete paragraphs, images, etc. It has two options
-(\doc:code{span} and \doc:code{valign}) that will be described later.
+(\doc:code{span} and \doc:code{valign}) that will be described later, besides
+the \doc:code{background} color.
 
 The \doc:code{\\celltable} is a specific type of cell related to cells spanning over
 multiple rows. It has only one option (\doc:code{span}) and will be addressed later
 too.
+
+Rows and regular cells, as noted, can have background color. The color specification is the
+same as defined in the \doc:keyword{color} package.
 
 \smallskip
 
@@ -354,11 +408,11 @@ too.
 \novbreak
 
 For now, let us stick with regular cells. As stated, their content could
-be anything. Each cell can be regarded as an idenpendent mini-frame.
+be anything. Each cell can be regarded as an independent mini-frame.
 Notably, the “frame width” within a cell is actually that of this cell,
 meaning that any command relying on it adapts correctly.\footnote{The
 “frame height” on the other hand is not known yet as the cells will
-vertically adapt automatically to the content.}. That is true to for other
+vertically adapt automatically to the content.} That is true too for other
 frame-related relative units, such as the line length.
 
 We could illustrate it with many commands, but allow us some \em{inception}
@@ -432,7 +486,7 @@ on cell A. This is also what some office programs call “merging”.
 
 So far, so easy. But what about spanning over multiple rows?
 Each cell takes up, by default, the height of one row… and in this
-table package, one cannot change that fact. 
+table package, one cannot change that fact.
 
 Instead of “merging”, we however have “splitting”, in that
 direction. You will still specify a \em{single cell}, but of a special type
@@ -467,13 +521,13 @@ you craft the same table but with the C and E columns
 merged?}
 
 \begin[cols=33.333%fw 33.333%fw 33.333%fw]{ptable}
-  \begin{row}
+  \begin[background=#ddd]{row}
     \cell{A.}
     \cell{B.}
     \cell{C.}
   \end{row}
   \begin{row}
-    \cell[span=2]{D.}
+    \cell[span=2, background=#eee]{D.}
     \cell{E}
   \end{row}
   \begin{row}
