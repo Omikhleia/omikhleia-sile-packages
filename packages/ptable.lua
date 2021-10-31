@@ -25,8 +25,10 @@ local parseColumnSpec = function (colspec)
 end
 
 -- Compute a cell width from the column widths,
--- taking into account the cell spanning.
+-- taking into account the cell spanning,
+-- and memorize already computed values as a micro-optimization
 local computeCellWidth = function (col, span, cols)
+  if cols[col..":"..span] then return cols[col..":"..span] end
   local width = 0
   if col > #cols or col + span - 1 > #cols then
     SU.error("Table contains an extraneous column")
@@ -34,6 +36,7 @@ local computeCellWidth = function (col, span, cols)
   for i = col, col + span - 1 do
     width = width + cols[i]
   end
+  cols[col..":"..span] = width
   return width
 end
 
@@ -225,7 +228,7 @@ processTable["cell"] = function (content, args, tablespecs)
               border = tablespecs.cellborder,
               valign = "middle", strut="character" }, function ()
       temporarilyClearFragileSettings(function()
-        SILE.process(content)
+        SILE.call("ptable:cell:hook", content.options, content)
       end)
     end)
     table.remove(SILE.typesetter.state.nodes) -- .. but steal it back...
@@ -338,6 +341,10 @@ SILE.registerCommand("ptable", function (options, content)
   SILE.call("medskip")
 end)
 
+SILE.registerCommand("ptable:cell:hook", function (options, content)
+  SILE.process(content)
+end)
+
 return {
   documentation = [[\begin{document}
 \script[src=packages/autodoc-extras]
@@ -393,7 +400,8 @@ elements, with the same rules applying. It only has one option, \doc:code{backgr
 The \doc:code{\\cell} is the final element containing text or actually anything
 you may want, including complete paragraphs, images, etc. It has two options
 (\doc:code{span} and \doc:code{valign}) that will be described later, besides
-the \doc:code{background} color.
+the \doc:code{background} color. All options (including additional ones you may
+set) are also passed to a cell “hook”.
 
 The \doc:code{\\celltable} is a specific type of cell related to cells spanning over
 multiple rows. It has only one option (\doc:code{span}) and will be addressed later
@@ -544,6 +552,16 @@ merged?}
   \end{row}
 \end{ptable}
 
+\em{Cell styling.}
+\novbreak
+
+Each cell being a mini-frame, it resets its settings to their top-level (i.e. document) values.
+Cell content and options, though, are passed to a \doc:code{ptable:cell:hook} which is just
+a pass-through command by default. Would you want to define specific styling for some cells,
+you can re-define that command to achieve it.
+
+\smallskip
+
 \em{Other considerations.}
 \novbreak
 
@@ -552,9 +570,6 @@ page breaks may only occur between first-level rows.
 With tables involving cell splitting, it might be difficult
 to get a good break-point.
 
-Each cell being a mini-frame, it resets its settings
-to their top-level (i.e. document) values. Some hook
-should likely be provided to alter the cell style (fonts, indents, etc.)
 Also, this package does not support a header row that would be repeated
 on each page.\footnote{Patches are welcome.}
 

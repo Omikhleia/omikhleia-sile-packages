@@ -5,6 +5,8 @@
 \set[parameter=document.parindent, value=1em]
 \define[command=title]{\font[weight=800]{\process}}
 
+Table 1.
+
 \begin[cols=20%fw 15%fw 15%fw 50%fw]{ptable}
   \begin{row}
     \cell{\title{Day}}
@@ -54,5 +56,141 @@
     \cell{SILE as an XML processor}
   \end{row}
 \end{ptable}
+
+Table 2 = same with background colors.
+
+\begin[cols=20%fw 15%fw 15%fw 50%fw]{ptable}
+  \begin[background=#ddd]{row}
+    \cell{\title{Day}}
+    \begin[span=3]{celltable}
+      \begin{row}
+        \cell[span=3]{\title{\center{Seminar}}}
+      \end{row}
+      \begin{row}
+        \begin[span=2]{celltable}
+          \begin{row}
+            \cell[span=2]{\title{\center{Schedule}}}
+          \end{row}
+          \begin{row}
+            \cell{Begin}
+            \cell{End}
+          \end{row}
+        \end{celltable}
+        \cell{\title{Topic}}
+      \end{row}
+    \end{celltable}
+  \end{row}
+  \begin{row}
+    \cell[background=#eee]{Monday}
+    \cell{9:30 AM}
+    \cell{5:30 PM}
+    \celltable{
+        \row{\cell{Introduction to SILE}}
+        \row{\cell{Step by step: classes & packages}}
+    }
+  \end{row}
+    \begin{row}
+    \cell[background=#eee]{Tuesday}
+    \celltable[span=2]{
+        \row{\cell{9:30 AM}\cell{11:00 AM}}
+        \row{\cell{11:00 AM}\cell{12:00 PM}}
+        \row{\cell{12:00 PM}\cell{5:00 PM}}
+    }
+    \celltable{
+        \row{\cell{Math & advanced typesetting}}
+        \row{\cell{The internals of SILE}}
+    }
+  \end{row}
+  \begin{row}
+    \cell[background=#eee]{Wednesday}
+    \cell{8:00 AM}
+    \cell{12:00 PM}
+    \cell{SILE as an XML processor}
+  \end{row}
+\end{ptable}
+
+Table 3 = same with cell hook.
+
+\script{
+  SILE.registerCommand("ptable:cell:hook", function(options, content)
+    if options.style == "center" then
+      SILE.call("center", {}, content)
+    else
+      SILE.process(content)
+    end
+  end)
+}
+
+\begin[cols=20%fw 15%fw 15%fw 50%fw]{ptable}
+  \begin[background=#ddd]{row}
+    \cell{\title{Day}}
+    \begin[span=3]{celltable}
+      \begin{row}
+        \cell[span=3, style=center]{\title{Seminar}}
+      \end{row}
+      \begin{row}
+        \begin[span=2]{celltable}
+          \begin{row}
+            \cell[span=2, style=center]{\title{Schedule}}
+          \end{row}
+          \begin{row}
+            \cell[style=center]{Begin}
+            \cell[style=center]{End}
+          \end{row}
+        \end{celltable}
+        \cell{\title{Topic}}
+      \end{row}
+    \end{celltable}
+  \end{row}
+  \begin{row}
+    \cell[background=#eee]{Monday}
+    \cell[style=center]{9:30 AM}
+    \cell[style=center]{5:30 PM}
+    \celltable{
+        \row{\cell{Introduction to SILE}}
+        \row{\cell{Step by step: classes & packages}}
+    }
+  \end{row}
+    \begin{row}
+    \cell[background=#eee]{Tuesday}
+    \celltable[span=2]{
+        \row{\cell[style=center]{9:30 AM}\cell[style=center]{11:00 AM}}
+        \row{\cell[style=center]{11:00 AM}\cell[style=center]{12:00 PM}}
+        \row{\cell[style=center]{12:00 PM}\cell[style=center]{5:00 PM}}
+    }
+    \celltable{
+        \row{\cell{Math & advanced typesetting}}
+        \row{\cell{The internals of SILE}}
+    }
+  \end{row}
+  \begin{row}
+    \cell[background=#eee]{Wednesday}
+    \cell[style=center]{8:00 AM}
+    \cell[style=center]{12:00 PM}
+    \cell{SILE as an XML processor}
+  \end{row}
+\end{ptable}
+
+Table 4 = generated table.
+
+\script{
+  -- Hacky-wacky way to create a ptable tree programmatically
+  local function createCommand(pos, col, line, command, options, content)
+    local result = content
+    result.options = options
+    result.command = command
+    result.id = "command"
+    return result
+  end
+  local t = {}
+  for r = 1, 20 do
+    local cell = {}
+    for c = 1, 4 do
+      table.insert(cell, createCommand(0, 0, 0, "cell", {}, { r.."."..c }))
+    end
+    table.insert(t, createCommand(0, 0, 0, "row", {}, cell))
+  end
+  SILE.call("ptable", { cols = "25%fw 25%fw 25%fw 25%fw"}, t)
+}
 
 \end{document}
