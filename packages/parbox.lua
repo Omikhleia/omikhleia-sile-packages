@@ -27,6 +27,23 @@ SILE.settings.declare({
   help = "Strut rule height"
 })
 
+-- Strut character (for a given font) will be used a lot, a bit dumb to recompute it each time.
+-- So let's cache it.
+local strutCache = {}
+local _key = function (options)
+  return table.concat({ options.family, ("%d"):format(options.weight), options.style,
+                        options.variant, options.features, options.filename }, ";")
+end
+local characterStrut = function ()
+  local key = _key(SILE.font.loadDefaults({}))
+  local hbox = strutCache[key]
+  if hbox then return hbox end
+  local hbox = SILE.call("hbox", {}, { SILE.settings.get("parbox.strut.character") })
+  table.remove(SILE.typesetter.state.nodes) -- steal it back
+  strutCache[key] = hbox
+  return hbox
+end
+
 SILE.registerCommand("strut", function (options, content)
   local method = options.method or "character"
   local show = SU.boolean(options.show, true)
@@ -42,8 +59,7 @@ SILE.registerCommand("strut", function (options, content)
       SILE.call("rebox", { phantom = true, height = strut.height, depth = strut.depth, width = strut.width }, { "x" })
     end
   else
-    strut = SILE.call("hbox", {}, { SILE.settings.get("parbox.strut.character") })
-    table.remove(SILE.typesetter.state.nodes) -- steal it back
+    strut = characterStrut()
     if show then
       SILE.call("rebox", { phantom = true, width = SILE.length() }, { SILE.settings.get("parbox.strut.character") })
     end
@@ -134,7 +150,7 @@ end
 local drawBorders = function (x, y, w, h, border)
   -- There's a little ugly tweak here, the bottom border is drawn below the box.
   -- So that successive vertical parboxes have overlapping borders.
-  -- Tables (ptable package) rely on it... That's not perfect, but might be
+  -- Tables (ptable package) rely on it... That's not perfect, but might not be
   -- too much noticeable with normal border thickness below 1pt...
   if border[1] > 0 then SILE.outputter:drawRule(x, y, w, border[1]) end
   if border[2] > 0 then SILE.outputter:drawRule(x, y + h, w, border[2]) end
