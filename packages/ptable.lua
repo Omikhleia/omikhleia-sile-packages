@@ -12,7 +12,7 @@ SILE.require("packages/parbox")
 -- an array of numeric values (we work in absolute points afterwards).
 local parseColumnSpec = function (colspec)
   local b = {}
-  for token in SU.gtoke(colspec, "[, ]+") do
+  for token in SU.gtoke(colspec, "[ ]+") do
     if (token.string) then
       local value = SU.cast("length", token.string)
       b[#b+1] = value:tonumber()
@@ -56,7 +56,7 @@ local parsePadding = function (rawspec)
   if #spec == 1 then
     return { spec[1], spec[1], spec[1], spec[1] }
   end
-  if #spec ~= 4 then SU.error("Invalid padding specification: "..textspec) end
+  if #spec ~= 4 then SU.error("Invalid padding specification: "..rawspec) end
   return spec
 end
 
@@ -305,12 +305,12 @@ processTable["row"] = function (content, args, tablespecs)
 -- TYPESETTER TWEAKS
 
 -- We modify the typesetter globally to check whether the content on a new
--- frame is a table which needs repeating a header row.
+-- frame is a table row, which needs repeating a header row to be inserted.
 -- EXPERIMENTAL AND SOMEWHAT HACKY-WHACKY = MIGHT NOT BE ROBUST
 local oldInitNextFrame = SILE.typesetter.initNextFrame
 SILE.typesetter.initNextFrame = function (self)
   oldInitNextFrame(self)
-  -- Check the top boxes if we were in a table.
+  -- Check the top vboxes:
   -- There could be a leading frame vglue, so we check the two first boxes.
   for k = 1, 2 do
     if self.state.outputQueue[k] and self.state.outputQueue[k]._header_ then

@@ -191,7 +191,7 @@ local parseBorderOrPadding = function (rawspec, opt)
   if #spec == 1 then
     return { spec[1], spec[1], spec[1], spec[1] }
   end
-  if #spec ~= 4 then SU.error("Invalid "..opt.." specification: "..textspec) end
+  if #spec ~= 4 then SU.error("Invalid "..opt.." specification: "..rawspec) end
   return spec
 end
 
