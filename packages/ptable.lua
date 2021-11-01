@@ -654,8 +654,5 @@ page breaks may only occur between first-level rows.
 With tables involving cell splitting, it might be difficult
 to get a good break-point.
 
-Also, this package does not support a header row that would be repeated
-on each page.\footnote{Patches are welcome.}
-
 \end{document}]]
 }
