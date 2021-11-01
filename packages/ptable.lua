@@ -228,7 +228,7 @@ local rowNode = pl.class({
       table.remove(SILE.typesetter.state.nodes) -- steal it back...
       colorBox(hbox, self.color) -- ...and re-wrap it with color.
     end
-    SILE.typesetter:leaveHmode()
+    SILE.typesetter:leaveHmode(1) -- do eject to page yet (see repeating header logic)
   end
 })
 
@@ -302,7 +302,26 @@ processTable["row"] = function (content, args, tablespecs)
     return rowNode(cells, color)
   end
 
--- COMMAND
+-- TYPESETTER TWEAKS
+
+-- We modify the typesetter globally to check whether the content on a new
+-- frame is a table which needs repeating a header row.
+-- EXPERIMENTAL AND SOMEWHAT HACKY-WHACKY = MIGHT NOT BE ROBUST
+local oldInitNextFrame = SILE.typesetter.initNextFrame
+SILE.typesetter.initNextFrame = function (self)
+  oldInitNextFrame(self)
+  -- Check the top boxes if we where in a table.
+  -- There could be a leading frame vglue, so we check the two first boxes.
+  for k = 1, 2 do
+    if self.state.outputQueue[k] and self.state.outputQueue[k]._header_ then
+      local header = self.state.outputQueue[k]._header_
+      table.insert(self.state.outputQueue, k, header)
+      break
+    end
+  end
+end
+
+-- COMMANDS
 
 -- The table building logic works as follows:
 --  1. Parse the AST
@@ -338,6 +357,7 @@ SILE.registerCommand("ptable", function (options, content)
   SILE.typesetter:leaveHmode()
   SILE.call("medskip")
 
+  local headerVbox
   temporarilyClearFragileSettings(function()
     SILE.settings.set("document.parindent", SILE.length())
     local iRow = 1
@@ -348,6 +368,26 @@ SILE.registerCommand("ptable", function (options, content)
           local node = processTable["row"](row, { width = totalWidth, row = iRow }, tablespecs)
           node:adjustBy(0)
           node:shipout()
+          -- begin header row logic (experimental, might not be robust).
+          -- The row shipout didn't ship the queue to the page...
+          if SU.boolean(options.header, false) then
+            local currentVbox
+            -- ... so the the last vbox should be our new row, skipping one vglue if present...
+            for b = #SILE.typesetter.state.outputQueue, 2, -1 do
+              if SILE.typesetter.state.outputQueue[b].is_vbox then
+                currentVbox = SILE.typesetter.state.outputQueue[b]
+                break
+              end
+            end
+            if iRow == 1 and currentVbox then
+              headerVbox = currentVbox
+            elseif currentVbox and headerVbox then
+              -- Hack a link to the header vbox in the current vbox
+              currentVbox._header_ = headerVbox
+            end
+          end
+          -- end header row logic.
+          SILE.typesetter:leaveHmode() -- Now we should be allowed to output to page, if it wants to.
           iRow = iRow + 1
         else
             SU.error("Unexpected '"..content[i].command.."' in table")
@@ -410,6 +450,9 @@ The other options are \doc:code{cellpadding} (defaults to 4pt) and
 \doc:code{cellborder} (defaults to 0.4pt; set it to zero to disable
 the borders). Both can be either a single length (applying to all
 sides) or four space-separated lengths (top, bottom, left, right).
+Finally, there is the \doc:code{header} boolean option, which is false
+by default. If set to true, the first row of the table is considered to be a header,
+repeated on each page if the table spans over multiple pages.
 
 A \doc:code{\\ptable} can only contain \doc:code{\\row} elements. Any other element causes
 an error to be reported, and any text content is silently ignored.

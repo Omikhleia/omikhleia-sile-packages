@@ -196,11 +196,11 @@ This table example is in the LaTeX ctable package, let us try to reproduce it.
 \end{ptable}
 }}
 
-Table 5 = generated table.
+Table 5 = generated table, with header repeated on page break(s)
 
 \script{
   -- Hacky-wacky way to create a ptable tree programmatically
-  local function createCommand(pos, col, line, command, options, content)
+  local function createCommand(command, options, content)
     local result = content
     result.options = options
     result.command = command
@@ -208,14 +208,15 @@ Table 5 = generated table.
     return result
   end
   local t = {}
-  for r = 1, 20 do
+  table.insert(t, createCommand("row", { background = "#eee" }, { createCommand("cell", { span =  2 }, { "Header" })}))
+  for r = 1, 10 do
     local cell = {}
-    for c = 1, 4 do
-      table.insert(cell, createCommand(0, 0, 0, "cell", {}, { r.."."..c }))
+    for c = 1, 2 do
+      table.insert(cell, createCommand("cell", {}, { r.."."..c }))
     end
-    table.insert(t, createCommand(0, 0, 0, "row", {}, cell))
+    table.insert(t, createCommand("row", {}, cell))
   end
-  SILE.call("ptable", { cols = "25%fw 25%fw 25%fw 25%fw"}, t)
+  SILE.call("ptable", { cols = "50%fw 50%fw", header = true }, t)
 }
 
 Table 6 = cell border and padding configuration at cell level.
