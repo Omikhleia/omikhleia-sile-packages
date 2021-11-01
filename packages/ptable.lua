@@ -389,7 +389,7 @@ of columns). Let us illustrate it with “50\%fw 50\%fw”.
 
 The other options are \doc:code{cellpadding} (defaults to 4pt) and
 \doc:code{cellborder} (defaults to 0.5pt; set it to zero to disable
-the borders). The former is a lenght, the latter either a single lenght
+the borders). The former is a length, the latter either a single length
 or four space-separated lengths (top, bottom, left, right).
 
 A \doc:code{\\ptable} can only contain \doc:code{\\row} elements. Any other element causes

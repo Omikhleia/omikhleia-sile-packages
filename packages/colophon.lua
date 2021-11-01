@@ -238,7 +238,7 @@ a circle that has the same area. But of course, we cannot know yet whether the l
 will be stretched (or even shrinked, but we cannot hope too much for it with
 such a shape) when justified into the circle. This is the second assumption:
 the above estimation is likely too small, as stretching will occur with little
-doubts. So the implemention adjusts the estimated lenght by a ratio, with an
+doubts. So the implemention adjusts the estimated length by a ratio, with an
 \em{arbitrary} value of 1.01 (i.e. we expect the line stretchability
 to globally reach 1\% at most). There will still be cases where the paragraph
 cannot fit and will overflow outside the circle, so the option \doc:code{ratio}
