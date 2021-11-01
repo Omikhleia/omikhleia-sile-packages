@@ -229,9 +229,9 @@ This table example is in the LaTeX booktabs package, let us try to reproduce it.
     \cell[border=0.8pt 0 0 0]{}
   \end{row}
   \begin{row}
-    \cell[border=0 0.4pt 0 0, padding=4pt 4pt 0 4pt]{\noindent{}Animal}
-    \cell[border=0 0.4pt 0 0]{Description}
-    \cell[border=0 0.4pt 0 0, padding=4pt 4pt 4pt 0]{\raggedleft{Price ($)}}
+    \cell[border=0 0.8pt 0 0, padding=4pt 4pt 0 4pt]{\noindent{}Animal}
+    \cell[border=0 0.8pt 0 0]{Description}
+    \cell[border=0 0.8pt 0 0, padding=4pt 4pt 4pt 0]{\raggedleft{Price ($)}}
   \end{row}
   \begin{row}
     \cell[valign=top, padding=4pt 1pt 0 4pt]{\noindent{}Gnat}
@@ -243,7 +243,7 @@ This table example is in the LaTeX booktabs package, let us try to reproduce it.
   \begin{row}
     \cell[padding=2pt 1pt 0 4pt]{\noindent{}Gnu}
     \cell[padding=2pt 1pt 4pt 4pt]{stuffed}
-    \cell[padding=2pt 1pt 4pt 0]{\raggedleft{13.65}}
+    \cell[padding=2pt 1pt 4pt 0]{\raggedleft{92.50}}
   \end{row}
   \begin{row}
     \cell[padding=2pt 1pt 0 4pt]{\noindent{}Emu}

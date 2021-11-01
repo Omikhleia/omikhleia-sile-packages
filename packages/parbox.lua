@@ -375,7 +375,7 @@ two}
 In professional typesetting, a “strut” is a rule with no width but a certain height
 and depth, to help guaranteeing that an element has a certain minimal height and depth,
 e.g. in tabular environments or in boxes.
-Two posible implementations are proposed, one based on a character, defined
+Two possible implementations are proposed, one based on a character, defined
 via the \doc:code{parbox.strut.character} setting, by default the vertical bar (|), and one relative to the
 current baseline skip, via the \doc:code{parbox.strut.ruledepth} and \doc:code{parbox.strut.ruleheight}
 settings, by default respectively 0.3bs and 1bs, following the same
