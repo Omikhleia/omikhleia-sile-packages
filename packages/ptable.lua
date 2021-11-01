@@ -225,7 +225,7 @@ processTable["cell"] = function (content, args, tablespecs)
     -- build the parbox...
     local cellBox = SILE.call("parbox", { width = width - 2 * pad,
               padding = pad,
-              border = tablespecs.cellborder,
+              border = content.options.border or tablespecs.cellborder,
               valign = "middle", strut="character" }, function ()
       temporarilyClearFragileSettings(function()
         SILE.call("ptable:cell:hook", content.options, content)
@@ -307,7 +307,7 @@ processTable["row"] = function (content, args, tablespecs)
 SILE.registerCommand("ptable", function (options, content)
   local cols = parseColumnSpec(SU.required(options, "cols", "ptable"))
   local cellpadding = SU.cast("length", options.cellpading or "4pt")
-  local cellborder = SU.cast("length", options.cellborder or "0.3pt")
+  local cellborder = options.cellborder or "0.3pt"
 
   local totalWidth = SU.sum(cols)
   local tablespecs = {
@@ -389,7 +389,8 @@ of columns). Let us illustrate it with “50\%fw 50\%fw”.
 
 The other options are \doc:code{cellpadding} (defaults to 4pt) and
 \doc:code{cellborder} (defaults to 0.5pt; set it to zero to disable
-the borders).
+the borders). The former is a lenght, the latter either a single lenght
+or four space-separated lengths (top, bottom, left, right).
 
 A \doc:code{\\ptable} can only contain \doc:code{\\row} elements. Any other element causes
 an error to be reported, and any text content is silently ignored.
@@ -400,15 +401,36 @@ elements, with the same rules applying. It only has one option, \doc:code{backgr
 The \doc:code{\\cell} is the final element containing text or actually anything
 you may want, including complete paragraphs, images, etc. It has two options
 (\doc:code{span} and \doc:code{valign}) that will be described later, besides
-the \doc:code{background} color. All options (including additional ones you may
-set) are also passed to a cell “hook”.
+the \doc:code{border} specification and the \doc:code{background} color. 
+All options (including additional ones you may set) are also passed to a cell “hook”.
 
 The \doc:code{\\celltable} is a specific type of cell related to cells spanning over
 multiple rows. It has only one option (\doc:code{span}) and will be addressed later
 too.
 
 Rows and regular cells, as noted, can have background color. The color specification is the
-same as defined in the \doc:keyword{color} package.
+same as defined in the \doc:keyword{color} package. The global cell border specification
+from the table can be overriden on each cell.
+
+\center{\parbox[width=70%fw, strut=character]{%
+\begin[cols=30%fw 35%fw 35%fw, cellborder=0]{ptable}
+  \begin{row}
+    \cell[border=1pt 0.5pt 0 0]{}
+    \cell[border=1pt 0.5pt 0 0]{\center{orbital period (yr)}}
+    \cell[border=1pt 0.5pt 0 0]{\center{radius (km)}}
+  \end{row}
+  \begin{row}
+    \cell{Mercury}
+    \cell{\center{0.24}}
+    \cell{\center{2440}}
+  \end{row}
+  \begin{row}
+    \cell[border=0 1pt 0 0]{Venus}
+    \cell[border=0 1pt 0 0]{\center{0.62}}
+    \cell[border=0 1pt 0 0]{\center{6051}}
+  \end{row}
+\end{ptable}
+}}
 
 \smallskip
 

@@ -1,5 +1,6 @@
 \begin{document}
 \script[src=packages/ptable]
+\script[src=packages/textsubsuper]
 \font[family=Libertinus Sans]
 
 \set[parameter=document.parindent, value=1em]
@@ -171,7 +172,29 @@ Table 3 = same with cell hook.
   \end{row}
 \end{ptable}
 
-Table 4 = generated table.
+Table 4 = cellborder configuration at cell level.
+
+\center{\parbox[width=40%fw, strut=character]{%
+\begin[cols=20%fw 40%fw 40%fw, cellborder=0]{ptable}
+  \begin{row}
+    \cell[border=1pt 0.5pt 0 0]{}
+    \cell[border=1pt 0.5pt 0 0, style=center]{H(Mu) + F\text:subscript{2}}
+    \cell[border=1pt 0.5pt 0 0, style=center]{H(Mu) + Cl\text:subscript{2}}
+  \end{row}
+  \begin{row}
+    \cell{\em{β}\kern[width=0.1em](H)}
+    \cell[style=center]{80.9°}
+    \cell[style=center]{83.2°}
+  \end{row}
+  \begin{row}
+    \cell[border=0 1pt 0 0]{\em{β}\kern[width=0.1em](Mu)}
+    \cell[border=0 1pt 0 0, style=center]{86.7°}
+    \cell[border=0 1pt 0 0, style=center]{87.7°}
+  \end{row}
+\end{ptable}
+}}
+
+Table 5 = generated table.
 
 \script{
   -- Hacky-wacky way to create a ptable tree programmatically
