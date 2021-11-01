@@ -228,7 +228,7 @@ local rowNode = pl.class({
       table.remove(SILE.typesetter.state.nodes) -- steal it back...
       colorBox(hbox, self.color) -- ...and re-wrap it with color.
     end
-    SILE.typesetter:leaveHmode(1) -- do eject to page yet (see repeating header logic)
+    SILE.typesetter:leaveHmode(1) -- do not eject to page yet (see repeating header logic)
   end
 })
 
@@ -310,7 +310,7 @@ processTable["row"] = function (content, args, tablespecs)
 local oldInitNextFrame = SILE.typesetter.initNextFrame
 SILE.typesetter.initNextFrame = function (self)
   oldInitNextFrame(self)
-  -- Check the top boxes if we where in a table.
+  -- Check the top boxes if we were in a table.
   -- There could be a leading frame vglue, so we check the two first boxes.
   for k = 1, 2 do
     if self.state.outputQueue[k] and self.state.outputQueue[k]._header_ then
@@ -372,7 +372,7 @@ SILE.registerCommand("ptable", function (options, content)
           -- The row shipout didn't ship the queue to the page...
           if SU.boolean(options.header, false) then
             local currentVbox
-            -- ... so the the last vbox should be our new row, skipping one vglue if present...
+            -- ... so the last vbox should be our new row, skipping one vglue if present...
             for b = #SILE.typesetter.state.outputQueue, 2, -1 do
               if SILE.typesetter.state.outputQueue[b].is_vbox then
                 currentVbox = SILE.typesetter.state.outputQueue[b]
