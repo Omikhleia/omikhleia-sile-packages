@@ -175,30 +175,34 @@ local insertStruts = function (vboxlist, strut)
   end
 end
 
-local parseBorder = function (borderspec)
-  local b = {}
-  for token in SU.gtoke(borderspec, "[ ]+") do
-    if(token.string) then
-      local value = SU.cast("length", token.string)
-      b[#b+1] = value:tonumber()
+local parseBorderOrPadding = function (rawspec, opt)
+  local spec
+  if type(rawspec) == "table" then
+    spec = rawspec
+  else
+    spec = {}
+    for token in SU.gtoke(rawspec, "[ ]+") do
+      if(token.string) then
+        local value = SU.cast("length", token.string)
+        spec[#spec+1] = value:tonumber()
+      end
     end
   end
-  if #b == 1 then
-    return { b[1], b[1], b[1], b[1] }
+  if #spec == 1 then
+    return { spec[1], spec[1], spec[1], spec[1] }
   end
-  if #b ~= 4 then SU.error("Invalid border specification") end
-  return b
+  if #spec ~= 4 then SU.error("Invalid "..opt.." specification: "..textspec) end
+  return spec
 end
 
 SILE.registerCommand("parbox", function (options, content)
   local width = SU.required(options, "width", "parbox")
   local strut = options.strut or "none"
-  local border = options.border and parseBorder(options.border) or { 0, 0, 0, 0 }
+  local border = options.border and parseBorderOrPadding(options.border, "border") or { 0, 0, 0, 0 }
   local valign = options.valign or "top"
-  local padding = options.padding ~= nil and SU.cast("length", options.padding) or SILE.length()
+  local padding = options.padding and parseBorderOrPadding(options.padding, "padding") or { 0, 0, 0, 0 }
 
   width = SU.cast("length", width):absolute()
-  padding = padding:absolute()
 
   local vboxes = parboxFraming({ width = width }, content)
 
@@ -227,20 +231,20 @@ SILE.registerCommand("parbox", function (options, content)
   local z0 = SILE.length(0)
   local depth, height
   if valign == "bottom" then
-    depth = z0 + strutDimen.depth
-    height = totalHeight - strutDimen.depth
+    depth = z0 + strutDimen.depth + padding[2]
+    height = totalHeight - strutDimen.depth + padding[1]
   elseif valign == "middle" then
-    depth = totalHeight / 2 - strutDimen.height / 2 + strutDimen.depth / 2
-    height = totalHeight / 2 + strutDimen.height / 2 - strutDimen.depth / 2
+    depth = totalHeight / 2 - strutDimen.height / 2 + strutDimen.depth / 2 + (padding[2] + padding[1]) / 2
+    height = totalHeight / 2 + strutDimen.height / 2 - strutDimen.depth / 2 + (padding[2] + padding[1]) / 2
   else -- valign == top
-    depth = totalHeight - strutDimen.height
-    height = z0 + strutDimen.height
+    depth = totalHeight - strutDimen.height + padding[1]
+    height = z0 + strutDimen.height + padding[1]
   end
 
   return SILE.typesetter:pushHbox({
-    width = width + 2 * padding,
-    depth = depth:absolute() + padding,
-    height = height:absolute() + padding,
+    width = width + padding[3] + padding[4],
+    depth = depth:absolute(),
+    height = height:absolute(),
     inner = vboxes,
     valign = valign,
     padding = padding,
@@ -260,9 +264,9 @@ SILE.registerCommand("parbox", function (options, content)
       )
 
       -- Process each vbox
-      typesetter.frame.state.cursorY = typesetter.frame.state.cursorY + self.padding - self.offset
+      typesetter.frame.state.cursorY = typesetter.frame.state.cursorY + self.padding[1] - self.offset
       for i = 1, #self.inner do
-        typesetter.frame.state.cursorX = saveX + self.padding
+        typesetter.frame.state.cursorX = saveX + self.padding[3]
         self.inner[i]:outputYourself(SILE.typesetter, self.inner[i])
       end
 
@@ -414,9 +418,7 @@ from 4, right parbox.}
 
 Another option is \doc:code{padding}, with a length applied on all sides of
 the parbox. Say, with 5pt.\footnote{If the padding does not seem to be the
-same on the sides and on the top and bottom, it is due to the strut. A future
-revision may provide different options to specify each padding (top, bottom, left,
-right).}
+same on the sides and on the top and bottom, it is due to the strut.}
 
 \smallskip
 
@@ -437,7 +439,7 @@ two}
 
 \smallskip
 
-This border can be specified as a single length (applying on all sides) or a string
+The border and the padding can be specified as a single length (applying on all sides) or a string
 containing a space-separated list of four lengths (“top bottom left right”).
 
 We have shown several examples but haven’t mentioned yet what could be one

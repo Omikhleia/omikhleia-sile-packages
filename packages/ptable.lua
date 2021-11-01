@@ -40,6 +40,26 @@ local computeCellWidth = function (col, span, cols)
   return width
 end
 
+local parsePadding = function (rawspec)
+  local spec
+  if type(rawspec) == "table" then
+    spec = rawspec
+  else
+    spec = {}
+    for token in SU.gtoke(rawspec, "[ ]+") do
+      if(token.string) then
+        local value = SU.cast("length", token.string)
+        spec[#spec+1] = value:tonumber()
+      end
+    end
+  end
+  if #spec == 1 then
+    return { spec[1], spec[1], spec[1], spec[1] }
+  end
+  if #spec ~= 4 then SU.error("Invalid padding specification: "..textspec) end
+  return spec
+end
+
 -- Let's admit that these whole tables assembled from parboxes
 -- can be pretty fragile if one starts messing up with glues,
 -- etc. There are a number of "dangerous" settings we want to
@@ -61,7 +81,7 @@ local temporarilyClearFragileSettings = function (callback)
   SILE.settings.popState()
 end
 
--- Apply a background color an hbox:
+-- Apply a background color to an hbox:
 -- Assumes the hbox is not in the output queue.
 SILE.require("packages/color")
 local colorBox = function (hbox, color)
@@ -219,11 +239,11 @@ local processTable = {}
 processTable["cell"] = function (content, args, tablespecs)
     local span = SU.cast("integer", content.options.span or 1)
     local color = content.options.background and SILE.colorparser(content.options.background)
-    local pad = tablespecs.cellpadding
+    local pad = parsePadding(content.options.padding or tablespecs.cellpadding)
     local width = computeCellWidth(args.col, span, tablespecs.cols)
 
     -- build the parbox...
-    local cellBox = SILE.call("parbox", { width = width - 2 * pad,
+    local cellBox = SILE.call("parbox", { width = width - pad[3] - pad[4],
               padding = pad,
               border = content.options.border or tablespecs.cellborder,
               valign = "middle", strut="character" }, function ()
@@ -234,7 +254,7 @@ processTable["cell"] = function (content, args, tablespecs)
     table.remove(SILE.typesetter.state.nodes) -- .. but steal it back...
     -- NOTE (reminder): when building the parbox, migrating nodes (e.g. footnotes)
     -- have been moved to the parent typesetter. Stealing the resulting box,
-    -- doens't change that. But it occurs before pushing all boxes, I am
+    -- doesn't change that. But it occurs before pushing all boxes, I am
     -- unsure where footnotes for long tables spanning over multiple
     -- pages will end up!
     return cellNode(cellBox, content.options.valign, color)
@@ -242,7 +262,6 @@ processTable["cell"] = function (content, args, tablespecs)
 
 processTable["celltable"] = function (content, args, tablespecs)
     local span = SU.cast("integer", content.options.span or 1)
-    local pad = tablespecs.cellborder
     local width = computeCellWidth(args.col, span, tablespecs.cols)
     local rows = {}
     for i = 1, #content do
@@ -306,8 +325,8 @@ processTable["row"] = function (content, args, tablespecs)
 
 SILE.registerCommand("ptable", function (options, content)
   local cols = parseColumnSpec(SU.required(options, "cols", "ptable"))
-  local cellpadding = SU.cast("length", options.cellpading or "4pt")
-  local cellborder = options.cellborder or "0.3pt"
+  local cellpadding = options.cellpadding or "4pt"
+  local cellborder = options.cellborder or "0.4pt"
 
   local totalWidth = SU.sum(cols)
   local tablespecs = {
@@ -388,7 +407,7 @@ of columns). Let us illustrate it with “50\%fw 50\%fw”.
 \end{ptable}
 
 The other options are \doc:code{cellpadding} (defaults to 4pt) and
-\doc:code{cellborder} (defaults to 0.5pt; set it to zero to disable
+\doc:code{cellborder} (defaults to 0.4pt; set it to zero to disable
 the borders). The former is a length, the latter either a single length
 or four space-separated lengths (top, bottom, left, right).
 
@@ -401,7 +420,7 @@ elements, with the same rules applying. It only has one option, \doc:code{backgr
 The \doc:code{\\cell} is the final element containing text or actually anything
 you may want, including complete paragraphs, images, etc. It has two options
 (\doc:code{span} and \doc:code{valign}) that will be described later, besides
-the \doc:code{border} specification and the \doc:code{background} color. 
+the \doc:code{border} and \doc:code{padding} specifications and the \doc:code{background} color.
 All options (including additional ones you may set) are also passed to a cell “hook”.
 
 The \doc:code{\\celltable} is a specific type of cell related to cells spanning over
@@ -409,7 +428,7 @@ multiple rows. It has only one option (\doc:code{span}) and will be addressed la
 too.
 
 Rows and regular cells, as noted, can have background color. The color specification is the
-same as defined in the \doc:keyword{color} package. The global cell border specification
+same as defined in the \doc:keyword{color} package. The global cell border and padding specifications
 from the table can be overriden on each cell.
 
 \center{\parbox[width=70%fw, strut=character]{%
@@ -420,9 +439,9 @@ from the table can be overriden on each cell.
     \cell[border=1pt 0.5pt 0 0]{\center{radius (km)}}
   \end{row}
   \begin{row}
-    \cell{Mercury}
-    \cell{\center{0.24}}
-    \cell{\center{2440}}
+    \cell[padding=4pt 0 4pt 4pt]{Mercury}
+    \cell[padding=4pt 0 4pt 4pt]{\center{0.24}}
+    \cell[padding=4pt 0 4pt 4pt]{\center{2440}}
   \end{row}
   \begin{row}
     \cell[border=0 1pt 0 0]{Venus}
