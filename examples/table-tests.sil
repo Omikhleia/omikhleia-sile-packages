@@ -259,4 +259,115 @@ This table example is in the LaTeX booktabs package, let us try to reproduce it.
 \end{ptable}
 }}
 
+Another way for the record, without even using a celltable... Not really better, as
+it would break if the two Gnat lines were longer (and broken).
+
+\center{\parbox[width=40%fw, strut=character]{%
+\begin[cols=34%fw 33%fw 33%fw, cellborder=0]{ptable}
+  \begin{row}
+    \cell[span=2,border=0.8pt 0.4pt 0 0]{\center{Item}}
+    \cell[border=0.8pt 0 0 0]{}
+  \end{row}
+  \begin{row}
+    \cell[border=0 0.8pt 0 0, padding=4pt 4pt 0 4pt]{\noindent{}Animal}
+    \cell[border=0 0.8pt 0 0]{Description}
+    \cell[border=0 0.8pt 0 0, padding=4pt 4pt 4pt 0]{\raggedleft{Price ($)}}
+  \end{row}
+  \begin{row}
+    \cell[valign=top, padding=4pt 1pt 0 4pt]{\noindent{}Gnat}
+    \cell[valign=top, padding=4pt 1pt 4pt 4pt]{per gram\par{}each}
+    \cell[valign=top, padding=4pt 1pt 4pt 0]{\raggedleft{13.65\par{}0.01}}
+  \end{row}
+  \begin{row}
+    \cell[padding=2pt 1pt 0 4pt]{\noindent{}Gnu}
+    \cell[padding=2pt 1pt 4pt 4pt]{stuffed}
+    \cell[padding=2pt 1pt 4pt 0]{\raggedleft{92.50}}
+  \end{row}
+  \begin{row}
+    \cell[padding=2pt 1pt 0 4pt]{\noindent{}Emu}
+    \cell[padding=2pt 1pt 4pt 4pt]{stuffed}
+    \cell[padding=2pt 1pt 4pt 0]{\raggedleft{33.33}}
+  \end{row}
+  \begin{row}
+    \cell[border=0 0.8pt 0 0, padding=2pt 4pt 0 4pt]{\noindent{}Armadillo}
+    \cell[border=0 0.8pt 0 0, padding=2pt 4pt 4pt 4pt]{frozen}
+    \cell[border=0 0.8pt 0 0, padding=2pt 4pt 4pt 0]{\raggedleft{8.99}}
+  \end{row}
+\end{ptable}
+}}
+
+Test 7 = re-doing 4 without the enclosing parbox, which could be regarded as an overkill.
+
+\center{%
+\begin[cols=8%fw 16%fw 16%fw, cellborder=0]{ptable}
+  \begin{row}
+    \cell[border=0.8pt 0.4pt 0 0]{}
+    \cell[border=0.8pt 0.4pt 0 0, style=center]{H(Mu) + F\text:subscript{2}}
+    \cell[border=0.8pt 0.4pt 0 0, style=center]{H(Mu) + Cl\text:subscript{2}}
+  \end{row}
+  \begin{row}
+    \cell{\em{β}\kern[width=0.1em](H)}
+    \cell[style=center]{80.9°}
+    \cell[style=center]{83.2°}
+  \end{row}
+  \begin{row}
+    \cell[border=0 0.8pt 0 0]{\em{β}\kern[width=0.1em](Mu)}
+    \cell[border=0 0.8pt 0 0, style=center]{86.7°}
+    \cell[border=0 0.8pt 0 0, style=center]{87.7°}
+  \end{row}
+\end{ptable}
+}
+
+Test 8 = Let us not forget these cells are parboxes!
+
+\begin[cols=26%fw 21%fw 37%fw 8%fw 8%fw, header=true]{ptable}
+  \begin[background=#eee]{row}
+    \celltable[span=5]{
+      \row{\cell[span=5]{\center{Community Courses - Bath Autumn 1997}}}
+      \begin{row}
+        \cell{\center{Course Name}}
+        \cell{\center{Course Tutor}}
+        \cell{\center{Summary}}
+        \cell{\center{Code}}
+        \cell{\center{Fee}}
+      \end{row}
+    }
+  \end{row}
+  \begin{row}
+    \cell{\noindent\raggedright{After the Civil War}}
+    \cell{Dr. John Wroughton}
+    \cell{\noindent\raggedright{%
+      The course will examine the turbulent years in England
+      after 1646.}
+            \raggedleft{\em{6 weekly meetings starting Monday 13th
+      October.}}}
+    \cell{H27}
+    \cell{£32}
+  \end{row}
+  \begin{row}
+    \cell{\noindent\raggedright{An Introduction to Anglo-Saxon England}}
+    \cell{Mark Cottle}
+    \cell{\noindent\raggedright{%
+      One day course introducing the early medieval
+      period reconstruction the Anglo-Saxons and
+      their society.}
+      \raggedleft{\em{Saturday 18th October.}}}
+    \cell{H28}
+    \cell{£18}
+  \end{row}
+  \begin{row}
+    \cell{\noindent\raggedright{The Glory that was Greece}}
+    \cell{Valerie Lorenz}
+    \cell{\noindent\raggedright{%
+      Birthplace of democracy, philosophy, heartland of theater, home of
+      argument.\par
+      
+      The Romans may have done it but the Greeks did it
+      first.}
+        \raggedleft{\em{Saturday day school 25th October.}}}
+    \cell{H30}
+    \cell{£18}
+  \end{row}
+\end{ptable}
+
 \end{document}
