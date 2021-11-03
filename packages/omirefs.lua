@@ -23,7 +23,7 @@ local moveRefs = function (_)
   end
 end
 
-local writeRefs = function ()
+local writeRefs = function (_)
   local tocdata = pl.pretty.write(SILE.scratch.refs)
   local tocfile, err = io.open(SILE.masterFilename .. '.ref', "w")
   if not tocfile then return SU.error(err) end

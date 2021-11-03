@@ -2,12 +2,12 @@
 -- Re-implementation of the footnotes package
 -- 2021, Didier Willis
 --
-SILE.require("packages/abbr") -- for abbr:nbsp
+SILE.require("packages/abbr") -- for abbr:nbsp - MAYBE WE'LL CHANGE THIS
 SILE.require("packages/textsubsuper") -- for text:superscript
-SILE.require("packages/counters")
-SILE.require("packages/raiselower")
-SILE.require("packages/rebox")
-SILE.require("packages/rules")
+SILE.require("packages/counters") -- used for counter formatting
+SILE.require("packages/raiselower") -- NOT NEEDED NOW, NO?
+SILE.require("packages/rebox") -- used by footnote:rule
+SILE.require("packages/rules") -- used by footnote:rule
 local insertions = SILE.require("packages/insertions")
 SILE.scratch.counters.footnote = { value= 1, display= "arabic" }
 
@@ -39,7 +39,7 @@ SILE.registerCommand("footnote:rule", function (options, _)
   end)
 end, "Small helper command (wrapper around footnote:separator) to set a footnote rule.")
 
--- Footnote call reference
+-- Footnote reference call (within the text flow)
 
 SILE.registerCommand("footnote:mark", function (options, _)
   if options.mark then
@@ -134,7 +134,7 @@ a footnote rule. It may be called, early on in your documents, without options,
 or one or several of the following:
 
 \begin{doc:codes}
-\\footnoterule[length=\doc:args{length}, beforeskipamount=\doc:args{glue},\par
+\\footnote:rule[length=\doc:args{length}, beforeskipamount=\doc:args{glue},\par
 afterskipamount=\doc:args{glue}, thickness=\doc:args{length}]
 \end{doc:codes}
 
