@@ -96,10 +96,10 @@ SILE.registerCommand("style:define", function (options, content)
   if options.inherit and SILE.scratch.styles[options.inherit] == nil then
     -- Should we really complain if inherited doesn't exist (yet)?
     -- (Well it avoids some obvious risks of cycle...)
-    SU.error("Unknown inherited named style " .. options.inherit .. ".")
+    SU.error("Unknown inherited named style '" .. options.inherit .. "'.")
   end
   if options.inherit and options.inherit == options.name then
-    SU.error("Named style " .. options.name .. " cannot inherit itself.")
+    SU.error("Named style '" .. options.name .. "' cannot inherit itself.")
   end
   SILE.scratch.styles[name] = { inherit = options.inherit, style = {} }
   for i=1, #content do
@@ -133,7 +133,7 @@ end
 SILE.registerCommand("style:apply", function (options, content)
   local name = SU.required(options, "name", "style:apply")
   local styledef = SILE.scratch.styles[name]
-  if styledef == nil then SU.error("Unknown named style " .. name .. ".") end
+  if styledef == nil then SU.error("Unknown named style '" .. name .. "'.") end
   if styledef.inherit then
     SILE.call("style:apply", { name = styledef.inherit }, function()
       style1(styledef.style, content)
@@ -149,16 +149,16 @@ SILE.registerCommand("style:redefine", function (options, content)
 
   if options.as then
     if options.as == options.name then
-      SU.error("Style " .. options.name .. " should not be redefined as itself.")
+      SU.error("Style '" .. options.name .. "' should not be redefined as itself.")
     end
 
     -- Case: \style:redefine[name=style-name, as=saved-style-name]
     if SILE.scratch.styles[options.as] ~= nil then
-      SU.error("Style " .. options.as .. " would be overwritten.") -- Let's forbid it for now.
+      SU.error("Style '" .. options.as .. "' would be overwritten.") -- Let's forbid it for now.
     end
     local sty = SILE.scratch.styles[options.name]
     if sty == nil then
-      SU.error("Style " .. options.name .. " does not exist!")
+      SU.error("Style '" .. options.name .. "' does not exist!")
     end
     SILE.scratch.styles[options.as] = sty
 
@@ -169,16 +169,16 @@ SILE.registerCommand("style:redefine", function (options, content)
     end
   elseif options.from then
     if options.from == options.name then
-      SU.error("Style " .. option.name .. " should not be restored from itself, ignoring.")
+      SU.error("Style '" .. option.name .. "' should not be restored from itself, ignoring.")
     end
 
     -- Case \style:redefine[name=style-name, from=saved-style-name]
     if content and (type(content) ~= "table" or #content ~= 0) then
-      SU.warn("Extraneous content in " .. options.name .. ", redefinition is ignored.")
+      SU.warn("Extraneous content in '" .. options.name .. "' is ignored.")
     end
     local sty = SILE.scratch.styles[options.from]
     if sty == nil then
-      SU.error("Style " .. option.from .. " does not exist!")
+      SU.error("Style '" .. option.from .. "' does not exist!")
     end
     SILE.scratch.styles[options.name] = sty
     SILE.scratch.styles[options.from] = nil
