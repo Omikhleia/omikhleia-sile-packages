@@ -5,7 +5,10 @@
 \language[main=en]
 \font[family=Libertinus Serif]
 \footnote:rule
+\header:rule
 
+\noheaderthispage
+\nofoliosthispage
 \hbox{}\vfill
 
 \begin{center}
@@ -19,9 +22,13 @@ for SILE
 \end{center}
 
 \vfill
-\break
+\supereject
+
+\noheaderthispage
+\nofoliosthispage
 
 \chapter[numbering=false, toc=false]{Table of Contents}
+
 \tableofcontents
 
 \chapter{Packages}
@@ -88,6 +95,10 @@ class writers.
 
 \package-documentation[src=packages/omirefs]
 
+\subsection{omiheaders: page headers revisited}
+
+\package-documentation[src=packages/omiheaders]
+
 \section{Specialized packages}
 
 \subsection{teidict: XML TEI P4 print dictionaries}
@@ -104,19 +115,30 @@ class writers.
 
 This is a work in progress, gradually tuning the default book
 class from SILE to this author’s needs and taste.
-
-Regarding the differences for now, it has slightly different default page masters,
-as the gutter space was found to be too small.
-The sectioning commands (partially) obey styles (relying on the \doc:keyword{styles} package).
-The chapter pages have page numbering. The page numbers, by the way, are
-flushed left or right depending on the page, rather than centered.
-The footnotes are based on the \doc:keyword{omifootnotes} package.
-The table of contents relies on the \doc:keyword{omitableofcontents} package.
-It supports cross-references via the \doc:keyword{omirefs} package.
-
 This very document uses it. As stated, it is far from finished, so anything
 that may look wrong here may show where we are heading to. And, obviously,
 as nothing is definitive yet, things may change or break.
+
+Regarding the differences for now, it has slightly different default page masters,
+as the gutter space was found to be too small.
+
+The sectioning commands (partially) obey styles (relying on the \doc:keyword{styles} package).
+
+The chapter pages have page numbering and make sure the current page does not have
+any header shown. Chapters begin on an odd page but the previous page, if blank,
+is shown without page number and header.
+
+The page numbers, by the way, are flushed left or right depending on the page, rather
+than centered.
+
+The footnotes are based on the \doc:keyword{omifootnotes} package.
+
+The table of contents relies on the \doc:keyword{omitableofcontents} package.
+
+It supports cross-references via the \doc:keyword{omirefs} package.
+
+Page headers rely on the functionality provided by the \doc:keyword{omiheaders}
+package.
 
 \section{teibook: XML TEI P4 print dictionaries}
 

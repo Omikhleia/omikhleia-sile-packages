@@ -8,6 +8,7 @@
 --   - Slightly different default page master (I found the gutter space too small)
 --   - Sectioning commands obey styles (defined with the "styles" package)
 --   - Chapters have page numbering
+--   - Better handling of page headers
 --
 local plain = SILE.require("plain", "classes")
 local omibook = plain { id = "omibook" }
@@ -19,6 +20,10 @@ styles.defineStyle("book:chapter", {}, { font = { weight = 800, size = "+4" } })
 styles.defineStyle("book:section", {},  { font = { weight = 800, size = "+2" } })
 styles.defineStyle("book:subsection", {},  { font = { weight = 800 } })
 styles.defineStyle("book:folio", {},  { font = { size = "-0.5" } })
+styles.defineStyle("book:header:base", {},  { font = { size = "-1" } })
+styles.defineStyle("book:header:left", { inherit = "book:header:base" }, {})
+styles.defineStyle("book:header:right", { inherit = "book:header:base" }, { font = { style = "italic" } })
+
 
 omibook.defaultFrameset = {
   content = {
@@ -64,6 +69,7 @@ function omibook:init ()
   })
 
   self:loadPackage("omirefs")
+  self:loadPackage("omiheaders")
 
   -- override foliostyle
   self:loadPackage("folio")
@@ -100,25 +106,9 @@ end
 omibook.endPage = function (self)
   self:moveTocNodes()
   self:moveRefs()
-  if (self:oddPage() and SILE.scratch.headers.right) then
-    SILE.typesetNaturally(SILE.getFrame("header"), function ()
-      SILE.settings.set("current.parindent", SILE.nodefactory.glue())
-      SILE.settings.set("document.lskip", SILE.nodefactory.glue())
-      SILE.settings.set("document.rskip", SILE.nodefactory.glue())
-      -- SILE.settings.set("typesetter.parfillskip", SILE.nodefactory.glue())
-      SILE.process(SILE.scratch.headers.right)
-      SILE.call("par")
-    end)
-  elseif (not(self:oddPage()) and SILE.scratch.headers.left) then
-      SILE.typesetNaturally(SILE.getFrame("header"), function ()
-        SILE.settings.set("current.parindent", SILE.nodefactory.glue())
-        SILE.settings.set("document.lskip", SILE.nodefactory.glue())
-        SILE.settings.set("document.rskip", SILE.nodefactory.glue())
-          -- SILE.settings.set("typesetter.parfillskip", SILE.nodefactory.glue())
-        SILE.process(SILE.scratch.headers.left)
-        SILE.call("par")
-      end)
-  end
+  local headerContent = (self:oddPage() and SILE.scratch.headers.right)
+        or (not(self:oddPage()) and SILE.scratch.headers.left)
+  self:outputHeader(headerContent)
   return plain.endPage(self)
 end
 
@@ -167,15 +157,32 @@ SILE.doTexlike([[%
 \define[command=book:chapter:post]{\par\noindent}%
 \define[command=book:section:post]{ }%
 \define[command=book:subsection:post]{ }%
-\define[command=book:left-running-head-font]{\font[size=9pt]}%
-\define[command=book:right-running-head-font]{\font[size=9pt,style=italic]}%
 ]])
 end
 
+SILE.registerCommand("omibook-double-page", function (_, _)
+  -- NOTE: We do not use the "open-double-page" from the two side
+  -- package as it has doesn't have the nice logic we have here
+  -- (page 1 special case, and no header nor folio on blank
+  -- even pages)
+  if SILE.scratch.counters.folio.value > 1 then
+    SILE.typesetter:leaveHmode()
+    SILE.call("supereject")
+    if SILE.documentState.documentClass:oddPage() then
+      SILE.typesetter:typeset("")
+      SILE.typesetter:leaveHmode()
+      SILE.call("nofoliosthispage")
+      SILE.call("noheaderthispage")
+      SILE.call("supereject")
+    end
+  end
+  SILE.typesetter:leaveHmode()
+end, "Open a double page without header and folio")
+
 SILE.registerCommand("chapter", function (options, content)
-  SILE.call("open-double-page")
+  SILE.call("omibook-double-page")
   SILE.call("noindent")
-  SILE.scratch.headers.right = nil
+  SILE.call("noheaderthispage")
   SILE.call("set-counter", { id = "footnote", value = 1 })
   SILE.call("style:apply", { name= "book:chapter" }, function ()
     SILE.call("book:sectioning", {
@@ -188,10 +195,7 @@ SILE.registerCommand("chapter", function (options, content)
     SILE.process(content)
   end)
   SILE.call("left-running-head", {}, function ()
-    SILE.settings.temporarily(function ()
-      SILE.call("book:left-running-head-font")
-      SILE.process(content)
-    end)
+    SILE.call("style:apply", { name = "book:header:left" }, content)
   end)
   SILE.call("bigskip")
   -- Chapters have page numbering (FIXME should be an option?)
@@ -214,9 +218,8 @@ SILE.registerCommand("section", function (options, content)
   end)
   if not SILE.scratch.counters.folio.off then
     SILE.call("right-running-head", {}, function ()
-      SILE.call("book:right-running-head-font")
       SILE.call("rightalign", {}, function ()
-        SILE.settings.temporarily(function ()
+        SILE.call("style:apply", { name = "book:header:right" }, function()
           SILE.call("show-multilevel-counter", { id = "sectioning", level = 2 })
           SILE.typesetter:typeset(" ")
           SILE.process(content)
@@ -250,6 +253,5 @@ SILE.registerCommand("subsection", function (options, content)
   SILE.call("novbreak")
   SILE.typesetter:inhibitLeading()
 end, "Begin a new subsection")
-
 
 return omibook
