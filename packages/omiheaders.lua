@@ -81,25 +81,25 @@ return {
   },
   documentation= [[\begin{document}
 \script[src=packages/autodoc-extras]
+\script[src=packages/enumitem]
 
 The \doc:keyword{omiheaders} package provides a few basic commands for classes to
 better control the output of the page headers, in a way similar to the \doc:keyword{folio}
 package for page numbers. It also provides four commands to users:
 
-\noindent{}• \doc:code{\\noheaders}: turns page headers off.
-
-\noindent{}• \doc:code{\\noheaderthispage}: turns page headers off for one page,
-             then on again afterward.
-
-\noindent{}• \doc:code{\\headers}: turns page headers back on.
-
-\noindent{}• \doc:code{\\header:rule[valign=\doc:args{top|bottom}, offset=\doc:args{length},
-thickness=\doc:args{length}]}: draws a header rule when the page headers are active.
-The default values for the options are, in order, top, 1bs and 0.8pt. The rule is drawn
-relative to the header frame; the offset is added if the alignement is to the top
-or substracted if it is to the bottom. This is the most generic solution, as header
-frames can be declared in different ways and, obviously, the nature of the content cannot
-be guessed, but one normally wants the rule to be displayed at the same place on each page…
+\begin{itemize}
+\item{\doc:code{\\noheaders}: turns page headers off.}
+\item{\doc:code{\\noheaderthispage}: turns page headers off for one page,
+  then on again afterward.}
+\item{\doc:code{\\headers}: turns page headers back on.}
+\item{\doc:code{\\header:rule[valign=\doc:args{top|bottom}, offset=\doc:args{length},
+  thickness=\doc:args{length}]}: draws a header rule when the page headers are active.
+  The default values for the options are, in order, top, 1bs and 0.8pt. The rule is drawn
+  relative to the header frame; the offset is added if the alignement is to the top
+  or substracted if it is to the bottom. This is the most generic solution, as header
+  frames can be declared in different ways and, obviously, the nature of the content cannot
+  be guessed, but one normally wants the rule to be displayed at the same place on each page…}
+\end{itemize}
 
 It exports a Lua function \doc:code{outputHeader()} which should be called by
 the class at the end of each page, with the desired content for the current page
