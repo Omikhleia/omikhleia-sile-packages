@@ -1,6 +1,8 @@
 \begin[papersize=6in x 9in, class=book]{document}
 \script[src=packages/styles]
 \script[src=packages/color]
+\script[src=packages/unichar]
+\script[src=packages/enumitem]
 \script[src=packages/autodoc-extras]
 
 The \doc:keyword{styles} package can be used to easily define styling specifications. 
@@ -30,22 +32,23 @@ This package is an attempt at implementing such ideas, or a subset of them, in S
 
 Let’s have a look at some recent version of LibreOffice…
 
-Character styles include: font (family, style 
+\begin{itemize}
+\item{Character styles include: font (family, style 
 and weight, size, language, features), font effects (color, decoration e.g. underlining and
 strikethrough, case), position (superscript, subscript), rotation… (and plenty of smaller
-features, e.g. borders, which interest is a bit doubtful, heh!).
+features, e.g. borders, which interest is a bit doubtful, heh!).}
+\item{Paragraph styles, in addition to the above, include: indent and spacing, alignment,
+   outline & numbering, text flow (notably, breaks).}
+\item{Page styles include: page layout (a bit akin to SILE’s masters), header and footer, folio 
+   numbering, background and such fancy things. Columns too, though this could be debatable.}
+\end{itemize}
 
-Paragraph styles, in addition to the above, include: indent and spacing, alignment,
-outline & numbering, text flow (notably, breaks).
+\smallskip
 
-Page styles include: page layout (a bit akin to SILE’s masters), header and footer, folio 
-numbering, background and such fancy things. Columns too, though this could be debatable.
+\em{Regular character styles.}
+\novbreak
 
-\bigskip
-
-— \em{Anything below this point is still experimental, and likely unstable.} —
-
-\medskip
+\smallskip
 To define a (character) style, one uses the following syntax (with any of the internal
 elements being optional):
 
@@ -70,6 +73,87 @@ A style can also inherit from a previously defined style:
 \par\quad…
 \par\}
 \end{doc:codes}
+
+\smallskip
+
+\em{Styles for tables of contents.}
+\novbreak
+
+\begin{doc:codes}
+\\style:define[name=\doc:args{name}]\{
+\par\quad{}…
+\par\quad\\toc[number=\doc:args{boolean}, pageno=\doc:args{boolean}, dotfill=\doc:args{boolean}]
+\par\}
+\end{doc:codes}
+
+The style specification, besides the formatting commands, includes:
+
+\begin{itemize}
+\item{Displaying the page number or not,}
+\item{Filling the line with dots or not,}
+\item{Displaying the section number or not.}
+\end{itemize}
+
+\smallskip
+
+\em{Character styles for bullet lists.}
+\novbreak
+
+\begin{doc:codes}
+\\style:define[name=\doc:args{name}]\{
+\par\quad{}…
+\par\quad\\itemize[bullet=\doc:args{character}]
+\par\}
+\end{doc:codes}
+
+The style specification includes the character to use as bullet. The other character
+formatting commands should of course apply to the bullet too.
+
+\smallskip
+
+\em{Character styles for enumerations.}
+\novbreak
+
+\begin{doc:codes}
+\\style:define[name=\doc:args{name}]\{
+\par\quad{}…
+\par\quad\\enumerate[display=\doc:args{string}, before=\doc:args{string}, after=\doc:args{string}]
+\par\}
+\end{doc:codes}
+
+The style specification includes:
+
+\begin{itemize}
+\item{The display type (format) of the item, as “arabic”, “roman”, etc.}
+\item{The text to prepend to the value,}
+\item{The text to append to the value.}
+\end{itemize}
+
+The specification also accepts another extended syntax:
+
+\begin{doc:codes}
+\\style:define[name=\doc:args{name}]\{
+\par\quad{}…
+\par\quad\\enumerate[display=U+\doc:args{hex}]
+\par\}
+\end{doc:codes}
+
+\smallskip
+
+Where the display format is provided as a Unicode codepoint in hexadecimal, supposed to
+represent the glyph for “1”. It allows using a subsequent range of Unicode characters
+as number labels, even though the font may not include any OpenType feature to enable
+these automatically. For instance, one could specify U+2474 \unichar{U+2474} (“parenthesized digit one”)…
+or, why not, U+2460 \unichar{U+2460}, U+2776 \unichar{U+2776} or even U+24B6 \unichar{U+24B6}, and so on.
+It obviously requires the font to have these characters, and due to the way how Unicode is
+done, the enumeration to stay within a range corresponding to expected characters.
+
+The other character formatting commands should of course apply to the full label.
+
+\smallskip
+
+\em{Advanced commands.}
+\novbreak
 
 To apply a (character) style to some content, one just has to do:
 

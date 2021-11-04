@@ -191,6 +191,14 @@ return {
   exports = {
     defineStyle = function(name, opts, styledef)
       SILE.scratch.styles[name] = { inherit = opts.inherit, style = styledef }
+    end,
+    resolveStyle = function (name)
+      local stylespec = SILE.scratch.styles[name]
+      if not stylespec then SU.error("Style '"..name.."' does not exist") end
+    
+      -- FIXME Later: Recurse for style inheritance.
+      -- print(name, dump(stylespec))
+      return stylespec.style
     end
   },
   documentation = [[\begin{document}

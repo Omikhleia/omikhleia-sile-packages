@@ -2,7 +2,6 @@
 -- Partial re-implementation of the tableofcontents package
 -- 2021, Didier Willis
 --
---
 -- Overrides a few definitions only.
 --
 local defaultTocPackage = SILE.require("packages/tableofcontents").exports
@@ -13,7 +12,7 @@ SILE.registerCommand("tableofcontents:title", function (_, _)
   SU.error("The omitableofcontents package should not use the tableofcontents:title command.")
 end)
 
--- Go for styles FIXME = TEMPORARY DEFINITIONS AWAITING FOR PROPER SUPPORT IN THE STYLES PACKAGE
+-- Styles
 local styles = SILE.require("packages/styles").exports
 local tocStyles = {
   -- level1 ~ chapter
@@ -36,9 +35,10 @@ SILE.registerCommand("tableofcontents:item", function (options, content)
   local level = tonumber(options.level)
   local hasFiller = true
   local hasPageno = true
-  if tocStyles[level].toc then
-    hasPageno = SU.boolean(tocStyles[level].toc.pageno, true)
-    hasFiller = hasPageno and SU.boolean(tocStyles[level].toc.dotfill, true)
+  local tocSty = styles.resolveStyle("toc:level"..level)
+  if tocSty.toc then
+    hasPageno = SU.boolean(tocSty.toc.pageno, true)
+    hasFiller = hasPageno and SU.boolean(tocSty.toc.dotfill, true)
   end
 
   if not hasPageno then
@@ -68,7 +68,8 @@ end)
 SILE.registerCommand("omitableofcontents:levelnumber", function (options, content)
   local level = SU.cast("integer", SU.required(options, "level", "omitableofcontents:level"))
   if level < 0 or level > 3 then SU.error("Invalid TOC level "..level) end
-  if tocStyles[level].toc and tocStyles[level].toc.number then
+  local tocSty = styles.resolveStyle("toc:level"..level)
+  if tocSty.toc and SU.boolean(tocSty.toc.number, false) then
     SILE.process(content)
   end
 end)
@@ -94,6 +95,7 @@ return {
   end,
   documentation = [[\begin{document}
 \script[src=packages/autodoc-extras]
+\script[src=packages/enumitem]
 
 The \doc:code{omitableofcontents} package is a wrapper around the \doc:code{tableofcontents} package,
 redefining some of its default behaviors.
@@ -112,13 +114,8 @@ it, while it is so simple to just add a consistently-styled section above the ta
 
 Moreover, this package overrides all the level formatting commands to rely on
 styles (using the \doc:keyword{styles} package), with specific options for the
-TOC. The style specifications, besides the formatting of the text, also include:
-
-• Displaying the page number or not,
-
-• Filling the line with dots (default) or not,
-
-• Displaying the section number or not.
+TOC, the styles used being \doc:code{toc:level1}, \doc:code{toc:level2} and
+\doc:code{toc:level3}.
 
 Other than that, everything else from the standard package applies.
 
