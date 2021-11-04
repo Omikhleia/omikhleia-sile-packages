@@ -10,7 +10,7 @@
     </titleStmt>
 
     <editionStmt>
-      <edition n="1.0.2"/>
+      <edition n="1.0.3"/>
     </editionStmt>
 
     <publicationStmt>
@@ -4158,7 +4158,6 @@
       <def>basé sur</def> <usg type="hint">référentiel</usg>
     </trans>
   </sense>
-  <xr type="analogy"><ptr target="du"/></xr>
 </entry>
 
 <entry id="chad">
@@ -8821,6 +8820,29 @@
   <etym>LÁLAK</etym>
 </entry>
 
+<entry id="lam">
+  <form>
+    <orth>lam</orth>
+  </form>
+  <sense>
+    <gramGrp>
+      <pos>adv.</pos> <subc>coord.</subc>
+    </gramGrp>
+    <trans lang="fr">
+      <def>ainsi, alors</def>
+    </trans>
+  </sense>
+  <sense>
+    <gramGrp>
+      <pos>conj.</pos>
+    </gramGrp>
+    <trans lang="fr">
+      <def>dès lors que…</def>
+    </trans>
+  </sense>
+  <etym>LAM-</etym>
+</entry>
+
 <entry id="lann">
   <form>
     <orth>lann</orth>
@@ -9013,29 +9035,6 @@
       <per>3rd</per> <number>pl.</number> <per>3rd</per> <number>pl.</number>
     </gramGrp>
   </re>
-</entry>
-
-<entry id="lam">
-  <form>
-    <orth>lam</orth>
-  </form>
-  <sense>
-    <gramGrp>
-      <pos>adv.</pos> <subc>coord.</subc>
-    </gramGrp>
-    <trans lang="fr">
-      <def>ainsi, alors</def>
-    </trans>
-  </sense>
-  <sense>
-    <gramGrp>
-      <pos>conj.</pos>
-    </gramGrp>
-    <trans lang="fr">
-      <def>dès lors que…</def>
-    </trans>
-  </sense>
-  <etym>LAM-</etym>
 </entry>
 
 <entry id="larese">
