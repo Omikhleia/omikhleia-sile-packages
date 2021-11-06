@@ -5,7 +5,7 @@
 \script[src=packages/enumitem]
 \script[src=packages/autodoc-extras]
 
-The \doc:keyword{styles} package can be used to easily define styling specifications. 
+The \doc:keyword{styles} package can be used to easily define styling specifications.
 It is intended to be used by other packages or classes, rather than directly.
 
 If one looks at the default/standard packages or classes in SILE, something may
@@ -19,7 +19,7 @@ at 22pt. This doesn’t depend on the document main font size. LaTeX, years befo
 a bit better here, defining different relative sizes (but assuming a book is always typeset in 10pt, 11pt or 12pt).
 (3) Many commands, say book sectioning, rely on hard-coded vertical skips. But what if one wants a different
 vertical spacing? Two solutions come to mind, either redefining the relevant commands
-(say \doc:code{\\chapter}) or temporarily redefining the skips (say, \doc:code{\\bigskip})… In a way, 
+(say \doc:code{\\chapter}) or temporarily redefining the skips (say, \doc:code{\\bigskip})… In a way,
 it all sounds very clumsy, cumbersome, somehow \em{ad hoc}, and… here, LaTeX-like. Which is not necessarily wrong
 (there is no offense intended here), but why not try a different approach?
 
@@ -33,13 +33,13 @@ This package is an attempt at implementing such ideas, or a subset of them, in S
 Let’s have a look at some recent version of LibreOffice…
 
 \begin{itemize}
-\item{Character styles include: font (family, style 
+\item{Character styles include: font (family, style
 and weight, size, language, features), font effects (color, decoration e.g. underlining and
 strikethrough, case), position (superscript, subscript), rotation… (and plenty of smaller
 features, e.g. borders, which interest is a bit doubtful, heh!).}
 \item{Paragraph styles, in addition to the above, include: indent and spacing, alignment,
    outline & numbering, text flow (notably, breaks).}
-\item{Page styles include: page layout (a bit akin to SILE’s masters), header and footer, folio 
+\item{Page styles include: page layout (a bit akin to SILE’s masters), header and footer, folio
    numbering, background and such fancy things. Columns too, though this could be debatable.}
 \end{itemize}
 
@@ -109,6 +109,9 @@ The style specification, besides the formatting commands, includes:
 The style specification includes the character to use as bullet. The other character
 formatting commands should of course apply to the bullet too.
 
+The bullet can be either entered directly as a character, or provided as a Unicode codepoint in
+hexadecimal (U+xxxx).
+
 \smallskip
 
 \em{Character styles for enumerations.}
@@ -134,7 +137,7 @@ The specification also accepts another extended syntax:
 \begin{doc:codes}
 \\style:define[name=\doc:args{name}]\{
 \par\quad{}…
-\par\quad\\enumerate[display=U+\doc:args{hex}]
+\par\quad\\enumerate[display=\doc:args{U+xxxx}]
 \par\}
 \end{doc:codes}
 

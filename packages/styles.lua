@@ -130,17 +130,31 @@ local style1 = function (style, content)
 end
 -- END DRAFT
 
+local function resolveStyle (name)
+  local stylespec = SILE.scratch.styles[name]
+  if not stylespec then SU.error("Style '"..name.."' does not exist") end
+
+  if stylespec.inherit then
+    local inherited = resolveStyle(stylespec.inherit)
+    -- Deep merging the specification options
+    local sty = pl.tablex.deepcopy(stylespec.style)
+    for k, v in pairs(inherited) do
+      if sty[k] then
+        sty[k] = pl.tablex.union(v, sty[k])
+      else
+        sty[k] = v
+      end
+    end
+    return sty
+  end
+  return stylespec.style
+end
+
 SILE.registerCommand("style:apply", function (options, content)
   local name = SU.required(options, "name", "style:apply")
-  local styledef = SILE.scratch.styles[name]
-  if styledef == nil then SU.error("Unknown named style '" .. name .. "'.") end
-  if styledef.inherit then
-    SILE.call("style:apply", { name = styledef.inherit }, function()
-      style1(styledef.style, content)
-    end)
-  else
-    style1(styledef.style, content)
-  end
+  local styledef = resolveStyle(name)
+
+  style1(styledef, content)
 end, "Applies a named style to the content.")
 
 
@@ -189,17 +203,12 @@ end, "Redefines a style saving the old version with another name, or restores it
 
 return {
   exports = {
+    -- programmatically define a style
     defineStyle = function(name, opts, styledef)
       SILE.scratch.styles[name] = { inherit = opts.inherit, style = styledef }
     end,
-    resolveStyle = function (name)
-      local stylespec = SILE.scratch.styles[name]
-      if not stylespec then SU.error("Style '"..name.."' does not exist") end
-    
-      -- FIXME Later: Recurse for style inheritance.
-      -- print(name, dump(stylespec))
-      return stylespec.style
-    end
+    -- resolve a style (incl. inherited fields)
+    resolveStyle = resolveStyle,
   },
   documentation = [[\begin{document}
 \include[src=packages/styles-doc.sil]

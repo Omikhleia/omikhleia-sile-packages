@@ -1,8 +1,5 @@
--- 
+--
 -- Lightweight enumerations and bullet lists
--- VERY ROUGH STUFF, QUICK AND DIRTY IMPLEMENTATION
--- Many internal things will change after a proper refactor.
--- Look at the documentation, but do not expect the code to be stable.
 -- License: MIT
 --
 SILE.require("packages/counters")
@@ -11,14 +8,14 @@ SILE.require("packages/rebox")
 SILE.scratch.liststyle = nil
 
 SILE.settings.declare({
-  parameter = "list.enumerate.depth",
+  parameter = "list.current.enumerate.depth",
   type = "integer",
   default = 0,
   help = "Current enumerate depth (nesting) - internal"
 })
 
 SILE.settings.declare({
-  parameter = "list.itemize.depth",
+  parameter = "list.current.itemize.depth",
   type = "integer",
   default = 0,
   help = "Current itemize depth (nesting) - internal"
@@ -65,103 +62,101 @@ local styles = SILE.require("packages/styles").exports
 -- N.B. Commented out colors and fonts were for the show, lol.
 
 -- Enumerate style
-styles.defineStyle("list:enumerate:1", {}, { 
+styles.defineStyle("list:enumerate:1", {}, {
   -- font = { weight = 800 },
   enumerate = { display = "arabic", before = "", after = "." }
 })
-styles.defineStyle("list:enumerate:2", {}, { 
+styles.defineStyle("list:enumerate:2", {}, {
   enumerate = { display = "roman", before = "", after = "." }
 })
-styles.defineStyle("list:enumerate:3", {}, { 
+styles.defineStyle("list:enumerate:3", {}, {
   -- color = { color = "blue" },
   enumerate = { display = "alpha", before = "", after = ")" }
 })
-styles.defineStyle("list:enumerate:4", {}, { 
+styles.defineStyle("list:enumerate:4", {}, {
   -- color = { color = "red" },
   enumerate = { display = "arabic", before = "", after = ")" }
 })
-styles.defineStyle("list:enumerate:5", {}, { 
+styles.defineStyle("list:enumerate:5", {}, {
   enumerate = { display = "arabic", before = "§", after = "." }
 })
 
 -- Alternate enumerate style
-styles.defineStyle("list:enumerate-alternate:1", {}, { 
+styles.defineStyle("list:enumerate-alternate:1", {}, {
   enumerate = { display = "Alpha", before = "", after = "." }
 })
-styles.defineStyle("list:enumerate-alternate:2", {}, { 
+styles.defineStyle("list:enumerate-alternate:2", {}, {
   enumerate = { display = "Roman", before = "", after = "." }
 })
-styles.defineStyle("list:enumerate-alternate:3", {}, { 
+styles.defineStyle("list:enumerate-alternate:3", {}, {
   enumerate = { display = "roman", before = "", after = "." }
 })
 styles.defineStyle("list:enumerate-alternate:4", {}, {
-  font = { style = "italic" }, 
+  font = { style = "italic" },
   enumerate = { display = "alpha", before = "", after = "." }
 })
-styles.defineStyle("list:enumerate-alternate:5", {}, { 
+styles.defineStyle("list:enumerate-alternate:5", {}, {
   enumerate = { display = "U+2474" }
 })
 
 -- Itemize style
-styles.defineStyle("list:itemize:1", {}, { 
+styles.defineStyle("list:itemize:1", {}, {
   -- color = { color = "red" },
   itemize = { bullet = "•" } -- black bullet
 })
-styles.defineStyle("list:itemize:2", {}, { 
+styles.defineStyle("list:itemize:2", {}, {
   itemize = { bullet = "◦" } -- circle bullet
 })
-styles.defineStyle("list:itemize:3", {}, { 
+styles.defineStyle("list:itemize:3", {}, {
   -- color = { color = "blue" },
   itemize = { bullet = "–" } -- en-dash
 })
-styles.defineStyle("list:itemize:4", {}, { 
+styles.defineStyle("list:itemize:4", {}, {
   itemize = { bullet = "•" } -- black bullet
 })
-styles.defineStyle("list:itemize:5", {}, { 
+styles.defineStyle("list:itemize:5", {}, {
   itemize = { bullet = "◦" } -- circle bullet
 })
-styles.defineStyle("list:itemize:6", {}, { 
+styles.defineStyle("list:itemize:6", {}, {
   -- color = { color = "blue" },
   itemize = { bullet = "–" } -- en-dash
 })
 
 -- Alternate itemize style
-styles.defineStyle("list:itemize-alternate:1", {}, { 
+styles.defineStyle("list:itemize-alternate:1", {}, {
   itemize = { bullet = "—" } -- em-dash
 })
-styles.defineStyle("list:itemize-alternate:2", {}, { 
+styles.defineStyle("list:itemize-alternate:2", {}, {
   itemize = { bullet = "•" } -- black bullet
 })
-styles.defineStyle("list:itemize-alternate:3", {}, { 
+styles.defineStyle("list:itemize-alternate:3", {}, {
   itemize = { bullet = "◦" } -- circle bullet
 })
-styles.defineStyle("list:itemize-alternate:4", {}, { 
+styles.defineStyle("list:itemize-alternate:4", {}, {
   itemize = { bullet = "–" } -- en-dash
 })
-styles.defineStyle("list:itemize-alternate:5", {}, { 
+styles.defineStyle("list:itemize-alternate:5", {}, {
   itemize = { bullet = "•" } -- black bullet
 })
-styles.defineStyle("list:itemize-alternate:6", {}, { 
+styles.defineStyle("list:itemize-alternate:6", {}, {
   itemize = { bullet = "◦" } -- circle bullet
 })
 
 local resolveEnumStyleDef = function (name)
-  local stylespec = SILE.scratch.styles[name] and SILE.scratch.styles[name]
-  if not stylespec then SU.error("Style '"..name.."' does not exist") end
+  local stylespec = styles.resolveStyle(name)
 
-  -- FIXME Later: Recurse for style inheritance.
-  local styledef = 
-    --stylespec.inherit and resolveEnumStyleDef(stypespec.inherit) or 
-    {}
-  if stylespec.style.enumerate then
-    styledef.display = stylespec.style.enumerate.display or styledef.display or "arabic"
-    styledef.after = stylespec.style.enumerate.after or styledef.after or ""
-    styledef.before = stylespec.style.enumerate.before or styledef.before or ""
-    return styledef
+  local styledef = {}
+  if stylespec.enumerate then
+    return {
+      display = stylespec.enumerate.display or "arabic",
+      after = stylespec.enumerate.after or "",
+      before = stylespec.enumerate.before or "",
+    }
   end
-  if stylespec.style.itemize then
-    styledef.bullet = stylespec.style.itemize.bullet or styledef.bullet or "*"
-    return styledef
+  if stylespec.itemize then
+    return {
+      bullet = stylespec.itemize.bullet or "•",
+    }
   end
 
   SU.error("Style '"..name.."' is not a list style")
@@ -183,22 +178,82 @@ local trim = function (str)
   return trimRight(trimLeft(str))
 end
 
-SILE.registerCommand("enumerate", function (options, content)
-  SILE.typesetter:leaveHmode()
-
-  -- options
-  local listType = options.type or "enumerate"
+local enforceListType = function (listType)
   if listType ~= "enumerate" and listType ~= "itemize" then
     SU.error("List type shall be 'enumerate' or 'itemize'")
   end
+end
+
+local unichar = function (str)
+  local hex = (str:match("[Uu]%+(%x+)") or str:match("0[xX](%x+)"))
+  if hex then
+    return tonumber("0x"..hex)
+  end
+  return nil
+end
+
+local doItem = function (options, content)
+  local enumStyle = content._enumitem_.style
+  local depth = content._enumitem_.depth
+  local styleName = content._enumitem_.styleName
+  local counter = content._enumitem_.counter
+  local indent = content._enumitem_.indent
+
+  local mark = SILE.call("hbox", {}, function ()
+    SILE.call("style:apply", { name = styleName }, function ()
+      if enumStyle.display then
+        local cp = unichar(enumStyle.display)
+        if cp then
+          SILE.typesetter:typeset(luautf8.char(cp + counter - 1))
+        else
+          SILE.typesetter:typeset(enumStyle.before)
+          SILE.typesetter:typeset(SILE.formatCounter({
+            value = counter,
+            display = enumStyle.display })
+          )
+          SILE.typesetter:typeset(enumStyle.after)
+        end
+      else
+        local cp = unichar(enumStyle.bullet)
+        if cp then
+          SILE.typesetter:typeset(luautf8.char(cp))
+        else
+          SILE.typesetter:typeset(enumStyle.bullet)
+        end
+      end
+    end)
+  end)
+  table.remove(SILE.typesetter.state.nodes) -- steal it back
+
+  local stepback
+  if enumStyle.display then
+    -- Tentative positionning...
+    local labelIndent = SILE.settings.get("list.enumerate.labelindent"):absolute()
+    stepback = indent - labelIndent
+  else
+    -- Center bullets in the indentation space
+    stepback = indent / 2 + mark.width / 2
+  end
+
+  SILE.call("kern", { width = -stepback })
+  SILE.call("rebox", { width = stepback }, function ()
+    SILE.typesetter:pushHbox(mark)
+  end)
+
+  SILE.process(content)
+  SILE.typesetter:leaveHmode()
+end
+
+local doNestedList = function (listType, _, content)
+  SILE.typesetter:leaveHmode()
 
   -- variant
   local variant = SILE.settings.get("list."..listType..".variant")
   local listAltStyleType = variant and listType.."-"..variant or listType
-  
+
   -- depth
-  local depth = SILE.settings.get("list."..listType..".depth") + 1
-  SILE.settings.set("list."..listType..".depth", depth)
+  local depth = SILE.settings.get("list.current."..listType..".depth") + 1
+  SILE.settings.set("list.current."..listType..".depth", depth)
 
   -- styling
   local styleName = checkEnumStyleName("list:"..listAltStyleType..":"..depth, "list:"..listType..":"..depth)
@@ -217,20 +272,21 @@ SILE.registerCommand("enumerate", function (options, content)
     -- We don't care about the rskip, do we?
   	-- SILE.settings.set("document.rskip", SILE.nodefactory.glue())
 
-    local iElem = 0
+    local counter = 0
     for i = 1, #content do
         if type(content[i]) == "table" then
           if content[i].command == "item" then
-            iElem = iElem + 1
-            -- FIXME I don't like this passing via options, was a quick'n dirty way.
-            content[i].options._style = enumStyle
-            content[i].options._depth = depth
-            content[i].options._number = iElem
-            content[i].options._indent = listIndent
-            content[i].options._styleName = styleName
+            counter = counter + 1
+            -- Enrich the node with internal properties
+            content[i]._enumitem_ = {
+              style = enumStyle,
+              depth = depth,
+              counter = counter,
+              indent = listIndent,
+              styleName = styleName
+            }
           else
-            -- Propagate, if not overridden
-            content[i].options.variant = content[i].options.variant or options.variant 
+            enforceListType(content[i].command)
           end
           SILE.process({ content[i] })
         elseif type(content[i]) == "string" then
@@ -243,69 +299,22 @@ SILE.registerCommand("enumerate", function (options, content)
     end
   end)
   depth = depth - 1
-  SILE.settings.set("list."..listType..".depth", depth)
-end)
-
-local unichar = function (str)
-  local hex = (str:match("[Uu]%+(%x+)") or str:match("0[xX](%x+)"))
-  if hex then
-    return tonumber("0x"..hex)
-  end
-  return nil
+  SILE.settings.set("list.current."..listType..".depth", depth)
 end
 
-SILE.registerCommand("item", function (options, content)
-  local enumStyle = options._style
-  local depth = options._depth
-  local styleName = options._styleName
-  local number = options._number or 0
-  local listIndent = options._indent or SILE.measurement()
-
-  local mark = SILE.call("hbox", {}, function ()
-    SILE.call("style:apply", { name = styleName }, function ()
-      --SILE.call("show-counter", { id = "enumerate" .. depth })
-      if enumStyle.display then
-        local cp = unichar(enumStyle.display)
-        if cp then
-          print("codepoint", cp)
-          SILE.typesetter:typeset(luautf8.char(cp + number - 1))
-        else
-          SILE.typesetter:typeset(enumStyle.before)
-          SILE.typesetter:typeset(SILE.formatCounter({
-            value = number,
-            display = enumStyle.display })
-          )
-          SILE.typesetter:typeset(enumStyle.after)
-        end
-      else
-        SILE.typesetter:typeset(enumStyle.bullet)
-      end
-    end)
-  end)
-  table.remove(SILE.typesetter.state.nodes) -- steal it back
-
-  local stepback
-  if enumStyle.display then
-    -- Tentative...
-    local labelIndent = SILE.settings.get("list.enumerate.labelindent"):absolute()
-    stepback = listIndent - labelIndent
-  else
-    -- Center bullets in the indentation space
-    stepback = listIndent / 2 + mark.width / 2
-  end
- 
-  SILE.call("kern", { width = -stepback })
-  SILE.call("rebox", { width = stepback }, function ()
-    SILE.typesetter:pushHbox(mark)
-  end)
-  
-  SILE.process(content)
-  SILE.typesetter:leaveHmode()
+SILE.registerCommand("enumerate", function (options, content)
+  doNestedList("enumerate", options, content)
 end)
 
 SILE.registerCommand("itemize", function (options, content)
-  options.type = "itemize"
-  SILE.call("enumerate", options, content)
+  doNestedList("itemize", options, content)
+end)
+
+SILE.registerCommand("item", function (options, content)
+  if not content._enumitem_ then
+    SU.error("The item command shall not be called outside a list")
+  end
+  doItem(options, content)
 end)
 
 return {
@@ -420,7 +429,7 @@ general solution to this subtle issue, this author accepts patches.\footnote{TeX
 the enumeration label ragged left. Other Office software do not.}
 
 As for bullet lists, switching to an alternate set of styles is possible with,
-you certainly guessed it already, the \doc:code{list.enumerate.variant}.
+you certainly guessed it already, the \doc:code{list.enumerate.variant} setting.
 
 \set[parameter=list.enumerate.variant, value=alternate]{%
 \begin{enumerate}
