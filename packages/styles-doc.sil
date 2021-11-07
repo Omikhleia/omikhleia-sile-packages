@@ -82,7 +82,7 @@ A style can also inherit from a previously defined style:
 \begin{doc:codes}
 \\style:define[name=\doc:args{name}]\{
 \par\quad{}…
-\par\quad\\toc[number=\doc:args{boolean}, pageno=\doc:args{boolean}, dotfill=\doc:args{boolean}]
+\par\quad\\toc[pageno=\doc:args{boolean}, dotfill=\doc:args{boolean}, number=\doc:args{boolean}]
 \par\}
 \end{doc:codes}
 
@@ -90,9 +90,12 @@ The style specification, besides the formatting commands, includes:
 
 \begin{itemize}
 \item{Displaying the page number or not,}
-\item{Filling the line with dots or not,}
+\item{Filling the line with dots or not (which, obviously, is only meaningful if the previous option is
+      set to true),}
 \item{Displaying the section number or not.}
 \end{itemize}
+
+Note that by nature, TOC styles are also paragraph styles (see further below).
 
 \smallskip
 
@@ -152,6 +155,54 @@ It obviously requires the font to have these characters, and due to the way how 
 done, the enumeration to stay within a range corresponding to expected characters.
 
 The other character formatting commands should of course apply to the full label.
+
+\smallskip
+
+\em{Proposal paragraph styles (experimental).}
+\novbreak
+
+\smallskip
+\novbreak
+To define a paragraph style, one uses the following syntax (with any of the internal
+elements being optional):
+
+\begin{doc:codes}
+\\style:define[name=\doc:args{name}]\{
+\par\quad{}…
+\par\quad\\paragraph[skipbefore=\doc:args{glue|skip}, indentbefore=\doc:args{boolean}
+\par\qquad{}skipafter=\doc:args{glue|skip}, indentafter=\doc:args{boolean},
+\par\qquad{}breakbefore=\doc:args{boolean}, breakafter=\doc:args{boolean}]
+\par\}
+\end{doc:codes}
+
+The specification includes:
+
+\begin{itemize}
+\item{The amount of vertical space before the paragraph, as a variable length or a well-known named skip
+   (bigskip, medskip, smallskip).}
+\item{Whether indentation is applied to this paragraph (defaults to true). Book sectioning commands,
+   typically, usually set it to false, for the section title not to be indented.}
+\item{The amount of vertical space after the paragraph, as a variable length or a well-known named skip
+   (bigskip, medskip, smallskip).}
+\item{Whether indentation is applied to the next paragraph (defaults to true). Book sectioning commands,
+   typically, may set it to false or true.\footnote{The usual convention for English
+   books is to disable the first paragraph indentation after a section title. The French convention, however,
+   is to always indent regular paragraphs, even after a section title.}}
+\item{Whether a page break may occur before or after this paragraph (defaults to true). Book sectioning commands,
+   typically, would set the after-break to false.}
+\end{itemize}
+
+Missing features considered for a later iteration:
+
+\begin{itemize}
+\item{Paragraph justification.}
+\item{Page breaks. This would be most useful for book-like sectioning commands, e.g. chapters and parts,
+  which \em{usually} begin on an odd page. Usually, but not always — in several books, notably novels,
+  it is nowadays quite frequent for chapters not to obey this rule (likely, for saving a few
+  pages). The difficulty here is for the normal case (odd-page breaks), where the “blank” even page
+  could have a different page style, so we may either need support from the class here, or have
+  to introduce page styles.}
+\end{itemize}
 
 \smallskip
 
@@ -232,7 +283,7 @@ Normal \\bigger\{Big \\bigger\{Great\}\}.
 Yields: Normal \smaller{Small \smaller{Tiny}}, Normal \bigger{Big \bigger{Great}}.
 
 \bigskip
-Where do we go now? Paragraph and page styles haven’t been proposed. Character styles
+Where do we go now? Styles
 could include other features. In other terms, this is an experimental work in progress!
 
 \end{document}

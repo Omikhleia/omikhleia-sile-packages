@@ -31,6 +31,8 @@ for SILE
 
 \tableofcontents
 
+\part{Part One}
+
 \chapter{Packages}
 
 \section{End-user packages}
@@ -138,12 +140,23 @@ Regarding the differences for now,
   \item{Sectioning commands:}
   \begin{itemize}
     \item{The sectioning commands (partially) obey styles (relying on the
-          \doc:keyword{styles} package).}
+          \doc:keyword{styles} package).\footnote{If you are, say, French, and want sections to
+          be followed by indented paragraphs, you can therefore enter, early in your document,
+          \doc:code{\\style:redefine[name=book:sectioning:base, as=saved@sectioning:base,
+            inherit=true]\{\\paragraph[indentafter=true]\}}.}}
     \item{The chapter pages have page numbering and make sure the current
           page does not have any header shown.}
     \item{Chapters begin on an odd
           page but the previous page, if blank, is shown without page number
           and header.}
+    \item{The \doc:code{\\part} is a “level 0” sectioning command, that is
+          above the chapters. It is currently always unnumbered for now, but this
+          is planned to change.}
+    \item{The \doc:code{\\subsubsection} is a “level 4” sectioning command.}
+    \item{“Writers that think they need more than five levels should instead consider
+          restructuring their document in a manner that does not require this level
+          of nested sectioning. Increased section granularity can actually begin
+          to detract from document clarity.”}
   \end{itemize}
   \item{Other:}
   \begin{itemize}

@@ -16,9 +16,18 @@ local omibook = plain { id = "omibook" }
 local counters = SILE.require("packages/counters").exports
 
 local styles = SILE.require("packages/styles").exports
-styles.defineStyle("book:chapter", {}, { font = { weight = 800, size = "+4" } })
-styles.defineStyle("book:section", {},  { font = { weight = 800, size = "+2" } })
-styles.defineStyle("book:subsection", {},  { font = { weight = 800 } })
+styles.defineStyle("book:sectioning:base", {}, {
+  paragraph = { indentbefore = false, indentafter = false } })
+styles.defineStyle("book:part", { inherit = "book:sectioning:base" }, { font = { weight = 800, size = "+6" },
+  paragraph = { skipbefore = "3cm", skipafter = "bigskip" } })
+styles.defineStyle("book:chapter", { inherit = "book:sectioning:base" }, { font = { weight = 800, size = "+4" },
+  paragraph = { skipafter = "bigskip" } })
+styles.defineStyle("book:section", { inherit = "book:sectioning:base" },  { font = { weight = 800, size = "+2" },
+  paragraph = { skipbefore = "bigskip", skipafter = "bigskip", breakafter = false } })
+styles.defineStyle("book:subsection", { inherit = "book:sectioning:base"},  { font = { weight = 800, size = "+1" },
+  paragraph = { skipbefore = "medskip", skipafter = "medskip", breakafter = false } })
+styles.defineStyle("book:subsubsection", { inherit = "book:sectioning:base" },  { font = { weight = 800 },
+  paragraph = { skipbefore = "smallskip", skipbefore = "smallskip"; breakafter = false } })
 styles.defineStyle("book:folio", {},  { font = { size = "-0.5" } })
 styles.defineStyle("book:header:base", {},  { font = { size = "-1" } })
 styles.defineStyle("book:header:left", { inherit = "book:header:base" }, {})
@@ -157,6 +166,7 @@ SILE.doTexlike([[%
 \define[command=book:chapter:post]{\par\noindent}%
 \define[command=book:section:post]{ }%
 \define[command=book:subsection:post]{ }%
+\define[command=book:subsubsection:post]{ }%
 ]])
 end
 
@@ -179,9 +189,33 @@ SILE.registerCommand("omibook-double-page", function (_, _)
   SILE.typesetter:leaveHmode()
 end, "Open a double page without header and folio")
 
+SILE.registerCommand("part", function (options, content)
+  SILE.call("omibook-double-page")
+  SILE.call("style:apply:before", { name = "book:part" })
+  SILE.call("noheaderthispage")
+  SILE.call("nofoliosthispage")
+  SILE.call("set-counter", { id = "footnote", value = 1 })
+  SILE.call("center", {}, function ()
+    SILE.call("style:apply", { name= "book:part" }, function ()
+      SILE.call("book:sectioning", {
+        numbering = false, -- options.numbering, NOT SUPPORTED FOR NOW FIXME
+        -- By the way, we want to support books without parts and with them, and
+        -- also sections without (numbered) chapters, so we need to have a closer
+        -- look at how multilevel counters work, not to get 0.1 etc. :)
+        toc = options.toc,
+        level = 0,
+        -- prenumber = "book:chapter:pre",
+        -- postnumber = "book:chapter:post"
+      }, content)
+      SILE.process(content)
+    end)
+  end)
+  SILE.call("bigskip")
+end, "Begin a new chapter")
+
 SILE.registerCommand("chapter", function (options, content)
   SILE.call("omibook-double-page")
-  SILE.call("noindent")
+  SILE.call("style:apply:before", { name = "book:chapter" })
   SILE.call("noheaderthispage")
   SILE.call("set-counter", { id = "footnote", value = 1 })
   SILE.call("style:apply", { name= "book:chapter" }, function ()
@@ -197,7 +231,7 @@ SILE.registerCommand("chapter", function (options, content)
   SILE.call("left-running-head", {}, function ()
     SILE.call("style:apply", { name = "book:header:left" }, content)
   end)
-  SILE.call("bigskip")
+  SILE.call("style:apply:after", { name = "book:chapter" })
   -- Chapters have page numbering (FIXME should be an option?)
   -- SILE.call("nofoliosthispage")
 end, "Begin a new chapter")
@@ -205,8 +239,7 @@ end, "Begin a new chapter")
 SILE.registerCommand("section", function (options, content)
   SILE.typesetter:leaveHmode()
   SILE.call("goodbreak")
-  SILE.call("bigskip")
-  SILE.call("noindent")
+  SILE.call("style:apply:before", { name = "book:section" })
   SILE.call("style:apply", { name = "book:section"}, function ()
     SILE.call("book:sectioning", {
       numbering = options.numbering,
@@ -227,17 +260,14 @@ SILE.registerCommand("section", function (options, content)
       end)
     end)
   end
-  SILE.call("novbreak")
-  SILE.call("bigskip")
-  SILE.call("novbreak")
+  SILE.call("style:apply:after", { name = "book:section" })
   SILE.typesetter:inhibitLeading()
 end, "Begin a new section")
 
 SILE.registerCommand("subsection", function (options, content)
   SILE.typesetter:leaveHmode()
   SILE.call("goodbreak")
-  SILE.call("noindent")
-  SILE.call("medskip")
+  SILE.call("style:apply:before", { name = "book:subsection" })
   SILE.call("style:apply", { name = "book:subsection" }, function ()
     SILE.call("book:sectioning", {
           numbering = options.numbering,
@@ -247,11 +277,25 @@ SILE.registerCommand("subsection", function (options, content)
         }, content)
     SILE.process(content)
   end)
-  SILE.typesetter:leaveHmode()
-  SILE.call("novbreak")
-  SILE.call("medskip")
-  SILE.call("novbreak")
+  SILE.call("style:apply:after", { name = "book:subsection" })
   SILE.typesetter:inhibitLeading()
 end, "Begin a new subsection")
+
+SILE.registerCommand("subsubsection", function (options, content)
+  SILE.typesetter:leaveHmode()
+  SILE.call("goodbreak")
+  SILE.call("style:apply:before", { name = "book:subsubsection" })
+  SILE.call("style:apply", { name = "book:subsubsection" }, function ()
+    SILE.call("book:sectioning", {
+          numbering = options.numbering,
+          toc = options.toc,
+          level = 4,
+          postnumber = "book:subsection:post"
+        }, content)
+    SILE.process(content)
+  end)
+  SILE.call("style:apply:after", { name = "book:subsubsection" })
+  SILE.typesetter:inhibitLeading()
+end, "Begin a new subsubsection")
 
 return omibook

@@ -15,16 +15,27 @@ end)
 -- Styles
 local styles = SILE.require("packages/styles").exports
 local tocStyles = {
+  -- level0 ~ part
+  { font = { weight = 800, size = "+2" }, toc = { number = false, dotfill = false},
+    paragraph = { skipbefore = "bigskip", indentbefore = false, skipafter = "medskip" } },
   -- level1 ~ chapter
-  { font = { weight = 800, size = "+2" }, toc = { number = true, dotfill = false} },
+  { font = { weight = 800, size = "+2" }, toc = { number = true, dotfill = false},
+    paragraph = { indentbefore = false, skipafter = "medskip" } },
   -- level2 ~ section
-  { font = { size = "+1" } },
+  { font = { size = "+1" },
+    paragraph = { indentbefore = false, skipafter = "smallskip" } },
   -- level3 ~ subsection
-  { toc = { pageno = false } }
+  { toc = { pageno = false },
+    paragraph = { indentbefore = true, skipafter = "smallskip" } },
+  -- level4 ~ subsubsection
+  { toc = { pageno = false },
+    paragraph = { indentbefore = true, skipafter = "smallskip" } }
 }
-styles.defineStyle("toc:level1", {}, tocStyles[1])
-styles.defineStyle("toc:level2", {}, tocStyles[2])
-styles.defineStyle("toc:level3", {}, tocStyles[3])
+styles.defineStyle("toc:level0", {}, tocStyles[1])
+styles.defineStyle("toc:level1", {}, tocStyles[2])
+styles.defineStyle("toc:level2", {}, tocStyles[3])
+styles.defineStyle("toc:level3", {}, tocStyles[4])
+styles.defineStyle("toc:level4", {}, tocStyles[5])
 
 -- Override tableofcontents:item
 --
@@ -60,14 +71,16 @@ SILE.registerCommand("tableofcontents:item", function (options, content)
 end)
 
 SILE.registerCommand("omitableofcontents:levelitem", function (options, content)
-  local level = SU.cast("integer", SU.required(options, "level", "omitableofcontents:level"))
-  if level < 0 or level > 3 then SU.error("Invalid TOC level "..level) end
+  local level = SU.cast("integer", SU.required(options, "level", "omitableofcontents:levelitem"))
+  if level < 0 or level > 4 then SU.error("Invalid TOC level "..level) end
+  SILE.call("style:apply:before", { name = "toc:level"..level })
   SILE.call("style:apply", { name = "toc:level"..level }, content)
+  SILE.call("style:apply:after", { name = "toc:level"..level })
 end)
 
 SILE.registerCommand("omitableofcontents:levelnumber", function (options, content)
-  local level = SU.cast("integer", SU.required(options, "level", "omitableofcontents:level"))
-  if level < 0 or level > 3 then SU.error("Invalid TOC level "..level) end
+  local level = SU.cast("integer", SU.required(options, "level", "omitableofcontents:levelnumber"))
+  if level < 0 or level > 4 then SU.error("Invalid TOC level "..level) end
   local tocSty = styles.resolveStyle("toc:level"..level)
   if tocSty.toc and SU.boolean(tocSty.toc.number, false) then
     SILE.process(content)
@@ -84,12 +97,16 @@ return {
 \define[command=tableofcontents:notocmessage]{\tableofcontents:headerfont{Rerun SILE to process table of contents!}}%
 \define[command=tableofcontents:header]{}%
 \define[command=tableofcontents:footer]{}%
-\define[command=tableofcontents:level1item]{\bigskip\noindent\omitableofcontents:levelitem[level=1]{\process}\medskip}%
-\define[command=tableofcontents:level2item]{\noindent\omitableofcontents:levelitem[level=2]{\process}\smallskip}%
-\define[command=tableofcontents:level3item]{\indent\omitableofcontents:levelitem[level=3]{\process}\smallskip}%
+\define[command=tableofcontents:level0item]{\omitableofcontents:levelitem[level=0]{\process}}%
+\define[command=tableofcontents:level1item]{\omitableofcontents:levelitem[level=1]{\process}}%
+\define[command=tableofcontents:level2item]{\omitableofcontents:levelitem[level=2]{\process}}%
+\define[command=tableofcontents:level3item]{\omitableofcontents:levelitem[level=3]{\process}}%
+\define[command=tableofcontents:level4item]{\omitableofcontents:levelitem[level=4]{\process}}%
+\define[command=tableofcontents:level0number]{\omitableofcontents:levelnumber[level=0]{\process}}%
 \define[command=tableofcontents:level1number]{\omitableofcontents:levelnumber[level=1]{\process}}%
 \define[command=tableofcontents:level2number]{\omitableofcontents:levelnumber[level=2]{\process}}%
 \define[command=tableofcontents:level3number]{\omitableofcontents:levelnumber[level=3]{\process}}%
+\define[command=tableofcontents:level4number]{\omitableofcontents:levelnumber[level=4]{\process}}%
 ]])
 
   end,
@@ -114,8 +131,7 @@ it, while it is so simple to just add a consistently-styled section above the ta
 
 Moreover, this package overrides all the level formatting commands to rely on
 styles (using the \doc:keyword{styles} package), with specific options for the
-TOC, the styles used being \doc:code{toc:level1}, \doc:code{toc:level2} and
-\doc:code{toc:level3}.
+TOC, the styles used being \doc:code{toc:level0}, to \doc:code{toc:level4}.
 
 Other than that, everything else from the standard package applies.
 
