@@ -3,7 +3,6 @@
 -- License: MIT
 --
 SILE.require("packages/counters")
-SILE.require("packages/rebox")
 
 SILE.scratch.liststyle = nil
 
@@ -227,7 +226,12 @@ local doItem = function (options, content)
 
   local stepback
   if enumStyle.display then
-    -- Tentative positionning...
+    -- The positionning is quite tentative... LaTeX would right justify the
+    -- number (at least for roman numerals), i.e.
+    --   i. Text
+    --  ii. Text
+    -- iii. Text.
+    -- Other Office software do not do that...
     local labelIndent = SILE.settings.get("list.enumerate.labelindent"):absolute()
     stepback = indent - labelIndent
   else
@@ -236,9 +240,13 @@ local doItem = function (options, content)
   end
 
   SILE.call("kern", { width = -stepback })
-  SILE.call("rebox", { width = stepback }, function ()
-    SILE.typesetter:pushHbox(mark)
-  end)
+  -- reinsert the mark with modified length
+  -- using \rebox caused an issue sometimes, not sure why, with the bullets
+  -- appearing twice in output... but we can avoid it:
+  -- reboxing an hbox was dumb anyway. We just need to fix its width before
+  -- reinserting it in the text flow.
+  mark.width = SILE.length(stepback)
+  SILE.typesetter:pushHbox(mark)
 
   SILE.process(content)
   SILE.typesetter:leaveHmode()
