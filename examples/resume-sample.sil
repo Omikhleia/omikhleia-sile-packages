@@ -1,4 +1,5 @@
 \begin[papersize=a4, class=omicv]{document}
+\script[src=packages/url]
 % Suitable font with thin, italic, lightweight bold italic, bold...
 \font[family=Lato, size=12pt]
 % Nice green tint:
@@ -37,7 +38,7 @@
     \end{entry}
     \begin{entry}
       \topic{1875–1881}
-      \description{\jobrole{Independant Detective}
+      \description{\jobrole{Independent Detective}
 \smallskip
 \begin{itemize}
         \item{Solved an important number of criminal cases}
@@ -174,5 +175,12 @@
     \end{entry}
   \end{section}
 \end{resume}
+
+\bigskip
+\begin{center}
+This CV was made with the SILE typesetting system
+
+\href[src=https://sile-typesetter.org/]{https://sile-typesetter.org/}
+\end{center}
 
 \end{document}

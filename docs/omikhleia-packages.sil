@@ -182,13 +182,13 @@ This class provides a minimalist (read, naive) way to make a modern \em{résumé
         style.\footnote{E.g. \doc:code{\\style:redefine[name=cv:dingbats,
             as=@dingbats, inherit=true]\{\\font[family= \doc:args{family}]\}}}}
   \end{itemize}
-  \item{Colors, in a CV, should not be abused, so this class proposes only three different colors.}
+  \item{Colors should not be abused in a CV, so this class proposes only three different colors.}
   \begin{itemize}
     \item{Two tints of gray for you first and last name, job title and headline.}
     \item{A nice tint of blue (#4080bf) for various sectioning and display elements. You can change it
         by redefining the \doc:code{cv:color} style.\footnote{E.g. to a nice tint of green,
             \doc:code{\\style:redefine[name=cv:color, as=@color, inherit=true]\{\\color[color=#59b24c]\}}
-            – likewise for your first and last name, which corresponds to the
+            – likewise for your first and last name, which correspond to the
             \doc:code{cv:firstname} and \doc:code{cv:lastname} styles respectively.}}
   \end{itemize}
   \item{Page layout}
@@ -199,7 +199,7 @@ This class provides a minimalist (read, naive) way to make a modern \em{résumé
   \item{The footer is shown side-by-side with the page folio, and contains your contact information. As for
         the header, the rationale is that you contacts should be repeated. You wouldn’t want not to be
         contacted just because the HR people lost the initial page, right?}
-  \item{The folio includes the number of pages in you CV. As said, they
+  \item{The folio includes the number of pages in your CV. As said, they
         get to see hundreds of CV. Be nice ensuring they have no ordering issue when handling a printed
         copy to managers, and do not miss any page.}
   \end{itemize}
