@@ -181,14 +181,9 @@ SILE.registerCommand("style:apply:before", function (options, _)
 
   if parSty then
     if parSty.skipbefore then
-      --²-- So that the top page vskip is honored
-      -- NO. This inserts an extra line before sections etc.
-      -- FIXME we have to be a more clever than than, depending of whether
-      -- we are at the top of a page or not? Let's try:
-      if SILE.typesetter:isQueueEmpty() then
-        SILE.call("hbox", {}, {}) 
-        -- Not even sure this is robust, do we want to take the risk before sections etc.?
-      end
+      -- FIXME: If we are at a top a page, how to make sure the vskip
+      -- is honored? Without inserting an empty hbox that would cause
+      -- a mess with regular sections etc.
     end
     parStySpace(parSty.skipbefore, parSty.breakbefore)
     if SU.boolean(parSty.indentbefore, true) then
@@ -213,6 +208,52 @@ SILE.registerCommand("style:apply:after", function (options, _)
     end
   end
 end, "Applies the paragraph before style.")
+
+local styleP = function (style, content)
+  if style.paragraph and style.paragraph.align then
+    if style.paragraph.align ~= "center"
+        and style.paragraph.align ~= "raggedright"
+        and style.paragraph.align ~= "raggedleft" then
+      SU.error("Invalid paragraph style alignment")
+    end
+    SILE.call(style.paragraph.align, {}, function ()
+      style1(style, content)
+    end)
+  else
+    style1(style, content)
+  end
+end
+
+SILE.registerCommand("style:apply:paragraph", function (options, content)
+  local name = SU.required(options, "name", "style:apply:paragraph")
+  local styledef = resolveStyle(name)
+  local parSty = styledef.paragraph
+
+  if parSty then
+    if parSty.skipbefore then
+      -- FIXME: If we are at a top a page, how to make sure the vskip
+      -- is honored? Without inserting an empty hbox that would cause
+      -- a mess with regular sections etc.
+    end
+    parStySpace(parSty.skipbefore, parSty.breakbefore)
+    if SU.boolean(parSty.indentbefore, true) then
+      SILE.call("indent")
+    else
+      SILE.call("noindent")
+    end
+  end
+
+  styleP(styledef, content)
+
+  if parSty then
+    parStySpace(parSty.skipafter, parSty.breakafter)
+    if SU.boolean(parSty.indentafter, true) then
+      SILE.call("indent")
+    else
+      SILE.call("noindent")
+    end
+  end
+end, "Applies the paragraph style.")
 
 SILE.registerCommand("style:redefine", function (options, content)
   SU.required(options, "name", "redefining style")

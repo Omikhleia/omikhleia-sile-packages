@@ -191,6 +191,7 @@ end, "Open a double page without header and folio")
 
 SILE.registerCommand("part", function (options, content)
   SILE.call("omibook-double-page")
+  SILE.call("hbox", {}, {}) -- HACK to ensure the vskip if any is applied... 
   SILE.call("style:apply:before", { name = "book:part" })
   SILE.call("noheaderthispage")
   SILE.call("nofoliosthispage")

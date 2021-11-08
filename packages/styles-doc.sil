@@ -171,7 +171,8 @@ elements being optional):
 \par\quad{}…
 \par\quad\\paragraph[skipbefore=\doc:args{glue|skip}, indentbefore=\doc:args{boolean}
 \par\qquad{}skipafter=\doc:args{glue|skip}, indentafter=\doc:args{boolean},
-\par\qquad{}breakbefore=\doc:args{boolean}, breakafter=\doc:args{boolean}]
+\par\qquad{}breakbefore=\doc:args{boolean}, breakafter=\doc:args{boolean},
+\par\qquad{}align=\doc:args{center|raggedright|raggedleft}]
 \par\}
 \end{doc:codes}
 
@@ -190,12 +191,12 @@ The specification includes:
    is to always indent regular paragraphs, even after a section title.}}
 \item{Whether a page break may occur before or after this paragraph (defaults to true). Book sectioning commands,
    typically, would set the after-break to false.}
+\item{The paragraph alignment, if not justified.}
 \end{itemize}
 
 Missing features considered for a later iteration:
 
 \begin{itemize}
-\item{Paragraph justification.}
 \item{Page breaks. This would be most useful for book-like sectioning commands, e.g. chapters and parts,
   which \em{usually} begin on an odd page. Usually, but not always — in several books, notably novels,
   it is nowadays quite frequent for chapters not to obey this rule (likely, for saving a few
@@ -235,7 +236,7 @@ also inherits from \doc:code{\\\doc:args{saved-name}} — in other terms, both a
 one to only leverage the new definition, basing it on the older one.
 
 Note that if invoked without \doc:args{content}, the redefinition will just define an alias to the current
-command (and in that case, obviously, the \doc:code{inherit} flag is not supported).
+style (and in that case, obviously, the \doc:code{inherit} flag is not supported).
 It is not clear whether there is an interesting use case for it (yet), but here you go:
 
 \begin{doc:codes}
