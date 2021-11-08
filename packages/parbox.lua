@@ -144,6 +144,10 @@ local parboxFraming = function (options, content)
 
   SILE.typesetter = oldTypesetter
   SILE.settings.popState()
+  -- Important, remove the frame from SILE.frames (it was added there by
+  -- SILE.newFrame()), now that we no longer need it. Otherwise, the
+  -- performances get awful as all our small frames are kept and solved!
+  SILE.frames[parboxTypesetter.frame.id] = nil
   return innerVbox
 end
 
