@@ -20,6 +20,11 @@ A demonstration of the **colophon** package, as we did not want to show all thes
 big examples in the main documentation. The text is somewhat nonsensical, with
 bits of actual explanations mixed with random quotes.
 
+## Sample curriculum vitae
+
+A fake _résumé_ of some Sherlock Holmes guy, used as a "sample test" for the **omicv**
+class. The information in it might not be very canonical, but it serves its purpose.
+
 ## Examples for the TEI dictionary class and package
 
 A small XML (TEI) lexicon (Almaqerin-French) and the corresponding PDF, to

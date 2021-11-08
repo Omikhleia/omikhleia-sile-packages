@@ -2,6 +2,7 @@
 \script[src=packages/autodoc]
 \script[src=packages/autodoc-extras]
 \script[src=packages/url]
+\script[src=packages/image]
 \language[main=en]
 \font[family=Libertinus Serif]
 \footnote:rule
@@ -165,6 +166,53 @@ Regarding the differences for now,
     \item{Cross-references are supported via the \doc:keyword{omirefs} package.}
   \end{itemize}
 \end{itemize}
+
+\section{omicv: a minimalist curriculum vitae}
+
+This class provides a minimalist (read, naive) way to make a modern \em{résumé} (CV) with SILE.
+
+\smallskip
+\begin{itemize}
+\item{Fonts}
+\begin{itemize}
+  \item{You should select, early in your document, the main font to be used. This class ideally
+        works best with a font family that has: a thin style, an italic style, a light-weight (300)
+        bold italic, a bold (600) regular. Lato, for instance, is such a font.}
+  \item{Dingbat symbols rely on the Symbola font. You can change it by redefining the \doc:code{cv:dingbats}
+        style.\footnote{E.g. \doc:code{\\style:redefine[name=cv:dingbats,
+            as=@dingbats, inherit=true]\{\\font[family= \doc:args{family}]\}}}}
+  \end{itemize}
+  \item{Colors, in a CV, should not be abused, so this class proposes only three different colors.}
+  \begin{itemize}
+    \item{Two tints of gray for you first and last name, job title and headline.}
+    \item{A nice tint of blue (#4080bf) for various sectioning and display elements. You can change it
+        by redefining the \doc:code{cv:color} style.\footnote{E.g. to a nice tint of green,
+            \doc:code{\\style:redefine[name=cv:color, as=@color, inherit=true]\{\\color[color=#59b24c]\}}
+            – likewise for your first and last name, which corresponds to the
+            \doc:code{cv:firstname} and \doc:code{cv:lastname} styles respectively.}}
+  \end{itemize}
+  \item{Page layout}
+  \begin{itemize}
+  \item{The first page does not have a header, but on subsequent pages the header repeats your full name.
+        The rationale is that your name shall be visible on each page, as the HR people get hundreds of CVs and
+        can easily get lost in them.}
+  \item{The footer is shown side-by-side with the page folio, and contains your contact information. As for
+        the header, the rationale is that you contacts should be repeated. You wouldn’t want not to be
+        contacted just because the HR people lost the initial page, right?}
+  \item{The folio includes the number of pages in you CV. As said, they
+        get to see hundreds of CV. Be nice ensuring they have no ordering issue when handling a printed
+        copy to managers, and do not miss any page.}
+  \end{itemize}
+\end{itemize}
+
+\smallskip
+
+The commands are pretty simple and straightforward in this first version, so you can refer
+to the sample CV included in our example repository.
+
+\begin{center}
+\img[width=100%fw, src=examples/resume-sample.png]
+\end{center}
 
 \section{teibook: XML TEI P4 print dictionaries}
 
