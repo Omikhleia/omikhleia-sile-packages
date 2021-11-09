@@ -151,15 +151,17 @@ local parboxFraming = function (options, content)
   return innerVbox
 end
 
-local drawBorders = function (x, y, w, h, border)
-  -- There's a little ugly tweak here, the bottom border is drawn below the box.
-  -- So that successive vertical parboxes have overlapping borders.
+local drawBorders = function (x, y, w, h, border, bordercolor)
+  -- There's a little ugly tweak here, the bottom and right borders are drawn
+  -- "outside" the box, so that successive parboxes have overlapping borders.
   -- Tables (ptable package) rely on it... That's not perfect, but might not be
-  -- too much noticeable with normal border thickness below 1pt...
+  -- too much noticeable with a normal border thickness below 1pt or so...
+  if bordercolor then SILE.outputter:pushColor(bordercolor) end
   if border[1] > 0 then SILE.outputter:drawRule(x, y, w, border[1]) end
   if border[2] > 0 then SILE.outputter:drawRule(x, y + h, w, border[2]) end
   if border[3] > 0 then SILE.outputter:drawRule(x, y, border[3], h + border[2]) end
   if border[4] > 0 then SILE.outputter:drawRule(x + w, y, border[4], h + border[2]) end
+  if bordercolor then SILE.outputter:popColor() end
 end
 
 local insertStruts = function (vboxlist, strut)
@@ -205,6 +207,7 @@ SILE.registerCommand("parbox", function (options, content)
   local border = options.border and parseBorderOrPadding(options.border, "border") or { 0, 0, 0, 0 }
   local valign = options.valign or "top"
   local padding = options.padding and parseBorderOrPadding(options.padding, "padding") or { 0, 0, 0, 0 }
+  local bordercolor =  options.bordercolor and SILE.colorparser(options.bordercolor)
 
   width = SU.cast("length", width):absolute()
 
@@ -254,6 +257,7 @@ SILE.registerCommand("parbox", function (options, content)
     padding = padding,
     offset = SILE.length(), -- INTERNAL: See comment below.
     border = border,
+    bordercolor = bordercolor,
     outputYourself= function (self, typesetter, line)
       local saveY = typesetter.frame.state.cursorY
       local saveX = typesetter.frame.state.cursorX
@@ -264,7 +268,8 @@ SILE.registerCommand("parbox", function (options, content)
         typesetter.frame.state.cursorY:tonumber(),
         self.width:tonumber(),
         self.depth:tonumber() + self.height:tonumber(),
-        self.border
+        self.border,
+        self.bordercolor
       )
 
       -- Process each vbox
@@ -444,7 +449,9 @@ two}
 \smallskip
 
 The border and the padding can be specified as a single length (applying on all sides) or a string
-containing a space-separated list of four lengths (“top bottom left right”).
+containing a space-separated list of four lengths (“top bottom left right”). Additionaly, a
+unique \doc:code{bordercolor} can be specified, the color specification being as defined in the
+\doc:keyword{color} package.
 
 We have shown several examples but haven’t mentioned yet what could be one
 of the \em{most important concepts} underlying these paragraph boxes: each

@@ -246,6 +246,7 @@ processTable["cell"] = function (content, args, tablespecs)
     local cellBox = SILE.call("parbox", { width = width - pad[3] - pad[4],
               padding = pad,
               border = content.options.border or tablespecs.cellborder,
+              bordercolor = tablespecs.bordercolor,
               valign = "middle", strut="character" }, function ()
       temporarilyClearFragileSettings(function()
         SILE.call("ptable:cell:hook", content.options, content)
@@ -346,12 +347,14 @@ SILE.registerCommand("ptable", function (options, content)
   local cols = parseColumnSpec(SU.required(options, "cols", "ptable"))
   local cellpadding = options.cellpadding or "4pt"
   local cellborder = options.cellborder or "0.4pt"
+  local bordercolor = options.bordercolor
 
   local totalWidth = SU.sum(cols)
   local tablespecs = {
     cols = cols,
     cellpadding = cellpadding,
-    cellborder = cellborder
+    cellborder = cellborder,
+    bordercolor = bordercolor
   }
 
   SILE.typesetter:leaveHmode()
@@ -450,6 +453,8 @@ The other options are \doc:code{cellpadding} (defaults to 4pt) and
 \doc:code{cellborder} (defaults to 0.4pt; set it to zero to disable
 the borders). Both can be either a single length (applying to all
 sides) or four space-separated lengths (top, bottom, left, right).
+The \doc:code{bordercolor} option (defaults to unset, i.e. black)
+defines the color of any border defined here or later overriddden.
 Finally, there is the \doc:code{header} boolean option, which is false
 by default. If set to true, the first row of the table is considered to be a header,
 repeated on each page if the table spans over multiple pages.
@@ -472,7 +477,7 @@ too.
 
 Rows and regular cells, as noted, can have background color. The color specification is the
 same as defined in the \doc:keyword{color} package. The global cell border and padding specifications
-from the table can be overriden on each cell.
+from the table can be overridden on each cell.
 
 \center{\parbox[width=70%fw, strut=character]{%
 \begin[cols=30%fw 35%fw 35%fw, cellborder=0]{ptable}

@@ -208,7 +208,7 @@ Table 5 = generated table, with header repeated on page break(s)
     return result
   end
   local t = {}
-  table.insert(t, createCommand("row", { background = "#eee" }, { createCommand("cell", { span =  2 }, { "Header" })}))
+  table.insert(t, createCommand("row", { background = "#ecb0b8" }, { createCommand("cell", { span =  2 }, { "Header" })}))
   for r = 1, 10 do
     local cell = {}
     for c = 1, 2 do
@@ -216,7 +216,7 @@ Table 5 = generated table, with header repeated on page break(s)
     end
     table.insert(t, createCommand("row", {}, cell))
   end
-  SILE.call("ptable", { cols = "50%fw 50%fw", header = true }, t)
+  SILE.call("ptable", { cols = "50%fw 50%fw", header = true, bordercolor = "#b94051" }, t)
 }
 
 Table 6 = cell border and padding configuration at cell level.
