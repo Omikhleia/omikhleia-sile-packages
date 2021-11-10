@@ -29,16 +29,16 @@ local function prosodyFilter(text, content, options)
         prosodyAnnotation = "–" -- endash
       elseif prosodyAnnotation == "u" then
         prosodyAnnotation = "ᵕ" -- some half circle
-        opts.lower = SILE.length("-0.33ex")
+        opts.lower = SILE.measurement("-0.33ex")
       end
     elseif options.mode == "classical" then
       if prosodyAnnotation == "x" then
         prosodyAnnotation = "×" -- U+00D7 times
       elseif prosodyAnnotation == "-" then
-        opts.lower = SILE.length("-0.66ex")
+        opts.lower = SILE.measurement("-0.66ex")
         prosodyAnnotation = "¯" -- macron
       elseif prosodyAnnotation == "u" then
-        opts.lower = SILE.length("-0.66ex")
+        opts.lower = SILE.measurement("-0.66ex")
         prosodyAnnotation = "˘" -- breve
       end
     elseif options.mode == "mixed" then
@@ -47,7 +47,7 @@ local function prosodyFilter(text, content, options)
       elseif prosodyAnnotation == "-" then
         prosodyAnnotation = "–" -- endash
       elseif prosodyAnnotation == "u" then
-        opts.lower = SILE.length("-0.66ex")
+        opts.lower = SILE.measurement("-0.66ex")
         prosodyAnnotation = "˘" -- breve
       end
     end
@@ -118,7 +118,7 @@ SILE.registerCommand("omipoetry:prosody", function (options, content)
   local vadjust
 
   SILE.call("omipoetry:prosodyfont", {}, function ()
-    vadjust = options.lower or SILE.length()
+    vadjust = options.lower or SILE.measurement()
     prosodyBox = SILE.call("hbox", {}, function()
       SILE.typesetter:typeset(options.name)
     end)
@@ -380,7 +380,7 @@ that is \doc:code{<…>}\footnote{As in the standard \doc:keyword{chordmode} pac
 used the exact same logic.}. The annotation is placed above the (following) text.
 In English, typically, a 2-level notation is often used, as shown
 hereafter.\footnote{Arthur Golding, \em{Ovid’s Metamorphoses}, book II, lines 1–2,
-scansion example from Wikipedia.}
+scansion from Wikipedia.}
 
 \begin[prosody=true]{poetry}
 \v{Th<x>e p</>rince|l<x>y p</>al|<x>ace </>of | th<x>e s</>un || st<x>ood g</>or|g<x>eous t</>o | b<x>eh</>old}

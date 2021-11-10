@@ -1,5 +1,6 @@
 --
 -- Paragraph blocks ("parbox") for SILE
+-- Or how to wrap width-contrained vboxes into an hbox:
 -- A building block for more advanced concepts.
 -- 2021, Didier Willis
 -- License: MIT
@@ -15,15 +16,15 @@ SILE.settings.declare({
 
 SILE.settings.declare({
   parameter = "parbox.strut.ruledepth",
-  type = "length",
-  default = SILE.length("0.3bs"),
+  type = "measurement",
+  default = SILE.measurement("0.3bs"),
   help = "Strut rule depth"
 })
 
 SILE.settings.declare({
   parameter = "parbox.strut.ruleheight",
-  type = "length",
-  default = SILE.length("1bs"),
+  type = "measurement",
+  default = SILE.measurement("1bs"),
   help = "Strut rule height"
 })
 
@@ -52,7 +53,7 @@ SILE.registerCommand("strut", function (options, content)
     strut = {
       height = SILE.settings.get("parbox.strut.ruleheight"):absolute(),
       depth = SILE.settings.get("parbox.strut.ruledepth"):absolute(),
-      width = SILE.length()
+      width = SILE.measurement()
     }
     if show then
       -- The "x" there could be anything, we just want to be sure we get a box
@@ -152,6 +153,8 @@ local parboxFraming = function (options, content)
 end
 
 local drawBorders = function (x, y, w, h, border, bordercolor)
+  -- The border was initially a debug feature, but it turned out to be neat
+  -- for tables (e.g. the ptable package).
   -- There's a little ugly tweak here, the bottom and right borders are drawn
   -- "outside" the box, so that successive parboxes have overlapping borders.
   -- Tables (ptable package) rely on it... That's not perfect, but might not be
@@ -189,7 +192,7 @@ local parseBorderOrPadding = function (rawspec, opt)
     spec = {}
     for token in SU.gtoke(rawspec, "[ ]+") do
       if(token.string) then
-        local value = SU.cast("length", token.string)
+        local value = SU.cast("measurement", token.string)
         spec[#spec+1] = value:tonumber()
       end
     end
@@ -209,7 +212,7 @@ SILE.registerCommand("parbox", function (options, content)
   local padding = options.padding and parseBorderOrPadding(options.padding, "padding") or { 0, 0, 0, 0 }
   local bordercolor =  options.bordercolor and SILE.colorparser(options.bordercolor)
 
-  width = SU.cast("length", width):absolute()
+  width = SU.cast("measurement", width):absolute()
 
   local vboxes = parboxFraming({ width = width }, content)
 
@@ -235,7 +238,7 @@ SILE.registerCommand("parbox", function (options, content)
     totalHeight = totalHeight + vboxes[i].height + vboxes[i].depth 
   end
 
-  local z0 = SILE.length(0)
+  local z0 = SILE.measurement(0)
   local depth, height
   if valign == "bottom" then
     depth = z0 + strutDimen.depth + padding[2]
@@ -255,7 +258,7 @@ SILE.registerCommand("parbox", function (options, content)
     inner = vboxes,
     valign = valign,
     padding = padding,
-    offset = SILE.length(), -- INTERNAL: See comment below.
+    offset = SILE.measurement(), -- INTERNAL: See comment below.
     border = border,
     bordercolor = bordercolor,
     outputYourself= function (self, typesetter, line)
@@ -287,7 +290,8 @@ SILE.registerCommand("parbox", function (options, content)
   -- The offset parameter in the pbox above is for INTERNAL use.
   -- The "ptable" package (parbox-base tables) sets it to tweak and adjust cells.
   -- Kind of a mixed concern here, but it's an easy trick to avoid re-implementing
-  -- a bunch of things.
+  -- a bunch of things. And after all these parboxes were made with tables in
+  -- mind, though they can be of a more general interest.
 end)
 
 return {

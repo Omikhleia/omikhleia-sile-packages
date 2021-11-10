@@ -14,7 +14,7 @@ local parseColumnSpec = function (colspec)
   local b = {}
   for token in SU.gtoke(colspec, "[ ]+") do
     if (token.string) then
-      local value = SU.cast("length", token.string)
+      local value = SU.cast("measurement", token.string)
       b[#b+1] = value:tonumber()
     end
   end
@@ -22,6 +22,28 @@ local parseColumnSpec = function (colspec)
     SU.error("Invalid table column specification")
   end
   return b
+end
+
+-- Parse the padding specification as a single measurement or a set of
+-- for (top bottom left right).
+local parsePadding = function (rawspec)
+  local spec
+  if type(rawspec) == "table" then
+    spec = rawspec
+  else
+    spec = {}
+    for token in SU.gtoke(rawspec, "[ ]+") do
+      if(token.string) then
+        local value = SU.cast("measurement", token.string)
+        spec[#spec+1] = value:tonumber()
+      end
+    end
+  end
+  if #spec == 1 then
+    return { spec[1], spec[1], spec[1], spec[1] }
+  end
+  if #spec ~= 4 then SU.error("Invalid padding specification: "..rawspec) end
+  return spec
 end
 
 -- Compute a cell width from the column widths,
@@ -40,33 +62,13 @@ local computeCellWidth = function (col, span, cols)
   return width
 end
 
-local parsePadding = function (rawspec)
-  local spec
-  if type(rawspec) == "table" then
-    spec = rawspec
-  else
-    spec = {}
-    for token in SU.gtoke(rawspec, "[ ]+") do
-      if(token.string) then
-        local value = SU.cast("length", token.string)
-        spec[#spec+1] = value:tonumber()
-      end
-    end
-  end
-  if #spec == 1 then
-    return { spec[1], spec[1], spec[1], spec[1] }
-  end
-  if #spec ~= 4 then SU.error("Invalid padding specification: "..rawspec) end
-  return spec
-end
-
 -- Let's admit that these whole tables assembled from parboxes
 -- can be pretty fragile if one starts messing up with glues,
 -- etc. There are a number of "dangerous" settings we want to
 -- disable temporarily where suitable... The parbox resets the
 -- settings to top-level, so we enforce additional settings
 -- on top of that... In a heavy-handed way (this function
--- might be call where uneeded strictly speaking but heh...)
+-- might even be called where uneeded, strictly speaking).
 local vglueNoStretch = function (vg)
   return SILE.nodefactory.vglue(SILE.length(vg.height.length))
 end
@@ -81,8 +83,8 @@ local temporarilyClearFragileSettings = function (callback)
   SILE.settings.popState()
 end
 
--- Apply a background color to an hbox:
--- Assumes the hbox is not in the output queue.
+-- Apply a background color to an hbox.
+-- N.B. This assumes the hbox is NOT in the output queue.
 SILE.require("packages/color")
 local colorBox = function (hbox, color)
   if not color then
@@ -118,7 +120,7 @@ end
 
 -- CLASSES
 
--- Used for the re-shaping and shipout passes (see below)
+-- Used for the re-shaping and shipout passes (see below).
 
 local cellNode = pl.class({
   type = "cellnode",
@@ -135,15 +137,15 @@ local cellNode = pl.class({
   end,
   adjustBy = function (self, adjustement)
     -- Correct the box by an amount. It was build with "middle" valign,
-    -- so we distribute the adjustement evently
+    -- so we distribute the adjustement evently.
     self.cellBox.height = self.cellBox.height + adjustement / 2
     self.cellBox.depth = self.cellBox.depth + adjustement / 2
-    -- Handle the alignment option on cells
+    -- Handle the alignment option on cells, i.e. derive the necessary offset.
     if self.valign == "top" then
-      -- Nothing to do
+      -- Nothing to do, we are already good.
     elseif self.valign == "bottom" then
       self.cellBox.offset = -adjustement
-    else -- assume middle by default
+    else -- middle (by default)
       self.cellBox.offset = -adjustement / 2
     end
   end,
@@ -168,7 +170,7 @@ local cellTableNode = pl.class({
     return h
   end,
   adjustBy = function(self, adjustement)
-    -- Distribute the adjustment evenly on all rows
+    -- Distribute the adjustment evenly on all rows.
     for i = 1, #self.rows do
       self.rows[i]:adjustBy(adjustement / #self.rows)
     end
@@ -177,8 +179,7 @@ local cellTableNode = pl.class({
     SILE.call("parbox", { width = self.width, strut = "character", valign = "middle" }, function()
       temporarilyClearFragileSettings(function()
         for i = 1, #self.rows do
-          -- Set up queue but avoid a newPar?
-          -- Apparently not needed here.
+          -- Set up queue but avoid a newPar? Apparently not needed here.
           -- SILE.typesetter.state.nodes[#SILE.typesetter.state.nodes+1] = SILE.nodefactory.zerohbox()
           self.rows[i]:shipout()
         end
@@ -257,7 +258,7 @@ processTable["cell"] = function (content, args, tablespecs)
     -- have been moved to the parent typesetter. Stealing the resulting box,
     -- doesn't change that. But it occurs before pushing all boxes, I am
     -- unsure where footnotes for long tables spanning over multiple
-    -- pages will end up!
+    -- pages and/or split cells will end up...
     return cellNode(cellBox, content.options.valign, color)
   end
 
@@ -385,7 +386,7 @@ SILE.registerCommand("ptable", function (options, content)
             if iRow == 1 and currentVbox then
               headerVbox = currentVbox
             elseif currentVbox and headerVbox then
-              -- Hack a link to the header vbox in the current vbox
+              -- Hack a link to the header vbox in the current vbox.
               currentVbox._header_ = headerVbox
             end
           end
@@ -396,7 +397,7 @@ SILE.registerCommand("ptable", function (options, content)
             SU.error("Unexpected '"..content[i].command.."' in table")
         end
       end
-      -- All text nodes in ignored
+      -- All text nodes in ignored without warning.
     end
   end)
   SILE.typesetter:leaveHmode()

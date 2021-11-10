@@ -173,7 +173,7 @@ end, "Text to appear at the bottom of the page")
 styles.defineStyle("cv:firstname", {}, { font = { style = "light" }, color = { color = "#a6a6a6" } })
 styles.defineStyle("cv:lastname", {}, { color = { color = "#737373" } })
 
-styles.defineStyle("cv:fullname", {}, { font = { size = "30pt" }, paragraph = { align = "raggedleft" } })
+styles.defineStyle("cv:fullname", {}, { font = { size = "30pt" }, paragraph = { align = "right" } })
 
 styles.defineStyle("cv:color", {}, { color = { color = "#4080bf" } }) -- a nice tint of blue
 
@@ -188,7 +188,7 @@ styles.defineStyle("cv:headline", {}, { font = { weight = "300", style = "italic
 styles.defineStyle("cv:section", { inherit = "cv:color" }, { font = { size = "+2" } })
 
 styles.defineStyle("cv:topic", {}, { font = { style="light", size = "-1" },
-  paragraph = { align = "raggedleft" } })
+  paragraph = { align = "right" } })
 styles.defineStyle("cv:description", {}, {})
 
 styles.defineStyle("cv:contact", {}, { font = { style = "thin", size = "-0.5" },
@@ -198,7 +198,7 @@ styles.defineStyle("cv:jobtitle", {}, { font = { size = "20pt" },
   color = { color = "#373737" }, paragraph = { align = "center", skipbefore = "0.5cm" } })
 
 styles.defineStyle("cv:header", {}, { font = { size = "20pt" },
-  paragraph = { align = "raggedleft" } })
+  paragraph = { align = "right" } })
 
 -- Redefine the 6 default itemize style to apply our cv:color
 for i = 1, 6 do
@@ -305,7 +305,7 @@ SILE.registerCommand("resume", function (options, content)
 
   local fullnameAndPictureRow = C("row", {}, {
     C("cell", { border = "0 1pt 0 0", padding = "4pt 4pt 0 4pt", valign = "bottom" }, { function ()
-        local w = SILE.length("100%fw"):absolute() - 7.2 -- padding and border
+        local w = SILE.measurement("100%fw"):absolute() - 7.2 -- padding and border
         SILE.call("parbox", { width = w, border = "0.6pt", padding = "3pt" }, function ()
           SILE.call("img", { width = "100%fw", src = picture.options.src })
         end)

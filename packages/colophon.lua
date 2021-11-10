@@ -26,8 +26,8 @@ local internalScratch = {}
 
 local function circleSetupLineLengths(options)
   local adjustRatio = options.ratio and SU.cast("number", options.ratio)
-  local bs = SILE.length("1bs"):tonumber()
-  local ex = SILE.length("1ex"):tonumber()
+  local bs = SILE.measurement("1bs"):tonumber()
+  local ex = SILE.measurement("1ex"):tonumber()
 
   local setupLineLengths = function (self)
     -- Estimate the width this would reach if set all on a single line.
@@ -92,8 +92,8 @@ local function circleSetupLineLengths(options)
 end
 
 local function circleDecoration(options, radius, nbLines)
-  local bs = SILE.length("1bs"):tonumber()
-  local ex = SILE.length("1ex"):tonumber()
+  local bs = SILE.measurement("1bs"):tonumber()
+  local ex = SILE.measurement("1ex"):tonumber()
   -- Retrieve the things we stored when line breaking occurred.
   local radius = internalScratch.radius or SU.error("Oops, broken implementation")
   local nbLines = internalScratch.nbLines or SU.error("Oops, broken implementation")
@@ -164,8 +164,8 @@ SILE.registerCommand("colophon", function (options, content)
         -- 1. We also insert a vertical glue corresponding to the extra space needed for
         --    the decoration.
         internalScratch.nbLines = #lines
-        local bs = SILE.length("1bs"):tonumber()
-        local ex = SILE.length("1ex"):tonumber()
+        local bs = SILE.measurement("1bs"):tonumber()
+        local ex = SILE.measurement("1ex"):tonumber()
         local figure = options.figure or "default"
         local decoration = SILE.scratch.colophon.circle.decorations[figure] or SU.error("Unknown decoration '"..figure.."'")
         local scale = decoration.scale

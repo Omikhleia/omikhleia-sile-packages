@@ -7,8 +7,8 @@
 SILE.registerCommand("couyard", function (options, _)
   SILE.require("packages/svg")
   local n = SU.cast("integer", options.type or 1)
-  local width = options.width and SU.cast("length", options.width == "default" and "7em" or options.width)
-  local height = options.height and SU.cast("length", options.height =="default" and "0.9em" or options.height)
+  local width = options.width and SU.cast("measurement", options.width == "default" and "7em" or options.width)
+  local height = options.height and SU.cast("measurement", options.height =="default" and "0.9em" or options.height)
   if width ~= nil and height ~= nil then SU.error("Specify only one of width or height") end
   if width == nil and height == nil then height = "0.9em" end
 

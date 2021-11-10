@@ -250,7 +250,7 @@ teibook.endPage = function (self)
       local first = SILE.call("hbox", {}, function ()
         SILE.call("first-entry-reference")
       end)
-      local l = SILE.length("100%lw"):tonumber()
+      local l = SILE.measurement("100%lw"):tonumber()
       SILE.typesetter:pushGlue({ width = l  / 2 - first.width:tonumber() - folio.width:tonumber() / 2 })
 
       SILE.typesetter:typeset(foliotext)
