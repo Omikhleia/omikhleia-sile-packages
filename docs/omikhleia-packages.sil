@@ -3,11 +3,17 @@
 \script[src=packages/autodoc-extras]
 \script[src=packages/url]
 \script[src=packages/image]
+\script[src=packages/color]
+\script[src=packages/background]
 \language[main=en]
 \font[family=Libertinus Serif]
+\define[command=codeblock]{\font[family=Libertinus Sans]{\process}}
 \footnote:rule
 \header:rule
 
+% We do not have a true titlepage for now, build it manually.
+
+\background[color=#e9d8ba,allpages=false]
 \noheaderthispage
 \nofoliosthispage
 \hbox{}\vfill
@@ -28,11 +34,18 @@ for SILE
 \noheaderthispage
 \nofoliosthispage
 
+% There we go for the content.
+
 \chapter[numbering=false, toc=false]{Table of Contents}
 
 \tableofcontents
 
-\part{Part One}
+\part{Packages & Classes}
+
+\bigskip
+\begin{center}
+\img[src=docs/images/printing_press.png, width=60%pw]
+\end{center}
 
 \chapter{Packages}
 
@@ -134,27 +147,23 @@ Regarding the differences for now,
   \begin{itemize}
     \item{It has slightly different default page masters, as the gutter space
           was found to be too small.}
-    \item{Page numbers (folios) are flushed left or right depending on the
-          page, rather than centered.}
+    \item{Page numbers (folios) are by default flushed left or right depending on the
+          page, rather than centered.\footnote{Well, this is defined via paragraph styles, so it
+          can actually be customized at convenience.}}
     \item{Page headers rely on the functionality provided by the \doc:keyword{omiheaders} package.}
   \end{itemize}
   \item{Sectioning commands:}
   \begin{itemize}
-    \item{The sectioning commands (partially) obey styles (relying on the
-          \doc:keyword{styles} package).\footnote{If you are, say, French, and want sections to
-          be followed by indented paragraphs, you can therefore enter, early in your document,
-          \doc:code{\\style:redefine[name=book:sectioning:base, as=saved@sectioning:base,
-            inherit=true]\{\\paragraph[indentafter=true]\}}.}}
+    \item{The sectioning commands obey styles (relying on the
+          \doc:keyword{styles} package).}
     \item{The chapter pages have page numbering and make sure the current
           page does not have any header shown.}
-    \item{Chapters begin on an odd
-          page but the previous page, if blank, is shown without page number
-          and header.}
+    \item{When chapters begin on an odd page\footnote{Again, this can be customized.}, 
+          the previous page, if blank, is shown without page number and header.}
     \item{The \doc:code{\\part} is a “level 0” sectioning command, that is
-          above the chapters. It is currently always unnumbered for now, but this
-          is planned to change.}
+          above the chapters.}
     \item{The \doc:code{\\subsubsection} is a “level 4” sectioning command.}
-    \item{“Writers that think they need more than five levels should instead consider
+    \item{Remember — “Writers that think they need more than five levels should instead consider
           restructuring their document in a manner that does not require this level
           of nested sectioning. Increased section granularity can actually begin
           to detract from document clarity.”}
@@ -179,16 +188,16 @@ This class provides a minimalist (read, naive) way to make a modern \em{résumé
         works best with a font family that has: a thin style, an italic style, a light-weight (300)
         bold italic, a bold (600) regular. Lato, for instance, is such a font.}
   \item{Dingbat symbols rely on the Symbola font. You can change it by redefining the \doc:code{cv:dingbats}
-        style.\footnote{E.g. \doc:code{\\style:redefine[name=cv:dingbats,
-            as=@dingbats, inherit=true]\{\\font[family= \doc:args{family}]\}}}}
+        style.\footnote{E.g. \codeblock{\\style:redefine[name=cv:dingbats,
+            as=_dbats, inherit=true]\{\\font[family=\doc:args{family}]\}}.}}
   \end{itemize}
   \item{Colors should not be abused in a CV, so this class proposes only three different colors.}
   \begin{itemize}
-    \item{Two tints of gray for you first and last name, job title and headline.}
+    \item{Two tints of gray for your first and last name, job title and headline.}
     \item{A nice tint of blue (#4080bf) for various sectioning and display elements. You can change it
-        by redefining the \doc:code{cv:color} style.\footnote{E.g. to a nice tint of green,
-            \doc:code{\\style:redefine[name=cv:color, as=@color, inherit=true]\{\\color[color=#59b24c]\}}
-            – likewise for your first and last name, which correspond to the
+        by redefining the \doc:code{cv:color} style.\footnote{E.g.
+            \codeblock{\\style:redefine[name=cv:color, as=_cv:color, inherit=true]\{\\color[color=#59b24c]\}}
+            for a nice tint of green–likewise for your first and last name, which correspond to the
             \doc:code{cv:firstname} and \doc:code{cv:lastname} styles respectively.}}
   \end{itemize}
   \item{Page layout}
@@ -229,5 +238,116 @@ repository}\footnote{\doc:url{https://github.com/Omikhleia/omikhleia-sile-packag
 For a more complex project using the same tools, you may also check
 the \href[src=https://omikhleia.github.io/sindict/]{sindict
 repository}\footnote{\doc:url{https://omikhleia.github.io/sindict/}}.
+
+\part{Questions & Answers}
+
+\begin{center}
+\img[src=docs/images/printer_1568.png, width=55%pw]
+\end{center}
+
+% Let's have fun and define a new sectioning command for questions.
+\style:define[name=omi:question]{
+   \font[style=italic]
+   \paragraph[skipbefore=smallskip, indentbefore=false, skipafter=smallskip, breakafter=false]
+   \sectioning[counter=questions, level=1, display=arabic, goodbreak=false, numberstyle=omi:question:number]
+}
+\style:define[name=omi:question:number]{
+   \label[pre=Q, post=". "]
+}
+
+\define[command=Q]{\rawsection[style=omi:question, toc=false]{\process}}
+
+\chapter{Customizing your omibook}
+
+The class draws heavily upon the concept of “styles”. While you could refer to the
+documentation of that package and look at the class source code for the styles it
+defines for almost everything, we thought a few standard questions would be best
+addressed here.  
+
+\section{Chapters & sections}
+
+\Q{Can I have indented paragraphs after section titles?}
+
+If you are, say, French, and want all sections to be followed by indented paragraphs,
+you can therefore enter, early in your document:
+
+%\style:redefine[name=sectioning:base, as=_secbase, inherit=true]{\paragraph[indentafter=true]}
+
+\smallskip
+\codeblock{\\style:redefine[name=sectioning:base, as=_secbase, inherit=true]\{\par
+\qquad\\paragraph[indentafter=true]\}}
+\smallskip
+
+This \codeblock{sectioning:base} style is inherited by all other sectioning
+commands.
+
+\Q{Paper is costly, I do not want chapters to open on an odd page.}
+
+I have seen this used mostly in huge novels, where modern editors relax the ancient rule, or
+mere convention, that says that chapters always have to open on an odd page.
+
+%\style:redefine[name=sectioning:chapter, as=_chapter, inherit=true]{\sectioning[open=any]}
+
+\smallskip
+\codeblock{\\style:redefine[name=sectioning:chapter, as=_chapter, inherit=true]\{\par
+\qquad\\sectioning[open=any]\}}
+\smallskip
+
+Likewise, the same solution could be applied to \codeblock{sectioning:part}, would you
+need that too.
+
+\Q{Can I have my chapter numbers in roman?}\par
+
+I bet you are writing a novel.
+
+%\style:redefine[name=sectioning:chapter, as=_chapter, inherit=true]{\sectioning[display=Roman]}
+
+\smallskip
+\codeblock{\\style:redefine[name=sectioning:chapter, as=_chapter, inherit=true]\{\par
+\qquad\\sectioning[display=ROMAN]\}}
+
+\section{Footer & header}
+
+\Q{Can I have folios (page numbers) centered? I prefer that.}
+
+The class always distinguishes between odd and even pages, so here you will need
+two redefinitions, to override the default alignments.
+
+%\style:redefine[name=folio:odd, as=_folodd, inherit=true]{\paragraph[align=center]}
+%\style:redefine[name=folio:even, as=_foleven, inherit=true]{\paragraph[align=center]}
+
+\smallskip
+\codeblock{\\style:redefine[name=folio:odd, as=_folodd, inherit=true]\{\par
+\qquad\\paragraph[align=center]\}}
+
+\codeblock{\\style:redefine[name=folio:even, as=_foleven, inherit=true]\{\par
+\qquad\\paragraph[align=center]\}}
+
+\Q{Can I have running headers centered too?}
+
+As for the previous question, but with the header styles.
+
+%\style:redefine[name=header:odd, as=_headodd, inherit=true]{\paragraph[align=center]}
+%\style:redefine[name=header:even, as=_headeven, inherit=true]{\paragraph[align=center]}
+
+\smallskip
+\codeblock{\\style:redefine[name=header:odd, as=_headodd, inherit=true]\{\par
+\qquad\\paragraph[align=center]\}}
+
+\codeblock{\\style:redefine[name=header:even, as=_headeven, inherit=true]\{\par
+\qquad\\paragraph[align=center]\}}
+
+\Q{Can I have change the appearance (font, color) of the folios or headers?}
+
+In addition to the abovementioned paragraph styles, you can also redefine the
+\codeblock{folio:base} and \codeblock{header:base} parent styles, which specify
+their character styles. For instance, I recently read a novel where folios where
+in using the “old-style” numbers.
+
+%\style:redefine[name=folio:base, as=_folbase, inherit=true]{\font[features=+onum]}
+
+\smallskip
+\codeblock{\\style:redefine[name=folio:base, as=_folbase, inherit=true]\{\par
+\qquad\\font[features=+onum]\}}
 
 \end{document}

@@ -3,36 +3,77 @@
 -- 2021, Didier Willis
 -- License: MIT
 --
--- This is a work in progress, gradually tuning the default book
--- class from SILE to my needs and taste.
---   - Slightly different default page master (I found the gutter space too small)
---   - Sectioning commands obey styles (defined with the "styles" package)
---   - Chapters have page numbering
---   - Better handling of page headers
---
 local plain = SILE.require("plain", "classes")
 local omibook = plain { id = "omibook" }
 
 local counters = SILE.require("packages/counters").exports
 
 local styles = SILE.require("packages/styles").exports
-styles.defineStyle("book:sectioning:base", {}, {
-  paragraph = { indentbefore = false, indentafter = false } })
-styles.defineStyle("book:part", { inherit = "book:sectioning:base" }, { font = { weight = 800, size = "+6" },
-  paragraph = { skipbefore = "3cm", skipafter = "bigskip" } })
-styles.defineStyle("book:chapter", { inherit = "book:sectioning:base" }, { font = { weight = 800, size = "+4" },
-  paragraph = { skipafter = "bigskip" } })
-styles.defineStyle("book:section", { inherit = "book:sectioning:base" },  { font = { weight = 800, size = "+2" },
-  paragraph = { skipbefore = "bigskip", skipafter = "bigskip", breakafter = false } })
-styles.defineStyle("book:subsection", { inherit = "book:sectioning:base"},  { font = { weight = 800, size = "+1" },
-  paragraph = { skipbefore = "medskip", skipafter = "medskip", breakafter = false } })
-styles.defineStyle("book:subsubsection", { inherit = "book:sectioning:base" },  { font = { weight = 800 },
-  paragraph = { skipbefore = "smallskip", skipbefore = "smallskip"; breakafter = false } })
-styles.defineStyle("book:folio", {},  { font = { size = "-0.5" } })
-styles.defineStyle("book:header:base", {},  { font = { size = "-1" } })
-styles.defineStyle("book:header:left", { inherit = "book:header:base" }, {})
-styles.defineStyle("book:header:right", { inherit = "book:header:base" }, { font = { style = "italic" } })
 
+-- sectioning styles
+-- We extend style specifications with a sectioning section:
+--   \sectioning[counters=<name>, level=<N>, display=<display>, open=<odd,any,unset>, header="odd,even,both,none", numberstyle]
+styles.defineStyle("sectioning:base", {}, {
+  paragraph = { indentbefore = false, indentafter = false }
+})
+styles.defineStyle("sectioning:part", { inherit = "sectioning:base" }, {
+  font = { weight = 800, size = "+6" },
+  paragraph = { skipbefore = "3cm", align = "center", skipafter = "bigskip" },
+  sectioning = { counter = "parts", level = 0, display = "ROMAN", open = "odd", numberstyle="sectioning:part:number" },
+})
+styles.defineStyle("sectioning:chapter", { inherit = "sectioning:base" }, {
+  font = { weight = 800, size = "+4" },
+  paragraph = { skipafter = "bigskip" },
+  sectioning = { counter = "sections", level = 1, display = "arabic", open = "odd", header="odd", numberstyle="sectioning:chapter:number" },
+})
+styles.defineStyle("sectioning:section", { inherit = "sectioning:base" }, {
+  font = { weight = 800, size = "+2" },
+  paragraph = { skipbefore = "bigskip", skipafter = "bigskip", breakafter = false },
+  sectioning = { counter = "sections", level = 2, display = "arabic", header="even", numberstyle="sectioning:other:number" },
+})
+styles.defineStyle("sectioning:subsection", { inherit = "sectioning:base"}, {
+  font = { weight = 800, size = "+1" },
+  paragraph = { skipbefore = "medskip", skipafter = "medskip", breakafter = false },
+  sectioning = { counter = "sections", level = 3, display = "arabic", numberstyle="sectioning:other:number" },
+})
+styles.defineStyle("sectioning:subsubsection", { inherit = "sectioning:base" }, {
+  font = { weight = 800 },
+  paragraph = { skipbefore = "smallskip", skipbefore = "smallskip"; breakafter = false },
+  sectioning = { counter = "sections", level = 4, display = "arabic", numberstyle="sectioning:other:number" },
+})
+
+styles.defineStyle("sectioning:part:number", {}, {
+  font = { features = "+smcp" },
+  label = { pre = "Part " },
+  paragraph = { skipafter = "medskip", indentbefore = false, indentafter = false },
+})
+styles.defineStyle("sectioning:chapter:number", {}, {
+  label = { pre = "Chapter ", post = "." },
+  paragraph = { skipafter = "smallskip", indentbefore = false, indentafter = false },
+})
+styles.defineStyle("sectioning:other:number", {}, {
+  label = { post = ". " }
+})
+
+-- folio styles
+styles.defineStyle("folio:base", {}, {
+  font = { size = "-0.5" }
+})
+styles.defineStyle("folio:even", { inherit = "folio:base" }, {
+})
+styles.defineStyle("folio:odd", { inherit = "folio:base" }, {
+  paragraph = { align = "right" }
+})
+-- header styles
+styles.defineStyle("header:base", {}, {
+  font = { size = "-1" }
+})
+styles.defineStyle("header:even", { inherit = "header:base" }, {
+})
+styles.defineStyle("header:odd", { inherit = "header:base" }, {
+  font = { style = "italic" },
+  paragraph = { align = "right" }
+})
 
 omibook.defaultFrameset = {
   content = {
@@ -80,16 +121,14 @@ function omibook:init ()
   self:loadPackage("omirefs")
   self:loadPackage("omiheaders")
 
-  -- override foliostyle
+  -- override the standard foliostyle to rely on styles
   self:loadPackage("folio")
   SILE.registerCommand("foliostyle", function (_, content)
     SILE.call("noindent")
     if SILE.documentState.documentClass:oddPage() then
-      SILE.call("rightalign", {}, function()
-        SILE.call("style:apply", { name = "book:folio"}, content)
-      end)
+      SILE.call("style:apply:paragraph", { name = "folio:odd"}, content)
     else
-      SILE.call("style:apply", { name = "book:folio"}, content)
+      SILE.call("style:apply:paragraph", { name = "folio:even"}, content)
     end
   end)
 
@@ -115,59 +154,65 @@ end
 omibook.endPage = function (self)
   self:moveTocNodes()
   self:moveRefs()
-  local headerContent = (self:oddPage() and SILE.scratch.headers.right)
-        or (not(self:oddPage()) and SILE.scratch.headers.left)
-  self:outputHeader(headerContent)
+  local headerContent = (self:oddPage() and SILE.scratch.headers.odd)
+        or (not(self:oddPage()) and SILE.scratch.headers.even)
+  if headerContent then
+    self:outputHeader(headerContent)
+  end
   return plain.endPage(self)
 end
 
-SILE.registerCommand("left-running-head", function (_, content)
+SILE.registerCommand("even-running-header", function (_, content)
   local closure = SILE.settings.wrap()
-  SILE.scratch.headers.left = function () closure(content) end
+  SILE.scratch.headers.even = function () closure(content) end
 end, "Text to appear on the top of the left page")
 
-SILE.registerCommand("right-running-head", function (_, content)
+SILE.registerCommand("odd-running-header", function (_, content)
   local closure = SILE.settings.wrap()
-  SILE.scratch.headers.right = function () closure(content) end
+  SILE.scratch.headers.odd = function () closure(content) end
 end, "Text to appear on the top of the right page")
 
-SILE.registerCommand("book:sectioning", function (options, content)
-  local level = SU.required(options, "level", "book:sectioning")
+SILE.registerCommand("xxx:sectioning", function (options, content)
+  local level = SU.cast("integer", SU.required(options, "level", "sectioning:sectioning"))
+  local counter = SU.required(options, "counter", "sectioning:sectioning")
+  local display = options.display or "arabic"
+  local toclevel = level -- HACK level 0 stuff. Probably a bad design
+  if level == 0 then level = 1 end 
+
   local number
   if SU.boolean(options.numbering, true) then
-    SILE.call("increment-multilevel-counter", { id = "sectioning", level = level })
-    number = SILE.formatMultilevelCounter(counters.getMultilevelCounter("sectioning"))
+    SILE.call("increment-multilevel-counter", { id = counter, level = level, display = display })
+    number = SILE.formatMultilevelCounter(counters.getMultilevelCounter(counter), { noleadingzero = true })
   end
   if SU.boolean(options.toc, true) then
-    SILE.call("tocentry", { level = level, number = number }, SU.subContent(content))
+    SILE.call("tocentry", { level = toclevel, number = number }, SU.subContent(content))
   end
   local lang = SILE.settings.get("document.language")
   if SU.boolean(options.numbering, true) then
-    if options.prenumber then
-      if SILE.Commands[options.prenumber .. ":"  .. lang] then
-        options.prenumber = options.prenumber .. ":" .. lang
-      end
-      SILE.call(options.prenumber)
-    end
-    SILE.call("show-multilevel-counter", { id = "sectioning" })
-    if options.postnumber then
-      if SILE.Commands[options.postnumber .. ":" .. lang] then
-        options.postnumber = options.postnumber .. ":" .. lang
-      end
-      SILE.call(options.postnumber)
+    -- if options.prenumber then
+    --   if SILE.Commands[options.prenumber .. ":"  .. lang] then
+    --     options.prenumber = options.prenumber .. ":" .. lang
+    --   end
+    --   SILE.call(options.prenumber)
+    -- end
+    if options.numberstyle then
+      local numSty = styles.resolveStyle(options.numberstyle)
+      local pre = numSty.label and numSty.label.pre
+      local post = numSty.label and numSty.label.post or " "
+      SILE.call("style:apply:paragraph", { name = options.numberstyle }, function ()
+        if pre then SILE.typesetter:typeset(pre) end
+        SILE.call("show-multilevel-counter", { id = counter, noleadingzero = true })
+        if post then SILE.typesetter:typeset(post) end
+      end)
+    else
+      SILE.call("show-multilevel-counter", { id = counter, noleadingzero = true })
+      SILE.typesetter:typeset(" ")
     end
   end
 end)
 
 omibook.registerCommands = function (_)
   plain.registerCommands()
-SILE.doTexlike([[%
-\define[command=book:chapter:pre]{}%
-\define[command=book:chapter:post]{\par\noindent}%
-\define[command=book:section:post]{ }%
-\define[command=book:subsection:post]{ }%
-\define[command=book:subsubsection:post]{ }%
-]])
 end
 
 SILE.registerCommand("omibook-double-page", function (_, _)
@@ -189,114 +234,246 @@ SILE.registerCommand("omibook-double-page", function (_, _)
   SILE.typesetter:leaveHmode()
 end, "Open a double page without header and folio")
 
+SILE.registerCommand("omibook-single-page", function (_, _)
+  if SILE.scratch.counters.folio.value > 1 then
+    SILE.typesetter:leaveHmode()
+    SILE.call("supereject")
+  end
+  SILE.typesetter:leaveHmode()
+end, "Open a single page")
+
+local resolveSectionStyleDef = function (name)
+  local stylespec = styles.resolveStyle(name)
+
+  if stylespec.sectioning then
+    return {
+      counter = stylespec.sectioning.counter or
+        SU.error("Sectioning style '"..name.."' must have a counter"),
+      display = stylespec.sectioning.display or "arabic",
+      level = stylespec.sectioning.level or 1,
+      open = stylespec.sectioning.open, -- nil = do not open a page
+      numberstyle = stylespec.sectioning.numberstyle,
+      goodbreak = stylespec.sectioning.goodbreak,
+    }
+  end
+
+  SU.error("Style '"..name.."' is not a sectioning style")
+end
+
+SILE.registerCommand("sectioning:enter", function (options, content)
+  local name = SU.required(options, "name", "sectioning:enter")
+  local secStyle = resolveSectionStyleDef(name)
+  if secStyle.open and secStyle.open ~= "unset" then
+    -- Sectioning style that causes a page break.
+    if secStyle.open == "odd" then
+      SILE.call("omibook-double-page")
+    else
+      SILE.call("omibook-single-page")
+    end
+  else
+    -- Sectioning style that doesn't cause a page break.
+    -- Always good to allow a page break before it, though.
+    SILE.typesetter:leaveHmode()
+    if SU.boolean(secStyle.goodbreak, true) then
+      SILE.call("goodbreak")
+    end
+  end
+  return secStyle
+end, "Enter a sectioning command = honor the <open> specification if defined, and return the substyle definition")
+
 SILE.registerCommand("part", function (options, content)
-  SILE.call("omibook-double-page")
-  SILE.call("hbox", {}, {}) -- HACK to ensure the vskip if any is applied... 
-  SILE.call("style:apply:before", { name = "book:part" })
-  SILE.call("noheaderthispage")
-  SILE.call("nofoliosthispage")
+  local secStyle = SILE.call("sectioning:enter", { name = "sectioning:part" })
+
+  SILE.call("noheaders")
+  SILE.call("nofolios")
+  SILE.scratch.headers.odd = nil
+  SILE.scratch.headers.even = nil
+
   SILE.call("set-counter", { id = "footnote", value = 1 })
-  SILE.call("center", {}, function ()
-    SILE.call("style:apply", { name= "book:part" }, function ()
-      SILE.call("book:sectioning", {
-        numbering = false, -- options.numbering, NOT SUPPORTED FOR NOW FIXME
-        -- By the way, we want to support books without parts and with them, and
-        -- also sections without (numbered) chapters, so we need to have a closer
-        -- look at how multilevel counters work, not to get 0.1 etc. :)
-        toc = options.toc,
-        level = 0,
-        -- prenumber = "book:chapter:pre",
-        -- postnumber = "book:chapter:post"
-      }, content)
+  SILE.call("set-multilevel-counter", { id = "sections", level = 1, value = 0 })
+    
+  SILE.call("style:apply:paragraph", { name= "sectioning:part" }, function ()
+    SILE.call("xxx:sectioning", {
+      counter = secStyle.counter,
+      display = secStyle.display,
+      level = secStyle.level,
+      numberstyle = secStyle.numberstyle, 
+      numbering = options.numbering,
+      toc = options.toc,
+    }, content)
+    SILE.process(content)
+  end)
+end, "Begin a new part")
+
+SILE.registerCommand("chapter", function (options, content)
+  local secStyle = SILE.call("sectioning:enter", { name = "sectioning:chapter" })
+
+  -- The chapter pages have no header, and reset the footnote counter.
+  SILE.call("noheaderthispage")
+  SILE.call("set-counter", { id = "footnote", value = 1 })
+
+  SILE.call("style:apply:paragraph", { name= "sectioning:chapter" }, function ()
+    SILE.call("xxx:sectioning", {
+      counter = secStyle.counter,
+      display = secStyle.display,
+      level = secStyle.level,
+      numberstyle = secStyle.numberstyle, 
+      numbering = options.numbering,
+      toc = options.toc,
+    }, content)
+    SILE.process(content)
+  end)
+  SILE.call("even-running-header", {}, function ()
+    SILE.call("style:apply:paragraph", { name = "header:even" }, content)
+  end)
+  SILE.typesetter:inhibitLeading()
+end, "Begin a new chapter")
+
+SILE.registerCommand("rawsection", function (options, content)
+  local styleName = SU.required(options, "style", "rawsection")
+  local secStyle = SILE.call("sectioning:enter", { name = styleName })
+
+  SILE.call("style:apply:paragraph", { name = styleName }, function ()
+    SILE.call("xxx:sectioning", {
+      counter = secStyle.counter,
+      display = secStyle.display,
+      level = secStyle.level,
+      numberstyle = secStyle.numberstyle, 
+      numbering = options.numbering,
+      toc = options.toc,
+    }, content)
+    SILE.process(content)
+  end)
+  SILE.typesetter:inhibitLeading()
+end, "Begin a new simple raw section identified by its <style>")
+
+SILE.registerCommand("section", function (options, content)
+  local secStyle = SILE.call("sectioning:enter", { name = "sectioning:section" })
+
+  SILE.call("style:apply:paragraph", { name = "sectioning:section"}, function ()
+    SILE.call("xxx:sectioning", {
+      counter = secStyle.counter,
+      display = secStyle.display,
+      level = secStyle.level,
+      numberstyle = secStyle.numberstyle, 
+      numbering = options.numbering,
+      toc = options.toc,
+    }, content)
+    SILE.process(content)
+  end)
+  SILE.call("odd-running-header", {}, function ()
+    SILE.call("style:apply:paragraph", { name = "header:odd" }, function()
+      if SU.boolean(options.numbering, true) then
+        SILE.call("show-multilevel-counter", { id = secStyle.counter, level = 2, noleadingzero = true })
+        SILE.typesetter:typeset(" ")
+      end
       SILE.process(content)
     end)
   end)
-  SILE.call("bigskip")
-end, "Begin a new chapter")
-
-SILE.registerCommand("chapter", function (options, content)
-  SILE.call("omibook-double-page")
-  SILE.call("style:apply:before", { name = "book:chapter" })
-  SILE.call("noheaderthispage")
-  SILE.call("set-counter", { id = "footnote", value = 1 })
-  SILE.call("style:apply", { name= "book:chapter" }, function ()
-    SILE.call("book:sectioning", {
-      numbering = options.numbering,
-      toc = options.toc,
-      level = 1,
-      prenumber = "book:chapter:pre",
-      postnumber = "book:chapter:post"
-    }, content)
-    SILE.process(content)
-  end)
-  SILE.call("left-running-head", {}, function ()
-    SILE.call("style:apply", { name = "book:header:left" }, content)
-  end)
-  SILE.call("style:apply:after", { name = "book:chapter" })
-  -- Chapters have page numbering (FIXME should be an option?)
-  -- SILE.call("nofoliosthispage")
-end, "Begin a new chapter")
-
-SILE.registerCommand("section", function (options, content)
-  SILE.typesetter:leaveHmode()
-  SILE.call("goodbreak")
-  SILE.call("style:apply:before", { name = "book:section" })
-  SILE.call("style:apply", { name = "book:section"}, function ()
-    SILE.call("book:sectioning", {
-      numbering = options.numbering,
-      toc = options.toc,
-      level = 2,
-      postnumber = "book:section:post"
-    }, content)
-    SILE.process(content)
-  end)
-  if not SILE.scratch.counters.folio.off then
-    SILE.call("right-running-head", {}, function ()
-      SILE.call("rightalign", {}, function ()
-        SILE.call("style:apply", { name = "book:header:right" }, function()
-          SILE.call("show-multilevel-counter", { id = "sectioning", level = 2 })
-          SILE.typesetter:typeset(" ")
-          SILE.process(content)
-        end)
-      end)
-    end)
-  end
-  SILE.call("style:apply:after", { name = "book:section" })
   SILE.typesetter:inhibitLeading()
 end, "Begin a new section")
 
 SILE.registerCommand("subsection", function (options, content)
-  SILE.typesetter:leaveHmode()
-  SILE.call("goodbreak")
-  SILE.call("style:apply:before", { name = "book:subsection" })
-  SILE.call("style:apply", { name = "book:subsection" }, function ()
-    SILE.call("book:sectioning", {
-          numbering = options.numbering,
-          toc = options.toc,
-          level = 3,
-          postnumber = "book:subsection:post"
-        }, content)
-    SILE.process(content)
-  end)
-  SILE.call("style:apply:after", { name = "book:subsection" })
-  SILE.typesetter:inhibitLeading()
+  options.style = "sectioning:subsection"
+  SILE.call("rawsection", options, content)
 end, "Begin a new subsection")
 
 SILE.registerCommand("subsubsection", function (options, content)
-  SILE.typesetter:leaveHmode()
-  SILE.call("goodbreak")
-  SILE.call("style:apply:before", { name = "book:subsubsection" })
-  SILE.call("style:apply", { name = "book:subsubsection" }, function ()
-    SILE.call("book:sectioning", {
-          numbering = options.numbering,
-          toc = options.toc,
-          level = 4,
-          postnumber = "book:subsection:post"
-        }, content)
-    SILE.process(content)
-  end)
-  SILE.call("style:apply:after", { name = "book:subsubsection" })
-  SILE.typesetter:inhibitLeading()
+  options.style = "sectioning:subsubsection"
+  SILE.call("rawsection", options, content)
 end, "Begin a new subsubsection")
+
+-- BEGIN TEMPORARY
+-- This should go in the core SILE distribution once enough tested...
+
+SILE.formatMultilevelCounter = function (counter, options)
+  local maxlevel = options and options.level and SU.min(options.level, #counter.value) or #counter.value
+  local minlevel = 1
+  local out = {}
+  if options and SU.boolean(options.noleadingzero, true) then
+    -- skip leading zeros
+    while counter.value[minlevel] == 0 do minlevel = minlevel + 1 end
+  end
+  for x = minlevel, maxlevel do
+    out[x - minlevel + 1] = SILE.formatCounter({ display = counter.display[x], value = counter.value[x] })
+  end
+  return table.concat(out, ".")
+end
+
+local function getMultilevelCounter(id)
+  local counter = SILE.scratch.counters[id]
+  if not counter then
+    counter = { value= { 0 }, display= { "arabic" }, format = SILE.formatMultilevelCounter }
+    SILE.scratch.counters[id] = counter
+  end
+  return counter
+end
+
+SILE.registerCommand("set-multilevel-counter", function (options, _)
+  local value = SU.cast("integer", SU.required(options, "value", "set-multilevel-counter"))
+  local level = SU.cast("integer", SU.required(options, "level", "set-multilevel-counter"))
+
+  local counter = getMultilevelCounter(options.id)
+  local currentLevel = #counter.value
+
+  if level == currentLevel then
+    -- e.g. set to x the level 3 of 1.2.3 => 1.2.x
+    counter.value[level] = value
+  elseif level > currentLevel then
+    -- Fill all missing levels in-between
+    -- e.g. set to x the level 3 of 1 = 1.0...
+    while level - 1 > currentLevel do -- e.g.  
+      currentLevel = currentLevel + 1
+      counter.value[currentLevel] = 0
+      counter.display[currentLevel] = counter.display[currentLevel - 1]
+    end
+    -- ... and the 1.0.x with default display (in case the option below is absent)
+    currentLevel = currentLevel + 1
+    counter.value[level] = value
+    counter.display[level] = counter.display[currentLevel - 1]
+  else -- level < currentLevel
+    counter.value[level] = value
+    -- Reset all greater levels
+    -- e.g. set to x the level 2 of 1.2.3 => 1.x
+    while currentLevel > level do
+      counter.value[currentLevel] = nil
+      counter.display[currentLevel] = nil
+      currentLevel = currentLevel - 1
+    end
+  end
+  if options.display then counter.display[currentLevel] = options.display end
+end, "Sets the counter named by the <id> option to <value>; sets its display type (roman/Roman/arabic) to type <display>.")
+
+
+SILE.registerCommand("increment-multilevel-counter", function (options, _)
+  local counter = getMultilevelCounter(options.id)
+  local currentLevel = #counter.value
+  local level = tonumber(options.level) or currentLevel
+  if level == currentLevel then
+    counter.value[level] = counter.value[level] + 1
+  elseif level > currentLevel then
+    while level > currentLevel do
+      currentLevel = currentLevel + 1
+      counter.value[currentLevel] = (options.reset == false) and counter.value[currentLevel -1 ] or 1
+      counter.display[currentLevel] = counter.display[currentLevel - 1]
+    end
+  else -- level < currentLevel
+    counter.value[level] = counter.value[level] + 1
+    while currentLevel > level do
+      if not (options.reset == false) then counter.value[currentLevel] = nil end
+      counter.display[currentLevel] = nil
+      currentLevel = currentLevel - 1
+    end
+  end
+  if options.display then counter.display[currentLevel] = options.display end
+end, "Increments the value of the multilevel counter <id> at the given <level> or the current level.")
+
+SILE.registerCommand("show-multilevel-counter", function (options, _)
+  local counter = getMultilevelCounter(options.id)
+
+  SILE.typesetter:typeset(SILE.formatMultilevelCounter(counter, options))
+end, "Outputs the value of the multilevel counter <id>.")
+
+-- END TEMPORARY
 
 return omibook

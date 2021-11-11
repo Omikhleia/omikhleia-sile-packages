@@ -3,38 +3,12 @@
 -- 2021, Didier Willis
 -- License: MIT
 --
--- Rough API ! Experimental and unstable ! Real quick'n dirty :)
---
---  % Applies a font (same as \font), but additionaly supporting relative sizes (e.g. -1)
---  \style:font[family=...]{...}
---
---  \style:define[name=<custom-style>, inherit=other:custom-name]{
---      \font[family=...] % Actually uses \style:font
---      \color[color=...]
--- % Paragraph styles
---      \numbering[numbering=true/false, toc=true/false, level=N, prenumber="hook", postnumber=hook] % NOT YET
---      \beforeskip[] % NOT YET
---      \afterskip[] % NOT YET
---      something for % NOT YET
---           \set[parameter=document.lskip,value=0pt plus 100000pt]
---           \set[parameter=document.rskip,value=0pt plus 100000pt]
---           \set[parameter=document.spaceskip,value=0.5en]
---           \set[parameter=current.parindent,value=0pt]
---           \set[parameter=document.parindent,value=0pt]
---           \set[parameter=typesetter.parfillskip,value=0pt]
---  }
-
-
--- \style:redefine[name, as, inherit]{....}
--- \style:redefine[name, from]{....}
-
--- NOT YET....
--- \style
+-- NOT YET.... NO SURE IT IS THAT USEFUL
 -- \pagestyle
---   pagesize
---   orientation
---   margins x 4
---   numbering i.e. 1,2,3, i,ii,ii, A, B, C etc.
+--   pagesize?
+--   orientation?
+--   margins x 4?
+--   folo numbering i.e. 1,2,3, i,ii,ii, A, B, C etc.
 --   color (nore, color, gradient, weird stuff) or image?
 --   header
         -- on off
@@ -45,24 +19,8 @@
 --   footer
 --      same stuf
 --   border ...
---   column
+--   columns ??
 --   footnote configuration?
-
-
--- BEGIN STUFF FOR QUICK AND DIRTY DEBUG
-local function dump(o)
-  if type(o) == 'table' then
-    local s = '{ '
-    for k,v in pairs(o) do
-      if type(k) ~= 'number' then k = '"'..k..'"' end
-      s = s .. '['..k..'] = ' .. dump(v) .. ','
-    end
-    return s .. '} '
-  else
-    return tostring(o)
-  end
-end
--- END STUFF FOR QUICK AND DIRTY DEBUG
 
 SILE.scratch.styles = {}
 
@@ -109,23 +67,21 @@ SILE.registerCommand("style:define", function (options, content)
   end
 end, "Defines a named style.")
 
--- BEGIN DRAFT
 -- Very naive cascading for now...
-local style2 = function (style, content)
+local styleForColor = function (style, content)
   if style.color then
     SILE.call("color", style.color, content)
   else
     SILE.process(content)
   end
 end
-
-local style1 = function (style, content)
+local styleForFont = function (style, content)
   if style.font then
     SILE.call("style:font", style.font, function ()
-      style2(style, content)
+      styleForColor(style, content)
     end)
   else
-    style2(style, content)
+    styleForColor(style, content)
   end
 end
 
@@ -134,18 +90,66 @@ local knownSkips = {
   medskip = SILE.settings.get("plain.medskipamount"),
   bigskip = SILE.settings.get("plain.bigskipamount"),
 }
-local parStySpace = function (skip, vbreak)
+local styleForParagraph = function (skip, vbreak)
   local b = SU.boolean(vbreak, true)
+  if not b then SILE.call("novbreak") end
+  SILE.typesetter:leaveHmode()
   if skip then
     local vglue = knownSkips[skip] or SU.cast("vglue", skip)
-    if not b then SILE.call("novbreak") end
-    SILE.typesetter:leaveHmode()
     if not b then SILE.call("novbreak") end
     SILE.typesetter:pushExplicitVglue(vglue)
   end
   if not b then SILE.call("novbreak") end
 end
--- END DRAFT
+
+local knownAligns = {
+  center = "center",
+  left = "raggedright",
+  right = "raggedleft",
+  -- be friendly with users...
+  raggedright = "raggedright",
+  raggedleft = "raggedleft"
+}
+
+local styleForAlignment = function (style, content)
+  if style.paragraph and style.paragraph.align and style.paragraph.align ~= "justify" then
+    local alignCommand = knownAligns[style.paragraph.align]
+    if not alignCommand then
+      SU.error("Invalid paragraph style alignment '"..style.paragraph.align.."'")
+    end
+    SILE.call(alignCommand, {}, function ()
+      styleForFont(style, content)
+    end)
+  else
+    styleForFont(style, content)
+  end
+end
+
+local function dumpOptions(v)
+  local opts = {}
+  for k, v in pairs(v) do
+    opts[#opts+1] = k.."="..v
+  end
+  return table.concat(opts, ", ")
+end
+local function dumpStyle (name)
+  local stylespec = SILE.scratch.styles[name]
+  if not stylespec then return "(undefined)" end
+
+  local desc = {}
+  for k, v in pairs(stylespec.style) do
+    desc[#desc+1] = k .. "[" .. dumpOptions(v).."]"
+  end
+  local textspec = table.concat(desc, ", ")
+  if stylespec.inherit then
+    if #textspec > 0 then
+      textspec = stylespec.inherit.." > "..textspec
+    else
+      textspec = "< "..stylespec.inherit
+    end
+  end
+  return textspec
+end
 
 local function resolveStyle (name)
   local stylespec = SILE.scratch.styles[name]
@@ -167,62 +171,54 @@ local function resolveStyle (name)
   return stylespec.style
 end
 
+-- APPLY A CHARACTER STYLE
+
 SILE.registerCommand("style:apply", function (options, content)
   local name = SU.required(options, "name", "style:apply")
   local styledef = resolveStyle(name)
 
-  style1(styledef, content)
+  styleForFont(styledef, content)
 end, "Applies a named style to the content.")
 
-SILE.registerCommand("style:apply:before", function (options, _)
-  local name = SU.required(options, "name", "style:apply:before")
-  local styledef = resolveStyle(name)
-  local parSty = styledef.paragraph
+-- APPLY A PARAGRAPH STYLE
 
-  if parSty then
-    if parSty.skipbefore then
-      -- FIXME: If we are at a top a page, how to make sure the vskip
-      -- is honored? Without inserting an empty hbox that would cause
-      -- a mess with regular sections etc.
-    end
-    parStySpace(parSty.skipbefore, parSty.breakbefore)
-    if SU.boolean(parSty.indentbefore, true) then
-      SILE.call("indent")
-    else
-      SILE.call("noindent")
-    end
-  end
-end, "Applies the paragraph before style.")
+-- Undocumented and reserved for casual testing.
+-- SILE.registerCommand("style:apply:before", function (options, _)
+--   local name = SU.required(options, "name", "style:apply:before")
+--   local styledef = resolveStyle(name)
+--   local parSty = styledef.paragraph
 
-SILE.registerCommand("style:apply:after", function (options, _)
-  local name = SU.required(options, "name", "style:apply:after")
-  local styledef = resolveStyle(name)
-  local parSty = styledef.paragraph
+--   if parSty then
+--     if parSty.skipbefore and #SILE.typesetter.state.outputQueue == 0 then
+--       -- FIXME: If we are at a top a page, how to make sure the vskip
+--       -- is honored? Without inserting an empty hbox that would cause
+--       -- a mess with regular sections etc.
+--       -- Is this the proper way?
+--       SILE.typesetter:initline()
+--     end
+--     styleForParagraph(parSty.skipbefore, parSty.breakbefore)
+--     if SU.boolean(parSty.indentbefore, true) then
+--       SILE.call("indent")
+--     else
+--       SILE.call("noindent")
+--     end
+--   end
+-- end, "Applies the paragraph-before style - undocumented.")
 
-  if parSty then
-    parStySpace(parSty.skipafter, parSty.breakafter)
-    if SU.boolean(parSty.indentafter, true) then
-      SILE.call("indent")
-    else
-      SILE.call("noindent")
-    end
-  end
-end, "Applies the paragraph before style.")
+-- SILE.registerCommand("style:apply:after", function (options, _)
+--   local name = SU.required(options, "name", "style:apply:after")
+--   local styledef = resolveStyle(name)
+--   local parSty = styledef.paragraph
 
-local styleP = function (style, content)
-  if style.paragraph and style.paragraph.align then
-    if style.paragraph.align ~= "center"
-        and style.paragraph.align ~= "raggedright"
-        and style.paragraph.align ~= "raggedleft" then
-      SU.error("Invalid paragraph style alignment")
-    end
-    SILE.call(style.paragraph.align, {}, function ()
-      style1(style, content)
-    end)
-  else
-    style1(style, content)
-  end
-end
+--   if parSty then
+--     styleForParagraph(parSty.skipafter, parSty.breakafter)
+--     if SU.boolean(parSty.indentafter, true) then
+--       SILE.call("indent")
+--     else
+--       SILE.call("noindent")
+--     end
+--   end
+-- end, "Applies the paragraph-after style - undocumented.")
 
 SILE.registerCommand("style:apply:paragraph", function (options, content)
   local name = SU.required(options, "name", "style:apply:paragraph")
@@ -230,12 +226,14 @@ SILE.registerCommand("style:apply:paragraph", function (options, content)
   local parSty = styledef.paragraph
 
   if parSty then
-    if parSty.skipbefore then
+    if parSty.skipbefore and #SILE.typesetter.state.outputQueue == 0 then
       -- FIXME: If we are at a top a page, how to make sure the vskip
       -- is honored? Without inserting an empty hbox that would cause
-      -- a mess with regular sections etc.
+      -- a mess with regular sections etc.?
+      -- Is this the proper way?
+      SILE.typesetter:initline()
     end
-    parStySpace(parSty.skipbefore, parSty.breakbefore)
+    styleForParagraph(parSty.skipbefore, parSty.breakbefore)
     if SU.boolean(parSty.indentbefore, true) then
       SILE.call("indent")
     else
@@ -243,17 +241,19 @@ SILE.registerCommand("style:apply:paragraph", function (options, content)
     end
   end
 
-  styleP(styledef, content)
+  styleForAlignment(styledef, content)
 
   if parSty then
-    parStySpace(parSty.skipafter, parSty.breakafter)
+    styleForParagraph(parSty.skipafter, parSty.breakafter)
     if SU.boolean(parSty.indentafter, true) then
       SILE.call("indent")
     else
       SILE.call("noindent")
     end
   end
-end, "Applies the paragraph style.")
+end, "Applies the paragraph style entirely.")
+
+-- STYLE REDEFINITION
 
 SILE.registerCommand("style:redefine", function (options, content)
   SU.required(options, "name", "redefining style")
@@ -306,7 +306,8 @@ return {
     end,
     -- resolve a style (incl. inherited fields)
     resolveStyle = resolveStyle,
-    debug = dump
+    -- human-readable specification for debug (text)
+    dumpStyle = dumpStyle
   },
   documentation = [[\begin{document}
 \include[src=packages/styles-doc.sil]

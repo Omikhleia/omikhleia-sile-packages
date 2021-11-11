@@ -10,8 +10,9 @@ It is intended to be used by other packages or classes, rather than directly.
 
 If one looks at the default/standard packages or classes in SILE, something may
 seem wrong (though of course it is a matter of taste and could be debated):
-(1) Many commands have “hooks”, such as \doc:code{pullquote:font}, \doc:code{book:chapterfont}, or
-whatever. But what if one also wants, for instance, to specify a color?
+(1) Many commands have “hooks”, such as \doc:code{pullquote:font}, \doc:code{book:chapterfont}, 
+\doc:code{book:right-running-head-font}, or whatever. None seem to have the same type of name.
+But what if one also wants, for instance, to specify a color?
 Of course, in many cases, the hook could be redefined to apply that wanted color to the content…
 But, er, isn’t it called \doc:code{xxx:font}? Something looks amiss.
 (2) Those hooks often have fixed definitions, e.g. footnote text at 9pt, chapter heading
@@ -27,16 +28,15 @@ Actually, this is what most modern word-processing software have been doing for 
 be it MS-Word, Libre/OpenOffice and cognates… They all introduce the concept of “styles”,
 in actually three forms at least: character styles, paragraph styles and page styles. But also,
 frame styles, list styles, and table styles, to list a few others.
-
 This package is an attempt at implementing such ideas, or a subset of them, in SILE.
-
 Let’s have a look at some recent version of LibreOffice…
 
 \begin{itemize}
 \item{Character styles include: font (family, style
-and weight, size, language, features), font effects (color, decoration e.g. underlining and
-strikethrough, case), position (superscript, subscript), rotation… (and plenty of smaller
-features, e.g. borders, which interest is a bit doubtful, heh!).}
+   and weight, size, language, features), font effects (color, decoration e.g. underlining and
+   strikethrough, case), position (superscript, subscript), rotation… (and plenty of smaller
+   features, e.g. borders, which real interest is a bit doubtful, in this author’s opinion
+   at least).}
 \item{Paragraph styles, in addition to the above, include: indent and spacing, alignment,
    outline & numbering, text flow (notably, breaks).}
 \item{Page styles include: page layout (a bit akin to SILE’s masters), header and footer, folio
@@ -45,10 +45,20 @@ features, e.g. borders, which interest is a bit doubtful, heh!).}
 
 \smallskip
 
-\em{Regular character styles.}
-\novbreak
+We do not intend to cover all of the above here. First, because some of them already have
+matching mechanisms, or even of superior design, in SILE. Page masters, for instances, are
+a neat concept, and we do not really need to address them differently. This implementation
+therefore focuses on some practical use cases. 
 
-\smallskip
+% We will even use our own fancy paragraph style for internal sectioning below.
+\style:define[name=internal-sectioning]{
+   \font[style=italic]
+   \paragraph[skipbefore=smallskip, skipafter=smallskip, breakafter=false]
+}
+\define[command=P]{\style:apply:paragraph[name=internal-sectioning]{\process}}
+
+\P{Regular styles.}
+
 To define a (character) style, one uses the following syntax (with any of the internal
 elements being optional):
 
@@ -65,6 +75,11 @@ elements being optional):
 }
 
 Can you guess how this \style:apply[name=style@example]{Style} was defined?
+Note that despite their command-like syntax, the elements in style
+specifications are not (necessarily) corresponding to actual commands.
+It just uses that familiar syntax as a convenience.\footnote{Technically-minded readers may
+also note it is also very simple to implement that way, just relying
+on SILE’s standard parser and its underlying AST.} 
 
 A style can also inherit from a previously defined style:
 
@@ -74,17 +89,7 @@ A style can also inherit from a previously defined style:
 \par\}
 \end{doc:codes}
 
-\smallskip
-
-\em{Styles for tables of contents.}
-\novbreak
-
-\begin{doc:codes}
-\\style:define[name=\doc:args{name}]\{
-\par\quad{}…
-\par\quad\\toc[pageno=\doc:args{boolean}, dotfill=\doc:args{boolean}, number=\doc:args{boolean}]
-\par\}
-\end{doc:codes}
+\P{Styles for the table of contents.}
 
 The style specification, besides the formatting commands, includes:
 
@@ -95,12 +100,19 @@ The style specification, besides the formatting commands, includes:
 \item{Displaying the section number or not.}
 \end{itemize}
 
+\begin{doc:codes}
+\\style:define[name=\doc:args{name}]\{
+\par\quad{}…
+\par\quad\\toc[pageno=\doc:args{boolean}, dotfill=\doc:args{boolean}, number=\doc:args{boolean}]
+\par\}
+\end{doc:codes}
+
 Note that by nature, TOC styles are also paragraph styles (see further below).
 
-\smallskip
+\P{Character styles for bullet lists.}
 
-\em{Character styles for bullet lists.}
-\novbreak
+The style specification includes the character to use as bullet. The other character
+formatting commands should of course apply to the bullet too.
 
 \begin{doc:codes}
 \\style:define[name=\doc:args{name}]\{
@@ -109,23 +121,10 @@ Note that by nature, TOC styles are also paragraph styles (see further below).
 \par\}
 \end{doc:codes}
 
-The style specification includes the character to use as bullet. The other character
-formatting commands should of course apply to the bullet too.
-
 The bullet can be either entered directly as a character, or provided as a Unicode codepoint in
 hexadecimal (U+xxxx).
 
-\smallskip
-
-\em{Character styles for enumerations.}
-\novbreak
-
-\begin{doc:codes}
-\\style:define[name=\doc:args{name}]\{
-\par\quad{}…
-\par\quad\\enumerate[display=\doc:args{string}, before=\doc:args{string}, after=\doc:args{string}]
-\par\}
-\end{doc:codes}
+\P{Character styles for enumerations.}
 
 The style specification includes:
 
@@ -134,6 +133,13 @@ The style specification includes:
 \item{The text to prepend to the value,}
 \item{The text to append to the value.}
 \end{itemize}
+
+\begin{doc:codes}
+\\style:define[name=\doc:args{name}]\{
+\par\quad{}…
+\par\quad\\enumerate[display=\doc:args{string}, before=\doc:args{string}, after=\doc:args{string}]
+\par\}
+\end{doc:codes}
 
 The specification also accepts another extended syntax:
 
@@ -156,13 +162,8 @@ done, the enumeration to stay within a range corresponding to expected character
 
 The other character formatting commands should of course apply to the full label.
 
-\smallskip
+\P{Paragraph styles.}
 
-\em{Proposal paragraph styles (experimental).}
-\novbreak
-
-\smallskip
-\novbreak
 To define a paragraph style, one uses the following syntax (with any of the internal
 elements being optional):
 
@@ -172,7 +173,7 @@ elements being optional):
 \par\quad\\paragraph[skipbefore=\doc:args{glue|skip}, indentbefore=\doc:args{boolean}
 \par\qquad{}skipafter=\doc:args{glue|skip}, indentafter=\doc:args{boolean},
 \par\qquad{}breakbefore=\doc:args{boolean}, breakafter=\doc:args{boolean},
-\par\qquad{}align=\doc:args{center|raggedright|raggedleft}]
+\par\qquad{}align=\doc:args{center|right|left|justify}]
 \par\}
 \end{doc:codes}
 
@@ -191,7 +192,8 @@ The specification includes:
    is to always indent regular paragraphs, even after a section title.}}
 \item{Whether a page break may occur before or after this paragraph (defaults to true). Book sectioning commands,
    typically, would set the after-break to false.}
-\item{The paragraph alignment, if not justified.}
+\item{The paragraph alignment (center, left, right or justify — the latter is the default but may be
+   useful to overwrite an inherited alignment).}
 \end{itemize}
 
 Missing features considered for a later iteration:
@@ -205,16 +207,34 @@ Missing features considered for a later iteration:
   to introduce page styles.}
 \end{itemize}
 
-\smallskip
+\P{Applying a character style.}
 
-\em{Advanced commands.}
-\novbreak
-
-To apply a (character) style to some content, one just has to do:
+To apply a character style to some content, one just has to do:
 
 \begin{doc:codes}
 \\style:apply[name=\doc:args{name}]\{\doc:args{content}\}
 \end{doc:codes}
+
+\P{Applying a paragraph style.}
+
+Likewise, the following command applies the whole paragraph style to its content, that is:
+the skips and options applying before the content, the character style and the alignment
+on the content itself, and finally the skips and options applying after it.
+
+\begin{doc:codes}
+\\style:apply:paragraph[name=\doc:args{name}]\{\doc:args{content}\}
+\end{doc:codes}
+
+\P{Applying the other styles.}
+
+A style is a versatile concept and a powerful paradigm, but for some advanced usages it
+cannot be fully generalized in a single package. The sectioning, table of contents or
+enumeration styles all require support from other packages. This package just provides
+them a general framework to play with. Actually we refrained for checking many things
+in the style specifications, so one could possibly extend them with new concepts and
+benefit from the proposed core features and simple style inheritance model.
+
+\P{Redefining styles.}
 
 Regarding re-definitions now, the first syntax below allows one to change the definition
 of style \doc:args{name} to new \doc:args{content}, but saving the previous definition to \doc:args{saved-name}:
@@ -252,6 +272,8 @@ in \doc:args{saved-name}, and to clear the latter:
 
 So now on, \doc:code{\\\doc:args{name}} is restored to whatever was saved and \doc:code{\\\doc:args{saved-name}}
 is no longer defined.
+
+\P{Additional goodies.}
 
 The package also defines a \doc:code{\\style:font} command, which is basically the same as the
 standard \doc:code{\\font} command, but additionaly supports relative sizes with respect to

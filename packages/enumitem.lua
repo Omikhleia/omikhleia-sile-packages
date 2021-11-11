@@ -144,7 +144,6 @@ styles.defineStyle("list:itemize-alternate:6", {}, {
 local resolveEnumStyleDef = function (name)
   local stylespec = styles.resolveStyle(name)
 
-  local styledef = {}
   if stylespec.enumerate then
     return {
       display = stylespec.enumerate.display or "arabic",
