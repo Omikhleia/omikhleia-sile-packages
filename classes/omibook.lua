@@ -217,21 +217,27 @@ end
 
 SILE.registerCommand("omibook-double-page", function (_, _)
   -- NOTE: We do not use the "open-double-page" from the two side
-  -- package as it has doesn't have the nice logic we have here
-  -- (page 1 special case, and no header nor folio on blank
-  -- even pages)
-  if SILE.scratch.counters.folio.value > 1 then
-    SILE.typesetter:leaveHmode()
+  -- package as it has doesn't have the nice logic we have here:
+  --  - check we are not already at the top of a page
+  --  - disable neither and folio on blank even page
+  -- I really had hard times to make this work correctly. It now
+  -- seems ok, but it might be fragile.
+  SILE.typesetter:leaveHmode() -- Important, flushes output queue.
+  if #SILE.typesetter.state.outputQueue ~= 0 then
+    -- We are not at the top of a page, eject the current content.
     SILE.call("supereject")
-    if SILE.documentState.documentClass:oddPage() then
-      SILE.typesetter:typeset("")
-      SILE.typesetter:leaveHmode()
-      SILE.call("nofoliosthispage")
-      SILE.call("noheaderthispage")
-      SILE.call("supereject")
-    end
   end
-  SILE.typesetter:leaveHmode()
+  SILE.typesetter:leaveHmode() -- Important again...
+  -- ... so now we are at the top of a page, and only need
+  -- to add a blank page if we are not on an odd page.
+  if not SILE.documentState.documentClass:oddPage() then
+    SILE.typesetter:typeset("")
+    SILE.typesetter:leaveHmode()
+    SILE.call("nofoliosthispage")
+    SILE.call("noheaderthispage")
+    SILE.call("supereject")
+  end
+  SILE.typesetter:leaveHmode() -- and again!
 end, "Open a double page without header and folio")
 
 SILE.registerCommand("omibook-single-page", function (_, _)
