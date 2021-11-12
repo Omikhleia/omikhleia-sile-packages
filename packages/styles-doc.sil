@@ -10,7 +10,7 @@ It is intended to be used by other packages or classes, rather than directly.
 
 If one looks at the default/standard packages or classes in SILE, something may
 seem wrong (though of course it is a matter of taste and could be debated):
-(1) Many commands have “hooks”, such as \doc:code{pullquote:font}, \doc:code{book:chapterfont}, 
+(1) Many commands have “hooks”, such as \doc:code{pullquote:font}, \doc:code{book:chapterfont},
 \doc:code{book:right-running-head-font}, or whatever. None seem to have the same type of name.
 But what if one also wants, for instance, to specify a color?
 Of course, in many cases, the hook could be redefined to apply that wanted color to the content…
@@ -48,7 +48,7 @@ Let’s have a look at some recent version of LibreOffice…
 We do not intend to cover all of the above here. First, because some of them already have
 matching mechanisms, or even of superior design, in SILE. Page masters, for instances, are
 a neat concept, and we do not really need to address them differently. This implementation
-therefore focuses on some practical use cases. 
+therefore focuses on some practical use cases.
 
 % We will even use our own fancy paragraph style for internal sectioning below.
 \style:define[name=internal-sectioning]{
@@ -79,7 +79,7 @@ Note that despite their command-like syntax, the elements in style
 specifications are not (necessarily) corresponding to actual commands.
 It just uses that familiar syntax as a convenience.\footnote{Technically-minded readers may
 also note it is also very simple to implement that way, just relying
-on SILE’s standard parser and its underlying AST.} 
+on SILE’s standard parser and its underlying AST.}
 
 A style can also inherit from a previously defined style:
 
@@ -88,6 +88,10 @@ A style can also inherit from a previously defined style:
 \par\quad…
 \par\}
 \end{doc:codes}
+
+This simple style inheritance mechanism is actually quite nice, allowing
+you to re-use or redefine (see further below) existing styles and just
+override the bits you want.
 
 \P{Styles for the table of contents.}
 
@@ -196,16 +200,47 @@ The specification includes:
    useful to overwrite an inherited alignment).}
 \end{itemize}
 
-Missing features considered for a later iteration:
+\P{Advanced paragraph styles.}
 
-\begin{itemize}
-\item{Page breaks. This would be most useful for book-like sectioning commands, e.g. chapters and parts,
-  which \em{usually} begin on an odd page. Usually, but not always — in several books, notably novels,
-  it is nowadays quite frequent for chapters not to obey this rule (likely, for saving a few
-  pages). The difficulty here is for the normal case (odd-page breaks), where the “blank” even page
-  could have a different page style, so we may either need support from the class here, or have
-  to introduce page styles.}
-\end{itemize}
+As specified above, the styles specifications do not provide any way to configure
+the margins (i.e. left and right skips) and other low-level paragraph formatting
+options.
+
+\script{
+-- We use long names with @ in them just to avoid messing with document
+-- styles a user might have defined, but obviously this could just be
+-- called "block" or whathever.
+SILE.registerCommand("style@blockindent", function (options, content)
+  SILE.settings.temporarily(function ()
+    local indent = SILE.length("2em")
+    SILE.settings.set("document.rskip", SILE.nodefactory.glue(indent))
+    SILE.settings.set("document.lskip", SILE.nodefactory.glue(indent))
+    SILE.process(content)
+    SILE.call("par")
+  end)
+end, "Typesets its contents in a blockquote.")
+SILE.scratch.styles.alignments["block@example"] = "style@blockindent"
+}
+\style:define[name=style@block]{
+   \font[size=-1]
+   \paragraph[skipbefore=smallskip, skipafter=smallskip, align=block@example]
+}
+
+\begin[name=style@block]{style:apply:paragraph}
+But it does not mean this is not possible at all.
+You can actually define your own command in Lua that sets these things at
+your convenience, and register it with some name in
+the \doc:code{SILE.scratch.styles.alignments} array,
+so it gets known and is now a valid alignment option.
+
+It allows you to easily extend the styles while still getting the benefits
+from their other features.
+\end{style:apply:paragraph}
+
+Guess it, it is actually what we did here in code, to typeset the above
+“block-indented” paragraph. Similarly, you can also register your own skips
+by name in \doc:code{SILE.scratch.styles.skips} so that to use them
+in the various paragraph skip options.
 
 \P{Applying a character style.}
 
@@ -304,9 +339,5 @@ Normal \\bigger\{Big \\bigger\{Great\}\}.
 \end{doc:codes}
 
 Yields: Normal \smaller{Small \smaller{Tiny}}, Normal \bigger{Big \bigger{Great}}.
-
-\bigskip
-Where do we go now? Styles
-could include other features. In other terms, this is an experimental work in progress!
 
 \end{document}

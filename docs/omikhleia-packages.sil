@@ -10,9 +10,17 @@
 \define[command=codeblock]{\font[family=Libertinus Sans]{\process}}
 \footnote:rule
 \header:rule
+\script{
+-- FIXME... Until proper fix in SILE for Unicode metadata #1280
+local pdf = require("justenoughlibtexpdf")
+SILE.outputters.libtexpdf._init()
+local info = pdf.get_dictionary("Info")
+pdf.add_dict(info, pdf.parse("/Title"),
+  pdf.parse("<"..SU.utf8_to_utf16be_hexencoded("Omikhleia’s classes & packages")..">"))
+}
+\pdf:metadata[key=Author, val=Didier Willis]
 
 % We do not have a true titlepage for now, build it manually.
-
 \background[color=#e9d8ba,allpages=false]
 \noheaderthispage
 \nofoliosthispage
@@ -29,13 +37,27 @@ for SILE
 \end{center}
 
 \vfill
-\supereject
 
-\noheaderthispage
-\nofoliosthispage
+\break
 
+% Now a legal matter page
+\hbox{}
+
+\vfill
+
+© 2021 Didier Willis.
+
+This material may be distributed only subject to the terms and conditions set forth in the
+Creative Commons Attribution, Share-Alike License,
+version 2.0 (http://creativecommons.org/licenses/by-sa/2.0/).
+
+\hbox{}\par\break%
+%
+\noheaderthispage%
+\nofoliosthispage%
+%
 % There we go for the content.
-
+%
 \chapter[numbering=false, toc=false]{Table of Contents}
 
 \tableofcontents
@@ -337,7 +359,7 @@ As for the previous question, but with the header styles.
 \codeblock{\\style:redefine[name=header:even, as=_headeven, inherit=true]\{\par
 \qquad\\paragraph[align=center]\}}
 
-\Q{Can I have change the appearance (font, color) of the folios or headers?}
+\Q{Can I change the appearance (font, color) of the folios or headers?}
 
 In addition to the abovementioned paragraph styles, you can also redefine the
 \codeblock{folio:base} and \codeblock{header:base} parent styles, which specify

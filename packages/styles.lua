@@ -22,7 +22,27 @@
 --   columns ??
 --   footnote configuration?
 
-SILE.scratch.styles = {}
+SILE.scratch.styles = {
+  -- Actual style specifications will go there (see defineStyle etc.)
+  specs = {},
+  -- Known aligns options, with the command implementing them.
+  -- You can register extra options there.
+  alignments = {
+    center = "center",
+    left = "raggedright",
+    right = "raggedleft",
+    -- be friendly with users...
+    raggedright = "raggedright",
+    raggedleft = "raggedleft",
+  },
+  -- Known skip options.
+  -- You can add register skips there.
+  skips = {
+    smallskip = SILE.settings.get("plain.smallskipamount"),
+    medskip = SILE.settings.get("plain.medskipamount"),
+    bigskip = SILE.settings.get("plain.bigskipamount"),
+  },
+}
 
 local function shallowcopy(orig)
   local orig_type = type(orig)
@@ -51,7 +71,7 @@ end, "Applies a font, with additional support for relative sizes.")
 
 SILE.registerCommand("style:define", function (options, content)
   local name = SU.required(options, "name", "style:define")
-  if options.inherit and SILE.scratch.styles[options.inherit] == nil then
+  if options.inherit and SILE.scratch.styles.specs[options.inherit] == nil then
     -- Should we really complain if inherited doesn't exist (yet)?
     -- (Well it avoids some obvious risks of cycle...)
     SU.error("Unknown inherited named style '" .. options.inherit .. "'.")
@@ -59,10 +79,10 @@ SILE.registerCommand("style:define", function (options, content)
   if options.inherit and options.inherit == options.name then
     SU.error("Named style '" .. options.name .. "' cannot inherit itself.")
   end
-  SILE.scratch.styles[name] = { inherit = options.inherit, style = {} }
+  SILE.scratch.styles.specs[name] = { inherit = options.inherit, style = {} }
   for i=1, #content do
     if type(content[i]) == "table" and content[i].command then
-        SILE.scratch.styles[name].style[content[i].command] = content[i].options
+        SILE.scratch.styles.specs[name].style[content[i].command] = content[i].options
     end
   end
 end, "Defines a named style.")
@@ -85,40 +105,30 @@ local styleForFont = function (style, content)
   end
 end
 
-local knownSkips = {
-  smallskip = SILE.settings.get("plain.smallskipamount"),
-  medskip = SILE.settings.get("plain.medskipamount"),
-  bigskip = SILE.settings.get("plain.bigskipamount"),
-}
 local styleForParagraph = function (skip, vbreak)
   local b = SU.boolean(vbreak, true)
   if not b then SILE.call("novbreak") end
   SILE.typesetter:leaveHmode()
   if skip then
-    local vglue = knownSkips[skip] or SU.cast("vglue", skip)
+    local vglue = SILE.scratch.styles.skips[skip] or SU.cast("vglue", skip)
     if not b then SILE.call("novbreak") end
     SILE.typesetter:pushExplicitVglue(vglue)
   end
   if not b then SILE.call("novbreak") end
 end
 
-local knownAligns = {
-  center = "center",
-  left = "raggedright",
-  right = "raggedleft",
-  -- be friendly with users...
-  raggedright = "raggedright",
-  raggedleft = "raggedleft"
-}
-
 local styleForAlignment = function (style, content)
   if style.paragraph and style.paragraph.align and style.paragraph.align ~= "justify" then
-    local alignCommand = knownAligns[style.paragraph.align]
+    local alignCommand = SILE.scratch.styles.alignments[style.paragraph.align]
     if not alignCommand then
       SU.error("Invalid paragraph style alignment '"..style.paragraph.align.."'")
     end
     SILE.call(alignCommand, {}, function ()
-      styleForFont(style, content)
+      styleForFont(style, function()
+        SILE.process(content)
+--        SILE.typesetter:leaveHmode() -- We do it here to ensure the paragraph is ended
+                                     -- within font changes (for line heights to be correct)
+      end)
     end)
   else
     styleForFont(style, content)
@@ -133,7 +143,7 @@ local function dumpOptions(v)
   return table.concat(opts, ", ")
 end
 local function dumpStyle (name)
-  local stylespec = SILE.scratch.styles[name]
+  local stylespec = SILE.scratch.styles.specs[name]
   if not stylespec then return "(undefined)" end
 
   local desc = {}
@@ -152,7 +162,7 @@ local function dumpStyle (name)
 end
 
 local function resolveStyle (name)
-  local stylespec = SILE.scratch.styles[name]
+  local stylespec = SILE.scratch.styles.specs[name]
   if not stylespec then SU.error("Style '"..name.."' does not exist") end
 
   if stylespec.inherit then
@@ -264,14 +274,14 @@ SILE.registerCommand("style:redefine", function (options, content)
     end
 
     -- Case: \style:redefine[name=style-name, as=saved-style-name]
-    if SILE.scratch.styles[options.as] ~= nil then
+    if SILE.scratch.styles.specs[options.as] ~= nil then
       SU.error("Style '" .. options.as .. "' would be overwritten.") -- Let's forbid it for now.
     end
-    local sty = SILE.scratch.styles[options.name]
+    local sty = SILE.scratch.styles.specs[options.name]
     if sty == nil then
       SU.error("Style '" .. options.name .. "' does not exist!")
     end
-    SILE.scratch.styles[options.as] = sty
+    SILE.scratch.styles.specs[options.as] = sty
 
     -- Sub-case: \style:redefine[name=style-name, as=saved-style-name, inherit=true/false]{content}
     -- TODO We could accept another name in the inherit here? Use case?
@@ -287,12 +297,12 @@ SILE.registerCommand("style:redefine", function (options, content)
     if content and (type(content) ~= "table" or #content ~= 0) then
       SU.warn("Extraneous content in '" .. options.name .. "' is ignored.")
     end
-    local sty = SILE.scratch.styles[options.from]
+    local sty = SILE.scratch.styles.specs[options.from]
     if sty == nil then
       SU.error("Style '" .. option.from .. "' does not exist!")
     end
-    SILE.scratch.styles[options.name] = sty
-    SILE.scratch.styles[options.from] = nil
+    SILE.scratch.styles.specs[options.name] = sty
+    SILE.scratch.styles.specs[options.from] = nil
   else
     SU.error("Style redefinition needs a 'as' or 'from' parameter.")
   end
@@ -302,7 +312,7 @@ return {
   exports = {
     -- programmatically define a style
     defineStyle = function(name, opts, styledef)
-      SILE.scratch.styles[name] = { inherit = opts.inherit, style = styledef }
+      SILE.scratch.styles.specs[name] = { inherit = opts.inherit, style = styledef }
     end,
     -- resolve a style (incl. inherited fields)
     resolveStyle = resolveStyle,

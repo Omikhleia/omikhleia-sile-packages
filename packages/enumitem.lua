@@ -161,7 +161,7 @@ local resolveEnumStyleDef = function (name)
 end
 
 local checkEnumStyleName = function (name, defname)
-  return SILE.scratch.styles[name] and name or defname
+  return SILE.scratch.styles.specs[name] and name or defname
 end
 
 -- END STYLES

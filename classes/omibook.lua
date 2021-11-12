@@ -45,7 +45,7 @@ styles.defineStyle("sectioning:subsubsection", { inherit = "sectioning:base" }, 
 styles.defineStyle("sectioning:part:number", {}, {
   font = { features = "+smcp" },
   label = { pre = "Part " },
-  paragraph = { skipafter = "medskip", indentbefore = false, indentafter = false },
+  paragraph = { skipafter = "smallskip", indentbefore = false, indentafter = false },
 })
 styles.defineStyle("sectioning:chapter:number", {}, {
   label = { pre = "Chapter ", post = "." },
@@ -316,6 +316,7 @@ SILE.registerCommand("chapter", function (options, content)
 
   -- The chapter pages have no header, and reset the footnote counter.
   SILE.call("noheaderthispage")
+  SILE.call("folios")
   SILE.call("set-counter", { id = "footnote", value = 1 })
 
   SILE.call("style:apply:paragraph", { name= "sectioning:chapter" }, function ()
@@ -351,7 +352,7 @@ SILE.registerCommand("rawsection", function (options, content)
     SILE.process(content)
   end)
   SILE.typesetter:inhibitLeading()
-end, "Begin a new simple raw section identified by its <style>")
+end, "Begin a new simple raw section identified by its <style> (convenience command).")
 
 SILE.registerCommand("section", function (options, content)
   local secStyle = SILE.call("sectioning:enter", { name = "sectioning:section" })

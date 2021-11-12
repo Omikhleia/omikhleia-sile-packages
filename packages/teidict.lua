@@ -60,7 +60,7 @@ styles.defineStyle("tei:q", {}, { font = { style = "italic" } })
 -- UTILITIES
 
 local italicCorr = function (stylename)
-  local spec = SILE.scratch.styles[stylename]
+  local spec = SILE.scratch.styles.specs[stylename]
   if spec == nil then SU.error("Unknown style "..stylename) end
   if spec.style and spec.style.font and spec.style.font.style == "italic" then
     SILE.call("kern", { width = "0.1em" }) -- Hand-made italic correction
