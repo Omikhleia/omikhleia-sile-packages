@@ -327,6 +327,7 @@ end)
 return {
   documentation = [[\begin{document}
 \script[src=packages/autodoc-extras]
+\script[src=packages/footnotes]
 
 This package provides enumerations and bullet lists (a.k.a. \em{itemization}\kern[width=0.1em]), which can
 be styled\footnote{So you can for instance pick up a color and a font for the bullet

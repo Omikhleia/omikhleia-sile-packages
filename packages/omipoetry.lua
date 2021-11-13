@@ -282,6 +282,7 @@ end, "A single verse (theoretically an internal command).")
 
 return {
   documentation = [[\begin{document}
+\script[src=packages/footnotes]
 \script[src=packages/autodoc-extras]
 
 If this package is called \doc:keyword{omipoetry}, it is not only because

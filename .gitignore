@@ -1,3 +1,4 @@
 *.toc
 *.ref
+*.autodoc.*
 tests/*.pdf

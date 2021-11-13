@@ -880,7 +880,7 @@ end)
 return {
   documentation = [[\begin{document}
 \script[src=packages/url]
-\script[src=packages/color]
+\script[src=packages/footnotes]
 \script[src=packages/autodoc-extras]
 
 This package supports a subset of the (XML) TEI  P4 “Print Dictionary” standard,
