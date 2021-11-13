@@ -1,9 +1,7 @@
 --
 -- Some common shorthands and abbreviations
--- 2021, Didier Willis
 -- License: MIT
 --
-
 SILE.require("packages/textsubsuper") -- for text:superscript
 
 SILE.registerCommand("abbr:nbsp", function (options, _)
@@ -98,7 +96,7 @@ SILE.registerCommand("abbr:siecle", function (_, content)
     or SU.error("Expected a string for abbr:siecle")
 
   if tonumber(century) ~= nil then
-    century = SILE.formatCounter({ display = "roman", value = century })
+    century = SU.formatNumber(century, "roman")
   elseif century:match("^[IVX]+$") ~= nil then
     century = string.lower(century)
   elseif century:match("^[ivx]+$") == nil then
