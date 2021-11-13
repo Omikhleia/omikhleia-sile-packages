@@ -3,25 +3,6 @@
 -- 2021, Didier Willis
 -- License: MIT
 --
--- NOT YET.... NO SURE IT IS THAT USEFUL
--- \pagestyle
---   pagesize?
---   orientation?
---   margins x 4?
---   folo numbering i.e. 1,2,3, i,ii,ii, A, B, C etc.
---   color (nore, color, gradient, weird stuff) or image?
---   header
-        -- on off
-        -- same left right
-        -- same first page
-        -- margins (left, right)
-        -- spacing = rather where is that box
---   footer
---      same stuf
---   border ...
---   columns ??
---   footnote configuration?
-
 SILE.scratch.styles = {
   -- Actual style specifications will go there (see defineStyle etc.)
   specs = {},
@@ -68,7 +49,6 @@ SILE.registerCommand("style:font", function (options, content)
   SILE.call("font", opts, content)
 end, "Applies a font, with additional support for relative sizes.")
 
-
 SILE.registerCommand("style:define", function (options, content)
   local name = SU.required(options, "name", "style:define")
   if options.inherit and SILE.scratch.styles.specs[options.inherit] == nil then
@@ -105,10 +85,8 @@ local styleForFont = function (style, content)
   end
 end
 
-local styleForParagraph = function (skip, vbreak)
+local styleForSkip = function (skip, vbreak)
   local b = SU.boolean(vbreak, true)
-  if not b then SILE.call("novbreak") end
-  SILE.typesetter:leaveHmode()
   if skip then
     local vglue = SILE.scratch.styles.skips[skip] or SU.cast("vglue", skip)
     if not b then SILE.call("novbreak") end
@@ -117,19 +95,35 @@ local styleForParagraph = function (skip, vbreak)
   if not b then SILE.call("novbreak") end
 end
 
-local styleForAlignment = function (style, content)
-  if style.paragraph and style.paragraph.align and style.paragraph.align ~= "justify" then
-    local alignCommand = SILE.scratch.styles.alignments[style.paragraph.align]
-    if not alignCommand then
-      SU.error("Invalid paragraph style alignment '"..style.paragraph.align.."'")
+local styleForAlignment = function (style, content, ba)
+  if style.paragraph and style.paragraph.align then
+    if style.paragraph.align and style.paragraph.align ~= "justify" then
+      local alignCommand = SILE.scratch.styles.alignments[style.paragraph.align]
+      if not alignCommand then
+        SU.error("Invalid paragraph style alignment '"..style.paragraph.align.."'")
+      end
+      if not ba then SILE.call("novbreak") end
+      SILE.typesetter:leaveHmode()
+      -- Here we must apply the font, then the alignement, so that line heights are
+      -- correct even on the last paragraph. But the color introduces hboxes so
+      -- must be applied last, no to cause havoc with the noindent/indent and
+      -- centering etc. environments
+      if style.font then
+        SILE.call("style:font", style.font, function ()
+          SILE.call(alignCommand, {}, function ()
+            styleForColor(style, content)
+          end)
+        end)
+      else
+        SILE.call(alignCommand, {}, function ()
+          styleForColor(style, content)
+        end)
+      end
+    else
+      styleForFont(style, content)
+      if not ba then SILE.call("novbreak") end
+      SILE.call("par")
     end
-    SILE.call(alignCommand, {}, function ()
-      styleForFont(style, function()
-        SILE.process(content)
---        SILE.typesetter:leaveHmode() -- We do it here to ensure the paragraph is ended
-                                     -- within font changes (for line heights to be correct)
-      end)
-    end)
   else
     styleForFont(style, content)
   end
@@ -192,58 +186,18 @@ end, "Applies a named style to the content.")
 
 -- APPLY A PARAGRAPH STYLE
 
--- Undocumented and reserved for casual testing.
--- SILE.registerCommand("style:apply:before", function (options, _)
---   local name = SU.required(options, "name", "style:apply:before")
---   local styledef = resolveStyle(name)
---   local parSty = styledef.paragraph
-
---   if parSty then
---     if parSty.skipbefore and #SILE.typesetter.state.outputQueue == 0 then
---       -- FIXME: If we are at a top a page, how to make sure the vskip
---       -- is honored? Without inserting an empty hbox that would cause
---       -- a mess with regular sections etc.
---       -- Is this the proper way?
---       SILE.typesetter:initline()
---     end
---     styleForParagraph(parSty.skipbefore, parSty.breakbefore)
---     if SU.boolean(parSty.indentbefore, true) then
---       SILE.call("indent")
---     else
---       SILE.call("noindent")
---     end
---   end
--- end, "Applies the paragraph-before style - undocumented.")
-
--- SILE.registerCommand("style:apply:after", function (options, _)
---   local name = SU.required(options, "name", "style:apply:after")
---   local styledef = resolveStyle(name)
---   local parSty = styledef.paragraph
-
---   if parSty then
---     styleForParagraph(parSty.skipafter, parSty.breakafter)
---     if SU.boolean(parSty.indentafter, true) then
---       SILE.call("indent")
---     else
---       SILE.call("noindent")
---     end
---   end
--- end, "Applies the paragraph-after style - undocumented.")
-
 SILE.registerCommand("style:apply:paragraph", function (options, content)
   local name = SU.required(options, "name", "style:apply:paragraph")
   local styledef = resolveStyle(name)
   local parSty = styledef.paragraph
 
   if parSty then
-    if parSty.skipbefore and #SILE.typesetter.state.outputQueue == 0 then
-      -- FIXME: If we are at a top a page, how to make sure the vskip
-      -- is honored? Without inserting an empty hbox that would cause
-      -- a mess with regular sections etc.?
-      -- Is this the proper way?
-      SILE.typesetter:initline()
+    local bb = SU.boolean(parSty.breakbefore, true)
+    if #SILE.typesetter.state.nodes then
+      if not bb then SILE.call("novbreak") end
+      SILE.typesetter:leaveHmode()
     end
-    styleForParagraph(parSty.skipbefore, parSty.breakbefore)
+    styleForSkip(parSty.skipbefore, parSty.breakbefore)
     if SU.boolean(parSty.indentbefore, true) then
       SILE.call("indent")
     else
@@ -251,10 +205,13 @@ SILE.registerCommand("style:apply:paragraph", function (options, content)
     end
   end
 
-  styleForAlignment(styledef, content)
+  local ba = not parSty and true or SU.boolean(parSty.breakafter, true)
+  styleForAlignment(styledef, content, ba)
 
   if parSty then
-    styleForParagraph(parSty.skipafter, parSty.breakafter)
+    if not ba then SILE.call("novbreak") end
+    SILE.call("par")
+    styleForSkip(parSty.skipafter, parSty.breakafter)
     if SU.boolean(parSty.indentafter, true) then
       SILE.call("indent")
     else

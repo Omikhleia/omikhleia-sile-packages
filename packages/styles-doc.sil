@@ -237,7 +237,7 @@ It allows you to easily extend the styles while still getting the benefits
 from their other features.
 \end{style:apply:paragraph}
 
-Guess it, it is actually what we did here in code, to typeset the above
+Guess what, it is actually what we did here in code, to typeset the above
 “block-indented” paragraph. Similarly, you can also register your own skips
 by name in \doc:code{SILE.scratch.styles.skips} so that to use them
 in the various paragraph skip options.

@@ -11,14 +11,16 @@ local counters = SILE.require("packages/counters").exports
 local styles = SILE.require("packages/styles").exports
 
 -- sectioning styles
+-- FIXME We need toclevel != counter level
 -- We extend style specifications with a sectioning section:
---   \sectioning[counters=<name>, level=<N>, display=<display>, open=<odd,any,unset>, header="odd,even,both,none", numberstyle]
+--   \sectioning[counters=<name>, level=<N>, display=<display>,
+-- open=<odd,any,unset>, header="odd,even,both,none", goodbreak, numberstyle]
 styles.defineStyle("sectioning:base", {}, {
   paragraph = { indentbefore = false, indentafter = false }
 })
 styles.defineStyle("sectioning:part", { inherit = "sectioning:base" }, {
   font = { weight = 800, size = "+6" },
-  paragraph = { skipbefore = "3cm", align = "center", skipafter = "bigskip" },
+  paragraph = { skipbefore = "15%fh", align = "center", skipafter = "bigskip" },
   sectioning = { counter = "parts", level = 0, display = "ROMAN", open = "odd", numberstyle="sectioning:part:number" },
 })
 styles.defineStyle("sectioning:chapter", { inherit = "sectioning:base" }, {
@@ -187,14 +189,7 @@ SILE.registerCommand("xxx:sectioning", function (options, content)
   if SU.boolean(options.toc, true) then
     SILE.call("tocentry", { level = toclevel, number = number }, SU.subContent(content))
   end
-  local lang = SILE.settings.get("document.language")
   if SU.boolean(options.numbering, true) then
-    -- if options.prenumber then
-    --   if SILE.Commands[options.prenumber .. ":"  .. lang] then
-    --     options.prenumber = options.prenumber .. ":" .. lang
-    --   end
-    --   SILE.call(options.prenumber)
-    -- end
     if options.numberstyle then
       local numSty = styles.resolveStyle(options.numberstyle)
       local pre = numSty.label and numSty.label.pre
@@ -275,6 +270,13 @@ SILE.registerCommand("sectioning:enter", function (options, content)
       SILE.call("omibook-double-page")
     else
       SILE.call("omibook-single-page")
+    end
+    local sty = styles.resolveStyle(name) -- Heavy-handed, but I was tired.
+    if sty.paragraph and sty.paragraph.skipbefore then
+      -- Ensure the vertical skip will be applied even if at the top of
+      -- the page. Introduces a line, though. I haven't found how to avoid
+      -- it :(
+      SILE.typesetter:initline()
     end
   else
     -- Sectioning style that doesn't cause a page break.
