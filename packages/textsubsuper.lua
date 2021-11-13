@@ -67,6 +67,7 @@ SILE.registerCommand("text:superscript", function (options, content)
     SILE.call("font", { features="+sups" }, content)
   else
     SU.warn("No true superscripts for '"..SU.contentToString(content).."', fallback to scaling")
+    SILE.require("packages/raiselower")
     SILE.call("raise", { height = scriptSupOffset }, function ()
       SILE.call("font", { size = scriptSize }, content)
     end)
@@ -74,14 +75,15 @@ SILE.registerCommand("text:superscript", function (options, content)
 end, "Typeset in superscript.")
 
 SILE.registerCommand("text:subscript", function (options, content)
-  if type(content) ~= "table" then SU.error("Expected a table content in text:superscript") end
+  if type(content) ~= "table" then SU.error("Expected a table content in text:subscript") end
   if checkFontFeatures("+subs", content) then
     SILE.call("font", { features="+subs" }, content)
-  elseif checkFontFeatures("+sinf") then
+  elseif checkFontFeatures("+sinf", content) then
     SU.warn("No true subscripts for '"..SU.contentToString(content).."', fallback to scientific inferiors")
     SILE.call("font", { features="+sinf" }, content)
   else
     SU.warn("No true subscripts for '"..SU.contentToString(content).."', fallback to scaling")
+    SILE.require("packages/raiselower")
     SILE.call("lower", { height = scriptSubOffset}, function ()
       SILE.call("font", { size = scriptSize }, content)
     end)
@@ -90,8 +92,8 @@ end, "Typeset in subscript.")
 
 return {
   documentation = [[\begin{document}
-\script[src=packages/textsubsuper]
 \script[src=packages/autodoc-extras]
+\script[src=packages/footnotes]
 
 The \doc:keyword{textsubsuper} package provides two commands, \doc:code{\\text:superscript\{\doc:args{content}\}}
 and \doc:code{\\text:subscript\{\doc:args{content}\}}.
