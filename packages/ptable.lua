@@ -1,7 +1,6 @@
 --
 -- A table package for SILE
 -- Or rather "parbox-based tables", using the parbox package as a building block.
--- 2021, Didier Willis
 -- License: MIT
 --
 SILE.require("packages/parbox")
@@ -25,7 +24,7 @@ local parseColumnSpec = function (colspec)
 end
 
 -- Parse the padding specification as a single measurement or a set of
--- for (top bottom left right).
+-- four (top bottom left right).
 local parsePadding = function (rawspec)
   local spec
   if type(rawspec) == "table" then
@@ -84,7 +83,8 @@ local temporarilyClearFragileSettings = function (callback)
 end
 
 -- Apply a background color to an hbox.
--- N.B. This assumes the hbox is NOT in the output queue.
+-- N.B. It assumes the hbox is NOT in the output queue
+-- (i.e. was stolen back and or stored earlier).
 SILE.require("packages/color")
 local colorBox = function (hbox, color)
   if not color then
@@ -210,17 +210,13 @@ local rowNode = pl.class({
     end
   end,
   shipout = function (self)
-      -- A regular hbox suffices here
+      -- A regular hbox suffices here.
       -- Important hack or a parindent occurs sometimes: Set up queue but avoid a newPar.
       -- We had do to the same weird magic in the parbox package too at one step, see the
       -- comment there.
       SILE.typesetter.state.nodes[#SILE.typesetter.state.nodes+1] = SILE.nodefactory.zerohbox()
       local hbox = SILE.call("hbox", {}, function ()
-      -- Important hack or a parindent occurs sometimes: Set up queue but avoid a newPar.
-      -- We had do to the same weird magic in the parbox package too at one step, see the
-      -- comment there.
-      SILE.typesetter.state.nodes[#SILE.typesetter.state.nodes+1] = SILE.nodefactory.zerohbox()
-
+      -- 
       for i = 1, #self.cells do
         self.cells[i]:shipout(width)
       end
@@ -229,7 +225,7 @@ local rowNode = pl.class({
       table.remove(SILE.typesetter.state.nodes) -- steal it back...
       colorBox(hbox, self.color) -- ...and re-wrap it with color.
     end
-    SILE.typesetter:leaveHmode(1) -- do not eject to page yet (see repeating header logic)
+    SILE.typesetter:leaveHmode(1) -- 1 = do not eject to page yet (see repeating header logic)
   end
 })
 

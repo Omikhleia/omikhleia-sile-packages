@@ -1,0 +1,56 @@
+\begin{document}
+\script[src=packages/ptable]
+
+% A simple table
+
+\begin[cols=20%fw 15%fw 15%fw 50%fw]{ptable}
+  \begin{row}
+    \cell{Day}
+    \begin[span=3]{celltable}
+      \begin{row}
+        \cell[span=3]{\center{Seminar}}
+      \end{row}
+      \begin{row}
+        \begin[span=2]{celltable}
+          \begin{row}
+            \cell[span=2]{\center{Schedule}}
+          \end{row}
+          \begin{row}
+            \cell{Begin}
+            \cell{End}
+          \end{row}
+        \end{celltable}
+        \cell{Topic}
+      \end{row}
+    \end{celltable}
+  \end{row}
+  \begin{row}
+    \cell{Monday}
+    \cell{9:30 AM}
+    \cell{5:30 PM}
+    \celltable{
+        \row{\cell{Introduction to SILE}}
+        \row{\cell{Step by step: classes & packages}}
+    }
+  \end{row}
+    \begin{row}
+    \cell{Tuesday}
+    \celltable[span=2]{
+        \row{\cell{9:30 AM}\cell{11:00 AM}}
+        \row{\cell{11:00 AM}\cell{12:00 PM}}
+        \row{\cell{12:00 PM}\cell{5:00 PM}}
+    }
+    \celltable{
+        \row{\cell{Math & advanced typesetting}}
+        \row{\cell{The internals of SILE}}
+    }
+  \end{row}
+  \begin{row}
+    \cell{Wednesday}
+    \cell{8:00 AM}
+    \cell{12:00 PM}
+    \cell{SILE as an XML processor}
+  \end{row}
+\end{ptable}
+
+\end{document}

@@ -1,0 +1,60 @@
+\begin{document}
+\script[src=packages/ptable]
+
+% Table containing paragraphs and long text that will be line-broken:
+% Let us not forget these cells are parboxes.
+% (This table was in a W3C documentation.)
+
+\set[parameter=document.parindent, value=1em]
+
+\begin[cols=26%fw 21%fw 37%fw 8%fw 8%fw, header=true]{ptable}
+  \begin[background=#eee]{row}
+    \celltable[span=5]{
+      \row{\cell[span=5]{\center{Community Courses - Bath Autumn 1997}}}
+      \begin{row}
+        \cell{\center{Course Name}}
+        \cell{\center{Course Tutor}}
+        \cell{\center{Summary}}
+        \cell{\center{Code}}
+        \cell{\center{Fee}}
+      \end{row}
+    }
+  \end{row}
+  \begin{row}
+    \cell{\noindent\raggedright{After the Civil War}}
+    \cell{Dr. John Wroughton}
+    \cell{\noindent\raggedright{%
+      The course will examine the turbulent years in England
+      after 1646.}
+            \raggedleft{\em{6 weekly meetings starting Monday 13th
+      October.}}}
+    \cell{H27}
+    \cell{£32}
+  \end{row}
+  \begin{row}
+    \cell{\noindent\raggedright{An Introduction to Anglo-Saxon England}}
+    \cell{Mark Cottle}
+    \cell{\noindent\raggedright{%
+      One day course introducing the early medieval
+      period reconstruction the Anglo-Saxons and
+      their society.}
+      \raggedleft{\em{Saturday 18th October.}}}
+    \cell{H28}
+    \cell{£18}
+  \end{row}
+  \begin{row}
+    \cell{\noindent\raggedright{The Glory that was Greece}}
+    \cell{Valerie Lorenz}
+    \cell{\noindent\raggedright{%
+      Birthplace of democracy, philosophy, heartland of theater, home of
+      argument.\par
+      
+      The Romans may have done it but the Greeks did it
+      first.}
+        \raggedleft{\em{Saturday day school 25th October.}}}
+    \cell{H30}
+    \cell{£18}
+  \end{row}
+\end{ptable}
+
+\end{document}

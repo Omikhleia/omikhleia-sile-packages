@@ -2,7 +2,6 @@
 -- Paragraph blocks ("parbox") for SILE
 -- Or how to wrap width-contrained vboxes into an hbox:
 -- A building block for more advanced concepts.
--- 2021, Didier Willis
 -- License: MIT
 --
 SILE.require("packages/rebox")
