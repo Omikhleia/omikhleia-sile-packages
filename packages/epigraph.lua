@@ -159,7 +159,7 @@ end, "Displays an epigraph.")
 return {
   documentation = [[\begin{document}
 \script[src=packages/lorem]
-\script[src=packages/footnotes]
+%\script[src=packages/footnotes]
 \script[src=packages/autodoc-extras]
 \define[command=randomtext]{\lorem[words=18].}
 \define[command=randomsource]{The Lorem Ipsum Book.}

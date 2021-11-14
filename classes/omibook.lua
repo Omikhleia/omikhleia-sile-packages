@@ -10,52 +10,80 @@ local counters = SILE.require("packages/counters").exports
 
 local styles = SILE.require("packages/styles").exports
 
--- sectioning styles
--- FIXME We need toclevel != counter level
--- We extend style specifications with a sectioning section:
---   \sectioning[counters=<name>, level=<N>, display=<display>,
--- open=<odd,any,unset>, header="odd,even,both,none", goodbreak, numberstyle]
+-- Sectioning styles
+
 styles.defineStyle("sectioning:base", {}, {
   paragraph = { indentbefore = false, indentafter = false }
 })
 styles.defineStyle("sectioning:part", { inherit = "sectioning:base" }, {
   font = { weight = 800, size = "+6" },
   paragraph = { skipbefore = "15%fh", align = "center", skipafter = "bigskip" },
-  sectioning = { counter = "parts", level = 0, display = "ROMAN", open = "odd", numberstyle="sectioning:part:number" },
+  sectioning = { counter = "parts", level = 1, display = "ROMAN",
+                 toclevel = 0,
+                 open = "odd", numberstyle="sectioning:part:number",
+                 hook = "sectioning:part:hook" },
 })
 styles.defineStyle("sectioning:chapter", { inherit = "sectioning:base" }, {
   font = { weight = 800, size = "+4" },
-  paragraph = { skipafter = "bigskip" },
-  sectioning = { counter = "sections", level = 1, display = "arabic", open = "odd", header="odd", numberstyle="sectioning:chapter:number" },
+  paragraph = { skipafter = "bigskip", align = "left" },
+  sectioning = { counter = "sections", level = 1, display = "arabic",
+                 toclevel = 1,
+                 open = "odd", numberstyle="sectioning:chapter:number",
+                 hook = "sectioning:chapter:hook" },
 })
 styles.defineStyle("sectioning:section", { inherit = "sectioning:base" }, {
   font = { weight = 800, size = "+2" },
-  paragraph = { skipbefore = "bigskip", skipafter = "bigskip", breakafter = false },
-  sectioning = { counter = "sections", level = 2, display = "arabic", header="even", numberstyle="sectioning:other:number" },
+  paragraph = { skipbefore = "bigskip", skipafter = "medskip", breakafter = false },
+  sectioning = { counter = "sections", level = 2, display = "arabic",
+                 toclevel = 2,
+                 numberstyle="sectioning:other:number",
+                 hook = "sectioning:section:hook" },
 })
 styles.defineStyle("sectioning:subsection", { inherit = "sectioning:base"}, {
   font = { weight = 800, size = "+1" },
   paragraph = { skipbefore = "medskip", skipafter = "medskip", breakafter = false },
-  sectioning = { counter = "sections", level = 3, display = "arabic", numberstyle="sectioning:other:number" },
+  sectioning = { counter = "sections", level = 3, display = "arabic",
+                 toclevel = 3,
+                 numberstyle="sectioning:other:number" },
 })
 styles.defineStyle("sectioning:subsubsection", { inherit = "sectioning:base" }, {
   font = { weight = 800 },
   paragraph = { skipbefore = "smallskip", skipbefore = "smallskip"; breakafter = false },
-  sectioning = { counter = "sections", level = 4, display = "arabic", numberstyle="sectioning:other:number" },
+  sectioning = { counter = "sections", level = 4, display = "arabic",
+                 toclevel = 4,
+                 numberstyle="sectioning:other:number" },
 })
 
 styles.defineStyle("sectioning:part:number", {}, {
   font = { features = "+smcp" },
-  label = { pre = "Part " },
-  paragraph = { skipafter = "smallskip", indentbefore = false, indentafter = false },
+  label = { pre = "Part ", standalone = true },
 })
 styles.defineStyle("sectioning:chapter:number", {}, {
-  label = { pre = "Chapter ", post = "." },
-  paragraph = { skipafter = "smallskip", indentbefore = false, indentafter = false },
+  font = { size = "-1" },
+  label = { before = "Chapter ", after = ".", standalone = true },
 })
 styles.defineStyle("sectioning:other:number", {}, {
-  label = { post = ". " }
+  label = { after = ". " }
 })
+
+local resolveSectionStyleDef = function (name)
+  local stylespec = styles.resolveStyle(name)
+  if stylespec.sectioning then
+    return {
+      counter = stylespec.sectioning.counter or
+        SU.error("Sectioning style '"..name.."' must have a counter"),
+      display = stylespec.sectioning.display or "arabic",
+      level = stylespec.sectioning.level or 1,
+      open = stylespec.sectioning.open, -- nil = do not open a page
+      numberstyle = stylespec.sectioning.numberstyle,
+      goodbreak = stylespec.sectioning.goodbreak,
+      toclevel = stylespec.sectioning.toclevel,
+      hook = stylespec.sectioning.hook,
+    }
+  end
+
+  SU.error("Style '"..name.."' is not a sectioning style")
+end
 
 -- folio styles
 styles.defineStyle("folio:base", {}, {
@@ -66,9 +94,11 @@ styles.defineStyle("folio:even", { inherit = "folio:base" }, {
 styles.defineStyle("folio:odd", { inherit = "folio:base" }, {
   paragraph = { align = "right" }
 })
+
 -- header styles
 styles.defineStyle("header:base", {}, {
-  font = { size = "-1" }
+  font = { size = "-1" },
+  paragraph = { indentbefore = false, indentafter = false }
 })
 styles.defineStyle("header:even", { inherit = "header:base" }, {
 })
@@ -166,44 +196,65 @@ end
 
 SILE.registerCommand("even-running-header", function (_, content)
   local closure = SILE.settings.wrap()
-  SILE.scratch.headers.even = function () closure(content) end
+  SILE.scratch.headers.even = function ()
+    closure(function ()
+      SILE.call("style:apply:paragraph", { name = "header:even" }, content)
+    end)
+  end
 end, "Text to appear on the top of the left page")
 
 SILE.registerCommand("odd-running-header", function (_, content)
   local closure = SILE.settings.wrap()
-  SILE.scratch.headers.odd = function () closure(content) end
+  SILE.scratch.headers.odd = function ()
+    closure(function ()
+      SILE.call("style:apply:paragraph", { name = "header:odd" }, content)
+    end)
+  end
 end, "Text to appear on the top of the right page")
 
 SILE.registerCommand("xxx:sectioning", function (options, content)
   local level = SU.cast("integer", SU.required(options, "level", "sectioning:sectioning"))
   local counter = SU.required(options, "counter", "sectioning:sectioning")
   local display = options.display or "arabic"
-  local toclevel = level -- HACK level 0 stuff. Probably a bad design
-  if level == 0 then level = 1 end 
+  local toclevel = options.toclevel and SU.cast("integer", options.toclevel)
 
-  local number
-  if SU.boolean(options.numbering, true) then
-    SILE.call("increment-multilevel-counter", { id = counter, level = level, display = display })
-    number = SILE.formatMultilevelCounter(counters.getMultilevelCounter(counter), { noleadingzero = true })
+  if options.hook then
+    SILE.call(options.hook, options, content)
   end
-  if SU.boolean(options.toc, true) then
-    SILE.call("tocentry", { level = toclevel, number = number }, SU.subContent(content))
-  end
-  if SU.boolean(options.numbering, true) then
-    if options.numberstyle then
-      local numSty = styles.resolveStyle(options.numberstyle)
-      local pre = numSty.label and numSty.label.pre
-      local post = numSty.label and numSty.label.post or " "
-      SILE.call("style:apply:paragraph", { name = options.numberstyle }, function ()
-        if pre then SILE.typesetter:typeset(pre) end
-        SILE.call("show-multilevel-counter", { id = counter, noleadingzero = true })
-        if post then SILE.typesetter:typeset(post) end
-      end)
-    else
-      SILE.call("show-multilevel-counter", { id = counter, noleadingzero = true })
-      SILE.typesetter:typeset(" ")
+
+  SILE.call("style:apply:paragraph", { name = options.styleName }, function ()
+    local number
+    if SU.boolean(options.numbering, true) then
+      SILE.call("increment-multilevel-counter", { id = counter, level = level, display = display })
+      number = SILE.formatMultilevelCounter(counters.getMultilevelCounter(counter), { noleadingzero = true })
     end
-  end
+    if toclevel and SU.boolean(options.toc, true) then
+      SILE.call("tocentry", { level = toclevel, number = number }, SU.subContent(content))
+    end
+
+    if SU.boolean(options.numbering, true) then
+      if options.numberstyle then
+        local numSty = styles.resolveStyle(options.numberstyle)
+        local pre = numSty.label and numSty.label.before
+        local post = numSty.label and numSty.label.after or " "
+        local kern = numSty.label and numSty.label.kern or "1spc"
+        SILE.call("style:apply", { name = options.numberstyle }, function ()
+          if pre and pre ~= "false" then SILE.typesetter:typeset(pre) end
+          SILE.call("show-multilevel-counter", { id = counter, noleadingzero = true })
+          if post and post ~= false then SILE.typesetter:typeset(post) end
+        end)
+        if SU.boolean(numSty.label and numSty.label.standalone, false) then
+          SILE.call("break") -- HACK. Pretty weak unless the parent pagraph style is ragged.
+        else
+          SILE.call("kern", { width = kern })
+        end
+      else
+        SILE.call("show-multilevel-counter", { id = counter, noleadingzero = true })
+        SILE.typesetter:typeset(" ") -- Should it be a 1spc kern?
+      end
+    end
+    SILE.process(content)
+  end)
 end)
 
 omibook.registerCommands = function (_)
@@ -217,7 +268,7 @@ SILE.registerCommand("omibook-double-page", function (_, _)
   --  - disable neither and folio on blank even page
   -- I really had hard times to make this work correctly. It now
   -- seems ok, but it might be fragile.
-  SILE.typesetter:leaveHmode() -- Important, flushes output queue.
+  SILE.typesetter:leaveHmode() -- Important, flushes nodes to output queue.
   if #SILE.typesetter.state.outputQueue ~= 0 then
     -- We are not at the top of a page, eject the current content.
     SILE.call("supereject")
@@ -243,23 +294,6 @@ SILE.registerCommand("omibook-single-page", function (_, _)
   SILE.typesetter:leaveHmode()
 end, "Open a single page")
 
-local resolveSectionStyleDef = function (name)
-  local stylespec = styles.resolveStyle(name)
-
-  if stylespec.sectioning then
-    return {
-      counter = stylespec.sectioning.counter or
-        SU.error("Sectioning style '"..name.."' must have a counter"),
-      display = stylespec.sectioning.display or "arabic",
-      level = stylespec.sectioning.level or 1,
-      open = stylespec.sectioning.open, -- nil = do not open a page
-      numberstyle = stylespec.sectioning.numberstyle,
-      goodbreak = stylespec.sectioning.goodbreak,
-    }
-  end
-
-  SU.error("Style '"..name.."' is not a sectioning style")
-end
 
 SILE.registerCommand("sectioning:enter", function (options, content)
   local name = SU.required(options, "name", "sectioning:enter")
@@ -289,97 +323,70 @@ SILE.registerCommand("sectioning:enter", function (options, content)
   return secStyle
 end, "Enter a sectioning command = honor the <open> specification if defined, and return the substyle definition")
 
-SILE.registerCommand("part", function (options, content)
-  local secStyle = SILE.call("sectioning:enter", { name = "sectioning:part" })
-
-  SILE.call("noheaders")
-  SILE.call("nofolios")
-  SILE.scratch.headers.odd = nil
-  SILE.scratch.headers.even = nil
-
-  SILE.call("set-counter", { id = "footnote", value = 1 })
-  SILE.call("set-multilevel-counter", { id = "sections", level = 1, value = 0 })
-    
-  SILE.call("style:apply:paragraph", { name= "sectioning:part" }, function ()
-    SILE.call("xxx:sectioning", {
-      counter = secStyle.counter,
-      display = secStyle.display,
-      level = secStyle.level,
-      numberstyle = secStyle.numberstyle, 
-      numbering = options.numbering,
-      toc = options.toc,
-    }, content)
-    SILE.process(content)
-  end)
-end, "Begin a new part")
-
-SILE.registerCommand("chapter", function (options, content)
-  local secStyle = SILE.call("sectioning:enter", { name = "sectioning:chapter" })
-
-  -- The chapter pages have no header, and reset the footnote counter.
-  SILE.call("noheaderthispage")
-  SILE.call("folios")
-  SILE.call("set-counter", { id = "footnote", value = 1 })
-
-  SILE.call("style:apply:paragraph", { name= "sectioning:chapter" }, function ()
-    SILE.call("xxx:sectioning", {
-      counter = secStyle.counter,
-      display = secStyle.display,
-      level = secStyle.level,
-      numberstyle = secStyle.numberstyle, 
-      numbering = options.numbering,
-      toc = options.toc,
-    }, content)
-    SILE.process(content)
-  end)
-  SILE.call("even-running-header", {}, function ()
-    SILE.call("style:apply:paragraph", { name = "header:even" }, content)
-  end)
-  SILE.typesetter:inhibitLeading()
-end, "Begin a new chapter")
-
 SILE.registerCommand("rawsection", function (options, content)
   local styleName = SU.required(options, "style", "rawsection")
   local secStyle = SILE.call("sectioning:enter", { name = styleName })
 
-  SILE.call("style:apply:paragraph", { name = styleName }, function ()
     SILE.call("xxx:sectioning", {
+      styleName = styleName,
       counter = secStyle.counter,
       display = secStyle.display,
       level = secStyle.level,
-      numberstyle = secStyle.numberstyle, 
+      toclevel = secStyle.toclevel,
+      numberstyle = secStyle.numberstyle,
+      hook = secStyle.hook,
       numbering = options.numbering,
       toc = options.toc,
     }, content)
-    SILE.process(content)
-  end)
   SILE.typesetter:inhibitLeading()
 end, "Begin a new simple raw section identified by its <style> (convenience command).")
 
-SILE.registerCommand("section", function (options, content)
-  local secStyle = SILE.call("sectioning:enter", { name = "sectioning:section" })
+SILE.registerCommand("sectioning:part:hook", function (options, content)
+  -- Parts cancel headers and folios
+  SILE.call("noheaderthispage")
+  SILE.call("nofoliosthispage")
+  SILE.scratch.headers.odd = nil
+  SILE.scratch.headers.even = nil
 
-  SILE.call("style:apply:paragraph", { name = "sectioning:section"}, function ()
-    SILE.call("xxx:sectioning", {
-      counter = secStyle.counter,
-      display = secStyle.display,
-      level = secStyle.level,
-      numberstyle = secStyle.numberstyle, 
-      numbering = options.numbering,
-      toc = options.toc,
-    }, content)
+  -- Parts reset footnotes and chapters
+  SILE.call("set-counter", { id = "footnote", value = 1 })
+  SILE.call("set-multilevel-counter", { id = "sections", level = 1, value = 0 })
+end, "Applies part hooks (counter resets, footers and headers, etc.)")
+
+SILE.registerCommand("sectioning:chapter:hook", function (options, content)
+  -- Chapters re-enable folios, have no header, and reset the footnote counter.
+  SILE.call("noheaderthispage")
+  SILE.call("folios")
+  SILE.call("set-counter", { id = "footnote", value = 1 })
+
+  -- Chapters, here, go in the even header.
+  SILE.call("even-running-header", {}, content)
+end, "Applies chapter hooks (counter resets, footers and headers, etc.)")
+
+SILE.registerCommand("sectioning:section:hook", function (options, content)
+  -- Sections here, go in the odd header.
+  SILE.call("odd-running-header", {}, function ()
+    if SU.boolean(options.numbering, true) then
+      SILE.call("show-multilevel-counter", { id = options.counter, level = options.level, noleadingzero = true })
+      SILE.typesetter:typeset(" ")
+    end
     SILE.process(content)
   end)
-  SILE.call("odd-running-header", {}, function ()
-    SILE.call("style:apply:paragraph", { name = "header:odd" }, function()
-      if SU.boolean(options.numbering, true) then
-        SILE.call("show-multilevel-counter", { id = secStyle.counter, level = 2, noleadingzero = true })
-        SILE.typesetter:typeset(" ")
-      end
-      SILE.process(content)
-    end)
-  end)
-  SILE.typesetter:inhibitLeading()
+end, "Applies section hooks (footers and headers, etc.)")
+
+SILE.registerCommand("part", function (options, content)
+  options.style = "sectioning:part"
+  SILE.call("rawsection", options, content)
+end, "Begin a new part")
+
+SILE.registerCommand("chapter", function (options, content)
+  options.style = "sectioning:chapter"
+  SILE.call("rawsection", options, content)
+end, "Begin a new chapter")
+
+SILE.registerCommand("section", function (options, content)
+  options.style = "sectioning:section"
+  SILE.call("rawsection", options, content)
 end, "Begin a new section")
 
 SILE.registerCommand("subsection", function (options, content)
@@ -431,7 +438,7 @@ SILE.registerCommand("set-multilevel-counter", function (options, _)
   elseif level > currentLevel then
     -- Fill all missing levels in-between
     -- e.g. set to x the level 3 of 1 = 1.0...
-    while level - 1 > currentLevel do -- e.g.  
+    while level - 1 > currentLevel do -- e.g.
       currentLevel = currentLevel + 1
       counter.value[currentLevel] = 0
       counter.display[currentLevel] = counter.display[currentLevel - 1]

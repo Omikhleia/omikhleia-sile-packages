@@ -197,7 +197,7 @@ end, "Formats shaped paragraphs")
 return {
   documentation = [[\begin{document}
 \script[src=packages/autodoc-extras]
-\script[src=packages/footnotes]
+%\script[src=packages/footnotes]
 
 Quoting Wikipedia, a colophon (/ˈkɒləfon/) is a brief statement containing information about
 the publication of a book such as the place of publication, the publisher, and the date of

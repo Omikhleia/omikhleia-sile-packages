@@ -407,7 +407,7 @@ end)
 return {
   documentation = [[\begin{document}
 \script[src=packages/autodoc-extras]
-\script[src=packages/footnotes]
+%\script[src=packages/footnotes]
 
 The \doc:keyword{ptable} package provides commands to typeset flexible tables.\footnote{The
 name stands for \em{perfect table}… No, just kidding, it stands for \em{parbox-based table},

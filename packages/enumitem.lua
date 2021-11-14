@@ -58,22 +58,18 @@ SILE.settings.declare({
 local styles = SILE.require("packages/styles").exports
 
 -- BEGIN STYLES
--- N.B. Commented out colors and fonts were for the show, lol.
 
 -- Enumerate style
 styles.defineStyle("list:enumerate:1", {}, {
-  -- font = { weight = 800 },
   enumerate = { display = "arabic", before = "", after = "." }
 })
 styles.defineStyle("list:enumerate:2", {}, {
   enumerate = { display = "roman", before = "", after = "." }
 })
 styles.defineStyle("list:enumerate:3", {}, {
-  -- color = { color = "blue" },
   enumerate = { display = "alpha", before = "", after = ")" }
 })
 styles.defineStyle("list:enumerate:4", {}, {
-  -- color = { color = "red" },
   enumerate = { display = "arabic", before = "", after = ")" }
 })
 styles.defineStyle("list:enumerate:5", {}, {
@@ -327,7 +323,7 @@ end)
 return {
   documentation = [[\begin{document}
 \script[src=packages/autodoc-extras]
-\script[src=packages/footnotes]
+%\script[src=packages/footnotes]
 
 This package provides enumerations and bullet lists (a.k.a. \em{itemization}\kern[width=0.1em]), which can
 be styled\footnote{So you can for instance pick up a color and a font for the bullet

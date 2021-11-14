@@ -1,12 +1,12 @@
 \begin[papersize=6in x 9in, class=book]{document}
 \script[src=packages/styles]
-\script[src=packages/footnotes]
+%\script[src=packages/footnotes]
 \script[src=packages/color]
 \script[src=packages/unichar]
 \script[src=packages/enumitem]
 \script[src=packages/autodoc-extras]
 
-The \doc:keyword{styles} package can be used to easily define styling specifications.
+The \doc:keyword{styles} package aims at easily defining “styling specifications”.
 It is intended to be used by other packages or classes, rather than directly.
 
 If one looks at the default/standard packages or classes in SILE, something may
@@ -112,7 +112,21 @@ The style specification, besides the formatting commands, includes:
 \par\}
 \end{doc:codes}
 
-Note that by nature, TOC styles are also paragraph styles (see further below).
+Note that by nature, TOC styles are also paragraph styles (see further below). Moreover,
+they also accept an extra specification, which is applied when \doc:code{number} is true, defining:
+
+\begin{itemize}
+\item{The text to prepend to the number,}
+\item{The text to append to the number,}
+\item{The kerning spaced added after it (defaults to 1spc).}
+\end{itemize}
+
+\begin{doc:codes}
+\quad{}\\label[before=\doc:args{string}, after=\doc:args{string}, kern=\doc:args{length}]
+\end{doc:codes}
+
+The pre- and post-strings can be set to false, if you need to disable
+an inherited value.
 
 \P{Character styles for bullet lists.}
 
@@ -197,7 +211,7 @@ The specification includes:
    is to always indent regular paragraphs, even after a section title.}}
 \item{Whether a page break may occur before or after this paragraph (defaults to true). Book sectioning commands,
    typically, would set the after-break to false.}
-\item{The paragraph alignment (center, left, right or justify — the latter is the default but may be
+\item{The paragraph alignment (center, left, right or justify—the latter is the default but may be
    useful to overwrite an inherited alignment).}
 \end{itemize}
 
@@ -243,6 +257,13 @@ Guess what, it is actually what we did here in code, to typeset the above
 by name in \doc:code{SILE.scratch.styles.skips} so that to use them
 in the various paragraph skip options.
 
+As it can be seen in the example above, moreover, what we call a paragraph
+here in our styling specification is actually a “paragraph block”—nothing
+forbids you to typeset more than one actual paragraph in that environment.
+The vertical skip and break options apply before and after that whole block,
+not within it; this is by design, notably so as to achieve that kind of
+block-indented quotes.
+
 \P{Applying a character style.}
 
 To apply a character style to some content, one just has to do:
@@ -260,6 +281,9 @@ on the content itself, and finally the skips and options applying after it.
 \begin{doc:codes}
 \\style:apply:paragraph[name=\doc:args{name}]\{\doc:args{content}\}
 \end{doc:codes}
+
+Why a specific command, you may ask? Sometimes, one may want to just apply only the
+(character) formatting specifications of a style.
 
 \P{Applying the other styles.}
 
@@ -308,6 +332,8 @@ in \doc:args{saved-name}, and to clear the latter:
 
 So now on, \doc:code{\\\doc:args{name}} is restored to whatever was saved and \doc:code{\\\doc:args{saved-name}}
 is no longer defined.
+
+These style redefinion mechanisms are, obviously, at the core of customization.
 
 \P{Additional goodies.}
 

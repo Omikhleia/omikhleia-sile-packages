@@ -2,7 +2,8 @@
 -- Partial re-implementation of the tableofcontents package
 -- 2021, Didier Willis
 --
--- Overrides a few definitions only.
+-- Overrides a few definitions only...
+-- But a whole reimplementation could be better...
 --
 local defaultTocPackage = SILE.require("packages/tableofcontents").exports
 
@@ -94,9 +95,19 @@ SILE.registerCommand("omitableofcontents:levelnumber", function (options, conten
   if level < 0 or level > 4 then SU.error("Invalid TOC level "..level) end
   local tocSty = styles.resolveStyle("toc:level"..level)
   if tocSty.toc and SU.boolean(tocSty.toc.number, false) then
+    local pre = tocSty.label and tocSty.label.before
+    local post = tocSty.label and tocSty.label.after
+    local kern = tocSty.label and tocSty.label.kern or "1spc"
+    if pre and pre ~= "false" then SILE.typesetter:typeset(pre) end
     SILE.process(content)
+    SILE.call("kern", { width = "-1spc" }) -- HACK: the original toc item added it, so we remove it :(
+    if post and post ~= "false" then
+      SILE.typesetter:typeset(post)
+    end
+    SILE.call("kern", { width = kern })
   end
 end)
+
 
 return {
   exports = { writeToc = defaultTocPackage.writeToc, moveTocNodes = defaultTocPackage.moveTocNodes },

@@ -27,7 +27,7 @@ end)
 return {
   documentation = [[\begin{document}
 \script[src=packages/autodoc-extras]
-\script[src=packages/footnotes]
+%\script[src=packages/footnotes]
 \define[command=dingbatfont]{\font[family=Symbola]{\process}}
 
 Typographers of the past relied on a number of ornaments to make their books look nicer.
