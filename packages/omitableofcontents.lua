@@ -18,18 +18,18 @@ local styles = SILE.require("packages/styles").exports
 local tocStyles = {
   -- level0 ~ part
   { font = { weight = 800, size = "+1.5" },
-    toc = { number = false, pageno = false },
+    toc = { numbering = false, pageno = false },
     paragraph = { skipbefore = "medskip", indentbefore = false, skipafter = "smallskip", breakafter = false } },
   -- level1 ~ chapter
   { font = { weight = 800, size = "+1" },
-    toc = { number = false, pageno = true, dotfill = false},
+    toc = { numbering = false, pageno = true, dotfill = false},
     paragraph = { indentbefore = false, skipbefore = "medskip" } },
   -- level2 ~ section
   { font = { size = "+1" },
-    toc = { number = false, pageno = true, dotfill = true },
+    toc = { numbering = false, pageno = true, dotfill = true },
     paragraph = { indentbefore = false, skipbefore = "smallskip" } },
   -- level3 ~ subsection
-  { toc = { number = true, pageno = true, dotfill = false },
+  { toc = { numbering = true, pageno = true, dotfill = false },
     paragraph = { indentbefore = true, skipbefore = "smallskip" } },
   -- level4 ~ subsubsection
   { toc = { pageno = false },
@@ -94,10 +94,10 @@ SILE.registerCommand("omitableofcontents:levelnumber", function (options, conten
   local level = SU.cast("integer", SU.required(options, "level", "omitableofcontents:levelnumber"))
   if level < 0 or level > 4 then SU.error("Invalid TOC level "..level) end
   local tocSty = styles.resolveStyle("toc:level"..level)
-  if tocSty.toc and SU.boolean(tocSty.toc.number, false) then
-    local pre = tocSty.label and tocSty.label.before
-    local post = tocSty.label and tocSty.label.after
-    local kern = tocSty.label and tocSty.label.kern or "1spc"
+  if tocSty.toc and SU.boolean(tocSty.toc.numbering, false) then
+    local pre = tocSty.numbering and tocSty.numbering.before
+    local post = tocSty.numbering and tocSty.numbering.after
+    local kern = tocSty.numbering and tocSty.numbering.kern or "1spc"
     if pre and pre ~= "false" then SILE.typesetter:typeset(pre) end
     SILE.process(content)
     SILE.call("kern", { width = "-1spc" }) -- HACK: the original toc item added it, so we remove it :(

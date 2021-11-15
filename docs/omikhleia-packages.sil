@@ -125,6 +125,10 @@ class writers.
 
 \package-documentation[src=packages/styles]
 
+\subsection{sectioning: an abstraction for sectioning commands}
+
+\package-documentation[src=packages/sectioning]
+
 \subsection{omifootnotes: footnotes redone}
 
 \package-documentation[src=packages/omifootnotes]
@@ -155,13 +159,14 @@ class writers.
 
 \section{omibook: a book class redone}
 
-This is a work in progress, gradually tuning the default book
-class from SILE to this author’s needs and taste.
-This very document uses it. As stated, it is far from finished, so anything
-that may look wrong here may show where we are heading to. And, obviously,
-as nothing is definitive yet, things may change or break.
+The design of this class was started as an attempt at gradually tuning the
+default book class from SILE to this author’s needs and taste. It eventually
+evolved into a full redesign on different grounds. This very document uses it,
+so you can see it in real action.
 
-Regarding the differences for now,
+\subsection{Main differences}
+
+There are several differences from the original book class.
 
 \smallskip
 \begin{itemize}
@@ -177,7 +182,8 @@ Regarding the differences for now,
   \item{Sectioning commands:}
   \begin{itemize}
     \item{The sectioning commands obey styles (relying on the
-          \doc:keyword{styles} package).}
+          \doc:keyword{styles} and \doc:keyword{sectioning} packages), which notably
+          imply that they have a lot of customization possibilities.}
     \item{The chapter pages have page numbering and make sure the current
           page does not have any header shown.}
     \item{When chapters begin on an odd page\footnote{Again, this can be customized.},
@@ -261,7 +267,7 @@ For a more complex project using the same tools, you may also check
 the \href[src=https://omikhleia.github.io/sindict/]{sindict
 repository}\footnote{\doc:url{https://omikhleia.github.io/sindict/}}.
 
-\part{Questions & Answers}
+\part{Tips & Tricks}
 
 \begin{center}
 \img[src=docs/images/printer_1568.png, width=55%pw]
@@ -274,10 +280,10 @@ repository}\footnote{\doc:url{https://omikhleia.github.io/sindict/}}.
    \sectioning[counter=questions, level=1, display=arabic, goodbreak=false, numberstyle=omi:question:number]
 }
 \style:define[name=omi:question:number]{
-   \label[before=Q, after=.]
+   \numbering[before=Q, after=.]
 }
 
-\define[command=Q]{\rawsection[style=omi:question, toc=false]{\process}}
+\define[command=Q]{\sectioning[style=omi:question, toc=false]{\process}}
 
 \chapter{Customizing your omibook}
 
@@ -333,16 +339,16 @@ I bet you are writing a novel.
 
 For sections and lower levels:
 
-%\style:redefine[name=sectioning:other:number, as=_sclabel, inherit=true]{\label[after=false]}
+%\style:redefine[name=sectioning:other:number, as=_sclabel, inherit=true]{\numbering[after=false]}
 
 \smallskip
 \codeblock{\\style:redefine[name=sectioning:other:number, as=_sclabel, inherit=true]\{\par
-\qquad\\label[after=false]\}}
+\qquad\\numebering[after=false]\}}
 \smallskip
 
 \Q{Chapters and parts have English labels?}
 
-%\style:redefine[name=sectioning:chapter:number, as=_chlabel, inherit=true]{\label[before="Chapitre "]}
+%\style:redefine[name=sectioning:chapter:number, as=_chlabel, inherit=true]{\numbering[before="Chapitre "]}
 
 By default, yes. This author does not believe in localized strings at all. And I have
 no idea what a “part” would be in your book, anyway. “Part I”, are you sure? What if you typeset, say,
@@ -351,14 +357,14 @@ want “Chapitre” instead of “Chapter”.
 
 \smallskip
 \codeblock{\\style:redefine[name=sectioning:chapter:number, as=_chlabel, inherit=true]\{\par
-\qquad\\label[before="Chapitre "]\}}
+\qquad\\numbering[before="Chapitre "]\}}
 \smallskip
 
 And likewise for \codeblock{sectioning:part:number}. As for sections in the previous
 question, the label also has a \codeblock{post} specifier. So I guess you have all
 the keys for chapter numbering in Japanese or Chinese.
 
-\section{Footer & header}
+\section{Footers & headers}
 
 \Q{Can I have folios (page numbers) centered? I prefer that.}
 
@@ -415,7 +421,7 @@ on SILE’s web site, how good can we render it customizing our class?
 
 \section{An easy start}
 
-Leaving aside the title page–which another whole topic–, let us concentrate
+Leaving aside the title page–which is another whole topic–, let us concentrate
 on our styling. First, of course, we would select a language and a font, as
 usual.
 
@@ -428,14 +434,14 @@ usual.
 \section{Sectioning…}
 
 What is the sectioning structure of that book? It contains “Adventures”, which
-seem to be the top-level section. Here we leap into the unknown, but let’s
+seem to be the top-level sections. Here we leap into the unknown, but let’s
 decide they will be our “parts”. But of course, we do not want them do be shown
 that way.
 
 \smallskip
 \begin{codeblock}
 \\style:redefine[name=sectioning:part:number, as=_partlabel, inherit=true]\{\par
-\qquad\\label[before="Adventure "]\}
+\qquad\\numbering[before="Adventure "]\}
 \end{codeblock}
 \smallskip
 
@@ -509,7 +515,7 @@ Sticking with our choice, we do not need any of them, after all.
 \smallskip
 
 On the other hand, we want our part title to go in the odd
-page header. We need to rewrite its hook in order to to this,
+page header. We need to rewrite its hook in order to do this,
 but still keeping the other things it does (cancelling the header on this
 very page, and resetting some counters).
 
@@ -517,7 +523,7 @@ very page, and resetting some counters).
 \begin{codeblock}
 \\define[command=sectioning:part:hook]\{\par
 \qquad\\noheaderthispage\par
-\qquad\\odd-running-header{\\process}\par
+\qquad\\odd-running-header\{\\process\}\par
 \qquad\\set-counter[id=foonote, value=1]\par
 \qquad\\set-multilevel-counter[id=sections, level=1, value=0]\}
 \end{codeblock}
@@ -543,8 +549,8 @@ reproduce the same effect as in the original book.
 \smallskip
 \begin{codeblock}
 \\style:define[name=toc:level0]\{\par
-\qquad\\toc[number=true, pageno=true, dotfill=true]\par
-\qquad\\label[after=.—, kern=3spc]\par
+\qquad\\toc[numbering=true, pageno=true, dotfill=true]\par
+\qquad\\numbering[after=.—, kern=3spc]\par
 \qquad\\paragraph[indentbefore=false, skipbefore=smallskip]\}
 \end{codeblock}
 
@@ -552,9 +558,9 @@ reproduce the same effect as in the original book.
 
 Surely, we are done now. Wait, I am super-lazy, really. Later in that story,
 there is a letter from Irene Adler. In the original print, it used some
-small capitals. They did’nt do it, but it might also be styled appropriately
+small capitals. They didn’t do it, but it might also be styled appropriately
 in some sort of quote. These are surely things I will need
-again and again, why not trying to use styles for them?
+again and again, so why not try using styles for them?
 
 This one is so dumb, I should feel ashamed.
 
@@ -566,7 +572,7 @@ This one is so dumb, I should feel ashamed.
 \smallskip
 
 This one is (a bit) more clever: it defines a command that typesets its content
-with indented left and right skips, registers it as a valid aligmnent option
+with indented left and right skips, registers it as a valid alignment option
 for paragraph styles, declares the so-said style, and finally defines a
 convenience command to wrap it all.
 
@@ -589,6 +595,25 @@ SILE.scratch.styles.alignments["blockquote"] = "blockquote"\par
 \quad\\paragraph[skipbefore=smallskip, skipafter=smallskip, align=blockquote]\}\par
 \\define[command=letter]\{\\style:apply:paragraph[name=bkquote]\{\\process\}\}
 \end{codeblock}
-\smallskip
+
+\section{Where we erred…}
+
+Eventually, it works. Yay. We did a few things wrong, though, or rather, we perhaps 
+made our task more complex than it ought to be.
+
+\begin{enumerate}
+\item{We started with the \doc:code{omibook} class, trying to cancel some of
+  its behaviours. It could have been simpler to make our own class and design
+  our styles from scratch. I cannot be sure, as we also reused, via the
+  inheritance mechanism, some existing things. But it is one of the question
+  you might have to face. \em{Here later we
+  might abstract a base class with all packages set up but no sectioning defined?}}
+\item{Remenber the doubts we faced above, “Maybe we did not decide
+  to customize the \em{right} section types”. Later, I came across the complete
+  stories of Sherlock Holmes in anoter edition, where \em{The Adventures} is but
+  a section. So our parts could have been chapters, and so on. Properly
+  sectioning a work is decidely a hard task, one never knows how it will end.
+  But we have all the tools to do it.}
+\end{enumerate}
 
 \end{document}

@@ -26,7 +26,7 @@ end)
 \language[main=en]
 \font[family=Libertinus Serif, size=11pt]
 \style:redefine[name=sectioning:part:number, as=_partlabel, inherit=true]{
-  \label[before="Adventure "]
+  \numbering[before="Adventure "]
 }
 \style:redefine[name=sectioning:part, as=_part, inherit=true]{
   \font[size=+4]
@@ -54,8 +54,8 @@ end)
   \set-multilevel-counter[id=sections, level=1, value=0]
 }
 \style:define[name=toc:level0]{
-  \toc[number=true, pageno=true, dotfill=true]
-  \label[after=.—, kern=3spc]
+  \toc[numbering=true, pageno=true, dotfill=true]
+  \numbering[after=.—, kern=3spc]
   \paragraph[indentbefore=false, skipbefore=smallskip]
 }
 \style:define[name=caps]{
@@ -329,7 +329,7 @@ Holmes took a note of it. “One other question,” said he. “Was the photogra
 
 “It was.”
 
-“Then, good-night, your Majesty, and I trust that we shall soon have some good news for you. And good-night, Watson,” he added, as the wheels of the royal brougham rolled down the street. “If you wlll be good enough to call to-morrow afternoon at three o’clock I should like to chat this little matter over with you.”
+“Then, good-night, your Majesty, and I trust that we shall soon have some good news for you. And good-night, Watson,” he added, as the wheels of the royal brougham rolled down the street. “If you will be good enough to call to-morrow afternoon at three o’clock I should like to chat this little matter over with you.”
 
 \chapter{}
 

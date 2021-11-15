@@ -108,7 +108,7 @@ The style specification, besides the formatting commands, includes:
 \begin{doc:codes}
 \\style:define[name=\doc:args{name}]\{
 \par\quad{}…
-\par\quad\\toc[pageno=\doc:args{boolean}, dotfill=\doc:args{boolean}, number=\doc:args{boolean}]
+\par\quad\\toc[pageno=\doc:args{boolean}, dotfill=\doc:args{boolean}, numbering=\doc:args{boolean}]
 \par\}
 \end{doc:codes}
 
@@ -118,11 +118,11 @@ they also accept an extra specification, which is applied when \doc:code{number}
 \begin{itemize}
 \item{The text to prepend to the number,}
 \item{The text to append to the number,}
-\item{The kerning spaced added after it (defaults to 1spc).}
+\item{The kerning space added after it (defaults to 1spc).}
 \end{itemize}
 
 \begin{doc:codes}
-\quad{}\\label[before=\doc:args{string}, after=\doc:args{string}, kern=\doc:args{length}]
+\quad{}\\numbering[before=\doc:args{string}, after=\doc:args{string}, kern=\doc:args{length}]
 \end{doc:codes}
 
 The pre- and post-strings can be set to false, if you need to disable
