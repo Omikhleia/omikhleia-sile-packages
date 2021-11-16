@@ -19,21 +19,22 @@ local tocStyles = {
   -- level0 ~ part
   { font = { weight = 800, size = "+1.5" },
     toc = { numbering = false, pageno = false },
-    paragraph = { skipbefore = "medskip", indentbefore = false, skipafter = "smallskip", breakafter = false } },
+    paragraph = { skipbefore = "medskip", indentbefore = false,
+                  skipafter = "medskip", breakafter = false } },
   -- level1 ~ chapter
   { font = { weight = 800, size = "+1" },
     toc = { numbering = false, pageno = true, dotfill = false},
-    paragraph = { indentbefore = false, skipbefore = "medskip" } },
+    paragraph = { indentbefore = false, skipafter = "smallskip" } },
   -- level2 ~ section
   { font = { size = "+1" },
     toc = { numbering = false, pageno = true, dotfill = true },
-    paragraph = { indentbefore = false, skipbefore = "smallskip" } },
+    paragraph = { indentbefore = false, skipafter = "smallskip" } },
   -- level3 ~ subsection
   { toc = { numbering = true, pageno = true, dotfill = false },
-    paragraph = { indentbefore = true, skipbefore = "smallskip" } },
+    paragraph = { indentbefore = true, skipafter = "smallskip" } },
   -- level4 ~ subsubsection
   { toc = { pageno = false },
-    paragraph = { indentbefore = true, skipbefore = "smallskip" } },
+    paragraph = { indentbefore = true, skipafter = "smallskip" } },
   -- extra loosely defined levels, so we have them at hand if need be
   -- level5 .. level 9 = that's a total of 10 levels...
   { toc = { pageno = false },
