@@ -63,7 +63,7 @@ end)
 }
 \define[command=caps]{\style:apply[name=caps]{\process}}
 \begin{script}
-SILE.registerCommand("blockquote", function (options, content)
+SILE.registerCommand("bkquote", function (options, content)
   SILE.settings.temporarily(function ()
     local indent = SILE.length("2em")
     SILE.settings.set("document.rskip", SILE.nodefactory.glue(indent))
@@ -72,11 +72,11 @@ SILE.registerCommand("blockquote", function (options, content)
     SILE.call("par")
   end)
 end, "Typesets its contents in a blockquote.")
-SILE.scratch.styles.alignments["blockquote"] = "blockquote"
+SILE.scratch.styles.alignments["bkquote"] = "bkquote"
 \end{script}
 \style:define[name=bkquote]{
    \font[size=-0.5]
-   \paragraph[skipbefore=smallskip, skipafter=smallskip, align=blockquote]
+   \paragraph[skipbefore=smallskip, skipafter=smallskip, align=bkquote]
 }
 \define[command=letter]{\style:apply:paragraph[name=bkquote]{\process}}
 \even-running-header{The Adventures of Sherlock Holmes}

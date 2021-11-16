@@ -3,7 +3,6 @@
 -- An extension of the "styles" package and the sectioning paradigm
 -- License: MIT
 --
-
 local counters = SILE.require("packages/counters").exports
 local styles = SILE.require("packages/styles").exports
 
@@ -37,7 +36,6 @@ SILE.registerCommand("sectioning", function (options, content)
   --    (Would "even" be useful? I do not think is has any actual use)
   if secStyle.open and secStyle.open ~= "unset" then
     -- Sectioning style that causes a page-break.
-    -- !These commands have to be overidden by the supporting class!
     if secStyle.open == "odd" then
       SILE.call("open-on-odd-page")
     else -- Case: any
@@ -113,7 +111,7 @@ SILE.registerCommand("sectioning", function (options, content)
         SILE.typesetter:typeset(" ") -- Should it be a 1spc kern?
       end
     end
-    -- 3C. Section content
+    -- 3D. Section (title) content
     SILE.process(content)
   end)
   SILE.typesetter:inhibitLeading()
@@ -123,7 +121,7 @@ SILE.registerCommand("open-on-odd-page", function (_, _)
   -- NOTE: We do not use the "open-double-page" from the two side
   -- package as it has doesn't have the nice logic we have here:
   --  - check we are not already at the top of a page
-  --  - disable neither and folio on blank even page
+  --  - disable header and folio on blank even page
   -- I really had hard times to make this work correctly. It now
   -- seems ok, but it might be fragile.
   SILE.typesetter:leaveHmode() -- Important, flushes nodes to output queue.
@@ -133,10 +131,12 @@ SILE.registerCommand("open-on-odd-page", function (_, _)
   end
   SILE.typesetter:leaveHmode() -- Important again...
   -- ... so now we are at the top of a page, and only need
-  -- to add a blank page if we are not on an odd page.
+  -- to add a blank page if we have not landed on an odd page.
   if not SILE.documentState.documentClass:oddPage() then
     SILE.typesetter:typeset("")
     SILE.typesetter:leaveHmode()
+    -- Disable headers and footers if we can... i.e. the
+    -- supporting class loaded all the necessary commands.
     if SILE.Commands["nofoliosthispage"] then
       SILE.call("nofoliosthispage")
     end
@@ -318,13 +318,13 @@ With these first assumptions in mind, let’s summarize the requirements:
 \item{Sections may go into a table of contents at some specified level.—It may hence have a TOC level.}
 \item{Sections may trigger a page break and may even need to open on an odd page.}
 \item{Sections, especially those who do not cause a (forced) page break, may recommmend
-  allowing a page break before them (so usual that it should defaults to true).}
+  allowing a page break before them (so usual that it should default to true).}
 \item{The numbering, when used, may need some text strings prepended or appended to it.}
 \item{Sections can be interdependent, in the sense that some of them may reset the counters
   of others, or can act upon other unrelated counters (e.g. footnotes), request to be added
   to page headers, and so on.—The list of possibilities could be long here and very dependent
   on the kind of structure one considers, and it would be boresome to invent a syntax
-  covering all potential needs, so some sort of “hook” has at lest to be provided (more on that later).}
+  covering all potential needs, so some sort of “hook” has at least to be provided (more on that later).}
 \end{enumerate}
 
 \smallskip
@@ -380,10 +380,10 @@ concerns, it will just do the minimum things it should—and in many cases, it m
 simple that one could even do it in SILE language rather than in Lua.
 
 You may remember, from the \doc:keyword{styles} package, that one of the
-rationale for introducing hooks was to avoid command “hooks” with different names,
+rationale for introducing styles was to avoid command “hooks” with different names,
 unknown scopes and effects, and also to formalize our expectations with a
 regular format that one could easily tweak. Resorting to a such a complex specification and
-eventually even a hook may look amiss. Still, there are obvious benefits in the new
+eventually even a hook may look amiss. Still, there are obvious benefits in the proposed
 paradigm:
 \begin{itemize}
 \item{Style inheritance and reusability.}
@@ -395,39 +395,3 @@ paradigm:
 \end{itemize}
 \end{document}]]
 }
-
--- \comment{
-
---   styles.defineStyle("sectioning:base", {}, {
---     paragraph = { indentbefore = false, indentafter = false }
---   })
---   styles.defineStyle("sectioning:part", { inherit = "sectioning:base" }, {
---     font = { weight = 800, size = "+6" },
---     paragraph = { skipbefore = "15%fh", align = "center", skipafter = "bigskip" },
---     sectioning = { counter = "parts", level = 1, display = "ROMAN",
---                    toclevel = 0,
---                    open = "odd", numberstyle="sectioning:part:number",
---                    hook = "sectioning:part:hook" },
---   })
---   styles.defineStyle("sectioning:chapter", { inherit = "sectioning:base" }, {
---     font = { weight = 800, size = "+4" },
---     paragraph = { skipafter = "bigskip", align = "left" },
---     sectioning = { counter = "sections", level = 1, display = "arabic",
---                    toclevel = 1,
---                    open = "odd", numberstyle="sectioning:chapter:number",
---                    hook = "sectioning:chapter:hook" },
---   })
-
--- if stylespec.sectioning then
---   return {
---     counter = stylespec.sectioning.counter or
---       SU.error("Sectioning style '"..name.."' must have a counter"),
---     display = stylespec.sectioning.display or "arabic",
---     level = stylespec.sectioning.level or 1,
---     open = stylespec.sectioning.open, -- nil = do not open a page
---     numberstyle = stylespec.sectioning.numberstyle,
---     goodbreak = stylespec.sectioning.goodbreak,
---     toclevel = stylespec.sectioning.toclevel,
---     hook = stylespec.sectioning.hook,
---   }
--- }

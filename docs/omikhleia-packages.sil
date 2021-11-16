@@ -579,7 +579,7 @@ convenience command to wrap it all.
 \smallskip
 \begin{codeblock}
 \\begin\{script\}\par
-SILE.registerCommand("blockquote", function (options, content)\par
+SILE.registerCommand("bkquote", function (options, content)\par
 \quad{}SILE.settings.temporarily(function ()\par
 \qquad{}local indent = SILE.length("2em")\par
 \qquad{}SILE.settings.set("document.rskip", SILE.nodefactory.glue(indent))\par
@@ -588,11 +588,11 @@ SILE.registerCommand("blockquote", function (options, content)\par
 \qquad{}SILE.call("par")\par
 \quad{}end)\par
 end, "Typesets its contents in a blockquote.")\par
-SILE.scratch.styles.alignments["blockquote"] = "blockquote"\par
+SILE.scratch.styles.alignments["bkquote"] = "bkquote"\par
 \\end\{script\}\par
 \\style:define[name=bkquote]\{\par
 \quad\\font[size=-0.5]\par
-\quad\\paragraph[skipbefore=smallskip, skipafter=smallskip, align=blockquote]\}\par
+\quad\\paragraph[skipbefore=smallskip, skipafter=smallskip, align=bkquote]\}\par
 \\define[command=letter]\{\\style:apply:paragraph[name=bkquote]\{\\process\}\}
 \end{codeblock}
 
@@ -610,7 +610,7 @@ made our task more complex than it ought to be.
   might abstract a base class with all packages set up but no sectioning defined?}}
 \item{Remenber the doubts we faced above, “Maybe we did not decide
   to customize the \em{right} section types”. Later, I came across the complete
-  stories of Sherlock Holmes in anoter edition, where \em{The Adventures} is but
+  stories of Sherlock Holmes in another edition, where \em{The Adventures} is but
   a section. So our parts could have been chapters, and so on. Properly
   sectioning a work is decidely a hard task, one never knows how it will end.
   But we have all the tools to do it.}
