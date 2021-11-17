@@ -208,7 +208,7 @@ end, "Applies the paragraph style entirely.")
 -- STYLE REDEFINITION
 
 SILE.registerCommand("style:redefine", function (options, content)
-  SU.required(options, "name", "redefining style")
+  SU.required(options, "name", "style:redefined")
 
   if options.as then
     if options.as == options.name then
@@ -248,6 +248,14 @@ SILE.registerCommand("style:redefine", function (options, content)
   else
     SU.error("Style redefinition needs a 'as' or 'from' parameter.")
   end
+end, "Redefines a style saving the old version with another name, or restores it.")
+
+-- DEBUG OR DOCUMENTATION
+
+SILE.registerCommand("style:show", function (options, content)
+  local name = SU.required(options, "name", "style:show")
+
+  SILE.typesetter:typeset(dumpStyle(name))
 end, "Redefines a style saving the old version with another name, or restores it.")
 
 return {
@@ -313,7 +321,7 @@ Something may seem wrong (though of course it is a matter of taste and could be 
 \end{enumerate}
 
 Indeed, \em{why not try a different approach}. Actually, this is what most modern
-word-processing software have been doing for a while, be it MS-Word, Libre/OpenOffice
+word-processing software have been doing for a while, be it Microsoft Word or Libre/OpenOffice
 and cognates… They all introduce the concept of “styles”, in actually three forms at
 least: character styles, paragraph styles and page styles; But also frame styles, 
 list styles and table styles, to list a few others. This package is an attempt at
@@ -360,7 +368,7 @@ It just uses that familiar syntax as a convenience.\footnote{Technically-minded 
 also note it is also very simple to implement that way, just relying
 on SILE’s standard parser and its underlying AST.}
 
-A style can also inherit from a previously defined style:
+A style can also inherit from a previously-defined style:
 
 \begin{doc:codes}
 \\style:define[name=\doc:args{name}, inherit=\doc:args{other-name}]\{
