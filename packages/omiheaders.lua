@@ -57,9 +57,15 @@ return {
             SILE.settings.set("document.lskip", SILE.nodefactory.glue())
             SILE.settings.set("document.rskip", SILE.nodefactory.glue())
 
+            -- Temporarilly kill footnotes (fragile)
+            local oldFt = SILE.Commands["footnote"]
+            SILE.Commands["footnote"] = function() end
+
             SILE.process(headerContent)
 
             SILE.typesetter:leaveHmode()
+
+            SILE.Commands["footnote"] = oldFt
             SILE.settings.popState()
 
             if SILE.scratch.headers.rule then
@@ -104,7 +110,7 @@ package for page numbers. It also provides four commands to users:
 It exports a Lua function \doc:code{outputHeader()} which should be called by
 the class at the end of each page, with the desired content for the current page
 header. The class is left responsible for choosing the header content material
-depending on its own logic, e.g. two-side pages, sectioning, etc.
+depending on its own logic, e.g. two-side pages, sectioning, styling, etc.
 
 \end{document}]]
 }
