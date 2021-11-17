@@ -62,12 +62,20 @@ version 2.0 (http://creativecommons.org/licenses/by-sa/2.0/).
 
 \tableofcontents
 
+\section[numbering=false, toc=false]{Figures}
+
+\listoffigures
+
+\section[numbering=false, toc=false]{Tables}
+
+\listoftables
+
 \part{Packages & Classes}
 
-\bigskip
-\begin{center}
+\begin{figure}
 \img[src=docs/images/printing_press.png, width=60%pw]
-\end{center}
+\caption{Gutenberg’s press.}
+\end{figure}
 
 \chapter{Packages}
 
@@ -133,7 +141,7 @@ class writers.
 
 \package-documentation[src=packages/omifootnotes]
 
-\subsection{omitableofcontents: revisited table of contents}
+\subsection{omitableofcontents: tables of contents redone}
 
 \package-documentation[src=packages/omitableofcontents]
 
@@ -181,20 +189,11 @@ There are several differences from the original book class.
   \end{itemize}
   \item{Sectioning commands:}
   \begin{itemize}
-    \item{The sectioning commands obey styles (relying on the
+    \item{All sectioning commands obey styles (relying on the
           \doc:keyword{styles} and \doc:keyword{sectioning} packages), which notably
           imply that they have a lot of customization possibilities.}
-    \item{The chapter pages have page numbering and make sure the current
-          page does not have any header shown.}
-    \item{When chapters begin on an odd page\footnote{Again, this can be customized.},
-          the previous page, if blank, is shown without page number and header.}
-    \item{The \doc:code{\\part} is a “level 0” sectioning command, that is
-          above the chapters.}
-    \item{The \doc:code{\\subsubsection} is a “level 4” sectioning command.}
-    \item{Remember — “Writers that think they need more than five levels should instead consider
-          restructuring their document in a manner that does not require this level
-          of nested sectioning. Increased section granularity can actually begin
-          to detract from document clarity.”}
+    \item{In the following pages, the behaviors we describe apply to the default
+          configuration and styling, out-of-the-box.}
   \end{itemize}
   \item{Other:}
   \begin{itemize}
@@ -203,6 +202,126 @@ There are several differences from the original book class.
     \item{Cross-references are supported via the \doc:keyword{omirefs} package.}
   \end{itemize}
 \end{itemize}
+%
+\script{
+  -- FIXME UNUSED FINALLY
+  SILE.registerCommand("show-help", function (options, content)
+    local command = SU.required(options, "command", "show-command")
+    local help = SILE.Help[command]
+    SILE.typesetter:typeset(help and help.description or "?")
+  end)
+}%
+
+\subsection{Standard sectioning commands}
+
+The class supports the following sectioning commands, from the highest
+division level to the lowest: \doc:code{\\part}, \doc:code{\\chapter},
+\doc:code{\\section}, \doc:code{\\subsection}, \doc:code{\\subsubsection}.
+
+By default, parts disable page numbering and running headers on their page.
+Chapters have page numbering enabled on their first page and make sure
+not header shown is shown on that page. Both start on an odd page\footnote{Again,
+as almost everything depending on styles, this can be customized.}, and the previous
+even page, if inserted blank, is shown without page number and header.
+
+All the sections accepts the \doc:code{numbering=false} option, if you want
+them unnumbered, and the \doc:code{toc=false} option, if you do not want them
+to appear in the table of contents. When they do, they correspond to “level 0”
+(parts) up to “level 4” (subsubsections).
+
+Remember a good advice—“Writers that think they need more than five levels should
+instead consider restructuring their document in a manner that does not require
+this level of nested sectioning. Increased section granularity can actually begin
+to detract from document clarity.”
+
+By default, parts and chapters reset the footnote counter. Chapter and section
+titles go in odd and even running headers respectively, unless customized otherwise.
+
+\subsection{Captioned figures and tables}
+
+The class provides two additional environnments, \doc:code{figure}
+and \doc:code{table}. Both can contains arbitrary contents and a
+\doc:code{\\caption\{\doc:args{text}\}} element. The latter is
+extracted and displayed below the contents.
+By default, these environements show their contents centered, with a numbered caption.
+Each of them has its own distinct counter.
+
+The figure environment is (normally) intended to be used around an illustration of
+some kind.
+
+\define[command=ptable:cell:hook]{\raggedright{\noindent\style:font[size=-1]{\process}}}% FIXME
+\begin{table}
+\begin[cols=45%fw 45%fw]{ptable}
+  \begin[background=#eee]{row}
+    \cell[valign=top]{Style}
+    \cell[valign=top]{Description}
+  \end{row}
+  \begin{row}
+    \cell[valign=top]{\doc:code{figure}}
+    \cell[valign=top]{Style applied to the figure content (not including the caption).}
+  \end{row}
+  \begin{row}
+    \cell[valign=top]{\doc:code{figure:caption}}
+    \cell[valign=top]{Style applied to the figure caption.}
+  \end{row}
+  \begin{row}
+    \cell[valign=top]{\doc:code{figure:caption:number}}
+    \cell[valign=top]{Style applied to the caption number.}
+  \end{row}
+\end{ptable}
+\caption{Styles used for figures.}
+\end{table}
+
+The table environment is (normally) intended to be used around… tables, you would
+have guessed it.
+
+\begin{table}
+\begin[cols=45%fw 45%fw]{ptable}
+  \begin[background=#eee]{row}
+    \cell[valign=top]{Style}
+    \cell[valign=top]{Description}
+  \end{row}
+  \begin{row}
+    \cell[valign=top]{\doc:code{table}}
+    \cell[valign=top]{Style applied to the table content (not including the caption).}
+  \end{row}
+  \begin{row}
+    \cell[valign=top]{\doc:code{table:caption}}
+    \cell[valign=top]{Style applied to the table caption.}
+  \end{row}
+  \begin{row}
+    \cell[valign=top]{\doc:code{table:caption:number}}
+    \cell[valign=top]{Style applied to the caption number.}
+  \end{row}
+\end{ptable}
+\caption{Styles used for tables.}
+\end{table}
+
+The figure and table caption styles are actually sectioning styles, and the captions are
+inserted into the table of contents at level 5 and 6 respectively. It implies that one has
+the possibility to have them shown in the TOC, if passing a sufficient \doc:code{depth}
+value to the \doc:code{\\tableofcontents} command. While some authors may appreciate that,
+other, most likely, prefer having them in separate lists. Two convenience functions are
+provided to that effect:
+
+\begin{itemize}
+\item{\doc:code{\\listoffigures}}
+\item{\doc:code{\\listoftables}}
+\end{itemize}
+
+But basically, they are just simple calls to \doc:code{\\tableofcontents} with the
+appropriate option to start at the corresponding TOC level and display only one level.  
+
+\subsection{Block-indented quotes}
+
+The class provides the \doc:code{blockquote} environment to typeset simple block-indented
+paragraphs of the kind shown in the doc:keyword{styles} package documentation. It is sort
+of an extra, but it was so often needed by this author that he decided to include it in
+standard.
+
+The environment relies on the same-name style for styling, and on the
+\doc:code{book.blockquote.margin} for the indentation (defaults to 2em). intended
+quotes can be nested.
 
 \section{omicv: a minimalist curriculum vitae}
 
@@ -247,9 +366,10 @@ This class provides a minimalist (read, naive) way to make a modern \em{résumé
 The commands are pretty simple and straightforward in this first version, so you can refer
 to the sample CV included in our example repository.
 
-\begin{center}
+\begin{figure}
 \img[width=100%fw, src=examples/resume-sample.png]
-\end{center}
+\caption{A sample CV for a famous detective.}
+\end{figure}
 
 \section{teibook: XML TEI P4 print dictionaries}
 
@@ -269,9 +389,11 @@ repository}\footnote{\doc:url{https://omikhleia.github.io/sindict/}}.
 
 \part{Tips & Tricks}
 
-\begin{center}
+\begin{figure}
 \img[src=docs/images/printer_1568.png, width=55%pw]
-\end{center}
+\caption{Printers in 1568.\footnote[mark=†]{Meggs, Philip B.,
+  \em{A History of Graphic Design,} John Wiley & Sons, Inc. 1998, p. 64.}}
+\end{figure}
 
 % Let's have fun and define a new sectioning command for questions.
 \style:define[name=omi:question]{
@@ -328,7 +450,7 @@ need that too.
 
 I bet you are writing a novel.
 
-%\style:redefine[name=sectioning:chapter, as=_chapter, inherit=true]{\sectioning[display=Roman]}
+%\style:redefine[name=sectioning:chapter, as=_chapter, inherit=true]{\sectioning[display=ROMAN]}
 
 \smallskip
 \codeblock{\\style:redefine[name=sectioning:chapter, as=_chapter, inherit=true]\{\par
@@ -574,7 +696,9 @@ This one is so dumb, I should feel ashamed.
 This one is (a bit) more clever: it defines a command that typesets its content
 with indented left and right skips, registers it as a valid alignment option
 for paragraph styles, declares the so-said style, and finally defines a
-convenience command to wrap it all.
+convenience command to wrap it all.\footnote{This book class ended up having a better
+\doc:code{blockquote} environment, eventually. For the sake of illustration,
+however, we keep this documentation unchanged.}
 
 \smallskip
 \begin{codeblock}

@@ -1,0 +1,20 @@
+\begin[class=omibook]{document}
+\script[src=packages/lorem]
+\nofolios
+\noheaders
+
+Before blockquote.
+
+\begin{blockquote}
+\lorem[words=20].
+
+\begin{blockquote}
+Blockquote inside blockquote, \lorem[words=20].
+\end{blockquote}
+
+\lorem[words=20].
+\end{blockquote}
+
+After blockquote.
+
+\end{document}

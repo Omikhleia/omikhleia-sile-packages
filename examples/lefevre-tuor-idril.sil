@@ -4,7 +4,6 @@
 \script[src=packages/couyards]
 \style:define[name=epigraph:source:style]{}
 % FIXME LATER \script[src=packages/dropcaps]
-% FIXME LATER \script[src=packages/blockquote]
 \script[src=packages/abbr]
 %
 \language[main=fr]
@@ -27,50 +26,20 @@ SILE.registerCommand("dropcaps", function (options, content)
   SILE.typesetter:typeset(letter)
   SILE.process(content)
 end, "FIXME waiting for dropcap(s) to be released")
-SILE.registerCommand("blockquote", function (options, content)
-  local author = options.author or nil
-  local scale = options.scale or 3
-  local color = options.color or "#999999"
-  SILE.settings.temporarily(function ()
-    local indent = SU.cast("length", options.indent or "2em"):absolute()
-    SILE.settings.set("document.rskip", SILE.nodefactory.glue(indent))
-    SILE.settings.set("document.lskip", SILE.nodefactory.glue(indent))
-    SILE.typesetter:leaveHmode()
-    SILE.call("smallskip")
-    -- SILE.call("noindent")
-    -- -- typesetMark(true, indent, scale, color, "“")
-    -- SILE.call("indent")
-    SILE.call("style:font", { size=-0.5 }, content)
-    --SILE.process(content)
-    -- typesetMark(false, indent, scale, color, "”")
-    if author then
-      SILE.settings.temporarily(function ()
-        SILE.typesetter:leaveHmode()
-        SILE.call("blockquote:author-font")
-        SILE.call("raggedleft", {}, function ()
-          SILE.typesetter:typeset("— " .. author)
-        end)
-      end)
-    else
-      SILE.call("par")
-      SILE.call("smallskip")
-    end
-  end)
-end, "Typesets its contents in a formatted blockquote with decorative quotation\
-      marks in the margins.")
-}%
+}
 %
 % HACK FAKE CHAPTER
 % FIXME consider whether chapters etc. should be raggedright by default
 % They also break badly at running headers etc. It's messy...
-%\chapter[numbering=false]{Le conte perdu de Mercure\break
+\chapter[numbering=false]{Le conte perdu de Mercure}
+% WE NEED SOME SORT OF SUBCHAPTER
 %— Tuor et Idril élevés au rang d’astre}
-\noindent
+%\noindent
 \begin{raggedright}
-\font[weight=800, size=14pt]{Le conte perdu de Mercure\break
-— Tuor et Idril élevés au rang d’astre}
-
-\bigskip
+%\font[weight=800, size=14pt]{Le conte perdu de Mercure\break
+%— Tuor et Idril élevés au rang d’astre}
+%
+%\bigskip
 Alain \smallcaps{Lefèvre}\footnote[mark=†]{Cet article est extrait de \em{Tolkien, le façonnement d’un monde}, \abbr:vol{1},
 Le Dragon de Brume, 2011, \abbr:page{211–216} — avec la permission de l’auteur.}
 \end{raggedright}

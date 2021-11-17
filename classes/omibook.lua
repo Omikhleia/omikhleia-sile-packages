@@ -8,9 +8,11 @@ local omibook = plain { id = "omibook" }
 
 local styles = SILE.require("packages/styles").exports
 SILE.require("packages/sectioning")
+SILE.require("packages/parbox")
+
+-- STYLES
 
 -- Sectioning styles
-
 styles.defineStyle("sectioning:base", {}, {
   paragraph = { indentbefore = false, indentafter = false }
 })
@@ -87,6 +89,12 @@ styles.defineStyle("header:odd", { inherit = "header:base" }, {
   paragraph = { align = "right" }
 })
 
+-- Additional styles are defined further below for specific commands
+-- i.e. convenience commands provided by the class, but which are not (necessarily)
+-- book-related, such as blockquotes, figures, tables.
+
+-- PAGE MASTERS
+
 omibook.defaultFrameset = {
   content = {
     left = "10%pw", -- was 8.3%pw
@@ -113,6 +121,8 @@ omibook.defaultFrameset = {
     bottom = "86.3%ph" -- was 83.3%ph
   }
 }
+
+-- CLASS DEFINITION
 
 function omibook:init ()
   self:loadPackage("masters")
@@ -164,7 +174,7 @@ omibook.finish = function (self)
 end
 
 omibook.endPage = function (self)
-  self:moveTocNodes()
+  self:moveToc()
   self:moveRefs()
   local headerContent = (self:oddPage() and SILE.scratch.headers.odd)
         or (not(self:oddPage()) and SILE.scratch.headers.even)
@@ -174,6 +184,14 @@ omibook.endPage = function (self)
   return plain.endPage(self)
 end
 
+omibook.registerCommands = function (_)
+  plain.registerCommands()
+end
+
+-- COMMANDS
+
+-- Running headers
+
 SILE.registerCommand("even-running-header", function (_, content)
   local closure = SILE.settings.wrap()
   SILE.scratch.headers.even = function ()
@@ -181,7 +199,7 @@ SILE.registerCommand("even-running-header", function (_, content)
       SILE.call("style:apply:paragraph", { name = "header:even" }, content)
     end)
   end
-end, "Text to appear on the top of the left page")
+end, "Text to appear on the top of the even page(s).")
 
 SILE.registerCommand("odd-running-header", function (_, content)
   local closure = SILE.settings.wrap()
@@ -190,11 +208,9 @@ SILE.registerCommand("odd-running-header", function (_, content)
       SILE.call("style:apply:paragraph", { name = "header:odd" }, content)
     end)
   end
-end, "Text to appear on the top of the right page")
+end, "Text to appear on the top of the odd page(s).")
 
-omibook.registerCommands = function (_)
-  plain.registerCommands()
-end
+-- Sectionning hooks and commands
 
 SILE.registerCommand("sectioning:part:hook", function (options, content)
   -- Parts cancel headers and folios
@@ -206,7 +222,7 @@ SILE.registerCommand("sectioning:part:hook", function (options, content)
   -- Parts reset footnotes and chapters
   SILE.call("set-counter", { id = "footnote", value = 1 })
   SILE.call("set-multilevel-counter", { id = "sections", level = 1, value = 0 })
-end, "Applies part hooks (counter resets, footers and headers, etc.)")
+end, "Apply part hooks (counter resets, footers and headers, etc.)")
 
 SILE.registerCommand("sectioning:chapter:hook", function (options, content)
   -- Chapters re-enable folios, have no header, and reset the footnote counter.
@@ -216,14 +232,14 @@ SILE.registerCommand("sectioning:chapter:hook", function (options, content)
 
   -- Chapters, here, go in the even header.
   SILE.call("even-running-header", {}, content)
-end, "Applies chapter hooks (counter resets, footers and headers, etc.)")
+end, "Apply chapter hooks (counter resets, footers and headers, etc.)")
 
 SILE.registerCommand("sectioning:section:hook", function (options, content)
   -- Sections, here, go in the odd header.
   SILE.call("odd-running-header", {}, function ()
     if SU.boolean(options.numbering, true) then
       SILE.call("show-multilevel-counter", {
-        id = options.counter, 
+        id = options.counter,
         level = options.level,
         noleadingzero = true
       })
@@ -236,26 +252,157 @@ end, "Applies section hooks (footers and headers, etc.)")
 SILE.registerCommand("part", function (options, content)
   options.style = "sectioning:part"
   SILE.call("sectioning", options, content)
-end, "Begin a new part")
+end, "Begin a new part.")
 
 SILE.registerCommand("chapter", function (options, content)
   options.style = "sectioning:chapter"
   SILE.call("sectioning", options, content)
-end, "Begin a new chapter")
+end, "Begin a new chapter.")
 
 SILE.registerCommand("section", function (options, content)
   options.style = "sectioning:section"
   SILE.call("sectioning", options, content)
-end, "Begin a new section")
+end, "Begin a new section.")
 
 SILE.registerCommand("subsection", function (options, content)
   options.style = "sectioning:subsection"
   SILE.call("sectioning", options, content)
-end, "Begin a new subsection")
+end, "Begin a new subsection.")
 
 SILE.registerCommand("subsubsection", function (options, content)
   options.style = "sectioning:subsubsection"
   SILE.call("sectioning", options, content)
-end, "Begin a new subsubsection")
+end, "Begin a new subsubsection.")
+
+-- Quotes
+
+SILE.settings.declare({
+  parameter = "book.blockquote.margin",
+  type = "measurement",
+  default = SILE.measurement("2em"),
+  help = "Left margin (indentation) for enumerations"
+})
+
+SILE.registerCommand("blockindent", function (options, content)
+  SILE.settings.temporarily(function ()
+    local indent = SILE.settings.get("book.blockquote.margin"):absolute()
+    local lskip = SILE.settings.get("document.lskip") or SILE.nodefactory.glue()
+    local rskip = SILE.settings.get("document.rskip") or SILE.nodefactory.glue()
+    SILE.settings.set("document.lskip", SILE.nodefactory.glue(lskip.width + indent))
+    SILE.settings.set("document.rskip", SILE.nodefactory.glue(rskip.width + indent))
+    SILE.process(content)
+    SILE.call("par")
+  end)
+end, "Typeset its contents in a right and left indented block.")
+
+SILE.scratch.styles.alignments["block"] = "blockindent"
+
+styles.defineStyle("blockquote", {}, {
+  font = { size = "-0.5" },
+  paragraph = { skipbefore = "smallskip", skipafter = "smallskip",
+                align = "block" }
+})
+
+SILE.registerCommand("blockquote", function (options, content)
+  SILE.call("style:apply:paragraph", { name = "blockquote" }, content)
+end, "Typeset its contents in a styled blockquote.")
+
+-- Captioned elements
+-- N.B. Despite the similar naming to LaTeX, these are not "floats"
+
+local extractFromTree = function (tree, command)
+  for i=1, #tree do
+    if type(tree[i]) == "table" and tree[i].command == command then
+      return table.remove(tree, i)
+    end
+  end
+end
+
+styles.defineStyle("figure", {}, {
+  paragraph = { skipbefore = "smallskip",
+                align = "center" },
+                -- we don't put anything after yet.
+                -- The captioning should insert all necessary skips and no-vbreaks, etc.
+})
+styles.defineStyle("figure:caption", { inherit = "sectioning:base" }, {
+  font = { style = "italic", size = "-0.5" },
+  paragraph = { indentbefore = false, skipbefore = "medskip", breakbefore = false,
+                align = "center",
+                skipafter = "medskip" },
+  sectioning = { counter = "figures", level = 1, display = "arabic",
+                 toclevel = 5,
+                 goodbreak = false, numberstyle="figure:caption:number" },
+})
+styles.defineStyle("figure:caption:number", {}, {
+  numbering = { before = "Figure ", after = "." },
+})
+styles.defineStyle("table", {}, {
+  paragraph = { align = "center" },
+                -- we don't put anything after yet.
+                -- The captioning should insert all necessary skips and no-vbreaks, etc.
+})
+styles.defineStyle("table:caption", {}, {
+  font = { size = "-0.5" },
+  paragraph = { indentbefore = false, breakbefore = false,
+                align = "center",
+                skipafter = "medskip" },
+  sectioning = { counter = "table", level = 1, display = "arabic",
+                 toclevel = 6,
+                 goodbreak = false, numberstyle="table:caption:number" },
+})
+styles.defineStyle("table:caption:number", {}, {
+  numbering = { before = "Table ", after = "." },
+  font = { features = "+smcp" },
+})
+
+SILE.registerCommand("figure", function (_, content)
+  if type(content) ~= "table" then SU.error("Expected a table content in text:superscript") end
+  local caption = extractFromTree(content, "caption")
+
+  -- Should wee "parbox" the content so it becomes a standalone hbox.
+  --SILE.call("parbox", { width = "100%fw" }, function()
+    SILE.call("style:apply:paragraph", { name = "figure" }, content)
+  --end)
+  if caption then
+    SILE.call("sectioning", { style = "figure:caption" }, caption)
+  else
+    -- It's bad to use the figure environment without caption, it's here for that.
+    -- So I am not even going to use styles here.
+    SILE.call("smallskip")
+  end
+end, "Insert a captioned figure.")
+
+SILE.registerCommand("table", function (_, content)
+  if type(content) ~= "table" then SU.error("Expected a table content in text:superscript") end
+  local caption = extractFromTree(content, "caption")
+
+  -- Should we "parbox" the content so it becomes a standalone hbox.
+  --SILE.call("parbox", { width = "100%fw", strut = "rule" }, function()
+    SILE.call("style:apply:paragraph", { name = "table" }, content)
+  --end)
+  if caption then
+    SILE.call("sectioning", { style = "table:caption" }, caption)
+  else
+    -- It's bad to use the table environment without caption, it's here for that.
+    -- So I am not even going to use styles here.
+    SILE.call("smallskip")
+  end
+end, "Insert a captioned table.")
+
+SILE.registerCommand("listoffigures", function (_, content)
+  local figSty = styles.resolveStyle("figure:caption")
+  local start = figSty.sectioning and figSty.sectioning.toclevel
+    or SU.error("Figure style does not specify a TOC level sectioning")
+
+  SILE.call("tableofcontents", { start = start, depth = 0 })
+end, "Output the list of figures.")
+
+SILE.registerCommand("listoftables", function (_, content)
+  local figSty = styles.resolveStyle("table:caption")
+  local start = figSty.sectioning and figSty.sectioning.toclevel
+    or SU.error("Figure style does not specify a TOC level sectioning")
+
+  SILE.call("tableofcontents", { start = start, depth = 0 })
+end, "Output the list of tables.")
 
 return omibook
