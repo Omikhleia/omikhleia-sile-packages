@@ -1,0 +1,22 @@
+\begin[class=omibook]{document}
+\nofolios
+\noheaders
+% Test case from the omibook customization.
+% Q. Can I have indented paragraphs after section titles?
+
+\section{Section One}
+
+First pararaph should not be indented.
+
+Next paragraphs are.
+
+\style:redefine[name=sectioning:base, as=_secbase, inherit=true]{
+\paragraph[indentafter=true]}
+
+\section{Section Two}
+
+First pararaph should now be indented.
+
+Next paragraphs are too.
+
+\end{document}

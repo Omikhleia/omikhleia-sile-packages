@@ -1,0 +1,26 @@
+\begin[class=omibook]{document}
+% Test case from the omibook customization.
+% Can I have folios (page numbers) centered? I prefer that.
+% Can I have running headers centered too?
+% Can I change the appearance (font, color) of the folios or headers?
+\odd-running-header{Lorem Ipsum (Odd)}
+\even-running-header{Lorem Ipsum (Even)}
+
+\style:redefine[name=folio:odd, as=_folodd, inherit=true]{\paragraph[align=center]}%
+\style:redefine[name=folio:even, as=_foleven, inherit=true]{\paragraph[align=center]}%
+\style:redefine[name=header:odd, as=_headodd, inherit=true]{\paragraph[align=center]}%
+\style:redefine[name=header:even, as=_headeven, inherit=true]{
+    \font[style=italic]
+    \paragraph[align=center]}%
+\style:redefine[name=folio:base, as=_folbase, inherit=true]{
+    \font[style=italic, size=20pt]}%
+\style:redefine[name=header:base, as=_headbase, inherit=true]{
+    \font[size=15pt]}%
+
+Odd page.
+
+\eject
+
+Even page.
+
+\end{document}

@@ -1,0 +1,13 @@
+\begin[class=omibook]{document}
+\nofolios
+\noheaders
+% Test case from the omibook customization.
+% Q. Can I have my chapter numbers in roman?
+\style:redefine[name=sectioning:chapter,
+    as=_chapter, inherit=true]{\sectioning[display=ROMAN]}%
+
+\chapter{One}
+
+Chapter numbering should be in roman.
+
+\end{document}

@@ -1,0 +1,13 @@
+\begin[class=omibook]{document}
+\nofolios
+\noheaders
+% Test case from the omibook customization.
+% Chapters and parts have English labels?
+\style:redefine[name=sectioning:chapter:number, as=_chlabel, inherit=true]{
+    \numbering[before="Capitulus "]}%
+
+\chapter{Lorem}
+
+This should be a Capitulus instead of a Chapter.
+
+\end{document}

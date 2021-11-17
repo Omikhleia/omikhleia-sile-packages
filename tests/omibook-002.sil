@@ -1,0 +1,25 @@
+\begin[class=omibook]{document}
+\nofolios
+\noheaders
+% Test case from the omibook customization.
+% Q. Paper is costly, I do not want chapters to open on an odd page.
+
+\chapter{One}
+
+Chapter should start on an odd page.
+
+\chapter{Two}
+
+Chapter should start on an odd page.
+
+\style:redefine[name=sectioning:chapter, as=_chapter, inherit=true]{\sectioning[open=any]}
+
+\chapter{Three}
+
+Chapter should start on any page.
+
+\chapter{Four}
+
+Chapter should start on any page.
+
+\end{document}

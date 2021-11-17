@@ -1,0 +1,41 @@
+Set paper size 	595.275597	841.8897729
+Begin page
+Mx 	59.5276
+My 	107.4981
+Set font 	Gentium Plus;13;800;;normal;;LTR
+T	38 68 83 76 87 88 79 88 86 w=50.1401	(Capitulus)
+Mx 	113.1030
+T	20 w=6.1001	(1)
+Mx 	119.2031
+T	17 w=2.9771	(.)
+Mx 	59.5276
+My 	124.2981
+Set font 	Gentium Plus;14;800;;normal;;LTR
+T	47 82 85 72 80 w=36.9619	(Lorem)
+My 	144.0715
+Set font 	Gentium Plus;10;400;;normal;;LTR
+T	55 75 76 86 w=17.5977	(This)
+Mx 	79.7970
+T	86 75 82 88 79 71 w=27.6172	(should)
+Mx 	110.0860
+T	69 72 w=9.6973	(be)
+Mx 	122.4550
+T	68 w=4.5898	(a)
+Mx 	129.7167
+T	38 68 83 76 87 88 79 88 86 w=38.5693	(Capitulus)
+Mx 	170.9578
+T	76 81 86 87 72 68 71 w=29.9414	(instead)
+Mx 	203.5710
+T	82 73 w=8.1396	(of)
+Mx 	214.3825
+T	68 w=4.5898	(a)
+Mx 	221.6441
+T	38 75 68 83 87 72 85 w=32.7881	(Chapter)
+Mx 	254.4322
+T	17 w=2.2900	(.)
+Mx 	518.2239
+My 	757.5827
+Set font 	Gentium Plus;9.5;400;;normal;;LTR
+T	20 w=4.4578	(1)
+End page
+Finish

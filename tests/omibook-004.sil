@@ -1,0 +1,25 @@
+\begin[class=omibook]{document}
+\nofolios
+\noheaders
+% Test case from the omibook customization.
+% Can I remove that dot after the section numbers?
+% (Or change it)
+\style:redefine[name=sectioning:other:number, as=_1, inherit=true]{
+    \numbering[after=.]}%
+\section{One}
+
+Section should have a dot after its number.
+
+\style:redefine[name=sectioning:other:number, as=_2, inherit=true]{
+    \numbering[after=false]}%
+\section{Two}
+
+Section should not have the dot any longer.
+
+\style:redefine[name=sectioning:other:number, as=_3, inherit=true]{
+    \numbering[after=–, before=§, kern=3spc]}%
+\section{Two}
+
+Section should have an emdash after its number, a § before it, and larger spacing.
+
+\end{document}
