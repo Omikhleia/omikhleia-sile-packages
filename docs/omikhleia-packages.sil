@@ -172,57 +172,17 @@ default book class from SILE to this author’s needs and taste. It eventually
 evolved into a full redesign on different grounds. This very document uses it,
 so you can see it in real action.
 
-\subsection{Main differences}
-
-There are several differences from the original book class.
-
-\smallskip
-\begin{itemize}
-  \item{Page layout:}
-  \begin{itemize}
-    \item{It has slightly different default page masters, as the gutter space
-          was found to be too small.}
-    \item{Page numbers (folios) are by default flushed left or right depending on the
-          page, rather than centered.\footnote{Well, this is defined via paragraph styles, so it
-          can actually be customized at convenience.}}
-    \item{Page headers rely on the functionality provided by the \doc:keyword{omiheaders} package.}
-  \end{itemize}
-  \item{Sectioning commands:}
-  \begin{itemize}
-    \item{All sectioning commands obey styles (relying on the
-          \doc:keyword{styles} and \doc:keyword{sectioning} packages), which notably
-          imply that they have a lot of customization possibilities.}
-    \item{In the following pages, the behaviors we describe apply to the default
-          configuration and styling, out-of-the-box.}
-  \end{itemize}
-  \item{Other:}
-  \begin{itemize}
-    \item{The footnotes are based on the \doc:keyword{omifootnotes} package.}
-    \item{The table of contents relies on the \doc:keyword{omitableofcontents} package.}
-    \item{Cross-references are supported via the \doc:keyword{omirefs} package.}
-  \end{itemize}
-\end{itemize}
-%
-\script{
-  -- FIXME UNUSED FINALLY
-  SILE.registerCommand("show-help", function (options, content)
-    local command = SU.required(options, "command", "show-command")
-    local help = SILE.Help[command]
-    SILE.typesetter:typeset(help and help.description or "?")
-  end)
-}%
-
 \subsection{Standard sectioning commands}
 
 The class supports the following sectioning commands, from the highest
 division level to the lowest: \doc:code{\\part}, \doc:code{\\chapter},
 \doc:code{\\section}, \doc:code{\\subsection}, \doc:code{\\subsubsection}.
 
-By default, parts disable page numbering and running headers on their page.
-Chapters have page numbering enabled on their first page and make sure
-not header shown is shown on that page. Both start on an odd page\footnote{Again,
-as almost everything depending on styles, this can be customized.}, and the previous
-even page, if inserted blank, is shown without page number and header.
+All sectioning commands obey styles (relying on the
+\doc:keyword{styles} and \doc:keyword{sectioning} packages), which notably
+imply that they have a lot of customization possibilities.
+In the following pages, the described behaviors apply to the default
+configuration and styling, out-of-the-box.
 
 All the sections accepts the \doc:code{numbering=false} option, if you want
 them unnumbered, and the \doc:code{toc=false} option, if you do not want them
@@ -234,8 +194,71 @@ instead consider restructuring their document in a manner that does not require
 this level of nested sectioning. Increased section granularity can actually begin
 to detract from document clarity.”
 
-By default, parts and chapters reset the footnote counter. Chapter and section
-titles go in odd and even running headers respectively, unless customized otherwise.
+\define[command=ptable:cell:hook]{\raggedright{\noindent\style:font[size=-1]{\process}}}%
+% FIXME Maybe the class should load ptable and override the hook to actually supported
+% styles, that would be both convenient and consistent.
+\begin{table}
+\begin[cols=40%fw 50%fw, header=true]{ptable}
+  \begin[background=#eee]{row}
+    \cell[valign=top]{Style}
+    \cell[valign=top]{Description}
+  \end{row}
+  \begin{row}
+    \cell[valign=top]{\doc:code{sectioning:base}}
+    \cell[valign=top]{(Paragraph style inherited by sectioning command.)}
+  \end{row}
+  \begin{row}
+    \cell[valign=top]{\doc:code{section:\doc:args{section type}}}
+    \cell[valign=top]{(Sectioning) style applied to that sectioning command.}
+  \end{row}
+  \begin{row}
+    \cell[valign=top]{\doc:code{section:\doc:args{part|chapter}:number}}
+    \cell[valign=top]{Style pre-defined for parts and chapter for styling their number.}
+  \end{row}
+  \begin{row}
+    \cell[valign=top]{\doc:code{section:other:number}}
+    \cell[valign=top]{Style pre-defined for other sectioning commands for styling the
+      section number.}
+  \end{row}
+\end{ptable}
+\caption{Styles used for sectioning commands.}
+\end{table}
+
+By default, parts disable page numbering and running headers on their page.
+Chapters have page numbering enabled on their first page and make sure
+not header shown is shown on that page. Both start on an odd page\footnote{Again,
+as almost everything depending on styles, this can be customized.}, and the previous
+even page, if inserted blank, is shown without page number and header. Parts and chapters
+reset the footnote counter. Chapter and section titles go in odd and even running
+headers respectively, unless customized otherwise.
+
+Notably, the class also defines a few commands currenty used as hooks in some of the
+above sectionining styles.
+
+\begin{table}
+\begin[cols=40%fw 50%fw, header=true]{ptable}
+  \begin[background=#eee]{row}
+    \cell[valign=top]{Command}
+    \cell[valign=top]{Description}
+  \end{row}
+  \begin{row}
+    \cell[valign=top]{\doc:code{\\sectioning:part:hook}}
+    \cell[valign=top]{Clears all page headers, disable the folios globally,
+      resets the footnote counter and the chapter counter.}
+  \end{row}
+  \begin{row}
+    \cell[valign=top]{\doc:code{\\sectioning:chapter:hook}}
+    \cell[valign=top]{Clears the header on the current page, re-enables folios, resets
+      the footnote counter and adds the chapter title to the even running headers (see further below).}
+  \end{row}
+  \begin{row}
+    \cell[valign=top]{\doc:code{\\sectioning:section:hook}}
+    \cell[valign=top]{Adds the section title to the odd running headers (see further below), with its
+      counter preprended to it.}
+  \end{row}
+\end{ptable}
+\caption{Pre-defined command hooks used by sectioning commands.}
+\end{table}
 
 \subsection{Captioned figures and tables}
 
@@ -245,13 +268,10 @@ and \doc:code{table}. Both can contains arbitrary contents and a
 extracted and displayed below the contents.
 By default, these environements show their contents centered, with a numbered caption.
 Each of them has its own distinct counter.
+The figure environment is (normally) intended to be used around an illustration.
 
-The figure environment is (normally) intended to be used around an illustration of
-some kind.
-
-\define[command=ptable:cell:hook]{\raggedright{\noindent\style:font[size=-1]{\process}}}% FIXME
 \begin{table}
-\begin[cols=45%fw 45%fw]{ptable}
+\begin[cols=40%fw 50%fw, header=true]{ptable}
   \begin[background=#eee]{row}
     \cell[valign=top]{Style}
     \cell[valign=top]{Description}
@@ -276,7 +296,7 @@ The table environment is (normally) intended to be used around… tables, you wo
 have guessed it.
 
 \begin{table}
-\begin[cols=45%fw 45%fw]{ptable}
+\begin[cols=40%fw 50%fw, header=true]{ptable}
   \begin[background=#eee]{row}
     \cell[valign=top]{Style}
     \cell[valign=top]{Description}
@@ -301,16 +321,104 @@ The figure and table caption styles are actually sectioning styles, and the capt
 inserted into the table of contents at level 5 and 6 respectively. It implies that one has
 the possibility to have them shown in the TOC, if passing a sufficient \doc:code{depth}
 value to the \doc:code{\\tableofcontents} command. While some authors may appreciate that,
-other, most likely, prefer having them in separate lists. Two convenience functions are
-provided to that effect:
+other, most likely, prefer having them in separate lists. Two convenience commands are
+provided to that effect.
 
-\begin{itemize}
-\item{\doc:code{\\listoffigures}}
-\item{\doc:code{\\listoftables}}
-\end{itemize}
+\begin{table}
+\begin[cols=40%fw 50%fw, header=true]{ptable}
+  \begin[background=#eee]{row}
+    \cell[valign=top]{Command}
+    \cell[valign=top]{Description}
+  \end{row}
+  \begin{row}
+    \cell[valign=top]{\doc:code{\\listoffigures}}
+    \cell[valign=top]{Outputs the list of figures.}
+  \end{row}
+  \begin{row}
+    \cell[valign=top]{\doc:code{\\listoftables}}
+    \cell[valign=top]{Outputs the list of tables.}
+  \end{row}
+\end{ptable}
+\caption{Commands for list of figures and tables.}
+\end{table}
 
 But basically, they are just simple calls to \doc:code{\\tableofcontents} with the
-appropriate option to start at the corresponding TOC level and display only one level.  
+appropriate options to start at the corresponding TOC level and display only that level.
+The only noteworthy advantage is that they check the styles in order to find out which
+level is concerned, so they may apply even if TOC levels are customized differently.
+
+As a final but important note, despite their name, the figure and table environements
+are not “floating” objects in the sense that this concept has in LaTeX. In other terms,
+they are always inserted where declared in the page, without attempt to possibly move
+their material to some other position or a later page. 
+
+\subsection{Headers & Footers}
+
+Page numbers (folios) and running headers are by default flushed left or right depending
+on the page they are on, rather than centered. This is defined via paragraph styles, so it
+can actually be customized at convenience. The default styles also include an inheritance
+to a common “base” style (suitable for selecting the foot size, etc.). Nothing mandates
+it, but if you want to redefine these styles, we recommend keeping an appropriate
+style hierarchy, rather than stacking all definitions in a single style. Well-thought,
+it can simplify the task for other later customizations.
+
+\begin{table}
+\begin[cols=40%fw 50%fw, header=true]{ptable}
+  \begin[background=#eee]{row}
+    \cell[valign=top]{Style}
+    \cell[valign=top]{Description}
+  \end{row}
+  \begin{row}
+    \cell[valign=top]{\doc:code{folio:base}}
+    \cell[valign=top]{(Style inherited by the other folio styles.)}
+  \end{row}
+  \begin{row}
+    \cell[valign=top]{\doc:code{header:base}}
+    \cell[valign=top]{(Style inherited by the other header styles.)}
+  \end{row}
+  \begin{row}
+    \cell[valign=top]{\doc:code{folio:even}}
+    \cell[valign=top]{(Paragraph) style applied to the folio on even pages.}
+  \end{row}
+  \begin{row}
+    \cell[valign=top]{\doc:code{folio:odd}}
+    \cell[valign=top]{(Paragraph) style applied to the folio on odd pages.}
+  \end{row}
+  \begin{row}
+    \cell[valign=top]{\doc:code{header:even}}
+    \cell[valign=top]{(Paragraph) style applied to the header on even pages.}
+  \end{row}
+  \begin{row}
+    \cell[valign=top]{\doc:code{header:odd}}
+    \cell[valign=top]{(Paragraph) style applied to the header on odd pages.}
+  \end{row}
+\end{ptable}
+\caption{Styles used for folios and headers.}
+\end{table}
+
+The class also defines two commands for manipulating the page headers.
+
+\begin{table}
+\begin[cols=45%fw 45%fw, header=true]{ptable}
+  \begin[background=#eee]{row}
+    \cell[valign=top]{Command}
+    \cell[valign=top]{Description}
+  \end{row}
+  \begin{row}
+    \cell[valign=top]{\doc:code{\\even-running-header\{\doc:args{content}\}}}
+    \cell[valign=top]{Registers the content to be used in even running headers.}
+  \end{row}
+  \begin{row}
+    \cell[valign=top]{\doc:code{\\odd-running-header\{\doc:args{content}\}}}
+    \cell[valign=top]{Registers the content to be used in even running headers.}
+  \end{row}
+\end{ptable}
+\caption{Commands for manipulating page headers.}
+\end{table}
+
+Page headers rely on the functionality provided by the \doc:keyword{omiheaders} package,
+so the \doc:code{\\noheaders}, \doc:code{\\noheaderthispage} and \doc:code{\\headers}
+commands are available, as well as \doc:code{\\header:rule}.
 
 \subsection{Block-indented quotes}
 
@@ -319,9 +427,26 @@ paragraphs of the kind shown in the doc:keyword{styles} package documentation. I
 of an extra, but it was so often needed by this author that he decided to include it in
 standard.
 
-The environment relies on the same-name style for styling, and on the
-\doc:code{book.blockquote.margin} for the indentation (defaults to 2em). intended
+The environment relies on the same-named style for its styling and on the
+\doc:code{book.blockquote.margin} setting for its indentation (defaults to 2em). intended
 quotes can be nested.
+
+\subsection{Other features}
+
+The footnotes are based on the \doc:keyword{omifootnotes} package and therefore have the
+extra features proposed in this implementation, notably the \doc:code{\\footer:rule}
+command and the possibility to specify an explicit \doc:code{mark} on footnote calls.
+
+The table of contents relies on the \doc:keyword{omitableofcontents} package. One can
+therefore change many styling and appearance aspects to create custom table of contents.
+
+Cross-references are supported via the \doc:keyword{omirefs} package, henceforth
+the \doc:code{\\label}, \doc:code{\\ref} and \doc:code{\\pageref} commands are
+available.
+
+Regarding the page layout, not that it has slightly different default page masters
+than the legacy book class of SILE, as the gutter space was found to be too small,
+in this author’s opinion.
 
 \section{omicv: a minimalist curriculum vitae}
 
@@ -390,7 +515,7 @@ repository}\footnote{\doc:url{https://omikhleia.github.io/sindict/}}.
 \part{Tips & Tricks}
 
 \begin{figure}
-\img[src=docs/images/printer_1568.png, width=55%pw]
+\img[src=docs/images/printer_1568.png, width=50%pw]
 \caption{Printers in 1568.\footnote[mark=†]{Meggs, Philip B.,
   \em{A History of Graphic Design,} John Wiley & Sons, Inc. 1998, p. 64.}}
 \end{figure}
