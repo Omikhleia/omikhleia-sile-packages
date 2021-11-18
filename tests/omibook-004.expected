@@ -9,7 +9,7 @@ T	17 w=2.7480	(.)
 Mx 	70.5490
 T	50 81 72 w=19.3652	(One)
 Mx 	59.5276
-My 	119.0205
+My 	123.2178
 Set font 	Gentium Plus;10;400;;normal;;LTR
 T	54 72 70 87 76 82 81 w=30.4492	(Section)
 Mx 	92.6505
@@ -29,13 +29,13 @@ T	81 88 80 69 72 85 w=32.5049	(number)
 Mx 	236.4715
 T	17 w=2.2900	(.)
 Mx 	59.5276
-My 	143.0205
+My 	147.2178
 Set font 	Gentium Plus;12;800;;normal;;LTR
 T	21 w=5.6309	(2)
 Mx 	67.8010
 T	55 90 82 w=21.1172	(Two)
 Mx 	59.5276
-My 	156.7647
+My 	165.2178
 Set font 	Gentium Plus;10;400;;normal;;LTR
 T	54 72 70 87 76 82 81 w=30.4492	(Section)
 Mx 	92.6503
@@ -55,7 +55,7 @@ T	79 82 81 74 72 85 w=26.7139	(longer)
 Mx 	238.9598
 T	17 w=2.2900	(.)
 Mx 	59.5276
-My 	180.7647
+My 	189.2178
 Set font 	Gentium Plus;12;800;;normal;;LTR
 T	134 w=5.6309	(§)
 Mx 	65.1584
@@ -65,7 +65,7 @@ T	178 w=5.6309	(–)
 Mx 	84.3479
 T	55 90 82 w=21.1172	(Two)
 Mx 	59.5276
-My 	194.5088
+My 	207.2178
 Set font 	Gentium Plus;10;400;;normal;;LTR
 T	54 72 70 87 76 82 81 w=30.4492	(Section)
 Mx 	92.6330

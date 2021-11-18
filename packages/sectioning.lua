@@ -114,7 +114,9 @@ SILE.registerCommand("sectioning", function (options, content)
     -- 3D. Section (title) content
     SILE.process(content)
   end)
-  SILE.typesetter:inhibitLeading()
+  -- Was present in the original book class for section and subsection
+  -- But seems to behave weird = cancelled for now.
+  -- SILE.typesetter:inhibitLeading()
 end, "Apply sectioning")
 
 SILE.registerCommand("open-on-odd-page", function (_, _)

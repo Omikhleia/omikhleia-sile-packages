@@ -8,7 +8,6 @@ local omibook = plain { id = "omibook" }
 
 local styles = SILE.require("packages/styles").exports
 SILE.require("packages/sectioning")
-SILE.require("packages/parbox")
 
 -- STYLES
 
@@ -42,7 +41,7 @@ styles.defineStyle("sectioning:section", { inherit = "sectioning:base" }, {
 })
 styles.defineStyle("sectioning:subsection", { inherit = "sectioning:base"}, {
   font = { weight = 800, size = "+1" },
-  paragraph = { skipbefore = "medskip", skipafter = "medskip", breakafter = false },
+  paragraph = { skipbefore = "medskip", skipafter = "smallskip", breakafter = false },
   sectioning = { counter = "sections", level = 3, display = "arabic",
                  toclevel = 3,
                  numberstyle="sectioning:other:number" },
@@ -359,10 +358,7 @@ SILE.registerCommand("figure", function (_, content)
   if type(content) ~= "table" then SU.error("Expected a table content in text:superscript") end
   local caption = extractFromTree(content, "caption")
 
-  -- Should wee "parbox" the content so it becomes a standalone hbox.
-  --SILE.call("parbox", { width = "100%fw" }, function()
-    SILE.call("style:apply:paragraph", { name = "figure" }, content)
-  --end)
+  SILE.call("style:apply:paragraph", { name = "figure" }, content)
   if caption then
     SILE.call("sectioning", { style = "figure:caption" }, caption)
   else
@@ -376,10 +372,7 @@ SILE.registerCommand("table", function (_, content)
   if type(content) ~= "table" then SU.error("Expected a table content in text:superscript") end
   local caption = extractFromTree(content, "caption")
 
-  -- Should we "parbox" the content so it becomes a standalone hbox.
-  --SILE.call("parbox", { width = "100%fw", strut = "rule" }, function()
-    SILE.call("style:apply:paragraph", { name = "table" }, content)
-  --end)
+  SILE.call("style:apply:paragraph", { name = "table" }, content)
   if caption then
     SILE.call("sectioning", { style = "table:caption" }, caption)
   else
