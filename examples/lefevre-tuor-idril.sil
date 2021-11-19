@@ -9,12 +9,11 @@
 \language[main=fr]
 \font[family=Libertinus Serif]
 %
-\define[command=code]{\process}% FIXME HACK DUMP URL code
+\define[command=code]{\process}% FIXME HACK DUMB URL CODE
 %
 \define[command=smallcaps]{\font[features=+smcp]{\process}}
 \define[command=foreign:en]{\em{\language[main=en]{\process}}}
 \define[command=foreign:gr]{\em{\language[main=und]{\process}}}
-%
 \define[command=JRR]{J.{\abbr:nbsp}R.{\abbr:nbsp}R}
 %
 \footnote:rule
@@ -28,18 +27,21 @@ SILE.registerCommand("dropcaps", function (options, content)
 end, "FIXME waiting for dropcap(s) to be released")
 }
 %
-% HACK FAKE CHAPTER
-% FIXME consider whether chapters etc. should be raggedright by default
-% They also break badly at running headers etc. It's messy...
+\style:redefine[name=header:odd, as=_hdodd, inherit=true]{
+  \paragraph[align=center]
+  \font[style=italic]
+}%
+\style:redefine[name=header:even, as=_hdeven, inherit=true]{
+  \paragraph[align=center]
+  \font[style=italic]
+}%
+\odd-running-header{Tolkien, le façonnement d’un monde}
 \chapter[numbering=false]{Le conte perdu de Mercure}
-% WE NEED SOME SORT OF SUBCHAPTER
-%— Tuor et Idril élevés au rang d’astre}
-%\noindent
+% The actual title had ..."— Tuor et Idril élevés au rang d’astre"
+% Too long with the default styling, and 2-line chapter titles look ugly.
+% Address it later at some point?
+
 \begin{raggedright}
-%\font[weight=800, size=14pt]{Le conte perdu de Mercure\break
-%— Tuor et Idril élevés au rang d’astre}
-%
-%\bigskip
 Alain \smallcaps{Lefèvre}\footnote[mark=†]{Cet article est extrait de \em{Tolkien, le façonnement d’un monde}, \abbr:vol{1},
 Le Dragon de Brume, 2011, \abbr:page{211–216} — avec la permission de l’auteur.}
 \end{raggedright}
