@@ -5,6 +5,7 @@
 \script[src=packages/image]
 \script[src=packages/color]
 \script[src=packages/background]
+\script[src=packages/couyards]
 \language[main=en]
 \font[family=Libertinus Serif]
 \define[command=codeblock]{\font[family=Libertinus Sans]{\process}}
@@ -58,7 +59,7 @@ version 2.0 (http://creativecommons.org/licenses/by-sa/2.0/).
 %
 % There we go for the content.
 %
-\chapter[numbering=false, toc=false]{Table of Contents}
+\chapter[numbering=false, toc=false]{Contents}
 
 \tableofcontents
 
@@ -69,6 +70,107 @@ version 2.0 (http://creativecommons.org/licenses/by-sa/2.0/).
 \section[numbering=false, toc=false]{Tables}
 
 \listoftables
+
+\chapter[numbering=false]{Preface}
+
+\hfill{}November 20, 2021.
+
+\smallskip
+
+If this booklet has a page size of 6 inches × 9 inches, it is not to make you waste
+paper (assuming you could possibly want to print it in A4 or US letter), but
+just because it is the format I use the most for printed books and I wanted to
+ensure my classes and packages looked functional with it.
+
+But let’s rewind, here… On August 29, 2021, I decided to give a try to the SILE
+typesetting system.
+This booklet could have been called “My First Journey with SILE” as it is
+the result of these experiments.
+
+To proceed orderly, I considered a book I had aready typeset with another
+software–for what it matters, LibreOffice–and looked how I could
+do it again with SILE. I had no intent to redo the whole book, of course,
+but the overall structure and a sample chapter would do. If you already
+have some typeset content available at hand, I recommend this method,
+would you want to switch to SILE (or to any other solution).
+It is a good way to ascertain your needs and
+to rethink the kind of things you are used to do or you had solved there, though
+differently.
+If I had to typeset that book, however, the version of SILE at the time (that was
+0.10.15) somehow lacked many supporting packages for the sort of things I usually
+write.
+
+First, just at a glance, there were a few general issues. My book was in French and
+the typographic rules for punctuations in that language were not yet fully implemented.
+I proposed a fix that eventually got accepted. The book had also long footnotes which
+contained fairly long and hard-to-break URLs, so I ended up contributing a few fixes
+and improvements here too. All articles used “dropped capitals” and these did not
+work well at the time. I also proposed a new implementation which was eventually
+reviewed and integrated with even nicer features than my initial attempt. The SILE
+community might still be small, but it is live and great.
+
+The book had a non-obvious table of contents where entries, depending on their level,
+did not always show a page number or the usual dots (leaders). I needed more customization
+than offered by the default table of contents package. It lead to the creation
+of the \doc:keyword{omitableofcontents} package.
+Likewise, I felt I needed more control on (running) page headers and it lead
+to the \doc:keyword{omiheaders} package.
+I mentioned footnotes earlier; I eventually had to consider
+more changes to them in order to match the target book: \doc:keyword{omifootnotes}
+saw the light.
+I did not mention yet that the book was a collection of essays with a good bunch of
+cross-references between them–and even, from a footnote in an essay to a footnote in another.
+Trying to do the things right, the \doc:keyword{omirefs} package was born.
+
+Looking at the sample chapter I had selected, it started and ended with quotations,
+or rather “epigraphs”. It ended with some nice floral motif. So I wrote
+the \doc:keyword{epigraph} and \doc:keyword{couyards}
+packages. I then had almost all the building blocks to typeset this essay, at last.
+
+Yet, even if I did not plan to typeset the whole book again, as stated, I looked
+through the other chapters to check their needs. One had complex tables and the simple
+table package from SILE was clearly insufficient. So logically, it lead me to find
+a solution, in the form of the \doc:keyword{ptable} package and the
+low-level \doc:keyword{parbox} at its core. It also turned to be useful for this very documentation,
+which I had decided to compose using the same tools.
+In the same vein, enumerations and bullet lists were used. I did not really need to
+support many nested levels, but why not anyway. The \doc:keyword{enumitem} package
+was born.
+More marginally, one of the essays included a poem and a discussion of its prosody.
+I wrapped up the \doc:keyword{omipoetry} package as a first attempt to address it.
+The book had a fancy “colophon” at its end, where the editor–that is, I–thanked the
+authors, contributors and proofreaders. I wanted to play around that idea:
+the \doc:keyword{colophon} package is a somehow experimental approach to it.
+On this journey, small recurring details appeared and were extracted as
+the \doc:keyword{textsubsuper} and \doc:keyword{abbr} packages. When testing,
+I also wanted an easy way to tweak commands without always having to change
+their Lua code, so \doc:keyword{redefine} was written. I have to confess it was
+one of my first packages but, as I progressed, I did not use it that often.
+
+Last but not least, a book class was obviously needed but the default one
+had to be extended to rely on some of the abovementioned packages. I was
+also concerned that “hooks” did not seem the right way to handle customizations.
+After several false starts, what had begun as a mere adaptation of the
+existing book class gradually became another beast, abstracting styling decisions in the
+\doc:keyword{styles} and \doc:keyword{sectioning} packages–and those also
+made their way into several of the previous packages.
+The \doc:keyword{omibook} class logically concluded that journey… Well, my
+dabbling into SILE also produced a few other by-products. To check that my
+implementation for tables could be generalized to other needs, I played around
+the idea of using it for a \em{résumé}. It lead to the \doc:keyword{omicv} class.
+In parallel, I couldn’t resist checking if SILE could also help me in another
+project; it resulted in a class and packages for (a specific kind of) XML TEI
+dictionaries.
+
+Let’s conclude, temporarily, the so-said journey. It may seem that I had to write
+many packages to reach my aim. On the other hand, it also proves that SILE
+is flexible and versatile, with a very decent learning curve.
+I cannot thank Simon Cozens and the SILE community enough for all their
+achievements. The software has a great code base and it is really enjoyable
+to work with.
+
+\medskip
+\couyard[type=8,width=default]
 
 \part{Packages & Classes}
 
@@ -205,7 +307,7 @@ to detract from document clarity.”
   \end{row}
   \begin{row}
     \cell[valign=top]{\doc:code{sectioning:base}}
-    \cell[valign=top]{(Paragraph style inherited by sectioning command.)}
+    \cell[valign=top]{(Paragraph style inherited by all sectioning commands.)}
   \end{row}
   \begin{row}
     \cell[valign=top]{\doc:code{section:\doc:args{section type}}}
@@ -213,7 +315,7 @@ to detract from document clarity.”
   \end{row}
   \begin{row}
     \cell[valign=top]{\doc:code{section:\doc:args{part|chapter}:number}}
-    \cell[valign=top]{Style pre-defined for parts and chapter for styling their number.}
+    \cell[valign=top]{Style pre-defined for parts and chapters for styling their number.}
   \end{row}
   \begin{row}
     \cell[valign=top]{\doc:code{section:other:number}}
@@ -226,7 +328,7 @@ to detract from document clarity.”
 
 By default, parts disable page numbering and running headers on their page.
 Chapters have page numbering enabled on their first page and make sure
-not header shown is shown on that page. Both start on an odd page\footnote{Again,
+no header shown is shown on that page. Both start on an odd page\footnote{Again,
 as almost everything depending on styles, this can be customized.}, and the previous
 even page, if inserted blank, is shown without page number and header. Parts and chapters
 reset the footnote counter. Chapter and section titles go in odd and even running
@@ -263,10 +365,10 @@ above sectionining styles.
 \subsection{Captioned figures and tables}
 
 The class provides two additional environnments, \doc:code{figure}
-and \doc:code{table}. Both can contains arbitrary contents and a
+and \doc:code{table}. Both can contain arbitrary contents and a
 \doc:code{\\caption\{\doc:args{text}\}} element. The latter is
 extracted and displayed below the contents.
-By default, these environements show their contents centered, with a numbered caption.
+By default, these environments show their contents centered, with a numbered caption.
 Each of them has its own distinct counter.
 The figure environment is (normally) intended to be used around an illustration.
 
@@ -339,7 +441,7 @@ provided to that effect.
     \cell[valign=top]{Outputs the list of tables.}
   \end{row}
 \end{ptable}
-\caption{Commands for list of figures and tables.}
+\caption{Commands for lists of figures and tables.}
 \end{table}
 
 But basically, they are just simple calls to \doc:code{\\tableofcontents} with the
@@ -347,10 +449,10 @@ appropriate options to start at the corresponding TOC level and display only tha
 The only noteworthy advantage is that they check the styles in order to find out which
 level is concerned, so they may apply even if TOC levels are customized differently.
 
-As a final but important note, despite their name, the figure and table environements
+As a final but important note, despite their name, the figure and table environments
 are not “floating” objects in the sense that this concept has in LaTeX. In other terms,
 they are always inserted where declared in the page, without attempt to possibly move
-their material to some other position or a later page. 
+their material to some other position or a later page.
 
 \subsection{Headers & Footers}
 
@@ -423,18 +525,18 @@ commands are available, as well as \doc:code{\\header:rule}.
 \subsection{Block-indented quotes}
 
 The class provides the \doc:code{blockquote} environment to typeset simple block-indented
-paragraphs of the kind shown in the doc:keyword{styles} package documentation. It is sort
+paragraphs of the kind shown in the \doc:keyword{styles} package documentation. It is sort
 of an extra, but it was so often needed by this author that he decided to include it in
 standard.
 
 The environment relies on the same-named style for its styling and on the
-\doc:code{book.blockquote.margin} setting for its indentation (defaults to 2em). intended
+\doc:code{book.blockquote.margin} setting for its indentation (defaults to 2em). Indent ed
 quotes can be nested.
 
 \subsection{Other features}
 
 The footnotes are based on the \doc:keyword{omifootnotes} package and therefore have the
-extra features proposed in this implementation, notably the \doc:code{\\footer:rule}
+extra features proposed in this implementation, notably the \doc:code{\\footnote:rule}
 command and the possibility to specify an explicit \doc:code{mark} on footnote calls.
 
 The table of contents relies on the \doc:keyword{omitableofcontents} package. One can
@@ -444,7 +546,7 @@ Cross-references are supported via the \doc:keyword{omirefs} package, henceforth
 the \doc:code{\\label}, \doc:code{\\ref} and \doc:code{\\pageref} commands are
 available.
 
-Regarding the page layout, not that it has slightly different default page masters
+Regarding the page layout, note that it has slightly different default page masters
 than the legacy book class of SILE, as the gutter space was found to be too small,
 in this author’s opinion.
 
@@ -847,7 +949,7 @@ SILE.scratch.styles.alignments["bkquote"] = "bkquote"\par
 
 \section{Where we erred…}
 
-Eventually, it works. Yay. We did a few things wrong, though, or rather, we perhaps 
+Eventually, it works. Yay. We did a few things wrong, though, or rather, we perhaps
 made our task more complex than it ought to be.
 
 \begin{enumerate}
