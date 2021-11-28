@@ -319,9 +319,7 @@ end
 
 styles.defineStyle("figure", {}, {
   paragraph = { skipbefore = "smallskip",
-                align = "center" },
-                -- we don't put anything after yet.
-                -- The captioning should insert all necessary skips and no-vbreaks, etc.
+                align = "center", breakafter = false },
 })
 styles.defineStyle("figure:caption", { inherit = "sectioning:base" }, {
   font = { style = "italic", size = "-0.5" },
@@ -336,9 +334,7 @@ styles.defineStyle("figure:caption:number", {}, {
   numbering = { before = "Figure ", after = "." },
 })
 styles.defineStyle("table", {}, {
-  paragraph = { align = "center" },
-                -- we don't put anything after yet.
-                -- The captioning should insert all necessary skips and no-vbreaks, etc.
+  paragraph = { align = "center", breakafter = false },
 })
 styles.defineStyle("table:caption", {}, {
   font = { size = "-0.5" },
@@ -354,13 +350,14 @@ styles.defineStyle("table:caption:number", {}, {
   font = { features = "+smcp" },
 })
 
-SILE.registerCommand("figure", function (_, content)
-  if type(content) ~= "table" then SU.error("Expected a table content in text:superscript") end
+SILE.registerCommand("figure", function (options, content)
+  if type(content) ~= "table" then SU.error("Expected a table content in figure environment") end
   local caption = extractFromTree(content, "caption")
 
+  options.style = "figure:caption"
   SILE.call("style:apply:paragraph", { name = "figure" }, content)
   if caption then
-    SILE.call("sectioning", { style = "figure:caption" }, caption)
+    SILE.call("sectioning", options, caption)
   else
     -- It's bad to use the figure environment without caption, it's here for that.
     -- So I am not even going to use styles here.
@@ -368,13 +365,14 @@ SILE.registerCommand("figure", function (_, content)
   end
 end, "Insert a captioned figure.")
 
-SILE.registerCommand("table", function (_, content)
-  if type(content) ~= "table" then SU.error("Expected a table content in text:superscript") end
+SILE.registerCommand("table", function (options, content)
+  if type(content) ~= "table" then SU.error("Expected a table content in table environment") end
   local caption = extractFromTree(content, "caption")
 
+  options.style = "table:caption"
   SILE.call("style:apply:paragraph", { name = "table" }, content)
   if caption then
-    SILE.call("sectioning", { style = "table:caption" }, caption)
+    SILE.call("sectioning", options, caption)
   else
     -- It's bad to use the table environment without caption, it's here for that.
     -- So I am not even going to use styles here.
