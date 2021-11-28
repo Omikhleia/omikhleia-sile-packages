@@ -1,0 +1,111 @@
+\begin{document}
+\script[src=packages/pullquote]
+
+\eject
+\hbox{}\vfill
+
+\noheaderthispage
+\center{\img[src=examples/almaq/opalescence_cd_cover.png, width=85%fw]}
+
+\bigskip
+
+\pullquote{%
+Dans le sillage instrumental et choral des immortelles \em{Planètes} (op. 32) de Gustave Holst — on songe en
+particulier aux accents mystiques de \em{Neptune}, septième et dernier mouvement du poème symphonique de Holst —,
+le maestro Yann C. et le Miskatonic Ensemble ne pouvaient qu’être tout désignés pour faire ainsi plus ou moins
+renaître, en les rendant audibles, ces trésors de musique ancienne oubliés. Arkham Records a, une fois de plus,
+encore fait un excellent travail.}
+
+\chapter[numbering=false]{Caraye’s \em{Opalescence} – a criticism.}
+
+\begin{raggedleft}
+Jeremy S. \font[features=+smcp]{Schick},\par
+\em{Journal of the American Society for Music Research.}
+\end{raggedleft}
+
+\medskip
+
+\begin[main=en]{language}
+\em{Opalescence: Themes & Variations on the Code of Celdre}, by Yann Caraye and the Miskatonic
+Ensemble, Arkham Records, 2020.
+
+\medskip
+
+Musicology as a science requires both thorough study and a humble attitude.
+As an art, it also requires courage to bridge the remaining gap to recreate
+music nobody heard for centuries. Yet courage alone doesn’t do the trick, it
+rather become overboldness. More often than not, the result owes more to
+the musical talent of the interpreter than to the original composition.
+
+Such is the case with Yann Caraye’s latest creation, \em{Opalescence}, which aimed
+to recreate the lost music of Almaq. Building upon recent research on a Vatican
+manuscript containing a partially deciphered musical notation, Caraye set to put it back to our ears. His
+choices, explained in the CD booklet, are highly dependent on his interpretations of the mystery drama
+this music was supposed to accompany. Sadly, \em{The Opalescent Mask} is one the most obscure writings
+from the lost literature of Almaq. Most experts only agree that this piece of theater is incomplete, and that
+its first act alone was preserved, not unsurprisingly, perhaps, since it deals with the destruction of Almaq
+itself.
+
+Yet Caraye argues that what we have contains the entire drama, and that the few measures of music
+appended at the end aren’t simple musical themes, as it seems, but the entire musical composition. A
+composition that couldn’t realistically last for more than a few minutes, which seems rather unlikely.
+Strange as it may seem, Caraye chooses to further cut it down into smaller chunks, which he propounds were
+to be heard between each of the scenes. Most of his explanations then focus on his very personal reading
+of the drama. While his guess that the piece ended with the death of the famous Alster is likely, one may
+wonder whether it should happen in such an absurd manner as he imagines. Instead of a plot involving
+political assassination shortly after the conquest of Almaq, according to Erich Wiegger’s standard commentary,
+Caraye interprets the last preserved scene in a decidedly fantastical manner. One may
+wonder whether following the discredited mythical approach of a Pierre de Blancandre may produce a
+realistic way of deciphering Almaqian music.
+
+Caraye is still forced to admit that the musical notation extent becomes extremely repetitive when
+played without ornamentations. Compounding this issue, no indication of the pentatonic scale to be used
+is available. Here Caraye creativity happily shows up, as his CD provides variations on all possible scales,
+taking –as is his right– the Lydian mode as the basic one. His choices of harp and oboe for the main tunes
+of all three scenes are hardly more than guesses, but they definitely sound right. Caraye displays his
+experience as a former assistant to Howard Shore when he decides to give the two additional melodies
+of the second scenes to a male and female choirs rather than further stringed instruments. His modernistic
+scenic depictions here strongly influence his choices, despite the fact that the themes of \em{The Opalescent
+Mask} probably shouldn’t be treated as a contemporary film score.
+
+The musical result is strange and slightly mysterious, quite appropriately for the theme of the drama. One
+may regret, on the other hand, that the stereo recording is impaired by a lack of depth and volume. Also, the
+dearth of orchestration shows that Caraye is probably a better interpreter than composer. Despite being
+rather short, the electronic version included in the bonus track might in fact be the most convincing of
+these variations. What the old poet Celdre might have thought of it is another matter…
+
+\smallskip
+\couyard[type=6, width=default]
+
+\bigskip
+
+\style:font[size=-1.5]{%
+Polyphony in four movements based on a work from the 12\text:superscript{th} century –
+Track list.
+
+\em{Opalescent Mask variation \abbr:no{1}} (Lydian scale, acoustic session) \hfill 2:00
+
+\em{Opalescent Mask variation \abbr:no{2}} (Lydian scale, live recording) \hfill 2:34
+
+\em{Opalescent Mask variation \abbr:no{3}} (Hirajōshi scale) \hfill 2:37
+
+\em{Opalescent Mask variation \abbr:no{4}} (Major pentatonic scale) \hfill  2:35
+
+\em{The Opalescent Choirs} (Choral reinterpretation) \hfill 2:41
+
+\em{Opalescence Revisited} (Orchestral variations) \hfill 5:00
+
+\em{Opalescence Transposed} (Experimental score) \hfill 5:02
+
+\em{Opalescence Reinvented} (Experimental score) \hfill 5:05
+
+\em{Celdre’s Legacy} (Experimental variations & complements) \hfill 7:01
+
+\em{Celdre’s Legacy II} (Experimental variations & complements) \hfill 7:00
+
+[Digipack bonus track] \em{Opalescence Doomed} (Synth.) \hfill 2:14
+
+}
+\end{language}
+
+\end{document}

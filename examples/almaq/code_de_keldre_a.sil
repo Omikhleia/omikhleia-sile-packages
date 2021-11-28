@@ -1,0 +1,181 @@
+\begin{document}
+\chapter[numbering=false]{Les clefs du « code de Keldre ».}
+
+\begin{raggedleft}
+Article de Louise G. \font[features=+smcp]{Bourgeois}, Ph. D.,\par
+in \em{Essays in Honor of Emma Lenski}, Leeds, 2011.
+\end{raggedleft}
+
+\medskip
+
+Le \em{Liber de fabulis Alastri} conservé au Vatican contient une pièce de théâtre fragmentaire —
+nous n’en avons qu’un prologue et un acte en trois scènes — attribuée au poète Keldre : \em{le Masque opalescent}.
+
+À de nombreux égards, le texte est surprenant et fait débat. De par son unité de temps : le jour
+de la chute d’Almaq, de sorte que sa rédaction est nécessairement postérieure à celle-ci et en
+ferait ainsi l’un des rares textes tardifs du corpus. De par sa nature mythique : Le Dragon
+et la Chimère de la cosmogonie d’Almaq sont incarnés par ce qui semble être des chœurs, dans
+un agencement assez particulier. De par sa représentation des personnages, peu ou prou tous masqués,
+selon les indications du prologue. Enfin, de par son style épuré : personnages statiques et long
+monologues introspectifs sur un décor quasi-inexistant, suggérant une mise en scène qui relèverait
+presque d’une conception moderne du théâtre plutôt que d’une composition médiévale classique.
+Mais qu’attendre de moins de l’obscur Keldre, si ce n’est une construction alambiquée et novatrice,
+sur le forme comme sur le fond ?
+
+L’inscription très dense qui figure à sa suite a longtemps laissé les spécialistes dubitatifs,
+quand ils ne l’ont pas simplement ignorée. Laissons parler Emma Lenski\footnote{%
+Emma Lenski, \em{The Chronicles of Alstre and Dongann by the poet Celdre}, Londres,
+2\text:superscript{e} éd. augm., 1962, app. A (notre traduction).
+Si Lenski semble critique sur ses hypothèses passées, elle n’en émet pas de nouvelles.
+} :
+
+\begin{blockquote}
+Cette partie du \em{Liber} est très abîmée et l’encre a fortement pâli. Les signes sont si petits
+que l’on peine à les déchiffrer. L’arrangement sur des lignes verticales fait penser à l’ancien
+système d’écriture d’Almaq, le \em{chadhruid}, mais les quelques signes très symétriques, que
+l’on pourrait penser consonantiques, ne ressemblent à aucun de ceux connus, si ce n’est que deux
+d’entre eux peuvent à la rigueur évoquer un /s/ et un /r/, quoique parfois inversés… Certains
+glyphes en début de ligne s’apparentent à des connecteurs. Quant aux signes vocaliques, on retrouve
+notamment /a/, /e/, /i/ et /u/, quoique leur position à gauche ou à droite de la ligne porteuse
+soit assez variable… La structure morphologique, de type CVC, paraît très répétitive. Elle est
+essentiellement linéaire, à l’exception de courts passages arborescents, au final tous assez
+semblables, pour ne pas dire identiques. On a pensé à la transcription d’une autre langue
+(Pierre de Blancandre), ou même à un code secret (Erich Wiegger et l’école allemande), sans
+parvenir à un consensus. Le présent auteur a émis, jadis, l’hypothèse contestable que le scribe
+Titius Vilis pouvait avoir reproduit un passage en \em{chadhruid} sans en saisir la nature exacte,
+se contentant d’en reprendre sans logique la forme générale. On ne saurait, dès lors, donner un quelconque
+sens à cet enchevêtrement malhabile de signes incompris.
+\end{blockquote}
+
+Pour l’essentiel, nos commentateurs en sont restés là — C’est qu’ils avaient alors déjà beaucoup à faire,
+sans doute, avec la mise en ordre et la publication de la matière d’Almaq !
+
+En outre, ils omettent de l’équation une section encore non déchiffrée du \em{Codex Monesterellum},
+à laquelle on a parfois prêté le nom d’« excursus linguistique en langue merluine »\footnote{%
+(N.d. E.) On pourra se reporter, pour une contextualisation sommaire du \em{Codex Monesterellum}, à notre
+article « De la transmission des textes » dans le présent recueil. La première partie
+de cette « section merluine », où apparaissent des termes en langue d’Almaq, pourrait être un glossaire.
+De la deuxième, on ne sait toujours rien dire, mais la troisième, dont on a suggéré qu’elle puisse constituer
+un traité sur l’écriture, mélange l’alphabet « royal » et des signes qui lui sont exterieurs. C’est un
+sous-ensemble groupé de ceux-ci que Louise Georges Bourgeois identifie comme relevant du même système de
+notation que le code de Keldre.
+}. Quelle que soit la nature exacte de ce texte, il nous a semblé qu’un passage reprenait peu ou prou,
+avec des ajouts qui pourraient fort bien nous éclairer, les mêmes signes que dans l’inscription négligée
+du \em{Liber}. Nous nous proposons donc d’en donner une analyse entièrement nouvelle, en reprenant
+le dossier depuis son commencement. Nous pouvons, déjà, recenser et compléter les signes que Lenski
+apparente ici à des consonnes. Aux variations près d’une transcription difficile et effectivement
+incertaine, nous pensons pouvoir les résumer à cinq ou six glyphes de base, pouvant tous être
+inversés ; pour simplifier ensuite, nous parlerons de formes ouvrantes et fermantes.
+
+\begin{figure}
+\img[src=examples/almaq/musique_signes_consonantiques.png, width=3cm]
+\caption{%
+Dix signes. Le premier et le dernier sont ceux que Lenski rapproche du /s/ et du /r/ dans le
+système du \em{chadhruid}. Les derniers possèdent une variante « pointée ».}
+\end{figure}
+
+Les quatre premiers signes ont aussi chacun ce qui nous apparaît être une variante, précédée ou suivie
+d’un trait horizontal. Étant donné que ce trait n’apparaît pas isolé, mais toujours dans cette sorte de
+composition, nous ne pensons pas qu’il puisse s’agir d’autre chose.
+
+\begin{figure}
+\img[src=examples/almaq/musique_variantes.png, width=3cm]
+\caption{%
+Huit « variantes » avec tiret.}
+\end{figure}
+
+Passons à présent aux signes d’apparence « vocalique » — en d’autres termes, des traits courts et détachés
+de la ligne porteuse. Lenski en a dénombré quatre, complétés, là encore, par leur forme inversée.
+En toute rigueur, nous en relevons en fait un cinquième, un peu moins fréquent dans le spécimen étudié,
+ce qui explique sans doute son oubli.
+
+\begin{figure}
+\img[src=examples/almaq/musique_signes_vocaliques.png, width=3cm]
+\caption{%
+Dix autres signes. Les premiers évoquent peut-être les voyelles du \em{chadhruid}.}
+\end{figure}
+
+Sans nous livrer à une analyse exhaustive des fréquences, le symbole en forme de simple point est
+à l’évidence le plus courant, du moins sur les porteuses principales. C’est un peu moins vrai,
+cependant, sur les porteuses secondaires dans les passages arborescents. 
+
+Comme l’ont noté nos prédécesseurs, les lignes porteuses commencent généralement par des connecteurs
+semblables à ceux du système d’écriture. Sans les illustrer ici, nous en identifions cinq. Et parce
+qu’ils ouvrent en apparence toujours une ligne, plutôt que de « connecteurs », parlons peut-être de
+clefs d’ouverture…
+
+Notons déjà à ce stade, sans trop nous avancer, que tous nos principaux signes vont ainsi par groupes
+de cinq, lequel nombre est aussi celui qui constitue, comme on le sait, la base du système numérique
+d’Almaq.
+
+La porteuse, enfin, n’est pas continue, mais constituée, comme dans le \em{chadhruid}, de segments
+successifs où des encoches peuvent s’intercaler. Leur nombre et leur forme ne semblant guère varier,
+nous n’en donnerons que quelques exemples.
+
+\begin{figure}
+\img[src=examples/almaq/musique_encoches.png, width=2cm]
+\caption{%
+Exemples de segmentation de la porteuse (sans encoche, avec une et deux encoches).}
+\end{figure}
+
+Les arborescences, enfin, semblent être de deux types : (a) verticales,
+c’est-à-dire parallèles ; et (b) orthogonales, ce qui constitue une originalité (toute relative)
+par rapport à la présentation (classique) du \em{chadhruid}.
+
+Aux aléas près d’un déchiffrement parfois hasardeux, nous pouvons nous livrer, reportée en annexe
+à cette étude\footnote{%
+(N. d. E.) Annexe omise dans la présente édition, au profit de la transposition plus récente
+élaborée par Y. Caraye.
+}, à une retranscription au propre de l’illustration du \em{Liber}, de façon à en améliorer la lecture,
+épurée des maladresses de tracé et des dégradations des encres ou du support au fil du temps.
+
+Quelques constatations sont d’ores et déjà possibles sur la forme. Quant aux signes de type
+« consonantique », des symétries apparaissent assez régulièrement entre les formes ouvrantes
+et les formes fermantes ; quant aux signes « vocaliques », leur nombre est souvent identique
+dans les passages arborescents et ne semble différer, quantitativement dirons-nous, que lorsqu’ils
+sont distincts.
+
+Tout porte ainsi à penser que loin d’être un « enchevêtrement malhabile de signes incompris »,
+l’inscription se révèle ainsi avoir une texture certaine, avec des structures sous-jacentes et
+des thèmes répétés, ou repris avec quelques variations.
+
+Nous ne pouvons savoir évidemment comment Keldre ou les gens d’Almaq concevaient une interprétation
+théâtrale. Il n’est pas exclu qu’elle puisse avoir été accompagnée de musique, ou peut-être chantée,
+voire même qu’elle ait été polyphonique lorsque les chœurs entrent en action. L’intuition devient
+assez forte, dès lors, que cette étrange illustration puisse simplement relever d’un système de
+notation musical.
+
+Pouvons-nous raisonnablement supposer que les « clefs d’ouverture » soient telles nos clefs de
+sol ou de fa — ou, tout du moins, puissent représenter une note ou un ton de référence pour ce
+qui ne serait autre qu’une portée ? Les signes ouvrants impliqueraient alors, sur une échelle
+que l’on peut alors sans peine supposer pentatonique, une augmentation de hauteur (+1, +2, +3, +4
+et le changement d’octave) ; les signes fermants symétriques, en toute logique, la diminution de
+hauteur correspondante ; les signes barrés, peut-être, des tons intercalaires, quelque chose du
+moins s’approchant de nos dièse et bémol, dans le principe sinon dans la valeur exacte ? Dans un
+tel système de notation, sans doute les notes, représentées par ces traits détachés de formes
+variables, possèdent-elles des longueurs, telles nos croches, nos noires ou nos blanches variant
+en quantité. La segmentation des porteuses, enfin, pourrait indiquer les silences ou le rythme.
+
+\center{⁂}
+
+Et le « Code de Keldre », ainsi qu’on l’a parfois nommé, ne serait autre… qu’une partition.
+
+Pour en entendre la mélodie, il me semble qu’il ne nous reste, pour ainsi dire, qu’à faire quelques
+suppositions savantes quant à la valeur des clefs et l’interprétation des quantités… Après quelques
+essais peu fructueux (à partir d’un programme informatique déclinant ma transcription personnelle
+de la notation de Keldre vers un logiciel de gravure musicale), j’y ai cependant renoncé. N’étant
+pas spécialiste de la question, tant en matière de musicologie que d’informatique, on le devine,
+j’ai préféré en faire la demande à un ami artiste-musicien, lui laissant toute latitude d’interprétation
+et de subjectivité, tant ma propre tentative de déchiffrement systématique laissait à désirer. Il en
+ressort un morceau étrange et déroutant, parfois hésitant, à la limite de ce que nous considérons
+sonner faux… Il s’agit néanmoins bien d’un thème musical où l’on peut percevoir, je le crois, quoique
+mon oreille soit profane, ces aspects particuliers de la musique d’Almaq évoqués par Deiraval à propos
+d’une autre œuvre, la \em{Répétition du Même}, qui en serait la représentante absolue. La voix des gens
+d’Almaq s’est perdue dans le temps lointain mais, contre toute attente, l’œuvre de Keldre nous permet
+d’en écouter un souvenir fantomatique, sur lequel planent les grandes ombres terribles du Dragon et
+de la Chimère, et les flammes féroces d’un Alster destructeur emporté par la folie.
+
+\smallskip
+\couyard[type=6, width=default]
+
+\end{document}

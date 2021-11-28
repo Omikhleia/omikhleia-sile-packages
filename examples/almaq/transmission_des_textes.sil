@@ -1,0 +1,450 @@
+\begin{document}
+\chapter[numbering=false]{De la transmission des textes.}
+
+\em{Le lecteur qui a suivi les récents progrès de la recherche universitaire quant à la matière
+d’Almaq n’appendra rien de vraiment neuf ci-après ; mais j’ai conscience que celle-ci est encore
+méconnue du grand public et qu’une présentation de nos sources et des difficultés qu’elles suscitent
+encore serait bienvenue.}
+
+\medskip
+
+C’est un fait que la matière des \em{Chroniques} est principalement de nature littéraire. Les preuves archéologiques
+ont longtemps été inexistantes. Quoique quelques progrès aient été faits dans ce domaine, elles sont encore très
+minces à ce jour\footnote{%
+Pour un exemple typique, cf. la fig. 1 en fin d’article.
+}, en dépit des recherches entreprises depuis le début du \abbr:siecle{xx} siècle.
+
+Les experts s’accordent néanmoins aujourd’hui sur le fait que la matière d’Almaq serait apparue sur le
+vieux continent aux alentours des \abbr:siecle{xi} et \abbr:siecle{xii} siècles de notre ère. Selon toute
+vraisemblance, cette première vague de textes n’eut cependant qu’un impact limité et ne dut sa préservation
+qu’à l’exceptionnelle qualité du vélin et des encres. Il s’agit du \em{Codex Monesterellum}, très lacunaire,
+et du \em{Codex de Briga}, encore plus dégradé et fragmentaire. Pierre de Blancandre pensait qu’ils étaient
+l’œuvre des gens d’Almaq eux-mêmes. Ils sont rédigés, pour l’essentiel, dans le système d’écriture de ce peuple,
+le \em{chadrave anorgerin} (voir \em{supra}\kern[width=0.1em]) et ne comprennent pas moins de trois langues
+inconnues jusqu’alors : (a) la langue d’Almaq ou \em{almaqerin} ; (b) le \em{traghe}, sorte de vernaculaire
+qui dériverait des langues de l’empire siléen voisin ; et (c) de manière moindre, une troisième langue que
+l’on pense être celle de Keldre lui-même, mais dont on sait fort peu de choses au demeurant\footnote{%
+On la nomme, faute de mieux, \em{langue merluine} — du fait que Keldre se décrit comme un natif de l’« archipel
+des Merluines ».
+}. Si les langues (a) et (b) ont pu être étudiées et largement interprétées, grâce aux traductions
+ultérieures — nous y reviendrons plus bas — les rares textes du groupe (c) resistent encore à l’analyse,
+faute de savoir ce qu’ils relatent. Quant à leur répartition, elle est à la mesure des écrits disparates
+qui constituent les \em{Chroniques}. Les contes mythiques, les œuvres de Fesed Lerani et les œuvres attribuées
+à Dongann sont ainsi en \em{almaqerin} ; les autres, majoritairement, en \em{traghe}\footnote{%
+Cela inclut donc l’essentiel des textes attribués à Keldre, les lettres de Deiraval, le rêve d’Elleth, etc.
+Tout porte à considérer qu’à l’époque de Keldre, la langue traghe était d’usage dans la partie médiane
+de la cité, un quartier commerçant cosmopolite où il demeurait. La langue propre à Almaq restait celle des
+quartiers populaires et de la noblesse. Sur le bilinguisme à Almaq, et plus généralement la structure sociale
+et politique de la cité, voir tout particulièrement E. Wiegger, « Die almakische Stadtstruktur »,
+in \em{Almakistik IV}, Heidelberg, 1954.
+}. La troisième langue
+n’intervient que dans des notes marginales et un long excursus qui semble être de nature linguistique,
+peut-être un glossaire ou lexique. Si l’on accepte leur extrème ancienneté, il fait peu de doutes que ces
+très beaux manuscrits n’eurent guère d’écho. Ils se retrouvèrent, sans que l’on puisse mieux en retracer
+l’histoire ensuite, dans des collections privées. Au demeurant, leur écriture encore non déchiffrée et leurs
+langues alors inconnues les rapprochaient à bien des égards du mystérieux manuscrit de Voynich
+(\abbr:siecle{xv} s.)\footnote{%
+Pierre Barthélémy (préface), \em{Le code Voynich : le Manuscrit MS 408 de la Beinicke Rare Book and Manuscript
+Library Yale University}, Paris, 2005.
+} ou du \em{Codex Rohonczi} (\abbr:siecle{xvi} s.)\footnote{%
+Levente Zoltán Király & Gábor Tokai, « Cracking the code of the Rohonc Codex », \em{Cryptologia}, vol. 42 (4), 2018,
+p. 285–315.
+}. Comme pour ces derniers, leur re-découverte à la fin du \abbr:siecle{xix} siècle et les controverses quand
+à leur authenticité ont fait l’objet de savants débats qui mériteraient un article à part entière. Une différence
+de taille les en distingue néanmoins : l’existence bien attestée d’un ensemble de traductions, notamment grecques
+et latines, qui s’échelonnent entre le \abbr:siecle{xii} et le \abbr:siecle{xvi} siècles. L’hypothèse de Pierre
+de Blancandre, qui fut le premier, dans les années 1920 à 1930, à les rassembler et les recouper avec méthode,
+est que les gens d’Almaq, en exil après la chute de leur cité, seraient encore une fois à l’origine de cette
+seconde vague littéraire : Ils auraient été les seuls, dans un premier temps, à même de pouvoir traduire leur histoire,
+avant que d’autres puissent enfin s’en emparer et la faire connaître plus amplement. 
+
+Si l’authenticité des textes est néanmoins discutable, c’est déjà que le monde où ils prennent place, avec ses
+cités et royaumes, ses mythes ou croyances, ses coutumes et ses mœurs ne se rattachent à aucun contexte connu
+en Occident — ni même en Orient, comme on l’a jadis parfois pensé. C’est aussi que plusieurs éléments relèvent
+d’anachronismes difficiles à évacuer, pour ce que l’on sait de notre époque médiévale. Les récits des \em{Chroniques}
+s’arrêtent peu ou prou au tout début du \abbr:siecle{xi} siècle de l’ère siléenne\footnote{%
+Plus précisément, dans nos sources, l’ére dite « siléenne » s’arrête à son \abbr:siecle{x} siècle, à l’achèvement
+sanglant d’un millenaire ; débute alors une « ère sarane » — du nom de Sifo — qui voit l’injonction de dame Sifo
+et le voyage de retour du poète Keldre dans son île natale. Quelques mentions isolées évoquent la période qui suivit
+la chute de la cité ; dans le récit fabuleux du soldat Anthoné de Longrines, dans la conclusion du \em{Jardin des
+Luthiers d’Elleth} de Haute-Ferme et dans \em{Perles d’innocence}, conte allégorique de Keldre. Notre connaissance
+de l’histoire d’Almaq s’arrête là.
+}. Si l’on admet que Keldre en est l’instigateur et que leur matière semble encore fraîche pour ses premiers
+traducteurs, qui ne vont pas beaucoup plus loin, alors il ne se serait pas écoulé plus d’une centaine d’années
+entre la chute d’Almaq et notre \abbr:siecle{xi} siècle. Les deux calendriers, pour ainsi dire, coincideraient
+presque. La science d’Almaq semble cependant très en avance sur la nôtre en ces temps, avec ses récentes armes
+à feu\footnote{%
+Pierre de Blancandre va jusqu’à les moderniser en « fusils ». Le terme traghe est assez obscur (\em{narthə segəven},
+peut-être « canne creuse à flamme ») et le terme almaqerin n’est guère plus parlant (\em{dyevdhave}, soit un objet
+relatif au feu, \em{dyevdh}\kern[width=0.1em]). Ces armes, quelles qu’elles soient, firent leur apparition à la fin du xe siècle siléen, donnant à la cité d’Almaq une brève supériorité militaire avant de se retourner contre elle.
+}, ses cerfs-volants, ses horloges mécaniques, ou encore ses cartes à jouer, ses journeaux imprimés et
+ses « navires volants ». On pourrait chercher à justifier tout cela. La Chine connaissait la poudre dès
+le \abbr:siecle{viii} siècle au moins, même si les armes à projectiles ne semblent pas être apparues avant
+le \abbr:siecle{xiii}. La Chine, encore, connaisait le cerf-volant depuis longtemps déjà, même si son introduction
+en occident remonte probablement à la fin du \abbr:siecle{xii} siècle. Les cerfs-volants chinois sont
+nouveaux et impressionnants pour Marco Polo (1254–1324). D’aucuns ont ainsi suggéré une origine orientale
+des \em{Chroniques}. Ils ont voulu penser que des marchands arabes auraient transmis, jusqu’à l’Empire romain
+d’Orient, tout un corpus légendaire venu d’Asie lointaine, non sans le déformer. Cependant, on n’a encore
+trouvé aucune trace d’une matière proche de celle des \em{Chroniques} en dehors d’Europe… Quant à l’usage
+de roues dentées au sein de mécanismes complexes, il n’étonne plus depuis la découverte, dans une antique
+épave antérieure au \abbr:siecle{i} siècle av. J.-C., de la machine d’Anticythère. Quand bien même la
+miniaturisation et le façonnement précis de tels dispositifs demanderait encore plusieurs siècles…
+Les histoires mentionnant des bateaux volants sont nombreuses, mais ceux-ci relèvent alors de la fable,
+comme dans la Luciade\footnote{%
+Les versions grecques empruntent très clairement leur vocabulaire à l’\em{Histoire véritable} de Lucien
+de Samosate (\em{ἀεροδρόμος, ἀεροδρομήσαντες,} etc.). Dans sa restitution moderne, Pierre de Blancandre
+opte pour des « ballons dirigeables ».
+} ou dans le \em{De Grandine et Tonitruis} d’Agobard de Lyon (\abbr:siecle{ix} s.), tandis que dans le
+monde d’Almaq, ils sont bien réels et fort maniables\footnote{%
+Dans les \em{Dits de la Saigne} de Dongann : « Il me fallait jouer des palans et des cordages pour
+maintenir le cap en conservant de l’altitude. » Dans la première lettre de Deiraval : « leur ballet rapide
+est incessant (…). C’est une ruche fébrile de jour, un cortège de lucioles de nuit. »
+}, peut-être même motorisés\footnote{%
+Ils semblent avoir un gouvernail, et quelque chose comme une hélice, dans la troisième lettre de
+Deiraval : « Le nautonnier lança son hélice et se mit à la barre. » — La traduction de Pierre de Blancandre
+pourrait paraître osée, mais les \em{Fabulae Alastri} en latin médiéval emploient \em{spiralis}.
+}. C’est de nouveau en Chine, autour des \abbr:siecle{vii}–\abbr:siecle{viii} siècles, que l’on rencontre
+les toutes premières cartes à jouer, quoique leur apparition en Europe ne semble pas avoir précédé le
+\abbr:siecle{xiv} siècle. Pire encore, l’usage divinatoire des arcanes du Tarot avec la signification
+qu’on leur connait n’est pas attesté avant l’Italie du \abbr:siecle{xviii} siècle. Que penser dès lors
+du « Grand Jeu » d’Almaq, où les arcanes ont déjà des noms et des significations très proches de celles
+de ce tardif Tarot ? Je vous fais grâce, enfin, des discussions houleuses quant à la nature de
+l’imprimerie à Almaq… Les éléments heurtant notre entendement de l’histoire des arts et sciences
+seraient moins nombreux, que leur justification pourait sans doute tenir. Cependant, tout cela mis bout
+à bout, de la géographie d’un continent inconnu à des connaissances et des techniques trop avancées pour
+leur époque, commence à faire beaucoup pour ne pas douter. Tout cela ne va guère dans le sens de la
+crédibilité, mais voilà qu’ont été rassemblées des sources anciennes, compilées sur plusieurs siècles,
+parfois contradictoires entre elles ou ne se recoupant pas intégralement. Sauf à toutes les présumer
+fictives\footnote{%
+Un pas que certains chercheurs ont franchi, cf. Pumpernickel \em{et al.}, « \language[main=en]{Improbable Celdre
+and incredible Alstre: early attempts at disproving the tales of Almaq} » in \em{Summa Almaquensis. Essays in
+honor of Emma Lenski}, Leeds, 1995, p. 150–203. Mes précédents exemples sont, pour une large partie, tirés de
+cet essai. 
+}, il nous est tout aussi difficile de rejeter l’ensemble de la matière d’Almaq d’un seul bloc. Pour autant,
+on ne peut ignorer les difficultés que nous avons résumées\footnote{%
+\em{Ibid.} Les auteurs n’excluent pas, à défaut de pouvoir récuser la totalité des textes, que certains
+puissent être des supercheries, complètes ou partielles. Leur solide démonstration ne manque pas de bons
+arguments.
+}. La piste orientale n’ayant rien donné de probant jusqu’ici, les théories les plus farfelues ont été émises.
+Un très jeune Erich Wiegger pensait Almaq telle une prodigieuse Atlantide dévastée par ses luttes intestines.
+S’il prit plus tard ses distances avec de telles inepties — au point de rallier les plus féroces critiques —,
+d’autres poursuivent aujourd’hui encore leur quête insensée d’une Hy-Brasil fabuleuse ou d’une Hyperborée
+fantasmée. Nous sortons là du raisonnable. 
+
+Revenons-en, plus sérieusement, aux traductions qui nous firent connaître les \em{Chroniques}.
+
+\section[numbering=false]{La branche grecque : \em{\language[main=el]{Tὸ βιϐλίον Ἀλστερίωνος τοῦ Πτολιπόρθιου καὶ Δογγάννου
+ τοῦ Γελωτοποιοῦ}.}}
+
+Emma Lenski\footnote{%
+Emma Lenski, \em{op. cit.} (je traduis).
+} a fort bien résumé ce qu’on l’on sait des traductions en grec byzantin de la matière d’Almaq et de leur
+transmission :
+
+\begin{blockquote}
+Au début \abbr:siecle{xiv} siècle, l’astronome byzantin Grégoire Choniadès (c. 1240–1320) s’inquiète des
+œuvres volées ou détruites lorsque les croisés prirent Constantinople en 1204. Il en vient à se lamenter
+sur la perte des précieux volumes de toutes sortes apportés à Athènes par l’érudit Michel Choniatès (c. 1140–1220),
+dont la bibliothèque fut aussi pillée, lors du sac de la ville dans les années 1204–1205 par Othon de la Roche.
+Choniadès rappelle que le vieil ecclésiastique avait espéré en vain, jusqu’à la fin de ses jours, retrouver
+« les trésors de la littérature antique qui faisaient la richesse de Constantinople ». Il dresse la liste
+présumée des ouvrages que Choniatès aurait possédés dans sa bibliothèque athénienne et qui n’auraient pas été
+retrouvés, au nombre desquels figure des \em{χρονικά Kελδρου}, ou « Chroniques de Celdre »\footnote{%
+Cf. fig. 2 en fin d’article.
+}.
+
+Quant à ce titre, il s’agirait de la première mention attestée du texte \em{τὰ τοῦ Kελδρου χρονικά βιβλία}, dont
+on a retrouvé à Latran en 1880 un incunable xylographique. On admet que celui-ci date de la première moitié
+du \abbr:siecle{xv} siècle. Omettant une large partie de la matière que nous regroupons à présent dans les
+\em{Chroniques}, il ne contient que quelques récits relatifs à Alstre et Dongann, dans un ordre supposé
+chronologique. Il se termine par la ruine d’Almaq et la mort des principaux protagonistes.
+
+Pål Laufeyson, de l’université de Stockholm, émet l’hypothèse que le texte possédé par Choniatès lui aurait été
+remis par Théodore Prodrome (c. 1115–1160). Dans le roman \em{Rhodanté et Dosiclès}, que Prodrome composa dans
+les années 1140, figure une digression fort étonnante mettant en scène le suicide fictif d’un bouffon, Satyrion.
+Le petit homme contrefait, au terme de ses pitreries et railleries, se passe une épée au travers du cou.
+Le sang jaillit en abondance de la plaie, mais le roi touche le bouffon et le ressuscite d’un mot.
+Celui-ci entonne ensuite un hymne puis est remercié d’une coupe de vin. Les commentateurs ont noté combien
+ce passage donnant dans le grotesque est inattendu dans l’économie générale de l’œuvre. La digression est
+si étrangère à l’intrigue romanesque que certaines adaptations ultérieures l’omettent. La critique a aussi
+indiqué à fort juste titre que le personnage de Satyrion serait pris au \em{Banquet} de Lucien de Samosate
+(c. 120–180) où un mime de même nom, « petit homme fort laid (…) danse en se disloquant et en se tortillant
+de manière à paraître plus ridicule, récite avec l’accent égyptien des anapestes, dont il bat la mesure,
+et finit par railler les assistants », puis ridiculise en combat singulier un philosophe qui le défie,
+le rouant de coups. Dans le \em{Livre d’Alstre le Ptoliporthe et de Dongann le Bouffon} en grec, une scène,
+quoique transposée à Almaq et appliquée à un Dongann qui prend l’accent siléen, évoque ces deux épisodes
+à la fois. Elle est absente des versions latines qui nous sont parvenues : Est-ce à dire que le traducteur
+grec aurait emprunté à Lucien et inspiré Prodrome ? C’est ce que pense Laufeyson, qui suppose dès lors une
+transmission byzantine de la matière d’Almaq par l’intermédiaire de Prodrome puis de Choniatès.
+La plus ancienne édition complète incluant cette anecdote est cependant celle imprimé en 1518 à Rome\footnote{%
+Cf. notre commentaire pour la fig. 3 \em{idem}.
+}, de sorte qu’un ajout ultérieur est aussi une possibilité.\footnote{%
+Rendons exceptionnellement raison à la théorie des faussaires de Wiegger. Ce ne serait pas la première fois
+qu’un mystificateur cherche à faire passer un texte pour plus ancien qu’il n’est en réalité, sans hésiter à
+plagier les auteurs classiques si cela peut lui donner une apparence d’authenticité !
+}
+\end{blockquote}
+
+Résumons avec elle :
+
+\begin{blockquote}
+Nous avons donc d’une part \em{τὰ τοῦ Kελδρου χρονικά βιϐλία}, au plus tard de la première moitié du
+\abbr:siecle{xv} s., mais mentionnées par leur titre dès le début du \abbr:siecle{xiv} s. et suspectées
+de dater du \abbr:siecle{xii} s.{} ; d’autre part, \em{τὸ βιϐλίον Ἀλστερίωνος τοῦ Πτολιπόρθιου καὶ Δογγάννου
+τοῦ Γελωτοποιοῦ}, volume très complet mais dont la plus ancienne édition connue est du tout début du
+\abbr:siecle{xvi} s.{} ; pour finir, un ensemble parcellaire de textes\footnote{%
+Tels que \em{ὁ τοῦ πτολιπόρθιου τόμος} (manuscrit, \abbr:siecle{xiii} s.) ; \em{τὸ τοῦ γελωτοποιοῦ βιϐλίον} (in-4°,
+\abbr:siecle{xiv} s.), etc. Tous sont des abrégés qui dérivent vraisemblablement d’une même source. Le grec de
+certaines versions est très mauvais, voire présente des formes incorrectes pour l’époque : piètre traducteur,
+copiste incompétent, ou faussaire ? Pour l’anecdote, \em{περὶ τῆς πτῶσεως Ἀλμάκος} (\abbr:siecle{xv} s.) se termine
+par une citation d’Hérodote : « \em{ἐγὼ δὲ περὶ μὲν τούτων οὐκ ἔρχομαι ἐρέων ὡς οὕτω ἢ ἄλλως κως ταῦτα ἐγένετο}. Je
+ne prétends point décider si les choses se sont passées de cette manière ou d’une autre. » Au début du
+\abbr:siecle{xvii} s. dans le Beylicat de Tunis, l’érudit ‘Ali ben Fredj El-sahli en rédige une élégante traduction
+arabe (« De l’ascension à la destruction d’Almaq », \font[family=KacstQurn]{عن الالماق؛ من الصعود إلى الهلاك‎}) doublée d’un commentaire
+puisant à d’autres sources ottomanes aujourd’hui perdues, mais qui nous donnent un intéressant aperçu de la
+connaissance des sources byzantines dans le monde arabophone.
+} recoupant ce dernier et dont la composition s’étend sur la même période allant du
+\abbr:siecle{xii}-\abbr:siecle{xiii} s. au \abbr:siecle{xvi} s.
+\end{blockquote}
+
+\section[numbering=false]{La branche latine : \em{Liber de fabulis Alastri Urbium-Eversoris.}}
+
+Plusieurs fois réimprimées, les traductions latines constituent de très loin notre source la plus complète.
+Leur contenu est riche d’épisodes absents des versions grecques. Le latin de ces textes est cependant parfois
+vulgaire et cède à la facilité ; en d’autres occasions, il est opaque, pour ne pas dire cryptique, et empreint
+de grécismes douteux\footnote{%
+Quoique l’ouvrage ait assez mal vieilli par ailleurs, la stylistique des \em{Fabulae Alastri} est fort bien
+étudiée dans \em{Cosmographia in Fabulae Alastri, in Graeca et Latina}, éd. Karl H. Føskangre, Copenhague, 1874.
+Ses traductions sont plus accessibles au lecteur — et moins dispendieuses : \em{Die Kosmographie des Alasters},
+Munich, 1994 ; \em{A cosmography of the Fables of Alstre from the Greek and Latin sources}, Cork, 2014. Pour
+les citations, elles s’appuient respectivement sur la traduction allemande de Wiegger (révisée pour l’occasion)
+et celle anglaise de Lenski.
+}.
+
+La très belle édition conservée au Vatican est unique en son genre. Illustrée de cartes\footnote{%
+Cf. fig. 5.
+}, elle contient en outre un fragment d’une pièce de théatre de Keldre, \em{le Masque opalescent}, et
+une présentation des règles du Tarot d’Almaq (voir \em{supra}\kern[width=0.1em]). Son compilateur ou
+traducteur putatif serait un certain Titius Vilis qu’aucune autre édition ne mentionne. Le consensus
+actuel est qu’on lui devrait, plus vraisemblablement, une autre innovation de cette édition : l’usage 
+de transcriptions plus ou moins phonétiques en caractères grecs pour certains noms de lieux ou de personnes.
+Par exemple, \em{Alaster Urbium-Eversor} devient \em{Alaster Ὃυρσεδαν Urbium-Eversor}\kern[width=0.1em]\footnote{%
+On ne s’explique pas complètement \em{Ὃυρσεδαν} pour \em{Hūrvedan}. Wiegger s’est demandé s’il ne fallait
+pas y deviner un \em{*Ὃυρϛεδαν} avec digamma sous forme cursive, « une hyper-correction érudite mais anachronique ».
+}.
+
+\section[numbering=false]{La branche norroise : \em{Alstrs Heimsbana saga ok Dongans frumkveða flærðanna.}}
+
+Un manuscrit, probablement en latin, fit son chemin jusqu’en Islande, où il fut traduit et adapté, au moins
+en partie. Sigriður Grimsdottir, dans l’introduction de sa thèse, retrace le peu que l’on en sait\footnote{%
+Sigriður Grimsdottir, \em{op. cit.} (je traduis).
+} :
+
+\begin{blockquote}
+Le texte n’est présent que dans une copie très dégradée du Flateyarbok détenue par Ari Loptrson, tavernier
+à Reykjavík vers 1715 et qui fut envoyée avec d’autres œuvres à Arni Magnusson en 1721. Par chance ce manuscrit
+ne fut pas perdu lors de l’incendie de Copenhague en 1728. Cependant, Arni ne semblait pas le tenir en haute
+estime. En 1729, il écrivait à son secrétaire Jón Ólafsson : « \em{Ég veit ekki hvaðan þessi hlutur kemur. Svo
+gengur það til í heiminum, að sumir hjálpa erroribus á gáng og aðrir leitast síðan við að útryðja aftur þeim
+sömu erroribus. Hafa svo hverir tveggja nokkuð að iðja}. Je ne sais pas d’où vient cette chose. Mais c’est
+dans l‘ordre des choses que certains hommes mettent des erreurs en circulation et d’autres ensuite doivent
+corriger ces erreurs. Et les deux ont un rôle à jouer. »
+
+Plus près de nous, des chercheurs ont pensé que le texte pouvait venir d’Orient, d’où il aurait été ramené par
+Rognvald Kali Kolsson (c. 1100–1158) lors de sa croisade. C’était notamment la thèse de Freyja
+Fjölnirsdottir (1890–?), érudite et théosophe islandaise vivant à Liège, qui a défendu bec et ongles sa théorie
+d’un manuscrit latin apporté en Méditerranée par Umberto Burgos, marchand catalano-vénitien, et déposé dans
+une cour lettrée, peut être celle d’Ermengarde de Narbonne (c. 1127–1197).
+\end{blockquote}
+
+Le récit s’attarde principalement sur le personnage d’Alstr et ses batailles. Sa cause est présentée sous
+un angle assez positif, tandis que le bouffon (\em{loddari}\kern[width=0.1em]) traverse ses aventures et
+influence son destin. Le style est celui des sagas historiques, avec une tendance à calquer l’Edda de Snorri
+dès lors que le bouffon intervient\footnote{%
+Par ex. \em{Gylfaginning} 33 : « \em{Sá er enn talðr með ásum, er sumir kalla rógbera ásanna ok frumkveða
+flærðanna ok vömm allra goða ok manna.} » (mon emphase).
+}.
+
+\section[numbering=false]{Une mythologie pour l’Europe.}
+
+Si je n’ai pas évoqué plus tôt l’opuscule en vieil anglais \em{Dongan glīƿere ⁊ hleahtorsmiþ}, c’est qu’il
+fut composé au \abbr:siecle{xviii} siècle et non au \abbr:siecle{xi} comme son éditeur voulut le faire
+croire\footnote{%
+L’affaire est très bien relatée dans Pumpernickel \em{et al.}, « A jester and amuser put on trial », \em{op. cit.}
+L’escroc érudit alla jusqu’à traduire d’authentiques passages des livres grecs, mêlés à ses inventions propres.
+}. Cette tentative de mystification illustre cependant, parmi d’autres cas, la fascination exercée par les
+\em{Chroniques}, en dépit de leur provenance incertaine et de leur nature inhabituelle.
+
+Tandis que le milieu universitaire exprimait encore son profond scepticisme, le conte d’Almaq s’était peu à
+peu insinué dans la culture populaire. Dans les années 1920, après qu’on eut collecté les sources grecques
+et latines et compris leurs relations, Eugène de Blancandre\footnote{%
+Jeune frère de Pierre de Blancandre, qui s’engagea dans les Brigades internationales et trouva la mort en 1937,
+lors de la bataille de Belchite.
+} entreprit de répertorier les traces dans la littérature de ce qu’il appelait « l’émergence d’Almaq au réel ».
+Les quelques exemples qui suivent, choisis par pure préference personnelle, sont issus de ses notes.
+
+Dans ses mémoires, Prosper Mérimée relate que lors de son dernier voyage vers l’Espagne (1859), son hôte d’une
+nuit à Céret lui narra le procès des Trabucaires en 1846, disant de l’un des malfaiteurs que « cet homme était
+pire que l’Ours de Cerdagne ». L’auteur de poursuivre :
+
+\begin{blockquote}
+C’est une tradition de toute la région, m’avait-on dit, que de tenir, au mois de février, une fête de l’ours,
+ou \em{festa de l’ós}. Bien que ce ne soit pas propre à la Cerdagne, mais aussi au Vallespir &c., je ne m’étonnai
+pas sur le moment de cette étrange comparaison. Notre discussion dériva bientôt vers d’autres sujets. Lorsque
+le souvenir m’en revint ensuite sur la route, je ne pus me retenir de penser que mon interlocuteur avait en
+réalité voulu évoquer le féroce Oursedan des fables du poète latin Celdrus, cet Alaster qui pillait villes et
+hameaux sans faire de prisonniers.
+\end{blockquote}
+
+Dans le journal de Jean Desmarets de Varzy (1733) :
+
+\begin{blockquote}
+Comme je n’étois guère heureux avec les cartes, je demandois souvens au Marquis d’où il tenoit sa science
+du jeu. « Une autre fois peut-être, messire », me répétoit le carabin en empochant son gain sans m’accorder
+plus d’attention. Cet insolens, qui n’étoit qu’un laquais fait riche au Lansquenet, tenoit son sobriquet
+de Marquis de ce qu’à la Cour, voulant trop mettre à la réjouissance, il avoit déplu au Roi. Un jour,
+prenant le ton des confidences, il me fit la réponse qu’il tenoit son savoir des gens de l’Almaquie, qui
+avoient l’entendement des cartes bien avans les François ou les Anglois, et dont il avoit perçé les secrets.
+Il ne faisoit guère de doute qu’il se moquoit de moi, mais j’eus la sagesse de me contenir et d’ignorer
+l’intrigans.\footnote{%
+Jean Desmarets de Varzy, \em{Journal d’un Nivernais à la Cour}, Paris, 1760. Cf. aussi la reproduction du
+manuscrit en fig. 4 \em{infra}. ¶ (Jeu du) Lansquenet : jeu de cartes qui s’est développé au
+\abbr:siecle{xvii} siècle, cf. Rémond de Montmort, \em{Essai d’analyse sur les jeux de hasard}, Paris, 1708.
+Le valet ou laquais devenu « marquis » est évoqué dans la pièce \em{le Joueur} de Regnard, 1696 ; cf. aussi
+la lettre \abbr:no{39} de Karl Ludwig von Pöllnitz, \em{Lettres et mémoires du baron de Pöllnitz}, Amsterdam, 1737.
+}
+\end{blockquote}
+
+Dans une lettre d’Humphred Lyon à Edgar Allan Poe (Londres, 13 janvier 1834) :
+
+\begin{blockquote}
+Bien qu’elle n’eût qu’un \em{succès d’estime}, ma biographie raisonnée de Canning avait attiré sur moi
+l’attention d’un assez grand nombre de personnes pour me valoir quelques ennemis, et tous n’étaient pas
+doctes. La controverse qu’elle avait suscitée lors de sa parution faisait encore débat dans les cercles
+savants de Londres. J’avais cherché à montrer que les fantaisies arthuriennes de ce romancier méconnu
+avait inspiré tant Chatterton que Scott. (…) Certains avaient loué l’effort de mes recherches ; d’autres
+me reprochaient ce qu’ils voyaient comme une vilaine tentative de ternir les succès récents de l’illustre
+Écossais. J’avais dans l’idée, pour mes prochains travaux, de m’en prendre à une tout autre matière et
+d’étudier les influences de la geste d’Alstre sur nos vieux poètes, afin de ne point heurter de manière
+trop ostensible la sensibilité des modernes… Canning fait fort évidemment partie des premiers, ce qui
+n’échapperait peut-être pas aux lecteurs attentifs ! C’est dans ces dispositions d’esprit que me trouva
+la comtesse de J*** quand elle me rendit visite à l’heure du thé. C’était une femme cultivée et pleine
+d’intelligence, à qui je confiais sans hésiter mon nouveau projet. « Et bien ! Malgré votre modestie,
+vous êtes un parti à ne pas négliger ! » dit-elle en me donnant une petite tape sous le menton. « Viendrez-vous
+à Almack ce soir ? » Je sursautai à ce nom, encore perdu dans mes songes littéraires, ce qui la fit rire.
+Bien entendu, elle me parlait des réceptions dont elle était l’une des patronnesses, dans cet établissement
+maintenant tenu par les Willis où toute la société recommendable tient à se faire accepter. « Oui, pour sûr,
+très chère », lui répondis-je en l’accompagnant à sa chaise. Je me jetais, je m’en doutais bien, dans une
+arène de lions. Puissé-je ne pas en être le bouffon !\footnote{%
+A. H. Wades \em{et al.} (sous la dir. de), \foreign:en{Selected letters: Love affairs in the Regency era & afterwards},
+Boston, 1964–1965 (je traduis). ¶ « Succès d’estime » : en français dans le texte. Launcelot Canning
+(\abbr:siecle{xv} s.), romancier anglais dont on se souvient surtout pour la médiocrité de ses écrits.
+Thomas Chatterton (1752–1770), poète anglais de talent, maître de la supercherie pseudo-médiévale.
+Walter Scott (1771–1832) est autrement plus connu du grand public ; ses « succès récents » se réfèrent
+très probablement ici à son \em{Ivanhoé} (1819), dont le chap.\abbr:nbsp{}16 présente une intéressante
+similitude avec un passage de Canning. L’américain Edgar Allan Poe (1809–1849) est célèbre pour ses
+histoires fantastiques, traduites en français par Charles Baudelaire ; « La Chute de la maison Usher » (1839)
+cite Canning ; « Lionnerie » (1835) se déroule dans un cadre très semblable à celui de cette lettre.
+\em{Almack’s Assembly Rooms}, puis \em{Willis’s Rooms} (après 1781), était un établissement mondain
+élitiste de Londres où l’on ne pouvait être admis qu’avec un billet d’entrée fort cher et soumis à
+l’approbation d’un conseil de dames de la haute aristocratie. Lenski a noté que l’accès aux quartiers
+supérieurs de la cité d’Almaq exigeait de présenter un sauf-conduit.
+}
+\end{blockquote}
+
+En 1956, peu avant son décès, Pierre de Blancandre écrivait : « L’esprit de Keldre a fondu sur moi il y a
+maintenant un peu plus de cinquante ans… Mes efforts à lui rendre justice ne peuvent être qu’imparfaits,
+même si j’y ai mis tout mon cœur. Je sais à présent que le temps m’est compté et que je ne verrai pas la
+publication de l’histoire d’Almaq achevée dans son intégralité. J’ose espérer que les générations futures
+poursuivront la tâche ; enfin, avec le \em{guir}\kern[width=0.1em]\footnote{%
+Concept philosophique difficile à appréhender, que P. de Blancandre rend par « espoir-destin » dans sa trad. fr.
+}
+des gens d’Almaq, que la Cité m’attend dans quelque Au-Delà où le poète et moi pourrons deviser sur la
+nature du destin qui dans un même temps m’ôta un frère chéri et me donna la meilleure des amies. »\footnote{%
+Lettre à Emma Lenksi, qui me la transmit en 1991.
+}
+
+\smallskip
+\couyard[type=6, width=default]
+
+\eject
+
+\begin{figure}
+\svg[src=examples/almaq/chadhruid_narg_an_sitar.svg, width=5cm]
+\caption{%
+Reproduction (empreinte) de gravures sur bois trouvées dans l’église en bois debout
+(\em{stavkirke}\kern[width=0.1em]) de Hopperstad (Norvège, \abbr:siecle{xii} siècle),
+lors de travaux de restauration effectués vers 1885. Elles furent conservées jusqu’en
+1943 au musée de Bergen, d’où Erich Wiegger et son équipe, qui y ont reconnu des
+incriptions en \em{chadhruid}, les enlevèrent pour les ramener à Berlin. Elle ne furent
+pas retrouvées après la Seconde Guerre mondiale. Selon la descrip­tion qu’en donna plus
+tard Wiegger, la première figurait sur un épais panneau qui aurait pu provenir d’un ancien
+volet ; la seconde, sur une plaque étroite et plus mince, perforée de deux trous sur sa
+partie haute, aurait pu être destinée à être suspendue. Les deux autres glyphes figuraient
+sur des poutres très dégradées.\footnote{%
+Sans s’expliquer comment elles sont parvenues là, Wiegger note que ces inscriptions
+pourraient évoquer le nom d’une taverne des bas-quartiers d’Almaq, « la Reine » (\em{i-Narg}\kern[width=0.1em]),
+où le bouffon Dongann avait ses aises. Lenski a remarqué que ce même établissement pouvait
+aussi être mentionné dans le texte de Deiraval, mais que cette dernière le décrivait
+comme une maison de mauvaises mœurs — disons-le, fort probablement une maison close —
+« la Sitarienne » (\em{i-Sitarian}\kern[width=0.1em]). Il reste que Wiegger est notre seul témoin occulaire
+des inscriptions originales, ce qui est assez cocasse quand on connait sa « théorie des faussaires »
+et ses doutes sur les sources littéraires.}}
+\end{figure}
+
+\begin{figure}
+\img[src=examples/almaq/grec_onciale.png, width=7cm]
+\caption{%
+Onciale byzantine, début du \abbr:siecle{xiv} siècle : extrait d’une liste d’œuvres recencées par
+Grégoire Choniadès (c. 1240–1320) et présumées perdues après le morcellement de l’Empire byzantin
+lors de la quatrième croisade. On peut relever, sur la seconde ligne de cet extrait, la mention
+\em{χρονικά Kελδρου}, très probablement les « Chroniques de Keldre »\footnote{%
+Cf. \em{supra}, le titre complet \em{τὰ τοῦ Kελδρου χρονικά βιϐλία}.}}
+\end{figure}
+
+\begin{figure}
+\img[src=examples/almaq/grec_titre.png, width=10cm]
+\caption{%
+Mention figurant en marge du commentaire (\em{scholia}\kern[width=0.1em]) d’une réédition du texte
+grec de Lucien de Samosate (Florence, milieu du \abbr:siecle{xvi} siècle). Elle est absente de
+l’\em{editio princeps} établie par Janus Lascaris (Florence, 1496). Le volume \em{in-quarto} publié
+à Rome en 1518, \em{Tὸ βιϐλίον Ἀλστερίωνος τοῦ Πτολιπόρθιου καὶ Δογγάννου τοῦ Γελωτοποιοῦ}, est
+imprimé en capitales accentuées\footnote{%
+Les minuscules étaient alors réservées aux commentaires.}, selon la typographie de Janus Lascaris\footnote{%
+Lascaris (c. 1445–1535) aurait pu ramener une traduction grecque du livre de Keldre de l’un ses voyages
+en Grèce, probablement du mont Athos où il se rendit en 1492. L’apostille au texte de Lucien, sans doute
+ajoutée à une date postérieure à la mort de Lascaris, dit au complet : « Le livre d’Alster le Ptoliporthe
+et de Dongann le bouffon évoque lui aussi des navires voguant dans les cieux. » On notera que dans cette
+note florentine tardive, Dongann est transcrit \em{Δογκών, ~ῶνος} tandis que le bouffon est nommé
+\em{Δογγάννης, ~άννου} dans l’édition romaine de 1518 de la matière d’Almaq. Wiegger a suggéré, pour
+justifier cette différence, que les imprimeurs avaient accès à plu­sieurs traductions grecques de la matière
+originelle. Je ne sais s’il faut le suivre. Le livre de 1518 est imprimé à Rome où vivait alors Lascaris,
+probablement depuis un authentique manuscrit grec ; la réédition florentine de la Luciade est plus tardive
+et ses \em{marginalia} ne s’appuient pas nécessairement sur une source sûre. Au demeurant, d’autres versions
+grecques présentent aussi des variations de ce type (\em{Kελδηρ, ~δρος / Kελδρος, ~ου} ; \em{Σίφω / Ψίπω} ;
+\em{Ἂλμαξ, Ἂλμακος / Ἀλμακοῦη, Ἀλμακοῦης}\kern[width=0.1em]) à propos desquelles nous ne pouvons rien dire
+de certain, sinon que la transcription de noms étrangers en grec se heurte à des difficultés évidentes.}
+et Lorenzo di Alopa.}
+\end{figure}
+
+\begin{figure}
+\img[src=examples/almaq/jean_desmarets.png, width=99%fw]
+\caption{%
+Extrait du manuscrit du journal de Jean Desmarets de Varzy. Bibliothèque nationale de France.}
+\end{figure}
+
+\begin{figure}
+\img[src=examples/almaq/carte_sile_vaticana.png, width=88%fw]
+\caption{%
+Reproduction de la carte IV de la luxueuse édition des \em{Fabulae Alastri Urbium-Eversoris} conservée
+à la \em{Bibliotheca Apostolica Vaticana} (Vat. estr. ms. 408)\footnote{%
+J’ai choisi cette carte en particulier car elle donne au lecteur une idée d’ensemble du \em{locus dramatis}
+de la matière d’Almaq ; mais aussi pour qu’il puisse se faire sa propre idée quant aux propos jadis tenus
+par Wiegger : « C’est un piètre dessin où les îles semblent être simplement les Cyclades, déformées par un
+trait grossier et maladroit. Quant à la grande \em{sila terra} si dénuée de détails, ses contours fictifs
+sont semblables à ceux de l’île de Frisland sur la carte des frères Zeno, qui a très bien pu servir de
+modèle : un faux en appelle un autre » (je traduis).}. Le texte est bel exemple de calligraphie bénéventaine, telle qu’on l’employait encore dans le Sud
+de l’Italie au \abbr:siecle{xiii} siècle.}
+\end{figure}
+
+\end{document}

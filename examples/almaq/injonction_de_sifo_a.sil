@@ -1,0 +1,539 @@
+\begin{document}
+
+\open-on-odd-page
+\noindent\img[src=examples/almaq/chadhruid_na_sifo_main.jpeg, width=99%fw]
+
+\eject
+\hbox{}\vfill
+
+\begin{figure}
+\img[src=examples/almaq/chadhruid_table_lenski.png, width=99%fw]
+\caption{%
+Notes de la main d’Emma Lenski dans \em{The Chronicles of Alstre and Dongann by the poet Celdre},
+fac-similé inclus dans la première édition de 1937, p. 4. L’édition augmentée de 1962 reporte la
+table étendue des caractères en appendice B et en recense d’autres variantes ; en outre,
+soixante-treize logogrammes sont étudiés en appendice C.
+}
+\end{figure}
+
+\vfill
+\noindent\style:font[size=-0.5]{Page précédente : manuscrit M de l’injonction de Sifo (collection personnelle).}
+
+\chapter[numbering=false]{À propos de l’injonction de Sifo.}
+
+Le bref texte que l’on nomme communément « l’injonction de dame Sifo » figure en tête des principales
+éditions des \em{Chroniques}, bien que son authenticité soit contestée.
+
+C’est l’un des rares exemples d’une utilisation aussi tardive\footnote{%
+Postérieure d’au moins un siècle à la chute d’Almaq, selon Pierre de Blancandre, \em{les Chroniques du
+Ptoliporthe & autres récits d’Almaq}, La-Charité-sur-Loire, 1907, p. xi-xiv. 
+}, à notre connaissance, de l’ancien
+système du \em{chadhruid}, réputé pour sa difficulté\footnote{%
+Ce qu’en disent les gens d’Almaq eux-mêmes, au \abbr:siecle{x} siècle de l’ère siléenne :
+« système (…) fort complexe et heureusement dépassé » dans les pages du journal
+\em{Le Lézard de la Tour Penchée} relatives à la mort de Dongann.
+}. Les commentateurs s’accordent peu ou prou sur sa signification générale, qu’ils rendent de manière
+assez semblable — nous citons la première traduction française de Pierre de Blancandre, souvent
+reprise à quelques variantes près\footnote{%
+Par ex. Erich Wiegger, \em{Chroniken von Almak}, Leipzig, 1943, p. 5 : « \em{Ich, Sifo Sarane, fragte
+den Dichter, Keldre der Obskure, nach der Geschichte von Alster Ptoliporthes – dem Zerstörer der Städte,
+dem Mann, der den Sturz von Almak verursachte – und von Dongann, dem Hofnarr, dem kleinen König der
+Nautae.} » — Comme dans la trad. de Pierre de Blancandre, le second nom de Sifo est ici omis.
+} :
+
+\begin{blockquote}
+Moi, Sifo la Sarane, j’ai demandé au poète, Keldre l’Obscur, une relation de l’histoire d’Alster
+le Ptoliporthe — le Destructeur de Cités, le faiseur de la chute d’Almaq — et de Dongann le Bouffon,
+le Petit Roi des Nautes.
+\end{blockquote}
+
+Quoique fort élégante, cette formulation ne saurait restituer pleinement le fondement du texte.
+Ce très ancien système d’écriture\footnote{%
+\label[marker=note-chadhruid]Pierre de Blancandre, \em{ibid.},
+« Il s’agit d’une écriture de type alphabétique — avec des reliquats
+logographiques — surtout utilisée avant le \abbr:siecle{iii} siècle de l’ère siléenne et remplacée,
+après la quatrième guerre cyclique, par l’alphabet impérial, assez rapidement adopté et dont l’usage
+survécut à la restauration du \abbr:siecle{v} siècle. (…) La version définitive du \em{chadhruid} est
+la forme officielle consignée au \abbr:siecle{v} siècle, avec sa recension de 231 logogrammes d’usage
+courant. Dans le même temps, cependant, l’alphabet impérial de l’envahisseur siléen est adapté aux
+spécificités de la langue d’Almaq ; ce nouveau système, le \em{chadhrave anorgerin}, achève
+vraisemblablement de s’imposer vers la fin du \abbr:siecle{vi} siècle, du moins dans les actes officiels.
+Le \em{chadhruid} est relégué à un usage plus discret. Au \abbr:siecle{x} siècle, seuls les érudits en
+maîtrisent encore les subtilités ; la population n’en reconnaît que quelques logogrammes. »
+}, en effet, fait figurer les éléments de phrase sur des lignes arborescentes qui sous-tendent
+une structure parallèle, renforcée par l’usage de connecteurs contextuels. En d’autres termes,
+nous sommes ici en présence non d’un énoncé linéaire, mais d’un graphe à embranchements multiples.
+
+Relevant que ce système n’était plus en usage depuis plusieurs siècles à l’époque des faits,
+Emma Lenski suggère que l’auteur de l’injonction — qu’il s’agisse en vérité de Sifo elle-même
+ou d’un faussaire postérieur — essaie de transmettre quelque chose de l’ordre de la « pensée partagée »
+ou « compensée » (\em{co-thinking}\kern[width=0.1em]), un mode particulier d’organisation de l’expression
+que les gens de la cité d’Almaq semblent avoir pratiqué. Dans \em{The Chronicles of Alstre and Dongann by
+the poet Celdre}, elle opte pour une formulation déstructurée, qui se voudrait ainsi plus
+littérale\footnote{%
+Emma Lenski, \em{The Chronicles of Alstre and Dongann by the poet Celdre}, Londres, (1937) 1962, p. 3.
+} :
+
+\begin{blockquote}
+Je suis Sifo… une exigence… Je suis née Beneth, Sifo de la maison Saran… par l’obscur Celdre… un rapport…
+grâce au poète Celdre… J’ai exigé… Sur Alstre Hurvedan… disperseur de cités… Sur Dongann… la cause de la
+ruine d’Almaq… le farceur… petit-roi des fées.
+
+[\em{I am Sifo… a requirement… I am born Beneth, Sifo of house Saran… by the obscure Celdre… an account…
+thanks to poet Celdre… I required… Of Alstre Hurvedan… scatterer of cities… Of Dongann… the cause of
+the ruin of Almaq…  the jester… little-king of fairies.}]
+\end{blockquote}
+
+Erich Wiegger, dans ses \em{Chroniken von Almak}, fait suivre sa propre traduction d’une transcription
+latine du texte originel, sous une forme supposée en restituer la structure\footnote{%
+Erich Wiegger, \em{op. cit.}, p. 6.
+}.
+
+\begin[main=und]{language}
+\begin[size=-1, style=italic]{style:font}
+\begin[numbering=false]{poetry}
+\v{Na Sifo,}
+\v{\quad{}Beneþ na Sifo Saranean.}
+\v{Na Sifo,}
+\v{\quad{}toled.}
+\v{\quad{}\quad{}elad Anevrin na Keldər,}
+\v{\quad{}\quad{}\quad{}„gnuþ“.}
+\v{\quad{}\quad{}kweþ Keldər broðian,}
+\v{\quad{}\quad{}\quad{}„ne toled“.}
+\v{\quad{}\quad{}keγmin Alstər Hūrvedan,}
+\v{\quad{}\quad{}\quad{}maþanian an barnas,}
+\v{\quad{}\quad{}\quad{}\quad{}„nemed ettlan [an] Almak“;}
+\v{\quad{}\quad{}\quad{}keγmin Dongann}
+\v{\quad{}\quad{}\quad{}\quad{}dohon,}
+\v{\quad{}\quad{}\quad{}\quad{}senerg an dəreins.}
+\end{poetry}
+\end{style:font}
+\end{language}
+
+Dans les compléments de la nouvelle édition savante de son ouvrage\footnote{%
+Emma Lenski, \em{op. cit.}, appendice A dans l’édition augmentée de 1962.
+}, Emma Lenski donne ce qui nous semble être une bien meilleure façon de présenter
+cette allocution — quoi que l’on pense de sa terminologie pour les connecteurs\footnote{%
+B \em{broadcast}, O \em{outer}, N \em{neuter}, I \em{inner}, — \em{quote}.
+} :
+
+\begin[cols=10%fw 3%fw 10%fw 3.5%fw 31.5%fw 22%fw 20%fw, cellborder=0, cellpadding=2]{ptable}
+\row{
+  \cell[style=narrow, border=0 0 0 0.4pt]{\smaller{\em{na sifo}}}
+  \cell[border=0 0 0 0.4pt]{}
+  \cell[span=5, style=narrow]{\smaller{\em{beneth na sifo saranean}}}
+}
+\row{
+  \cell[border=0 0 0 0.4pt]{}
+  \cell[style=narrow, border=0 0 0 0.4pt]{\smaller{B}}
+  \cell[span=5]{}
+}
+\row{
+  \cell[style=narrow, border=0 0 0 0.4pt]{\smaller{\em{na sifo}}}
+  \cell[border=0 0 0 0.4pt]{}
+  \cell[border=0 0 0 0.4pt]{}
+  \cell[span=4, style=narrow]{\smaller{\em{qeth celder brodhian} — \em{ne toled}}}
+}
+\row{
+  \cell{}
+  \cell[border=0 0 0 0.4pt]{}
+  \cell[style=narrow, border=0 0 0 0.4pt]{\smaller{\em{toled} O}}
+  \cell{}
+  \cell{}
+  \cell{}
+  \cell{}
+}
+\row{
+  \cell{}
+  \cell{}
+  \cell[border=0 0 0 0.4pt]{}
+  \cell[border=0 0 0 0.4pt]{}
+  \cell[span=3, style=narrow]{\smaller{\em{elad anevrin na celder} — \em{gnuth}}}
+}
+\row{
+  \cell{}
+  \cell{}
+  \cell[border=0 0 0 0.4pt]{}
+  \cell[style=narrow, border=0 0 0 0.4pt]{\smaller{N}}
+  \cell{}
+  \cell[border=0 0 0 0.4pt]{}
+  \cell[style=narrow]{\smaller{\em{senerg an dereins}}}
+}
+\row{
+  \cell{}
+  \cell{}
+  \cell{}
+  \cell[border=0 0 0 0.4pt]{}
+  \cell[border=0 0 0 0.4pt]{}
+  \cell[style=narrow, border=0 0 0 0.4pt]{\smaller{\em{cexmin dongann} I}}
+  \cell{}
+}
+\row{
+  \cell{}
+  \cell{}
+  \cell{}
+  \cell[border=0 0 0 0.4pt]{}
+  \cell[style=narrow, border=0 0 0 0.4pt]{\smaller{\em{cexmin alster hurvedan} N}}
+  \cell[border=0 0 0 0.4pt]{}
+  \cell[style=narrow]{\smaller{\em{dohon}}}
+}
+\row{
+  \cell{}
+  \cell{}
+  \cell{}
+  \cell{}
+  \cell[border=0 0 0 0.4pt]{}
+  \cell[span=2, style=narrow]{\smaller{\raggedright{\em{mathanian an barnas} — \em{nemed ethlan almaq}}}}
+}
+\end{ptable}
+
+Sa transcription reprend idéalement les codes graphiques du \em{chadhruid} — si ce n’est, évidemment, que
+l’écriture originale est verticale — de sorte que le lecteur moderne est à même d’appréhender l’agencement
+si particulier des mots et des éléments de la phrase.
+
+\section[numbering=false]{Discussion}
+
+Disons-le d’emblée, je ne crois pas qu’il faille suivre Wiegger\footnote{%
+Erich Wiegger, \em{op. cit.}, p. 342–347.
+} quand il avance que l’injonction de Sifo ne saurait être qu’une adjonction maladroite, et même embarrassante,
+d’un mauvais faussaire (\em{eine umständliche Ergänzung, die peinliche Hinzufügung eines schlechten Fälschers}\kern[width=0.1em])
+— et encore moins une curiosité agrammaticale (\em{eine agramatische Kuriosität}\kern[width=0.1em]) dénuée
+d’intérêt\footnote{%
+Sans que cela n’enlève rien à la qualité et à la pertinence de ses autres travaux sur la matière d’Almaq,
+quant à la question de l’injonction, Wiegger achève de se décrédibiliser complètement, à mes yeux, dans
+sa prétentieuse conclusion… « \em{Frau Lenski-Blancandre hat nichts anderes vorgeführt.} » (\em{ibid.}, p. 350)
+— L’intéressée lui a fort au demeurant bien répondu par son édition révisée de 1962.
+}.
+
+Ce que l’on désigne improprement comme la « Chronique du Ptoliporthe » est un recueil de textes fort
+disparates : un assemblage composite auquel il n’est pas même certain que le poète Keldre ait pris part,
+du moins dans ses formes présentes. C’est un fait que l’ouvrage nous est parvenu dans de nombreuses variantes.
+Admettons qu’autant d’omissions ou d’ajouts entre les éditions peuvent surprendre même les spécialistes de la
+question. C’est cependant là où Wiegger et ses collègues de l’école allemande font, à mon avis, fausse route,
+considérant que d’incertains copistes, n’ayant a priori à leur disposition que des exemplaires lacunaires, ont
+sélectionné tel passage encore à peu près clair pour eux, enjolivé ou amendé tel autre extrait incomplet ;
+bref, agencé l’ouvrage selon leur entendement imparfait, quand ils n’y ont pas aussi été de leurs compléments
+personnels.
+
+J’entends néanmoins démontrer que toutes ces leçons ont un rapport avec la matière originelle de l’héritage
+de Keldre, sans faire appel à l’incurie, l’incompétence ou la licence de copistes supputés. Ce n’est
+certainement pas un hasard si l’essentiel des éditions débute par une introduction du romancier lui-même,
+évoquant son départ depuis son île natale et son retour, bien des années plus tard, avec pour seul bagage
+d’importance un ouvrage qu’il lui reste encore à transmettre : une Encyclopédie des Mondes
+(\em{Herchallas e-Veiris}\kern[width=0.1em]) complétée par ses soins, mais dont il a aussi perdu des
+feuillets au cours de ses tribulations. Le genre même de ce type d’ouvrage, une forme littéraire souple
+et flexible qui tient autant du récit historique que de l’almanach, semble avoir été très prisée de la
+société d’Almaq ; mais aussi, je le crois volontiers, des peuples voisins. Sont conviés des textes
+qui parlent, au sens large, du monde connu (et dans le cas présent, principalement du point de vue de
+la cité d’Almaq), mais aussi des mythes ou des légendes, que le lecteur attentif est supposé apprécier
+dans leur relation intime au sujet principal du recueil. De sorte que « Keldre l’Obscur » n’est
+finalement pas plus abscons que les autres poètes et écrivains dont il convoque le patronage, sinon
+l’éclairage. Sont donnés, \em{in extenso}, outre quelques récits de voyage dudit Keldre : plusieurs
+fictions du grand Fesed Lerani, un échange épistolaire de Deiraval d’Almaq, des extraits de journaux,
+un conte fabuleux de Dongann, un passage du journal intime d’Elleth de Haute-Ferme, etc. — La sélection
+des textes selon les versions est, en apparence, aussi changeante qu’arbitraire. Mon point de vue est
+que tout cela ne doit cependant rien ni au hasard, ni aux lubies des compositeurs, mais tient à la nature
+propre de ce type spécifique d’œuvre que constituent les \em{Herchallasen} — littéralement, dans le parler
+d’Almaq, les « Livres de Choses ». Dans l’économie de ces peuples, tous ces textes participent au fond
+d’un même \em{Herchallas e-Veiris} fantasmé : une somme unique, un Grand Tout ultime de la connaissance
+auquel seul les initiés, peut-être, ont accès dans sa totalité du moment\footnote{%
+Voire, au bout d’un long moment, dans sa complétude absolue — puisque dans la pensée des gens d’Almaq,
+le temps est de nature cyclique et l’Histoire ne fait que se répéter autour de mêmes éléments centraux.
+La question est cependant fort complexe et dépasse très largement le cadre de cette modeste introduction.
+}. Une édition donnée ne peut approcher que de très loin cet objectif de perfection : Keldre et
+ses continuateurs\footnote{%
+Aussi bien que Keldre et ses sources : pour la part du recueil qui lui revient, ses sources sont
+tout aussi multiples, et rien ne démontre qu’il se soit arrêté sur une sélection donnée. Bien au
+contraire, les feuillets qu’il reconnaît avoir perdu demandaient à être remplacés ; de sorte que le
+recueil qu’il lègue à son retour diffère probablement déjà des versions qui nous sont parvenues par
+d’autres biais, quand bien même toutes porteraient sa marque.
+} n’ont eu d’autre choix que de multiplier leurs approches.
+
+Dans cette optique, l’injonction de Sifo ne détonne pas autant que Wiegger et ses confrères ont voulu s’en
+persuader. Qu’elle soit absente de certaines éditions anciennes ne la discrédite pas pour autant, du moins pas
+davantage que n’importe quel autre texte du recueil. Évidemment, Wiegger n’appuie pas uniquement son
+argumentation sur une comparaison des différentes leçons. Ses prédécesseurs trouvaient déjà suspicieux que
+l’injonction soit reproduite, lorsqu’elle est présente, pratiquement à l’identique. À leur décharge, une variante
+assez différente leur était alors inconnue (voir reproduction en p. \pageref[marker=illus-boustrophedon]).
+Même sans savoir cela, néanmoins,
+pourquoi s’étonner que les copistes n’aient pas cherché, une fois n’est peut-être pas coutume, à altérer une
+inscription dans un système d’écriture qui n’était déjà plus maîtrisé du vivant de Keldre, sauf par de rares
+érudits ? Ne sachant plus ni la valeur des signes, ni si leur présentation revêt une quelconque importance,
+ils se sont contentés de la reproduire aussi fidèlement que possible. Quand bien même un déchiffrement aurait
+été envisageable, ils n’en avaient peut-être pas le goût, ou — c’est tout autant plausible — l’archaïsme du
+spécimen leur convenait en l’état.
+
+Je prétends que l’on peut aussi évacuer de la même manière les critiques de nature linguistique de Wiegger.
+Sur le plan de la syntaxe et de la grammaire, les deux points majeurs qui l’embarrassent (et auxquels se sont
+aussi confrontés les autres commentateurs) sont le doublon initial (\em{na sifo}\kern[width=0.1em]), qui est inhabituel pour ce
+que l’on en sait, et l’absence de toute forme verbale explicite. Quant au doublon, Sigriður Grimsdottir a
+déjà fait l’essentiel du travail\footnote{%
+Sigriður Grimsdottir, \em{Alster the Homeslayer and Dongann the Trickster}, thèse de l’université
+de Colorado Springs, 1963 ; VSNR Saga-Book, vol. XVI (inédit) ; Penguin Books, 1969 (épuisé) ;
+texte introductif, p. xxviii \em{sq.} Je traduis.
+} : « Comme on l’apprend par la suite, Sifo n’appartient pas à la caste gémellaire dont étaient issues
+les princesses d’Almaq. Si elle se retrouve, malgré elle semble-t-il, à tenir les rênes d’un peuple
+désemparé à l’issue de la guerre destructrice qui clôt la Saga d’Alster, c’est uniquement parce que les
+familles nobles et une large partie de la population se sont exilées avant l’assaut final. Au demeurant,
+elle est probablement issue de la bourgeoisie modeste et non d’une famille noble. Son prénom d’enfant,
+Beneth, est des plus banals ; quant à son nom d’adulte, il est à l’évidence sur le modèle d’autres noms
+de commerçants qui se sont installés à Almaq quelques siècles plus tôt mais n’en étaient pas natifs.
+Enfin, elle n’indique pas, dans son titre complet, de nom matriarcal ainsi que l’usage le voudrait.
+Elle se contente d’une vague lignée dont nous n’avons pas trace ailleurs. (…) Sifo est ainsi, pour
+le commun, une relative inconnue qui n’a pas de légitimité forte. Elle doit \em{doublement} s’imposer :
+auprès du peuple, pour se faire reconnaître dans le chaos d’après-guerre ; au titre de l’histoire qu’elle
+commande à Keldre. Dans l’injonction, elle appuie sa référence au poète, dont elle espère sans doute que
+la renommée rejaillira sur elle. (…) N’en déplaise à Herr Wiegger, un double \em{Na Sifo} anaphorique, dans
+ce contexte politique, n’est pas nécessairement étonnant. »
+
+Quant au point de grammaire — ou de stylistique, pourrais-je arguer — je ne compte pas m’y attarder ici,
+mais nous avons bien d’autres exemples de formules purement nominales dans notre corpus\footnote{%
+Il m’est déplaisant, mais c’est sans doute nécessaire, de rappeler ici que si la langue d’Almaq ne semble
+pas recueillir pas la faveur d’un Wiegger à la critique aisée dans ses études de jeunesse, c’est qu’il a
+cherché, en vain, à la rapprocher des langues indo-européennes, dans cette époque troublée où ses
+contemporains espéraient intégrer les \em{Chroniques} à leur grand récit national… Peut-être a-t-il été
+trop prompt à contester tout ce qui l’en éloignait, rejetant la faute sur des copistes supputés, pour ne
+retenir comme « fondamental » du corpus que ce qui lui convenait. Voir annexe C.
+}. Sur le plan du vocabulaire, les objections de Wiegger n’ont guère plus de teneur. Pierre de Blancandre
+avait déjà relevé en 1907 (et cela n’a pas été mis en cause depuis) que \em{senerg} est un hapax.
+Dans \em{le Dit de la Saigne} attribué à Dongann, le narrateur est désigné par \em{sa-norg an i-dranei},
+« petit-roi de la féerie » ; où \em{sa-norg} est l’hypocoristique de \em{norg}, roi. Les noms de cette catégorie
+présentent généralement une alternance vocalique en \em{a/o/e}. Quelques exemples issus du lexique établi
+par Pierre de Blancandre : \em{latheg}, chatte / \em{lotheg}, chat / \em{letheg}, une chatte ou un chat sans
+distinction ; \em{raig}, mois lunaire / \em{roig}, mois solaire / \em{reig}, mois calendaire\footnote{%
+Pour simple note, l’autre alternance vocalique dont la langue d’Almaq garde une trace résiduelle est en
+\em{e/a}, par ex. \em{cenn}, une amuseuse / \em{cann}, un amuseur.
+}. De sorte qu’à côté des formes attestées \em{narg}, reine et \em{norg}, roi, nous pouvons aisément accepter
+une forme générique \em{*nerg}, ainsi qu’un composé figé \em{senerg} qui aurait assimilé la particule
+hypocoristique.
+
+Le problème posé par \em{dereins}, dont la transcription varie selon les leçons (\em{dreins, dəreins}\kern[width=0.1em]),
+est autrement plus délicat. D’une part, Almaq a connu, en des temps relevant peut-être du mythe,
+une opulente guilde de navigateurs fluviaux. Le mystère de sa disparition au faîte de sa puissance
+plane sur l’histoire (réelle ou imaginée) de la cité et des contrées voisines ; il est devenu matière
+de fables lorgnant volontiers du côté du surnaturel. Les membres de cette société secrète sont désignés
+par le terme \em{Dereins} dans les récits des \em{Chroniques}, que Pierre de Blancandre traduit par « Nautes »\footnote{%
+Le singulier n’est jamais employé. Lorsqu’il est besoin, une formule partitive est toujours utilisée. Ainsi,
+dans le conte de la Dame Renarde, le personnage du bouffon se revendique « \em{an Dereins} / (je suis) des Nautes ».
+}. D’autre part, un « conte de fées » se dit \em{i-dranuid} ; une fée, \em{i-dran}, le pays fabuleux des fées,
+\em{i-dranei}. Dans le corpus, ces mots sont invariablement précédés de la marque respective \em{i-} qui provoque
+une mutation consonantique, de sorte que l’on ne peut dire si leur forme non mutée commencerait
+en \em{t-} ou en \em{d-}. On ne sait par conséquent si les termes sont apparentés d’une quelconque façon.
+Tout ce que l’on peut avancer, c’est que Dongann est \em{sa-norg an i-dranei} dans un conte de son cru,
+\em{senerg an d(e)reins} dans l’injonction de Sifo : « petit-roi de la féerie » ou « prince des Nautes ».
+Est-ce la même chose ? Le récit initiatique de Dongann dans les \em{Chroniques} s’articule autour de sa
+quête des « sentiers cachés » du monde féerique ; ce sont aussi les chemins secrets des mystérieux
+Nautes dont il semble dès lors avoir acquis quelques attributs fabuleux. J’ose croire que c’est ainsi
+qu’on le percevait du temps de Sifo et sous la plume de Keldre. En d’autres termes, loin d’être une
+curiosité comme le concevait Wiegger, l’injonction nous enseigne peut-être quelque chose de la double
+nature de ce personnage emblématique des \em{Chroniques}. L’hésitation des copistes quant à la forme de
+son qualificatif m’apparaît dès lors significative d’un autre fait : contrairement à ce que Wiegger
+suggérait, il se peut qu’ils aient perçu de quoi il en retournait. L’étymologie problématique, la
+caractérisation inhabituelle du personnage, cela ne peut leur avoir échappé. Loin d’être alors de
+purs calques malhabiles, les variantes du texte témoigneraient ainsi de leur incertitude quant au
+terme à employer\footnote{%
+En 1991, Emma Lenski, à qui j’avais envoyé une première esquisse des éléments repris dans ce paragraphe,
+me fit remarquer que dans le système du \em{chadhruid}, il existe un logogramme qui signifierait selon
+elle « Naute ». On le trouve comme premier arcane du Tarot d’Almaq : l’équivalent,
+peu ou prou, de notre Bateleur — ce qu’est précisément le bouffon Dongann, tandis que le « Bouffon »
+dans le Tarot d’Almaq occupe la position qui échoit chez nous au Mat ou Fou. Les \em{Chroniques} évoquent
+à plusieurs reprises des \label[marker=piliers]piliers gravés remontant à la fondation de la cité et portant le
+« signe des Nautes » (\em{nedhr an Dereins}\kern[width=0.1em]), que les gens du commun savaient encore
+reconnaître comme tel, ce qui serait logique s’il est aussi une carte de jeu ; un certain Bethaine
+mentionne que « le bouffon portait sur lui la marque des Nautes » (\em{defthe dohon neph chadhr cexmad Dereins}\kern[width=0.1em]),
+etc. Je ne prétends pas conclure, mais c’est dire que nous n’avons sans doute pas fini d’épuiser
+l’herméneutique du personnage.
+}, quant à ce qu’il convient ou non de révéler au grand jour (voir \em{infra}\kern[width=0.1em]).
+
+Je peux à présent aborder à nouveau compte les expressions \em{mathanian an barnas} et \em{nemed ethlan almaq}.
+Elles présentent une inversion inattendue, dont Wiegger se défiait. Alster, dans toutes nos autres
+sources, est toujours le Ptoliporthe\footnote{%
+Soit \em{Hurvedan}, forme transposée depuis la langue de l’empire, « celui qui détruit les foyers »
+(\em{Hurvein}, de l’ancien siléen \em{Hūr Wēden}\kern[width=0.1em]). Rappelons que Pierre de Blancandre
+prit le premier le parti de rendre les termes en langue siléenne par du grec ancien transcrit à la
+française (« pour donner à mon lecteur une impression tout à la fois de vague familiarité et de lointaine
+ancienneté »). L’usage a perduré après lui. Cela étant, il s’inspirait aussi d’une version latine des
+\em{Chroniques} où le grec est employé pour certaines expressions étrangères.
+Cf. « De la transmission des textes » dans le présent recueil.
+}, le « destructeur de cités », \em{ethlanian an barnas} ; tandis que la chute de la cité est rendue
+par \em{i-mathan an Almaq}, littéralement, la « dispersion ». Pour Alster, cette métaphore est un
+qualificatif quasi-obligé\footnote{%
+Sigriður Grimsdottir, \em{op. cit.}, le rapproche d’un épithète homérique ou d’un \em{kenning} de la
+poésie scandinave.
+}. Quant au thème prophétique de la dispersion de la population, il est récurrent dans la
+matière d’Almaq\footnote{%
+Erich Wiegger, \em{op. cit.}, a vu dans cette dispersion téléologique une ressemblance avec le mythe
+de la Tour de Babel : Almaq est la « Cité aux mille tours », tout en verticalité ; « aux mille langues »
+en vertu de sa population venant de tout le continent ; le plus haut point de la ville « jouxte les
+nuages », etc. Quelques pages plus haut, il y voit aussi des points de rapprochement avec le mythe de
+l’Atlantide : « la chute d’une culture jadis très avancée » (\em{der Untergang einer einst sehr
+fortgeschrittenen Kultur}\kern[width=0.1em]) dont le peuple « fut dispersé, tels les Atlantes, à travers
+le globe. » (\em{Das almakische Volk war wie die Atlanter über die ganze Erde verstreut.}) — Voir mon annexe C.
+}.
+
+Pierre de Blancandre rétablit les qualificatifs dans leur ordre attendu, ainsi que Wiegger à sa suite.
+Le premier ne s’en justifie pas ; le second pense que leur inversion est une erreur de transcription.
+
+Avant d’y revenir, je veux déjà préciser un autre fait d’importance. Contrairement à ce que les
+traductions précédentes laissent entendre, \em{na Sifo} ne signifie aucunement que c’est Sifo elle-même
+qui parle. La particule d’emphase \em{na}\kern[width=0.1em]\footnote{%
+La langue d’Almaq possède trois \em{na} distincts : une négation verbale et adverbiale, une coordination
+apparaissant notamment dans les noms personnels (ainsi qu’on la trouve ailleurs dans l’injonction) et
+une particule d’emphase. Seule devant un nom, c’est toujours de cette dernière dont il s’agit.
+\em{Na nyesem}, formule appuyée de salutation. \em{Na Sornas}, titre d’un fragment légendaire,.
+\em{Na phanuid}, « c’est du vol ! ». \em{Na Sorn, na Nuvch}, « ô Chimère, ô Dragon »,
+début de prière. \em{Na Miro caledhian}, titre d’une autobiographie que l’on peut parfaitement rendre
+par « Moi Miro, marchand ». C’est peut-être cet exemple qui a inspiré P. de Blancandre, mais il serait
+aussi correct de traduire simplement « le Marchand Miro ». Entendons-nous bien, « Moi Sifo » n’est pas
+forcément une erreur pour autant, même s’il existe d’autres façons moins égotiques de se présenter.
+} n’introduit pas (nécessairement) une narration. L’injonction peut très bien être rapportée au discours
+indirect, et le discours direct n’intervenir en fait que plus loin. Il est judicieux de noter que ce
+texte fait usage, à trois reprises, du connecteur de citation\footnote{%
+Cf. « Introduction au \em{chadhruid} » dans le présent ouvrage.
+}. Les éléments introduits par ce dernier peuvent, \em{in fine}, constituer la seule relation des propos
+véritablement tenus par Sifo : \em{ne toled / gnuth / nemed ethlan Almaq}, ce que l’on pourrait lire
+comme « j’ai exigé un rapport quant aux causes de la destruction d’Almaq ». Là serait son unique demande :
+savoir ce qui a causé l’effondrement de la cité et l’aboutissement de sa longue histoire. La tâche qui
+incombe à Keldre n’en est alors que plus ardue : une cité peut-elle tomber du fait de quelques individus
+isolés ? Dès lors, la nature disparate des textes recueillis pourrait prendre un tout autre sens.
+Un conte tel que celui de la dame renarde, qui se tient lors d’une première guerre fondatrice d’une
+certaine conception mythique de la cité, ne peut-il éclairer une dernière guerre destructive ? Une partie
+de cartes entre voisins ou une description de la ville par les yeux d’une étrangère ne donnent-t-ils pas
+à comprendre une situation sociale et politique ? Saisir tout cela, c’est sous-entendre que le texte
+de l’injonction, en ouvrant le recueil, appelle à être déchiffré de plusieurs manières — entre les
+lignes, pourrait-on même dire sans vraiment jouer sur les mots.
+
+\break
+En la matière, Emma Lenski a très tôt fait preuve d’une intuition remarquable\footnote{%
+Emma Lenski, « Re-reading Sifo: hidden truth & unveiled secrets in the chronicles of Alstre » (1939),
+article repris en version complétée dans sa 2\text:superscript{e} éd. de 1962, \em{op. cit}. 
+} :
+
+\begin{blockquote}
+Les lignes parallèles invitent aussi à une lecture transversale. C’est parce qu’elle est Sifo de la
+maison Saran qu’elle a le droit d’imposer sa volonté. Celdre est ensuite mis en perspective avec le
+reste du texte, ce qui impliquerait que tout ce qui suit est rendu possible par la grâce du poète.
+Et ainsi de suite. Celdre est chargé d’écrire un compte rendu des actes d’Alstre. C’est peu ou prou
+ce à quoi l’on s’attendrait, car ses contemporains le considéraient comme le principal protagoniste
+de la ruine d’Almaq… Cela semble très prometteur, mais si nous procédons de cette façon, quelque chose
+d’étrange apparaît. C’est soudain Dongann, plutôt qu’Alstre, qui devient un disperseur de cités.
+Et c’est encore le bouffon roi des fées qui est associé à la cause de la ruine d’Almaq. Absurdités ?
+Certains le diraient. Mais pourtant, qu’en savons-nous vraiment ?
+
+[\em{The parallel lines also invite to a transversal reading. It is because she is Sifo of house Saran
+that she is entitled to impose her will. Celdre is then put into perspective with the rest of the
+text, implying that all that follows is made possible by the grace of the poet. And so forth. Alstre
+is commissioned to write an account about the deeds of Alstre. This is kind of expected, as he was
+regarded by her contemporaries as the main protagonist in the ruin of Almaq… It all sounds very
+promising, but if we proceed in this way, something strange appears. It is suddenly Dongann, rather
+than Alstre, who becomes a scatterer of cities. And it is still the jester king of fairies who is
+then related to the cause of the ruin of Almaq. Nonsense? So would some say. But yet, what do we
+really know?}\kern[width=0.1em]]
+\end{blockquote}
+
+La variante en boustrophédon découverte ultérieurement (p. \pageref[marker=illus-boustrophedon]) ne
+reprend pas exactement le même parallélisme dans sa première partie\footnote{%
+Je note que si l’on retient la méthode, l’analyse de Sigriður Grimsdottir citée \em{supra} s’en
+trouve renforcée.
+}, mais l’intuition première de Lenski tient cependant encore fort bien pour la suite, sur toute
+une ligne continue !
+
+Dans les années 1950, elle affine sa compréhension des connecteurs du \em{chadhruid}. Sa théorie,
+fondée sur une analyse de l’ensemble des sources directes (c-à-dire les inscriptions) et indirectes
+(c-à-dire les récits ou traités qui y feraient allusion) est qu’une formule gauche d’un énoncé
+arborescent est principale\footnote{%
+Quoique la source où il en est question soit assez obscure, il se peut que la langue d’Almaq s’y réfère
+sous le vocable de \em{belth}, « fondement » (ou littéralement « sol ») : \em{Belthindo sqere cexm meruid
+nadan gwerethe} « à la façon du sol, on parle de bonheur ; cependant la terreur règne. »
+}, tandis qu’une formule droite est secondaire. La principale est destinée
+à tous, tandis que la secondaire est contextualisée, selon le connecteur employé. Si je ne peux lui
+donner entièrement raison quant au prolongement du concept au-delà de l’écrit\footnote{%
+Elle va bien trop loin, je le pense, quand elle en affirme l’applicabilité à la pensée même des gens
+d’Almaq, en leur prêtant une capacité en partie inconsciente à une forme d’empathie quasi-télépathique,
+de sorte que l’expression orale se doublerait d’un non-dit secondaire qui pourrait être perçu par autrui,
+pour peu qu’il sache orienter sa  pensée. Certes, Lenski s’inscrit ici dans le prolongement d’un
+développement du concept de « pensée partagée » dans le récit de Deiraval, mais même cette dernière
+n’affiche pas autant de certitude quant à la nature d’un tel phénomène. D’autres sources à caractère
+ésotérique en parlent aussi, mais s’agit-il pour autant d’un fait avéré ? J’invite le lecteur à davantage
+de prudence en la matière. La fiction poétique est tout aussi plausible. Dans ses vieux jours, Wiegger
+a relevé non sans bon sens que « si le gens d’Almaq ont entre eux un entendement naturel des pensées,
+comment se peut-il qu’ils apprécient autant les jeux de hasard où le bluff est de règle ? Si l’on ne
+peut mentir sans se trahir en pensée, comment de tels jeux mais aussi la stratégie politique ou le doute
+amoureux peuvent-ils exister ? » — Je le rejoins pleinement. Quelle qu’en soit la condition réelle ou
+fantasmé, le \em{co-thinking} n’est pas l’\em{ósanwe} du professeur Tolkien (cf. \em{Vinyar Tengwar},
+fanzine, \abbr:no{41}, 2000).
+}, son hypothèse est astucieuse et donne encore une autre lecture de l’injonction. Le connecteur
+qu’elle désigne par \em{broadcast} dénoterait une secondaire destinée à tous, tout autant que la
+principale. Ce serait le cas pour \em{beneth na sifo saranean}. Le connecteur \em{outer} signifierait que
+la secondaire est orientée vers un destinataire précis. Ici l’éloge en forme de demande est, en
+toute logique, adressée à Keldre. Le connecteur \em{neuter} ne serait pas déterminant, ou plutôt la
+secondaire n’aurait rien de masqué, quel qu’en soit le destinataire : le (sur)nom complet du romancier
+est bien connu de tous ; que la demande porte sur un récit n’a rien de très surprenant. Enfin,
+le connecteur \em{inner} relèverait de la sphère privée, voire du secret. Il se peut que la formule secondaire
+soit absente, le connecteur n’en révélant alors que l’omission volontaire. Significativement, l’injonction
+l’applique à \em{senerg an dereins}, dont nous avons déjà longuement parlé. Comme nous l’avions pressenti,
+que le bouffon Dongann soit des Nautes ou de Féerie relèverait ainsi d’un savoir occulte, d’un mystère
+que l’on devrait taire. Pour satisfaire à l’attente de Sifo, Keldre devra bien évoquer le terrible
+Ptoliporthe dont les armées prirent la ville. Mais il devra aussi rendre compte du ténébreux secret
+qui entoure un simple amuseur des rues dont il fut l’ami et le confident — et les raisons de la chute
+d’Almaq seront alors révélées.
+
+Si l’on souscrit à cette thèse audacieuse, tout le projet des \em{Chroniques} tient dans la brève
+injonction mise en exergue à leur commencement. Peut-on encore dire, comme le faisait Wiegger, qu’il ne
+s’agirait que d’une adjonction maladroite dont on pourrait légitimement se passer ?
+
+\smallskip
+\couyard[type=6, width=default]
+
+\eject
+
+\begin{figure}
+\img[src=examples/almaq/chadhruid_mss_K.jpeg, height=77%fh]
+\caption{%
+Copie du manuscrit K de l’injonction de Sifo (collection privée). Les variantes par rapport au
+manuscrit M sont minimes. Les contours des lettres ont été repassés à l’encre, par-dessus une
+première couche maladroitement esquissée au fusain. Erich Wiegger y voit un indice de l’usage
+d’un calque, ce qui le conforte dans son opinion que toutes les leçons du texte dérivent d’une
+même source et que leur nombre ne saurait par conséquent constituer une quelconque preuve
+d’authenticité.
+}
+\end{figure}
+
+\eject
+
+\begin{figure}
+\svg[src=examples/almaq/chadhruid_polski.svg, height=55%fh]
+\caption{%
+Transcription d’une variante *P, figurant en frontispice de l’édition polonaise de la monographie
+de Pierre de Blancandre (\em{Kroniki niszczyciela miasta}, Łódź, 1924), présentant là encore quelques
+variantes de forme mineures. L’original ayant servi à établir cette transcription relativement grossière
+est perdu depuis la Seconde Guerre mondiale, mais Wiegger affirme avoir connu un témoin sûr certifiant
+l’exactitude de la copie.
+}
+\end{figure}
+
+\begin{figure}
+\svg[src=examples/almaq/chadhrave_na_sifo.svg, width=95%fw]
+\caption{%
+Le \em{Codex Monesterellum} contient la seule transcription connue de l’injonction de Sifo
+dans l’alphabet adapté du système impérial siléen, qui remplaça l’ancien système à partir du
+\abbr:siecle{v} siècle de l’ère siléenne (voir note \ref[marker=note-chadhruid, relative=true]\kern[width=0.1em]).
+}
+\end{figure}
+
+\eject
+
+\begin{figure}
+\svg[src=examples/almaq/chadhruid_boustrophedon.svg, height=75%fh]
+\caption{%
+\label[marker=illus-boustrophedon]%
+Fac-similé du très beau manuscrit S trouvé en 1995 dans un lot de vieilles archives à Saorge (Alpes-Maritimes).
+Wiegger (1913–1983) aurait probablement révisé son jugement sévère s’il avait eu connaissance de ce spécimen.
+Ce n’est pas un calque de la formule générale et il présente d’intéressantes variations. Quant à Mrs. Lenski
+(1912–2003), elle l’aurait très certainement mis à profit pour compléter son analyse des divers symboles
+logographiques. Ce fut un grand regret pour moi d’apprendre son décès sans avoir pu lui faire part de cette
+importante découverte.
+}
+\end{figure}
+
+\end{document}

@@ -1,0 +1,116 @@
+\begin{document}
+
+\chapter[numbering=false]{Introduction au \em{chadhrave}.}
+
+L’alphabet royal (\em{chadhrave anorgerin}\kern[width=0.1em]) fut adopté à Almaq à partir de la fin du
+\abbr:siecle{vi} siècle de l’ère siléenne.
+Quoique dérivé du système impérial, dont il conserve certains traits essentiels, il en redéfinit
+plusieurs symboles et comprend plusieurs glyphes ou ligatures spécifiques aux sonorités de la langue d’Almaq.
+Ses conventions typographiques sont de même une innovation selon l’usage d’Almaq.
+
+\begin{figure}
+\svg[src=examples/almaq/chadhrave_tyesed.svg, height=0.8cm]
+\caption{%
+Le mot \em{tyesed} (« langue »)\footnote{%
+Emma Lenski, \em{op. cit.}, appendice D dans l’édition augmentée de 1962.
+} dans un style décoratif où la position d’un caractère
+par rapport à la ligne de base peut varier selon ceux qui l’entourent. Ainsi, le /s/ devient
+un caractère avec jambage ; le /d/ est de même légèrement abaissé.}
+\end{figure}
+
+Sur vélin, les caractères étaient généralement tracés de gauche à droite avec une plume large.
+Si le système ne dispose pas de véritable notion de casse, les noms propres sont souvent écrits à
+l’encre rouge, ou d’un trait plus épais.
+
+\begin{figure}
+\svg[src=examples/almaq/chadhrave_e_sornas_agwinchasrin.svg, height=1cm]
+\caption{%
+Dans le même style décoratif, \em{e-sornas agwinchasrin} (« les hydres fabuleuses »),
+nom d’un fragment de conte mythologique\footnote{%
+\em{Ibid.}
+}. Comme précédemment, le /s/ est abaissé pour
+que sa boucle figure sous la ligne de base et s’ajuste au caractère précédent ; il
+en va semblablement pour le /o/, le /gw/ et le /ch/.}
+\end{figure}
+
+\begin{figure}
+\svg[src=examples/almaq/chadhrave_na_sornas.svg, width=95%fw]
+\caption{%
+\label[marker=na-sornas]%
+Extrait d’un bref texte reprenant ce titre dans le \em{Codex Monesterellum}, dans
+le style typographique propre à cet ouvrage. Une portion de phrase a été grattée, mais
+une analyse par imagerie en ultraviolet a permis de la reconstituer (ici reproduite en grisé)\footnote{%
+Je renvoie le lecteur à mon analyse du \em{Codex}, que j’espère voir paraître prochainement.
+}.
+Le texte présentait le mythe des Hydres dans une version visiblement influencée par la
+tradition siléenne, faisant référence à leur panthéon de dragons et de dieux en guerre.
+Cette tradition est étrangère au fond mythologique comme au fait religieux\footnote{%
+Sur le fait religieux à Almaq, cf. notamment E. Wiegger, \em{Das Baum und der König}, Hanovre, 1944.
+} tels que reconnus à Almaq, ce qui pourrait expliquer sa suppression.}
+\end{figure}
+
+Le système ne comporte que trois marques de ponctuation. Le tilde est une ponctuation géné­rale,
+recouvrant le point, la virgule ou le tiret d’emphase. Dans ce dernier usage, on le rencontre parfois
+doublé (sc. deux tildes superposés). Le point médian s’emploie après des particules qui peuvent
+provoquer une mutation de la consonne initiale du mot qui suit ; pour cette raison, la transcription
+latine le reprend parfois pareillement (suivant l’usage semblable que l’on en fait dans les langues
+présentant ce trait linguistique), quand elle ne lui substitue pas simplement un tiret. Il se
+rencontre aussi, conventionnellement, après certains auxiliaires modaux et dans la composition
+d’adjectifs, sans pour autant nécessairement altérer la consonne suivante\footnote{%
+Le terme de \em{lenition dot} initialement utilisé par Lenski est donc trompeur ; nous lui préférons
+aujourd’hui celui de \em{point médian}, purement descriptif.
+}. Enfin, le chevron\footnote{%
+Pour P. de Blancandre, c’est un \em{guillemet} ; pour Lenski, un \em{dash}, plus rarement un \em{quote}.
+} introduit une proposition secondaire, un discours rapporté ou une énumération.
+
+\smallskip
+
+\begin{figure}
+\svg[src=examples/almaq/chadhrave_table.svg, width=100%fw]
+\caption{Reconstruction de la table des glyphes du \em{chadhrave} d’après E. Lenski\footnote{%
+Emma Lenski, \em{loc. cit.} La transcription latine retenue est normalisée par mes soins. Précisons
+néanmoins qu’elle est orthographique et non phonologique.
+}.}
+\end{figure}
+
+
+Les symboles vocaliques ont deux séries de variantes qui pouvaient servir,
+dans le système impérial d’origine, à noter la longueur ou la hauteur, ou encore à indiquer
+des allophones. Ce trait n’a pas été conservé dans le mode adopté par la langue d’Almaq,
+sauf pour la transcription de noms étrangers. La première série est interprétée
+comme une variation non signifiante, d’usage assez libre encore que son utilisation classique
+concerne principalement les déterminants et préfixes. La seconde série est employée
+pour les diphtongues de la langue d’Almaq. Le cas du /i/ est un peu différent. Le second symbole
+marquait une semi-consonne palatale dans le système impérial. Le mode d’Almaq l’emploie, par
+mimétisme, comme variante graphique du i devant une autre voyelle, bien que les sons soient
+prononcés distinctement. Il est parfois souscrit. 
+
+Les lettres /n/, /l/ et /s/ possèdent des ligatures doublées. 
+
+Le /c/ doublé s’emploie comme abréviation de la coordination.
+
+La série palatale /sy/, /hy/, /ny/ et le graphe /thl/ (dont la ligature est une variante) sont des
+innovations d’Almaq ; les palatales /ty/ et /dy/ reprennent des symboles existants de l’alphabet impérial,
+mais avec d’autres valeurs. De la série des fricatives voisées, n’a été conservée que la dentale /dh/ ;
+on pourrait cependant aisément compléter la table avec les caractères valant /bh/ et /gh/, pour
+les termes étrangers qui le nécessiteraient.
+
+\begin[width=80%lw]{epigraph}
+« À propos des hydres — Les hydres fabuleuses sont : \em{Sigreine} la très-vieille ; \em{Sigrain} l’hydre-mâle bréhaigne.
+En ces temps-là, \em{Sigreine}, l’hydre vénérable, considéra la puissance du dragon. Lors, elle ressentit la
+peur. De ses fils, \em{Sigreine} épargna son favori, \em{Sigrain} l’incestueux ; elle en fit son amant pour
+perpétuer sa race et ne pas affaiblir sa propre puissance. »\footnote{%
+Je cite la traduction fr. de Pierre de Blancandre, \em{op. cit.}, pour l’extrait donné en figure \ref[marker=na-sornas].
+La partie grattée à la ponce donnerait : « du dragon < des dragons, opposée à celle des dieux. » — L’hydre
+femelle de la tradition siléenne, dont il est question ici, correspond dans les grandes lignes seulement
+à celui de la Chimère d’Almaq, qui « dévora tant sa progéniture première que le fruit de ses incestes » ;
+beaucoup d’autres détails l’en distinguent néanmoins. Pour un bon récapitulatif, voir E. Wiegger,
+\em{Das Baum und der König, op. cit.} ; et pour complément le « Conte du dragon et de l’hydre » (Сказка о
+драконе и гидре) recueilli à Kaliningrad vers 1957 par E. Poplavsky, \em{Народные легенды страны Алмака},
+mais inconnu hors de la sphère soviétique avant 1991.}
+\end{epigraph}
+
+\smallskip
+\couyard[type=6, width=default]
+
+\end{document}

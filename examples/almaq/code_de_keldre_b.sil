@@ -1,0 +1,366 @@
+\begin{document}
+\chapter[numbering=false]{Un testament révélé : le code musical du \em{Masque opalescent}.}
+
+\begin{raggedleft}
+Une mise en musique par Yann \font[features=+smcp]{Caraye},\par
+Miskatonic University, 2020.
+\end{raggedleft}
+
+\medskip
+
+Que faire d’une pièce de théâtre supposée incomplète, et dont pratiquement tout nous échappe,
+jusqu’à son titre, puisqu’il n’y est jamais question d’un masque\footnote{%
+Certes, on pourra arguer que selon le prologue introductif, les personnages portent des masques
+sur scène. Au-delà de cette évidence, cela ne nous éclaire cependant en rien.
+}, fût-il de surcroît opalescent ou non\footnote{%
+Notons que sous la plume de Keldre, dans ses \em{Pensées concentriques}, le thème du
+« masque opalescent » revient à deux reprises : « À ceux qui cherchent la vérité dissimulée
+derrière les mots du poète, qu’ils sachent qu’au lieu de sa cuisse, la muse n’a fait que
+leur révéler, en miroir et trop brièvement pour les satisfaire, un simple pan de son jupon.
+C’est là une autre expression du masque opalescent. (…) § Quand je parle du sang qui suppure
+à la plaie du Dragon, qu’ai je dit ? Tout ce qu’il y a à énoncer. Ou rien, aussi. S’il est
+vrai que le poète met son âme inquiète à nu, osant écrire ce qu’il ne pourrait dire à voix
+haute sans peur d’être rejeté de la société des hommes, il n’a que rarement, s’il est un tant
+soit peu doué, à en craindre les conséquences. Car par-delà les figures de style propres à son
+art, derrière la pléthore de personnages auxquels il prête vie et la multiplicité des situations
+qui constituent le cadre déformé de son imagination enflammée, comment deviner ses pensées
+véritables ou connaître son vécu le plus cru et ses failles les plus personnelles, ses aspirations,
+ses rêveries intimes ou ses hontes obscènes ? Ses mots chatoyants sont, pour ceux qui les
+reçoivent, toujours perçus au travers d’une sorte de voile fébrile, certes dangereusement mince,
+mais tantôt transparent dans toute sa violence brute, tantôt opaque jusqu’à l’inintelligible,
+sans que l’on puisse savoir quel aspect mensonger l’on contemple. Ce voile variable, qui est
+aussi celui du lecteur, est tel un masque ondoyant, de la façon dont la pierre d’opale
+s’irise différemment, selon l’angle sous lequel elle est éclairée. » (trad. fr. de Pierre
+de Blancandre). On pourrait, dès lors, se demander de quelle teneur étaient les actes manquants
+de la pièce, mais la question, nous le verrons plus loin, n’a peut-être aucun sens.
+} ? Que faire encore, lorsque l’on découvre ce que l’on pense être son thème musical, dans un
+système de notation non conventionnel et pour le moins imprécis ? Je vais devoir tempérer,
+tout d’abord, l’enthousiasme — au demeurant fort compréhensible — de Louise G. Bourgeois
+lorsqu’elle comprit, en 2011, la nature musicale de l’inscription qui suit la pièce dans
+les \em{Fabulae Alastri}. De quelque façon que l’on s’y prenne, il ne fait aucun doute que la
+partition déchiffrée n’est pas assez longue pour accompagner l’intégralité de la pièce, ni même
+un seul acte ou une scène unique. Au simple décompte des notes, nulle nécessité d’en connaître
+avec précision la hauteur et la longueur — point n’est besoin non plus d’être un expert en la
+matière : la composition, quel que soit son rythme, ne saurait excéder quelques minutes. Qui
+plus est, elle est segmentée, de manière assez évidente, en quatre mouvements qui, de mon point
+de vue, ne semblent pas nécessairement devoir être enchaînés. Une possibilité, appuyée par
+l’extrême répétitivité du morceau, est qu’il s’agisse d’indications ponctuelles, de thèmes
+très généraux à varier, le poète laissant à l’appréciation de la mise en scène le soin de
+s’en inspirer. Une autre, qui a ma faveur sans être exclusive avec la première, est que nous
+aurions un prélude, deux interludes et un final, encadrant ainsi les trois scènes de la pièce\footnote{%
+La partition ne couvrirait ainsi que les trois scènes de l’acte premier : Cela nous amène d’ores et
+déjà à interroger cet \em{actus primus} qui appelle implicitement à d’autres actes, faisant penser à
+tant d’experts que le texte serait parcellaire. Je ne suis pas sûr d’avoir lu la même pièce qu’eux,
+mais n’anticipons pas davantage…
+}. Le bénéfice de cette solution est que l’on peut alors penser chaque mouvement en reflet
+du texte et de son argument. C’est dans cette approche comparative que s’est inscrite ma
+démarche, cherchant, pour leur redonner un sens, les coïncidences entre les lignes musicales,
+d’une part, et les personnages de la pièce, d’autre part. Je me dois donc de résumer l’intrigue
+de cette dernière, afin que l’on comprenne mon cheminement.
+
+La scène 1 se déroule au pied des remparts brisés d’Almaq, tandis que le feu se répand dans
+la cité. Sur le devant de l’estrade : Alster Ptoliporthe, un soldat de sa troupe rapprochée
+et une jeune fille prénommée Elleth\footnote{%
+Elleth : Dans la langue d’Almaq, ce nom peut signifier, de manière assez transparente, la « Sans-Lien »
+(\em{*ed-leth}\kern[width=0.1em]). Il fait vraisemblablement écho aux paroles d’Alster dans
+les \em{Chroniques du Ptoliporthe}, tandis qu’il sauve \em{in extremis} une fillette des flammes,
+la hissant sur son cheval, lors du sac d’Onérande à la fin de sa campagne dans les Edrases :
+« Je te délie du Dragon et de la Chimère ». Elle est ensuite oubliée, ne servant probablement
+qu’à montrer qu’en dépit d’un fanatisme grandissant, Alster, bien qu’ayant ordonné à ses troupes,
+dans un terrible accès de colère, l’anéantissement de la ville et le massacre de toute sa population,
+avait encore une part d’humanité, ne pouvant supporter la vue d’une enfant encerclée par le feu.
+Cela se déroule peu de temps avant sa folle décision de rebrousser chemin et de trahir Almaq.
+S’il s’agit du même personnage, il est peut-être significatif que Keldre l’ait choisi précisément
+pour tenir tête au Ptoliporthe, lors de cette autre embrasement d’une cité qu’est la destruction
+d’Almaq. Selon le prologue de sa pièce, cependant, « Elleth a les yeux cachés par des pièces d’or »,
+ce qui pourrait suggérer qu’elle est aveugle, ce dont l’épisode des \em{Chroniques} ne fait pas état.
+}. Les chœurs, précise le poète, se tiennent en retrait dans l’ombre. En guise d’introduction,
+ladite Elleth relate comment Alster, fils d’un seigneur des Mille Îles, fut envoyé à Almaq pour
+y parfaire son éducation. Il vécut à la cour, dans l’intimité de la princesse et de son entourage.
+La prise des Mille Îles par Cartamène III, empereur des Edrases, mit le jeune homme dans tous
+ses états ; lorsque la guerre fut déclarée, il se porta volontaire pour intégrer les armées
+d’Almaq. Las, confrontés aux derniers bastions de leurs adversaires et à leur résistance forcenée,
+les troupes s’embourbèrent trop longtemps, connaissant la famine, la maladie, la douleur et la folie.
+Le caractère d’Alster fut mis à rude épreuve, forgé à l’épreuve de la guerre, de l’abandon, du doute
+et de la défaite, jusqu’à la rupture.
+
+S’il fait assez peu de doutes que les mesures de la partition sont à cinq temps, il va sans dire,
+en l’état, que notre choix quant à l’échelle des notes ne saurait être qu’arbitraire. Par préférence,
+et sans autre justification plus raisonnée, j’avais décidé de m’affranchir des gammes pentatoniques
+mineures et majeures, si courantes dans la musique occidentale qu’elles ne pouvaient pleinement
+parvenir, selon moi, à susciter l’inquiétante étrangeté de la composition telle que je la ressentais.
+C’est, j’en conviens, un point de vue très subjectif, pour ne pas dire artificiel. Dans ce projet,
+j’ai un temps lorgné du côté de la gamme japonaise \em{Hira-jōshi}, avant de me décider, en définitive,
+pour un mode lydien en \em{do, mi, fa#, sol} et \em{si}. Au final, sans être trop familier, il arrive
+selon mon goût à provoquer l’émotion particulière que je cherchais.
+
+La sélection des instruments\footnote{%
+On sait au demeurant relativement peu de choses quant aux instruments connus à Almaq. Les choix de traduction
+très techniques de P. de Blancandre dans \em{le Jardin des Luthiers} de la poétesse Elleth de Haute-Ferme
+(sans aucun rapport \em{a priori} avec l’Elleth du présent texte), avec ses frettes, ses luths théorbés &c,
+sont, faut-il le rappeler encore, une tentative d’actualiser la leçon grecque, tout aussi sujette à caution
+dans ses descriptions influencées par l’époque byzantine. Les versions latines restent quant à elles moins
+précises et nous ne savons pas ce que recouvrent les termes originaux en langue d’Almaq.
+} ne saurait être, elle aussi, qu’une interprétation somme toute personnelle. J’ai procédé en fonction
+de mon ressenti des acteurs et des rôles. Dans le premier mouvement, une ligne rapide et haute en tonalité
+me semble convenir à la partition d’Elleth ; une seconde, plus grave et posée, peut être celle d’Alster
+en répons. J’ai choisi pour eux, sans trop d’hésitation, la harpe, qui me semble rendre assez finement
+tant le phrasé ponctué de la jeune fille que la gravité froide de son interlocuteur. Pour la dernière
+partie, que je ne conçois pas autrement que comme un accompagnement\footnote{%
+Il ne saurait, à mon sens, s’agir du soldat. D’abord, parce que l’enchaînement est, ainsi qu’on peut le
+constater, quasiment identique aux parties d’Elleth et d’Alster. Ce personnage secondaire ne possède pas
+de voix propre ; il n’est là, au fond, que pour renforcer les propos d’Alster au début, puis pour le
+provoquer par railleries, à la toute fin de la scène, poussant ses raisonnements autour du sens de son
+destin jusqu’à l’absurde, pour l’amener à accepter d’être le pion d’enjeux mythiques qui le dépassent.
+Le prologue ne lui définit qu’un attribut : « Il arbore en évidence sur son gambison l’insigne du corbeau »,
+c’est-à-dire de toute évidence le « Corbeau de Bethaine » (N. d. E., cf. « Introduction au \em{chadhruid} »
+dans le présent ouvrage, signe \abbr:no{7}), sorte de fibule ou de médaille que portaient les plus
+fervents compagnons d’Alster (ainsi que lui-même sans aucun doute), ces « fils incompris du Dieu Borgne »
+qui se reconnaissaient « dans cet oiseau de sinistre augure, venant dévorer les cadavres après la bataille »
+(Anthoné de Longrines, \em{Dans le secret d’un bois}\kern[width=0.1em]). En un sens, il n’est que le miroir
+du Ptoliporthe, quoique préfigurant aussi, par ses atours mythologiques, le Dragon et la Chimère à venir.
+Au demeurant, il ne survit pas à la fin de la scène, tandis que le même signe de portée se retrouve ensuite.
+}, j’ai opté pour un hautbois.
+Il n’échappera pas aux oreilles averties que la structure mélodique du prélude (n’)est (qu’)une série
+de variations, en hauteur et en tempo, d’une même séquence de base, que l’on retrouve dans les mouvements
+suivants et que j’appellerai, faute de mieux, le « destin d’Alster ».
+
+\begin[numbering=false]{partition}
+\novbreak\img[src=examples/almaq/opalescence_partition_1.png, width=97%fw]
+\caption{Premier mouvement (prélude)\novbreak{}}
+\end{partition}
+
+Tout au long de la scène, le ton monte entre Alster et son fantassin. Tandis que le premier tente de
+justifier ses actes et les crimes terribles qui ont conduit à la chute de tant de royaumes et au sac
+final d’Almaq, le second le nargue de plus en plus ostensiblement, lui faisant valoir que c’est lui
+seul qui s’est érigé en Ptoliporthe, réalisant les présages et accomplissant dès lors de son plein gré
+les antiques prophéties qui, cependant, auraient pu ne jamais se réaliser\footnote{%
+Keldre semble élaborer sur le fait que les éléments déclencheurs de la neuvième guerre cyclique ont
+dérouté les gens d’Almaq, cf. le chapitre consacré à cette question par E. Wiegger, \em{Almakistik V-VI},
+Potsdam, 1956 ; en résumé, lors des huit guerres précédentes, l’ennemi historique avait toujours été
+le peuple dit siléen (c.-à-dire, au sens le plus large, les royaumes du Nord, unis ou non), tandis
+qu’au \abbr:siecle{x} siècle, Nivein le Sage, leur « Roi Blanc », semble avoir été un souverrain aspirant
+surtout à la paix, ayant cherché tant qu’il le pouvait à faire taire les dissensions internes aux royaumes
+traghes, nogres et cughes fédérés ; de sorte que les hostilités qui démarrèrent dans les îles avoisinantes
+auraient fort bien pu ne jamais constituer l’« ultime bataille » de la prophétie des Nautes.
+}. Elles annonçaient neuf guerres cycliques dont la dernière verrait la fin du monde et, comme de
+hasard, Alster non seulement participe à celle-ci, mais en devient le héraut. Le Destructeur de Cités
+emblématique des mythes d’Almaq serait le moteur auto-réalisateur d’un destin prophétique : « Le costume
+était à ton goût, et de croire que notre guerre pouvait être celle-là même, la plus grande, une finale
+à ta démesure, plutôt qu’une autre bataille insignifiante ? » ironise le troupier. « Là, c’est accompli,
+tu t’es rendu traître du monde et tu l’as brisé sous ton joug. En es-tu satisfait pour autant, seigneur
+lézardé, et es-tu empli à présent du sens que tu cherchais à donner à ta vie morcelée ? Tu ne peux plus
+douter, c’est sûr, d’être l’élu de dieux maudits et le pantin de leurs desseins ! » Saisi de colère,
+se refusant à endosser la responsabilité du suicide de la princesse Ernithé — auprès de laquelle il
+avait été élevé mais qui d’horreur s’est jetée de la Citadelle lors de la prise de la ville —, Alster
+s’emporte aux derniers affronts qui lui sont faits et pourfend son homme de main, sous les reproches
+d’Elleth.
+
+La deuxième séquence musicale, qui selon moi clôt cette scène, n’apporte à l’ensemble aucun thème
+véritablement novateur. On n’y trouve que le thème du « destin d’Alster », répété à foison, quoique
+entrecoupé des remontrances peinées d’Elleth, qui prennent, cette fois-ci, un ton propre et détaché,
+comme si la jeune fille ne voulait pas entrer dans le jeu du Ptoliporthe, alors que ce dernier
+s’enferme dans des idées de plus en plus délétères, ruminant avec une fureur croissante sa haine
+des puissances télébreuses qui auraient orienté ses actes et perverti son projet de refonder un monde
+meilleur.
+
+\begin[numbering=false]{partition}
+\img[src=examples/almaq/opalescence_partition_2.png, width=97%fw]
+\caption{Second mouvement (interlude entre sc. 1 et sc. 2)}
+\end{partition}
+
+La scène 2 se déroule dans les égouts boueux d’Almaq, aux abords du fleuve souterrain qui traverse
+la ville de part en part, « dans les eaux souillées et saumâtres de la cité qui saigne ». Elle voit
+Alster bien décidé à occire le Dragon et la Chimère, rejetant ses fautes sur les deux monstres
+fabuleux, puisque ce seraient eux qui se tiendraient à l’origine de tous les maux du monde, et en
+particulier des siens. Elleth lui rappelle que tuer un dragon ou une chimère, cela revient précisément
+à vouloir détruire le monde\footnote{%
+Ce thème légendaire complexe, à la fois originel et eschatologique, ainsi que l’a montré E. Lenski,
+\em{The Chronicles of Alstre and Dongann by the poet Celdre, op. cit.}, chapitre « Commentary on the
+account of the Ninth Cyclic War », tient au mystère des Nautes et puise autant aux mythes d’Almaq
+qu’aux racines de ceux des autres peuples de Silé. Il sort trop largement du sujet de notre exposé
+pour être expliqué ici.
+} : Pourquoi Alster ne peut-il pas s’arrêter avant qu’il ne soit trop tard ? Mais le Ptoliporthe ne
+l’écoute pas, il veut sa vengeance contre le destin trompeur. Leurs altercations enflammées sont
+l’occasion pour le poète d’enchaîner plusieurs tableaux et saynettes relatant les épisodes marquants
+de la neuvième guerre cyclique et du parcours du destructeur de cités, la matière légendaire ne refaisant
+surface qu’à leur dénouement\footnote{%
+Quoique les chœurs interviennent régulièrement dans cette scène, leur nature mythologique ne joue aucun
+rôle fondamental avant la fin.
+}, lorsque Alster parvient enfin devant le Dragon et la Chimère et plante
+son épée dans le corps du premier.
+
+Tout du long, les chœurs se sont approchés des deux acteurs ; celui des femmes en retrait derrière
+Alster, celui des hommes entourant la jeune fille jusqu’à la faire peu à peu disparaître derrière
+leur robe. La partition de l’interlude musical suivant débute par un chant montant, que nous attribuons
+à Elleth, puis enchaîne de nouveau une série de variations du « destin d’Alster », mais en y ajoutant
+cette fois-ci deux lignes chorales en contrepoint. L’une des portées a pour clef le signe de la
+Chimère\footnote{%
+(N. d. E.) Cf. encore, dans la présente édition, « Introduction au \em{chadhruid} »,
+signe \abbr:no{18}.
+}, de sorte que son attribution est évidente et laisse logiquement l’autre au Dragon, même si la
+clef d’ouverture est différente du symbole usuel attendu. Cette séquence, que je désignerai
+comme l’« antienne des deux monstres », mérite que l’on s’y attarde. Les mesures de la Chimère
+sont — systématiquement — en retard sur celles du Dragon, et interrompues avant elles, de sorte
+que les deux chants se retrouvent de fait alternés. De surcroît, à bien y regarder, le thème de
+la chimère dans ce passage est une version tronquée du « destin d’Alster ». Tout se passe comme
+si la Chimère ne pouvait commencer ou finir ses phrases sans que le Dragon ne prenne le dessus.
+\em{A contrario}, le thème de ce dernier se résume, essentiellement, à une succession de trois
+notes qui semblent ignorer les autres parties — ou qui tentent de s’imposer à elles.
+
+\begin[numbering=false]{partition}
+\img[src=examples/almaq/opalescence_partition_3.png, width=97%fw]
+\caption{Troisième mouvement (interlude entre sc. 2 et sc. 3)}
+\end{partition}
+
+Basculant totalement dans le fantastique, la dernière scène atteint un summum de complexité narrative.
+Selon l’indication du prologue, elle se déroule « dans la nuit par-delà les remparts », ce qui peut
+certes signifier, de façon très prosaïque, « en-dehors (des murs) de la cité », mais aussi, dans
+l’imaginaire du peuple d’Almaq, se référer à un outre-monde supposé en-dehors du monde connu, voire
+hors du temps\footnote{%
+Giuseppe Cosini, « Fuori città di Almaq: Rappresentazione fisica o spazio oltre il mondo? » in
+\em{Cronache di Almaq, dalla lucertola all’idra}, éd. Bontempi, Lecce, 2013.
+}. L’estrade est plongée dans l’obscurité ; les visages des acteurs et des choreutes sont seulement
+éclairés par en-dessous. Elleth se tient au centre, « frêle figure pâle en pleurs, (…) robe déchirée
+et cheveux en bataille » ; les chœurs se placent de part et d’autre, tandis qu’Alster, entrant et
+sortant de l’ombre, fait les cent pas entre eux.
+
+Pour ce qui est de l’argument, il est assez difficile à cerner. Blessé mais loin d’avoir succombé
+au coup porté par Alster, le Dragon vocifère son mépris, son aversion des mortels. Chimère, Dragon
+et Ptoliporthe s’apostrophent tour à tour, dans une succession rapide d’invectives haineuses et
+d’injures obscènes. Le poète fait appel à toute sa connaissance des légendes anciennes, d’où il tire
+nombre de formules équivoques et d’épithètes difficiles à interprêter\footnote{%
+Sigriður Grimsdottir, \em{Alster the Homeslayer and Dongann the Trickster}, thèse de l’université
+de Colorado Springs, 1963 ; VSNR Saga-Book, vol. XVI ; Penguin Books, 1969 (épuisé) ; texte
+introductif, p. xxxiv-xxxvii, relève des similarités inexpliquées entre la \em{Alstrs Heimsbana saga}
+scandinave et le théâtre de Keldre : a) Le soldat de la sc. 1 occupe un rôle semblable à celui du
+bouffon Dongan dans la saga, se gaussant d’Alstr tout en cherchant à l’influencer ; b) La saga
+couvre principalement les batailles d’Alstr, qui, quoique transposées, suivent globalement une
+trame assez proche des épisodes évoqués dans la sc. 2 de la pièce, avec une même progression
+dramatique ; et c) enfin, la saga contient plusieurs allusions aux mythes norois, avec des
+métaphores d’interprétation incertaine qui, bien que pouvant relever du style spécifique à cette
+sorte d’œuvre (\em{kennings} et \em{heiti}\kern[width=0.1em]), entreraient aussi en écho avec
+la sc. 3. Selon Grimsdottir, les formules encore opaques, tant dans la saga que dans la pièce de
+Keldre, pourraient s’expliquer mutuellement, mais la recherche en ce sens est encore balbutiante,
+pour ne pas dire controversée. Elle n’emporte pas l’adhésion de tous les universitaires. Lenski
+elle-même (correspondance privée avec ses ayants droit) avait émis quelques réserves prudentes
+sur cette partie des travaux de son ancienne élève.
+}, en particulier de mythes propres aux peuples siléens du Nord qui, quoique sans doutes connus à
+Almaq à son époque, n’appartiennent probablement pas au fond légendaire usuel\footnote{%
+Le mythe de la Chimère connaît plusieurs variantes même à Almaq et le thème de la dévoratrice de
+mondes est indubitablement ancien. La cosmogonie siléenne le décline à sa façon, au sein de tout
+un panthéon de dieux et de démons protéiformes. L’Hydre femelle dévore ses rejetons incestueux,
+n’épargnant qu’un seul de ses fils. Cet élément apparaît dans quelques textes d’Almaq
+(\em{Sorn abenedrin}, l’Hydre mâle bréhaigne ), à vocation herméneu­tique plus que mythologique,
+mais à cet emprunt isolé près, les autres développements de la légende siléenne, quoique connus
+des érudits, ne semblent pas avoir eu de prise réelle à Almaq. En particulier, et malgré les
+nombreux parallèles qui les rapprochent, la nature strictement négative et maléfique de l’Hydre
+siléenne, figure du chaos destructeur, pleine de haine et de vilenie, est (globalement) absente
+de l’image que le gens d’Almaq se faisaient de cet être-concept mythologique. Cf. E. Wiegger,
+\em{Das Baum und der König}, Hanovre, 1944.
+}. Pour en donner quelques exemples sur lesquels les commentateurs s’accordent : la chimère est
+« l’Acariâtre », « l’empoisonneuse des Mondes », « la Dévoreuse insatiable », une « castratrice
+au pays des morts »\footnote{%
+\em{L’Encyclopédie des mondes en langue d’Almaq}, préservée par Keldre lors de la chute de la cité,
+nous donne son nom en vieux siléen (\em{Sīg a Daran Sīn}, « l’Empoisonneuse aux Cent Visages ») et
+en langue traghe ultérieure (Sigreine). Si elle est décomptée parmi les déesses primitives, une
+description en fait une vieille sorcière acariâtre — ce qui peut aussi se concevoir comme un autre
+sens possible de son nom en vieux siléen, « l’empoisonneuse au visage centenaire » — experte en
+philtres magiques et en poisons mortels (\em{*sig-}, le sang-poison de l’hydre). Son dernier fils
+incestueux est \em{Sigeran a Satan} (Sigrain le Méhaigné). Dans certaines leçons, sa stérilité
+découle d’une blessure qu’il aurait reçue lors de leur premier accouplement, dans l’empressement
+qu’elle avait « à ne laisser perdre aucune goutte de sa semence ». D’autres variantes attribuent
+cette stérilité au combat que Sigrain mena contre un autre dieu du chaos, \em{Kūr-i-Geler} (Curigle),
+le Démon Balafré venu les tuer dans leur antre souterraine, en représailles des supposés méfaits de
+l’Hydre (qui aurait, dit-on, empoisonné la liqueur servie aux dieux dans leurs banquets). Sigrain
+fit rempart de son corps pour protéger sa mère et amante. Pendant le combat, il cracha son mépris
+au visage du dieu, et ce crachat empoisonné défigura son ennemi. Ce dernier parvint à l’émasculer
+avant de s’enfuir. Les plaies que Sigrain avait reçues au bas ventre s’infectèrent et, veillé par
+sa mère, il trépassa dans une lente et douloureuse agonie. La plupart des sources siléennes, nous
+dit \em{l’Encyclopédie}, s’accordent sur un retrait de l’Hydre dans les profondeurs des Enfers,
+où elle se lamente sur sa solitude et sa faim. Quelques textes plus tardifs suggèrent, \em{a contrario},
+que l’Hydre a remis au monde une nouvelle génération spontanée de mâles et qu’elle a repris le cycle
+de ses débauches infernales : la fin des temps, prophétisent-ils, surviendra lorsque son appétit
+insatiable surpassera sa capacité à procréer. Ces éléments du mythe cosmogonique n’ont pas
+d’équivalents directs dans les croyances d’Almaq, qui ne connaissent ni hordes de démons, ni enfers
+souterrains. Le thème de la castration de l’Hydre mâle (par sa mère ou par un représentant des mâles)
+est strictement siléen. L’influence de la culture siléenne pendant les époques de la domination traghe
+est néanmoins perceptible, de sorte que certaines caractéristiques de l’Hydre femelle transparaissent
+dans nombre de productions littéraires tardives. Pour autant, cela ne semble pas avoir relevé d’une
+quelconque forme de croyance, cf. encore les analyses de Wiegger.
+} ; le monde est appelé le « sang séché du Dragon » ainsi que les « demeures lézardées »\footnote{%
+Cf. \em{L’Encyclopédie des mondes en langue d’Almaq}, « Légende des cinq sangs », où les Dragons
+revendiquent le monde comme leur possession.
+} ; quant au dragon lui-même, il est « l’Intemporel »\footnote{%
+Cf. « Chute de Dragon » et « Aube de Sang », deux « contes de veillée de la neuvième guerre cyclique »,
+relatés dans les \em{Chroniques}, où le Dragon est ainsi nommé — dans la trad. fr. de P. de Blancandre,
+« l’Achrone ».
+}, le « sire des eaux smaragdines ». Et des formules encore incomprises : que sont le « bâtard du Borgne »
+et les « filles du fleuve crépusculaire » ?
+
+Les avis sur cette scène sont partagés. Pour Pierre de Blancandre, « le celèbre poète-dramaturge déploie
+tout son génie littéraire et s’élève à la hauteur de sa réputation ». Emma Lenski est bien plus mesurée :
+« C’est un passage difficile d’accès, dont l’objectif ne cesse de nous échapper, en dépit de toutes nos
+approches intertextuelles ». Quant à Wiegger, il est pour le moins sévère\footnote{%
+E. Wiegger, \language[main=de]{\em{Die Letzten Seiten: Almakistik IX}}, notes posthumes parues à Berlin en 1989. Nous traduisons
+librement de l’allemand ; « clabauderie » est en français dans le texte.
+} : 
+
+\begin{blockquote}
+Rien ne fait sens dans la dernière scène. Les métaphores sont enflées et les tournures inutilement
+compliquées. Que de lourdeurs, que d’envolées lyriques masquant au final la pauvreté du propos !
+Car l’argument, sous couvert mythologique, est assez faible, pour ne pas dire inexistant. Que Blancandre
+puisse dire que ce texte incompréhensible vaut à ce Keldre son surnom d’Obscur, c’est de facto mérité !
+Tout n’est en définitive qu’un exercice de style vain, qui n’éclaire en rien la vie d’Alster et la chute
+d’Almaq. (…) Le développement final grandiloquent n’est qu’une péroraison futile, une \em{clabauderie}
+consternante. Ce poète, qui aspirait à paraître profond, n’a accouché que d’une œuvre aussi impénétrable
+qu’elle est est pompeuse.
+\end{blockquote}
+
+Quoi que l’on pense d’un pareil jugement, le final musical reproduit, en quelque sorte, la complexité
+du matériau textuel. Bien plus travaillé que les précédents, ce quatrième et dernier mouvement peut
+se découper en plusieurs temps : i) la Chimère, seule, entonne ce que l’on pourrait appeler le
+« thème chimérique », assez déconcertant mais non dénué de musicalité\footnote{%
+Keldre, quoique se référant à plusieurs reprises, ainsi qu’on l’a vu \em{supra}, au mythe de l’Hydre
+siléenne dans sa caractérisation de la Chimère, s’éloigne ici des modèles classiques dont il s’inspire,
+dans lesquels l’hydre, figure archétypique du néant, n’est aucunement capable d’harmonie. Par ex. lors
+de la veillée de son fils agonisant, selon la tradition siléenne, son chant mortuaire résonne « comme
+cent voix en chœur, entremêlant pleurs, cris gutturaux et hurlements bestiaux, dans un horrible concert
+de notes discordantes, crissements métalliques et grondements chthoniens » (\em{L’Encyclopédie des mondes
+en langue d’Almaq}, « Légende des cinq sangs »).
+} ; ii) s’ensuit un affrontement polyphonique où le Dragon tente un jeu en opposition, légèrement
+décalé ; échange dissonant qui se conclut par son abandon, bien qu’il essaie d’imposer son thème
+propre ; iii) la Chimère ne s’en est pas laissée compter et reprend le dessus, casant même une
+mesure du destin d’Alster ; iv) les deux créatures mythologiques s’affrontent de nouveau, leur
+discorde reprenant l’« antienne des monstres » ; v) mais la Chimère cependant l’emporte
+encore ; et vi) enfin, les choreutes des deux groupes s’accordent : Dragon et Chimère abordent
+ensemble le final ; lui sur son thème de base ; elle, parvenant à maintenir son jeu (qui repart
+du thème chimérique initial, inclut une mesure de celui du Ptoliporthe et reprend même une mesure
+du thème du Dragon) — jusqu’à la toute fin, où l’accompagnement reprend le « destin d’Alster ».
+
+Pour conclure, rappelons les derniers propos d’Alster : « Puisque il en ainsi, que l’ordre du monde
+est gouverné par un sort implacable et terrible, que tout mène à la fin des temps et que j’en suis
+le jouet autant que l’acteur, alors soit ! Ô Chimère, ô Dragon, j’accepte de boire la coupe qui m’est
+destinée, jusqu’à la lie. » — Et les feux s’éteignent, nous indique le paratexte, plongeant la scène
+dans l’obscurité tandis que le Ptoliporthe retourne sa lame contre lui et qu’Elleth pousse un cri
+déchirant dans la nuit. Certes, nous ne pouvons dire si Alster met son geste à exécution. La partition
+est cependant claire : Elleth et lui sont absents de ce final tragique dominé par la Chimère, où les
+deux antagonistes monstrueux se combinent néanmoins à la fin, sans vainqueur ni vaincu. Pour ma part,
+je n’ai dès lors que peu de doutes quant à l’issue de cette effroyable tragédie. Je ne crois pas que
+la pièce soit incomplète, que les pages soient perdues où l’on verrait de nouveau le Ptoliporthe
+arpenter les planches. À l’apothéose du testament musical de Keldre, son destin est scellé. Pour
+autant, le traducteur latin Titius Vilis ne s’y est pas trompé avec son \em{actus primus} en sous-titre.
+C’est cela peut-être qu’il nous invite à méditer par-delà les siècles qui nous séparent maintenant
+de la chute d’Almaq : un instant inconcevable, fondamental et fondateur, où tout a basculé — où
+l’indicible est arrivé, emportant dans l’oubli un homme hors norme mais dépassé par les événements
+et, avec lui, une cité merveilleuse, voire un monde entier.
+
+\begin[numbering=false]{partition}
+\img[src=examples/almaq/opalescence_partition_4.png, width=97%fw]
+\caption{Quatrième mouvement (final)}
+\end{partition}
+
+\smallskip
+\couyard[type=6, width=default]
+
+\end{document}

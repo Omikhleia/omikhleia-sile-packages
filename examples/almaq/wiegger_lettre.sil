@@ -1,0 +1,76 @@
+\begin{document}
+\chapter[numbering=false]{Un inédit de Wiegger.}
+\script{
+SILE.registerCommand("struck", function (_, content)
+    local hbox = SILE.call("hbox", {}, content)
+
+    local oldOut = hbox.outputYourself
+    hbox.outputYourself= function (self, typesetter, line)
+      local saveY = typesetter.frame.state.cursorY
+      local saveX = typesetter.frame.state.cursorX
+      oldOut(self, typesetter, line)
+      SILE.outputter:drawRule(saveX - 2, saveY - line.height, self.width + 3, line.height + line.depth)
+    end
+end)  
+}%
+\begin[family=Truetypewriter PolyglOTT, size=9pt, language=en]{font}
+\set[parameter=document.parskip, value=0.5bs]
+\set[parameter=document.parindent, value=0]
+\set[parameter=current.parindent, value=0]
+\set[parameter=document.lskip, value=0.5cm]
+\set[parameter=document.rskip, value=0.5cm plus 9999pt]
+Prof. Erich Wiegger\hfill{}July 1963\break
+27 \struck{XXXXXX}straße,\break
+Potsdam, D.D.R.
+
+\qquad{}Dear Mrs. Lenski-Blancandre, 
+
+I feel apologetic for not having written earlier, but of course, I received the autographed copy of the new
+edition of your Chronicles of Alstre in may 1962.
+
+In all honesty, it came as a surprise, but I am very thankful for your words, which touched my heart despite
+of their irony.
+Since you wrote in German, I’ll return the courtesy with a letter in English. Perhaps next time, for I dare
+there will be a next time, can we use the tyesed anevethrin, and I’ll call you "my dear Emma" again, as we
+used to, before our world fell apart in its second cyclic war? One may dream.\quad\rebox[width=0,height=0]{\lower[height=1bs]{\img[src=examples/almaq/wiegger_lettre_annotation_lenski_1.png, width=2.5cm]}}
+
+As for you book, it is truly a great masterpiece and a landmark in our domain. 
+
+Its reading was a true gift to me, in difficult times. It reached me in the most unfortunate moment, hence my
+late reply.
+You certainly remember Hanne always had a frail health. The situation declined a lot last year. She is getting
+slightly better by now, but we both know the saying of Fesed, "Time is an enemy without defeat"; and I don’t
+have much Hoffnung-Schicksal left...
+
+Yours sincerely,
+
+\qquad\qquad\img[src=examples/almaq/wiegger_signature.png, width=3cm]\break
+P.S. I recovered an old document that I thought lost or more presumably destroyed. I was part of an expedition
+in 1938 in Peru, where we found an engraved ivory casket (approx. 9 x 7 by 5 inches) with interesting
+inscrip-\break
+tions. I don’t know what happened to the casket, but imprints were made by \struck{XXXXX} \struck{XXXXXX} upon
+my return to Germany. It was not included in my 1943 book because of the secrecy around our operations.
+I had kept a carbon copy, with my handwritten annotations, in a cache.
+Despite the bombings in \struck{XXXXX} and \struck{XXXXXX}, it survived the war.
+
+P.P.S. I am not the one who applied the unfortunate "stamps". Obviously, it is unsafe for me to keep such
+material here, so I’ll arrange these pages to pass through to you, to the West.
+
+Q.E.D. The Sword is not Aquila. \lower[height=0.5bs]{\rebox[width=0,height=0]{\img[src=examples/almaq/wiegger_lettre_annotation_lenski_2.png, width=3cm]}}
+
+\end{font}
+
+\hbox{}\vfill
+
+\begin{center}
+\img[src=examples/almaq/wiegger_coffre_a.png, height=90%fh]
+\end{center}
+
+\eject
+\hbox{}\vfill
+
+\begin{center}
+\img[src=examples/almaq/wiegger_coffre_b.png, width=90%fw]
+\end{center}
+
+\end{document}
