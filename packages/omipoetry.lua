@@ -196,6 +196,7 @@ SILE.registerCommand("poetry", function (options, content)
   end
 
   SILE.settings.temporarily(function()
+    SILE.settings.set("current.parindent", SILE.length(0))
     SILE.settings.set("document.parindent", SILE.length(0))
     SILE.settings.set("document.lskip", indent)
     SILE.settings.set("document.rskip", regularIdent)
