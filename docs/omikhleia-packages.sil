@@ -530,7 +530,7 @@ of an extra, but it was so often needed by this author that he decided to includ
 standard.
 
 The environment relies on the same-named style for its styling and on the
-\doc:code{book.blockquote.margin} setting for its indentation (defaults to 2em). Indent ed
+\doc:code{book.blockquote.margin} setting for its indentation (defaults to 2em). Indented
 quotes can be nested.
 
 \subsection{Other features}
