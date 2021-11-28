@@ -216,11 +216,10 @@ local rowNode = pl.class({
       -- comment there.
       SILE.typesetter.state.nodes[#SILE.typesetter.state.nodes+1] = SILE.nodefactory.zerohbox()
       local hbox = SILE.call("hbox", {}, function ()
-      -- 
-      for i = 1, #self.cells do
-        self.cells[i]:shipout(width)
-      end
-    end)
+        for i = 1, #self.cells do
+          self.cells[i]:shipout(width)
+        end
+      end)
     if self.color then
       table.remove(SILE.typesetter.state.nodes) -- steal it back...
       colorBox(hbox, self.color) -- ...and re-wrap it with color.
@@ -397,7 +396,8 @@ SILE.registerCommand("ptable", function (options, content)
     end
   end)
   SILE.typesetter:leaveHmode()
-  SILE.call("medskip")
+  SILE.call("novbreak") -- FIXME weak solution to avoid breaks between table and a possible caption.
+  SILE.call("medskip")  -- Also I don't like much hard-coded skips...
 end)
 
 SILE.registerCommand("ptable:cell:hook", function (options, content)

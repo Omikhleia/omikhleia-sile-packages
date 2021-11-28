@@ -97,11 +97,13 @@ local styleForAlignment = function (style, content, ba)
         SILE.call("style:font", style.font, function ()
           SILE.call(alignCommand, {}, function ()
             styleForColor(style, content)
+            if not ba then SILE.call("novbreak") end
           end)
         end)
       else
         SILE.call(alignCommand, {}, function ()
           styleForColor(style, content)
+          if not ba then SILE.call("novbreak") end
         end)
       end
     else
