@@ -1,0 +1,223 @@
+\begin{document}
+\chapter[numbering=false]{Repères chronologiques.}
+\define[command=onum]{\font[features=+onum]{\process}}%
+
+\subsection[numbering=false]{Sources et repères.}
+
+\begin[cols=10%fw 90%fw, cellborder=0, cellpadding=0 4pt 0 0]{ptable}
+\begin{row}
+  \cell[valign=top, style=narrow]{\abbr:siecle{xi} s.}
+  \cell[valign=top, style=narrow]{\em{Codex de Briga.}}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\abbr:siecle{xii}}
+  \cell[valign=top, style=narrow]{\em{Codex de Monesterellum.}
+
+\em{Tὰ τοῦ Kελδρου χρονικά βιϐλία.}
+
+Autres traductions partielles en grec byzantin.
+
+\em{Rhodanté et Dosiclès} (1140) de Théodore Prodrome (1115–1160).
+
+Les \em{Fabulae Alastri} et autres versions partielles en latin.
+}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\abbr:siecle{xiii}}
+  \cell[valign=top, style=narrow]{Sac de Constantinople (1204), d’Athènes (1205).
+
+\em{Ὁ τοῦ πτολιπόρθιου τόμος.}
+
+\em{Alstrs Heimsbana saga ok Dongans frumkveða flærðanna.}
+
+Marco Polo (1254–1324)
+}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\abbr:siecle{xiv}}
+  \cell[valign=top, style=narrow]{\em{Tὸ τοῦ γελωτοποιοῦ βιϐλίον.}}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\abbr:siecle{xv}}
+  \cell[valign=top, style=narrow]{\em{Περὶ τῆς πτῶσεως Ἀλμάκος.}
+
+Manuscrit de Voynich.
+}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\abbr:siecle{xvi}}
+  \cell[valign=top, style=narrow]{\language[main=el]{\em{Tὸ βιϐλίον Ἀλστερίωνος τοῦ Πτολιπόρθιου καὶ Δογγάννου τοῦ Γελωτοποιοῦ.}}
+
+\em{Liber de Fabulis Alastri Urbium-Eversoris} de la bibliothèque vaticane.
+
+\em{Codex Rohonczi.}
+}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\abbr:siecle{xvii}}
+  \cell[valign=top, style=narrow]{Traduction arabe du \em{περὶ τῆς πτῶσεως Ἀλμάκος.}}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\abbr:siecle{xviii}}
+  \cell[valign=top, style=narrow]{\em{Dongan glīƿere ⁊ hleahtorsmiþ}, de nos jours reconnu comme un
+        faux littéraire et non une œuvre du \abbr:siecle{xi} s.}
+\end{row}
+\end{ptable}
+
+\subsection[numbering=false]{Acteurs contemporains et bibliographie sélective.}
+
+\begin[cols=10%fw 90%fw, cellborder=0, cellpadding=0 4pt 0 0]{ptable}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{1874}}
+  \cell[valign=top, style=narrow]{\em{Cosmographia in Fabulae Alastri, in Graeca et Latina}, éd. Karl H. Føskangre.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{1880}}
+  \cell[valign=top, style=narrow]{Un incunable des \em{tὰ τοῦ Kελδρου χρονικά βιϐλία} est retrouvé.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{1887}}
+  \cell[valign=top, style=narrow]{Naissance de Pierre de Blancandre.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{1901}}
+  \cell[valign=top, style=narrow]{Naissance d’Eugène de Blancandre, frère né sur le tard de Pierre.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{1907}}
+  \cell[valign=top, style=narrow]{Pierre de Blancandre fait paraître, à compte d’auteur,
+       \em{les Chroniques du Ptoliporthe & autres récits d’Almaq} à La-Charité-sur-Loire.
+       Il ment à son imprimeur sur son jeune âge, ce qui explique que certaines biographies le font naître en 1889.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{1912}}
+  \cell[valign=top, style=narrow]{Naissance d’Emma Lenski.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{1913}}
+  \cell[valign=top, style=narrow]{Naissance d’Erich Wiegger.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{1915}}
+  \cell[valign=top, style=narrow]{Devenu soutien de famille, Pierre prend en charge le jeune Eugène qui se passionne pour les
+        travaux de son aîné.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{1923}}
+  \cell[valign=top, style=narrow]{Pierre et Eugène séjournent à Łódź en Pologne chez Mateusz Lenski et sa compagne Bolesława Gringarten.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{1924}}
+  \cell[valign=top, style=narrow]{Parutions conjointes d’une nouvelle édition très largement augmentée des \em{Chroniques du Ptoliporthe} de
+        Pierre de Blancandre et de leur leur traduction en polonais par Mateusz et Bolesława Lenski,
+        \em{Kroniki niszczyciela miasta}.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{1933}}
+  \cell[valign=top, style=narrow]{Lors d’un congrès à Oslo, où l’un accompagnait un professeur,
+        l’autre son père et les Blancandre, Erich Wiegger s’amourache d’Emma Lenski, qui
+        l’éconduit.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{1936}}
+  \cell[valign=top, style=narrow]{Eugène de Blancandre s’engage dans les Brigades internationales.
+    La jeune Emma Lenski (24 ans), au pair chez les Blancandre, le convainc de fiançailles avant son
+    départ, en dépit de leur écart d’âge.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{1937}}
+  \cell[valign=top, style=narrow]{Le 4 sept., décès à 36 ans d’Eugène de Blancandre pendant la guerre
+    d’Espagne.
+    En novembre, Emma Lenski fait paraître à Londres \em{The Chronicles of Alstre and Dongann
+    by the poet Celdre}.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{1939}}
+  \cell[valign=top, style=narrow]{Parution du texte de la conférence d’Emma Lenski, « \language[main=en]{Re-reading
+   Sifo: hidden truth & unveiled secrets in the chronicles of Alstre} ».}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{1942}}
+  \cell[valign=top, style=narrow]{Mateusz et Bolesława décèdent à Bełżec.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{1943}}
+  \cell[valign=top, style=narrow]{Les \em{Chronikhen von Almak} d’Erich Wiegger sont publiées à Leipzig.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{1944}}
+  \cell[valign=top, style=narrow]{\em{Das Baum und der König} de Wiegger, imprimé à Hanovre, reprenant aussi ses essais
+        parus dans sa revue personnelle \em{Almakistik}, I–III.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{1954}}
+  \cell[valign=top, style=narrow]{Wiegger, \em{Almakistik} IV, Heidelberg.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{1956}}
+  \cell[valign=top, style=narrow]{Wiegger, \em{Almakistik} V–VI, Postdam. Pierre de Blancandre décède, à 69 ans, des suites
+   d’une longue maladie.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{1957}}
+  \cell[valign=top, style=narrow]{E. Poplavsky recueille les \em{Народные легенды страны Алмака} dans la région de Kaliningrad.
+        L’ouvrage, au tirage assez confidentiel, ne fut cependant découvert en Europe de l’Ouest qu’après
+        1991.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{1962}}
+  \cell[valign=top, style=narrow]{Seconde édition de \em{The Chronicles of Alstre and Dongann
+    by the poet Celdre}. Recension de la Saga d’Alstr noroise par Pål Laufeyson.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{1963}}
+  \cell[valign=top, style=narrow]{Sigriður Grimsdottir soutient sa thèse à l’univ. de Colorado Springs.
+        Son mémoire, \em{Alster the Homeslayer and Dongann the Trickster}, est réédité en 1969.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{1971}}
+  \cell[valign=top, style=narrow]{Wiegger, \em{Almakistik} VII–VIII, Postdam. Très affecté
+  par la mort de son épouse Hanne en 1965, Wiegger se montre très critique et désabusé.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{1983}}
+  \cell[valign=top, style=narrow]{Décès d’Erich Wiegger à 70 ans.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{1989}}
+  \cell[valign=top, style=narrow]{\language[main=de]{\em{Die Letzten Seiten: Almakistik IX}}, notes posthumes
+    de Wiegger parues à Berlin.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{1994}}
+  \cell[valign=top, style=narrow]{\em{Die Kosmographie des Alasters}, Munich.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{1995}}
+  \cell[valign=top, style=narrow]{\em{Summa Almaquensis. Essays in honor of Emma Lenski}, éd. Pumpernickel \em{et al.}}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{2003}}
+  \cell[valign=top, style=narrow]{Emma Lenski décède à 91 ans.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{2011}}
+  \cell[valign=top, style=narrow]{\em{Collected essays in memory of Emma Lenski}, Leeds.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{2013}}
+  \cell[valign=top, style=narrow]{\em{Cronache di Almaq, dalla lucertola all’idra}, éd. Bontempi, Lecce.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{2014}}
+  \cell[valign=top, style=narrow]{\em{A cosmography of the Fables of Alstre from the Greek and Latin sources}, Cork.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{2020}}
+  \cell[valign=top, style=narrow]{Yann Caraye, \em{Opalescence}, Arkham Records.}
+\end{row}
+\end{ptable}
+
+\couyard[type=6, width=default]
+
+\end{document}
