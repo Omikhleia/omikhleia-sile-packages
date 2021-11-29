@@ -11,7 +11,7 @@ encore serait bienvenue.}
 C’est un fait que la matière des \em{Chroniques} est principalement de nature littéraire. Les preuves archéologiques
 ont longtemps été inexistantes. Quoique quelques progrès aient été faits dans ce domaine, elles sont encore très
 minces à ce jour\footnote{%
-Pour un exemple typique, cf. la fig. 1 en fin d’article.
+Pour un exemple typique, cf. la fig. \ref[marker=fig-narg-an-sitar] en fin d’article.
 }, en dépit des recherches entreprises depuis le début du \abbr:siecle{xx} siècle.
 
 Les experts s’accordent néanmoins aujourd’hui sur le fait que la matière d’Almaq serait apparue sur le
@@ -133,8 +133,8 @@ fantasmée. Nous sortons là du raisonnable.
 
 Revenons-en, plus sérieusement, aux traductions qui nous firent connaître les \em{Chroniques}.
 
-\section[numbering=false]{La branche grecque : \em{\language[main=el]{Tὸ βιϐλίον Ἀλστερίωνος τοῦ Πτολιπόρθιου καὶ Δογγάννου
- τοῦ Γελωτοποιοῦ}.}}
+\section[numbering=false]{La branche grecque : \language[main=el]{Tὸ βιϐλίον Ἀλστερίωνος τοῦ Πτολιπόρθιου καὶ Δογγάννου
+ τοῦ Γελωτοποιοῦ}.}
 
 Emma Lenski\footnote{%
 Emma Lenski, \em{op. cit.} (je traduis).
@@ -150,7 +150,7 @@ Choniadès rappelle que le vieil ecclésiastique avait espéré en vain, jusqu�
 « les trésors de la littérature antique qui faisaient la richesse de Constantinople ». Il dresse la liste
 présumée des ouvrages que Choniatès aurait possédés dans sa bibliothèque athénienne et qui n’auraient pas été
 retrouvés, au nombre desquels figure des \em{χρονικά Kελδρου}, ou « Chroniques de Celdre »\footnote{%
-Cf. fig. 2 en fin d’article.
+Cf. fig. \ref[marker=fig-grec-onciale] en fin d’article.
 }.
 
 Quant à ce titre, il s’agirait de la première mention attestée du texte \em{τὰ τοῦ Kελδρου χρονικά βιβλία}, dont
@@ -177,7 +177,7 @@ quoique transposée à Almaq et appliquée à un Dongann qui prend l’accent si
 grec aurait emprunté à Lucien et inspiré Prodrome ? C’est ce que pense Laufeyson, qui suppose dès lors une
 transmission byzantine de la matière d’Almaq par l’intermédiaire de Prodrome puis de Choniatès.
 La plus ancienne édition complète incluant cette anecdote est cependant celle imprimé en 1518 à Rome\footnote{%
-Cf. notre commentaire pour la fig. 3 \em{idem}.
+Cf. notre commentaire pour la fig. \ref[marker=fig-grec-titre] \em{idem}.
 }, de sorte qu’un ajout ultérieur est aussi une possibilité.\footnote{%
 Rendons exceptionnellement raison à la théorie des faussaires de Wiegger. Ce ne serait pas la première fois
 qu’un mystificateur cherche à faire passer un texte pour plus ancien qu’il n’est en réalité, sans hésiter à
@@ -222,7 +222,7 @@ et celle anglaise de Lenski.
 }.
 
 La très belle édition conservée au Vatican est unique en son genre. Illustrée de cartes\footnote{%
-Cf. fig. 5.
+Cf. fig. \ref[marker=carte-vaticana].
 }, elle contient en outre un fragment d’une pièce de théatre de Keldre, \em{le Masque opalescent}, et
 une présentation des règles du Tarot d’Almaq (voir \em{supra}\kern[width=0.1em]). Son compilateur ou
 traducteur putatif serait un certain Titius Vilis qu’aucune autre édition ne mentionne. Le consensus
@@ -308,7 +308,7 @@ avoient l’entendement des cartes bien avans les François ou les Anglois, et d
 Il ne faisoit guère de doute qu’il se moquoit de moi, mais j’eus la sagesse de me contenir et d’ignorer
 l’intrigans.\footnote{%
 Jean Desmarets de Varzy, \em{Journal d’un Nivernais à la Cour}, Paris, 1760. Cf. aussi la reproduction du
-manuscrit en fig. 4 \em{infra}. ¶ (Jeu du) Lansquenet : jeu de cartes qui s’est développé au
+manuscrit en fig. \ref[marker=fig-desmarets, relative=true]. ¶ (Jeu du) Lansquenet : jeu de cartes qui s’est développé au
 \abbr:siecle{xvii} siècle, cf. Rémond de Montmort, \em{Essai d’analyse sur les jeux de hasard}, Paris, 1708.
 Le valet ou laquais devenu « marquis » est évoqué dans la pièce \em{le Joueur} de Regnard, 1696 ; cf. aussi
 la lettre \abbr:no{39} de Karl Ludwig von Pöllnitz, \em{Lettres et mémoires du baron de Pöllnitz}, Amsterdam, 1737.
@@ -372,6 +372,7 @@ Lettre à Emma Lenksi, qui me la transmit en 1991.
 \begin{figure}
 \svg[src=examples/almaq/chadhruid_narg_an_sitar.svg, width=5cm]
 \caption{%
+\label[marker=fig-narg-an-sitar]%
 Reproduction (empreinte) de gravures sur bois trouvées dans l’église en bois debout
 (\em{stavkirke}\kern[width=0.1em]) de Hopperstad (Norvège, \abbr:siecle{xii} siècle),
 lors de travaux de restauration effectués vers 1885. Elles furent conservées jusqu’en
@@ -395,6 +396,7 @@ et ses doutes sur les sources littéraires.}}
 \begin{figure}
 \img[src=examples/almaq/grec_onciale.png, width=7cm]
 \caption{%
+\label[marker=fig-grec-onciale]%
 Onciale byzantine, début du \abbr:siecle{xiv} siècle : extrait d’une liste d’œuvres recencées par
 Grégoire Choniadès (c. 1240–1320) et présumées perdues après le morcellement de l’Empire byzantin
 lors de la quatrième croisade. On peut relever, sur la seconde ligne de cet extrait, la mention
@@ -405,6 +407,7 @@ Cf. \em{supra}, le titre complet \em{τὰ τοῦ Kελδρου χρονικ�
 \begin{figure}
 \img[src=examples/almaq/grec_titre.png, width=10cm]
 \caption{%
+\label[marker=fig-grec-titre]%
 Mention figurant en marge du commentaire (\em{scholia}\kern[width=0.1em]) d’une réédition du texte
 grec de Lucien de Samosate (Florence, milieu du \abbr:siecle{xvi} siècle). Elle est absente de
 l’\em{editio princeps} établie par Janus Lascaris (Florence, 1496). Le volume \em{in-quarto} publié
@@ -430,12 +433,14 @@ et Lorenzo di Alopa.}
 \begin{figure}
 \img[src=examples/almaq/jean_desmarets.png, width=99%fw]
 \caption{%
+\label[marker=fig-desmarets]%
 Extrait du manuscrit du journal de Jean Desmarets de Varzy. Bibliothèque nationale de France.}
 \end{figure}
 
 \begin{figure}
 \img[src=examples/almaq/carte_sile_vaticana.png, width=88%fw]
 \caption{%
+\label[marker=carte-vaticana]%
 Reproduction de la carte IV de la luxueuse édition des \em{Fabulae Alastri Urbium-Eversoris} conservée
 à la \em{Bibliotheca Apostolica Vaticana} (Vat. estr. ms. 408)\footnote{%
 J’ai choisi cette carte en particulier car elle donne au lecteur une idée d’ensemble du \em{locus dramatis}
