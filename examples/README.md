@@ -5,6 +5,8 @@ defined here.
 
 Please note that their license(s) may differ from that of the main directory.
 
+When not specified or in case of doubt, the applicable license is CC-BY-NC-SA 2.0.
+
 ## Sample book chapters
 
 They are used as "sample tests" for the **omibook** class and related packages.
