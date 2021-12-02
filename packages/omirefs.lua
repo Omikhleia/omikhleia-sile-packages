@@ -84,7 +84,7 @@ end
 local dc = 1
 SILE.registerCommand("refentry", function (options, content)
   if _markers[options.marker] ~= nil then
-    SU.warn("Duplicate label '"..marker.."': this is possibly an error")
+    SU.warn("Duplicate label '"..options.marker.."': this is possibly an error")
   end
   _markers[options.marker] = true -- Just store seen markers
 
