@@ -48,7 +48,7 @@ Manuscrit de Voynich.
   \cell[valign=top, style=narrow]{\abbr:siecle{xvi}}
   \cell[valign=top, style=narrow]{\language[main=el]{\em{Tὸ βιϐλίον Ἀλστερίωνος τοῦ Πτολιπόρθιου καὶ Δογγάννου τοῦ Γελωτοποιοῦ.}}
 
-\em{Liber de Fabulis Alastri Urbium-Eversoris} de la bibliothèque vaticane.
+\em{Liber de fabulis Alastri Urbium-Eversoris} de la bibliothèque vaticane.
 
 \em{Codex Rohonczi.}
 }
@@ -110,12 +110,12 @@ Manuscrit de Voynich.
   \cell[valign=top, style=narrow]{\onum{1924}}
   \cell[valign=top, style=narrow]{Parutions conjointes d’une nouvelle édition très largement augmentée des \em{Chroniques du Ptoliporthe} de
         Pierre de Blancandre et de leur leur traduction en polonais par Mateusz et Bolesława Lenski,
-        \em{Kroniki niszczyciela miasta}.}
+        \language[main=pl]{\em{Kroniki niszczyciela miasta}}.}
 \end{row}
 \begin{row}
   \cell[valign=top, style=narrow]{\onum{1933}}
   \cell[valign=top, style=narrow]{Lors d’un congrès à Oslo, où l’un accompagnait un professeur,
-        l’autre son père et les Blancandre, Erich Wiegger s’amourache d’Emma Lenski, qui
+        l’autre son père et les frères Blancandre, Erich Wiegger s’amourache d’Emma Lenski, qui
         l’éconduit.}
 \end{row}
 \begin{row}
@@ -142,7 +142,7 @@ Manuscrit de Voynich.
 \end{row}
 \begin{row}
   \cell[valign=top, style=narrow]{\onum{1943}}
-  \cell[valign=top, style=narrow]{Les \em{Chronikhen von Almak} d’Erich Wiegger sont publiées à Leipzig.}
+  \cell[valign=top, style=narrow]{Les \em{Chroniken von Almak} d’Erich Wiegger sont publiées à Leipzig.}
 \end{row}
 \begin{row}
   \cell[valign=top, style=narrow]{\onum{1944}}
@@ -155,7 +155,7 @@ Manuscrit de Voynich.
 \end{row}
 \begin{row}
   \cell[valign=top, style=narrow]{\onum{1956}}
-  \cell[valign=top, style=narrow]{Wiegger, \em{Almakistik} V–VI, Postdam. Pierre de Blancandre décède, à 69 ans, des suites
+  \cell[valign=top, style=narrow]{Wiegger, \em{Almakistik} V–VI, Potsdam. Pierre de Blancandre décède, à 69 ans, des suites
    d’une longue maladie.}
 \end{row}
 \begin{row}
@@ -176,7 +176,7 @@ Manuscrit de Voynich.
 \end{row}
 \begin{row}
   \cell[valign=top, style=narrow]{\onum{1971}}
-  \cell[valign=top, style=narrow]{Wiegger, \em{Almakistik} VII–VIII, Postdam. Très affecté
+  \cell[valign=top, style=narrow]{Wiegger, \em{Almakistik} VII–VIII, Potsdam. Très affecté
   par la mort de son épouse Hanne en 1965, Wiegger se montre très critique et désabusé.}
 \end{row}
 \begin{row}
