@@ -1,0 +1,534 @@
+\begin{document}
+\style:define[name=date:luthiers]{
+   \font[style=italic]
+   \paragraph[skipbefore=medskip, indentbefore=true, breakafter=false]
+}%
+\define[command=D]{\style:apply:paragraph[name=date:luthiers]{\process}}%
+
+\chapter[numbering=false]{Le jardin des Luthiers.}
+
+\D{17 de Glace, an 996 de l’ère siléenne.}
+
+\smallcaps{Princesse esseulée}, j’ai rêvé d’un château, de banquets et de ménestrels. Le premier est hors de ma portée,
+je n’ai pour toute richesse que cette masure héritée de mes parents où je vis seule, à Haute-Ferme, une bourgade
+sans importance qu’aucun prince ne viendra visiter. Les festivités supposent une renommée qui ne sera jamais
+la mienne : je porte un nom de reine selon le souhait de ma mère, mais je ne suis qu’une fille de simples paysans.
+Quant aux trouvères, puisqu’ils ne viendront pas à moi sans raison, il me faudra les remplacer…
+
+J’ai longtemps mûri mon projet, bel ami qui n’existe que dans mes songes, et je vais te confier chacun
+de mes jours et chacune de mes pensées par l’entremise de ce journal. En ton absence, il sera mon confident,
+mais chacun des mots que j’y inscris t’est destiné.
+
+J’ai noué mes cheveux dans mon dos, me promettant de ne les relâcher qu’au jour où ma tâche serait accomplie.
+
+\D{11 de Brume, an 997.}
+
+C’est dans un état d’esprit mélancolique, malheureuse dans ma solitude, que j’ai entrepris la fabrication
+de mon luth, la semaine dernière.
+
+Au début, j’ai fait des croquis, j’ai pris des mesures et esquissé des plans en réfléchissant au choix
+des bois… Décider de l’allure et l’arrondi exacts de la caisse, du nombre de côtes qui la composent,
+sur lequel aucun ouvrage ne semble s’accorder… Choisir entre l’érable ondé, l’if rouge ou le bois de serpent…
+Le manche et le chevillier qui le prolonge seront-ils en bois massif de la même essence ou plaqués en ébène ?
+Chevillier simple, d’ailleurs, comme le veut l’usage dans nos régions, ou double à la façon des contrées du Sud ?
+Tant de choix malaisés pour qui n’est pas spécialiste et ne s’en réfère qu’à une connaissance
+livresque du sujet… Ou alors faudra-t-il opter pour un tout autre arbre fruitier ? Si la qualité du luth vaut
+pour beaucoup dans la valeur des bois qui servent à sa fabrication, hmm… De l’aubier blanc, peut-être,
+comme au temps jadis… N’ai-je pas lu quelque chose à cet égard ? La tâche s’annonce pour le moins ardue.
+
+\D{Sans date.}
+
+Et des heures nocturnes, après le labeur journalier, à compulser d’obscurs manuels où chaque expert donne
+son avis à n’en plus finir… Pour le manche, entre épicéa ou tilleul, qu’est-ce qui convient le mieux ?
+Je n’ai pas les moyens de tout essayer, il me faudra trancher arbitrairement.
+Les navires marchands d’Almaq ne passent pas si souvent dans le pays, aussi sera-t-il nécessaire de faire
+importer les précieuses essences qui me sont nécessaires sans que j’aie une idée précise de la démarche
+à suivre pour cela. 
+
+\D{18 de Brume, an 997.}
+
+L’épicéa va de soi : pour une sonorité parfaite, la table d’harmonie, aussi fine que possible, doit être,
+à en croire mes sources, d’un bois léger et souple, provenant d’arbres d’altitude et anciens.
+Voilà un dilemme de résolu… Quant au reste, je vais un peu à l’aveuglette, me laissant guider par mon instinct —
+à défaut de connaissance certaine, la couleur d’une espèce ou son grain au toucher valent bien un autre critère.
+
+\D{13 de Floraison, an 997.}
+
+Dans mon esprit, jour après jour, l’instrument prend forme… Mes cahiers se noircissent lentement de schémas
+annotés, esquissant le galbe minutieux du manche, le contour sinueux de la caisse en demi-poire — il faudrait
+dire « piriforme », ai-je appris au gré de mes lectures. Rien n’est encore définitif, tout est à construire :
+plutôt qu’à perdre mon temps sans but, j’ai là matière à occuper mon esprit par une multitude de petits détails.
+
+\D{27 de Floraison, an 997.}
+
+La pose de la touche et des frettes, termes qui pour moi n’avaient aucun sens au début de mes recherches,
+devient maintenant l’objet de mes préoccupations. Parfois, je m’extasie devant une formule absconse
+qui me laisse sans souffle. « Il ne faut pas confondre l’archiluth et les luths dits théorbés, même
+si certaines de ses spécificités pourraient les regrouper sous une même dénomination » découvre-t-on par
+exemple dans \em{l’Organologie des Cordes Pincées} de Jan de Boquerose. Voilà qui n’est guère clair !
+Mais ces mots étranges revêtent une résonance enchanteresse, ils sont autant de poèmes et de chansons
+auxquels mon cœur aspire… Des mots étrangers à tes oreilles t’ont-il déjà fait pareil effet ?
+Ce savoir profond, sans doute, se transmet de maître à élève, entre initiés. Je donnerais beaucoup
+pour en rencontrer quelques-uns et partager avec eux ma passion, à la lumière de leur science.
+
+\D{3 de Chaleur, an 997.}
+
+La table sera bien sûr ornementée d’une délicate rosace. Sculptée « au canif », dit-on,
+sa découpe est unique et inimitable pour chaque luthier. Je commence donc à réfléchir à la marque
+qui personnifiera à jamais mon œuvre. Quel dessin lui donner, fleuri et ouvragé, ou régulièrement géométrique ?
+Tu ne peux imaginer quels moments d’intense extase ces considérations éveillent en moi.
+
+Dois-je consigner ici, plus prosaïquement, que je n’ai plus rien à manger ? Il va falloir se résoudre
+à aller un peu aux champs, poétesse. Le moins que l’on puisse dire, c’est que je ne fais pas une très
+bonne maîtresse de maison et que le retour à la réalité est parfois difficile, mine de rien.
+
+\D{16 de Chaleur, an 997.}
+
+Les cordes, ou chœurs ainsi qu’on les appelle dans le jargon du métier, sont en boyau de mouton.
+Je crois avoir saisi que la chanterelle est simple, les autres doubles, mais je n’en suis pas encore sûre.
+La complexité d’un tel instrument, si élémentaire en apparence lorsqu’on le voit, en spectateur ignorant,
+manié par des mains agiles, ne cesse de m’étonner.
+
+Les sillets frettes, en boyau aussi, sont noués autour du manche de manière à le diviser en demi-tons,
+m’indique \em{De l’Art du frettage d’un luth} de Fesed Lerani. « Le luth fretté avec expertise s’exprime
+à sa façon tendre et passionnée, invitant le poète à terminer ses phrases. C’est un instrument qui a acquis
+de la sagesse et de la personnalité. Il ne donne que des accords sereins : un frettage idéal procure
+les plus belles tierces dans les tonalités usuelles. »
+
+Ravie, je souris avec une pensée espiègle à l’idée que le poète place souvent plus d’un sens dans ses phrases. Il me faudra parfaire mes modestes connaissances musicales : c’est que déjà l’étude du luth m’emporte vers d’autres horizons insoupçonnés et vers une myriade de techniques qu’il me faudra maîtriser, de la langue des notes à la science des menuisiers, avant de pouvoir espérer mener mon projet à son terme. 
+
+\D{Sans date.}
+
+Dictionnaires et encyclopédies s’entassent dans ma bibliothèque. Je les fais venir à grand prix de la capitale,
+Onérande. Les gens du coin sourient de mes lubies, ils se demandent à quoi tous ces livres coûteux peuvent bien
+servir — Ces ignares, à supposer qu’ils sachent lire, ne connaissent certainement pas la différence entre
+un théorbe et un luth ordinaire. Je décide de ne leur prêter aucune attention.
+Pourquoi les laisserais-je empiéter sur mon jardin secret ?
+
+Mes amies préfèrent aller au lavoir. Il paraît que les hommes du village y passent pour se rendre aux champs
+et que c’est l’endroit idéal pour faire une charmante rencontre. Elles m’ont bien enjointe de les accompagner,
+mais je ne suis pas très à l’aise à l’idée d’être observée et jugée à la dérobée tandis que je lave mon linge,
+je préfère encore le calme de ma chaumière. On murmure dans mon dos que je suis une fille étrange,
+et je n’ai personne à qui confier mon amour secret de la musique. Je ne me trouve coquette et jolie
+que devant mon miroir, m’imaginant vêtue d’une robe de soie comme les grandes dames, mon instrument dans les bras.
+
+\D{15 de Sècheresse, an 997.}
+
+Alors que je me sens prête à commencer les travaux, ce sont les outils qui me causent quelques soucis…
+Je parle avec passion, te racontant chaque détail de mon aventure et, sans doute, déjà lassé,
+en as-tu plus qu’assez… Pourtant comment ne pas évoquer les innombrables pinces et marteaux,
+limes de précision, rabots et scies à rabot, les outils spécifiques pour polir les frettes, les pidaires —
+Voilà un bien joli terme, mais que recouvre-t-il, n’est-ce pas ? — les fers pour cintrer le bois,
+compas de mesure et autres Lousses — Oh ! Encore un objet au doux nom hermétique ! Sans parler de ces étapes,
+après l’étude du plan, dont l’enchaînement évoque quelque mystérieux secret alchimique :
+fabrication des éclisses, tournage des tasseaux et des chevilles, montage en accord…
+Il me semble assez logique, après tout, que la fabrication de ce qui doit être l’œuvre de ma vie dût
+prendre un cheminement ésotérique jalonné de mots aux sonorités mythiques et fascinantes.
+
+Des heures durant, tels ces collectionneurs passionnés que rien n’arrête, je peaufine mon art du luth —
+et ainsi le temps passe sans peser, dans un semblant d’inexistence… Mine de rien, ne l’ai-je point vaincu,
+ce triste seigneur que d’autres ont dit invincible ? Ou ne fais-je que l’éviter, avec une ignorance feinte,
+en me forçant inconsciemment à me croire l’égale des maîtres luthiers ?
+Je me croirais paraphraser le maître Fesed.
+
+\D{22 de Sècheresse, an 997.}
+
+Je flâne entre mes notes éparses, hors des bruits du monde et de leur atteinte :
+je suis moi-même une de ces cantates dont on ne sait à l’avance comment elles vont se terminer.
+Le compositeur Hieronymus de Brême, dont je rêve d’interpréter les pièces — je viens de découvrir
+les partitions que l’on m’a apportées — ne dit-il pas d’ailleurs « Je suis mon propre instrument,
+dans la souffrance il m’a fait autant que je l’ai conçu » ?
+
+\D{8 d’Automnal, an 997.}
+
+Quand l’enfant viendra, me plais-je à penser, je lui chanterai des berceuses, accompagnée de mon instrument.
+Je le fais pour ce jour futur, avant tout. Mes partitions s’épanouiront en lui et il rira gaiement,
+ses petites menottes tendues vers moi… Car le regard d’un enfant possède la brillance d’une symphonie. 
+
+\D{13 d’Automnal, an 997.}
+
+Mes travaux n’avancent pas. Ce luth entamé, au milieu de ses copeaux, ressemble à un cadavre. Mine de rien,
+ce n’est qu’un objet inerte, comment ai-je pu penser qu’il aurait une âme ? C’était un beau leurre,
+nous ne créons que des choses à notre image. À cette heure, je me sens la faiblesse de renoncer.
+
+Je n’ai pas reçu les livraisons escomptées et je me sens terriblement seule.
+L’automne me fait toujours cet effet, mais je n’arrive pas à m’y faire. Hier encore j’étais heureuse,
+aujourd’hui déjà maussade. La nature doit avoir ses raisons.
+
+Nos choix sont des pièges pernicieux — Ils procurent la richesse d’une main, mais nous volent
+notre jeunesse de l’autre.
+
+\D{26-27 d’Automnal, an 997.}
+
+Enfin, l’épicéa m’a été fourni ! Mais l’enthousiasme me fait défaut, mes idées sont confuses
+et je n’arrive pas à reprendre là où je m’étais interrompue. J’ai passé plusieurs heures à ne rien faire,
+regardant par la fenêtre le jour tomber sur les collines voisines. Le soleil a saigné sur l’horizon…
+Sait-il seulement qu’il va mourir ?
+
+La lune est grosse, cette nuit. Peut-être va-t-elle enfanter une horde de démons nocturnes.
+Je suis toujours à ma fenêtre : rien à faire, le sommeil ne veut pas venir.
+
+\D{17 de Glace, an 997.}
+
+Il fait trop froid pour travailler. Je n’ai pas été très prévoyante et je manque de bois de chauffage.
+Quel comble ! Le luth inachevé trône sur son chevalet, semblant me défier de le mettre au feu pour
+quelques minutes d’un confort surfait. J’ai envie de pleurer — si des larmes voulaient couler sur mes joues,
+peut-être aurais-je davantage l’impression d’être en vie. 
+
+\D{14-15 de Brume, an 998.}
+
+J’ai longtemps dormi, un mois durant sans doute. Je ne saurais le dire vraiment, c’est comme si les jours
+passés n’avaient pas existé. Quand la fougue qui m’animait me fait défaut, je n’existe plus.
+Mais, ce matin, je me suis levée à l’aurore, mue par un curieux sentiment d’étrangeté, et j’ai travaillé
+toute la journée sans m’arrêter. Je suis enfin touchée par la grâce. Un peu honteuse, je ne me suis pas lavée,
+ni habillée décemment. Si mes amies apprenaient ma condition, elles croiraient que je vais mal, alors que
+je suis au comble du bonheur. Mais qu’importe, il fait presque nuit désormais.
+Et de toute façon, qui pourrait me voir ? Mon voisin le plus proche s’est enrôlé dans l’armée au début
+de l’année et sa femme est partie vivre chez sa belle-sœur. 
+
+L’aube se lève avant que j’aie pu jouer ma première note. Une joie sans nom s’empare pourtant de moi :
+écroulée de fatigue, je contemple en silence l’ouvrage qui m’a causé tant de peine et que je viens de terminer.
+Il est si beau… Si tu le voyais ! Un an déjà s’est écoulé depuis que j’ai entrepris cette folie.
+La récompense est à la hauteur de mes espérances… Je le soupèse comme si c’était la première fois
+que je le prenais entre mes mains, surprise par son incroyable légèreté. Tendre ces maudites cordes a été
+d’un tel effort que j’en avais presque oublié la finesse et la minceur des matériaux qui le composent.
+
+Mes mains blessées le caressent lentement : il est doux comme un corps, vibrant comme un rire.
+Ne reste que le vernis à appliquer et quelques derniers réglages pour en parfaire la finition —
+puis enfin il pourra chanter entre mes doigts.
+
+\D{25 de Brume, an 998.}
+
+Il a quelques imperfections, mais je peux m’estimer satisfaite. Son son est pur et aérien, il me transporte
+dans des songes merveilleux où troubadours et chantres m’accompagnent en souriant. Les notes sonnaient un peu
+plus haut que je ne l’aurais pensé d’après mes calculs, mais en reculant le chevalet de sa position théorique
+de quelques millimètres, j’obtiens maintenant un beau tymbre, doux et moelleux.
+
+Je joue pour qui veut m’entendre — pour ainsi dire presque personne — au plaisir du partage.
+Je n’en tire aucune fierté déplacée, ne songeant qu’à faire profiter les autres du peu que j’ai pu apprendre…
+Et si cela pouvait mettre à jour quelques vocations, qui sait ? Je n’en serais pas mécontente. Il est dommage
+que mes proches ne me comprennent toujours pas et perçoivent ma passion comme un enfermement.
+À moins qu’ils n’aient raison, mine de rien, pour partie ?
+
+\D{9 de Floraison, an 998.}
+
+Haute-Ferme n’est pas un bien grand hameau, il compte tout juste sept maisons et quatre granges.
+C’est à peine s’il figure sur les Grandes Cartes royales, et bien qu’il soit à la croisée des chemins,
+les voyageurs ne s’y attardent jamais longtemps.
+
+Quelques étrangers s’arrêtent parfois à ma ferme, en quête d’un repas ou d’un gîte pour la nuit.
+Ils sont un peu plus nombreux depuis que la guerre a éclaté dans les provinces orientales.
+Je n’en avais pas entendu parler, mais il semblerait qu’un nouveau seigneur se soit dressé contre l’Empire
+et qu’il soit sur le point de renverser le cours de la bataille qui se déroule entre Orchale et Halberge.
+Mais peu importe, il est bien rare que mes visiteurs remarquent le luth posé sur son pupitre au coin de
+la pièce — tout au plus lui jettent-ils un bref regard sans s’attarder, en prenant connaissance des lieux
+d’un air absent, pensant déjà à la route du lendemain.
+
+\D{20 de Floraison, an 998.}
+
+Tu ne peux pas imaginer ma joie ! Ce matin, je m’entraînais à ajuster les accords de mon luth en répétant une
+pièce de ma composition — pour ainsi dire une vague transposition d’un hymne ancien — quand un groupe de pèlerins
+s’est arrêté à ma porte. Tout d’abord, je n’ai pas vu pas les harpes, tambours et cuivres qui dépassaient à
+l’arrière de leur carriole, j’étais trop occupée à mes propres affaires.
+
+« Joli morceau, apprentie ! » a lancé l’homme qui venait en tête. J’ai répliqué par un « Pardon ? » étonné.
+« Et bel instrument ! » a-t-il enchaîné sans transition, « De quel maître luthier le tiens-tu ? »
+
+J’ai dû rougir, parce qu’il m’a regardé bizarrement et est parti d’un rire franc. « Allons donc, te joindrais-tu
+à nous si tu n’as rien d’autre de mieux à faire ? Autant précéder les armées qu’avoir à les subir ! »
+
+Je lui ai demandé où il se rendait avec sa petite troupe, et il a regardé derrière lui avec un sourire entendu.
+« Nous allons chanter la gloire du Ptoliporthe. Il l’a emporté à Ephène et il marche désormais sur Onérande,
+vers un triomphe assuré. L’Empire a joué sa dernière carte, toutes ses troupes sont désormais en déroute.
+Et Boquerose ne veut pas manquer un tel événement digne de légende, ça non ! Je veux être le premier à voir
+le Ptoliporthe monter les marches du palais d’Onérande. »
+
+Mon cœur n’a fait qu’un tour. Boquerose ? Jan de Boquerose, l’auteur de \em{l’Organologie} et des \em{Sept suites
+mineures pour harpe baroque} ? Je l’avais imaginé plus âgé, et certainement pas itinérant. Voilà qu’il se
+tenait devant moi, lui dont j’avais étudié les ouvrages !
+
+Comme tu peux l’imaginer, je n’ai pas hésité. Ils ont dû me trouver bien empressée dans ma hâte à les suivre.
+Sous les étoiles, près du feu que nous avons allumé dans la soirée, j’écris ces notes d’une main tremblante.
+J’ai déjà sympathisé avec Irenn, maîtresse des cordes frottées, et Pierguy, chantre des instruments à vents.
+Je possède enfin mon clan.
+
+J’ai demandé à Jan pourquoi il m’avait appelée « apprentie » dans la matinée. « Tu joues d’un instrument
+non sans talent, mais tu ne portes ni les rubans et ni les insignes. » a-t-il simplement répondu avec
+un haussement d’épaules. Tous ses compagnons portent effectivement une marque distinctive, à qui un ruban
+blanc, pourpre ou noir, à qui un pendentif en forme de harpe, de hautbois ou de viole de gambe.
+
+\D{24 de Chaleur, an 998.}
+
+Je suis seule dans le jardin des luthiers à Onérande-sous-Elure. Nous sommes arrivés il y a trois jours,
+mais je suis étonnée par les changements qui s’opèrent déjà en Jan et ses amis. Enjoués pendant le voyage,
+ils applaudissaient mes compositions et en vantaient les mérites. À les écouter, je n’appartiens à aucune
+école et j’ai développé mon style propre. La population d’Onérande n’est guère différente de celle des
+campagnes : je reçois ses louanges et ses applaudissements, bien qu’elle ne connaisse rien à la musique.
+J’ai pourtant l’impression qu’il me reste beaucoup à apprendre — d’ailleurs on ne m’a donné aucun grade
+encore et je n’ai pas le sentiment de faire partie de leur groupe lorsqu’ils sont entre eux.
+
+Ce sont des érudits, mais ils n’ont étonnamment rien à m’enseigner. Leurs quêtes ne sont pas les miennes.
+Certains, à la suite de Boquerose, s’appliquent à élucider le mystère de telle ou telle technique musicale,
+en prétendant que l’Art est imparfait et ne pourra jamais être maîtrisé. « L’étude, c’est tout ce qui est
+à notre portée. Ah, si les Dieux avaient laissé leurs partitions à notre confrérie plutôt qu’aux Merluins !
+Là, il y aurait matière à de nouvelles études. » soupire régulièrement Jan. « Mais je ne désespère pas de
+les obtenir… Si seulement ces maudits moines et ces austères nonnes de l’Ordre des Merluines ne préservaient
+aussi jalousement les \em{Fragments Obscurs} qu’ils possèdent. »
+
+Irenn d’Onérande, qui — si j’ai bien compris ce que j’ai entendu — appartient à l’Ordre dont elle est une
+fervente défenseuse, entre alors dans des colères noires et argumente avec ferveur que la transcription des
+écrits divins, ou considérés comme tels bien qu’il n’en soit rien dans les faits, n’est pas pour le commun
+du peuple. « Toi et ta bande de trublions sans talent, vous nous contestez sans cesse la légitimité de nos
+actes, mais nous avons ces manuscrits en notre possession de plein droit, nous ! Nous ne chapardons pas les
+\em{Fragments Obscurs} à d’autres, nous avons une plus haute idée de l’honneur et du respect que vous. »
+
+Autours d’eux gravite un parquet hétérogène de jeunes courtisans sans idée, qui se rallient tantôt à un camp,
+tantôt à l’autre. Mine de rien, la politique semble être de règle dans la demeure exiguë des ménestrels.
+Je ne comprends rien à toutes ces luttes, aussi je m’isole dans le jardin à l’arrière de notre maisonnée.
+Personne n’y vient jamais. Et tous ces bardes m’impressionnent tant que je n’ose plus jouer pour moi-même :
+si je ne doute pas du talent dont on veut bien me gratifier, je suis cependant prise d’une lassitude telle
+que l’inspiration ne me vient plus. Mon luth, dans la chambre qui m’a été allouée, prend lentement la
+poussière.
+
+\D{12 de Sècheresse, an 998.}
+
+Onérande tient du labyrinthe, toutes les ruelles se ressemblent et les visages qu’on y croise ont même allure.
+
+Il y a beaucoup de fenêtres dans ce monde, mais si peu de portes. Seules celles marquées « sortie » sont
+évidentes, les autres sont invisibles. Peut-être suis-je en train de vieillir, pour que de pareilles
+pensées m’assaillent.
+
+\D{Sans date.}
+
+Le temps coule et m’emporte. Je m’ennuie à en mourir. Je ne suis pas comme Eux. Il faut avoir fait les Écoles
+pour avoir quelque chance d’être reconnu. Ils disent m’estimer, peut-être par politesse, mais je ne ferai
+jamais vraiment partie de leur confrérie.
+
+\D{18 d’Automnal, an 998.}
+
+Alster Ptoliporthe est arrivé à Onérande. Mon rêve d’enfance s’est réalisé — voir un prince entrer en fanfare
+dans la cité. J’ai versé des larmes pendant toute la cérémonie. Mais les autres bardes l’ont trouvée rébarbative
+et bâclée, peut-être ont-ils raison, après tout ce sont eux les sages. S’ils jugent que le Ptoliporthe n’est
+qu’un pillard qui déçoit les attentes qu’ils avaient placées en lui, que puis-je y faire ? Je ne sais pas même
+décrire ce que j’ai ressenti lorsqu’il a posé la couronne impériale sur son front. À bien y réfléchir après
+coup, la scène finalement n’avait rien d’exceptionnel. De toute façon, notre vainqueur est reparti de sitôt
+vers de nouvelles batailles. Dans quelques semaines, ce sera déjà de l’histoire ancienne.
+
+\D{5 de Glace, an 998.}
+
+Pierguy m’a proposé de participer à une représentation devant la vieille noblesse d’Onérande et l’ambassade
+du Ptoliporthe. Aussi ai-je repris mes études à leur début : dans ce pays, celui qui fabrique un instrument
+est souvent celui qui en joue, et dans ce domaine je suis encore une débutante. Il m’importe de mettre au mieux
+en musique un petit texte auquel j’ai songé, une ode inspirée par l’esprit des dragons et des fées à la manière
+des anciens aèdes.
+
+Et me voilà dans l’apprentissage des triades et des accords septièmes… À m’interroger comme auparavant sur le
+sens et le son de concepts qui me dépassent, sur un accord mineur sept quinte bémol, sur la force et le courage
+du mode dorien, sur la capacité du phrygien à exciter et enflammer les esprits… Armer la clef comme l’exigent
+les règles, élever les notes de quelques degrés, dans le rapport voulu, et ainsi de suite… Tout cela,
+te diras-tu avec un sourire, devrais me plaire — n’aimais-je pas me plonger dans d’obscurs grimoires en
+quête d’inspiration, et jongler ensuite avec le savoir nouvellement acquis ? Pourtant, la motivation me fait
+défaut. Je ne sais comment retrouver la ferveur qui m’animait lorsque je polissais seule mon luth dans ma
+petite masure de Haute-Ferme. Peut-être ne suis-je pas faite pour répondre à des demandes sur mesure,
+comme celle de Pierguy, et que je ne m’exprime correctement que laissée à moi-même. D’ailleurs, je réalise
+que je ne note même plus tous les détails, que j’ai cessé de te confier mon cheminement vers l’Art.
+Allez, pour la forme : « Cet essai permettra de décrypter certaines structures figées du mètre, aussi
+elliptiques qu’opaques. » Non, ce n’est guère crédible. Même Jan de Boquerose ne semble pas pouvoir
+se renouveler.
+
+\D{Sans date, premier cauchemar.}
+
+J’ai fait des rêves étranges et déplaisants, ces nuits passées. Dans le dernier, je me présentais
+devant une assemblée bariolée de bourgeois aux visages fardés et aux perruques grises. Mais mon instrument
+n’avait qu’une seule corde et ma voix s’enrouait dans ma gorge… Les rires fusaient, moqueurs, et je cherchais
+à m’enfuir. La foule oppressante se rapprochait tandis que la porte des coulisses restait fermée. Les quolibets
+ne cessaient de pleuvoir, comme des lames d’acier. Puis une douleur violente me prit au bas ventre et
+je sentis un liquide chaud et poisseux s’épancher sur ma robe blanche, tandis qu’une Irenn d’Onérande
+au visage déformé par la haine me hurlait aux oreilles, un poignard crénelé à la main, « Jamais tu ne joueras
+les notes enchantées, impuissante petite chose sans nom. »
+
+Je porte le nom d’une reine par la volonté de ma mère, mais je ne suis rien. Au réveil, mon esprit
+bouillonnait d’angoisse ; j’ai passé cette journée à me morfondre dans un état de déréliction. Tu sais…
+j’ai même failli brûler ce carnet.
+
+\D{25 de Glace, an 998.}
+
+Aujourd’hui, je porte un pendentif en forme de luth. On ne me l’a pas accordé, mais je me le suis octroyé
+moi-même : j’y ai droit autant que tout autre. Au diable l’esprit de caste qui les anime tous ! 
+
+J’ai aussi entrepris la conception d’un nouveau luth qui devrait approcher de la perfection. Je donnerai
+l’ancien à l’un de ces enfants qui passe parfois dans le jardin — il n’est que temps que jeunesse prenne relève.
+
+\D{5 de Brume, an 999.}
+
+Le jour assigné par Pierguy est arrivé… Selon l’usage, j’ai débuté ma suite par une brève introduction d’allure
+improvisée, pour tester l’accord de mon instrument. Mais je ne nierai pas que ce prélude était sans doute plus
+important que le reste de la composition… Libéré des contraintes d’un style.
+
+Jadis, j’avais une petite fiole en forme de larme que je portais contre mon cœur, suspendue à une cordelette.
+Elle contenait une essence précieuse, amère au goût mais propre à susciter des visions oniriques et des images
+sans pareil… L’eau de l’oubli, l’essence des mythes contenue dans une toute petite fiole de cristal… Chaque soir
+avant de m’endormir j’en déposais une goutte sur ma langue et mes yeux s’emplissaient de brumes vaporeuses.
+
+Je ne craignais, dans mon ignorance, que le jour où elle viendrait à se tarir, où la dernière goutte perlerait
+le long du goulot avec la nostalgie du dernier rêve.
+
+Un matin, pourtant, m’étirant dans la moiteur de mon lit, je sursautai lorsque mon bras vint à toucher une
+cordelette au recoin du matelas… Instinctivement je portai ma main à ma poitrine, mais je savais déjà que
+la fiole si chère à mes yeux n’y était plus… Ô Seigneurs et Dames des Rêves, rendez-moi ma précieuse essence
+envolée !
+
+Depuis j’erre dans les rues de la Cité, me surprenant à humer parfois la senteur d’une fleur dans un jardin
+ou le parfum d’une passante… Incapable d’oublier le souvenir fragile et passager des gouttes d’éternité.
+
+La réception a été favorable et les applaudissements nombreux. C’est donc que j’ai su faire illusion,
+malgré le manque d’enthousiasme que je craignais de laisser transparaître à chaque thème esquissé.
+« N’est pas pour autant luthiste qui a le talent d’un luthier ! » a cependant grincé une grosse rombière
+empêtrée dans une robe trop étriquée. C’était la seule remarque négative de la journée, mais mine de rien,
+elle touchait juste.
+
+\D{30 de Brume, an 999, second cauchemar.}
+
+J’ai cru m’éveiller en sursaut au son d’une musique étrange. La pièce était plongée dans l’obscurité,
+la Tiers Lune projetait quelques rayons blafards sur le chevalet où repose mon luth… Celui-ci, étrangement,
+luisait d’une pâle clarté bleutée et ses cordes vibraient seules. La complainte, pourtant, semblait venir
+d’ailleurs : de la fenêtre tournée vers l’Est, vers les plaines qui s’étendent au-delà des murailles d’Onérande.
+Je me levai, déambulai dans les corridors silencieux de la maison des bardes, et sorti dans le jardin.
+Tourné de dos, le Ptoliporthe observait les étoiles. « Elle vient. » lâcha-t-il dans un murmure rauque
+qu’accompagnèrent quelques pincements de corde. « Qui ? » demandai-je simplement, oubliant les titres et
+les formules de circonstance quand on s’adresse à un Puissant. Il se retourna vivement, appuyant un regard
+enflammé sur moi. Une dague dentelée brillait dans sa main gauche. « Qui ? La Mort et la Désespérance,
+la Destruction de la Cité… ou la révolte déposée dans les mains d’une poétesse sans talent. »
+
+Je m’éveillais pour de bon, en sueur, dans un lit moite, terrifiée par la folie perçue dans ces yeux de braise.
+
+\D{4 de Floraison, an 999.}
+
+Tous ces gens qui me posent des questions et me supposent pleine d’un savoir et d’une sagesse innée qui ne sont
+pas les miens… J’attire leur respect et parfois leur jalousie. Ah, l’attrait de la lumière pour les papillons
+de nuit ! Mais la lumière a des reflets de nuit, chez moi. Penchée sur l’abreuvoir à oiseau dans le jardin,
+je regarde les rides concentriques se dessiner sur l’eau de mes pensées.
+
+Je ne reconnais plus qu’une seule consigne : « Achève ce qui est commencé ! ». Mais je ne sais que trop quel
+double sens peut avoir « achever », aussi ne suis-je pas mes propres adages. J’ai trop peur des conséquences,
+mine de rien.
+
+\D{20 de Floraison, an 999, troisième cauchemar.}
+
+Je marchais pieds nus dans l’herbe, guidée par les étoiles sœurs. La Quinte Lune glissait entre des nuages
+noirs. Derrière moi, la silhouette d’Onérande se fondait dans la nuit, seulement révélée par une bougie qui
+brillait à la fenêtre de ma chambre. Mon vieux luth continuait à jouer seul, en écho d’une symphonie élégiaque
+qui faisait trembler le sol, entrecoupée de cris lointains. Le temps semblait figé et le paysage nocturne était
+légèrement flou, comme si l’arrêt sur image manquait de netteté. Un relief au contour indécis… des nuages
+vacillants… et des éclats de lumière lunaire diffractée.
+
+L’astre lunaire déchira les nuages, et soudain je me retrouvai dans une dépression, entourée de têtes décapitées
+et plantées sur des piquets. Celle du Ptoliporthe me faisait face, défigurée par un rictus absurde, langue bleue
+pendante, yeux moribonds exorbités. Une forme noire s’avança, drapée dans une cape si large qu’elle aurait pu lui
+tenir lieu d’ailes. Le râle musical, entrecoupé de hurlements d’horreur et de cris hachés, jaillissait de sa
+bouche, entre des crocs luisants dans la pénombre. Des pointes lui perçaient les flancs, et la terre fumait
+lorsque son sang, goutte à goutte, tombait sur le sol. Elle ricana férocement, me contemplant du haut de sa
+majesté écrasante. « Tous succombent à présent. »
+
+Et elle me tendit un cimeterre à lame en dent de scie. « Joue pour moi, petite Sœur des Tourments, rejoins
+maintenant le chant des Abysses. »
+
+Un cri m’éveilla, et il me fallut un instant avant de comprendre, dressée dans mon lit, qu’il jaillissait de
+ma propre gorge. Mon vieux luth borgne me faisait face, comme s’il me défiait de mettre un terme à tout ceci.
+
+\D{24 de Floraison, an 999, 23h59.}
+
+Achever toutes les illusions… Tuer l’enfant pour qu’il ne reste que… je ne sais pas ! Je ne sais ce qu’il
+y a d’autre que lui… hormis l’inéluctable ou l’inaccessible. Je suis fatiguée des temps qui passent sans changements…
+des miroirs qui retournent toujours les mêmes paysages ainsi que des horloges déréglées… des rêves aveugles qui
+ne parlent plus… Mon cœur, mes viscères, hurlent à l’unisson leur prière… leur envie usée de révolution…
+La tentation est forte alors, de vouloir s’assurer que les phénix renaissent de leurs cendres.
+
+Princesse esseulée, j’avais rêvé d’un château, de banquets et de ménestrels. J’ai vu le premier, sa vanité
+futile. J’ai vécu les fêtes superficielles. Quant aux derniers, côtoyés sans mérite, je les balaie d’une
+chiquenaude… 
+
+Je deviens folle…
+Il n’y a nulle alternative… Tous ces petits « mine de rien » qui émaillèrent mon existence et qui jalonnent
+ces pages jaunies de larmes… Ces instants de conscience accrue en la fin… Ils se révèlent à moi dans toute
+leur vérité abominable… Comment ai-je pu faire semblant de les ignorer ?
+
+\D{25 de Floraison, an 999, un peu après minuit.}
+
+Dans le Jardin des Luthiers que les oiseaux qui viennent nicher au printemps emplissent de leurs chants,
+j’ai posé tout à l’heure mon luth sur l’herbe verte. Je suis sortie nue, en marchant sans bruit. La Plenilune
+me souriait paisiblement au firmament, tandis que j’ai posé mon pied sur le bois poli, dans un mouvement d’abord
+hésitant, puis plus assuré. Écartant les bras pour sentir l’air frais de la nuit sur toute la surface de mon
+corps, j’ai soulevé l’autre pied. 
+
+Un seul craquement, qui s’est prolongé en écho dans tous mes os et jusque dans mon âme.
+
+Et cette fois-là, j’ai vraiment pleuré — non pas comme devant le Ptoliporthe lors de sa prise de pouvoir,
+mais avec des larmes de sang et des serrements de viscères. J’ai pleuré, à cause de Hieronymus.
+
+Puis j’ai souri, apaisée.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+\D{25 de Floraison, an premier de l’ère sarane.}
+Elle dénoue sa chevelure mi-longue, pose ses mains sur ses genoux repliés et entame une lente complainte
+mortuaire, un simple murmure sans paroles, accompagné de musique. Et sa beauté transcende les étoiles qui
+pleurent… Elle se lève, attache une fleur à ses cheveux qui retombent, ondoyants, sur ses épaules, esquisse
+un sourire sur ses lèvres fines qui appellent un baiser. Ses yeux pétillent d’une lueur sacrée, de la promesse
+d’un nouveau mythe, ses joues s’empourprent et la joie, lentement, trace son chemin dans ses veines jusqu’à son
+cœur.
+
+Quittant la cité, dépassant ses murs austères, elle suit un sentier qui ne mène sur nulle carte, par monts et
+vallées. Un enfant d’une dizaine d’année et sa sœur se tiennent au détour d’un sentier, près d’un bourg en ruine.
+La petite chantonne en serrant sa poupée. « Elle chante toujours ainsi ? »
+
+— Oui, quand elle est près de moi, répond le gamin d’un air méfiant. Mes parents…  nos parents la
+surnommaient « notre petit rossignol ».
+
+— Alors venez, vous serez… mes protégés.
+
+Ses enfants tant attendus ; mais il n’était pas encore temps de raviver les souvenirs. 
+
+Traversant les terres ravagées par la guerre, elle coupe à travers forêts et essarts. Un charpentier contemple
+tristement son hameau en flamme. Une hache pend mollement dans sa main. « Tu connais l’épicéa, l’aubier blanc,
+l’if rouge ? »
+
+— Oui, tous les arbres, tous… soupire-t-il avec un sourire désabusé. Toutes les poutres de ce village étaient
+ma joie, de l’or dans mes mains.
+
+— Alors viens, tu seras… mon ami.
+
+Son prince espéré, son amant ; mais il n’était pas encore temps de parier sur l’avenir.
+
+Face au monde entier qui s’effondre, deux orphelins veillant l’un sur l’autre en se tenant la main lèvent
+vers elle leurs regards brillant du besoin d’être rassurés. Et ses yeux à elle leur renvoient leurs songes,
+embellis d’un éclat de bonheur.
+
+Quêtant son sourire, un artisan pensif puise dans son visage la force et la confiance qui lui manquaient,
+et sa main s’affermit sur le manche de sa hache. Et ses lèvres à elle lui retournent ses espoirs, ciselés
+d’amour.
+
+Une biche blanche s’ébroue et les suit de loin dans la forêt. Un roitelet pépie gaiement en tournoyant
+autour d’eux. La légende ne fait que commencer.
+
+Déjà un an que nous marchons côte à côte… Pour toi, je me suis fait menuisier et j’ai façonné deux luths,
+une mandoline, un cor, une harpe. J’ai porté la petite sur mes épaules, j’ai enseigné ce que je savais à
+notre fils. Maintenant, tu dors près de nos enfants, belle poétesse, et je t’observe dans ton sommeil
+paisible. Pardonne-moi d’avoir écrit ces quelques mots maladroits dans le livre de ta vie, mais je crois
+qu’il m’était destiné et qu’il m’appartenait de sceller le passé. Demain, la foule t’acclamera encore.
+Mais je sais que la lueur ardente dans tes yeux ne brille que pour nous et que rien désormais ne pourra
+la ternir. Oh ! Mine de rien, je peux encore fabriquer une maison pour notre famille, pour le jour où tu
+seras fatiguée d’arpenter les routes.
+
+\smallskip
+\couyard[type=6, width=default]
+
+\end{document}

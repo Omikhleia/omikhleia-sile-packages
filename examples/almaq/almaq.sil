@@ -5,6 +5,9 @@
 \script[src=packages/image]
 \script[src=packages/ptable]
 \language[main=fr]
+\hyphenator:add-exceptions[lang=fr]{lo-go-gramme}%
+\hyphenator:add-exceptions[lang=fr]{igno-rer}%
+\hyphenator:add-exceptions[lang=fr]{com-pa-gnon}%
 \font[family=Libertinus Serif, size=11pt]
 \style:redefine[name=sectioning:base, as=_secbase, inherit=true]{\paragraph[indentafter=true]}%
 \footnote:rule
@@ -118,13 +121,28 @@ end, "Insert a partition.")
 \include[src=examples/almaq/caraye_opalescence_critique.sil]
 \include[src=examples/almaq/reperes_chronologiques.sil]
 
-\part{Textes}
+\part{Caractères}
 
 \include[src=examples/almaq/vie_et_faits_keldre.sil]
 
-\chapter{...}
+\chapter[numbering=false]{...}
 
 \include[src=examples/almaq/trois_perles.sil]
+
 \include[src=examples/almaq/dongann_horloge.sil]
+\include[src=examples/almaq/mort_dongann.sil]
+
+
+\part{Almaq}
+
+\include[src=examples/almaq/dame_renarde.sil]
+
+\include[src=examples/almaq/fille_de_sitar_1.sil]
+
+\include[src=examples/almaq/jeux_guerriers.sil]
+
+\part{La neuvième guerre cyclique}
+
+\include[src=examples/almaq/jardin_des_luthiers.sil]
 
 \end{document}
