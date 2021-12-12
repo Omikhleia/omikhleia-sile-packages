@@ -540,7 +540,7 @@ extra features proposed in this implementation, notably the \doc:code{\\footnote
 command and the possibility to specify an explicit \doc:code{mark} on footnote calls.
 
 The table of contents relies on the \doc:keyword{omitableofcontents} package. One can
-therefore change many styling and appearance aspects to create custom table of contents.
+therefore change many styling and appearance aspects to create a custom table of contents.
 
 Cross-references are supported via the \doc:keyword{omirefs} package, henceforth
 the \doc:code{\\label}, \doc:code{\\ref} and \doc:code{\\pageref} commands are
@@ -692,7 +692,7 @@ For sections and lower levels:
 
 \smallskip
 \codeblock{\\style:redefine[name=sectioning:other:number, as=_sclabel, inherit=true]\{\par
-\qquad\\numebering[after=false]\}}
+\qquad\\numbering[after=false]\}}
 \smallskip
 
 \Q{Chapters and parts have English labels?}
@@ -748,8 +748,8 @@ As for the previous question, but with the header styles.
 
 In addition to the abovementioned paragraph styles, you can also redefine the
 \codeblock{folio:base} and \codeblock{header:base} parent styles, which specify
-their character styles. For instance, I recently read a novel where folios where
-in using the “old-style” numbers.
+their character styles. For instance, I recently read a novel where folios
+used the “old-style” numbers.
 
 %\style:redefine[name=folio:base, as=_folbase, inherit=true]{\font[features=+onum]}
 
@@ -760,7 +760,7 @@ in using the “old-style” numbers.
 \section{Other questions}
 
 Well, do you have any other question that you felt unaddressed? If so, do not
-hesitate opening an issue on our repository.
+hesitate opening an issue in our repository.
 
 \chapter{A custom book from scratch}
 
