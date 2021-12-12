@@ -5,9 +5,10 @@
 \script[src=packages/image]
 \script[src=packages/ptable]
 \language[main=fr]
-\hyphenator:add-exceptions[lang=fr]{lo-go-gramme}%
-\hyphenator:add-exceptions[lang=fr]{igno-rer}%
-\hyphenator:add-exceptions[lang=fr]{com-pa-gnon}%
+%\hyphenator:add-exceptions[lang=fr]{lo-go-gramme}%
+%\hyphenator:add-exceptions[lang=fr]{igno-rer}%
+%\hyphenator:add-exceptions[lang=fr]{com-pa-gnon}%
+%\hyphenator:add-exceptions[lang=fr]{di-gres-sion}%
 \font[family=Libertinus Serif, size=11pt]
 \style:redefine[name=sectioning:base, as=_secbase, inherit=true]{\paragraph[indentafter=true]}%
 \footnote:rule
@@ -136,6 +137,7 @@ end, "Insert a partition.")
 \part{Almaq}
 
 \include[src=examples/almaq/dame_renarde.sil]
+\include[src=examples/almaq/sacrifice_de_divel.sil]
 
 \include[src=examples/almaq/fille_de_sitar_1.sil]
 
@@ -143,6 +145,8 @@ end, "Insert a partition.")
 
 \part{La neuvième guerre cyclique}
 
+\include[src=examples/almaq/chute_de_dragon.sil]
 \include[src=examples/almaq/jardin_des_luthiers.sil]
+\include[src=examples/almaq/anthone_de_longrines.sil]
 
 \end{document}
