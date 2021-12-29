@@ -125,12 +125,14 @@ end, "Insert a partition.")
 \part{Caractères}
 
 \include[src=examples/almaq/vie_et_faits_keldre.sil]
+\include[src=examples/almaq/fesed_portique.sil]
 
 \chapter[numbering=false]{...}
 
 \include[src=examples/almaq/trois_perles.sil]
 
 \include[src=examples/almaq/dongann_horloge.sil]
+\include[src=examples/almaq/dits_de_la_saigne.sil]
 \include[src=examples/almaq/mort_dongann.sil]
 
 

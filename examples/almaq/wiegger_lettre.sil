@@ -11,7 +11,7 @@ SILE.registerCommand("struck", function (_, content)
       oldOut(self, typesetter, line)
       SILE.outputter:drawRule(saveX - 2, saveY - line.height, self.width + 3, line.height + line.depth)
     end
-end)  
+end)
 }%
 \begin[family=Truetypewriter PolyglOTT, size=9pt, language=en]{font}
 \set[parameter=document.parskip, value=0.5bs]
@@ -23,7 +23,7 @@ Prof. Erich Wiegger\hfill{}July 1963\break
 27 \struck{XXXXXX}straße,\break
 Potsdam, D.D.R.
 
-\qquad{}Dear Mrs. Lenski-Blancandre, 
+\qquad{}Dear Mrs. Lenski-Blancandre,
 
 I feel apologetic for not having written earlier, but of course, I received the autographed copy of the new
 edition of your Chronicles of Alstre in may 1962.

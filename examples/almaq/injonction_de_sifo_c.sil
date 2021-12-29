@@ -34,7 +34,7 @@ complète (une \em{clause} selon la terminologie d’Emma Lenski). Divers connec
 les formules. Le système n’a pas d’autres signes de « ponctuation » que ceux-ci.
 
 Selon l’usage le plus répandu du système, les porteuses sont disposées verticalement. Les signes
-se lisent de haut en bas, et les formules de droite à gauche. Les variantes ornementales s’autorisent
+se lisent de haut en bas et les formules de droite à gauche. Les variantes ornementales s’autorisent
 néanmoins plus de liberté : écriture en boustrophédon (cf. p. \pageref[marker=illus-boustrophedon]),
 en spirale, ou encore rayonnante dans diverses directions à partir du centre de la page.
 
@@ -52,7 +52,7 @@ La figure simplifiée ci-contre illustre la structure générale d’une inscrip
 \quad{}(g) connecteur d’énumération ou citation (\em{enumquote}\kern[width=0.1em])
 
 \smallskip
-Le connecteur (g) correspond au chevron dans le \em{chadhrave anorgerin}. 
+Le connecteur (g) correspond au chevron dans le \em{chadhrave anorgerin}.
 
 \smallskip
 Tous les connecteurs possèdent des variantes. Pour (c), Lenski distingue \em{neuter, inner, outer} et \em{broadcast}.
@@ -70,7 +70,8 @@ de type alphabétique, et un jeu de glyphes (\em{nedhras}\kern[width=0.1em]), de
 
 Les premières n’appellent pas de difficulté particulière. L’on se reportera à la table de Lenski, que j’ai
 reprise \em{supra}, pour la forme la plus usuelle des signes\footnote{%
-Quelques remarques pour actualiser cette table selon l’usage actuellement admis : Le /cw/ se transcrit /q/.
+Quelques remarques pour actualiser cette table selon l’usage actuellement admis :
+Le /c\text:superscript{w}/ se transcrit /q/.
 Le /ç\text:superscript{2}/ et /ç\text:superscript{3}/ de Lenski se transcrivent aujourd’hui /hy/ et /x/ ; ces deux formes sont étymologiques
 mais correspondent à un même son dans la langue d’Almaq. Dans le \em{chadhruid}, elles se sont confondues
 en /ç\text:superscript{1}/ à l’époque de Sifo, qui vaut donc aussi pour /x/. Notons que le \em{chadhrave} a conservé cette
@@ -144,7 +145,7 @@ E. Poplavsky, \em{op. cit.}
 \begin{row}
   \cell[style=center, valign=middle]{\img[src=examples/almaq/chadhruid_n07.png]}
   \cell[style=narrow, valign=middle]{7. Le Corbeau.
- 
+
 \smaller{Carte du Tarot. C’est aussi l’emblème des Corbeaux de Bethaine, une troupe de soldats.}}
 \end{row}
 \begin{row}
@@ -243,7 +244,7 @@ encore que le cercle soit peut-être alors plus petit.}}
   \cell[style=center, valign=middle]{\img[src=examples/almaq/chadhruid_n21.png]}
   \cell[style=narrow, valign=middle]{21. Le Monde.
 
-\smaller{Carte du Tarot. Objet de structure sphérique, peut-être une sphère armillaire — mais le peuple d’Almaq 
+\smaller{Carte du Tarot. Objet de structure sphérique, peut-être une sphère armillaire — mais le peuple d’Almaq
 avait-il de telles connaissances ? La sphère est hors-ligne : comme étrangère à la cité ?}}
 \end{row}
 \begin{row}
@@ -343,7 +344,7 @@ habillaient les mots d’un sens profond. Les signes que je trace n’ont cepend
 qu’un habit, quel que soit l’homme qui le revêt. N’est pas plus profond celui qui porte un beau
 plastron bariolé. Mais qui pourrait vivre nu, se sachant nu ? Tais-toi et écris, poète ! Si Dongann
 a raison malgré tout, je serai vêtu de mes mots. »\footnote{%
-Pensée attribuée à Keldre l’Obscur. Je cite là encore la traduction fr. de Pierre de Blancandre, \em{op. cit.} 
+Pensée attribuée à Keldre l’Obscur. Je cite là encore la traduction fr. de Pierre de Blancandre, \em{op. cit.}
 }
 \end{epigraph}
 
