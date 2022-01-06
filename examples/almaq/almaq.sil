@@ -128,8 +128,9 @@ end, "Insert a partition.")
 \include[src=examples/almaq/fesed_portique.sil]
 
 \chapter[numbering=false]{...}
-
 \include[src=examples/almaq/trois_perles.sil]
+
+\include[src=examples/almaq/deiraval_et_dongann.sil]
 
 \include[src=examples/almaq/dongann_horloge.sil]
 \include[src=examples/almaq/dits_de_la_saigne.sil]
@@ -142,6 +143,7 @@ end, "Insert a partition.")
 \include[src=examples/almaq/sacrifice_de_divel.sil]
 
 \include[src=examples/almaq/fille_de_sitar_1.sil]
+\include[src=examples/almaq/fille_de_sitar_2.sil]
 
 \include[src=examples/almaq/jeux_guerriers.sil]
 
