@@ -13,7 +13,7 @@ local moveRefs = function (_)
     if node then
     for i = 1, #node do
       local marker = node[i].marker
-      -- We should already have warned the user below, do not spam him.
+      -- We should already have warned the user below, do not spam them.
       -- if SILE.scratch.refs[marker] ~= nil then
         -- SU.warn("Duplicate label '"..marker.."': this is possibly an error")
       -- end
@@ -57,6 +57,7 @@ end
 
 -- Leverage tocentry
 -- QUESTION: Should we actually do this, or rather leverage book:sectioning?
+-- (or whatever sectioning commands the used class may have...)
 -- The user might perhaps want to refer to a section not in the TOC.
 -- I have no idea, so let's go ahead for now.
 local _currentTocEntry = {}
@@ -134,14 +135,6 @@ SILE.registerCommand("ref", function (options, content)
         else
           SILE.call("ref:infra")
         end
-      elseif t == "_footnote_" then
-        -- See command footnoteref
-        -- No intended to be used directly so not documented.
-        if not node.footnote then
-          SILE.call("ref:unknown", options)
-        else
-          SILE.call("footnote:mark", { mark = node.footnote })
-        end
       else
         if t == "page" then
           SILE.typesetter:typeset(""..node.pageno)
@@ -210,22 +203,6 @@ SILE.registerCommand("pageref", function (options, content)
   options.type = "page"
   SILE.call("ref", options, content)
 end, "Convenience command to print a page reference.")
-
--- This command, which is defined if the omifootnotes package is active,
--- allows to fake a footnote call to an existing footnote using
--- a label reference. Let's not document it for now, I am not convinced
--- it should be kept. I'll have it if I even need it, or I'll take
--- the decision to remove it at some point.
-if SILE.Commands["footnote:mark"] then
-  -- The standard footnotes package has (at the time of writing)
-  -- footnotemark, not footnote:mark as the omifootnotes package.
-  -- We'll need support for the mark option, so let's expect this
-  -- doesn't change and we can check it this way...
-  SILE.registerCommand("footnoteref", function (options, content)
-    options.type = "_footnote_"
-    SILE.call("ref", options, content)
-  end, "Convenience command to format a reference as a footnote call.")
-end
 
 return {
   exports = { writeRefs = writeRefs, moveRefs = moveRefs },
