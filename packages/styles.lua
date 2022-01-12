@@ -6,7 +6,7 @@ SILE.scratch.styles = {
   -- Actual style specifications will go there (see defineStyle etc.)
   specs = {},
   -- Known aligns options, with the command implementing them.
-  -- You can register extra options there.
+  -- Users can register extra options in this table.
   alignments = {
     center = "center",
     left = "raggedright",
@@ -16,7 +16,7 @@ SILE.scratch.styles = {
     raggedleft = "raggedleft",
   },
   -- Known skip options.
-  -- You can add register skips there.
+  -- Users can add register custom skips there.
   skips = {
     smallskip = SILE.settings.get("plain.smallskipamount"),
     medskip = SILE.settings.get("plain.medskipamount"),
@@ -37,8 +37,6 @@ end, "Applies a font, with additional support for relative sizes.")
 SILE.registerCommand("style:define", function (options, content)
   local name = SU.required(options, "name", "style:define")
   if options.inherit and SILE.scratch.styles.specs[options.inherit] == nil then
-    -- Should we really complain if inherited doesn't exist (yet)?
-    -- (Well it avoids some obvious risks of cycle...)
     SU.error("Unknown inherited named style '" .. options.inherit .. "'.")
   end
   if options.inherit and options.inherit == options.name then
@@ -52,7 +50,7 @@ SILE.registerCommand("style:define", function (options, content)
   end
 end, "Defines a named style.")
 
--- Very naive cascading for now...
+-- Very naive cascading...
 local styleForColor = function (style, content)
   if style.color then
     SILE.call("color", style.color, content)
@@ -80,14 +78,14 @@ local styleForSkip = function (skip, vbreak)
   if not b then SILE.call("novbreak") end
 end
 
-local styleForAlignment = function (style, content, ba)
+local styleForAlignment = function (style, content, breakafter)
   if style.paragraph and style.paragraph.align then
     if style.paragraph.align and style.paragraph.align ~= "justify" then
       local alignCommand = SILE.scratch.styles.alignments[style.paragraph.align]
       if not alignCommand then
         SU.error("Invalid paragraph style alignment '"..style.paragraph.align.."'")
       end
-      if not ba then SILE.call("novbreak") end
+      if not breakafter then SILE.call("novbreak") end
       SILE.typesetter:leaveHmode()
       -- Here we must apply the font, then the alignement, so that line heights are
       -- correct even on the last paragraph. But the color introduces hboxes so
@@ -97,19 +95,21 @@ local styleForAlignment = function (style, content, ba)
         SILE.call("style:font", style.font, function ()
           SILE.call(alignCommand, {}, function ()
             styleForColor(style, content)
-            if not ba then SILE.call("novbreak") end
+            if not breakafter then SILE.call("novbreak") end
           end)
         end)
       else
         SILE.call(alignCommand, {}, function ()
           styleForColor(style, content)
-          if not ba then SILE.call("novbreak") end
+          if not breakafter then SILE.call("novbreak") end
         end)
       end
     else
       styleForFont(style, content)
-      if not ba then SILE.call("novbreak") end
-      SILE.call("par")
+      if not breakafter then SILE.call("novbreak") end
+      -- NOTE: SILE.call("par") would cause a parskip to be inserted.
+      -- Not really sure whether we expect this here or not.
+      SILE.typesetter:leaveHmode()
     end
   else
     styleForFont(style, content)
@@ -197,7 +197,9 @@ SILE.registerCommand("style:apply:paragraph", function (options, content)
 
   if parSty then
     if not ba then SILE.call("novbreak") end
-    SILE.call("par")
+    -- NOTE: SILE.call("par") would cause a parskip to be inserted.
+    -- Not really sure whether we expect this here or not.
+    SILE.typesetter:leaveHmode()
     styleForSkip(parSty.skipafter, parSty.breakafter)
     if SU.boolean(parSty.indentafter, true) then
       SILE.call("indent")
@@ -258,7 +260,9 @@ SILE.registerCommand("style:show", function (options, content)
   local name = SU.required(options, "name", "style:show")
 
   SILE.typesetter:typeset(dumpStyle(name))
-end, "Redefines a style saving the old version with another name, or restores it.")
+end, "Ouputs a textual (human-readable) description of a named style.")
+
+-- EXPORTS
 
 return {
   exports = {
