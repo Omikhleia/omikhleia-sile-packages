@@ -335,7 +335,7 @@ reset the footnote counter. Chapter and section titles go in odd and even runnin
 headers respectively, unless customized otherwise.
 
 Notably, the class also defines a few commands currenty used as hooks in some of the
-above sectionining styles.
+above sectioning styles.
 
 \begin{table}
 \begin[cols=40%fw 50%fw, header=true]{ptable}
@@ -459,7 +459,7 @@ their material to some other position or a later page.
 Page numbers (folios) and running headers are by default flushed left or right depending
 on the page they are on, rather than centered. This is defined via paragraph styles, so it
 can actually be customized at convenience. The default styles also include an inheritance
-to a common “base” style (suitable for selecting the foot size, etc.). Nothing mandates
+to a common “base” style (suitable for selecting the font size, etc.). Nothing mandates
 it, but if you want to redefine these styles, we recommend keeping an appropriate
 style hierarchy, rather than stacking all definitions in a single style. Well-thought,
 it can simplify the task for other later customizations.
@@ -512,7 +512,7 @@ The class also defines two commands for manipulating the page headers.
   \end{row}
   \begin{row}
     \cell[valign=top]{\doc:code{\\odd-running-header\{\doc:args{content}\}}}
-    \cell[valign=top]{Registers the content to be used in even running headers.}
+    \cell[valign=top]{Registers the content to be used in odd running headers.}
   \end{row}
 \end{ptable}
 \caption{Commands for manipulating page headers.}
@@ -580,7 +580,7 @@ This class provides a minimalist (read, naive) way to make a modern \em{résumé
         The rationale is that your name shall be visible on each page, as the HR people get hundreds of CVs and
         can easily get lost in them.}
   \item{The footer is shown side-by-side with the page folio, and contains your contact information. As for
-        the header, the rationale is that you contacts should be repeated. You wouldn’t want not to be
+        the header, the rationale is that your contacts should be repeated. You wouldn’t want not to be
         contacted just because the HR people lost the initial page, right?}
   \item{The folio includes the number of pages in your CV. As said, they
         get to see hundreds of CV. Be nice ensuring they have no ordering issue when handling a printed
