@@ -139,8 +139,8 @@ SILE.registerCommand("open-on-odd-page", function (_, _)
     SILE.typesetter:leaveHmode()
     -- Disable headers and footers if we can... i.e. the
     -- supporting class loaded all the necessary commands.
-    if SILE.Commands["nofoliosthispage"] then
-      SILE.call("nofoliosthispage")
+    if SILE.Commands["nofoliothispage"] then
+      SILE.call("nofoliothispage")
     end
     if SILE.Commands["noheaderthispage"] then
       SILE.call("noheaderthispage")

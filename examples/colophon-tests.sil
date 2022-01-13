@@ -53,7 +53,7 @@ of underlying assumptions, and sometimes some manual “tweaks” may be needed.
 Kafka, from his \em{Diaries}, 1910–1923:
 
 \font[size=9pt]{%
-\colophon[decoration=true]{% 
+\colophon[decoration=true]{%
 The life of society moves in a circle. \em{Only those burdened with a common affliction understand each other}.
 Thanks to their affliction they constitute a circle and provide each other mutual support. They glide along
 the inner borders of their circle, make way for or jostle one another gently in the crowd. Each encourages
@@ -72,7 +72,7 @@ This type of colophon might not be appropriate for short statements.
 A few traditional colophons.
 
 \font[size=10pt, style=italic, features="+hlig,+salt"]{%
-\colophon[decoration=true,figure=decorative]{% 
+\colophon[decoration=true,figure=decorative]{%
 The editor wishes to thank all the the authors, reviewers
 & friends who contributed to this volume. John Doer
 designed the layout & provided helpful hints on how
@@ -84,7 +84,7 @@ cannot be thanked enough for all her efforts in such
 a small colophon.}}
 
 \font[size=11pt, style=italic, features="+hlig,+salt"]{%
-\colophon[decoration=true,figure=floral]{% 
+\colophon[decoration=true,figure=floral]{%
 This book was prepared with SILE, an
 impressive & powerful typesetting system.
 As can be seen, it is composed in Libertinus, a nice font with a great taste.
@@ -125,7 +125,7 @@ so successfully, then it must be a matter of something more than merely cracking
 Or it is cracking nuts, but we must have ignored some aspect of this art form because
 we mastered it too well and it took this new nutcracker to reveal its true nature to us,
 and it can even help its demonstration if he is a little less proficient at nutcracking than
-the rest of us. 
+the rest of us.
 }}
 
 

@@ -11,20 +11,13 @@
 \define[command=codeblock]{\font[family=Libertinus Sans]{\process}}
 \footnote:rule
 \header:rule
-\script{
--- FIXME... Until proper fix in SILE for Unicode metadata #1280
-local pdf = require("justenoughlibtexpdf")
-SILE.outputters.libtexpdf._init()
-local info = pdf.get_dictionary("Info")
-pdf.add_dict(info, pdf.parse("/Title"),
-  pdf.parse("<"..SU.utf8_to_utf16be_hexencoded("Omikhleia’s classes & packages")..">"))
-}
-\pdf:metadata[key=Author, val=Didier Willis]
+\pdf:metadata[key=Title, value=Omikhleia’s classes & packages]
+\pdf:metadata[key=Author, value=Didier Willis]
 
 % We do not have a true titlepage for now, build it manually.
 \background[color=#e9d8ba,allpages=false]
 \noheaderthispage
-\nofoliosthispage
+\nofoliothispage
 \hbox{}\vfill
 
 \begin{center}
@@ -55,7 +48,7 @@ version 2.0 (http://creativecommons.org/licenses/by-sa/2.0/).
 \hbox{}\par\break%
 %
 \noheaderthispage%
-\nofoliosthispage%
+\nofoliothispage%
 %
 % There we go for the content.
 %

@@ -200,7 +200,7 @@ styles.defineStyle("cv:jobtitle", {}, { font = { size = "20pt" },
 styles.defineStyle("cv:header", {}, { font = { size = "20pt" },
   paragraph = { align = "right" } })
 
--- Redefine the 6 default itemize style to apply our cv:color
+-- Redefine the 6 default itemize styles to apply our cv:color
 for i = 1, 6 do
   local itemizeSty = styles.resolveStyle("list:itemize:"..i)
   styles.defineStyle("list:itemize:"..i, { inherit = "cv:color" }, itemizeSty)
@@ -242,7 +242,7 @@ local doEntry = function (rows, _, content)
           SILE.call("style:apply", { name = "cv:description" }, function ()
             SILE.call("strut")
           end)
-          -- The go ahead.
+          -- Then go ahead.
           SILE.process(topic)
         end)
       end

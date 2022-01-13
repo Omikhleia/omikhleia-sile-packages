@@ -214,7 +214,7 @@ end, "Text to appear on the top of the odd page(s).")
 SILE.registerCommand("sectioning:part:hook", function (options, content)
   -- Parts cancel headers and folios
   SILE.call("noheaderthispage")
-  SILE.call("nofoliosthispage")
+  SILE.call("nofoliothispage")
   SILE.scratch.headers.odd = nil
   SILE.scratch.headers.even = nil
 

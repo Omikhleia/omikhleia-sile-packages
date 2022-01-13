@@ -1,7 +1,7 @@
 \begin[class=omibook, papersize=6in x 9in]{document}
 \begin{script}
 SILE.registerCommand("titlepage", function (options, content)
-  SILE.call("nofoliosthispage")
+  SILE.call("nofoliothispage")
   SILE.call("hbox")
   SILE.call("vfill")
   SILE.call("center", {}, function ()

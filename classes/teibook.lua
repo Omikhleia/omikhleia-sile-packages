@@ -331,7 +331,7 @@ SILE.registerCommand("teibook:backmatter", function (_, _)
   if SILE.documentState.documentClass:oddPage() then
     SILE.typesetter:typeset("")
     SILE.typesetter:leaveHmode()
-    SILE.call("nofoliosthispage")
+    SILE.call("nofoliothispage")
     SILE.call("supereject")
   end
   SILE.typesetter:leaveHmode()
@@ -346,7 +346,7 @@ SILE.registerCommand("teibook:impressum", function (_, content)
   if SILE.documentState.documentClass:oddPage() then
     SILE.typesetter:typeset("")
     SILE.typesetter:leaveHmode()
-    SILE.call("nofoliosthispage")
+    SILE.call("nofoliothispage")
     SILE.call("supereject")
   end
   SILE.typesetter:leaveHmode()

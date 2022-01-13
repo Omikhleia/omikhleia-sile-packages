@@ -24,7 +24,7 @@ SILE.scratch.colophon = {
 
 local internalScratch = {}
 
-local function circleSetupLineLengths(options)
+local function circleSetupLineLengths(options, oldSetupLineLengths)
   local adjustRatio = options.ratio and SU.cast("number", options.ratio)
   local bs = SILE.measurement("1bs"):tonumber()
   local ex = SILE.measurement("1ex"):tonumber()
@@ -52,15 +52,10 @@ local function circleSetupLineLengths(options)
     local radius = math.sqrt(area / math.pi)
 
     -- We'll be lucky if it works decently :)
-    -- Setup the parShape method, with a table for memoization.
+    -- Setup the parShape method
     -- Oh again our lines assume fixed baselines, so we are in good
     -- company with Mr. Random.
-    internalScratch.parShapes = {}
     self.parShape = function (self, line)
-      if internalScratch.parShapes[line] then
-        -- Return memoized values
-        return internalScratch.parShapes[line]
-      end
       -- of course at the exact top of the circle the width would
       -- be null, so we offset that a bit by some x...
       local h = radius - (line - 1) * bs - 0.5 * ex
@@ -69,24 +64,13 @@ local function circleSetupLineLengths(options)
       if chord > self.hsize then SU.error("Circle-shaped paragraph to big to fit the frame width") end
 
       local indent = self.hsize / 2 - chord
-      internalScratch.parShapes[line] = {
-        width = SILE.measurement(2 * chord),
-        left = indent:tonumber(),
-        right = indent:tonumber()
-      }
-      -- print("SHAPE", line, internalScratch.parShapes[line].width, internalScratch.parShapes[line].left)
-      return internalScratch.parShapes[line]
+      return indent:tonumber(), SILE.measurement(2 * chord), indent:tonumber()
     end
 
-    -- Assume we should never reach 500 lines. If it does, stop
-    -- the mess.
-    self.lastSpecialLine = 1000
-    self.secondWidth = self.hsize
-    self.secondIndent = 0
-    self.easy_line = self.lastSpecialLine -- implies looseness=0
     -- Store the computed radius for decorations, which will be computed
     -- at the very end...
     internalScratch.radius = radius
+    oldSetupLineLengths(self)
   end
   return setupLineLengths
 end
@@ -141,6 +125,7 @@ end
 SILE.registerCommand("colophon", function (options, content)
   local oldT_breakIntoLines = SILE.typesetter.breakIntoLines
   local oldLB_setupLineLengths = SILE.linebreak.setupLineLengths
+  local oldLB_parShape = SILE.linebreak.parShape
 
   SILE.typesetter:leaveHmode()
   SILE.settings.temporarily(function()
@@ -149,10 +134,12 @@ SILE.registerCommand("colophon", function (options, content)
     -- Clear paragraph indent and ensure baselineskip has no stretch.
     SILE.settings.set("document.baselineskip", "1.2em")
     SILE.settings.set("document.parindent", 0)
+    -- Activate parshaping
+    SILE.settings.set("linebreak.parShape", true)
 
     -- Override some default methods...
     local leadingGlue = true
-    SILE.linebreak.setupLineLengths = circleSetupLineLengths(options)
+    SILE.linebreak.setupLineLengths = circleSetupLineLengths(options, oldLB_setupLineLengths)
     SILE.typesetter.breakIntoLines = function (self, nodelist, breakWidth)
       local lines = oldT_breakIntoLines(self, nodelist, breakWidth)
       if SU.boolean(options.decoration, false) then
@@ -183,9 +170,10 @@ SILE.registerCommand("colophon", function (options, content)
 
     -- Restore the original typesetter and linebreak.
     SILE.typesetter.breakIntoLines = oldT_breakIntoLines
-    SILE.linebreak.setupLineLengths = oldLB_setupLineLengths
     -- Also do not forget to deactivate the parShape method.
-    SILE.linebreak.parShape = nil
+    SILE.linebreak.setupLineLengths = oldLB_setupLineLengths
+    SILE.linebreak.parShape = oldLB_parShape
+    SILE.settings.set("linebreak.parShape", false)
 
     -- When all is done, we construct the decoration...
     if SU.boolean(options.decoration, false) then
