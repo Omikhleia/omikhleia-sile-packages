@@ -1,5 +1,39 @@
 \begin{document}
 
+\open-on-any-page
+\noheaderthispage
+\hbox{}
+\vfill
+
+\begin[width=80%fw, rule=0.4pt, margin=0.5cm]{epigraph}
+Dans les provinces siléennes, la monnaie prend la forme de pièces rondes coulées ou frappées, marquées
+des deux côtés. Au fil des siècles, elle s’est imposée dans le négoce entre les villes libres et les royaumes
+du continent, avec des valeurs cependant discutées selon sa région d’origine et son époque.
+Il n’est pas rare de voir des commerçants discuter, parfois assez vivement, quant à la valeur d’un paiement
+et au taux de conversion qu’il convient d’appliquer pour satisfaire toutes les parties. Quoique devenues rares,
+les pièces datant de l’ère des Nautes, faites d’un alliage que ceux-ci gardaient secret, suscitent moins
+de débats, tant elles sont difficiles à contrefaire. Il n’est point, sur tout le continent, d’autre exemple
+d’une telle longévité d’une monnaie aussi ancienne.
+(…) Dans les archipels, les pièces sont percées au centre d’un trou carré ou circulaire. Ces peuples marins
+ont pour usage, en effet, de les passer sur des tiges en bois étalonnées pour leur décompte ou, lorsqu’ils
+partent en voyage, de les réunir pour leur transport sur une cordelette passée dans leur trou central,
+qu’ils portent autour du cou sous leurs vêtements. Un riche marchand îlien se reconnaît ainsi à
+ses nombreux colliers.
+(…) Les pièces coulées de la cité d’Almaq sont autrement originales, étant de facture conique.
+Seule la face supérieure de ces cônes est marquée. Les gens de cette citée les empilent
+en tas ou les disposent dans des tubes cylindriques prévus à cet effet. Les pièces sont
+de quatre sortes : le bronze, le cuivre, l’argent et le fer. Seuls les trois premières ont valeur
+d’échange dans les activités commerciales. Le dernier type est une espèce
+spécifiquement dédiée au jeu. Son utilisation est régie par tout un ensemble de règles déconcertantes,
+pour qui n’est pas coutumier des us étranges de cette cité. Il peut ainsi paraître surprenant qu’une
+telle pièce prenne encore plus de valeur symbolique, dans certains cercles de joueurs, lorsqu’elle est
+rouillée, signe que son possesseur a su la garder longtemps sans devoir la gager. Se faire prendre
+à contrefaire cette monnaie ou à tenter de la vieillir de façon artificielle n’est pas perçu
+autrement que comme une tricherie odieuse qui vaut à celui qui la commet son exclusion définitive des
+activités sociales si appréciées par le peuple d’Almaq.
+\source{L’Encyclopédie des Mondes en langue d’Almaq.}
+\end{epigraph}
+
 \chapter[numbering=false]{Jeux guerriers.}
 
 \smallcaps{L’ambiance dans la taverne était maussade}, ce jour-là. Le temps était à la pluie,

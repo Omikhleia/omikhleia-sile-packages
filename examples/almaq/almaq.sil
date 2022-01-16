@@ -4,6 +4,7 @@
 \script[src=packages/omipoetry]
 \script[src=packages/image]
 \script[src=packages/ptable]
+\script[src=packages/dropcaps]
 \language[main=fr]
 %\hyphenator:add-exceptions[lang=fr]{lo-go-gramme}%
 %\hyphenator:add-exceptions[lang=fr]{igno-rer}%
@@ -16,6 +17,21 @@
 \define[command=foreign:gr]{\em{\language[main=und]{\process}}}%
 \set[parameter=linebreak.tolerance, value=5000]%
 %\set[parameter=linebreak.adjdemerits, value=500]%
+\script{
+local vglueNoStretch = function (vg)
+  return SILE.nodefactory.vglue(SILE.length(vg.height.length))
+end
+SILE.registerCommand("initial", function (options, content)
+  SILE.settings.temporarily(function()
+    SILE.settings.set("document.baselineskip", vglueNoStretch(SILE.settings.get("document.baselineskip")))
+    SILE.call("dropcap", { lines = 2, family = "Zallman Caps", join = true },
+      { options.letter })
+    SILE.process(content)
+    SILE.typesetter:leaveHmode()
+  end)
+end, "FIXME waiting for dropcap(s) to be released")
+}
+%
 \script{
 local extractFromTree = function (tree, command)
   for i=1, #tree do
@@ -106,7 +122,24 @@ end, "Insert a partition.")
   \even-running-header{}
   \set-counter[id=foonote, value=1]
   \set-multilevel-counter[id=sections, level=1, value=0]
-}
+}%
+%
+% Theatrical stuff...
+\script{
+  SILE.registerCommand("stage", function(options, content)
+    SILE.call("style:apply:paragraph", { name = options.name }, content)
+  end)
+}%
+\style:define[name=speaker]{
+   \font[features=+smcp]
+   \paragraph[skipbefore=smallskip, indentbefore=false, breakafter=false, indentafter=true, align=center]
+}%
+\define[command=speaker]{\stage[name=speaker]{\process}}%
+\style:define[name=didaskalia]{
+   \font[style=italic, size=-0.5]
+   \paragraph[indentbefore=false, breakafter=false, indentafter=true, align=center]
+}%
+\define[command=didaskalia]{\stage[name=didaskalia]{\process}}%
 %
 \odd-running-header{Contes et légendes d’Almaq}%
 
@@ -131,7 +164,6 @@ end, "Insert a partition.")
 \include[src=examples/almaq/trois_perles.sil]
 
 \include[src=examples/almaq/deiraval_et_dongann.sil]
-
 \include[src=examples/almaq/dongann_horloge.sil]
 \include[src=examples/almaq/dits_de_la_saigne.sil]
 \include[src=examples/almaq/mort_dongann.sil]
@@ -141,10 +173,9 @@ end, "Insert a partition.")
 
 \include[src=examples/almaq/dame_renarde.sil]
 \include[src=examples/almaq/sacrifice_de_divel.sil]
-
 \include[src=examples/almaq/fille_de_sitar_1.sil]
 \include[src=examples/almaq/fille_de_sitar_2.sil]
-
+\include[src=examples/almaq/fille_de_sitar_3.sil]
 \include[src=examples/almaq/jeux_guerriers.sil]
 
 \part{La neuvième guerre cyclique}
