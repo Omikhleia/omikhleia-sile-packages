@@ -151,8 +151,9 @@ SILE.registerCommand("open-on-odd-page", function (_, _)
 end, "Open a double page without header and folio")
 
 SILE.registerCommand("open-on-any-page", function (_, _)
-  if SILE.scratch.counters.folio.value > 1 then
-    SILE.typesetter:leaveHmode()
+  SILE.typesetter:leaveHmode() -- Important, flushes nodes to output queue.
+  if #SILE.typesetter.state.outputQueue ~= 0 then
+    -- We are not at the top of a page, eject the current content.
     SILE.call("supereject")
   end
   SILE.typesetter:leaveHmode()
