@@ -177,6 +177,7 @@ end, "Insert a partition.")
 \include[src=examples/almaq/fille_de_sitar_2.sil]
 \include[src=examples/almaq/fille_de_sitar_3.sil]
 \include[src=examples/almaq/jeux_guerriers.sil]
+\include[src=examples/almaq/essai_chronologie_interne.sil]
 
 \part{La neuvième guerre cyclique}
 

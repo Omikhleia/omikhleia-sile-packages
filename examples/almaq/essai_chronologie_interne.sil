@@ -1,0 +1,169 @@
+\begin{document}
+\chapter[numbering=false]{Tentatives chronologiques.}
+\define[command=onum]{\font[features=+onum]{\process}}%
+
+\smallcaps{Quoique} relevant d’une comparaison minutieuse des sources et d’un consensus relativement stable
+à la fin de notre \abbr:siecle{xx} siècle, aucune des dates avancées ci-dessus ne saurait être certaine.
+Qu’on se le dise, de nombreuses contradictions sont ici ignorées. La chronologie approximative qui suit n’a pas
+d’autre objectif que de donner aux lecteurs une idée assez générale de l’Histoire d’Almaq et, en particulier, des
+événements évoqués dans le présent recueil.
+
+\subsection[numbering=false]{Époques mythiques et histoire passée.}
+
+\begin[cols=10%fw 90%fw, cellborder=0, cellpadding=0 4pt 0 0]{ptable}
+\begin{row}
+  \cell[valign=top, style=narrow]{\abbr:siecle{i} s.}
+  \cell[valign=top, style=narrow]{L’an 1 marque le début de l’ère siléenne, point culminant de la
+  première guerre cyclique. Lurein revendique le titre d’empereur de Silé. Légende la princesse renarde.
+  La première guerre cyclique se termine vers l’an 14. L’effondrement du Premier Empire survient dans les
+  années 20.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\abbr:siecle{ii} s.}
+  \cell[valign=top, style=narrow]{La deuxième guerre cyclique se déroule au milieu du siècle (c. 135–155).}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\abbr:siecle{iii} s.}
+  \cell[valign=top, style=narrow]{La troisième guerre cyclique a lieu quelques décennies après le début du siècle (c. 220).}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\abbr:siecle{iv} s.}
+  \cell[valign=top, style=narrow]{Quatrième guerre cyclique (317–319). Prise d’Almaq et début du Second Empire
+  de Lurein III. Inauguration des Grands Jardins (330). Fesed Lerani (363–396). Cinquième guerre cyclique (395–397)
+  et chute du Second Empire alors gouverné par Lurein IV.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\abbr:siecle{v} s.}
+  \cell[valign=top, style=narrow]{Almaq connaît une période faste, dite de la Restauration.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\abbr:siecle{vi} s.}
+  \cell[valign=top, style=narrow]{La sixième guerre cyclique a lieu vers le milieu du siècle.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\abbr:siecle{vii} s.}
+  \cell[valign=top, style=narrow]{La septième guerre cyclique débute en 631. Almaq accueille de nombreux exilés.
+  Le siècle se termine par la fin de la Longue Guerre et l’établissement du Troisième Empire.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\abbr:siecle{viii} s.}
+  \cell[valign=top, style=narrow]{Grande peste. Nombreux troubles, auxquels certains historiens font
+  remonter la huitième guerre cyclique.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\abbr:siecle{ix} s.}
+  \cell[valign=top, style=narrow]{Huitième guerre cyclique (c. 805–815). 
+  Fin du Trosième Empire. Période dite de la Réforme à Almaq (c. 825).
+  Les Grands Jardins sont fermés à l’En-Bas.}
+\end{row}
+\end{ptable}
+
+\subsection[numbering=false]{Le dixième siècle.}
+
+\begin[cols=10%fw 90%fw, cellborder=0, cellpadding=0 4pt 0 0]{ptable}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{912}}
+  \cell[valign=top, style=narrow]{Naissance de Wembeneth an Norgovean.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{920}}
+  \cell[valign=top, style=narrow]{Naissance de Lisnû à Sitar.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{936}}
+  \cell[valign=top, style=narrow]{Lisnû arrive à Almaq.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{937}}
+  \cell[valign=top, style=narrow]{Lisnû prend le nom de Deiraval.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{938}}
+  \cell[valign=top, style=narrow]{Naissance de Dongann.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{941}}
+  \cell[valign=top, style=narrow]{Mort de Gesmanth.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{947}}
+  \cell[valign=top, style=narrow]{Mort d’Esphane. Deiraval s’installe dans la cité médiane.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{950}}
+  \cell[valign=top, style=narrow]{Le marchand Miro Lerani prend Deiraval comme gérante.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{951}}
+  \cell[valign=top, style=narrow]{Deiraval rencontre Dongann, Wembeneth et Aduin le Vieux. Fondation du Consortium.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{953}}
+  \cell[valign=top, style=narrow]{Naissance de Keldre dans les lointaines Merluines.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{955}}
+  \cell[valign=top, style=narrow]{Naissance d’Alster des Mille Îles.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{965}}
+  \cell[valign=top, style=narrow]{À partir de cette date, Dongann, prétendant partir sur les traces des Nautes, disparaît régulièrement d’Almaq.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{969}}
+  \cell[valign=top, style=narrow]{Alster rencontre Dongann et Deiraval.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{970}}
+  \cell[valign=top, style=narrow]{Révolte des Gueux.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{979}}
+  \cell[valign=top, style=narrow]{Deiraval intègre le conseil d’Almaq.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{981}}
+  \cell[valign=top, style=narrow]{Sekembrî de Sitar vient en ambassade à Almaq. Cartamène III, dans les Édrases, se proclame hiérarque.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{986}}
+  \cell[valign=top, style=narrow]{Keldre quitte les Merluines.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{987}}
+  \cell[valign=top, style=narrow]{Keldre arrive à Almaq et se lie d’amitié avec Dongann.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{989}}
+  \cell[valign=top, style=narrow]{Almaq entre en guerre. Début des Campagnes d’Alster.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{990}}
+  \cell[valign=top, style=narrow]{Dongann fait paraître ses \em{Dits de la Saigne}, dont il situe les aventures entre 968 et 983.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{998}}
+  \cell[valign=top, style=narrow]{Mort de Dongann.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{999}}
+  \cell[valign=top, style=narrow]{Sac d’Onérande. Chute d’Almaq.}
+\end{row}
+\end{ptable}
+
+\subsection[numbering=false]{Après la Chute.}
+
+\begin[cols=10%fw 90%fw, cellborder=0, cellpadding=0 4pt 0 0]{ptable}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{1007}}
+  \cell[valign=top, style=narrow]{Keldre quitte la cour de Sifo.}
+\end{row}
+\begin{row}
+  \cell[valign=top, style=narrow]{\onum{1018}}
+  \cell[valign=top, style=narrow]{Keldre revient dans les Merluines.}
+\end{row}
+\end{ptable}
+
+\couyard[type=6, width=default]
+
+\end{document}
