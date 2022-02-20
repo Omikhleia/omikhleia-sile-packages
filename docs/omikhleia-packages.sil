@@ -218,6 +218,10 @@ These are standalone packages users can use in their own documents.
 
 \package-documentation[src=packages/redefine]
 
+\subsection{framebox: fancy box framing}
+
+\package-documentation[src=packages/framebox]
+
 \section{Technical packages}
 
 These packages are not intended to be used alone, but provide utilities
