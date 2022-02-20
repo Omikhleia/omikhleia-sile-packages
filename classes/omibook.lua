@@ -48,7 +48,7 @@ styles.defineStyle("sectioning:subsection", { inherit = "sectioning:base"}, {
 })
 styles.defineStyle("sectioning:subsubsection", { inherit = "sectioning:base" }, {
   font = { weight = 800 },
-  paragraph = { skipbefore = "smallskip", skipbefore = "smallskip"; breakafter = false },
+  paragraph = { skipbefore = "smallskip", breakafter = false },
   sectioning = { counter = "sections", level = 4, display = "arabic",
                  toclevel = 4,
                  numberstyle="sectioning:other:number" },

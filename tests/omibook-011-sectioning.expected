@@ -1,0 +1,75 @@
+Set paper size 	595.275597	841.8897729
+Begin page
+Mx 	59.5276
+My 	107.4981
+Set font 	Gentium Plus;13;800;;normal;;LTR
+T	38 75 68 83 87 72 85 w=42.6245	(Chapter)
+Mx 	105.5874
+T	20 w=6.1001	(1)
+Mx 	111.6875
+T	17 w=2.9771	(.)
+Mx 	59.5276
+My 	124.2981
+Set font 	Gentium Plus;14;800;;normal;;LTR
+T	38 75 68 83 87 72 85 w=45.9033	(Chapter)
+My 	148.2981
+Set font 	Gentium Plus;10;400;;normal;;LTR
+T	38 75 68 83 87 72 85 w=32.7881	(Chapter)
+Mx 	95.0015
+T	70 82 81 87 72 81 87 w=31.9385	(content)
+Mx 	126.9400
+T	17 w=2.2900	(.)
+Mx 	59.5276
+My 	172.2981
+Set font 	Gentium Plus;12;800;;normal;;LTR
+T	20 17 20 w=14.0098	(1.1)
+Mx 	73.5373
+T	17 w=2.7480	(.)
+Mx 	78.9280
+T	54 72 70 87 76 82 81 w=36.5391	(Section)
+Mx 	59.5276
+My 	190.2981
+Set font 	Gentium Plus;10;400;;normal;;LTR
+T	54 72 70 87 76 82 81 w=30.4492	(Section)
+Mx 	92.6629
+T	70 82 81 87 72 81 87 w=31.9385	(content)
+Mx 	124.6013
+T	17 w=2.2900	(.)
+Mx 	59.5276
+My 	208.2981
+Set font 	Gentium Plus;11;800;;normal;;LTR
+T	20 17 20 17 20 w=20.5229	(1.1.1)
+Mx 	80.0505
+T	17 w=2.5190	(.)
+Mx 	84.9919
+T	54 88 69 86 72 70 87 76 82 81 w=49.1563	(Subsection)
+Mx 	59.5276
+My 	223.2981
+Set font 	Gentium Plus;10;400;;normal;;LTR
+T	54 88 69 86 72 70 87 76 82 81 w=44.6875	(Subsection)
+Mx 	106.8996
+T	70 82 81 87 72 81 87 w=31.9385	(content)
+Mx 	138.8381
+T	17 w=2.2900	(.)
+Mx 	59.5276
+My 	238.2981
+Set font 	Gentium Plus;10;800;;normal;;LTR
+T	20 17 20 17 20 17 20 w=25.6396	(1.1.1.1)
+Mx 	85.1672
+T	17 w=2.2900	(.)
+Mx 	89.6594
+T	54 88 69 86 88 69 86 72 70 87 76 82 81 w=58.9258	(Subsubsection)
+Mx 	59.5276
+My 	250.2981
+Set font 	Gentium Plus;10;400;;normal;;LTR
+T	54 88 69 86 88 69 86 72 70 87 76 82 81 w=58.9258	(Subsubsection)
+Mx 	121.1363
+T	70 82 81 87 72 81 87 w=31.9385	(content)
+Mx 	153.0748
+T	17 w=2.2900	(.)
+Mx 	518.2239
+My 	757.5827
+Set font 	Gentium Plus;9.5;400;;normal;;LTR
+T	20 w=4.4578	(1)
+End page
+Finish

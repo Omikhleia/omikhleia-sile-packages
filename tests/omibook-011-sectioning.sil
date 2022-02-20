@@ -1,0 +1,21 @@
+\begin[class=omibook]{document}
+\script[src=packages/lorem]%
+\nofolios
+\noheaders
+\chapter{Chapter}
+
+Chapter content.
+
+\section{Section}
+
+Section content.
+
+\subsection{Subsection}
+
+Subsection content.
+
+\subsubsection{Subsubsection}
+
+Subsubsection content.
+
+\end{document}
