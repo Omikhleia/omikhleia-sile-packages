@@ -188,6 +188,93 @@ SILE.registerCommand("roundbox", function(options, content)
   makefbox(hbox, padding, shadowsize, path, shadowpath)
 end, "Frames content in a rounded box.")
 
+local RoughGenerator = require('packages/framebox-rough').RoughGenerator
+function dump(o, p) -- UGLY DEBUG STUFF FIXME
+  p = p or 1
+  local pad = ""
+  for i = 1, p do pad = pad .. " " end
+  if type(o) == 'table' then
+     local s = '{ '
+     for k,v in pairs(o) do
+        if type(k) ~= 'number' then k = '"'..k..'"' end
+        s = s .. '\n  ['.. pad .. k..'] = ' .. dump(v, p+1) .. ','
+     end
+     return s .. '} '
+  else
+     return tostring(o)
+  end
+end
+
+local function opsToPath(drawing, fixedDecimals)
+  local path = ''
+  for k,item in ipairs(drawing.ops) do
+    -- print("\n --     ", k, dump(item[k]), item[k].op)
+    local data = item.data
+    -- const data = ((typeof fixedDecimals === 'number') && fixedDecimals >= 0) ? (item.data.map((d) => +d.toFixed(fixedDecimals))) : item.data;
+    if item.op == 'move' then
+        path = path .. data[1] .. ' ' .. data[2] .. " m "
+    elseif item.op == 'bcurveTo' then
+        path = path .. data[1] .. " " .. data[2] .. " " .. data[3] .. " " .. data[4] .. " " .. data[5] .. " " .. data[4] .. " c "
+    elseif item.op == "lineTo" then
+        path = path .. data[1] .. " " ..  data[1] .. " l "
+   end
+  end
+  -- print("\n opsToPath", path)
+  return path -- .trim()
+end
+
+local function draw(drawable)
+  local sets = drawable.sets or {}
+  -- print("draw enter", dump(drawable))
+  local o = drawable.options -- or this.getDefaultOptions();
+  local precision = drawable.options.fixedDecimalPlaceDigits;
+  local g = {}
+  for k,drawing in ipairs(sets) do
+    local path;
+    if drawing.type == "path" then
+--      print("\n@@@draw", dump(drawing))
+      path = opsToPath(drawing, precision);
+      -- print("\n@@@draw", path)
+    elseif drawing.type == "fillPath" then
+      -- TODO
+      SU.error("unimplemented")
+    elseif drawing.type == "fillSketch" then
+      -- TODO
+      SU.error("unimplemented")
+    end
+    if path then
+      g[#g + 1] = path
+    end
+  end
+  -- print("---------------draw:", dump(g))
+  return g
+end
+
+SILE.registerCommand("roughbox", function(options, content)
+  local padding = SU.cast("measurement", options.padding or SILE.settings.get("framebox.padding")):tonumber()
+  local borderwidth = SU.cast("measurement", options.borderwidth or SILE.settings.get("framebox.borderwidth")):tonumber()
+  local bordercolor = SILE.colorparser(options.bordercolor or "black")
+
+  local hbox = SILE.call("hbox", {}, content)
+  table.remove(SILE.typesetter.state.nodes) -- steal it back...
+
+  local w = hbox.width:tonumber() + 2 * padding
+  local h = hbox.height:tonumber() + hbox.depth:tonumber() + 2 * padding
+
+  local gen = RoughGenerator()
+  local r = gen:rectangle(0, 0, w, h)
+  local p = table.concat(draw(r), " ")
+
+  local path = table.concat({
+    p,
+    makecolor(bordercolor, true),
+    borderwidth, "w",
+    "S" -- stroke only
+  }, " ")
+
+  makefbox(hbox, padding, shadowsize, path, shadowpath)
+end, "Frames content in a rough box.")
+
 return {
   documentation = [[\begin{document}
 \script[src=packages/autodoc-extras]
@@ -228,6 +315,9 @@ rounded corner arc. It relies on the \doc:code{framebox.cornersize} setting (def
 \doc:code{padding} option, as usual, is explicitly specified as argument to the command. If one of the
 sides of the boxed content is smaller than that, then the maximum allowed rounding effect will be computed
 instead.
+
+Last but not least, there is the experimental \doc:code{\\roughbox} command that frames its content in a 
+\em{sketchy, hand-drawn-like} style, to obtain \roughbox[bordercolor=#59b24c]{a rough box.}
 
 As final notes, the box logic provided in this package applies to the natural size of the box content.
 
