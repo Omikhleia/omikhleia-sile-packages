@@ -32,7 +32,7 @@ SILE.settings.declare({
 
 -- Draw given paths on an hbox (wrapping it in another hbox).
 -- It assumes the hbox is NOT in the output queue
--- (i.e. was stolen back and or stored earlier).
+-- (i.e. was stolen back and/or stored earlier).
 local makefbox = function(hbox, padding, shadowsize, path, shadowpath)
   SILE.typesetter:pushHbox({
     inner = hbox,
@@ -160,7 +160,7 @@ SILE.registerCommand("roundbox", function(options, content)
   local rx = cornersize
   local ry = rx
 
-  local arc = 4 / 3 * (1.4142135623730951 - 1);
+  local arc = 4 / 3 * (1.4142135623730951 - 1)
   -- table of segments (2 coords) or bezier curves (6 coords)
   local segments = {
     {(w - 2 * rx), 0}, {(rx * arc), 0, rx, ry - (ry * arc), rx, ry}, {0, (h - 2 * ry)},
@@ -179,7 +179,7 @@ SILE.registerCommand("roundbox", function(options, content)
     "f"
   }, " ")
   local path = table.concat({
-    makepath(x, y, segments);
+    makepath(x, y, segments),
     makecolor(bordercolor, true), makecolor(fillcolor, false),
     borderwidth, "w",
     "B"
@@ -189,66 +189,23 @@ SILE.registerCommand("roundbox", function(options, content)
 end, "Frames content in a rounded box.")
 
 local RoughGenerator = require('packages/framebox-rough').RoughGenerator
-function dump(o, p) -- UGLY DEBUG STUFF FIXME
-  p = p or 1
-  local pad = ""
-  for i = 1, p do pad = pad .. " " end
-  if type(o) == 'table' then
-     local s = '{ '
-     for k,v in pairs(o) do
-        if type(k) ~= 'number' then k = '"'..k..'"' end
-        s = s .. '\n  ['.. pad .. k..'] = ' .. dump(v, p+1) .. ','
-     end
-     return s .. '} '
-  else
-     return tostring(o)
-  end
-end
+local RoughPdf = require('packages/framebox-rough').RoughPdf
 
-local function opsToPath(drawing, fixedDecimals)
-  local path = ''
-  for k,item in ipairs(drawing.ops) do
-    -- print("\n --     ", k, dump(item[k]), item[k].op)
-    local data = item.data
-    -- const data = ((typeof fixedDecimals === 'number') && fixedDecimals >= 0) ? (item.data.map((d) => +d.toFixed(fixedDecimals))) : item.data;
-    if item.op == 'move' then
-        path = path .. data[1] .. ' ' .. data[2] .. " m "
-    elseif item.op == 'bcurveTo' then
-        path = path .. data[1] .. " " .. data[2] .. " " .. data[3] .. " " .. data[4] .. " " .. data[5] .. " " .. data[4] .. " c "
-    elseif item.op == "lineTo" then
-        path = path .. data[1] .. " " ..  data[1] .. " l "
-   end
-  end
-  -- print("\n opsToPath", path)
-  return path -- .trim()
-end
-
-local function draw(drawable)
-  local sets = drawable.sets or {}
-  -- print("draw enter", dump(drawable))
-  local o = drawable.options -- or this.getDefaultOptions();
-  local precision = drawable.options.fixedDecimalPlaceDigits;
-  local g = {}
-  for k,drawing in ipairs(sets) do
-    local path;
-    if drawing.type == "path" then
---      print("\n@@@draw", dump(drawing))
-      path = opsToPath(drawing, precision);
-      -- print("\n@@@draw", path)
-    elseif drawing.type == "fillPath" then
-      -- TODO
-      SU.error("unimplemented")
-    elseif drawing.type == "fillSketch" then
-      -- TODO
-      SU.error("unimplemented")
-    end
-    if path then
-      g[#g + 1] = path
-    end
-  end
-  -- print("---------------draw:", dump(g))
-  return g
-end
+-- function dump(o, p) -- UGLY DEBUG STUFF FIXME REMOVE
+--   p = p or 1
+--   local pad = ""
+--   for i = 1, p do pad = pad .. " " end
+--   if type(o) == 'table' then
+--      local s = '{ '
+--      for k,v in pairs(o) do
+--         if type(k) ~= 'number' then k = '"'..k..'"' end
+--         s = s .. '\n  ['.. pad .. k..'] = ' .. dump(v, p+1) .. ','
+--      end
+--      return s .. '} '
+--   else
+--      return tostring(o)
+--   end
+-- end
 
 SILE.registerCommand("roughbox", function(options, content)
   local padding = SU.cast("measurement", options.padding or SILE.settings.get("framebox.padding")):tonumber()
@@ -261,9 +218,16 @@ SILE.registerCommand("roughbox", function(options, content)
   local w = hbox.width:tonumber() + 2 * padding
   local h = hbox.height:tonumber() + hbox.depth:tonumber() + 2 * padding
 
-  local gen = RoughGenerator()
-  local r = gen:rectangle(0, 0, w, h)
-  local p = table.concat(draw(r), " ")
+  local roughOpts = {}
+  if options.roughness then roughOpts.roughness = SU.cast("number", options.roughness) end
+  if options.bowing then roughOpts.bowing = SU.cast("number", options.bowing) end
+  roughOpts.preserveVertices = SU.boolean(options.preserve, false)
+  roughOpts.disableMultiStroke = SU.boolean(options.singlestroke, false)
+
+  local roughGenerator = RoughGenerator()
+  local drawable = roughGenerator:rectangle(0, 0, w, h, roughOpts)
+  local pathGenerator = RoughPdf()
+  local p = pathGenerator:draw(drawable)
 
   local path = table.concat({
     p,
@@ -310,14 +274,25 @@ It supports the same options, so one can have a \roundbox[shadow=true]{dropped s
 
 Or likewise, \roundbox[shadow=true, bordercolor=#b94051, fillcolor=#ecb0b8, shadowcolor=220]{apply colors.}
 
-Moreover, it has another additional option, \doc:code{cornersize}, which defines the radius of the
-rounded corner arc. It relies on the \doc:code{framebox.cornersize} setting (defaults to 5pt), unless the
-\doc:code{padding} option, as usual, is explicitly specified as argument to the command. If one of the
-sides of the boxed content is smaller than that, then the maximum allowed rounding effect will be computed
-instead.
+The radius of the rounded corner arc relies on the \doc:code{framebox.cornersize} setting (defaults to 5pt),
+unless the \doc:code{cornersize} option, as usual, is explicitly specified as argument to the command.
+(If one of the sides of the boxed content is smaller than that, then the maximum allowed rounding effect
+will be computed instead.)
 
-Last but not least, there is the experimental \doc:code{\\roughbox} command that frames its content in a 
-\em{sketchy, hand-drawn-like} style, to obtain \roughbox[bordercolor=#59b24c]{a rough box.}
+Last but not least, there is the experimental \doc:code{\\roughbox} command that frames its content in a
+\em{sketchy}, hand-drawn-like style\footnote{The implementation is based on a partial port of
+the \em{rough.js} JavaScript library.}: \roughbox[bordercolor=#59b24c]{a rough box.}
+
+As above, the \doc:code{padding}, \doc:code{borderwidth} and \doc:code{bordercolor} options apply.
+
+Sketching options are \doc:code{roughness} (numerical value indicating how rough the drawing is; 0 would
+be a perfect  rectangle, the default value is 1 and there is no upper limit to this value but a value
+over 10 is mostly useless), \doc:code{bowing} (numerical value indicating how curvy the lines are when
+drawing a sketch; a value of 0 will cause straight lines and the default value is 1),
+\doc:code{preserve} (defaults to false; when set to true, the locations of the end points are not
+randomized) and \doc:code{singlestroke} (defaults to false; if set to true, a single stroke is applied
+to sketch the shape instead of multiple strokes).
+For instance, here is a single-stroked \roughbox[bordercolor=#59b24c, singlestroke=true]{rough box.}
 
 As final notes, the box logic provided in this package applies to the natural size of the box content.
 

@@ -1,5 +1,12 @@
+--
+-- Core logic for rough hand-drawn-like sketchs
+-- Implemented: lines and rectangles
+-- License: MIT
+--
 
--- Quick and dirty experimental port of (a subset of) rough.js (https://github.com/rough-stuff/rough)
+-- Partial port of the rough.js (https://github.com/rough-stuff/rough) JavaScript library.
+
+-- From renderer.ts (private helpers)
 
 local function _offset(min, max, ops, roughnessGain)
   return ops.roughness * (roughnessGain or 1) * ((math.random() * (max - min)) + min)
@@ -9,7 +16,7 @@ local function _offsetOpt(x, ops, roughnessGain)
   return _offset(-x, x, ops, roughnessGain or 1)
 end
 
-local function _line(x1, y1, x2, y2, o, move, overlay)
+local function _line(x1, y1, x2, y2, o, move, overlay) -- returns an array of operations
   local lengthSq = math.pow((x1 - x2), 2) + math.pow((y1 - y2), 2)
   local length = math.sqrt(lengthSq)
   local roughnessGain = 1
@@ -26,7 +33,7 @@ local function _line(x1, y1, x2, y2, o, move, overlay)
     offset = length / 10
   end
   local halfOffset = offset / 2
-  local divergePoint = 0.2 + math.random() * 0.3 -- 0.2 instead of 0.3 ???
+  local divergePoint = 0.2 + math.random() * 0.33 -- NOTE: the original code had 0.2 here.
   local midDispX = o.bowing * o.maxRandomnessOffset * (y2 - y1) / 200
   local midDispY = o.bowing * o.maxRandomnessOffset * (x1 - x2) / 200
   midDispX = _offsetOpt(midDispX, o, roughnessGain)
@@ -36,9 +43,7 @@ local function _line(x1, y1, x2, y2, o, move, overlay)
   local randomFull = function() return _offsetOpt(offset, o, roughnessGain) end
   local preserveVertices = o.preserveVertices
   if move then
-    -- print("move true")
     if overlay then
-      -- print("overlay true")
       local t = {
         op = 'move',
         data = {
@@ -47,9 +52,7 @@ local function _line(x1, y1, x2, y2, o, move, overlay)
         }
       }
       ops[#ops+1] = t
-      -- print("overlay end true", dump(ops))
     else
-      -- print("overlay false")
       local t = {
         op = 'move',
         data = {
@@ -72,7 +75,7 @@ local function _line(x1, y1, x2, y2, o, move, overlay)
           y2 + (preserveVertices and 0 or randomHalf()),
         }
     }
-      ops[#ops+1] = t
+    ops[#ops+1] = t
   else
     local t = {
       op = 'bcurveTo',
@@ -85,9 +88,8 @@ local function _line(x1, y1, x2, y2, o, move, overlay)
         y2 + (preserveVertices and 0 or randomFull()),
       }
     }
-      ops[#ops+1] = t
+    ops[#ops+1] = t
   end
-  -- print("_line", dump(ops))
   return ops
 end
 
@@ -101,19 +103,18 @@ local function _doubleLine(x1, y1, x2, y2, o, filling)
     -- fusing arrays
     local t = {}
     local n = 0
-    for k,v in ipairs(o1) do
+    for _,v in ipairs(o1) do
       n = n + 1
       t[n] = v
     end
-    for k,v in ipairs(o2) do
-      n = n + 1 
+    for _,v in ipairs(o2) do
+      n = n + 1
       t[n] = v
     end
-    -- print("_doubleLine", dump(t), dump(o1), dump(o2))
     return t
 end
 
---
+-- From renderer.ts (public functions)
 
 local function line(x1, y1, x2, y2, o)
   return { type = 'path', ops = _doubleLine(x1, y1, x2, y2, o) }
@@ -121,7 +122,6 @@ end
 
 local function linearPath(points, close, o)
   local len = #(points or {})
-  -- print("LEN", len)
   if len >= 2 then
     local ops = {}
     for i = 1, len - 1 do
@@ -129,7 +129,6 @@ local function linearPath(points, close, o)
       for k = 1, #t do
         ops[#ops+1] = t[k]
       end
-      -- print("here len >=2", dump(ops))
     end
     if close then
       local t = _doubleLine(points[len][1], points[len][2], points[1][1], points[1][2], o)
@@ -139,15 +138,12 @@ local function linearPath(points, close, o)
     end
     return { type = 'path', ops = ops }
   elseif len == 2 then
-    SU.error("CHeck me")
     return line(points[1][1], points[1][2], points[2][1], points[2][2], o)
   end
   return { type = 'path', ops = {} }
 end
 
-
 local function polygon(points, o)
-  -- print("polygon")
   return linearPath(points, true, o)
 end
 
@@ -161,7 +157,7 @@ local function rectangle(x, y, width, height, o)
   return polygon(points, o)
 end
 
---
+-- From generator.ts
 
 local RoughGenerator = pl.class({
   defaultOptions = {
@@ -186,41 +182,94 @@ local RoughGenerator = pl.class({
     preserveVertices = false,
   },
 
-  _init = function (self, o)
-    -- TODO merge passed options with defaultOptions...
+  _init = function (self, options)
+    if options then
+      self.defaultOptions = self:_o(options)
+    end
   end,
 
-  _d = function(self, shape, sets, options)
+  _d = function (self, shape, sets, options)
     return { shape = shape, sets = sets or {}, options = options or self.defaultOptions }
-  end;
+  end,
+
+  _o = function (self, options)
+    return options and pl.tablex.union(self.defaultOptions, options) or self.defaultOptions
+  end,
+
+  line = function (self, x1, y1, x2, y2, options)
+    local o = this._o(options)
+    return this._d('line', { line(x1, y1, x2, y2, o) }, o)
+  end,
 
   rectangle = function (self, x, y, width, height, options)
-    -- local o = this._o(options);
-    -- TODO
-    local o = self.defaultOptions
+    local o = self:_o(options)
 
-    local paths = {};
-    local outline = rectangle(x, y, width, height, o);
+    local paths = {}
+    local outline = rectangle(x, y, width, height, o)
     if o.fill then
-      local points = { {x, y}, {x + width, y}, {x + width, y + height}, {x, y + height}};
+      local points = { {x, y}, {x + width, y}, {x + width, y + height}, {x, y + height} }
       if o.fillStyle == 'solid' then
-        -- TODO   paths.push(solidFillPolygon([points], o));
+        SU.error("Rough fill (solid) not yet implemented.")
+        -- paths.push(solidFillPolygon([points], o));
       else
-        -- TODO paths.push(patternFillPolygons([points], o));
+        SU.error("Rough fill (pattern) not yet implemented.")
+        -- paths.push(patternFillPolygons([points], o));
       end
     end
     if o.stroke ~= 'none' then
-      -- print("OUTLINE", dump(outline))
-      --for k = 1, #outline do
-      --  print("----------- addint outline", outline[k])
-        paths[#paths+1] = outline
-      -- end
-      -- print("\n-----outline", #outline, dump(paths))
+      paths[#paths+1] = outline
     end
     return self:_d('rectangle', paths, o)
   end,
 })
 
+-- From svg.ts but adapted to output PDF graphic objects
+-- The RoughPdf API is somewhat experimental and subject to changes
+
+local RoughPdf = pl.class({
+  opsToPath = function (self, drawing, fixedDecimals)
+    local path = ''
+    for _,item in ipairs(drawing.ops) do
+      local data = item.data
+      -- NOTE TODO: Initial code had:
+      -- const data = ((typeof fixedDecimals === 'number') && fixedDecimals >= 0) ? (item.data.map((d) => +d.toFixed(fixedDecimals))) : item.data;
+      if item.op == 'move' then
+          path = path .. data[1] .. ' ' .. data[2] .. " m "
+      elseif item.op == 'bcurveTo' then
+          path = path .. data[1] .. " " .. data[2] .. " " .. data[3] .. " " .. data[4] .. " " .. data[5] .. " " .. data[4] .. " c "
+      elseif item.op == "lineTo" then
+          path = path .. data[1] .. " " ..  data[1] .. " l "
+      end
+    end
+    return path -- .trim() TODO
+  end,
+
+  draw = function (self, drawable)
+    local sets = drawable.sets or {}
+    local o = drawable.options -- or this.getDefaultOptions(); TODO ??
+    local precision = drawable.options.fixedDecimalPlaceDigits
+    local g = {}
+    for _,drawing in ipairs(sets) do
+      local path
+      if drawing.type == "path" then
+        path = self:opsToPath(drawing, precision)
+        -- NOTE the original implementation was doing the stroking, coloring etc. here.
+      elseif drawing.type == "fillPath" then
+        SU.error("Path filling not yet implemented.")
+      elseif drawing.type == "fillSketch" then
+        SU.error("Sketch filling to yet implemented.")
+      end
+      if path then
+        g[#g + 1] = path
+      end
+    end
+    return table.concat(g, " ")
+  end
+})
+
+-- Exports
+
 return {
   RoughGenerator = RoughGenerator,
+  RoughPdf = RoughPdf,
 }
