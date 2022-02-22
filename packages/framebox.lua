@@ -30,10 +30,11 @@ SILE.settings.declare({
   help = "Shadow width applied to a framed box when dropped shadow is enabled."
 })
 
--- Draw given paths on an hbox (wrapping it in another hbox).
+-- Draw given paths on an hbox, wrapping it in another hbox.
 -- It assumes the hbox is NOT in the output queue
 -- (i.e. was stolen back and/or stored earlier).
-local makefbox = function(hbox, padding, shadowsize, path, shadowpath)
+-- The new hbox is enlarge by the padding and shadowsize, to take them into account in display.
+local makeFrameBoxEnlarged = function(hbox, padding, shadowsize, path, shadowpath)
   SILE.typesetter:pushHbox({
     inner = hbox,
     width = hbox.width + 2 * padding + shadowsize,
@@ -48,8 +49,33 @@ local makefbox = function(hbox, padding, shadowsize, path, shadowpath)
       end
       SILE.outputter:drawSVG(path, saveX, saveY, self.width, self.height, 1)
 
-      -- typesetter.frame.state.cursorY = saveY + padding
       typesetter.frame.state.cursorX = saveX + padding
+      self.inner:outputYourself(SILE.typesetter, line)
+
+      typesetter.frame.state.cursorY = saveY
+      typesetter.frame.state.cursorX = saveX
+      typesetter.frame:advanceWritingDirection(self.width)
+    end
+  })
+end
+
+-- Draw the given path on an hbox, wrapping it in another hbox.
+-- It assumes the hbox is NOT in the output queue
+-- (i.e. was stolen back and/or stored earlier).
+-- The new hbox has the same dimensions as the original one and the path will thus be drawn so that
+-- to overlap the surrounding content. Used by the roughbox command (upon option).
+local makeFrameBoxNonEnlarged = function(hbox, padding, path)
+  SILE.typesetter:pushHbox({
+    inner = hbox,
+    width = hbox.width,
+    height = hbox.height,
+    depth = hbox.depth,
+    outputYourself = function(self, typesetter, line)
+      local saveY = typesetter.frame.state.cursorY
+      local saveX = typesetter.frame.state.cursorX
+
+      SILE.outputter:drawSVG(path, saveX - padding, saveY - padding, self.width, self.height, 1)
+
       self.inner:outputYourself(SILE.typesetter, line)
 
       typesetter.frame.state.cursorY = saveY
@@ -62,7 +88,7 @@ end
 -- Builds a PDF graphic path from a starting position (x, y)
 -- and a set of segments which can be either lines (2 coords)
 -- or bezier curves (6 segments)
-local makepath = function(x, y, segments)
+local makePath = function(x, y, segments)
   local path = x .. " " .. y .. " m "
   for i = 1, #segments do
     local segment = segments[i]
@@ -83,7 +109,7 @@ local makepath = function(x, y, segments)
 end
 
 -- Builds a PDF graphic color (stroke or fill)
-local makecolor = function(color, stroke)
+local makeColor = function(color, stroke)
   local colspec
   local colop
   if color.r then -- RGB
@@ -118,17 +144,17 @@ SILE.registerCommand("framebox", function(options, content)
 
   local shadowpath = shadowsize ~= 0 and table.concat({
     shadowsize, shadowsize, w, h, "re",
-    makecolor(shadowcolor),
+    makeColor(shadowcolor),
     "f"
   }, " ")
   local path = table.concat({
     0, 0, w, h, "re",
-    makecolor(bordercolor, true), makecolor(fillcolor, false),
+    makeColor(bordercolor, true), makeColor(fillcolor, false),
     borderwidth, "w",
     "B"
   }, " ")
 
-  makefbox(hbox, padding, shadowsize, path, shadowpath)
+  makeFrameBoxEnlarged(hbox, padding, shadowsize, path, shadowpath)
 end, "Frames content in a square box.")
 
 SILE.registerCommand("roundbox", function(options, content)
@@ -151,12 +177,6 @@ SILE.registerCommand("roundbox", function(options, content)
   local smallest = w < h and w or h
   cornersize = cornersize < 0.5 * smallest and cornersize or math.floor(0.5 * smallest)
 
-  -- MAYBE LATER: alternative option to set the diameter of the corners arcs to a factor of the lessor
-  -- of the width and height of the box, e.g.
-  -- local factor = 0.33
-  -- local rx = w < h and math.floor(w * factor) or math.floor(h * factor)
-
-
   local rx = cornersize
   local ry = rx
 
@@ -173,44 +193,30 @@ SILE.registerCommand("roundbox", function(options, content)
   local y = 0
 
   local shadowpath = shadowsize ~= 0 and table.concat({
-    makepath(x + shadowsize, y + shadowsize, segments),
-    makecolor(shadowcolor),
+    makePath(x + shadowsize, y + shadowsize, segments),
+    makeColor(shadowcolor),
     borderwidth, "w",
     "f"
   }, " ")
   local path = table.concat({
-    makepath(x, y, segments),
-    makecolor(bordercolor, true), makecolor(fillcolor, false),
+    makePath(x, y, segments),
+    makeColor(bordercolor, true), makeColor(fillcolor, false),
     borderwidth, "w",
     "B"
   }, " ")
 
-  makefbox(hbox, padding, shadowsize, path, shadowpath)
+  makeFrameBoxEnlarged(hbox, padding, shadowsize, path, shadowpath)
 end, "Frames content in a rounded box.")
 
 local RoughGenerator = require('packages/framebox-rough').RoughGenerator
 local RoughPdf = require('packages/framebox-rough').RoughPdf
 
--- function dump(o, p) -- UGLY DEBUG STUFF FIXME REMOVE
---   p = p or 1
---   local pad = ""
---   for i = 1, p do pad = pad .. " " end
---   if type(o) == 'table' then
---      local s = '{ '
---      for k,v in pairs(o) do
---         if type(k) ~= 'number' then k = '"'..k..'"' end
---         s = s .. '\n  ['.. pad .. k..'] = ' .. dump(v, p+1) .. ','
---      end
---      return s .. '} '
---   else
---      return tostring(o)
---   end
--- end
-
 SILE.registerCommand("roughbox", function(options, content)
   local padding = SU.cast("measurement", options.padding or SILE.settings.get("framebox.padding")):tonumber()
   local borderwidth = SU.cast("measurement", options.borderwidth or SILE.settings.get("framebox.borderwidth")):tonumber()
   local bordercolor = SILE.colorparser(options.bordercolor or "black")
+
+  local enlarge = SU.boolean(options.enlarge, false)
 
   local hbox = SILE.call("hbox", {}, content)
   table.remove(SILE.typesetter.state.nodes) -- steal it back...
@@ -231,12 +237,16 @@ SILE.registerCommand("roughbox", function(options, content)
 
   local path = table.concat({
     p,
-    makecolor(bordercolor, true),
+    makeColor(bordercolor, true),
     borderwidth, "w",
     "S" -- stroke only
   }, " ")
 
-  makefbox(hbox, padding, shadowsize, path, shadowpath)
+  if enlarge then
+    makeFrameBoxEnlarged(hbox, padding, nil, path, nil)
+  else
+    makeFrameBoxNonEnlarged(hbox, padding, path)
+  end
 end, "Frames content in a rough box.")
 
 return {
@@ -293,6 +303,12 @@ drawing a sketch; a value of 0 will cause straight lines and the default value i
 randomized) and \doc:code{singlestroke} (defaults to false; if set to true, a single stroke is applied
 to sketch the shape instead of multiple strokes).
 For instance, here is a single-stroked \roughbox[bordercolor=#59b24c, singlestroke=true]{rough box.}
+
+Compared to the previous box framing commands, rough boxes by default do not take up more horizontal
+and vertical space due to their padding, as if the sketchy box was indeed manually added
+upon an existing text, without altering line height and spacing. Set the \doc:code{enlarge}
+option to true to revert this behavior (but also note that due to their rough style, these boxes
+may still sometimes overlap with surrounding content).
 
 As final notes, the box logic provided in this package applies to the natural size of the box content.
 
