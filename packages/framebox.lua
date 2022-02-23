@@ -309,7 +309,8 @@ Last but not least, there is the experimental \doc:code{\\roughbox} command that
 \em{sketchy}, hand-drawn-like style\footnote{The implementation is based on a partial port of
 the \em{rough.js} JavaScript library.}: \roughbox[bordercolor=#59b24c]{a rough box.}
 
-As above, the \doc:code{padding}, \doc:code{borderwidth} and \doc:code{bordercolor} options apply.
+As above, the \doc:code{padding}, \doc:code{borderwidth} and \doc:code{bordercolor} options apply,
+as well as \doc:code{fillcolor}: \roughbox[bordercolor=#b94051,fillcolor=200]{rough \em{hachured} box.}
 
 Sketching options are \doc:code{roughness} (numerical value indicating how rough the drawing is; 0 would
 be a perfect  rectangle, the default value is 1 and there is no upper limit to this value but a value
