@@ -33,7 +33,7 @@ local function _line(x1, y1, x2, y2, o, move, overlay) -- returns an array of op
     offset = length / 10
   end
   local halfOffset = offset / 2
-  local divergePoint = 0.2 + math.random() * 0.33 -- NOTE: the original code had 0.2 here.
+  local divergePoint = 0.2 + math.random() * 0.2
   local midDispX = o.bowing * o.maxRandomnessOffset * (y2 - y1) / 200
   local midDispY = o.bowing * o.maxRandomnessOffset * (x1 - x2) / 200
   midDispX = _offsetOpt(midDispX, o, roughnessGain)
@@ -157,6 +157,227 @@ local function rectangle(x, y, width, height, o)
   return polygon(points, o)
 end
 
+-- from geometry.ts
+
+local function rotatePoints(points, center, degrees)
+  if points and #points ~= 0 then
+    local cx = center[1]
+    local cy = center[2]
+    local angle = (math.pi / 180) * degrees
+    local cos = math.cos(angle)
+    local sin = math.sin(angle)
+    for _,p in ipairs(points) do
+      local x = p[1]
+      local y = p[2]
+      p[1] = ((x - cx) * cos) - ((y - cy) * sin) + cx
+      p[2] = ((x - cx) * sin) + ((y - cy) * cos) + cy
+    end
+  end
+end
+
+local function rotateLines(lines, center, degrees)
+  local points = {}
+  for _,line in ipairs(lines) do
+    for _,l in ipairs(line) do
+      points[#points + 1] = l
+    end
+  end
+  rotatePoints(points, center, degrees);
+end
+
+-- from fillers/scan-line-hachure.ts
+
+-- quick Lua shim...
+local function table_splice(tbl, start, length) -- from xlua
+  length = length or 1
+  start = start or 1
+  local endd = start + length
+  local spliced = {}
+  local remainder = {}
+  for i,elt in ipairs(tbl) do
+      if i < start or i >= endd then
+        table.insert(spliced, elt)
+      else
+        table.insert(remainder, elt)
+      end
+  end
+  return spliced, remainder
+end
+local function math_round (x) -- quick Lua shim
+  return x>=0 and math.floor(x+0.5) or math.ceil(x-0.5)
+end
+
+local function straightHachureLines (polygonList, gap)
+  local vertexArray = {}
+  for _,polygon in ipairs(polygonList) do
+    -- local vertices = [...polygon]
+    local vertices = polygon -- NOTE Should we make a copy? Why the spreading in JS ?
+    if vertices[1][1] ~= vertices[#vertices][1] and vertices[1][2] ~= vertices[#vertices][2] then
+      vertices[#vertices + 1] = { vertices[1][1], vertices[1][2] }
+    end
+    if #vertices > 2 then
+      vertexArray[#vertexArray + 1] = vertices
+    end
+  end
+
+  local lines = {}
+  gap = math.max(gap, 0.1)
+
+  -- Create sorted edges table
+  local edges = {}
+
+  for _,vertices in ipairs(vertexArray) do
+    for i = 1, #vertices - 1 do
+      local p1 = vertices[i]
+      local p2 = vertices[i + 1]
+      if p1[2] ~= p2[2] then
+        local ymin = math.min(p1[2], p2[2])
+        edges[#edges + 1] = {
+          ymin = ymin,
+          ymax = math.max(p1[2], p2[2]),
+          x = (ymin == p1[2]) and p1[1] or p2[1],
+          islope = (p2[1] - p1[1]) / (p2[2] - p1[2]),
+        }
+      end
+    end
+  end
+
+  local f = function (e1, e2)
+    if e1.ymin < e2.ymin then
+      return true
+    end
+    if e1.ymin > e2.ymin then
+      return false
+    end
+    if e1.x < e2.x then
+      return true
+    end
+    if e1.x > e2.x then
+      return false
+    end
+    if (e1.ymax < e2.ymax) then
+      return true
+    end
+    if (e1.ymax > e2.ymax) then
+     return false
+    end
+    return true
+  end
+  table.sort(edges, f)
+  if #edges == 0 then
+    return lines
+  end
+
+  -- Start scanning
+  local activeEdges = {}
+  local y = edges[1].ymin;
+  while (#activeEdges > 0 or #edges > 0) do
+    if #edges ~= 0 then
+      local ix = 0
+      for i = 1, #edges do
+        if edges[i].ymin > y then
+          break;
+        end
+        ix = i
+      end
+      local removed
+      edges, removed = table_splice(edges, 1, ix)
+      for _,e in ipairs(removed) do
+        activeEdges[#activeEdges + 1] = { s = y, edge = e }
+      end
+    end
+    activeEdges = pl.tablex.filter(activeEdges, function (ae)
+     if ae.edge.ymax <= y then
+       return false
+     end
+     return true;
+    end)
+    table.sort(activeEdges, function (ae1, ae2)
+      if ae1.edge.x < ae2.edge.x then
+        return true
+      end
+      return false
+    end)
+
+    -- fill between the edges
+    if (#activeEdges > 1) then
+      for i = 1, #activeEdges, 2 do
+        local nexti = i + 1
+        if nexti > #activeEdges then
+          break
+        end
+        local ce = activeEdges[i].edge;
+        local ne = activeEdges[nexti].edge;
+        lines[#lines + 1] = {
+          { math_round(ce.x), y },
+          { math_round(ne.x), y },
+        }
+      end
+    end
+
+    y = y + gap
+    for _,ae in ipairs(activeEdges) do
+      ae.edge.x = ae.edge.x + (gap * ae.edge.islope)
+    end
+  end
+  return lines
+end
+
+
+local function polygonHachureLines (polygonList, o)
+  local angle = o.hachureAngle + 90;
+  local gap = o.hachureGap
+  if gap < 0 then
+    gap = o.strokeWidth * 4
+  end
+  gap = math.max(gap, 0.1)
+
+  local rotationCenter = {0, 0}
+  if angle then
+    for _,polygon in ipairs(polygonList) do
+      rotatePoints(polygon, rotationCenter, angle)
+    end
+  end
+  local lines = straightHachureLines(polygonList, gap)
+  if angle then
+    -- NOTE: This code was in rough.js but is not needed, right?
+    -- for _,polygon in ipairs(polygonList) do
+    --   rotatePoints(polygon, rotationCenter, -angle)
+    -- end
+    rotateLines(lines, rotationCenter, -angle)
+  end
+  return lines
+end
+
+-- from fillers/harchure-filler.ts
+
+local HachureFiller = pl.class({
+  fillPolygons = function (self, polygonList, o)
+    local lines = polygonHachureLines(polygonList, o);
+    local ops = self:renderLines(lines, o);
+    return { type = 'fillSketch', ops = ops }
+  end,
+
+  renderLines = function (self, lines, o)
+    local ops = {}
+    for _,line in ipairs(lines) do
+      local t = _doubleLine(line[1][1], line[1][2], line[2][1], line[2][2], o, true) -- NOTE removed helper
+      for _,v in ipairs(t) do
+        ops[#ops + 1] = v
+      end
+    end
+    return ops;
+  end,
+})
+
+-- a bit of hack renderer.ts
+-- ...
+
+local filler = HachureFiller()
+local function patternFillPolygons(polygonList, o)
+  return filler:fillPolygons(polygonList, o);
+end
+
 -- From generator.ts
 
 local RoughGenerator = pl.class({
@@ -166,17 +387,17 @@ local RoughGenerator = pl.class({
     bowing = 1,
     stroke = '#000',
     strokeWidth = 1,
-    curveTightness = 0,
-    curveFitting = 0.95,
-    curveStepCount = 9,
+    -- curveTightness = 0,
+    -- curveFitting = 0.95,
+    -- curveStepCount = 9,
     fillStyle = 'hachure',
-    fillWeight = -1,
+    -- fillWeight = -1,
     hachureAngle = -41,
     hachureGap = -1,
-    dashOffset = -1,
-    dashGap = -1,
-    zigzagOffset = -1,
-    seed = 0,
+    -- dashOffset = -1,
+    -- dashGap = -1,
+    -- zigzagOffset = -1,
+    -- seed = 0,
     disableMultiStroke = false,
     disableMultiStrokeFill = false,
     preserveVertices = false,
@@ -197,8 +418,8 @@ local RoughGenerator = pl.class({
   end,
 
   line = function (self, x1, y1, x2, y2, options)
-    local o = this._o(options)
-    return this._d('line', { line(x1, y1, x2, y2, o) }, o)
+    local o = self:_o(options)
+    return self:_d('line', { line(x1, y1, x2, y2, o) }, o)
   end,
 
   rectangle = function (self, x, y, width, height, options)
@@ -212,8 +433,7 @@ local RoughGenerator = pl.class({
         SU.error("Rough fill (solid) not yet implemented.")
         -- paths.push(solidFillPolygon([points], o));
       else
-        SU.error("Rough fill (pattern) not yet implemented.")
-        -- paths.push(patternFillPolygons([points], o));
+        paths[#paths + 1] = patternFillPolygons({ points }, o)
       end
     end
     if o.stroke ~= 'none' then
@@ -236,9 +456,9 @@ local RoughPdf = pl.class({
       if item.op == 'move' then
           path = path .. data[1] .. ' ' .. data[2] .. " m "
       elseif item.op == 'bcurveTo' then
-          path = path .. data[1] .. " " .. data[2] .. " " .. data[3] .. " " .. data[4] .. " " .. data[5] .. " " .. data[4] .. " c "
+          path = path .. data[1] .. " " .. data[2] .. " " .. data[3] .. " " .. data[4] .. " " .. data[5] .. " " .. data[6] .. " c "
       elseif item.op == "lineTo" then
-          path = path .. data[1] .. " " ..  data[1] .. " l "
+          path = path .. data[1] .. " " ..  data[2] .. " l "
       end
     end
     return path -- .trim() TODO
@@ -257,7 +477,8 @@ local RoughPdf = pl.class({
       elseif drawing.type == "fillPath" then
         SU.error("Path filling not yet implemented.")
       elseif drawing.type == "fillSketch" then
-        SU.error("Sketch filling to yet implemented.")
+        path = self:opsToPath(drawing, precision)
+        -- NOTE as above stroking and coloring was done here.
       end
       if path then
         g[#g + 1] = path

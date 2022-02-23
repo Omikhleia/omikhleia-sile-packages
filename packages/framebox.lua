@@ -215,6 +215,7 @@ SILE.registerCommand("roughbox", function(options, content)
   local padding = SU.cast("measurement", options.padding or SILE.settings.get("framebox.padding")):tonumber()
   local borderwidth = SU.cast("measurement", options.borderwidth or SILE.settings.get("framebox.borderwidth")):tonumber()
   local bordercolor = SILE.colorparser(options.bordercolor or "black")
+  local fillcolor = options.fillcolor and SILE.colorparser(options.fillcolor)
 
   local enlarge = SU.boolean(options.enlarge, false)
 
@@ -229,6 +230,7 @@ SILE.registerCommand("roughbox", function(options, content)
   if options.bowing then roughOpts.bowing = SU.cast("number", options.bowing) end
   roughOpts.preserveVertices = SU.boolean(options.preserve, false)
   roughOpts.disableMultiStroke = SU.boolean(options.singlestroke, false)
+  roughOpts.strokeWidth = borderwidth
 
   local roughGenerator = RoughGenerator()
   local drawable = roughGenerator:rectangle(0, 0, w, h, roughOpts)
@@ -241,6 +243,20 @@ SILE.registerCommand("roughbox", function(options, content)
     borderwidth, "w",
     "S" -- stroke only
   }, " ")
+
+  if fillcolor then
+    roughOpts.fill = true
+    roughOpts.stroke = "none"
+    local fdrawable = roughGenerator:rectangle(0, 0, w, h, roughOpts)
+    local fp = pathGenerator:draw(fdrawable)
+    local fillpath = table.concat({
+      fp,
+      makeColor(fillcolor, true),
+      borderwidth, "w",
+      "S" -- stroke only
+    }, " ")
+    path = fillpath .. " " .. path
+  end
 
   if enlarge then
     makeFrameBoxEnlarged(hbox, padding, nil, path, nil)
