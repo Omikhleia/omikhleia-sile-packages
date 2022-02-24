@@ -2,6 +2,12 @@
 -- Fancy framed boxes for SILE
 -- License: MIT
 --
+-- KNOWN ISSUE: RTL writing direction not supported yet. It issues a warning in that case (maybe)
+-- and I cannot ensure how it will look... See also TODORTL comments, where things might go wrong.
+--
+
+-- SETTINGS
+
 SILE.settings.declare({
   parameter = "framebox.padding",
   type = "measurement",
@@ -30,60 +36,80 @@ SILE.settings.declare({
   help = "Shadow width applied to a framed box when dropped shadow is enabled."
 })
 
--- Draw given paths on an hbox, wrapping it in another hbox.
--- It assumes the hbox is NOT in the output queue
--- (i.e. was stolen back and/or stored earlier).
--- The new hbox is enlarge by the padding and shadowsize, to take them into account in display.
-local makeFrameBoxEnlarged = function(hbox, padding, shadowsize, path, shadowpath)
-  SILE.typesetter:pushHbox({
+-- LOW-LEVEL REBOXING HELPERS
+
+-- Rewraps an hbox into in another fake hbox, adding padding all around it
+-- and an optional shadowsize to the depth.
+-- It assumes the original hbox is NOT in the output queue
+-- (i.e. was stolen back and stored).
+local adjustPaddingHbox = function(hbox, padding, shadowsize)
+  local shadowpadding = shadowsize or 0
+  return { -- NOTE: Might be bad to fake an hbox here without all methods HACK
     inner = hbox,
-    width = hbox.width + 2 * padding + shadowsize,
+    width = hbox.width + 2 * padding + shadowpadding,
     height = hbox.height + padding,
-    depth = hbox.depth + padding + shadowsize,
+    depth = hbox.depth + padding + shadowpadding,
     outputYourself = function(self, typesetter, line)
-      local saveY = typesetter.frame.state.cursorY
-      local saveX = typesetter.frame.state.cursorX
-
-      if shadowpath then
-        SILE.outputter:drawSVG(shadowpath, saveX, saveY, self.width, self.height, 1)
-      end
-      SILE.outputter:drawSVG(path, saveX, saveY, self.width, self.height, 1)
-
-      typesetter.frame.state.cursorX = saveX + padding
+      typesetter.frame:advanceWritingDirection(padding)
       self.inner:outputYourself(SILE.typesetter, line)
-
-      typesetter.frame.state.cursorY = saveY
-      typesetter.frame.state.cursorX = saveX
-      typesetter.frame:advanceWritingDirection(self.width)
+      typesetter.frame:advanceWritingDirection(padding + shadowpadding)
     end
-  })
+  }
 end
 
--- Draw the given path on an hbox, wrapping it in another hbox.
--- It assumes the hbox is NOT in the output queue
+-- Rewraps an hbox into in another hbox responsible for framing it,
+-- via a path construction callback called with the target width,
+-- height and depth (assuming 0, 0 as original point on the baseline)
+-- and must return a PDF graphics.
+-- It assumes the initial hbox is NOT in the output queue
 -- (i.e. was stolen back and/or stored earlier).
--- The new hbox has the same dimensions as the original one and the path will thus be drawn so that
--- to overlap the surrounding content. Used by the roughbox command (upon option).
-local makeFrameBoxNonEnlarged = function(hbox, padding, path)
+-- It pushes the resulting hbox to the output queue
+local frameHbox = function(hbox, shadowsize, pathfunc)
+  local shadowpadding = shadowsize or 0
   SILE.typesetter:pushHbox({
     inner = hbox,
     width = hbox.width,
     height = hbox.height,
     depth = hbox.depth,
     outputYourself = function(self, typesetter, line)
-      local saveY = typesetter.frame.state.cursorY
       local saveX = typesetter.frame.state.cursorX
+      local saveY = typesetter.frame.state.cursorY
+      -- Scale to line to take into account strech/shrinkability
+      local outputWidth = self:scaledWidth(line)
+      -- Force advancing to get the new cursor position
+      typesetter.frame:advanceWritingDirection(outputWidth)
+      local newX = typesetter.frame.state.cursorX
 
-      SILE.outputter:drawSVG(path, saveX - padding, saveY - padding, self.width, self.height, 1)
+      -- Compute the target width, height, depth for the frame
+      -- TODORTL Should we add or substract the shadow padding?
+      local w = (newX - saveX):tonumber() - shadowpadding
+      local h = self.height:tonumber() + self.depth:tonumber() - shadowpadding
+      local d = self.depth:tonumber() - shadowpadding
 
-      self.inner:outputYourself(SILE.typesetter, line)
+      if w < 0 or h < 0 then
+        SU.warn("Got negative values ("..w.." ,"..h.."), framebox does not officialy support RTL yet!")
+      end
 
-      typesetter.frame.state.cursorY = saveY
+      -- Compute the PDF graphics (path)
+      -- TODORTL The various path functions in this package probably break in RTL, we might
+      -- need to pass the x, y coordinates and have some extra logic for converting all these
+      -- into PDF page spaces...
+      local path = pathfunc(w, h, d)
+
+      -- Draw the PDG graphics
+      if path then
+        SILE.outputter:drawSVG(path, saveX, saveY, w, h, 1)
+      end
+
+      -- Restore cursor position and output the content last (so it appears on top of the frame)
       typesetter.frame.state.cursorX = saveX
-      typesetter.frame:advanceWritingDirection(self.width)
+      self.inner:outputYourself(SILE.typesetter, line)
+      typesetter.frame.state.cursorX = newX
     end
   })
 end
+
+-- PDF GRAPHICS PATH CONSTRUCTION
 
 -- Builds a PDF graphic path from a starting position (x, y)
 -- and a set of segments which can be either lines (2 coords)
@@ -127,6 +153,8 @@ local makeColor = function(color, stroke)
   return colspec .. " " .. colop
 end
 
+-- BASIC BOX-FRAMING COMMANDS
+
 SILE.registerCommand("framebox", function(options, content)
   local padding = SU.cast("measurement", options.padding or SILE.settings.get("framebox.padding")):tonumber()
   local borderwidth = SU.cast("measurement", options.borderwidth or SILE.settings.get("framebox.borderwidth")):tonumber()
@@ -138,23 +166,26 @@ SILE.registerCommand("framebox", function(options, content)
 
   local hbox = SILE.call("hbox", {}, content)
   table.remove(SILE.typesetter.state.nodes) -- steal it back...
+  hbox = adjustPaddingHbox(hbox, padding, shadowsize)
 
-  local w = hbox.width:tonumber() + 2 * padding
-  local h = hbox.height:tonumber() + hbox.depth:tonumber() + 2 * padding
-
-  local shadowpath = shadowsize ~= 0 and table.concat({
-    shadowsize, shadowsize, w, h, "re",
-    makeColor(shadowcolor),
-    "f"
-  }, " ")
-  local path = table.concat({
-    0, 0, w, h, "re",
-    makeColor(bordercolor, true), makeColor(fillcolor, false),
-    borderwidth, "w",
-    "B"
-  }, " ")
-
-  makeFrameBoxEnlarged(hbox, padding, shadowsize, path, shadowpath)
+  frameHbox(hbox, shadowsize, function(w, h, d)
+    -- just plain rectangles
+    local path = table.concat({
+      0, d, w, h, "re",
+      makeColor(bordercolor, true), makeColor(fillcolor, false),
+      borderwidth, "w",
+      "B"
+    }, " ")
+    if shadowsize ~= 0 then
+        path = table.concat({
+        shadowsize, d + shadowsize, w, h, "re",
+        makeColor(shadowcolor),
+        "f",
+        path
+      }, " ")
+    end
+    return path
+  end)
 end, "Frames content in a square box.")
 
 SILE.registerCommand("roundbox", function(options, content)
@@ -170,46 +201,48 @@ SILE.registerCommand("roundbox", function(options, content)
 
   local hbox = SILE.call("hbox", {}, content)
   table.remove(SILE.typesetter.state.nodes) -- steal it back...
+  hbox = adjustPaddingHbox(hbox, padding, shadowsize)
 
-  local w = hbox.width:tonumber() + 2 * padding
-  local h = hbox.height:tonumber() + hbox.depth:tonumber() + 2 * padding
+  frameHbox(hbox, shadowsize, function(w, h, d)
+    local smallest = w < h and w or h
+    cornersize = cornersize < 0.5 * smallest and cornersize or math.floor(0.5 * smallest)
 
-  local smallest = w < h and w or h
-  cornersize = cornersize < 0.5 * smallest and cornersize or math.floor(0.5 * smallest)
+    local rx = cornersize
+    local ry = rx
+    local arc = 4 / 3 * (1.4142135623730951 - 1)
+    -- table of segments (2 coords) or bezier curves (6 coords)
+    local segments = {
+      {(w - 2 * rx), 0}, {(rx * arc), 0, rx, ry - (ry * arc), rx, ry}, {0, (h - 2 * ry)},
+      {0, (ry * arc), -(rx * arc), ry, -rx, ry}, {(-w + 2 * rx), 0},
+      {-(rx * arc), 0, -rx, -(ry * arc), -rx, -ry}, {0, (-h + 2 * ry)},
+      {0, -(ry * arc), (rx * arc), -ry, rx, -ry}
+    }
+    -- starting point
+    local x = rx
+    local y = d
 
-  local rx = cornersize
-  local ry = rx
-
-  local arc = 4 / 3 * (1.4142135623730951 - 1)
-  -- table of segments (2 coords) or bezier curves (6 coords)
-  local segments = {
-    {(w - 2 * rx), 0}, {(rx * arc), 0, rx, ry - (ry * arc), rx, ry}, {0, (h - 2 * ry)},
-    {0, (ry * arc), -(rx * arc), ry, -rx, ry}, {(-w + 2 * rx), 0},
-    {-(rx * arc), 0, -rx, -(ry * arc), -rx, -ry}, {0, (-h + 2 * ry)},
-    {0, -(ry * arc), (rx * arc), -ry, rx, -ry}
-  }
-  -- starting point
-  local x = rx
-  local y = 0
-
-  local shadowpath = shadowsize ~= 0 and table.concat({
-    makePath(x + shadowsize, y + shadowsize, segments),
-    makeColor(shadowcolor),
-    borderwidth, "w",
-    "f"
-  }, " ")
-  local path = table.concat({
-    makePath(x, y, segments),
-    makeColor(bordercolor, true), makeColor(fillcolor, false),
-    borderwidth, "w",
-    "B"
-  }, " ")
-
-  makeFrameBoxEnlarged(hbox, padding, shadowsize, path, shadowpath)
+    local path = table.concat({
+      makePath(x, y, segments),
+      makeColor(bordercolor, true), makeColor(fillcolor, false),
+      borderwidth, "w",
+      "B"
+    }, " ")
+    if shadowsize ~= 0 then
+      path = table.concat({
+        makePath(x + shadowsize, y + shadowsize, segments),
+        makeColor(shadowcolor),
+        borderwidth, "w",
+        "f",
+        path
+      }, " ")
+    end
+    return path
+  end)
 end, "Frames content in a rounded box.")
 
-local RoughGenerator = require('packages/framebox-rough').RoughGenerator
-local RoughPdf = require('packages/framebox-rough').RoughPdf
+local rough = require('packages/framebox-rough')
+local roughGenerator = rough.RoughGenerator()
+local pathGenerator = rough.RoughPdf()
 
 SILE.registerCommand("roughbox", function(options, content)
   local padding = SU.cast("measurement", options.padding or SILE.settings.get("framebox.padding")):tonumber()
@@ -217,13 +250,14 @@ SILE.registerCommand("roughbox", function(options, content)
   local bordercolor = SILE.colorparser(options.bordercolor or "black")
   local fillcolor = options.fillcolor and SILE.colorparser(options.fillcolor)
 
-  local enlarge = SU.boolean(options.enlarge, false)
+  local enlarge = true or SU.boolean(options.enlarge, false)
 
   local hbox = SILE.call("hbox", {}, content)
   table.remove(SILE.typesetter.state.nodes) -- steal it back...
+  if enlarge then
+    hbox = adjustPaddingHbox(hbox, padding)
+  end
 
-  local w = hbox.width:tonumber() + 2 * padding
-  local h = hbox.height:tonumber() + hbox.depth:tonumber() + 2 * padding
 
   local roughOpts = {}
   if options.roughness then roughOpts.roughness = SU.cast("number", options.roughness) end
@@ -232,38 +266,85 @@ SILE.registerCommand("roughbox", function(options, content)
   roughOpts.disableMultiStroke = SU.boolean(options.singlestroke, false)
   roughOpts.strokeWidth = borderwidth
 
-  local roughGenerator = RoughGenerator()
-  local drawable = roughGenerator:rectangle(0, 0, w, h, roughOpts)
-  local pathGenerator = RoughPdf()
-  local p = pathGenerator:draw(drawable)
+  frameHbox(hbox, shadowsize, function(w, h, d)
+    local x = 0
+    local y = d
+    if not enlarge then
+      x = -padding
+      y = d - padding
+      h = h + 2 * padding
+      w = w + 2 * padding
+    end
 
-  local path = table.concat({
-    p,
-    makeColor(bordercolor, true),
-    borderwidth, "w",
-    "S" -- stroke only
-  }, " ")
+    local drawable = roughGenerator:rectangle(x, y, w, h, roughOpts)
+    local p = pathGenerator:draw(drawable)
 
-  if fillcolor then
-    roughOpts.fill = true
-    roughOpts.stroke = "none"
-    local fdrawable = roughGenerator:rectangle(0, 0, w, h, roughOpts)
-    local fp = pathGenerator:draw(fdrawable)
-    local fillpath = table.concat({
-      fp,
-      makeColor(fillcolor, true),
+    local path = table.concat({
+      p,
+      makeColor(bordercolor, true),
       borderwidth, "w",
       "S" -- stroke only
     }, " ")
-    path = fillpath .. " " .. path
-  end
 
-  if enlarge then
-    makeFrameBoxEnlarged(hbox, padding, nil, path, nil)
-  else
-    makeFrameBoxNonEnlarged(hbox, padding, path)
-  end
+    if fillcolor then
+      roughOpts.fill = true
+      roughOpts.stroke = "none"
+      local fdrawable = roughGenerator:rectangle(x, y, w, h, roughOpts)
+      local fp = pathGenerator:draw(fdrawable)
+      local fillpath = table.concat({
+        fp,
+        makeColor(fillcolor, true),
+        borderwidth, "w",
+        "S" -- stroke only
+      }, " ")
+      path = fillpath .. " " .. path
+    end
+    return path
+  end)
 end, "Frames content in a rough box.")
+
+-- EXPERIMENTAL (UNDOCUMENTED)
+
+SILE.registerCommand("roughunder", function (options, content)
+  local bordercolor = SILE.colorparser(options.bordercolor or "black")
+  local fillcolor = options.fillcolor and SILE.colorparser(options.fillcolor)
+
+  -- Begin taken from the original underline command (rules package)
+  local ot = SILE.require("core/opentype-parser")
+  local fontoptions = SILE.font.loadDefaults({})
+  local face = SILE.font.cache(fontoptions, SILE.shaper.getFace)
+  local font = ot.parseFont(face)
+  local upem = font.head.unitsPerEm
+  local underlinePosition = -font.post.underlinePosition / upem * fontoptions.size
+  local underlineThickness = font.post.underlineThickness / upem * fontoptions.size
+  -- Underline taken from the original underline command (rules package)
+
+  local hbox = SILE.call("hbox", {}, content)
+  table.remove(SILE.typesetter.state.nodes) -- steal it back...
+
+  local roughOpts = {}
+  if options.roughness then roughOpts.roughness = SU.cast("number", options.roughness) end
+  if options.bowing then roughOpts.bowing = SU.cast("number", options.bowing) end
+  roughOpts.preserveVertices = true
+  roughOpts.disableMultiStroke = true
+  roughOpts.strokeWidth = underlineThickness
+
+  frameHbox(hbox, nil, function(w, h, d)
+    -- NOTE: Using some 1.5 factor, since those sketchy lines are probably best a bit more
+    -- lowered than intended...
+    local y = h + 1.5 * underlinePosition
+    local drawable = roughGenerator:line(0, y, w, y, roughOpts)
+    local p = pathGenerator:draw(drawable)
+
+    local path = table.concat({
+      p,
+      makeColor(bordercolor, true),
+      underlineThickness, "w",
+      "S" -- stroke only
+    }, " ")
+    return path -- path
+  end)
+end, "Underlines some content")
 
 return {
   documentation = [[\begin{document}
