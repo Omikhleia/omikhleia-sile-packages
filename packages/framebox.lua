@@ -250,7 +250,7 @@ SILE.registerCommand("roughbox", function(options, content)
   local bordercolor = SILE.colorparser(options.bordercolor or "black")
   local fillcolor = options.fillcolor and SILE.colorparser(options.fillcolor)
 
-  local enlarge = true or SU.boolean(options.enlarge, false)
+  local enlarge = SU.boolean(options.enlarge, false)
 
   local hbox = SILE.call("hbox", {}, content)
   table.remove(SILE.typesetter.state.nodes) -- steal it back...
