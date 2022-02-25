@@ -240,7 +240,7 @@ SILE.registerCommand("roundbox", function(options, content)
   end)
 end, "Frames content in a rounded box.")
 
-local rough = require('packages/framebox-rough')
+local rough = require('rough')
 local roughGenerator = rough.RoughGenerator()
 local pathGenerator = rough.RoughPdf()
 
