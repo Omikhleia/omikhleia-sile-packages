@@ -44,7 +44,7 @@ SILE.settings.declare({
 -- (i.e. was stolen back and stored).
 local adjustPaddingHbox = function(hbox, padding, shadowsize)
   local shadowpadding = shadowsize or 0
-  return { -- NOTE: Might be bad to fake an hbox here without all methods HACK
+  return { -- HACK NOTE: Efficient but might be bad to fake an hbox here without all methods.
     inner = hbox,
     width = hbox.width + 2 * padding + shadowpadding,
     height = hbox.height + padding,
@@ -374,9 +374,7 @@ With the well-named \doc:code{bordercolor}, \doc:code{fillcolor} and \doc:code{s
 also specify how the box is \framebox[shadow=true, bordercolor=#b94051, fillcolor=#ecb0b8, shadowcolor=220]{colored.}
 
 The color specifications are the same as defined in the \doc:keyword{color} package.
-
 The \doc:code{\\roundbox} command frames its content in a \roundbox{rounded box.}
-
 It supports the same options, so one can have a \roundbox[shadow=true]{dropped shadow} too.
 
 Or likewise, \roundbox[shadow=true, bordercolor=#b94051, fillcolor=#ecb0b8, shadowcolor=220]{apply colors.}
@@ -386,12 +384,12 @@ unless the \doc:code{cornersize} option, as usual, is explicitly specified as ar
 (If one of the sides of the boxed content is smaller than that, then the maximum allowed rounding effect
 will be computed instead.)
 
-Last but not least, there is the experimental \doc:code{\\roughbox} command that frames its content in a
+Last but not least, there is the \doc:code{\\roughbox} command that frames its content in a
 \em{sketchy}, hand-drawn-like style\footnote{The implementation is based on a partial port of
 the \em{rough.js} JavaScript library.}: \roughbox[bordercolor=#59b24c]{a rough box.}
 
 As above, the \doc:code{padding}, \doc:code{borderwidth} and \doc:code{bordercolor} options apply,
-as well as \doc:code{fillcolor}: \roughbox[bordercolor=#b94051,fillcolor=200]{rough \em{hachured} box.}
+as well as \doc:code{fillcolor}: \roughbox[bordercolor=#b94051,fillcolor=220]{rough \em{hachured} box.}
 
 Sketching options are \doc:code{roughness} (numerical value indicating how rough the drawing is; 0 would
 be a perfect  rectangle, the default value is 1 and there is no upper limit to this value but a value
@@ -405,8 +403,8 @@ For instance, here is a single-stroked \roughbox[bordercolor=#59b24c, singlestro
 Compared to the previous box framing commands, rough boxes by default do not take up more horizontal
 and vertical space due to their padding, as if the sketchy box was indeed manually added
 upon an existing text, without altering line height and spacing. Set the \doc:code{enlarge}
-option to true to revert this behavior (but also note that due to their rough style, these boxes
-may still sometimes overlap with surrounding content).
+option to true \roughbox[bordercolor=#22427c, enlarge=true]{to revert} this behavior (but also note
+that due to their rough style, these boxes may still sometimes overlap with surrounding content).
 
 As final notes, the box logic provided in this package applies to the natural size of the box content.
 
