@@ -1,0 +1,74 @@
+\begin[papersize=6in x 9in, class=omibook]{document}
+\script[src=packages/parbox]
+\script[src=packages/ptable]
+\script[src=packages/framebox]
+\neverindent
+\language[main=en]
+\font[family=Libertinus Serif, size=11pt]
+
+
+\begin{center}
+\font[weight=800,size=12pt]{Framed boxes in SILE}
+\end{center}
+
+\medskip
+
+A regular \framebox{\strut{}square box.}
+
+\medskip
+
+A box with \framebox[shadow=true]{\strut{}dropped shadow.}
+
+\medskip
+
+A square \framebox[shadow=true, bordercolor=#b94051, fillcolor=#ecb0b8, shadowcolor=220]{\strut{}colored box.}
+
+\medskip
+
+A \roundbox{\strut{}rounded box.}
+
+\medskip
+
+A rounded box with \roundbox[shadow=true]{\strut{}dropped shadow.}
+
+\medskip
+
+A rounded \roundbox[shadow=true, bordercolor=#b94051, fillcolor=#ecb0b8, shadowcolor=220]{\strut{}colored box.}
+
+\medskip
+
+A default \roughbox{\strut{}rough box.}
+
+\medskip
+
+A default \roughbox[enlarge=true]{\strut{}rough box} with extra spacing.
+
+\medskip
+
+A filled colored \roughbox[bordercolor=#b94051,fillcolor=220]{\strut{}rough box.}
+
+\medskip
+
+A single-stroked \roughbox[singlestroke=true]{\strut{}rough box.}
+
+\medskip
+
+A vertice-preserving single-stroked \roughbox[singlestroke=true, preserve=true]{\strut{}rough box.}
+
+\medskip
+
+A (strongly-)bowed single-stroked \roughbox[singlestroke=true, bowing=10]{\strut{}rough box.}
+
+\medskip
+
+A (strongly-)rough single-stroked \roughbox[singlestroke=true, roughness=2.5]{\strut{}rough box.}
+
+\medskip
+
+A stretched \roughbox[enlarge=true]{\strut{}rough\hfill box} for test.
+
+\medskip
+
+A \roughunder{rough underlined} text (experimental).
+
+\end{document}
