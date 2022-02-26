@@ -7,6 +7,12 @@
 SILE.require("packages/rebox")
 SILE.require("packages/struts")
 
+-- PARBOXING FUNCTIONS
+
+-- Function for build a new temporary frame which only constraint is to honor
+-- the target width of the paragraph box. This frame does not have to be
+-- registered in SILE.documentState.thisPageTemplate.frames since we will
+-- throw it out after boxing.
 local nb_ = 1
 local parboxTempFrame = function (options)
   local cFrame = SILE.typesetter.frame
@@ -14,8 +20,6 @@ local parboxTempFrame = function (options)
     id = cFrame.id .. "_parbox_"..nb_
   })
   nb_ = nb_+1
-  -- We don't even need to register it, we just use it temporarily.
-  -- SILE.documentState.thisPageTemplate.frames[newFrame.id] = newFrame
   newFrame:constrain("top", SILE.length())
   newFrame:constrain("bottom", SILE.length())
   newFrame:constrain("left", SILE.length())
@@ -23,13 +27,12 @@ local parboxTempFrame = function (options)
   return newFrame
 end
 
--- Move migrating content (e.g. footnotes) from
--- a typesetter to another
+-- Function for moving migrating content (e.g. footnotes) from
+-- a typesetter to another.
 local moveMigrating = function (fromTypesetter, toTypesetter)
   local nodelist = fromTypesetter.state.nodes
-  
+
   local hasStartedMigration = false
-  
   local i = 1
   while i <= #nodelist do
     if nodelist[i].is_migrating then
@@ -51,6 +54,8 @@ local moveMigrating = function (fromTypesetter, toTypesetter)
   end
 end
 
+-- Main function for parboxing content.
+-- Returns a list of vboxes.
 local parboxFraming = function (options, content)
   local nodes
   local oldTypesetter = SILE.typesetter
@@ -58,18 +63,19 @@ local parboxFraming = function (options, content)
   local innerVbox
 
   SILE.settings.pushState()
-  SILE.settings.toplevelState()  
+  SILE.settings.toplevelState()
   parboxTypesetter = SILE.defaultTypesetter {}
 
   local originalLeaveHmode = parboxTypesetter.leaveHmode
   parboxTypesetter.leaveHmode = function (self, _)
-    -- Move migrating material
+    -- Move migrating material gathered so far.
     moveMigrating(parboxTypesetter, oldTypesetter)
     -- NEVER output, just gather the nodes, hence the enforced 1 here.
     originalLeaveHmode(self, 1)
   end
+  -- (This comment just kept as it was a false start, for reminder)
   -- Finally we don't need to override the endline
-  -- method, we enforced the 1 in leaveHMode.
+  -- method, as we enforced the 1 in leaveHMode.
   -- parboxTypesetter.endline = function (self)
   --   self:leaveHmode(1)
   --   SILE.documentState.documentClass.endPar(self)
@@ -90,6 +96,8 @@ local parboxFraming = function (options, content)
   SILE.frames[parboxTypesetter.frame.id] = nil
   return innerVbox
 end
+
+-- PARBOXING COMMAND
 
 local drawBorders = function (x, y, w, h, border, bordercolor)
   -- The border was initially a debug feature, but it turned out to be neat
@@ -118,7 +126,7 @@ local insertStruts = function (vboxlist, strut)
   for i = #vboxlist, 1, - 1 do
     if vboxlist[i].is_vbox and vboxlist[i].depth < strut.depth then
       vboxlist[i].depth = strut.depth -- Hack depth of first vbox
-      break 
+      break
     end
   end
 end
@@ -168,13 +176,13 @@ SILE.registerCommand("parbox", function (options, content)
 
   local totalHeight = 0
   for i = 1, #vboxes do
-    -- Try to cancel stretching/shrinking
+    -- Try to cancel vertical stretching/shrinking
     -- But we don't inspect the internal content of the vboxes, maybe
-    -- they could have stretching/shrinking too?
+    -- they could have (vertical) stretching/shrinking too?
     vboxes[i].height = SILE.length(vboxes[i].height:tonumber())
     vboxes[i].depth = SILE.length(vboxes[i].depth:tonumber())
 
-    totalHeight = totalHeight + vboxes[i].height + vboxes[i].depth 
+    totalHeight = totalHeight + vboxes[i].height + vboxes[i].depth
   end
 
   local z0 = SILE.measurement(0)
@@ -276,7 +284,7 @@ two}
 As can be seen, there are however a few issues, if the parbox is intended to be
 used (as here) in a regular text flow: the interpretation of “baseline” is
 pretty strict, but perhaps unexpected; the line boxing is strict too
-and is affected depending on ascenders or descenders. To get what is 
+and is affected depending on ascenders or descenders. To get what is
 logically a more expected output, one would need some vertical adjustment,
 which comes in the form of a “strut” (see the \doc:keyword{struts} package).
 Let us try again, but this time with the \doc:code{strut} option set to “character”
@@ -379,7 +387,9 @@ two}
 The border and the padding can be specified as a single length (applying on all sides) or a string
 containing a space-separated list of four lengths (“top bottom left right”). Additionaly, a
 unique \doc:code{bordercolor} can be specified, the color specification being as defined in the
-\doc:keyword{color} package.
+\doc:keyword{color} package.\footnote{These border and padding options were expecially designed
+with tables in mind. For casual box framing, consider using a better-suited solution,
+such as the \doc:keyword{framebox} package.}
 
 We have shown several examples but haven’t mentioned yet what could be one
 of the \em{most important concepts} underlying these paragraph boxes: each
@@ -393,7 +403,7 @@ width of the parbox. Another notable effect is that centering and right or left
 flushing work as expected, out-of-the-box, as could have already been guessed from
 example 4 above.
 Another important point is that each parbox pushes and resets SILE’s settings
-to their top-level values, so that the content inside the parbox may tweak 
+to their top-level values, so that the content inside the parbox may tweak
 them, e.g. fonts, right and left skips, etc. without affecting anything else,
 especially other embedded parboxes.
 

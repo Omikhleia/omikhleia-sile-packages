@@ -85,6 +85,8 @@ end
 -- Apply a background color to an hbox.
 -- N.B. It assumes the hbox is NOT in the output queue
 -- (i.e. was stolen back and or stored earlier).
+-- It also assumes the box dimensions at this step are numbers,
+-- not lengths (with stretch/shrink).
 SILE.require("packages/color")
 local colorBox = function (hbox, color)
   if not color then
@@ -100,6 +102,12 @@ local colorBox = function (hbox, color)
         local saveY = typesetter.frame.state.cursorY
         local saveX = typesetter.frame.state.cursorX
 
+        -- We want the colored background first, i.e. below the content box.
+        -- Note that this is not a general solution for coloring an hbox
+        -- (in the general case, dimensions have stretch/shrink so we would
+        -- need to compute the scaled ratio with respect to the the line).
+        -- In other terms, it works here due to other logic before, but not
+        -- take it as a good example of how to color an hbox.
         SILE.outputter:pushColor(self.color)
         SILE.outputter:drawRule(
           saveX,
