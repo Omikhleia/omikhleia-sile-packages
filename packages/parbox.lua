@@ -5,67 +5,7 @@
 -- License: MIT
 --
 SILE.require("packages/rebox")
-
-SILE.settings.declare({
-  parameter = "parbox.strut.character",
-  type = "string",
-  default = "|",
-  help = "Strut character"
-})
-
-SILE.settings.declare({
-  parameter = "parbox.strut.ruledepth",
-  type = "measurement",
-  default = SILE.measurement("0.3bs"),
-  help = "Strut rule depth"
-})
-
-SILE.settings.declare({
-  parameter = "parbox.strut.ruleheight",
-  type = "measurement",
-  default = SILE.measurement("1bs"),
-  help = "Strut rule height"
-})
-
--- Strut character (for a given font) will be used a lot, a bit dumb to recompute it each time.
--- So let's cache it.
-local strutCache = {}
-local _key = function (options)
-  return table.concat({ options.family, ("%d"):format(options.weight), options.style,
-                        options.variant, options.features, options.filename }, ";")
-end
-local characterStrut = function ()
-  local key = _key(SILE.font.loadDefaults({}))
-  local hbox = strutCache[key]
-  if hbox then return hbox end
-  local hbox = SILE.call("hbox", {}, { SILE.settings.get("parbox.strut.character") })
-  table.remove(SILE.typesetter.state.nodes) -- steal it back
-  strutCache[key] = hbox
-  return hbox
-end
-
-SILE.registerCommand("strut", function (options, content)
-  local method = options.method or "character"
-  local show = SU.boolean(options.show, true)
-  local strut
-  if method == "rule" then
-    strut = {
-      height = SILE.settings.get("parbox.strut.ruleheight"):absolute(),
-      depth = SILE.settings.get("parbox.strut.ruledepth"):absolute(),
-      width = SILE.measurement()
-    }
-    if show then
-      -- The "x" there could be anything, we just want to be sure we get a box
-      SILE.call("rebox", { phantom = true, height = strut.height, depth = strut.depth, width = strut.width }, { "x" })
-    end
-  else
-    strut = characterStrut()
-    if show then
-      SILE.call("rebox", { phantom = true, width = SILE.length() }, { SILE.settings.get("parbox.strut.character") })
-    end
-  end
-  return strut
-end, "Formats a strut box.")
+SILE.require("packages/struts")
 
 local nb_ = 1
 local parboxTempFrame = function (options)
@@ -298,7 +238,7 @@ return {
 \script[src=packages/autodoc-extras]
 \script[src=packages/parbox]
 
-A paragraph box (“parbox”) is an horizontal box (so technically an hbox)
+A paragraph box (“parbox”) is an horizontal box (so technically an “hbox”)
 that contains, as its name implies, one or more paragraphs (so the displayed content
 is actually made of vbox’es and vertical glues). The only mandatory
 option on the \doc:code{\\parbox} command is its \doc:code{width}.
@@ -338,9 +278,9 @@ used (as here) in a regular text flow: the interpretation of “baseline” is
 pretty strict, but perhaps unexpected; the line boxing is strict too
 and is affected depending on ascenders or descenders. To get what is 
 logically a more expected output, one would need some vertical adjustment,
-which comes in the form of a “strut” (see further below). Let us try again, but
-this time with the \doc:code{strut} option set to “character” (the default, which was used
-above, corresponds to “none”).
+which comes in the form of a “strut” (see the \doc:keyword{struts} package).
+Let us try again, but this time with the \doc:code{strut} option set to “character”
+(the default, which was used above, corresponds to “none”).
 
 \smallskip
 
@@ -383,21 +323,6 @@ two}
 two}
 
 \medskip
-
-In professional typesetting, a “strut” is a rule with no width but a certain height
-and depth, to help guaranteeing that an element has a certain minimal height and depth,
-e.g. in tabular environments or in boxes.
-Two possible implementations are proposed, one based on a character, defined
-via the \doc:code{parbox.strut.character} setting, by default the vertical bar (|), and one relative to the
-current baseline skip, via the \doc:code{parbox.strut.ruledepth} and \doc:code{parbox.strut.ruleheight}
-settings, by default respectively 0.3bs and 1bs, following the same
-definition as in LaTeX. So they do not achieve exactly the same effect:
-the former should ideally be a character that covers the maximum ascender and descender
-heights in the current font; the other uses an alignment at the baseline skip level
-assuming it is reasonably fixed. The standalone command, would you need it, is \doc:code{\\strut[method=…]},
-where the method can be “character” (default) or “rule”. It returns the dimensions (for use
-in Lua code). If needed, the \doc:code{show} option indicates whether the rule should inserted at this
-point (defaults to true).
 
 Footnotes (and migrating material) in a parbox are transferred to the upper
 context. So they work as expected, but it is the main rationale behind the rule-based strut
