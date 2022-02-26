@@ -1,0 +1,57 @@
+\begin[papersize=6in x 9in, class=omibook]{document}
+\script[src=packages/framebox]
+\script[src=packages/parbox]% for strut
+\neverindent
+\nofolios
+\language[main=en]
+\font[family=Libertinus Serif, size=11pt]
+% replace math.random with a pseudo RNG to get always the same results
+\script{
+  local A1, A2 = 727595, 798405  -- 5^17=D20*A1+A2
+  local D20, D40 = 1048576, 1099511627776  -- 2^20, 2^40
+  local X1, X2 = 0, 1
+  math.random = function()
+      local U = X2*A2
+      local V = (X1*A2 + X2*A1) % D20
+      V = (V*D20 + U) % D40
+      X1 = math.floor(V/D20)
+      X2 = V - X1*D20
+      return V/D40
+  end
+}%
+
+A default \roughbox{\strut{}rough box.}
+
+\medskip
+
+A default \roughbox[enlarge=true]{\strut{}rough box} with extra spacing.
+
+\medskip
+
+A filled colored \roughbox[bordercolor=#b94051,fillcolor=220]{\strut{}rough box.}
+
+\medskip
+
+A single-stroked \roughbox[singlestroke=true]{\strut{}rough box.}
+
+\medskip
+
+A vertice-preserving single-stroked \roughbox[singlestroke=true, preserve=true]{\strut{}rough box.}
+
+\medskip
+
+A (strongly-)bowed single-stroked \roughbox[singlestroke=true, bowing=10]{\strut{}rough box.}
+
+\medskip
+
+A (strongly-)rough single-stroked \roughbox[singlestroke=true, roughness=2.5]{\strut{}rough box.}
+
+\medskip
+
+A stretched \roughbox[enlarge=true]{\strut{}rough\hfill box} for test.
+
+\medskip
+
+A \roughunder{rough underlined} text (experimental).
+
+\end{document}
