@@ -9,14 +9,16 @@ SILE.doTexlike([[%
 SILE.require("packages/url")
 
 local oldCode = SILE.Commands["code"]
-SILE.registerCommand("doc:url", function (options, content)
-  -- Overidde code in URLs
+local oldUrl = SILE.Commands["url"]
+SILE.registerCommand("url", function (options, content)
+  -- Kill code formatting in URLs, it's ugly.
+  -- We restore the \code command afterwards, in case someone needs it however.
   SILE.Commands["code"] = function(_, content)
     SILE.process(content)
   end
 
   SILE.typesetter:typeset("<")
-  SILE.call("url", options, content)
+  oldUrl(options, content)
   SILE.typesetter:typeset(">")
 
   SILE.Commands["code"] = oldCode

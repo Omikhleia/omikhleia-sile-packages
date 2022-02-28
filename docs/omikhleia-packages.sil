@@ -610,10 +610,10 @@ XML content is done in the \doc:keyword{teidict} package.
 This author does not intend to discuss it in full here.
 To see it in action, you can refer to our small example in
 \href[src=https://github.com/Omikhleia/omikhleia-sile-packages/tree/main/examples]{our
-repository}\footnote{\doc:url{https://github.com/Omikhleia/omikhleia-sile-packages/tree/main/examples}}.
+repository}\footnote{\url{https://github.com/Omikhleia/omikhleia-sile-packages/tree/main/examples}}.
 For a more complex project using the same tools, you may also check
 the \href[src=https://omikhleia.github.io/sindict/]{sindict
-repository}\footnote{\doc:url{https://omikhleia.github.io/sindict/}}.
+repository}\footnote{\url{https://omikhleia.github.io/sindict/}}.
 
 \part{Tips & Tricks}
 

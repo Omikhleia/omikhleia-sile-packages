@@ -26,6 +26,7 @@ end)
 
 return {
   documentation = [[\begin{document}
+\script[src=packages/url]
 \script[src=packages/autodoc-extras]
 \define[command=pkg-doc-dingbatfont]{\font[family=Symbola]{\process}}
 
@@ -54,9 +55,9 @@ hearts.)
 This author, however, wanted a bit more variety with some old-fashioned ornaments independent
 from the selected font. The present \doc:keyword{couyards} package
 therefore defines a few such ornaments\footnote{The first seven were converted to SVG from
-designs by Tartila \doc:url{https://fr.freepik.com/vecteurs-libre/diviseurs-fleurs-calligraphiques_10837974.htm},
+designs by Tartila \url{https://fr.freepik.com/vecteurs-libre/diviseurs-fleurs-calligraphiques_10837974.htm},
 free for personal and commercial usage with proper attribution. Number 8 and 9 are public domain (CC0),
-from \doc:url{https://freesvg.org}, and look better at fixed width rather than height. There are hundreds
+from \url{https://freesvg.org}, and look better at fixed width rather than height. There are hundreds
 of similar designs there and this author does not intend to have more than what he requires. The last two were
 actually added on a second thought only.},
 with the command \doc:code{\\couyard[type=\doc:args{n}]}, where \em{n} is a number between 1 and 9.

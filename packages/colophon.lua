@@ -184,6 +184,7 @@ end, "Formats shaped paragraphs")
 
 return {
   documentation = [[\begin{document}
+\script[src=packages/url]
 \script[src=packages/autodoc-extras]
 
 Quoting Wikipedia, a colophon (/ˈkɒləfon/) is a brief statement containing information about
@@ -257,7 +258,7 @@ but if you read up to this point, you probably got enough words of
 caution\footnote{Suggestions and patches are of course welcome.}.
 
 The pre-defined figures\footnote{The nice ones are all in
-the public domain (CC0), from \doc:url{https://freesvg.org}.}
+the public domain (CC0), from \url{https://freesvg.org}.}
 are \doc:code{default}, \doc:code{debug}, \doc:code{decorative},
 \doc:code{floral}, \doc:code{ornamental}, \doc:code{elegant},
 \doc:code{delicate}, and \doc:code{cornered}. Most of these names are
