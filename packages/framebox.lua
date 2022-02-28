@@ -387,7 +387,9 @@ will be computed instead.)
 
 Last but not least, there is the \doc:code{\\roughbox} command that frames its content in a
 \em{sketchy}, hand-drawn-like style\footnote{The implementation is based on a partial port of
-the \em{rough.js} JavaScript library.}: \roughbox[bordercolor=#59b24c]{a rough box.}
+the \em{rough.js} JavaScript library. It uses its own pseudo-random number generator, so that
+rough sketchs in your document all look different but remain the same when the document is rebuilt.}:
+\roughbox[bordercolor=#59b24c]{a rough box.}
 
 As above, the \doc:code{padding}, \doc:code{borderwidth} and \doc:code{bordercolor} options apply,
 as well as \doc:code{fillcolor}: \roughbox[bordercolor=#b94051,fillcolor=220]{rough \em{hachured} box.}
