@@ -93,7 +93,6 @@ end, "Typeset in subscript.")
 return {
   documentation = [[\begin{document}
 \script[src=packages/autodoc-extras]
-%\script[src=packages/footnotes]
 
 The \doc:keyword{textsubsuper} package provides two commands, \doc:code{\\text:superscript\{\doc:args{content}\}}
 and \doc:code{\\text:subscript\{\doc:args{content}\}}.

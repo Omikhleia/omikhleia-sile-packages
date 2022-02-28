@@ -3,7 +3,9 @@
 -- License: MIT
 --
 -- KNOWN ISSUE: RTL writing direction not supported yet. It issues a warning in that case (maybe)
--- and I cannot ensure how it will look... See also TODORTL comments, where things might go wrong.
+-- and I cannot ensure how it will look... See also TODORTL comments, where things might go wrong,
+-- but the standard \underline (rules package) also has some issues apparently, so there might be
+-- more at stakes here...
 --
 
 -- SETTINGS
@@ -317,7 +319,7 @@ SILE.registerCommand("roughunder", function (options, content)
   local upem = font.head.unitsPerEm
   local underlinePosition = -font.post.underlinePosition / upem * fontoptions.size
   local underlineThickness = font.post.underlineThickness / upem * fontoptions.size
-  -- Underline taken from the original underline command (rules package)
+  -- End taken from the original underline command (rules package)
 
   local hbox = SILE.call("hbox", {}, content)
   table.remove(SILE.typesetter.state.nodes) -- steal it back...
@@ -344,12 +346,11 @@ SILE.registerCommand("roughunder", function (options, content)
     }, " ")
     return path -- path
   end)
-end, "Underlines some content")
+end, "Underlines some content (experimental)")
 
 return {
   documentation = [[\begin{document}
 \script[src=packages/autodoc-extras]
-\script[src=packages/framebox]
 \script[src=packages/parbox]
 
 As its name implies, the \doc:keyword{framebox} package provide several horizontal box framing goodies.
@@ -411,7 +412,7 @@ As final notes, the box logic provided in this package applies to the natural si
 Thus \roundbox{a}, \roundbox{b} and \roundbox{p.}
 
 To avoid such an effect, one could for instance consider inserting a \doc:code{\\strut} in the content.
-This command is provided by the \doc:keyword{parbox} package.
+This command is provided by the \doc:keyword{struts} package.
 
 Thus now \roundbox{\strut{}a}, \roundbox{\strut{}b} and \roundbox{\strut{}p.}
 

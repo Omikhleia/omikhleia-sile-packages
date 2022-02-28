@@ -276,7 +276,6 @@ return {
     dumpStyle = dumpStyle
   },
   documentation = [[\begin{document}
-%\script[src=packages/footnotes]
 \script[src=packages/color]
 \script[src=packages/unichar]
 \script[src=packages/enumitem]

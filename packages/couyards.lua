@@ -27,8 +27,7 @@ end)
 return {
   documentation = [[\begin{document}
 \script[src=packages/autodoc-extras]
-%\script[src=packages/footnotes]
-\define[command=dingbatfont]{\font[family=Symbola]{\process}}
+\define[command=pkg-doc-dingbatfont]{\font[family=Symbola]{\process}}
 
 Typographers of the past relied on a number of ornaments to make their books look nicer.
 
@@ -41,8 +40,8 @@ single illustration or assembled from fleurons.
 A \em{fleuron} is a typographic element or glyph, used either as a punctuation mark or as an
 ornament for typographic compositions. Fleurons, hence the name, which also derives from
 French, are usually stylized forms of flowers or leaves. The Unicode standard defines several
-such glyphs, as \dingbatfont{❦} (U+2766, floral heart) and rotated versions of it,
-\dingbatfont{❧} (U+2767) and \dingbatfont{☙} (U+2619). Unicode version 7 even defines many more
+such glyphs, as \pkg-doc-dingbatfont{❦} (U+2766, floral heart) and rotated versions of it,
+\pkg-doc-dingbatfont{❧} (U+2767) and \pkg-doc-dingbatfont{☙} (U+2619). Unicode version 7 even defines many more
 glyphs of that type.
 
 In typography, these glyphs are also generically called \em{dingbats} or, when used as a section
