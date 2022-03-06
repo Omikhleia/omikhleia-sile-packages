@@ -1,19 +1,21 @@
 --
 -- Cross-references for SILE
--- 2021, Didier Willis
+-- 2021-2022, Didier Willis
 -- License: MIT
 --
-SILE.scratch.refs = {}
-local _refs = {}
-local _missing = false
-local _markers = {}
+SILE.scratch.refs = {} -- references being collated in this SILE run
+local _refs = {} -- references from the previous SILE run
+local _markers = {} -- references labels collated so far
+local _missing = false -- flag set to true when a label could not be resolved
 
+-- Collate label references.
+-- This method shall be called by supporting classes at the end of each page.
 local moveRefs = function (_)
   local node = SILE.scratch.info.thispage.ref
     if node then
     for i = 1, #node do
       local marker = node[i].marker
-      -- We should already have warned the user below, do not spam them.
+      -- We should already have warned the user below, do not spam them again
       -- if SILE.scratch.refs[marker] ~= nil then
         -- SU.warn("Duplicate label '"..marker.."': this is possibly an error")
       -- end
@@ -23,6 +25,9 @@ local moveRefs = function (_)
   end
 end
 
+-- Save the references to a file.
+-- This method shall be called by supporting classes at the end of the
+-- document.
 local writeRefs = function (_)
   local tocdata = pl.pretty.write(SILE.scratch.refs)
   local tocfile, err = io.open(SILE.masterFilename .. '.ref', "w")
@@ -37,6 +42,11 @@ local writeRefs = function (_)
   end
 end
 
+-- Read the reference file.
+-- This method is automatically called when the package is initialized.
+-- References saved from a previous SILE run are thus available on
+-- the next run. Multiple re-runs may be needed to obtain the correct
+-- references.
 local readRefs = function ()
   local reffile,_ = io.open(SILE.masterFilename .. '.ref')
   if not reffile then
@@ -47,6 +57,7 @@ local readRefs = function ()
   _refs = refs
 end
 
+-- Link support when pdf:link is available
 local linkWrapper = function (dest, func)
   if dest and SILE.Commands["pdf:link"] then
     SILE.call("pdf:link", { dest = dest }, func)
@@ -55,11 +66,17 @@ local linkWrapper = function (dest, func)
   end
 end
 
--- Leverage tocentry
--- QUESTION: Should we actually do this, or rather leverage book:sectioning?
--- (or whatever sectioning commands the used class may have...)
--- The user might perhaps want to refer to a section not in the TOC.
--- I have no idea, so let's go ahead for now.
+-- If a reference marker has already been met, it is above us (supra)
+-- else it must be after us (infra).
+  local isSupra = function(marker)
+    return _markers[marker] ~= nil and true or false
+  end
+
+-- Leverage \tocentry (from the tableofcontents package) if available.
+-- We do this do globally store the current section number.
+-- This implies the user can only refer to sections actually entered in the
+-- TOC. We would need another method if users eventually want want to refer
+-- to a section not in the TOC, but is it sound?
 local _currentTocEntry = {}
 if SILE.Commands["tocentry"] then
   local oldTocEntry = SILE.Commands["tocentry"]
@@ -69,8 +86,8 @@ if SILE.Commands["tocentry"] then
     oldTocEntry(options, content)
   end)
 end
-
--- Leverage footnote
+-- Leverage \footnote (from fthe ootnotes) if available.
+-- FIXME not a general solution enough.
 local _currentFn = nil
 if SILE.Commands["footnote"] then
   local oldFn = SILE.Commands["footnote"]
@@ -81,6 +98,8 @@ if SILE.Commands["footnote"] then
     _currentFn = nil
   end)
 end
+
+-- LOW-LEVEL/INTERNAL COMMANDS
 
 local dc = 1
 SILE.registerCommand("refentry", function (options, content)
@@ -102,16 +121,28 @@ SILE.registerCommand("refentry", function (options, content)
       title = content,
       section = options.section,
       footnote = options.footnote,
-      number = options.number, -- For other packages to tweak it.
+      number = options.number,
       link = dest
-      -- pageno is added when nodes are moved
+      -- pageno will be added when nodes are moved
     }
   })
-end, "Inserts a reference infonode (low-level command)")
+end, "Inserts a reference infonode.")
 
-local isSupra = function(marker)
-  return _markers[marker] ~= nil and true or false
-end
+SILE.registerCommand("ref:unknown", function (options, _)
+  SU.warn("Label reference '"..options.marker.."' has not yet been resolved")
+  SILE.call("font", { weight = 800 }, { "‹missing reference›"})
+  _missing = true
+end, "Warns the user and outputs ‹missing reference› for unresolved label references.")
+
+SILE.registerCommand("ref:supra", function (options, content)
+  SILE.call("font", { style = "italic", language = "und" }, { "supra" })
+end, "Relative reference is above (supra).")
+
+SILE.registerCommand("ref:infra", function (options, content)
+  SILE.call("font", { style = "italic", language = "und" }, { "infra" })
+end, "Relative reference is below (infra).")
+
+-- END-USER COMMANDS
 
 SILE.registerCommand("label", function (options, content)
   local marker = SU.required(options, "marker", "label")
@@ -185,24 +216,12 @@ SILE.registerCommand("ref", function (options, content)
   SILE.process(content)
 end, "Prints a reference for the given label marker.")
 
-SILE.registerCommand("ref:unknown", function (options, _)
-  SU.warn("Label reference '"..options.marker.."' has not yet been resolved")
-  SILE.call("font", { weight = 800 }, { "‹missing reference›"})
-  _missing = true
-end, "Warns the user and prints ‹missing reference› for unresolved label references.")
-
-SILE.registerCommand("ref:supra", function (options, content)
-  SILE.call("font", { style = "italic", language = "und" }, { "supra" })
-end, "Relative reference is above (supra).")
-
-SILE.registerCommand("ref:infra", function (options, content)
-  SILE.call("font", { style = "italic", language = "und" }, { "infra" })
-end, "Relative reference is below (infra).")
-
 SILE.registerCommand("pageref", function (options, content)
   options.type = "page"
   SILE.call("ref", options, content)
 end, "Convenience command to print a page reference.")
+
+-- EXPORTS
 
 return {
   exports = { writeRefs = writeRefs, moveRefs = moveRefs },
@@ -215,10 +234,6 @@ return {
 
 The \label[marker=omirefs:head]\doc:keyword{omirefs} package provides tools for classes
 and packages to support cross-references within a document.
-It exports two Lua functions, \doc:code{moveRefs()} and \doc:code{writeRefs()}.
-The former should be called at the end of each page to collate label references.
-The latter should be called at the end of the document, to save the references to a file
-which is read when the package is initialized.
 
 From a document author perspective, the commands \doc:code{\\label} and \doc:code{\\ref}
 are then available. Both take a \doc:code{marker} option, which can be any reference string.
@@ -278,6 +293,12 @@ obtaining better line breaks.
 As a final note, if the \doc:keyword{pdf} package is loaded before using label commands,
 then hyperlinks will be enabled on references. You may disable this behavior
 by setting the \doc:code{linking} option to false on the \doc:code{\\ref} command.
+
+\em{For class designers:} The package exports two Lua functions, \doc:code{moveRefs()} and
+\doc:code{writeRefs()}. The former should be called at the end of each page to collate
+label references. The latter should be called at the end of the document, to save the
+references to a file which is read when the package is initialized.
 \label[marker=omirefs:foot]
+
 \end{document}]]
 }
