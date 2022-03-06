@@ -216,7 +216,7 @@ return {
     self:loadPackage("infonode")
     self:loadPackage("leaders")
     SILE.doTexlike([[%
-\define[command=tableofcontents:notocmessage]{\tableofcontents:headerfont{Rerun SILE to process table of contents!}}%
+\define[command=tableofcontents:notocmessage]{Rerun SILE to process table of contents!}%
 ]])
   end,
   documentation = [[\begin{document}
