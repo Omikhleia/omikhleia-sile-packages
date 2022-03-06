@@ -168,13 +168,13 @@ end
 omibook.finish = function (self)
   local ret = plain.finish(self)
   self:writeToc()
-  self:writeRefs()
+  self:writeLabelRefs()
   return ret
 end
 
 omibook.endPage = function (self)
   self:moveToc()
-  self:moveRefs()
+  self:moveLabelRefs()
   local headerContent = (self:oddPage() and SILE.scratch.headers.odd)
         or (not(self:oddPage()) and SILE.scratch.headers.even)
   if headerContent then

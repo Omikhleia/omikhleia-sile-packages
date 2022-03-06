@@ -3,24 +3,24 @@
 -- 2021-2022, Didier Willis
 -- License: MIT
 --
-SILE.scratch.refs = {} -- references being collated in this SILE run
-local _refs = {} -- references from the previous SILE run
-local _markers = {} -- references labels collated so far
+SILE.scratch.labelrefs = {} -- references being collated in this SILE run
+local _labelrefs = {} -- references from the previous SILE run
+local _markers = {} -- references labels collated so far (for existence check)
 local _missing = false -- flag set to true when a label could not be resolved
 
 -- Collate label references.
 -- This method shall be called by supporting classes at the end of each page.
-local moveRefs = function (_)
-  local node = SILE.scratch.info.thispage.ref
+local moveLabelRefs = function (_)
+  local node = SILE.scratch.info.thispage.labelref
     if node then
     for i = 1, #node do
       local marker = node[i].marker
       -- We should already have warned the user below, do not spam them again
-      -- if SILE.scratch.refs[marker] ~= nil then
+      -- if SILE.scratch.labelrefs[marker] ~= nil then
         -- SU.warn("Duplicate label '"..marker.."': this is possibly an error")
       -- end
       node[i].pageno = SILE.formatCounter(SILE.scratch.counters.folio)
-      SILE.scratch.refs[marker] = node[i]
+      SILE.scratch.labelrefs[marker] = node[i]
     end
   end
 end
@@ -28,14 +28,14 @@ end
 -- Save the references to a file.
 -- This method shall be called by supporting classes at the end of the
 -- document.
-local writeRefs = function (_)
-  local tocdata = pl.pretty.write(SILE.scratch.refs)
+local writeLabelRefs = function (_)
+  local tocdata = pl.pretty.write(SILE.scratch.labelrefs)
   local tocfile, err = io.open(SILE.masterFilename .. '.ref', "w")
   if not tocfile then return SU.error(err) end
   tocfile:write("return " .. tocdata)
   tocfile:close()
 
-  if not pl.tablex.deepcompare(SILE.scratch.refs, _refs) then
+  if not pl.tablex.deepcompare(SILE.scratch.labelrefs, _labelrefs) then
     io.stderr:write("\n! Warning: Label references have changed, please rerun SILE to update them.")
   elseif _missing then
     io.stderr:write("\n! Warning: There are unresolved label references.")
@@ -53,8 +53,8 @@ local readRefs = function ()
     return
   end
   local doc = reffile:read("*all")
-  local refs = assert(load(doc))()
-  _refs = refs
+  local labelrefs = assert(load(doc))()
+  _labelrefs = labelrefs
 end
 
 -- For the lowest numbering scheme, we need to account for potential nesting,
@@ -115,7 +115,7 @@ SILE.registerCommand("refentry", function (options, content)
     dc = dc + 1
   end
   SILE.call("info", {
-    category = "ref",
+    category = "labelref",
     value = {
       marker = options.marker,
       title = content,
@@ -155,7 +155,7 @@ SILE.registerCommand("ref", function (options, content)
   local marker = SU.required(options, "marker", "ref")
   local t = options.type or "default"
 
-  local node = _refs[marker]
+  local node = _labelrefs[marker]
   if not node then
     SILE.call("ref:unknown", options)
   else
@@ -219,8 +219,8 @@ end, "Convenience command to print a page reference.")
 
 return {
   exports = {
-    writeRefs = writeRefs,
-    moveRefs = moveRefs,
+    writeLabelRefs = writeLabelRefs,
+    moveLabelRefs = moveLabelRefs,
     pushLabelRef = pushLabelRef,
     popLabelRef = popLabelRef,
   },
@@ -293,8 +293,8 @@ As a final note, if the \doc:keyword{pdf} package is loaded before using label c
 then hyperlinks will be enabled on references. You may disable this behavior
 by setting the \doc:code{linking} option to false on the \doc:code{\\ref} command.
 
-\em{For class implementers:} The package exports two Lua methods, \doc:code{moveRefs()} and
-\doc:code{writeRefs()}. The former should be called at the end of each page to collate
+\em{For class implementers:} The package exports two Lua methods, \doc:code{moveLabelRefs()} and
+\doc:code{writeLabelRefs()}. The former should be called at the end of each page to collate
 label references. The latter should be called at the end of the document, to save the
 references to a file which is read when the package is initialized. Also, this package has
 to be loaded after the table of contents package, as it updates its \doc:code{\\tocentry}

@@ -132,12 +132,12 @@ end
 
 omicv.finish = function (self)
   local ret = plain.finish(self)
-  self:writeRefs()
+  self:writeLabelRefs()
   return ret
 end
 
 omicv.endPage = function (self)
-  self:moveRefs()
+  self:moveLabelRefs()
   if SILE.scratch.counters.folio.value > 1 then
     self:outputHeader(SILE.scratch.headers.content)
   end
