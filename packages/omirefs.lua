@@ -5,7 +5,7 @@
 --
 SILE.scratch.labelrefs = {} -- references being collated in this SILE run
 local _labelrefs = {} -- references from the previous SILE run
-local _markers = {} -- references labels collated so far (for existence check)
+local _markers = {} -- reference labels collated so far (for existence check)
 local _missing = false -- flag set to true when a label could not be resolved
 
 -- Collate label references.
@@ -47,7 +47,7 @@ end
 -- References saved from a previous SILE run are thus available on
 -- the next run. Multiple re-runs may be needed to obtain the correct
 -- references.
-local readRefs = function ()
+local readLabelRefs = function ()
   local reffile,_ = io.open(SILE.masterFilename .. '.ref')
   if not reffile then
     return
@@ -57,8 +57,33 @@ local readRefs = function ()
   _labelrefs = labelrefs
 end
 
+-- For sectioning packages: 
+-- Leverage \tocentry (from the tableofcontents package) if available.
+-- We do this do globally store the current section number.
+-- This implies the user can only refer to sections actually entered in the
+-- TOC. We would need another method if users eventually want want to refer
+-- to a section not in the TOC, but is it sound?
+local _currentTocEntry = {}
+if SILE.Commands["tocentry"] then
+  local oldTocEntry = SILE.Commands["tocentry"]
+  SILE.registerCommand("tocentry", function (options, content)
+    _currentTocEntry.number = options.number
+    _currentTocEntry.content = content
+    oldTocEntry(options, content)
+  end)
+end
+
 -- For the lowest numbering scheme, we need to account for potential nesting,
 -- so we expose a stack...
+-- These two methods are exported for other (non-sectioning) packages
+-- to enable cross-references on their own numbered content.
+-- Example:
+--   local hasRefs = SILE.documentState.documentClass.pushLabelRef
+--   if hasRefs then SILE.documentState.documentClass:pushLabelRef(mynumber) end
+--   ... do my content stuff ...
+--   if hasRefs then SILE.documentState.documentClass:popLabelRef() end
+-- I.e. check the current class supports this package, and if so wrap the
+-- numbered stuff within these calls.
 local _numbers = {}
 local pushLabelRef = function (_, number)
   table.insert(_numbers, number)
@@ -84,21 +109,6 @@ end
     return _markers[marker] ~= nil and true or false
   end
 
--- Leverage \tocentry (from the tableofcontents package) if available.
--- We do this do globally store the current section number.
--- This implies the user can only refer to sections actually entered in the
--- TOC. We would need another method if users eventually want want to refer
--- to a section not in the TOC, but is it sound?
-local _currentTocEntry = {}
-if SILE.Commands["tocentry"] then
-  local oldTocEntry = SILE.Commands["tocentry"]
-  SILE.registerCommand("tocentry", function (options, content)
-    _currentTocEntry.number = options.number
-    _currentTocEntry.content = content
-    oldTocEntry(options, content)
-  end)
-end
-
 -- LOW-LEVEL/INTERNAL COMMANDS
 
 local dc = 1
@@ -122,7 +132,7 @@ SILE.registerCommand("refentry", function (options, content)
       section = options.section,
       number = options.number,
       link = dest
-      -- pageno will be added when nodes are moved
+      -- pageno will be added when infonodes are moved.
     }
   })
 end, "Inserts a reference infonode.")
@@ -226,7 +236,7 @@ return {
   },
   init = function (self)
     self:loadPackage("infonode")
-    readRefs()
+    readLabelRefs()
   end,
   documentation = [[\begin{document}
 \script[src=packages/autodoc-extras]
