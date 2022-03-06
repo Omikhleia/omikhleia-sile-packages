@@ -53,6 +53,7 @@ end, "Command internally called to typeset the footnote call reference in the te
 -- Footnote reference counter (within the footnote)
 
 SILE.registerCommand("footnote:counter", function (options, _)
+  -- FIXME We should rather honor a style \numbering[after kern, super=true/false]
   SILE.call("noindent")
   if options.mark then
     SILE.call("text:superscript", {}, { options.mark })
@@ -97,6 +98,13 @@ SILE.registerCommand("footnote", function (options, content)
   --   SILE.settings.set(v, SILE.settings.defaults[v])
   -- end
 
+  if SILE.documentState.documentClass.pushLabelRef then -- Cross-reference support
+    -- FIXME We recompute the footnote number at least three times (here, on call, on use).
+    -- Room for micro-optimization!
+    local fn = options.mark or SILE.formatCounter(SILE.scratch.counters.footnote)
+    SILE.documentState.documentClass:pushLabelRef(fn)
+  end
+
   -- Apply the font before boxing, so relative baselineskip applies #1027
   local material
   SILE.call("style:apply", { name = "footnote" }, function ()
@@ -105,6 +113,11 @@ SILE.registerCommand("footnote", function (options, content)
       SILE.process(content)
     end)
   end)
+
+  if SILE.documentState.documentClass.popLabelRef then -- Cross-reference support
+    SILE.documentState.documentClass:popLabelRef()
+  end
+
   SILE.settings.popState()
   SILE.typesetter = oldT
   insertions.exports:insert("footnote", material)

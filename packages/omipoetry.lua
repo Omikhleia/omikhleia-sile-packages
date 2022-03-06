@@ -7,8 +7,6 @@ local inputfilter = SILE.require("packages/inputfilter").exports
 SILE.require("packages/rebox")
 SILE.require("packages/raiselower")
 
-local _currentNumber
-
 local function prosodyFilter(text, content, options)
   local result = {}
   local prosodyAnnotation
@@ -214,10 +212,16 @@ SILE.registerCommand("poetry", function (options, content)
           if numbering and (iVerse % step == 0 or (iVerse == 1 and first)) then
             content[i].options.n = iVerse
           end
-          _currentNumber = iVerse
           content[i].options.mode = options.mode
           content[i].command = "omipoetry:v"
-          SILE.process({ content[i] })
+          if SILE.documentState.documentClass.pushLabelRef then
+             -- Cross-reference support
+            SILE.documentState.documentClass:pushLabelRef(iVerse)
+            SILE.process({ content[i] })
+            SILE.documentState.documentClass:popLabelRef()
+          else
+            SILE.process({ content[i] })
+          end
           iVerse = iVerse + 1
         elseif content[i].command == "stanza" then
           SILE.call("smallskip")
@@ -236,7 +240,6 @@ SILE.registerCommand("poetry", function (options, content)
       end
       -- All text nodes in ignored
     end
-    _currentNumber = nil
     if not SU.boolean(options.prosody, false) then
       SILE.call("medskip")
     end
@@ -258,15 +261,6 @@ local typesetVerseNumber = function (mark)
         SILE.typesetter:pushGlue({ width = w - setback - h.width })
         SILE.typesetter:pushHbox(h)
       end)
-  end)
-end
-
--- Subscribe to omirefs cross-references, if available
-if SILE.Commands["refentry"] then
-  local oldRefentry = SILE.Commands["refentry"]
-  SILE.registerCommand("refentry", function (options, content)
-    options.number = _currentNumber
-    oldRefentry(options, content)
   end)
 end
 

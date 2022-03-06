@@ -57,6 +57,18 @@ local readRefs = function ()
   _refs = refs
 end
 
+-- For the lowest numbering scheme, we need to account for potential nesting,
+-- so we expose a stack...
+local _numbers = {}
+local pushLabelRef = function (_, number)
+  table.insert(_numbers, number)
+end
+local popLabelRef = function (_)
+  if #_numbers > 0 then
+    _numbers[#_numbers] = nil
+  end
+end
+
 -- Link support when pdf:link is available
 local linkWrapper = function (dest, func)
   if dest and SILE.Commands["pdf:link"] then
@@ -86,18 +98,6 @@ if SILE.Commands["tocentry"] then
     oldTocEntry(options, content)
   end)
 end
--- Leverage \footnote (from fthe ootnotes) if available.
--- FIXME not a general solution enough.
-local _currentFn = nil
-if SILE.Commands["footnote"] then
-  local oldFn = SILE.Commands["footnote"]
-  SILE.registerCommand("footnote", function (options, content)
-    -- Be friendly with omifootnotes that support a mark option :)
-    _currentFn = options.mark or SILE.formatCounter(SILE.scratch.counters.footnote)
-    oldFn(options, content)
-    _currentFn = nil
-  end)
-end
 
 -- LOW-LEVEL/INTERNAL COMMANDS
 
@@ -120,7 +120,6 @@ SILE.registerCommand("refentry", function (options, content)
       marker = options.marker,
       title = content,
       section = options.section,
-      footnote = options.footnote,
       number = options.number,
       link = dest
       -- pageno will be added when nodes are moved
@@ -146,7 +145,8 @@ end, "Relative reference is below (infra).")
 
 SILE.registerCommand("label", function (options, content)
   local marker = SU.required(options, "marker", "label")
-  SILE.call("refentry", { marker = marker, section = _currentTocEntry.number, footnote = _currentFn }, _currentTocEntry.content)
+  local currentNumber = _numbers[#_numbers]
+  SILE.call("refentry", { marker = marker, section = _currentTocEntry.number, number = currentNumber }, _currentTocEntry.content)
   -- We don't really expect a content, let's ship it out anyway.
   SILE.process(content)
 end, "Registers a label reference at the current point in the document.")
@@ -182,18 +182,12 @@ SILE.registerCommand("ref", function (options, content)
             SILE.process(node.title)
           end
         elseif t == "default" then
-          -- Sections can contains footnotes, and all of these
-          -- can contain other numbered elements. I don't think
-          -- we need more than that.
+          -- Closest numbering in that order: number, section or page
           if not node.number then
-            if not node.footnote then
-              if not node.section then
-                SILE.call("ref:unknown", options)
-              else
-                SILE.typesetter:typeset(""..node.section)
-              end
+            if not node.section then
+              SILE.typesetter:typeset(""..node.pageno)
             else
-              SILE.typesetter:typeset(""..node.footnote)
+              SILE.typesetter:typeset(""..node.section)
             end
           else
             SILE.typesetter:typeset(""..node.number)
@@ -224,7 +218,12 @@ end, "Convenience command to print a page reference.")
 -- EXPORTS
 
 return {
-  exports = { writeRefs = writeRefs, moveRefs = moveRefs },
+  exports = {
+    writeRefs = writeRefs,
+    moveRefs = moveRefs,
+    pushLabelRef = pushLabelRef,
+    popLabelRef = popLabelRef,
+  },
   init = function (self)
     self:loadPackage("infonode")
     readRefs()
@@ -294,10 +293,19 @@ As a final note, if the \doc:keyword{pdf} package is loaded before using label c
 then hyperlinks will be enabled on references. You may disable this behavior
 by setting the \doc:code{linking} option to false on the \doc:code{\\ref} command.
 
-\em{For class designers:} The package exports two Lua functions, \doc:code{moveRefs()} and
+\em{For class implementers:} The package exports two Lua methods, \doc:code{moveRefs()} and
 \doc:code{writeRefs()}. The former should be called at the end of each page to collate
 label references. The latter should be called at the end of the document, to save the
-references to a file which is read when the package is initialized.
+references to a file which is read when the package is initialized. Also, this package has
+to be loaded after the table of contents package, as it updates its \doc:code{\\tocentry}
+command.
+
+\em{For packages implementers:} The package also exports two Lua methods, \doc:code{pushLabelRef()}
+and \doc:code{popLabelRefs()}. The former takes a formatted number as argument. To enable
+cross-referencing in your own package, whatever your numbering scheme is, you may test for their
+availability in your supporting class
+(e.g. checking \doc:code{SILE.documentState.documentClass.pushLabelRef} exists)
+and then wrap your code within them.
 \label[marker=omirefs:foot]
 
 \end{document}]]
