@@ -6,19 +6,16 @@
 SILE.scratch.labelrefs = {} -- references being collated in this SILE run
 local _labelrefs = {} -- references from the previous SILE run
 local _markers = {} -- reference labels collated so far (for existence check)
-local _missing = false -- flag set to true when a label could not be resolved
+local _missing = {} -- missing references
 
 -- Collate label references.
 -- This method shall be called by supporting classes at the end of each page.
+-- (The unused argument is the class)
 local moveLabelRefs = function (_)
   local node = SILE.scratch.info.thispage.labelref
     if node then
     for i = 1, #node do
       local marker = node[i].marker
-      -- We should already have warned the user below, do not spam them again
-      -- if SILE.scratch.labelrefs[marker] ~= nil then
-        -- SU.warn("Duplicate label '"..marker.."': this is possibly an error")
-      -- end
       node[i].pageno = SILE.formatCounter(SILE.scratch.counters.folio)
       SILE.scratch.labelrefs[marker] = node[i]
     end
@@ -28,6 +25,7 @@ end
 -- Save the references to a file.
 -- This method shall be called by supporting classes at the end of the
 -- document.
+-- (The unused argument is the class)
 local writeLabelRefs = function (_)
   local tocdata = pl.pretty.write(SILE.scratch.labelrefs)
   local tocfile, err = io.open(SILE.masterFilename .. '.ref', "w")
@@ -37,13 +35,14 @@ local writeLabelRefs = function (_)
 
   if not pl.tablex.deepcompare(SILE.scratch.labelrefs, _labelrefs) then
     io.stderr:write("\n! Warning: Label references have changed, please rerun SILE to update them.")
-  elseif _missing then
-    io.stderr:write("\n! Warning: There are unresolved label references.")
+  elseif #_missing > 0 then
+    io.stderr:write("\n! Warning: There are unresolved label references ("
+      ..table.concat(_missing, ", ")..")")
   end
 end
 
 -- Read the reference file.
--- This method is automatically called when the package is initialized.
+-- This function is automatically called when the package is initialized.
 -- References saved from a previous SILE run are thus available on
 -- the next run. Multiple re-runs may be needed to obtain the correct
 -- references.
@@ -138,16 +137,22 @@ SILE.registerCommand("refentry", function (options, content)
 end, "Inserts a reference infonode.")
 
 SILE.registerCommand("ref:unknown", function (options, _)
-  SU.warn("Label reference '"..options.marker.."' has not yet been resolved")
-  SILE.call("font", { weight = 800 }, { "‹missing reference›"})
-  _missing = true
+  local marker = SU.required(options, "marker", "ref")
+  SILE.call("font", { weight = 700 }, { "‹missing reference›"})
+  -- The warn option is not documented to avoid its abuse. It's only
+  -- convenience so that we can voluntarily show a missing reference in
+  -- the package documentation without the user being spammed...
+  if SU.boolean(options.warn, true) then
+    SU.warn("Label reference '"..marker.."' has not yet been resolved")
+    _missing[#_missing + 1] = marker
+  end
 end, "Warns the user and outputs ‹missing reference› for unresolved label references.")
 
-SILE.registerCommand("ref:supra", function (options, content)
+SILE.registerCommand("ref:supra", function (_, _)
   SILE.call("font", { style = "italic", language = "und" }, { "supra" })
 end, "Relative reference is above (supra).")
 
-SILE.registerCommand("ref:infra", function (options, content)
+SILE.registerCommand("ref:infra", function (_, _)
   SILE.call("font", { style = "italic", language = "und" }, { "infra" })
 end, "Relative reference is below (infra).")
 
@@ -157,7 +162,8 @@ SILE.registerCommand("label", function (options, content)
   local marker = SU.required(options, "marker", "label")
   local currentNumber = _numbers[#_numbers]
   SILE.call("refentry", { marker = marker, section = _currentTocEntry.number, number = currentNumber }, _currentTocEntry.content)
-  -- We don't really expect a content, let's ship it out anyway.
+  -- We don't really expect a content, let's ship it out anyway, so that if the
+  -- user accidentally had a group afterwards, it's not lost.
   SILE.process(content)
 end, "Registers a label reference at the current point in the document.")
 
@@ -216,7 +222,8 @@ SILE.registerCommand("ref", function (options, content)
       end
     end)
   end
-  -- We don't really expect a content, let's ship it out anyway.
+  -- We don't really expect a content, let's ship it out anyway, so that if the
+  -- user accidentally had a group afterwards, it's not lost.
   SILE.process(content)
 end, "Prints a reference for the given label marker.")
 
@@ -276,7 +283,7 @@ in a numbered section? Ok, this note is kind of obvious, not to say dumb.
 But it should be a footnote with a mark instead of a counter, if a footnote package
 supporting them (as this author’s \doc:keyword{omifootnotes} package) is active.
 If so, you will see why \ref[marker=omirefs:fn, type=relative].},
-a warning is reported and the printed output is \ref[marker=do:not:exist].
+a warning is reported and the printed output is \ref[marker=do:not:exist, warn=false].
 
 \label[marker=omirefs:fn]If this package is loaded after a footnote package, then we also get the footnote
 number for a label in a footnote, with \doc:code{\\ref[marker=\doc:args{marker}, type=default]}.
