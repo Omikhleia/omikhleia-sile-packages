@@ -4,8 +4,6 @@
 --
 SILE.require("packages/counters")
 
-SILE.scratch.liststyle = nil
-
 SILE.settings.declare({
   parameter = "list.current.enumerate.depth",
   type = "integer",
@@ -188,7 +186,6 @@ end
 
 local doItem = function (options, content)
   local enumStyle = content._enumitem_.style
-  local depth = content._enumitem_.depth
   local styleName = content._enumitem_.styleName
   local counter = content._enumitem_.counter
   local indent = content._enumitem_.indent
@@ -272,9 +269,6 @@ local doNestedList = function (listType, _, content)
     SILE.settings.set("document.parindent", SILE.nodefactory.glue())
     local lskip = SILE.settings.get("document.lskip") or SILE.nodefactory.glue()
     SILE.settings.set("document.lskip", SILE.nodefactory.glue(lskip.width + (baseIndent + listIndent)))
-    -- We don't care about the rskip, do we?
-  	-- SILE.settings.set("document.rskip", SILE.nodefactory.glue())
-
     local counter = 0
     for i = 1, #content do
         if type(content[i]) == "table" then
@@ -303,6 +297,15 @@ local doNestedList = function (listType, _, content)
   end)
   depth = depth - 1
   SILE.settings.set("list.current."..listType..".depth", depth)
+
+  local totalDepth = SILE.settings.get("list.current.itemize.depth")
+    + SILE.settings.get("list.current.enumerate.depth")
+  if totalDepth == 0 then
+    -- Inside nested lists, we just call leaveHmode() between items, which means we
+    -- do not insert any document.parskip. We do want to provoke one, though, after
+    -- existing the highest level.
+    SILE.call("par")
+  end
 end
 
 SILE.registerCommand("enumerate", function (options, content)
