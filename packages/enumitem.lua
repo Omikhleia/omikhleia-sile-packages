@@ -53,6 +53,13 @@ SILE.settings.declare({
   help = "Bullet list variant (styling)"
 })
 
+SILE.settings.declare({
+  parameter = "list.parskip",
+  type = "vglue",
+  default = SILE.nodefactory.vglue("0pt plus 1pt"),
+  help = "Leading between paragraphs and items in a list"
+})
+
 local styles = SILE.require("packages/styles").exports
 
 -- BEGIN STYLES
@@ -170,9 +177,9 @@ local trim = function (str)
   return trimRight(trimLeft(str))
 end
 
-local enforceListType = function (listType)
-  if listType ~= "enumerate" and listType ~= "itemize" then
-    SU.error("List type shall be 'enumerate' or 'itemize'")
+local enforceListType = function (cmd)
+  if cmd ~= "enumerate" and cmd ~= "itemize" then
+    SU.error("Only 'enumerate', 'itemize' or 'item' are accepted in lists, found '"..cmd.."'")
   end
 end
 
@@ -189,6 +196,13 @@ local doItem = function (options, content)
   local styleName = content._enumitem_.styleName
   local counter = content._enumitem_.counter
   local indent = content._enumitem_.indent
+    local inner = content._enumitem_.inner
+
+    -- Before an item, if not the first of a toplevel list, enforce a paragraph.
+    -- Note that the parskip at this stage should be the list.parskip.
+    if counter > 1 or inner then
+      SILE.call("par")
+    end
 
   local mark = SILE.call("hbox", {}, function ()
     SILE.call("style:apply", { name = styleName }, function ()
@@ -245,13 +259,13 @@ local doItem = function (options, content)
 end
 
 local doNestedList = function (listType, _, content)
-  SILE.typesetter:leaveHmode()
-
   -- variant
   local variant = SILE.settings.get("list."..listType..".variant")
   local listAltStyleType = variant and listType.."-"..variant or listType
 
   -- depth
+  local inner = (SILE.settings.get("list.current.itemize.depth")
+    + SILE.settings.get("list.current.enumerate.depth")) > 0
   local depth = SILE.settings.get("list.current."..listType..".depth") + 1
   SILE.settings.set("list.current."..listType..".depth", depth)
 
@@ -263,10 +277,22 @@ local doNestedList = function (listType, _, content)
   local baseIndent = (depth == 1) and SILE.settings.get("document.parindent").width:absolute() or SILE.measurement("0pt")
   local listIndent = SILE.settings.get("list."..listType..".leftmargin"):absolute()
 
+  -- initial skip
+  if not inner then
+    -- At the beginning of a toplevel list, enforce a paragraph if we are not already in
+    -- vertical mode (i.e. in which case there was probably already a paragraph or skip pushed)
+    -- This will therefore also honor the parskip, which in this case is still that of the
+    -- outer (document) context.
+    if not SILE.typesetter:vmode() then
+      SILE.call("par")
+    end
+  end
+
   -- processing
   SILE.settings.temporarily(function ()
     SILE.settings.set("current.parindent", SILE.nodefactory.glue())
     SILE.settings.set("document.parindent", SILE.nodefactory.glue())
+    SILE.settings.set("document.parskip", SILE.settings.get("list.parskip"))
     local lskip = SILE.settings.get("document.lskip") or SILE.nodefactory.glue()
     SILE.settings.set("document.lskip", SILE.nodefactory.glue(lskip.width + (baseIndent + listIndent)))
     local counter = 0
@@ -277,17 +303,18 @@ local doNestedList = function (listType, _, content)
             -- Enrich the node with internal properties
             content[i]._enumitem_ = {
               style = enumStyle,
-              depth = depth,
+              inner = inner,
               counter = counter,
               indent = listIndent,
-              styleName = styleName
+              styleName = styleName,
             }
           else
             enforceListType(content[i].command)
           end
           SILE.process({ content[i] })
         elseif type(content[i]) == "string" then
-          -- All text nodes in ignored in structure tags.
+          -- All text nodes are ignored in structure tags, but just warn
+          -- if there do not just consist in spaces.
           local text = trim(content[i])
           if text ~= "" then SU.warn("Ignored standalone text ("..text..")") end
         else
@@ -298,13 +325,11 @@ local doNestedList = function (listType, _, content)
   depth = depth - 1
   SILE.settings.set("list.current."..listType..".depth", depth)
 
-  local totalDepth = SILE.settings.get("list.current.itemize.depth")
-    + SILE.settings.get("list.current.enumerate.depth")
-  if totalDepth == 0 then
-    -- Inside nested lists, we just call leaveHmode() between items, which means we
-    -- do not insert any document.parskip. We do want to provoke one, though, after
-    -- existing the highest level.
-    SILE.call("par")
+  if not inner then
+     -- A the end a toplevel list, enforce a paragraph. This will therefore honor
+     -- the parskip, which in this case is back to that of the outer (document)
+     -- context.
+     SILE.call("par")
   end
 end
 
@@ -345,7 +370,6 @@ The environment, as a structure or data model, can only contain item elements
 and other lists. Any other element causes an error to be
 reported, and any
 text content is ignored with a warning.
-
 \begin{itemize}
     \item{Lorem}
     \begin{itemize}
@@ -387,8 +411,7 @@ setting, to switch to an alternate set of styles, such as the following.
             \end{itemize}
         \end{itemize}
     \end{itemize}
-\end{itemize}
-}
+\end{itemize}}%
 
 The alternate styles are expected to be named \doc:code{list:itemize-\doc:args{variant}:\doc:args{level}}
 and the package comes along with a pre-defined “alternate” variant using the em-dash.\footnote{This author is
@@ -452,8 +475,7 @@ you certainly guessed it already, the \doc:code{list.enumerate.variant} setting.
             \end{enumerate}
         \end{enumerate}
     \end{enumerate}
-\end{enumerate}
-}
+\end{enumerate}}%
 
 The alternate styles are expected to be \doc:code{list:enumerate-\doc:args{variant}:\doc:args{level}},
 how imaginative, and the package comes along with a pre-defined “alternate” variant, just because.
@@ -481,8 +503,19 @@ an example.
             \end{enumerate}
         \end{itemize}
     \end{enumerate}
-\end{enumerate}
-}
+\end{enumerate}}%
+
+\smallskip
+
+\em{Vertical spaces.}
+\novbreak
+
+The package tries to ensure a paragraph is enforced before and after a list.
+In most cases, this implies paragraph skips to be inserted, with the usual
+\autodoc:setting{document.parskip} glue, whatever value it has at these points
+in the surrounding context of your document.
+Between list items, however, the paragraph skip is switched to the value
+of the \autodoc:setting{list.parskip} setting.
 
 \smallskip
 
