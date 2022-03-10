@@ -149,11 +149,10 @@ local cellNode = pl.class({
     self.cellBox.height = self.cellBox.height + adjustement / 2
     self.cellBox.depth = self.cellBox.depth + adjustement / 2
     -- Handle the alignment option on cells, i.e. derive the necessary offset.
-    if self.valign == "top" then
-      -- Nothing to do, we are already good.
-    elseif self.valign == "bottom" then
+    -- For valign "top", nothing to do, we are already good.
+    if self.valign == "bottom" then
       self.cellBox.offset = -adjustement
-    else -- middle (by default)
+    elseif self.valign ~= "top" then -- enforce "middle"(default)
       self.cellBox.offset = -adjustement / 2
     end
   end,
@@ -225,7 +224,7 @@ local rowNode = pl.class({
       SILE.typesetter.state.nodes[#SILE.typesetter.state.nodes+1] = SILE.nodefactory.zerohbox()
       local hbox = SILE.call("hbox", {}, function ()
         for i = 1, #self.cells do
-          self.cells[i]:shipout(width)
+          self.cells[i]:shipout()
         end
       end)
     if self.color then
@@ -408,7 +407,7 @@ SILE.registerCommand("ptable", function (options, content)
   SILE.call("medskip")  -- Also I don't like much hard-coded skips...
 end)
 
-SILE.registerCommand("ptable:cell:hook", function (options, content)
+SILE.registerCommand("ptable:cell:hook", function (_, content)
   SILE.process(content)
 end)
 

@@ -1,4 +1,4 @@
--- 
+--
 -- Re-implementation of the footnotes package
 -- 2021, Didier Willis
 --

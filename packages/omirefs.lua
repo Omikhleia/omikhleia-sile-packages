@@ -56,7 +56,7 @@ local readLabelRefs = function ()
   _labelrefs = labelrefs
 end
 
--- For sectioning packages: 
+-- For sectioning packages:
 -- Leverage \tocentry (from the tableofcontents package) if available.
 -- We do this do globally store the current section number.
 -- This implies the user can only refer to sections actually entered in the

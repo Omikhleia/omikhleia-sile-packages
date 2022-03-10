@@ -116,9 +116,9 @@ local styleForAlignment = function (style, content, breakafter)
   end
 end
 
-local function dumpOptions(v)
+local function dumpOptions(options)
   local opts = {}
-  for k, v in pairs(v) do
+  for k, v in pairs(options) do
     opts[#opts+1] = k.."="..v
   end
   return table.concat(opts, ", ")
@@ -236,7 +236,7 @@ SILE.registerCommand("style:redefine", function (options, content)
     end
   elseif options.from then
     if options.from == options.name then
-      SU.error("Style '" .. option.name .. "' should not be restored from itself, ignoring.")
+      SU.error("Style '" .. options.name .. "' should not be restored from itself, ignoring.")
     end
 
     -- Case \style:redefine[name=style-name, from=saved-style-name]
@@ -245,7 +245,7 @@ SILE.registerCommand("style:redefine", function (options, content)
     end
     local sty = SILE.scratch.styles.specs[options.from]
     if sty == nil then
-      SU.error("Style '" .. option.from .. "' does not exist!")
+      SU.error("Style '" .. options.from .. "' does not exist!")
     end
     SILE.scratch.styles.specs[options.name] = sty
     SILE.scratch.styles.specs[options.from] = nil
@@ -256,7 +256,7 @@ end, "Redefines a style saving the old version with another name, or restores it
 
 -- DEBUG OR DOCUMENTATION
 
-SILE.registerCommand("style:show", function (options, content)
+SILE.registerCommand("style:show", function (options, _)
   local name = SU.required(options, "name", "style:show")
 
   SILE.typesetter:typeset(dumpStyle(name))
@@ -309,7 +309,7 @@ Something may seem wrong (though of course it is a matter of taste and could be 
 \item{Many commands have “font hooks” indeed, with varying implementations,
     such as \doc:code{pullquote:font} and \doc:code{book:right-running-head-font} to quote
     just a few. None of these seem to have the same type of name. Their scope too is not
-    always clear. But what if one also wants, for instance, to specify a color? 
+    always clear. But what if one also wants, for instance, to specify a color?
     Of course, in many cases, the hook could be redefined to apply that wanted color
     to the content… But, er, isn’t it called \doc:code{…font}? Something looks amiss.}
 \item{Those hooks often have fixed definitions, e.g. footnote text at 9pt, chapter heading
@@ -328,7 +328,7 @@ Something may seem wrong (though of course it is a matter of taste and could be 
 Indeed, \em{why not try a different approach}. Actually, this is what most modern
 word-processing software have been doing for a while, be it Microsoft Word or Libre/OpenOffice
 and cognates… They all introduce the concept of “styles”, in actually three forms at
-least: character styles, paragraph styles and page styles; But also frame styles, 
+least: character styles, paragraph styles and page styles; But also frame styles,
 list styles and table styles, to list a few others. This package is an attempt at
 implementing such ideas, or a subset of them, in SILE. We do not intend to cover
 all the inventory of features provided in these software via styles.

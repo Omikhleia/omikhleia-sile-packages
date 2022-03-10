@@ -69,7 +69,7 @@ local writeAbbr = function ()
     SU.warn("Translation table not found for '"..lang.."', trying 'en'")
   end
 
-  a = {}
+  local a = {}
   for k, v in pairs(teitrans.abbr) do
     if v.translate == nil then v.translate = k end
     if v.used and v.full ~= nil then
@@ -87,7 +87,7 @@ local writeAbbr = function ()
     SILE.call("style:apply", { name = "tei:orth" }, { teitrans.titles.abbreviations })
     SILE.typesetter:leaveHmode()
 
-    for k, v in pairs(teitrans.symbols) do
+    for _, v in pairs(teitrans.symbols) do
       if v.used then
         local h = SILE.call("hbox", {}, { v.symbol })
         h.width = SILE.length("0cm") -- Real weird but works.
@@ -95,7 +95,7 @@ local writeAbbr = function ()
         SILE.typesetter:leaveHmode()
       end
     end
-    for i, n in ipairs(a) do
+    for _, n in ipairs(a) do
       local h = SILE.call("hbox", {}, function ()
         SILE.call("style:apply", { name = "tei:pos" }, { n.translate })
       end)
@@ -147,7 +147,7 @@ local writeBibl = function (bibliography)
   end)
 end
 
-local writeImpressum = function (bibliography)
+local writeImpressum = function ()
   local lang = SILE.settings.get("document.language")
 
   local teitrans = SILE.scratch.teiabbr[lang]

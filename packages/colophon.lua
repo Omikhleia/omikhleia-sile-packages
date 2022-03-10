@@ -32,7 +32,6 @@ local function circleSetupLineLengths(options, oldSetupLineLengths)
   local setupLineLengths = function (self)
     -- Estimate the width this would reach if set all on a single line.
     local estimatedWidth = 0
-    local estimatedHeight = bs
     for i = 1, #self.nodes do
       estimatedWidth = estimatedWidth + self.nodes[i].width.length.amount or 0
     end
@@ -55,15 +54,15 @@ local function circleSetupLineLengths(options, oldSetupLineLengths)
     -- Setup the parShape method
     -- Oh again our lines assume fixed baselines, so we are in good
     -- company with Mr. Random.
-    self.parShape = function (self, line)
+    self.parShape = function (that, line)
       -- of course at the exact top of the circle the width would
       -- be null, so we offset that a bit by some x...
       local h = radius - (line - 1) * bs - 0.5 * ex
       local c = radius * radius - h * h
       local chord = c >= 0 and math.sqrt(c) or radius
-      if chord > self.hsize then SU.error("Circle-shaped paragraph to big to fit the frame width") end
+      if chord > that.hsize then SU.error("Circle-shaped paragraph to big to fit the frame width") end
 
-      local indent = self.hsize / 2 - chord
+      local indent = that.hsize / 2 - chord
       return indent:tonumber(), SILE.measurement(2 * chord), indent:tonumber()
     end
 
@@ -75,7 +74,7 @@ local function circleSetupLineLengths(options, oldSetupLineLengths)
   return setupLineLengths
 end
 
-local function circleDecoration(options, radius, nbLines)
+local function circleDecoration(options)
   local bs = SILE.measurement("1bs"):tonumber()
   local ex = SILE.measurement("1ex"):tonumber()
   -- Retrieve the things we stored when line breaking occurred.
@@ -151,7 +150,6 @@ SILE.registerCommand("colophon", function (options, content)
         -- 1. We also insert a vertical glue corresponding to the extra space needed for
         --    the decoration.
         internalScratch.nbLines = #lines
-        local bs = SILE.measurement("1bs"):tonumber()
         local ex = SILE.measurement("1ex"):tonumber()
         local figure = options.figure or "default"
         local decoration = SILE.scratch.colophon.circle.decorations[figure] or SU.error("Unknown decoration '"..figure.."'")

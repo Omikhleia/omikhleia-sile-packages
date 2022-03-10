@@ -36,13 +36,13 @@ local characterStrut = function ()
   local key = _key(SILE.font.loadDefaults({}))
   local hbox = strutCache[key]
   if hbox then return hbox end
-  local hbox = SILE.call("hbox", {}, { SILE.settings.get("strut.character") })
+  hbox = SILE.call("hbox", {}, { SILE.settings.get("strut.character") })
   table.remove(SILE.typesetter.state.nodes) -- steal it back
   strutCache[key] = hbox
   return hbox
 end
 
-SILE.registerCommand("strut", function (options, content)
+SILE.registerCommand("strut", function (options, _)
   local method = options.method or "character"
   local show = SU.boolean(options.show, true)
   local strut
@@ -80,7 +80,7 @@ settings, by default respectively 0.3bs and 1bs, following the same
 definition as in LaTeX. So they do not achieve exactly the same effect:
 the former should ideally be a character that covers the maximum ascender and descender
 heights in the current font; the other uses an alignment at the baseline skip level
-assuming it is reasonably fixed. 
+assuming it is reasonably fixed.
 
 The standalone user command is \doc:code{\\strut[method=\doc:args{method}]},
 where the method can be “character” (default) or “rule”. It returns the dimensions (for possible use

@@ -23,7 +23,7 @@ SILE.registerCommand("header:rule", function (options, _)
   local valign = options.valign or "top"
   local offset = SU.cast("measurement", options.offset or "1bs")
   local thickness = SU.cast("measurement", options.thickness or "0.8pt")
-  if options.valign ~= "top" and options.valign ~= bottom then
+  if valign ~= "top" and valign ~= "bottom" then
     SU.error("Invalid header rule valign option")
   end
   if thickness:tonumber() == 0 then

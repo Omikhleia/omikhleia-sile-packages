@@ -57,7 +57,6 @@ end
 -- Main function for parboxing content.
 -- Returns a list of vboxes.
 local parboxFraming = function (options, content)
-  local nodes
   local oldTypesetter = SILE.typesetter
   local parboxTypesetter
   local innerVbox
@@ -208,7 +207,7 @@ SILE.registerCommand("parbox", function (options, content)
     offset = SILE.measurement(), -- INTERNAL: See comment below.
     border = border,
     bordercolor = bordercolor,
-    outputYourself= function (self, typesetter, line)
+    outputYourself= function (self, typesetter, _)
       local saveY = typesetter.frame.state.cursorY
       local saveX = typesetter.frame.state.cursorX
 

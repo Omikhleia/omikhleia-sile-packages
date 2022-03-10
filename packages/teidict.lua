@@ -73,9 +73,9 @@ end
 local trimRight = function (str)
   return (str:gsub("%s*$", ""))
 end
-local trim = function (str)
-  return trimRight(trimLeft(str))
-end
+-- local trim = function (str)
+--   return trimRight(trimLeft(str))
+-- end
 
 -- UTILITIES APPLYTHING TO THE AST
 
@@ -311,7 +311,7 @@ end)
 SILE.call("tei:passthru:asParagraph", {}, { "p" })
 SILE.call("xmltricks:passthru", {}, { "name" })
 
-SILE.registerCommand("publicationStmt", function (options, content)
+SILE.registerCommand("publicationStmt", function (_, content)
   local publisher = SILE.findInTree(content, "publisher")
   if publisher == nil then SU.error("Structure error, no publisher in TEI.publicationStmt") end
   local date = SILE.findInTree(content, "date")
@@ -339,7 +339,7 @@ SILE.registerCommand("publicationStmt", function (options, content)
 end)
 
 local bibliography
-SILE.registerCommand("listBibl", function(options, content)
+SILE.registerCommand("listBibl", function(_, content)
   -- Store for processing in the backmatter
   bibliography = content
 end)
@@ -378,7 +378,7 @@ SILE.registerCommand("div0", function (options, content)
   teiabbr.writeImpressum()
 end)
 
-SILE.registerCommand("milestone", function (options, content)
+SILE.registerCommand("milestone", function (options, _)
   local title = SU.required(options, "n", "TEI.milestone")
   local dest = "tei_milestone_"..options.n
   SILE.typesetter:leaveHmode()
@@ -398,7 +398,7 @@ end)
 SILE.registerCommand("entry", function (options, content)
   local nSense = countElementByTag("sense", content)
   local iSense = 0
-  local nRe = countElementByTag("re", content)
+  -- local nRe = countElementByTag("re", content)
   local iRe = 0
 
   SILE.typesetter:leaveHmode()
@@ -506,7 +506,7 @@ SILE.registerCommand("form", function (options, content)
     else
       doSpacing(options)
     end
-    local nElem = countElements(content)
+    -- local nElem = countElements(content)
     local iElem = 0
     options.last = (options.last == nil and true or options.last)
     for i=1, #content do
@@ -515,9 +515,9 @@ SILE.registerCommand("form", function (options, content)
         content[i].options._pos = iElem
         content[i].options._parentType = options.type
         SILE.process({ content[i] })
-        if iElem < nElem then
+        -- if iElem < nElem then
      --     SILE.typesetter:typeset(" ")
-        end
+        -- end
       end
       -- All text nodes in <form> (normally only spaces) are ignored
     end
@@ -598,7 +598,7 @@ local xSampaSubset = {
   ["Z"]= 	"ʒ", -- 0292 vd. palatoalveolar fric., Eng. measure
   ["?"]= 	"ʔ", -- 0294 glottal stop, Ger. Verein, also Danish stød
   ["W"]=  "ʍ", -- 028D voiceless labial–velar fricative
-  ["K"]=  "ɬ", -- 026C voiceless alveolar lateral fricative	
+  ["K"]=  "ɬ", -- 026C voiceless alveolar lateral fricative
  -- Length, stress and tone marks
   [":"]= 	"ː", -- 02D0 length mark
   ["\""]=  	"ˈ", -- 02C8 primary stress *
@@ -705,15 +705,15 @@ SILE.registerCommand("trans", function (options, content)
   end)
 end)
 
-SILE.registerCommand("gloss", function (options, content)
+SILE.registerCommand("gloss", function (_, content)
   SILE.process(trimContent(content))
 end)
 
-SILE.registerCommand("def", function (options, content)
+SILE.registerCommand("def", function (_, content)
   SILE.process(trimContent(content))
 end)
 
-SILE.registerCommand("tr", function (options, content)
+SILE.registerCommand("tr", function (_, content)
   -- The HSD uses <def> (definition) everywhere, but for multilingual
   -- dictionaries, <tr> (translation) is rather expected.
   SILE.process(trimContent(content))
@@ -740,7 +740,7 @@ SILE.registerCommand("usg", function (options, content)
     SILE.typesetter:typeset(")")
   elseif t == "lang" then
     doSpacing(options)
-    local norm = SU.required(options, "norm", "TEI.usg (lang)")
+    -- local norm = SU.required(options, "norm", "TEI.usg (lang)")
     SILE.call("style:apply", { name = "tei:pos" }, { options.norm })
   elseif t == "cat" then
     -- ignored (FIXME shouldn't formally, but the HSD has them wrong)
@@ -798,7 +798,7 @@ SILE.registerCommand("xr", function (options, content)
   end
 end)
 
-SILE.registerCommand("ptr", function (options, content)
+SILE.registerCommand("ptr", function (options, _)
   local target = options.target and refs[options.target]
   if target == nil then SU.error("") end
 
@@ -861,19 +861,19 @@ SILE.registerCommand("foreign", function (options, content)
   end)
 end)
 
-SILE.registerCommand("hi", function (options, content)
+SILE.registerCommand("hi", function (_, content)
   SILE.call("style:apply", { name = "tei:mentioned" }, content)
 end)
 
-SILE.registerCommand("mentioned", function (options, content)
+SILE.registerCommand("mentioned", function (_, content)
   SILE.call("style:apply", { name = "tei:mentioned" }, content)
 end)
 
-SILE.registerCommand("xref", function (options, content)
+SILE.registerCommand("xref", function (_, content)
   SILE.call("url", {}, content)
 end)
 -- Override default URL font...
-SILE.registerCommand("code", function (options, content)
+SILE.registerCommand("code", function (_, content)
   SILE.process(content)
 end)
 

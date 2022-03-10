@@ -156,13 +156,6 @@ SILE.settings.declare({
     help = "Length (height) of the prodosy annotation line."
   })
 
-local wrapper = function(options, func)
-  if SU.boolean(options.prosody, false) then
-    SILE.settings.set("document.parskip", SILE.length("0.75bs"))
-  end
-  func()
-end
-
 SILE.registerCommand("poetry", function (options, content)
   local step = SU.cast("integer", options.step or 5)
   local iVerse = SU.cast("integer", options.start or 1)
@@ -228,9 +221,9 @@ SILE.registerCommand("poetry", function (options, content)
         else
           SU.error("Unexpected '"..content[i].command.."' in poetry")
         end
-        -- FIXME TODO? IDEAS 
+        -- FIXME TODO? IDEAS
         -- - Support poem title, perhaps outside this environement
-        -- - Support theatrical stuff (name of speaker en smallcaps+centré, mais pas forcément, 
+        -- - Support theatrical stuff (name of speaker en smallcaps+centré, mais pas forcément,
         -- - aussi indications de mise en scène = didaskalia)
         -- - Act, scene
         -- - Canto

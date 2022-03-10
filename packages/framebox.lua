@@ -268,7 +268,7 @@ SILE.registerCommand("roughbox", function(options, content)
   roughOpts.disableMultiStroke = SU.boolean(options.singlestroke, false)
   roughOpts.strokeWidth = borderwidth
 
-  frameHbox(hbox, shadowsize, function(w, h, d)
+  frameHbox(hbox, nil, function(w, h, d)
     local x = 0
     local y = d
     if not enlarge then
@@ -309,7 +309,6 @@ end, "Frames content in a rough box.")
 
 SILE.registerCommand("roughunder", function (options, content)
   local bordercolor = SILE.colorparser(options.bordercolor or "black")
-  local fillcolor = options.fillcolor and SILE.colorparser(options.fillcolor)
 
   -- Begin taken from the original underline command (rules package)
   local ot = SILE.require("core/opentype-parser")
@@ -331,7 +330,7 @@ SILE.registerCommand("roughunder", function (options, content)
   roughOpts.disableMultiStroke = true
   roughOpts.strokeWidth = underlineThickness
 
-  frameHbox(hbox, nil, function(w, h, d)
+  frameHbox(hbox, nil, function(w, h, _)
     -- NOTE: Using some 1.5 factor, since those sketchy lines are probably best a bit more
     -- lowered than intended...
     local y = h + 1.5 * underlinePosition

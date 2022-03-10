@@ -61,7 +61,7 @@ local scriptSubOffset = "0.33ex"
 local scriptSupOffset = "0.77ex"
 local scriptSize = "1.414ex"
 
-SILE.registerCommand("text:superscript", function (options, content)
+SILE.registerCommand("text:superscript", function (_, content)
   if type(content) ~= "table" then SU.error("Expected a table content in text:superscript") end
   if checkFontFeatures("+sups", content) then
     SILE.call("font", { features="+sups" }, content)
@@ -74,7 +74,7 @@ SILE.registerCommand("text:superscript", function (options, content)
   end
 end, "Typeset in superscript.")
 
-SILE.registerCommand("text:subscript", function (options, content)
+SILE.registerCommand("text:subscript", function (_, content)
   if type(content) ~= "table" then SU.error("Expected a table content in text:subscript") end
   if checkFontFeatures("+subs", content) then
     SILE.call("font", { features="+subs" }, content)

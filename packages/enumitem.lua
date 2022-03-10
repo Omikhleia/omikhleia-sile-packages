@@ -191,7 +191,7 @@ local unichar = function (str)
   return nil
 end
 
-local doItem = function (options, content)
+local doItem = function (_, content)
   local enumStyle = content._enumitem_.style
   local styleName = content._enumitem_.styleName
   local counter = content._enumitem_.counter

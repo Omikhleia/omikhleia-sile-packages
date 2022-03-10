@@ -32,7 +32,7 @@ SILE.registerCommand("sectioning", function (options, content)
 
   local secStyle = resolveSectionStyleDef(name)
 
-  -- 1. Handle the page-break: opening page: "unset", "odd" or "any" 
+  -- 1. Handle the page-break: opening page: "unset", "odd" or "any"
   --    (Would "even" be useful? I do not think is has any actual use)
   if secStyle.open and secStyle.open ~= "unset" then
     -- Sectioning style that causes a page-break.
@@ -249,7 +249,7 @@ SILE.registerCommand("show-multilevel-counter", function (options, _)
 
   SILE.typesetter:typeset(SILE.formatMultilevelCounter(counter, options))
 end, "Outputs the value of the multilevel counter <id>.")
-  
+
 -- END TEMPORARY
 
 return {
@@ -263,7 +263,7 @@ implementors are free to use the abstractions proposed here, if they find them
 sound with respect to their goals.
 
 The core idea is that all sectionning commands could be defined via
-approriate styles and that any user-friendly command for typesetting a section 
+approriate styles and that any user-friendly command for typesetting a section
 is then just a convenience wrapper. For that purpose, the package defines
 two things:
 
@@ -284,7 +284,7 @@ Let’s start with the latter, which is the simplest.
 It takes a (sectioning) style name, boolean options specifying whether
 that section is numbered and goes in the table of contents\footnote{Only honored if the
 style defines a TOC level, but we will see that in a moment.}, and a content logically
-representing the section title. It could obviously be directly used as-is. 
+representing the section title. It could obviously be directly used as-is.
 With such a thing in our hands, defining, say, a \doc:code{\\chapter} command is just,
 as stated above, a “convenience” helper. Let us do it in Lua, to be able to support
 all options, as a class would actually do.
