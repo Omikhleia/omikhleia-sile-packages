@@ -1,0 +1,23 @@
+\begin[papersize=a6, class=book]{document}
+\script[src=packages/enumitem]
+\font[family=Libertinus Serif]% Default Gentium lacks the white circle.
+\nofolios
+\neverindent
+% Test case 020: all enumerate levels
+
+\begin{enumerate}
+    \item{Level 1 First Enum}
+    \item{Level 1 Second Enum}
+    \begin{enumerate}
+        \item{Level 2 First Enum}
+        \item{Level 2 Second Enum}
+        \begin{enumerate}
+            \item{Level 3 First Enum}
+            \item{Level 3 Second Enum}
+        \end{enumerate}
+        \item{Level 2 Third Enum}
+    \end{enumerate}
+    \item{Level 1 Third Enum}
+\end{enumerate}
+
+\end{document}

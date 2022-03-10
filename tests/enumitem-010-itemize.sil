@@ -1,0 +1,23 @@
+\begin[papersize=a6, class=book]{document}
+\script[src=packages/enumitem]
+\font[family=Libertinus Serif]% Default Gentium lacks the white circle.
+\nofolios
+\neverindent
+% Test case 010: all itemize levels
+
+\begin{itemize}
+    \item{Level 1 First Item}
+    \item{Level 1 Second Item}
+    \begin{itemize}
+        \item{Level 2 First Item}
+        \item{Level 2 Second Item}
+        \begin{itemize}
+            \item{Level 3 First Item}
+            \item{Level 3 Second Item}
+        \end{itemize}
+        \item{Level 2 Third Item}
+    \end{itemize}
+    \item{Level 1 Third Item}
+\end{itemize}
+
+\end{document}

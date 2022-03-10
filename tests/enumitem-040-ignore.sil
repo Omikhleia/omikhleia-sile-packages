@@ -1,0 +1,16 @@
+\begin[papersize=a6, class=book]{document}
+\script[src=packages/enumitem]
+\font[family=Libertinus Serif]% Default Gentium lacks the white circle.
+\nofolios
+\neverindent
+% Test case 040: text is ignored inside list structured tags (warning only)
+
+\begin{itemize}
+ This text shall be ignored
+    \item{Level 1 Item}
+ This text shall be ignored
+    \item{Level 1 Item}
+ This text shall be ignored
+\end{itemize}
+
+\end{document}
