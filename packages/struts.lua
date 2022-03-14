@@ -79,13 +79,14 @@ current baseline skip, via the \doc:code{strut.ruledepth} and \doc:code{strut.ru
 settings, by default respectively 0.3bs and 1bs, following the same
 definition as in LaTeX. So they do not achieve exactly the same effect:
 the former should ideally be a character that covers the maximum ascender and descender
-heights in the current font; the other uses an alignment at the baseline skip level
+heights in the current font; the latter uses an alignment at the baseline skip level
 assuming it is reasonably fixed.
 
 The standalone user command is \doc:code{\\strut[method=\doc:args{method}]},
 where the method can be “character” (default) or “rule”. It returns the dimensions (for possible use
 in Lua code). If needed, the \doc:code{show} option indicates whether the rule should inserted at this
-point (defaults to true).
+point (defaults to true, again this is mostly intended at Lua code, where you could want to compute
+the current strut dimensions without adding it to the text flow).
 
 \end{document}]]
 }
