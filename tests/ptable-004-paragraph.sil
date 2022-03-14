@@ -1,6 +1,6 @@
 \begin{document}
+\nofolios
 \script[src=packages/ptable]
-
 % Table containing paragraphs and long text that will be line-broken:
 % Let us not forget these cells are parboxes.
 % (This table was in a W3C documentation.)

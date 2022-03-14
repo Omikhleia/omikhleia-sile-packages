@@ -1,6 +1,6 @@
 \begin{document}
+\nofolios
 \script[src=packages/ptable]
-
 % Generated table, with header repeated on page break(s).
 % Let us generate a long table programmatically.
 % + also with border colors.

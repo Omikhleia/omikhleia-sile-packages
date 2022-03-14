@@ -1,7 +1,7 @@
 \begin{document}
+\nofolios
 \script[src=packages/parbox]
 \script[src=packages/lorem]
-\nofolios
 \parbox[width=33%fw]{\lorem[words=100]}
 
 \end{document}

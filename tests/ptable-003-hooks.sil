@@ -1,6 +1,6 @@
 \begin{document}
+\nofolios
 \script[src=packages/ptable]
-
 % Simple table (same as test 002) with additional cell hooks
 
 \script{
