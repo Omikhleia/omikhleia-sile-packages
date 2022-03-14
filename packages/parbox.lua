@@ -15,9 +15,9 @@ SILE.require("packages/struts")
 -- throw it out after boxing.
 local nb_ = 1
 local parboxTempFrame = function (options)
-  local cFrame = SILE.typesetter.frame
+  local id = "parbox_"..nb_
   local newFrame = SILE.newFrame({
-    id = cFrame.id .. "_parbox_"..nb_
+    id = id
   })
   nb_ = nb_+1
   newFrame:constrain("top", SILE.length())
@@ -79,8 +79,8 @@ local parboxFraming = function (options, content)
   --   self:leaveHmode(1)
   --   SILE.documentState.documentClass.endPar(self)
   -- end
-  parboxTypesetter.frame = parboxTempFrame(options)
-  parboxTypesetter:init(parboxTypesetter.frame)
+  local parboxFrame = parboxTempFrame(options)
+  parboxTypesetter:init(parboxFrame)
   SILE.typesetter = parboxTypesetter
 
   SILE.process(content)
@@ -92,7 +92,7 @@ local parboxFraming = function (options, content)
   -- Important, remove the frame from SILE.frames (it was added there by
   -- SILE.newFrame()), now that we no longer need it. Otherwise, the
   -- performances get awful as all our small frames are kept and solved!
-  SILE.frames[parboxTypesetter.frame.id] = nil
+  SILE.frames[parboxFrame.id] = nil
   return innerVbox
 end
 
@@ -173,15 +173,17 @@ SILE.registerCommand("parbox", function (options, content)
     strutDimen = { height = SILE.length(0), depth = SILE.length(0) }
   end
 
-  local totalHeight = 0
+  local totalHeight = SILE.length()
   for i = 1, #vboxes do
     -- Try to cancel vertical stretching/shrinking
-    -- But we don't inspect the internal content of the vboxes, maybe
-    -- they could have (vertical) stretching/shrinking too?
-    vboxes[i].height = SILE.length(vboxes[i].height:tonumber())
-    vboxes[i].depth = SILE.length(vboxes[i].depth:tonumber())
-
-    totalHeight = totalHeight + vboxes[i].height + vboxes[i].depth
+    if vboxes[i].is_vglue then
+      -- Important: many vglues are just the _same_ node, which will be "adjusted"
+      -- by the page builder. We cannot tweak directly its height or depth as we
+      -- sometimes do with other boxes, as it would have a side effect. So we have
+      -- to re-create a new vglue with the appropriate fixed dimension.
+      vboxes[i] = SILE.nodefactory.vglue(SILE.length(vboxes[i].height.length))
+    end
+    totalHeight = totalHeight + vboxes[i].height:absolute() + vboxes[i].depth:absolute()
   end
 
   local z0 = SILE.measurement(0)
@@ -199,8 +201,8 @@ SILE.registerCommand("parbox", function (options, content)
 
   return SILE.typesetter:pushHbox({
     width = width + padding[3] + padding[4],
-    depth = depth:absolute(),
-    height = height:absolute(),
+    depth = depth,
+    height = height,
     inner = vboxes,
     valign = valign,
     padding = padding,
@@ -225,7 +227,7 @@ SILE.registerCommand("parbox", function (options, content)
       typesetter.frame.state.cursorY = typesetter.frame.state.cursorY + self.padding[1] - self.offset
       for i = 1, #self.inner do
         typesetter.frame.state.cursorX = saveX + self.padding[3]
-        self.inner[i]:outputYourself(SILE.typesetter, self.inner[i])
+        self.inner[i]:outputYourself(typesetter, self.inner[i])
       end
 
       typesetter.frame.state.cursorY = saveY
