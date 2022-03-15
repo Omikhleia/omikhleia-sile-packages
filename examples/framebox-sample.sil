@@ -1,7 +1,8 @@
-\begin[papersize=6in x 9in, class=omibook]{document}
+\begin[papersize=6in x 9in, class=book]{document}
 \script[src=packages/parbox]
 \script[src=packages/ptable]
 \script[src=packages/framebox]
+\nofolios
 \neverindent
 \language[main=en]
 \font[family=Libertinus Serif, size=11pt]
@@ -73,50 +74,14 @@ A \roughunder{rough underlined} text (experimental).
 
 \medskip
 
-%\font[size=5pt]
-\noindent This is it\dotfill \bracebox{{\parbox[valign=middle,width=4cm]{This is a long content as a boxed paragraph.}}} for test.
-
-This is it\hfill for test.
-
-This is it\dotfill for test.
+A box with a \bracebox{\strut{}left brace}.
 
 \medskip
 
-\font[]{This is it\dotfill\bracebox{{\parbox[strut=character,valign=top,width=4cm]{This is a long content as a boxed paragraph.}}}}
+A box with a \bracebox[side=right]{\strut{}right brace}.
 
 \medskip
 
-\parbox[valign=middle,width=20%lw]{\raggedright{\font[features=+smcp]{Civilian Central Wars}}}%
-\hfill
-\bracebox[bracewidth=0.8em]{\parbox[valign=middle,width=70%lw]{%
-44. Spasm or Insensate War\par
-43. Some Other Kinds of Controlled General War\par
-42. Civilian Devastation Attack\par
-41. Augmented Disarming Attack\par
-40. Countervalue Salvo\par
-39. Slow-Motion Countercity War\par
-}}
-
-\medskip
-
-\font[features=+smcp]{Civilian Central Wars} \bracebox{Augmented Disarming Attack} A
-
-\font[features=+smcp]{Civilian Central Wars} \bracebox[bracethickness=0]{Augmented Disarming Attack} A
-
-\font[features=+smcp]{Civilian Central Wars} \bracebox[bracethickness=0; curvyness=0.55]{Augmented Disarming Attack} A
-
-\font[features=+smcp]{Civilian Central Wars} \bracebox[bracethickness=0; curvyness=0.725]{Augmented Disarming Attack} A
-
-\font[size=8pt]
-\parbox[valign=middle,width=20%lw]{\raggedright{\font[features=+smcp]{Civilian Central Wars}}}%
-\hfill
-\bracebox[bracewidth=0.8em]{\parbox[valign=middle,width=70%lw]{%
-44. Spasm or Insensate War\par
-43. Some Other Kinds of Controlled General War\par
-42. Civilian Devastation Attack\par
-41. Augmented Disarming Attack\par
-40. Countervalue Salvo\par
-39. Slow-Motion Countercity War\par
-}}
+A box with \bracebox[side=both]{\strut{}braces} on both sides.
 
 \end{document}

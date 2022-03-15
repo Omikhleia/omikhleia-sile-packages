@@ -1,0 +1,56 @@
+\begin[papersize=6in x 9in, class=book]{document}
+\script[src=packages/image]
+\script[src=packages/parbox]
+\script[src=packages/framebox]
+\nofolios
+\neverindent
+\language[main=en]
+\font[family=Libertinus Serif, size=11pt]
+
+\begin{center}
+\font[weight=800,size=12pt]{A few “braced” boxes in SILE}
+\end{center}
+
+\bigskip
+
+\font[features=+smcp]{What is SILE?}\dotfill
+\bracebox{\parbox[valign=middle,width=65%fw,minimize=false,padding=0.2em]{%
+\font[size=9pt]
+SILE is a typesetting system.\par
+Its job is to produce beautiful printed documents from raw content.}}
+
+\medskip
+
+An example from some book:
+
+\smallskip
+
+\parbox[valign=middle,width=20%lw]{\raggedright{\font[features=+smcp]{Civilian Central Wars}}}%
+\hfill
+\bracebox[bracewidth=0.8em]{\parbox[valign=middle,width=75%lw]{%
+44. Spasm or Insensate War\par
+43. Some Other Kinds of Controlled General War\par
+42. Civilian Devastation Attack\par
+41. Augmented Disarming Attack\par
+40. Countervalue Salvo\par
+39. Slow-Motion Countercity War\par
+}}
+
+\medskip
+
+Another example:
+
+\smallskip
+
+\begin{center}
+\bracebox[side=both, bracecolor=#59b24c, curvyness=0.7, padding=1em, bracethickness=0.1em, bracewidth=0.4em]{%
+\parbox[valign=middle,width=80%fw,minimize=true]{%
+\begin{center}
+\font[weight=700]{Sherlock Holmes}\par
+221b Baker Street — London NW1 6XE\par
+sherlock.holmes@sile.org\par
+\end{center}
+}}
+\end{center}
+
+\end{document}
