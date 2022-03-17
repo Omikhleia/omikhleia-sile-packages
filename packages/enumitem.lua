@@ -512,10 +512,10 @@ an example.
 
 The package tries to ensure a paragraph is enforced before and after a list.
 In most cases, this implies paragraph skips to be inserted, with the usual
-\autodoc:setting{document.parskip} glue, whatever value it has at these points
+\doc:code{document.parskip} glue, whatever value it has at these points
 in the surrounding context of your document.
 Between list items, however, the paragraph skip is switched to the value
-of the \autodoc:setting{list.parskip} setting.
+of the \doc:code{list.parskip} setting.
 
 \smallskip
 

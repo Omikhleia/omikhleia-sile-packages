@@ -1,6 +1,6 @@
 
 SILE.doTexlike([[%
-\define[command=doc:keyword]{\font[family=Libertinus Sans, weight=600]{\process}}
+\define[command=doc:keyword]{\color[color=#16105a]{\font[family=Libertinus Sans, weight=600]{\process}}}
 \define[command=doc:code]{\font[family=Libertinus Sans, weight=600]{\process}}
 \define[command=doc:codes]{\par\smallskip\doc:code{\process}\par\smallskip}
 \define[command=doc:args]{⟨\em{\process}\kern[width=0.1em]⟩}
