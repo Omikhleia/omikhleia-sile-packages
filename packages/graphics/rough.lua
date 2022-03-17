@@ -4,55 +4,16 @@
 -- License: MIT
 --
 
--- Not ported from rough.js, but the idea here is similar...
+local PRNG = SILE.require("packages/graphics/prng")
+local prng = PRNG()
 
---
--- Pseudo-Random Number Generator (PRNG)
--- License: MIT
---
-
--- Why would a text processing software such as SILE need a PRNG,
--- where one would expect the reproduceability of the output?
---
--- Well, there are algorithms were a bit of randomness is expected
--- e.g. the rough "hand-drawn-like" drawing style, where one would
--- expect all rough graphics to look different. But using math.random
--- there would yield always different results... and using math.randomseed
--- is also problematic (it's global and could be affected elsewhere, etc.)
--- So one may need instead a fake PRNG, that spits out a seemingly uniform
--- distribution of "random" numbers.
-
--- (didier.willis@gmail.com) This Lua piece of code was found just on the
--- internet, where it was stated to be common in Monte Carlo randomizations.
--- I am not so lazy not to check, and traced it back to Sergei M. Prigarin,
--- _Spectral Models of Random Fields in Monte Carlo Methods_, 2001.
--- It is a "multiplicative generator", a popular type of modelling algorithms
--- of a sequence of pseudorandom numbers uniformly distributed on the interval
--- (0,1), initially studied by P.H. Lehmer around 1951.
--- This derivation, if I read correctly, has a 2^40 module and 5^17 mutiplier
--- (cycle length 2^38).
--- for information the seeds are (X1, X2), here set to (0, 1). The algorithm
--- could be seeded with other values. It's not clear to me which variant was
--- used (I didn't check the whole book), but it seems the constraints are
--- 0 < X1, X2 <= 2^20 and X2 being odd.
-local A1, A2 = 727595, 798405  -- 5^17=D20*A1+A2
-local D20, D40 = 1048576, 1099511627776  -- 2^20, 2^40
-local X1, X2 = 0, 1
-local random = function()
-  local U = X2*A2
-  local V = (X1*A2 + X2*A1) % D20
-  V = (V*D20 + U) % D40
-  X1 = math.floor(V/D20)
-  X2 = V - X1*D20
-  return V/D40
-end
-
--- Partial port of the rough.js (https://github.com/rough-stuff/rough) JavaScript library.
+-- This is a partial straightforward port of the rough.js JavaScript library.
+-- (https://github.com/rough-stuff/rough)
 
 -- From renderer.ts (private helpers)
 
 local function _offset(min, max, ops, roughnessGain)
-  return ops.roughness * (roughnessGain or 1) * ((random() * (max - min)) + min)
+  return ops.roughness * (roughnessGain or 1) * ((prng:random() * (max - min)) + min)
 end
 
 local function _offsetOpt(x, ops, roughnessGain)
@@ -62,7 +23,7 @@ end
 local function _line(x1, y1, x2, y2, o, move, overlay) -- returns an array of operations
   local lengthSq = math.pow((x1 - x2), 2) + math.pow((y1 - y2), 2)
   local length = math.sqrt(lengthSq)
-  local roughnessGain = 1
+  local roughnessGain
   if length < 200 then
     roughnessGain = 1
   elseif length > 500 then
@@ -76,7 +37,7 @@ local function _line(x1, y1, x2, y2, o, move, overlay) -- returns an array of op
     offset = length / 10
   end
   local halfOffset = offset / 2
-  local divergePoint = 0.2 + random() * 0.2
+  local divergePoint = 0.2 + prng:random() * 0.2
   local midDispX = o.bowing * o.maxRandomnessOffset * (y2 - y1) / 200
   local midDispY = o.bowing * o.maxRandomnessOffset * (x1 - x2) / 200
   midDispX = _offsetOpt(midDispX, o, roughnessGain)
@@ -146,11 +107,11 @@ local function _doubleLine(x1, y1, x2, y2, o, filling)
     -- fusing arrays
     local t = {}
     local n = 0
-    for _,v in ipairs(o1) do
+    for _, v in ipairs(o1) do
       n = n + 1
       t[n] = v
     end
-    for _,v in ipairs(o2) do
+    for _, v in ipairs(o2) do
       n = n + 1
       t[n] = v
     end
@@ -209,7 +170,7 @@ local function rotatePoints(points, center, degrees)
     local angle = (math.pi / 180) * degrees
     local cos = math.cos(angle)
     local sin = math.sin(angle)
-    for _,p in ipairs(points) do
+    for _, p in ipairs(points) do
       local x = p[1]
       local y = p[2]
       p[1] = ((x - cx) * cos) - ((y - cy) * sin) + cx
@@ -220,8 +181,8 @@ end
 
 local function rotateLines(lines, center, degrees)
   local points = {}
-  for _,line in ipairs(lines) do
-    for _,l in ipairs(line) do
+  for _, linea in ipairs(lines) do
+    for _, l in ipairs(linea) do
       points[#points + 1] = l
     end
   end
@@ -237,7 +198,7 @@ local function table_splice(tbl, start, length) -- from xlua
   local endd = start + length
   local spliced = {}
   local remainder = {}
-  for i,elt in ipairs(tbl) do
+  for i, elt in ipairs(tbl) do
       if i < start or i >= endd then
         table.insert(spliced, elt)
       else
@@ -252,9 +213,9 @@ end
 
 local function straightHachureLines (polygonList, gap)
   local vertexArray = {}
-  for _,polygon in ipairs(polygonList) do
+  for _, poly in ipairs(polygonList) do
     -- local vertices = [...polygon]
-    local vertices = polygon -- NOTE Should we make a copy? Why the spreading in JS ?
+    local vertices = poly -- NOTE Should we make a copy? Why the spreading in JS ?
     if vertices[1][1] ~= vertices[#vertices][1] and vertices[1][2] ~= vertices[#vertices][2] then
       vertices[#vertices + 1] = { vertices[1][1], vertices[1][2] }
     end
@@ -269,7 +230,7 @@ local function straightHachureLines (polygonList, gap)
   -- Create sorted edges table
   local edges = {}
 
-  for _,vertices in ipairs(vertexArray) do
+  for _, vertices in ipairs(vertexArray) do
     for i = 1, #vertices - 1 do
       local p1 = vertices[i]
       local p2 = vertices[i + 1]
@@ -325,7 +286,7 @@ local function straightHachureLines (polygonList, gap)
       end
       local removed
       edges, removed = table_splice(edges, 1, ix)
-      for _,e in ipairs(removed) do
+      for _, e in ipairs(removed) do
         activeEdges[#activeEdges + 1] = { s = y, edge = e }
       end
     end
@@ -359,7 +320,7 @@ local function straightHachureLines (polygonList, gap)
     end
 
     y = y + gap
-    for _,ae in ipairs(activeEdges) do
+    for _, ae in ipairs(activeEdges) do
       ae.edge.x = ae.edge.x + (gap * ae.edge.islope)
     end
   end
@@ -377,15 +338,15 @@ local function polygonHachureLines (polygonList, o)
 
   local rotationCenter = {0, 0}
   if angle then
-    for _,polygon in ipairs(polygonList) do
-      rotatePoints(polygon, rotationCenter, angle)
+    for _, poly in ipairs(polygonList) do
+      rotatePoints(poly, rotationCenter, angle)
     end
   end
   local lines = straightHachureLines(polygonList, gap)
   if angle then
     -- NOTE: This code was in rough.js but is not needed, right?
-    -- for _,polygon in ipairs(polygonList) do
-    --   rotatePoints(polygon, rotationCenter, -angle)
+    -- for _, poly in ipairs(polygonList) do
+    --   rotatePoints(poly, rotationCenter, -angle)
     -- end
     rotateLines(lines, rotationCenter, -angle)
   end
@@ -401,11 +362,12 @@ local HachureFiller = pl.class({
     return { type = 'fillSketch', ops = ops }
   end,
 
-  renderLines = function (self, lines, o)
+  renderLines = function (_, lines, o)
     local ops = {}
-    for _,line in ipairs(lines) do
-      local t = _doubleLine(line[1][1], line[1][2], line[2][1], line[2][2], o, true) -- NOTE removed helper
-      for _,v in ipairs(t) do
+    for _, lin in ipairs(lines) do
+      -- NOTE rough.js used a helper here.
+      local t = _doubleLine(lin[1][1], lin[1][2], lin[2][1], lin[2][2], o, true)
+      for _, v in ipairs(t) do
         ops[#ops + 1] = v
       end
     end
@@ -428,7 +390,7 @@ local RoughGenerator = pl.class({
     maxRandomnessOffset = 2,
     roughness = 1,
     bowing = 1,
-    stroke = '#000',
+    stroke = { l = 0 }, -- COMPAT WITH SILE PARSED COLORS
     strokeWidth = 1,
     -- curveTightness = 0,
     -- curveFitting = 0.95,
@@ -474,7 +436,7 @@ local RoughGenerator = pl.class({
       local points = { {x, y}, {x + width, y}, {x + width, y + height}, {x, y + height} }
       if o.fillStyle == 'solid' then
         SU.error("Rough fill (solid) not yet implemented.")
-        -- paths.push(solidFillPolygon([points], o));
+        -- paths[#paths + 1] = solidFillPolygon({ points }, o)
       else
         paths[#paths + 1] = patternFillPolygons({ points }, o)
       end
@@ -486,54 +448,8 @@ local RoughGenerator = pl.class({
   end,
 })
 
--- From svg.ts but adapted to output PDF graphic objects
--- The RoughPdf API is somewhat experimental and subject to changes
-
-local RoughPdf = pl.class({
-  opsToPath = function (self, drawing, fixedDecimals)
-    local path = ''
-    for _,item in ipairs(drawing.ops) do
-      local data = item.data
-      -- NOTE TODO: Initial code had:
-      -- const data = ((typeof fixedDecimals === 'number') && fixedDecimals >= 0) ? (item.data.map((d) => +d.toFixed(fixedDecimals))) : item.data;
-      if item.op == 'move' then
-          path = path .. data[1] .. ' ' .. data[2] .. " m "
-      elseif item.op == 'bcurveTo' then
-          path = path .. data[1] .. " " .. data[2] .. " " .. data[3] .. " " .. data[4] .. " " .. data[5] .. " " .. data[6] .. " c "
-      elseif item.op == "lineTo" then
-          path = path .. data[1] .. " " ..  data[2] .. " l "
-      end
-    end
-    return path -- .trim() TODO
-  end,
-
-  draw = function (self, drawable)
-    local sets = drawable.sets or {}
-    local o = drawable.options -- or this.getDefaultOptions(); TODO ??
-    local precision = drawable.options.fixedDecimalPlaceDigits
-    local g = {}
-    for _,drawing in ipairs(sets) do
-      local path
-      if drawing.type == "path" then
-        path = self:opsToPath(drawing, precision)
-        -- NOTE the original implementation was doing the stroking, coloring etc. here.
-      elseif drawing.type == "fillPath" then
-        SU.error("Path filling not yet implemented.")
-      elseif drawing.type == "fillSketch" then
-        path = self:opsToPath(drawing, precision)
-        -- NOTE as above stroking and coloring was done here.
-      end
-      if path then
-        g[#g + 1] = path
-      end
-    end
-    return table.concat(g, " ")
-  end
-})
-
 -- Exports
 
 return {
   RoughGenerator = RoughGenerator,
-  RoughPdf = RoughPdf,
 }

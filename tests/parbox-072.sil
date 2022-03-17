@@ -1,0 +1,16 @@
+\begin[class=book]{document}% Needs book class for footnotes
+\neverindent
+\nofolios
+\script[src=packages/parbox]
+\script[src=packages/lorem]
+% Test case 072 = Parbox inception and footnotes cascading as in 011, but with
+% minimized enabled.
+
+\parbox[width=50%fw, strut=character, padding=5pt, border=0.5pt, minimize=true]{%
+I am a parbox\footnote{Main parbox footnote.}
+
+\parbox[width=50%fw, strut=character, padding=5pt, border=0.5pt, minimize=true]{%
+I am an insider parbox\footnote{Insider parbox footnote.}}
+}
+
+\end{document}

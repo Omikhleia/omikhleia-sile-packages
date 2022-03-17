@@ -1,6 +1,7 @@
 --
 -- A table package for SILE
 -- Or rather "parbox-based tables", using the parbox package as a building block.
+-- 2021 Didier Willis
 -- License: MIT
 --
 SILE.require("packages/parbox")

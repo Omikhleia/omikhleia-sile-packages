@@ -1,6 +1,6 @@
 \begin{document}
+\nofolios
 \script[src=packages/ptable]
-
 % Table with cell border and padding configuration at cell level:
 % This table example is in the LaTeX booktabs package, let us try to reproduce it.
 

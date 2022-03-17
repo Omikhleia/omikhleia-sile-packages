@@ -1,7 +1,10 @@
 \begin{document}
+\neverindent
+\nofolios
 \script[src=packages/parbox]
 \script[src=packages/lorem]
-\nofolios
+% Test case 001 = Real basic/minimal parbox test. If this one fails, we broke something deep.
+
 \parbox[width=33%fw]{\lorem[words=100]}
 
 \end{document}

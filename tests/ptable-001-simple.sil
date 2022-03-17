@@ -1,6 +1,6 @@
 \begin{document}
+\nofolios
 \script[src=packages/ptable]
-
 % A simple table
 
 \begin[cols=20%fw 15%fw 15%fw 50%fw]{ptable}

@@ -1,6 +1,8 @@
 \begin{document}
 \script[src=packages/framebox]
 \nofolios
+\neverindent
+% Test case: \framebox and \roundbox basics
 
 A \framebox{square box.}
 

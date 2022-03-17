@@ -2,6 +2,7 @@
 -- Paragraph blocks ("parbox") for SILE
 -- Or how to wrap width-contrained vboxes into an hbox:
 -- A building block for more advanced concepts.
+-- 2021-2022 Didier Willis
 -- License: MIT
 --
 SILE.require("packages/rebox")
@@ -15,9 +16,9 @@ SILE.require("packages/struts")
 -- throw it out after boxing.
 local nb_ = 1
 local parboxTempFrame = function (options)
-  local cFrame = SILE.typesetter.frame
+  local id = "parbox_"..nb_
   local newFrame = SILE.newFrame({
-    id = cFrame.id .. "_parbox_"..nb_
+    id = id
   })
   nb_ = nb_+1
   newFrame:constrain("top", SILE.length())
@@ -79,8 +80,8 @@ local parboxFraming = function (options, content)
   --   self:leaveHmode(1)
   --   SILE.documentState.documentClass.endPar(self)
   -- end
-  parboxTypesetter.frame = parboxTempFrame(options)
-  parboxTypesetter:init(parboxTypesetter.frame)
+  local parboxFrame = parboxTempFrame(options)
+  parboxTypesetter:init(parboxFrame)
   SILE.typesetter = parboxTypesetter
 
   SILE.process(content)
@@ -92,7 +93,7 @@ local parboxFraming = function (options, content)
   -- Important, remove the frame from SILE.frames (it was added there by
   -- SILE.newFrame()), now that we no longer need it. Otherwise, the
   -- performances get awful as all our small frames are kept and solved!
-  SILE.frames[parboxTypesetter.frame.id] = nil
+  SILE.frames[parboxFrame.id] = nil
   return innerVbox
 end
 
@@ -157,6 +158,7 @@ SILE.registerCommand("parbox", function (options, content)
   local valign = options.valign or "top"
   local padding = options.padding and parseBorderOrPadding(options.padding, "padding") or { 0, 0, 0, 0 }
   local bordercolor =  options.bordercolor and SILE.colorparser(options.bordercolor)
+  local minimize = SU.boolean(options.minimize, false)
 
   width = SU.cast("measurement", width):absolute()
 
@@ -173,15 +175,47 @@ SILE.registerCommand("parbox", function (options, content)
     strutDimen = { height = SILE.length(0), depth = SILE.length(0) }
   end
 
-  local totalHeight = 0
+  local wmax = SILE.length()
+  local totalHeight = SILE.length()
   for i = 1, #vboxes do
     -- Try to cancel vertical stretching/shrinking
-    -- But we don't inspect the internal content of the vboxes, maybe
-    -- they could have (vertical) stretching/shrinking too?
-    vboxes[i].height = SILE.length(vboxes[i].height:tonumber())
-    vboxes[i].depth = SILE.length(vboxes[i].depth:tonumber())
+    if vboxes[i].is_vglue then
+      -- Important: many vglues are just the _same_ node, which will be "adjusted"
+      -- by the page builder. We cannot tweak directly its height or depth as we
+      -- sometimes do with other boxes, as it would have a side effect. So we have
+      -- to re-create a new vglue with the appropriate fixed dimension.
+      vboxes[i] = SILE.nodefactory.vglue(SILE.length(vboxes[i].height.length))
+    end
+    totalHeight = totalHeight + vboxes[i].height:absolute() + vboxes[i].depth:absolute()
 
-    totalHeight = totalHeight + vboxes[i].height + vboxes[i].depth
+    if minimize then
+      -- We go through all nodes in the line to compute the maximal line width.
+      -- This is not so efficient, we could have modified the typesetter to
+      -- compute it when it was processing the lines...But is is buried deep
+      -- in its breakpointsToLines() method, which some packages may moreover
+      -- overload, so we went for the easiest solution, albeit CPU-intensive.
+      local w = SILE.length()
+        if vboxes[i].nodes then
+          for n in ipairs(vboxes[i].nodes) do
+            if vboxes[i].nodes[n].width > 0 then
+              w = w + vboxes[i].nodes[n].width:absolute()
+            end
+          end
+        end
+      if w > wmax then wmax = w end
+    end
+  end
+
+  if minimize then
+    -- Again not so effective: we recompute all line ratios based on the new
+    -- width...
+    for i = 1, #vboxes do
+      if vboxes[i].nodes then
+        local r = SILE.typesetter:computeLineRatio(wmax, vboxes[i].nodes)
+        vboxes[i].ratio = r
+      end
+    end
+    width = wmax
   end
 
   local z0 = SILE.measurement(0)
@@ -199,8 +233,8 @@ SILE.registerCommand("parbox", function (options, content)
 
   return SILE.typesetter:pushHbox({
     width = width + padding[3] + padding[4],
-    depth = depth:absolute(),
-    height = height:absolute(),
+    depth = depth,
+    height = height,
     inner = vboxes,
     valign = valign,
     padding = padding,
@@ -225,7 +259,7 @@ SILE.registerCommand("parbox", function (options, content)
       typesetter.frame.state.cursorY = typesetter.frame.state.cursorY + self.padding[1] - self.offset
       for i = 1, #self.inner do
         typesetter.frame.state.cursorX = saveX + self.padding[3]
-        self.inner[i]:outputYourself(SILE.typesetter, self.inner[i])
+        self.inner[i]:outputYourself(typesetter, self.inner[i])
       end
 
       typesetter.frame.state.cursorY = saveY
@@ -390,6 +424,23 @@ unique \doc:code{bordercolor} can be specified, the color specification being as
 with tables in mind. For casual box framing, consider using a better-suited solution,
 such as the \doc:keyword{framebox} package.}
 
+There is still one advanced option we haven’t described so far, \doc:code{minimize=true}. When passed,
+then the width of the parbox is considered as a maximum width, vould line-breaking have to occur,
+but otherwise the box is reduced to the minimum width it actually needs\footnote{Be aware,
+however, that the current implementation is not particularly well optimized.}. Compare:
+
+\smallskip
+
+(7A) \parbox[width=37%fw, valign=middle, border=0.5pt]{First\par
+37\%fw width\par
+Not minimized}
+and
+(7B) \parbox[width=37%fw, valign=middle, border=0.5pt, minimize=true]{Second\par
+37\%fw width\par
+Minimized}
+
+\smallskip
+
 We have shown several examples but haven’t mentioned yet what could be one
 of the \em{most important concepts} underlying these paragraph boxes: each
 of them initializes its own typesetter instance and a dedicated (temporary)
@@ -412,14 +463,14 @@ another parbox, each having a size set to 65\%fw.
 
 \smallskip
 
-(7) \parbox[width=65%fw, valign=middle, strut=character, border=0.5pt]{%
+(8) \parbox[width=65%fw, valign=middle, strut=character, border=0.5pt]{%
 \begin{center}
 \font[style=italic]%
 A centered parbox in italic.
 
-(7X) \parbox[width=65%fw, valign=middle, strut=character, border=0.5pt]{
+(8X) \parbox[width=65%fw, valign=middle, strut=character, border=0.5pt]{
 Another parbox that does not inherit these
-things.\footnote{Footnote from 7X, to see it “cascades”
+things.\footnote{Footnote from 8X, to see it “cascades”
 up to the main frame and the printed page.}} (…)
 \par
 Isn’t it cool?

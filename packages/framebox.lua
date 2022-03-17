@@ -1,12 +1,13 @@
 --
 -- Fancy framed boxes for SILE
 -- License: MIT
+-- 2021-2022 Didier Willis
 --
--- KNOWN ISSUE: RTL writing direction not supported yet. It issues a warning in that case (maybe)
--- and I cannot ensure how it will look... See also TODORTL comments, where things might go wrong,
--- but the standard \underline (rules package) also has some issues apparently, so there might be
--- more at stakes here...
+-- KNOWN ISSUE: RTL and BTT writing directions are not officialy supported yet (untested)
 --
+local graphics = SILE.require("packages/graphics/renderer")
+local PathRenderer = graphics.PathRenderer
+local RoughPainter = graphics.RoughPainter
 
 -- SETTINGS
 
@@ -40,21 +41,19 @@ SILE.settings.declare({
 
 -- LOW-LEVEL REBOXING HELPERS
 
--- Rewraps an hbox into in another fake hbox, adding padding all around it
--- and an optional shadowsize to the depth.
+-- Rewraps an hbox into in another fake hbox, adding padding all around it.
 -- It assumes the original hbox is NOT in the output queue
 -- (i.e. was stolen back and stored).
-local adjustPaddingHbox = function(hbox, padding, shadowsize)
-  local shadowpadding = shadowsize or 0
+local adjustPaddingHbox = function(hbox, left, right, top, bottom)
   return { -- HACK NOTE: Efficient but might be bad to fake an hbox here without all methods.
     inner = hbox,
-    width = hbox.width + 2 * padding + shadowpadding,
-    height = hbox.height + padding,
-    depth = hbox.depth + padding + shadowpadding,
+    width = hbox.width + left + right,
+    height = hbox.height + top,
+    depth = hbox.depth + bottom,
     outputYourself = function(self, typesetter, line)
-      typesetter.frame:advanceWritingDirection(padding)
+      typesetter.frame:advanceWritingDirection(left)
       self.inner:outputYourself(SILE.typesetter, line)
-      typesetter.frame:advanceWritingDirection(padding + shadowpadding)
+      typesetter.frame:advanceWritingDirection(right)
     end
   }
 end
@@ -83,24 +82,14 @@ local frameHbox = function(hbox, shadowsize, pathfunc)
       local newX = typesetter.frame.state.cursorX
 
       -- Compute the target width, height, depth for the frame
-      -- TODORTL Should we add or substract the shadow padding?
       local w = (newX - saveX):tonumber() - shadowpadding
-      local h = self.height:tonumber() + self.depth:tonumber() - shadowpadding
+      local h = self.height:tonumber()
       local d = self.depth:tonumber() - shadowpadding
 
-      if w < 0 or h < 0 then
-        SU.warn("Got negative values ("..w.." ,"..h.."), framebox does not officialy support RTL yet!")
-      end
-
-      -- Compute the PDF graphics (path)
-      -- TODORTL The various path functions in this package probably break in RTL, we might
-      -- need to pass the x, y coordinates and have some extra logic for converting all these
-      -- into PDF page spaces...
+      -- Compute and draw the PDF graphics (path)
       local path = pathfunc(w, h, d)
-
-      -- Draw the PDG graphics
       if path then
-        SILE.outputter:drawSVG(path, saveX, saveY, w, h, 1)
+        SILE.outputter:drawSVG(path, saveX, saveY, w, h + d, 1)
       end
 
       -- Restore cursor position and output the content last (so it appears on top of the frame)
@@ -109,50 +98,6 @@ local frameHbox = function(hbox, shadowsize, pathfunc)
       typesetter.frame.state.cursorX = newX
     end
   })
-end
-
--- PDF GRAPHICS PATH CONSTRUCTION
-
--- Builds a PDF graphic path from a starting position (x, y)
--- and a set of segments which can be either lines (2 coords)
--- or bezier curves (6 segments)
-local makePath = function(x, y, segments)
-  local path = x .. " " .. y .. " m "
-  for i = 1, #segments do
-    local segment = segments[i]
-    if #segment == 2 then
-      -- line
-      x = segment[1] + x
-      y = segment[2] + y
-      path = path .. x .. " " .. y .. " l "
-    else
-      -- bezier curve
-      path = path .. (segment[1] + x) .. " " .. segment[2] + y .. " " .. (segment[3] + x) .. " " .. segment[4] + y ..
-                 " " .. (segment[5] + x) .. " " .. segment[6] + y .. " c "
-      x = segment[5] + x
-      y = segment[6] + y
-    end
-  end
-  return path
-end
-
--- Builds a PDF graphic color (stroke or fill)
-local makeColor = function(color, stroke)
-  local colspec
-  local colop
-  if color.r then -- RGB
-    colspec = table.concat({ color.r, color.g, color.b }, " ")
-    colop = stroke and "RG" or "rg"
-  elseif color.c then -- CMYK
-    colspec = table.concat({ color.c, color.m, color.y, color.k }, " ")
-    colop = stroke and "K" or "k"
-  elseif color.l then -- Grayscale
-    colspec = color.l
-    colop = stroke and "G" or "g"
-  else
-    SU.error("Invalid color specification")
-  end
-  return colspec .. " " .. colop
 end
 
 -- BASIC BOX-FRAMING COMMANDS
@@ -168,25 +113,20 @@ SILE.registerCommand("framebox", function(options, content)
 
   local hbox = SILE.call("hbox", {}, content)
   table.remove(SILE.typesetter.state.nodes) -- steal it back...
-  hbox = adjustPaddingHbox(hbox, padding, shadowsize)
+  hbox = adjustPaddingHbox(hbox, padding, padding + shadowsize, padding, padding + shadowsize)
 
   frameHbox(hbox, shadowsize, function(w, h, d)
-    -- just plain rectangles
-    local path = table.concat({
-      0, d, w, h, "re",
-      makeColor(bordercolor, true), makeColor(fillcolor, false),
-      borderwidth, "w",
-      "B"
-    }, " ")
+    local painter = PathRenderer()
+    local shadowpath, path
     if shadowsize ~= 0 then
-        path = table.concat({
-        shadowsize, d + shadowsize, w, h, "re",
-        makeColor(shadowcolor),
-        "f",
-        path
-      }, " ")
+      shadowpath = painter:rectangle(shadowsize, d + shadowsize, w , h + d, {
+        fill = shadowcolor, stroke = 'none'
+      })
     end
-    return path
+    path = painter:rectangle(0, d , w , h + d, {
+      fill = fillcolor, stroke = bordercolor, strokeWidth = borderwidth
+    })
+    return shadowpath and shadowpath .. " " .. path or path
   end)
 end, "Frames content in a square box.")
 
@@ -203,63 +143,39 @@ SILE.registerCommand("roundbox", function(options, content)
 
   local hbox = SILE.call("hbox", {}, content)
   table.remove(SILE.typesetter.state.nodes) -- steal it back...
-  hbox = adjustPaddingHbox(hbox, padding, shadowsize)
+  hbox = adjustPaddingHbox(hbox, padding, padding + shadowsize, padding, padding + shadowsize)
 
   frameHbox(hbox, shadowsize, function(w, h, d)
-    local smallest = w < h and w or h
+    local H = h + d
+    local smallest = w < H and w or H
     cornersize = cornersize < 0.5 * smallest and cornersize or math.floor(0.5 * smallest)
 
-    local rx = cornersize
-    local ry = rx
-    local arc = 4 / 3 * (1.4142135623730951 - 1)
-    -- table of segments (2 coords) or bezier curves (6 coords)
-    local segments = {
-      {(w - 2 * rx), 0}, {(rx * arc), 0, rx, ry - (ry * arc), rx, ry}, {0, (h - 2 * ry)},
-      {0, (ry * arc), -(rx * arc), ry, -rx, ry}, {(-w + 2 * rx), 0},
-      {-(rx * arc), 0, -rx, -(ry * arc), -rx, -ry}, {0, (-h + 2 * ry)},
-      {0, -(ry * arc), (rx * arc), -ry, rx, -ry}
-    }
-    -- starting point
-    local x = rx
-    local y = d
-
-    local path = table.concat({
-      makePath(x, y, segments),
-      makeColor(bordercolor, true), makeColor(fillcolor, false),
-      borderwidth, "w",
-      "B"
-    }, " ")
+    local painter = PathRenderer()
+    local shadowpath, path
     if shadowsize ~= 0 then
-      path = table.concat({
-        makePath(x + shadowsize, y + shadowsize, segments),
-        makeColor(shadowcolor),
-        borderwidth, "w",
-        "f",
-        path
-      }, " ")
+      shadowpath = painter:roundedRectangle(shadowsize, d + shadowsize, w , H, cornersize, cornersize, {
+        fill = shadowcolor, stroke = "none"
+      })
     end
-    return path
+    path = painter:roundedRectangle(0, d , w , H, cornersize, cornersize, {
+      fill = fillcolor, stroke = bordercolor, strokeWidth = borderwidth
+    })
+    return shadowpath and shadowpath .. " " .. path or path
   end)
 end, "Frames content in a rounded box.")
-
-local rough = require('rough')
-local roughGenerator = rough.RoughGenerator()
-local pathGenerator = rough.RoughPdf()
 
 SILE.registerCommand("roughbox", function(options, content)
   local padding = SU.cast("measurement", options.padding or SILE.settings.get("framebox.padding")):tonumber()
   local borderwidth = SU.cast("measurement", options.borderwidth or SILE.settings.get("framebox.borderwidth")):tonumber()
   local bordercolor = SILE.colorparser(options.bordercolor or "black")
   local fillcolor = options.fillcolor and SILE.colorparser(options.fillcolor)
-
   local enlarge = SU.boolean(options.enlarge, false)
 
   local hbox = SILE.call("hbox", {}, content)
   table.remove(SILE.typesetter.state.nodes) -- steal it back...
   if enlarge then
-    hbox = adjustPaddingHbox(hbox, padding)
+    hbox = adjustPaddingHbox(hbox, padding, padding, padding, padding)
   end
-
 
   local roughOpts = {}
   if options.roughness then roughOpts.roughness = SU.cast("number", options.roughness) end
@@ -267,49 +183,61 @@ SILE.registerCommand("roughbox", function(options, content)
   roughOpts.preserveVertices = SU.boolean(options.preserve, false)
   roughOpts.disableMultiStroke = SU.boolean(options.singlestroke, false)
   roughOpts.strokeWidth = borderwidth
+  roughOpts.stroke = bordercolor
+  roughOpts.fill = fillcolor
 
   frameHbox(hbox, nil, function(w, h, d)
+    local H = h + d
     local x = 0
     local y = d
     if not enlarge then
       x = -padding
       y = d - padding
-      h = h + 2 * padding
+      H = H + 2 * padding
       w = w + 2 * padding
     end
-
-    local drawable = roughGenerator:rectangle(x, y, w, h, roughOpts)
-    local p = pathGenerator:draw(drawable)
-
-    local path = table.concat({
-      p,
-      makeColor(bordercolor, true),
-      borderwidth, "w",
-      "S" -- stroke only
-    }, " ")
-
-    if fillcolor then
-      roughOpts.fill = true
-      roughOpts.stroke = "none"
-      local fdrawable = roughGenerator:rectangle(x, y, w, h, roughOpts)
-      local fp = pathGenerator:draw(fdrawable)
-      local fillpath = table.concat({
-        fp,
-        makeColor(fillcolor, true),
-        borderwidth, "w",
-        "S" -- stroke only
-      }, " ")
-      path = fillpath .. " " .. path
-    end
-    return path
+    local painter = PathRenderer(RoughPainter())
+    return painter:rectangle(x, y, w, H, roughOpts)
   end)
-end, "Frames content in a rough box.")
+end, "Frames content in a rough (sketchy) box.")
+
+SILE.registerCommand("bracebox", function(options, content)
+  local padding = SU.cast("measurement", options.padding or SILE.measurement("0.25em")):tonumber()
+  local strokewidth = SU.cast("measurement", options.strokewidth or SILE.measurement("0.033em")):tonumber()
+  local bracecolor = SILE.colorparser(options.bracecolor or "black")
+  local bracewidth = SU.cast("measurement", options.bracewidth or SILE.measurement("0.25em")):tonumber()
+  local bracethickness = SU.cast("measurement", options.bracethickness or SILE.measurement("0.05em")):tonumber()
+  local curvyness = SU.cast("number", options.curvyness or 0.6)
+  local left, right
+  if options.side == "left" or not options.side then left = true
+  elseif options.side == "right" then right = true
+  elseif options.side == "both" then left, right = true, true
+  else SU.error("Invalid side parameter") end
+
+  local hbox = SILE.call("hbox", {}, content)
+  table.remove(SILE.typesetter.state.nodes) -- steal it back...
+  hbox = adjustPaddingHbox(hbox, left and bracewidth + padding or 0, right and bracewidth + padding or 0, 0, 0)
+
+  frameHbox(hbox, nil, function(w, h, d)
+    local painter = PathRenderer()
+    local lb, rb
+    if left then
+      lb = painter:curlyBrace(bracewidth, d, bracewidth, 2*d+h, bracewidth, bracethickness, curvyness, {
+        fill = bracecolor, stroke = bracecolor, strokeWidth = strokewidth
+      })
+    end
+    if right then
+      rb = painter:curlyBrace(w-bracewidth, d, w-bracewidth, 2*d+h, -bracewidth, bracethickness, curvyness, {
+        fill = bracecolor, stroke = bracecolor, strokeWidth = strokewidth
+      })
+    end
+    return lb and (rb and lb .. " " .. rb or lb) or rb
+  end)
+end, "Frames content in a box with curly brace(s).")
 
 -- EXPERIMENTAL (UNDOCUMENTED)
 
 SILE.registerCommand("roughunder", function (options, content)
-  local bordercolor = SILE.colorparser(options.bordercolor or "black")
-
   -- Begin taken from the original underline command (rules package)
   local ot = SILE.require("core/opentype-parser")
   local fontoptions = SILE.font.loadDefaults({})
@@ -330,22 +258,16 @@ SILE.registerCommand("roughunder", function (options, content)
   roughOpts.disableMultiStroke = true
   roughOpts.strokeWidth = underlineThickness
 
-  frameHbox(hbox, nil, function(w, h, _)
-    -- NOTE: Using some 1.5 factor, since those sketchy lines are probably best a bit more
-    -- lowered than intended...
-    local y = h + 1.5 * underlinePosition
-    local drawable = roughGenerator:line(0, y, w, y, roughOpts)
-    local p = pathGenerator:draw(drawable)
-
-    local path = table.concat({
-      p,
-      makeColor(bordercolor, true),
-      underlineThickness, "w",
-      "S" -- stroke only
-    }, " ")
-    return path -- path
+  frameHbox(hbox, nil, function(w, h, d)
+    -- NOTE: Using some arbitrary 1.5 factor, since those sketchy lines are
+    -- probably best a bit more lowered than intended...
+    local y = h + d + 1.5 * underlinePosition
+    local painter = PathRenderer(RoughPainter())
+    return painter:line(0, y, w, y, roughOpts)
   end)
 end, "Underlines some content (experimental)")
+
+-- EXPORTS
 
 return {
   documentation = [[\begin{document}
@@ -372,8 +294,8 @@ is explicitly specified.
 
 With the well-named \doc:code{bordercolor}, \doc:code{fillcolor} and \doc:code{shadowcolor} options, one can
 also specify how the box is \framebox[shadow=true, bordercolor=#b94051, fillcolor=#ecb0b8, shadowcolor=220]{colored.}
-
 The color specifications are the same as defined in the \doc:keyword{color} package.
+
 The \doc:code{\\roundbox} command frames its content in a \roundbox{rounded box.}
 It supports the same options, so one can have a \roundbox[shadow=true]{dropped shadow} too.
 
@@ -384,8 +306,8 @@ unless the \doc:code{cornersize} option, as usual, is explicitly specified as ar
 (If one of the sides of the boxed content is smaller than that, then the maximum allowed rounding effect
 will be computed instead.)
 
-Last but not least, there is the \doc:code{\\roughbox} command that frames its content in a
-\em{sketchy}, hand-drawn-like style\footnote{The implementation is based on a partial port of
+For authors thriving for fancyness, there is the \doc:code{\\roughbox} command that frames its content
+in a \em{sketchy}, hand-drawn-like style\footnote{The implementation is based on a partial port of
 the \em{rough.js} JavaScript library. It uses its own pseudo-random number generator, so that
 rough sketchs in your document all look different but remain the same when the document is rebuilt.}:
 \roughbox[bordercolor=#59b24c]{a rough box.}
@@ -408,6 +330,25 @@ upon an existing text, without altering line height and spacing. Set the \doc:co
 option to true \roughbox[bordercolor=#22427c, enlarge=true]{to revert} this behavior (but also note
 that due to their rough style, these boxes may still sometimes overlap with surrounding content).
 
+The \doc:code{\\bracebox} commands draws a nice curly brace, by default on the left side of its
+\bracebox{\strut{}content}.
+The \doc:code{side} options may be set to \bracebox[side=right]{\strut{}“right”} or
+\bracebox[side=both]{\strut{}“both”}.
+As for fine-tuning options, \doc:code{padding} controls the space between the brace and the content
+(defaults to 0.25em),
+\doc:code{bracewidth} defines the widthof the whole brace (defaults to 0.25em),
+\doc:code{strokewidth} (defaults to 0.033em) and \doc:code{bracethickness} (0.05em) define
+the drawing characteristics of the brace.
+Its color, black by default, can be changed with \doc:code{bracecolor}.
+Finally, \doc:code{curvyness} (defaults to 0.6) is a number between 0.5 and 1, defining how curvy
+is the brace: 0.5 is the “normal” value (quite straight) and higher values giving a more “expressive”
+brace (anything above 0.725 is probably quite useless). As can be seen with the default values,
+they should be in a unit relative to the current font, so as to fit best with its current size.
+The default values are rather arbitrary but were found decent for a variety of fonts. Wait,
+we do hear you, at this point. Why you would possibly want this \doc:code{\\bracebox} thing where you
+could use a regular character? Because it adapts to its content height, and an example further below
+will show you its full potential.
+
 As final notes, the box logic provided in this package applies to the natural size of the box content.
 
 Thus \roundbox{a}, \roundbox{b} and \roundbox{p.}
@@ -417,10 +358,14 @@ This command is provided by the \doc:keyword{struts} package.
 
 Thus now \roundbox{\strut{}a}, \roundbox{\strut{}b} and \roundbox{\strut{}p.}
 
-The latter package can also be used to shape whole paragraphs into an horizontal box. It may make a good
-candidate if you want to use the commands provided here around paragraphs:
+The \doc:keyword{parbox} package can also be used to shape whole paragraphs into an horizontal box.
+It may make a good candidate if you want to use the commands provided here around paragraphs:
 
 \center{\framebox[shadow=true]{\parbox[valign=middle,width=4cm]{This is a long content as a boxed paragraph.}}}
+
+\smallskip
+Or also\dotfill{} \bracebox{\parbox[valign=middle,width=6cm]{\noindent This is a another paragraph, but now with a nice
+curly brace.}}
 
 \smallskip
 And as real last words, obviously, framed boxes are just horizonal boxes – so they will not be subject

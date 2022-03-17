@@ -1,0 +1,19 @@
+\begin{document}
+\neverindent
+\nofolios
+\script[src=packages/parbox]
+\script[src=packages/lorem]
+% Test case 071 = As 070, regular vs. minimized, but we need another test for
+% padding, both for the regular and the minimized parbox.
+
+(7A) \parbox[width=37%fw, valign=middle, border=0.5pt, padding=5pt]{First\par
+37\%fw width\par
+Not minimized}
+
+\smallskip
+
+(7B) \parbox[width=37%fw, valign=middle, border=0.5pt, padding=5pt, minimize=true]{Second\par
+37\%fw width\par
+Minimized}
+
+\end{document}

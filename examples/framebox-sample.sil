@@ -1,7 +1,8 @@
-\begin[papersize=6in x 9in, class=omibook]{document}
+\begin[papersize=6in x 9in, class=book]{document}
 \script[src=packages/parbox]
 \script[src=packages/ptable]
 \script[src=packages/framebox]
+\nofolios
 \neverindent
 \language[main=en]
 \font[family=Libertinus Serif, size=11pt]
@@ -70,5 +71,17 @@ A stretched \roughbox[enlarge=true]{\strut{}rough\hfill box} for test.
 \medskip
 
 A \roughunder{rough underlined} text (experimental).
+
+\medskip
+
+A box with a \bracebox{\strut{}left brace}.
+
+\medskip
+
+A box with a \bracebox[side=right]{\strut{}right brace}.
+
+\medskip
+
+A box with \bracebox[side=both]{\strut{}braces} on both sides.
 
 \end{document}
