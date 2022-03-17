@@ -1,4 +1,4 @@
-\begin[papersize=6in x 9in, class=omibook]{document}
+\begin{document}
 \script[src=packages/framebox]
 \script[src=packages/struts]
 \nofolios
