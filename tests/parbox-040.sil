@@ -1,0 +1,24 @@
+\begin{document}
+\neverindent
+\nofolios
+\script[src=packages/parbox]
+\script[src=packages/lorem]
+% Test case 040 = From the package documentation, complex case, with footnotes removed.
+% I am including it as non-regression as it helped finding a bug with stretch/shrink
+% cancellation (medskip is variable).
+
+(4) \parbox[width=37%fw, strut=character, border=0.5pt]{\lorem[words=8]
+
+\center{centered}
+
+\raggedleft{I am ragged\break left}
+
+\medskip
+
+A paragraph after a skip.
+}
+(…)
+\parbox[width=37%fw, strut=character, border=0.5pt]{\lorem[words=16]
+} (…)
+
+\end{document}

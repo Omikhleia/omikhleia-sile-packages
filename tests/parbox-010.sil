@@ -1,0 +1,24 @@
+\begin{document}
+\neverindent
+\nofolios
+\script[src=packages/parbox]
+\script[src=packages/lorem]
+% Test case 010 = From the package documentation, alignment without struts
+
+(1A) \parbox[width=37%fw, valign=top, border=0.5pt]{one\par
+\lorem[words=8]\par
+two}
+
+\smallskip
+
+(1B) \parbox[width=37%fw, valign=bottom, border=0.5pt]{one\par
+\lorem[words=8]\par
+two}
+
+\smallskip
+
+(1C) \parbox[width=37%fw, valign=middle, border=0.5pt]{one\par
+\lorem[words=8]\par
+two}
+
+\end{document}
