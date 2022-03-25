@@ -2,6 +2,33 @@
 -- Lightweight enumerations and bullet lists
 -- License: MIT
 --
+-- NOTE: So not described explicitely in the documentation, the package supports
+-- two nesting techniques:
+-- The "simple" one
+--    \begin{itemize}
+--       \item{L1.1}
+--       \begin{itemize}
+--          \item{L2.1}
+--       \end{itemize}
+--    \end{itemize}
+-- The "alternative" one, which consist in having the nested elements in an item:
+--    \begin{itemize}
+--       \item{L1.1
+--         \begin{itemize}
+--            \item{L2.1}
+--         \end{itemize}}
+--    \end{itemize}
+-- The latter might be less readable, but is of course more powerful, as other
+-- contents can be added to the item, as in
+--    \begin{itemize}
+--       \item{L1.1
+--         \begin{itemize}
+--            \item{L2.1}
+--         \end{itemize}%s
+--         This is still in L1.1}
+--    \end{itemize}
+-- But personally, for simple lists, I prefer the first "more readable" one.
+--
 SILE.require("packages/counters")
 
 SILE.settings.declare({
@@ -196,13 +223,10 @@ local doItem = function (_, content)
   local styleName = content._enumitem_.styleName
   local counter = content._enumitem_.counter
   local indent = content._enumitem_.indent
-    local inner = content._enumitem_.inner
 
-    -- Before an item, if not the first of a toplevel list, enforce a paragraph.
-    -- Note that the parskip at this stage should be the list.parskip.
-    if counter > 1 or inner then
-      SILE.call("par")
-    end
+  if not SILE.typesetter:vmode() then
+    SILE.call("par")
+  end
 
   local mark = SILE.call("hbox", {}, function ()
     SILE.call("style:apply", { name = styleName }, function ()
@@ -253,9 +277,7 @@ local doItem = function (_, content)
   -- reinserting it in the text flow.
   mark.width = SILE.length(stepback)
   SILE.typesetter:pushHbox(mark)
-
   SILE.process(content)
-  SILE.typesetter:leaveHmode()
 end
 
 local doNestedList = function (listType, _, content)
@@ -263,9 +285,6 @@ local doNestedList = function (listType, _, content)
   local variant = SILE.settings.get("list."..listType..".variant")
   local listAltStyleType = variant and listType.."-"..variant or listType
 
-  -- depth
-  local inner = (SILE.settings.get("list.current.itemize.depth")
-    + SILE.settings.get("list.current.enumerate.depth")) > 0
   local depth = SILE.settings.get("list.current."..listType..".depth") + 1
   SILE.settings.set("list.current."..listType..".depth", depth)
 
@@ -277,59 +296,61 @@ local doNestedList = function (listType, _, content)
   local baseIndent = (depth == 1) and SILE.settings.get("document.parindent").width:absolute() or SILE.measurement("0pt")
   local listIndent = SILE.settings.get("list."..listType..".leftmargin"):absolute()
 
-  -- initial skip
-  if not inner then
-    -- At the beginning of a toplevel list, enforce a paragraph if we are not already in
-    -- vertical mode (i.e. in which case there was probably already a paragraph or skip pushed)
-    -- This will therefore also honor the parskip, which in this case is still that of the
-    -- outer (document) context.
-    if not SILE.typesetter:vmode() then
-      SILE.call("par")
-    end
-  end
-
   -- processing
+  if not SILE.typesetter:vmode() then
+    SILE.call("par")
+  end
   SILE.settings.temporarily(function ()
     SILE.settings.set("current.parindent", SILE.nodefactory.glue())
     SILE.settings.set("document.parindent", SILE.nodefactory.glue())
     SILE.settings.set("document.parskip", SILE.settings.get("list.parskip"))
     local lskip = SILE.settings.get("document.lskip") or SILE.nodefactory.glue()
     SILE.settings.set("document.lskip", SILE.nodefactory.glue(lskip.width + (baseIndent + listIndent)))
+
     local counter = 0
     for i = 1, #content do
-        if type(content[i]) == "table" then
-          if content[i].command == "item" then
-            counter = counter + 1
-            -- Enrich the node with internal properties
-            content[i]._enumitem_ = {
-              style = enumStyle,
-              inner = inner,
-              counter = counter,
-              indent = listIndent,
-              styleName = styleName,
-            }
-          else
-            enforceListType(content[i].command)
-          end
-          SILE.process({ content[i] })
-        elseif type(content[i]) == "string" then
-          -- All text nodes are ignored in structure tags, but just warn
-          -- if there do not just consist in spaces.
-          local text = trim(content[i])
-          if text ~= "" then SU.warn("Ignored standalone text ("..text..")") end
+      if type(content[i]) == "table" then
+        if content[i].command == "item" then
+          counter = counter + 1
+          -- Enrich the node with internal properties
+          content[i]._enumitem_ = {
+            style = enumStyle,
+            counter = counter,
+            indent = listIndent,
+            styleName = styleName,
+          }
         else
-          SU.error("List structure error")
+          enforceListType(content[i].command)
         end
+        SILE.process({ content[i] })
+        if not SILE.typesetter:vmode() then
+          SILE.call("par")
+        else
+          SILE.typesetter:leaveHmode()
+        end
+      elseif type(content[i]) == "string" then
+        -- All text nodes are ignored in structure tags, but just warn
+        -- if there do not just consist in spaces.
+        local text = trim(content[i])
+        if text ~= "" then SU.warn("Ignored standalone text ("..text..")") end
+      else
+        SU.error("List structure error")
+      end
     end
   end)
   depth = depth - 1
   SILE.settings.set("list.current."..listType..".depth", depth)
 
-  if not inner then
-     -- A the end a toplevel list, enforce a paragraph. This will therefore honor
-     -- the parskip, which in this case is back to that of the outer (document)
-     -- context.
-     SILE.call("par")
+  if not SILE.typesetter:vmode() then
+      SILE.call("par")
+  else
+    SILE.typesetter:leaveHmode()
+    if not((SILE.settings.get("list.current.itemize.depth")
+        + SILE.settings.get("list.current.enumerate.depth")) > 0)
+    then
+      local g = SILE.settings.get("document.parskip").height - SILE.settings.get("list.parskip").height
+      SILE.typesetter:pushVglue(g)
+    end
   end
 end
 
