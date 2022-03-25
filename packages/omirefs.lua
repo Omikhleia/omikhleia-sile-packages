@@ -110,7 +110,6 @@ end
 
 -- LOW-LEVEL/INTERNAL COMMANDS
 
-local dc = 1
 SILE.registerCommand("refentry", function (options, content)
   if _markers[options.marker] ~= nil then
     SU.warn("Duplicate label '"..options.marker.."': this is possibly an error")
@@ -119,9 +118,8 @@ SILE.registerCommand("refentry", function (options, content)
 
   local dest
   if SILE.Commands["pdf:destination"] then
-    dest = "ref" .. dc
+    dest = "ref:" .. options.marker
     SILE.call("pdf:destination", { name = dest })
-    dc = dc + 1
   end
   SILE.call("info", {
     category = "labelref",
