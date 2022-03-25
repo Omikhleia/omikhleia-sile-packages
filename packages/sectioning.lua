@@ -29,6 +29,7 @@ SILE.registerCommand("sectioning", function (options, content)
   local name = SU.required(options, "style", "sectioning")
   local numbering = SU.boolean(options.numbering, true)
   local toc = SU.boolean(options.toc, true)
+  local marker = options.marker
 
   local secStyle = resolveSectionStyleDef(name)
 
@@ -113,6 +114,12 @@ SILE.registerCommand("sectioning", function (options, content)
     end
     -- 3D. Section (title) content
     SILE.process(content)
+    -- 3E. Cross-reference label
+    -- If the \label command is defined, assume a cross-reference package
+    -- is loaded and allow specifying a label marker. This makes it less clumsy
+    -- than having to put it in the section title content, or just after the section
+    -- (with the risk of impacting indent/noindent and novbreak decisions here)
+    if marker and SILE.Commands["label"] then SILE.call("label", { marker = marker }) end
   end)
   -- Was present in the original book class for section and subsection
   -- But seems to behave weird = cancelled for now.
@@ -283,8 +290,9 @@ Let’s start with the latter, which is the simplest.
 
 It takes a (sectioning) style name, boolean options specifying whether
 that section is numbered and goes in the table of contents\footnote{Only honored if the
-style defines a TOC level, but we will see that in a moment.}, and a content logically
-representing the section title. It could obviously be directly used as-is.
+style defines a TOC level, but we will see that in a moment.}, an optional marker name
+(which can be used to refer to the section with a cross-references packages) and a content
+logically representing the section title. It could obviously be directly used as-is.
 With such a thing in our hands, defining, say, a \doc:code{\\chapter} command is just,
 as stated above, a “convenience” helper. Let us do it in Lua, to be able to support
 all options, as a class would actually do.
