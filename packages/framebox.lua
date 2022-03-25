@@ -60,7 +60,7 @@ end
 
 -- Rewraps an hbox into in another hbox responsible for framing it,
 -- via a path construction callback called with the target width,
--- height and depth (assuming 0, 0 as original point on the baseline)
+-- height and depth (assuming 0,0 as original point on the baseline)
 -- and must return a PDF graphics.
 -- It assumes the initial hbox is NOT in the output queue
 -- (i.e. was stolen back and/or stored earlier).
@@ -92,7 +92,8 @@ local frameHbox = function(hbox, shadowsize, pathfunc)
         SILE.outputter:drawSVG(path, saveX, saveY, w, h + d, 1)
       end
 
-      -- Restore cursor position and output the content last (so it appears on top of the frame)
+      -- Restore cursor position and output the content last (so it appears
+      -- on top of the frame)
       typesetter.frame.state.cursorX = saveX
       self.inner:outputYourself(SILE.typesetter, line)
       typesetter.frame.state.cursorX = newX
@@ -237,6 +238,9 @@ end, "Frames content in a box with curly brace(s).")
 
 -- EXPERIMENTAL (UNDOCUMENTED)
 
+-- This would need to be reimplemented and checked after multiline effects
+-- (e.g. multiline links and underline) are possibly added to the
+-- typetter.
 SILE.registerCommand("roughunder", function (options, content)
   -- Begin taken from the original underline command (rules package)
   local ot = SILE.require("core/opentype-parser")
@@ -265,7 +269,7 @@ SILE.registerCommand("roughunder", function (options, content)
     local painter = PathRenderer(RoughPainter())
     return painter:line(0, y, w, y, roughOpts)
   end)
-end, "Underlines some content (experimental)")
+end, "Underlines some content (experimental, undocumented)")
 
 -- EXPORTS
 

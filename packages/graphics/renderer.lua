@@ -15,15 +15,21 @@ local RoughGenerator = SILE.require("packages/graphics/rough").RoughGenerator
 
 -- HELPERS
 
+local _r = function(number)
+  -- Lua 5.3+ formats floats as 1.0 and integers as 1
+  -- This is annoying.
+  return math.floor(number) == number and math.floor(number) or number
+end
+
 -- Builds a PDF graphics color (stroke or fill) from a SILE parsed color.
 local makeColorHelper = function(color, stroke)
   local colspec
   local colop
   if color.r then -- RGB
-    colspec = table.concat({ color.r, color.g, color.b }, " ")
+    colspec = table.concat({ _r(color.r), _r(color.g), _r(color.b) }, " ")
     colop = stroke and "RG" or "rg"
   elseif color.c then -- CMYK
-    colspec = table.concat({ color.c, color.m, color.y, color.k }, " ")
+    colspec = table.concat({ _r(color.c), _r(color.m), _r(color.y), _r(color.k) }, " ")
     colop = stroke and "K" or "k"
   elseif color.l then -- Grayscale
     colspec = color.l
@@ -45,10 +51,10 @@ local makePathHelper = function(x, y, segments)
       -- line
       x = s[1] + x
       y = s[2] + y
-      paths[#paths + 1] = { x, y, "l" }
+      paths[#paths + 1] = { _r(x), _r(y), "l" }
     else
       -- bezier curve
-      paths[#paths + 1] = { s[1] + x, s[2] + y, s[3] + x, s[4] + y, s[5] + x, s[6] + y, "c" }
+      paths[#paths + 1] = { _r(s[1] + x), _r(s[2] + y), _r(s[3] + x), _r(s[4] + y), _r(s[5] + x), _r(s[6] + y), "c" }
       x = s[5] + x
       y = s[6] + y
     end
@@ -69,7 +75,7 @@ local DefaultPainter = pl.class({
   line = function (self, x1, y1, x2, y2, options)
     options = options and pl.tablex.union(self.defaultOptions, options) or self.defaultOptions
     return {
-      path = table.concat({ x1, y1, "m", x2 - x1, y2 - y1, "l" }, " "),
+      path = table.concat({ _r(x1), _r(y1), "m", _r(x2 - x1), _r(y2 - y1), "l" }, " "),
       options = options,
     }
   end,
@@ -77,7 +83,7 @@ local DefaultPainter = pl.class({
   rectangle = function (self, x, y , w , h, options)
     options = options and pl.tablex.union(self.defaultOptions, options) or self.defaultOptions
     return {
-      path = table.concat({ x, y, w, h, "re" }, " "),
+      path = table.concat({ _r(x), _r(y), _r(w), _r(h), "re" }, " "),
       options = options,
     }
   end,
@@ -143,24 +149,24 @@ local DefaultPainter = pl.class({
       path = table.concat({
         -- TOP SEGMENT
         -- From (x1, y1)
-        x1, y1, "m",
+        _r(x1), _r(y1), "m",
         -- Goto (qx2, qy2) vith control point (qx1, qy1) on current position (x1, y1)
-        qx1, qy1, qx2, qy2, "v",
+        _r(qx1), _r(qy1), _r(qx2), _r(qy2), "v",
         -- Then go to (tx, ty) with the reflexion of the previous control point
         -- ((2 * point - control) is the reflexion of control relative to point)
-        (2 * qx2 - qx1), (2 * qy2 - qy1), tx, ty, "v",
+        _r(2 * qx2 - qx1), _r(2 * qy2 - qy1), _r(tx), _r(ty), "v",
         -- TOP SEGMENT THICKNESS
         -- Go back to (qx2b, qy2b) with control control point on it.
-        (2 * qx2b - qx1), (2 * qy2b - qy1), qx2b, qy2b, "y",
+        _r(2 * qx2b - qx1), _r(2 * qy2b - qy1), _r(qx2b), _r(qy2b), "y",
         -- And back to the original point (x1, y1), with control point on it.
-        qx1, qy1, x1, y1, "y",
+        _r(qx1), _r(qy1), _r(x1), _r(y1), "y",
         -- BOTTOM SEGMENT
         -- Same thing but from (x2, y2) to (tx, ty) and backwards with thickness.
-        x2, y2, "m",
-        qx3, qy3, qx4, qy4, "v",
-        (2 * qx4 - qx3), (2 * qy4 - qy3), tx, ty, "v",
-        (2 * qx4b - qx3), (2 * qy4b - qy3), qx4b, qy4b, "y",
-        qx3, qy3, x2, y2, "y",
+        _r(x2), _r(y2), "m",
+        _r(qx3), _r(qy3), _r(qx4), _r(qy4), "v",
+        _r(2 * qx4 - qx3), _r(2 * qy4 - qy3), _r(tx), _r(ty), "v",
+        _r(2 * qx4b - qx3), _r(2 * qy4b - qy3), _r(qx4b), _r(qy4b), "y",
+        _r(qx3), _r(qy3), _r(x2), _r(y2), "y",
         -- Round line caps and line joins
         1, "J", 1, "j",
       }, " "),
@@ -186,7 +192,7 @@ local DefaultPainter = pl.class({
         drawable.path,
         makeColorHelper(o.stroke, true),
         makeColorHelper(o.fill, false),
-        o.strokeWidth, "w",
+        _r(o.strokeWidth), "w",
         "B"
       }, " ")
     else
@@ -194,7 +200,7 @@ local DefaultPainter = pl.class({
       return table.concat({
         drawable.path,
         makeColorHelper(o.stroke, true),
-        o.strokeWidth, "w",
+        _r(o.strokeWidth), "w",
         "S"
       }, " ")
     end
@@ -228,7 +234,7 @@ local RoughPainter = pl.class({
         path = table.concat({
            self:opsToPath(drawing, precision),
            makeColorHelper(o.stroke, true),
-           o.strokeWidth, "w",
+           _r(o.strokeWidth), "w",
            "S"
         }, " ")
       elseif drawing.type == "fillPath" then
@@ -237,7 +243,7 @@ local RoughPainter = pl.class({
         path = table.concat({
           self:opsToPath(drawing, precision),
           makeColorHelper(o.fill, true),
-          o.strokeWidth, "w",
+          _r(o.strokeWidth), "w",
           "S"
        }, " ")
       end
@@ -251,13 +257,13 @@ local RoughPainter = pl.class({
     local path = {}
     for _, item in ipairs(drawing.ops) do
       local data = item.data
-      -- NOTE: we currently ignore the decimal precision.
-      if item.op == 'move' then
-          path[#path + 1] = data[1] .. ' ' .. data[2] .. " m"
+      -- NOTE: we currently ignore the decimal precision option
+      if item.op == "move" then
+          path[#path + 1] = _r(data[1]) .. " " .. _r(data[2]) .. " m"
       elseif item.op == 'bcurveTo' then
-          path[#path + 1] = data[1] .. " " .. data[2] .. " " .. data[3] .. " " .. data[4] .. " " .. data[5] .. " " .. data[6] .. " c"
+          path[#path + 1] = _r(data[1]) .. " " .. _r(data[2]) .. " " .. _r(data[3]) .. " " .. _r(data[4]) .. " " .. _r(data[5]) .. " " .. _r(data[6]) .. " c"
       elseif item.op == "lineTo" then
-          path[#path + 1] = data[1] .. " " ..  data[2] .. " l"
+          path[#path + 1] = _r(data[1]) .. " " ..  _r(data[2]) .. " l"
       end
     end
     return table.concat(path, " ")
