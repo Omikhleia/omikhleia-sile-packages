@@ -117,15 +117,16 @@ end
 local insertStruts = function (vboxlist, strut)
   -- The core assumption here is that first/last vboxes are actual text
   -- lines. Could be wrong...
+  local h, d = SU.cast("length", strut.height), SU.cast("length", strut.depth)
   for i = 1, #vboxlist do
-    if vboxlist[i].is_vbox and vboxlist[i].height < strut.height then
-      vboxlist[i].height = strut.height -- Hack height of first vbox
+    if vboxlist[i].is_vbox and vboxlist[i].height < h then
+      vboxlist[i].height = h -- Hack height of first vbox
       break
     end
   end
   for i = #vboxlist, 1, - 1 do
-    if vboxlist[i].is_vbox and vboxlist[i].depth < strut.depth then
-      vboxlist[i].depth = strut.depth -- Hack depth of first vbox
+    if vboxlist[i].is_vbox and vboxlist[i].depth < d then
+      vboxlist[i].depth = d -- Hack depth of first vbox
       break
     end
   end
@@ -160,7 +161,7 @@ SILE.registerCommand("parbox", function (options, content)
   local bordercolor =  options.bordercolor and SILE.colorparser(options.bordercolor)
   local minimize = SU.boolean(options.minimize, false)
 
-  width = SU.cast("measurement", width):absolute()
+  width = SILE.length(SU.cast("measurement", width)):absolute()
 
   local vboxes = parboxFraming({ width = width }, content)
 
@@ -197,7 +198,7 @@ SILE.registerCommand("parbox", function (options, content)
       local w = SILE.length()
         if vboxes[i].nodes then
           for n in ipairs(vboxes[i].nodes) do
-            if vboxes[i].nodes[n].width > 0 then
+            if vboxes[i].nodes[n].width > SILE.length(0) then
               w = w + vboxes[i].nodes[n].width:absolute()
             end
           end
@@ -218,21 +219,24 @@ SILE.registerCommand("parbox", function (options, content)
     width = wmax
   end
 
-  local z0 = SILE.measurement(0)
+  local z0 = SILE.length(0)
   local depth, height
   if valign == "bottom" then
-    depth = z0 + strutDimen.depth + padding[2]
-    height = totalHeight - strutDimen.depth + padding[1]
+    depth = z0 + strutDimen.depth + SILE.length(padding[2])
+    height = totalHeight - strutDimen.depth + SILE.length(padding[1])
   elseif valign == "middle" then
-    depth = totalHeight / 2 - strutDimen.height / 2 + strutDimen.depth / 2 + (padding[2] + padding[1]) / 2
-    height = totalHeight / 2 + strutDimen.height / 2 - strutDimen.depth / 2 + (padding[2] + padding[1]) / 2
+    local padwidth = SILE.length(padding[2] + padding[1])
+    local d2 = (totalHeight - strutDimen.height + strutDimen.depth + padwidth)
+    local h2 = (totalHeight + strutDimen.height - strutDimen.depth + padwidth)
+    depth = SILE.length(d2:tonumber() / 2)
+    height = SILE.length(h2:tonumber() / 2)
   else -- valign == top
-    depth = totalHeight - strutDimen.height + padding[1]
-    height = z0 + strutDimen.height + padding[1]
+    depth = totalHeight - strutDimen.height + SILE.length(padding[1])
+    height = z0 + strutDimen.height + SILE.length(padding[1])
   end
 
   return SILE.typesetter:pushHbox({
-    width = width + padding[3] + padding[4],
+    width = width + SILE.length(padding[3] + padding[4]),
     depth = depth,
     height = height,
     inner = vboxes,
@@ -245,7 +249,7 @@ SILE.registerCommand("parbox", function (options, content)
       local saveY = typesetter.frame.state.cursorY
       local saveX = typesetter.frame.state.cursorX
 
-      typesetter.frame.state.cursorY = saveY - self.height
+      typesetter.frame.state.cursorY = saveY - self.height:tonumber()
       drawBorders(
         typesetter.frame.state.cursorX:tonumber(),
         typesetter.frame.state.cursorY:tonumber(),
@@ -256,7 +260,7 @@ SILE.registerCommand("parbox", function (options, content)
       )
 
       -- Process each vbox
-      typesetter.frame.state.cursorY = typesetter.frame.state.cursorY + self.padding[1] - self.offset
+      typesetter.frame.state.cursorY = typesetter.frame.state.cursorY + self.padding[1] - self.offset:tonumber()
       for i = 1, #self.inner do
         typesetter.frame.state.cursorX = saveX + self.padding[3]
         self.inner[i]:outputYourself(typesetter, self.inner[i])
@@ -381,7 +385,7 @@ Let us try parboxes of different heights and footnotes in parboxes…
 
 \center{centered}
 
-\raggedleft{I am ragged\break left}
+\raggedleft{I am ragged-left}
 
 \medskip
 

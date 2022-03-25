@@ -112,9 +112,9 @@ local colorBox = function (hbox, color)
         SILE.outputter:pushColor(self.color)
         SILE.outputter:drawRule(
           saveX,
-          saveY - self.height,
-          self.width,
-          self.height + self.depth)
+          saveY - self.height:tonumber(),
+          self.width:tonumber(),
+          self.height:tonumber() + self.depth:tonumber())
         SILE.outputter:popColor()
 
         self.inner:outputYourself(SILE.typesetter, line)
@@ -205,9 +205,9 @@ local rowNode = pl.class({
     self.color = color
   end,
   height = function (self)
-    local h = 0
+    local h = SILE.length()
     for i = 1, #self.cells do
-      h = SU.max(self.cells[i]:height(), h)
+      h = SU.max(self.cells[i]:height(), SILE.length(h))
     end
     return h
   end,
@@ -273,7 +273,7 @@ processTable["celltable"] = function (content, args, tablespecs)
       if type(content[i]) == "table" then
         if content[i].command == "row" then
           local row = content[i]
-          local node = processTable["row"](row, { width = width, col = args.col }, tablespecs)
+          local node = processTable["row"](row, { col = args.col }, tablespecs)
           rows[#rows+1] = node
         else
           SU.error("Unexpected '"..content[i].command.."' in celltable")

@@ -34,12 +34,15 @@ local _key = function (options)
 end
 local characterStrut = function ()
   local key = _key(SILE.font.loadDefaults({}))
-  local hbox = strutCache[key]
-  if hbox then return hbox end
-  hbox = SILE.call("hbox", {}, { SILE.settings.get("strut.character") })
+  local strutCached = strutCache[key]
+  if strutCached then return strutCached end
+  local hbox = SILE.call("hbox", {}, { SILE.settings.get("strut.character") })
   table.remove(SILE.typesetter.state.nodes) -- steal it back
-  strutCache[key] = hbox
-  return hbox
+  strutCache[key] = {
+    height = hbox.height,
+    depth = hbox.depth,
+  }
+  return strutCache[key]
 end
 
 SILE.registerCommand("strut", function (options, _)
@@ -48,13 +51,12 @@ SILE.registerCommand("strut", function (options, _)
   local strut
   if method == "rule" then
     strut = {
-      height = SILE.settings.get("strut.ruleheight"):absolute(),
-      depth = SILE.settings.get("strut.ruledepth"):absolute(),
-      width = SILE.measurement()
+      height = SILE.length(SILE.settings.get("strut.ruleheight")):absolute(),
+      depth = SILE.length(SILE.settings.get("strut.ruledepth")):absolute(),
     }
     if show then
       -- The "x" there could be anything, we just want to be sure we get a box
-      SILE.call("rebox", { phantom = true, height = strut.height, depth = strut.depth, width = strut.width }, { "x" })
+      SILE.call("rebox", { phantom = true, height = strut.height, depth = strut.depth, width = SILE.length() }, {})
     end
   else
     strut = characterStrut()
@@ -63,7 +65,7 @@ SILE.registerCommand("strut", function (options, _)
     end
   end
   return strut
-end, "Formats a strut box.")
+end, "Formats a strut box, shows it if requested, returns its height and depth dimentions.")
 
 return {
   documentation = [[\begin{document}
