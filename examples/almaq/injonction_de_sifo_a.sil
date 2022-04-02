@@ -18,7 +18,9 @@ soixante-treize logogrammes sont étudiés en appendice C.
 
 \vfill
 \noindent\style:font[size=-0.5]{Page précédente : manuscrit M de l’injonction de Sifo (collection personnelle).}
-
+\par\break
+% WARN: Do not remove the comment here or the page breaks won't work as expected
+%
 \chapter[numbering=false]{À propos de l’injonction de Sifo.}
 
 Le bref texte que l’on nomme communément « l’injonction de dame Sifo » figure en tête des principales
@@ -79,7 +81,7 @@ Je suis Sifo… une exigence… Je suis née Beneth, Sifo de la maison Saran… 
 grâce au poète Celdre… J’ai exigé… Sur Alstre Hurvedan… disperseur de cités… Sur Dongann… la cause de la
 ruine d’Almaq… le farceur… petit-roi des fées.
 
-[\em{I am Sifo… a requirement… I am born Beneth, Sifo of house Saran… by the obscure Celdre… an account…
+[\foreign:en{I am Sifo… a requirement… I am born Beneth, Sifo of house Saran… by the obscure Celdre… an account…
 thanks to poet Celdre… I required… Of Alstre Hurvedan… scatterer of cities… Of Dongann… the cause of
 the ruin of Almaq…  the jester… little-king of fairies.}]
 \end{blockquote}
@@ -117,7 +119,7 @@ cette allocution — quoi que l’on pense de sa terminologie pour les connecteu
 B \em{broadcast}, O \em{outer}, N \em{neuter}, I \em{inner}, — \em{quote}.
 } :
 
-\begin[cols=10%fw 3%fw 10%fw 3.5%fw 31.5%fw 22%fw 20%fw, cellborder=0, cellpadding=2]{ptable}
+\begin[cols=10%fw 3%fw 10%fw 3.5%fw 31.25%fw 22%fw 20.25%fw, cellborder=0, cellpadding=2]{ptable}
 \row{
   \cell[style=narrow, border=0 0 0 0.4pt]{\smaller{\em{na sifo}}}
   \cell[border=0 0 0 0.4pt]{}
@@ -421,7 +423,7 @@ d’étrange apparaît. C’est soudain Dongann, plutôt qu’Alstre, qui devien
 Et c’est encore le bouffon roi des fées qui est associé à la cause de la ruine d’Almaq. Absurdités ?
 Certains le diraient. Mais pourtant, qu’en savons-nous vraiment ?
 
-[\em{The parallel lines also invite to a transversal reading. It is because she is Sifo of house Saran
+[\foreign:en{The parallel lines also invite to a transversal reading. It is because she is Sifo of house Saran
 that she is entitled to impose her will. Celdre is then put into perspective with the rest of the
 text, implying that all that follows is made possible by the grace of the poet. And so forth. Alstre
 is commissioned to write an account about the deeds of Alstre. This is kind of expected, as he was

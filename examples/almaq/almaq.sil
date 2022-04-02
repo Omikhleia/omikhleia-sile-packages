@@ -1,10 +1,12 @@
 \begin[papersize=6in x 9in, class=omibook]{document}
+\script[src=packages/pdf]
 \script[src=packages/couyards]
 \script[src=packages/epigraph]
 \script[src=packages/omipoetry]
 \script[src=packages/image]
 \script[src=packages/ptable]
 \script[src=packages/dropcaps]
+\script[src=packages/framebox]
 \language[main=fr]
 %\hyphenator:add-exceptions[lang=fr]{lo-go-gramme}%
 %\hyphenator:add-exceptions[lang=fr]{igno-rer}%
@@ -15,7 +17,8 @@
 \footnote:rule
 \define[command=foreign:en]{\em{\language[main=en]{\process}}}%
 \define[command=foreign:gr]{\em{\language[main=und]{\process}}}%
-\set[parameter=linebreak.tolerance, value=5000]%
+%\set[parameter=linebreak.tolerance, value=5000]%
+\set[parameter=linebreak.emergencyStretch, value=15%lw]%
 %\set[parameter=linebreak.adjdemerits, value=500]%
 \script{
 local vglueNoStretch = function (vg)
@@ -117,11 +120,13 @@ end, "Insert a partition.")
   \font[features =+smcp]
 }%
 %
+% Override class default, so as not to clear the odd running header^^
 \define[command=sectioning:part:hook]{
-  \noheaderthispage%
-  \even-running-header{}
-  \set-counter[id=foonote, value=1]
-  \set-multilevel-counter[id=sections, level=1, value=0]
+\noheaderthispage%
+\nofoliosthispage%
+\even-running-header{}
+\set-counter[id=foonote, value=1]
+\set-multilevel-counter[id=sections, level=1, value=0]
 }%
 %
 % Theatrical stuff...
@@ -141,8 +146,30 @@ end, "Insert a partition.")
 }%
 \define[command=didaskalia]{\stage[name=didaskalia]{\process}}%
 %
+% CYOA gamebook chapter
+\script{
+SILE.registerCommand("gamebook", function (options, content)
+  options.style = "sectioning:gamebook"
+  SILE.call("sectioning", options, content)
+end, "Begin a new chapter.")
+SILE.registerCommand("goto", function (options, content)
+  local marker = SU.required(options, "marker", "goto")
+  SILE.call("font", { weight=700 }, function()
+    SILE.call("ref", { marker = marker })
+  end)
+end)
+}%
+\style:define[name=sectioning:gamebook:number]{}
+\style:define[name=sectioning:gamebook]{%
+  \font[weight=700]
+  \paragraph[skipbefore=medskip,align=center]
+  \sectioning[counter=gamebook,level=1,display=arabic, numberstyle=sectioning:gamebook:number,
+    toclevel=9]% TOCLEVEL HACK IS DUMB, FIXME
+}%
+%
 \odd-running-header{Contes et légendes d’Almaq}%
 
+\include[src=examples/almaq/frontmatter_page.sil]
 \part{Études & Essais}
 \include[src=examples/almaq/injonction_de_sifo_a.sil]
 \include[src=examples/almaq/injonction_de_sifo_b.sil]
@@ -168,7 +195,6 @@ end, "Insert a partition.")
 \include[src=examples/almaq/dits_de_la_saigne.sil]
 \include[src=examples/almaq/mort_dongann.sil]
 
-
 \part{Almaq}
 
 \include[src=examples/almaq/dame_renarde.sil]
@@ -181,7 +207,9 @@ end, "Insert a partition.")
 
 \part{La neuvième guerre cyclique}
 
+\include[src=examples/almaq/tarot_illustration.sil]
 \include[src=examples/almaq/chute_de_dragon.sil]
+\include[src=examples/almaq/prophetie.sil]
 \include[src=examples/almaq/jardin_des_luthiers.sil]
 \include[src=examples/almaq/anthone_de_longrines.sil]
 

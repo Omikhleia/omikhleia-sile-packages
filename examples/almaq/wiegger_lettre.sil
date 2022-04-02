@@ -56,7 +56,7 @@ Despite the bombings in \struck{XXXXX} and \struck{XXXXXX}, it survived the war.
 P.P.S. I am not the one who applied the unfortunate "stamps". Obviously, it is unsafe for me to keep such
 material here, so I’ll arrange these pages to pass through to you, to the West.
 
-Q.E.D. The Sword is not Aquila. \lower[height=0.5bs]{\rebox[width=0,height=0]{\img[src=examples/almaq/wiegger_lettre_annotation_lenski_2.png, width=3cm]}}
+Q.E.D. \roughbox{The Sword is not Aquila.} \lower[height=0.5bs]{\rebox[width=0,height=0]{\img[src=examples/almaq/wiegger_lettre_annotation_lenski_2.png, width=3cm]}}
 
 \end{font}
 

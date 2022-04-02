@@ -1,0 +1,10 @@
+\begin{document}
+
+\open-on-any-page
+\noheaderthispage
+\nofoliothispage
+\hbox{}
+\vfill
+\noindent\img[src=examples/almaq/tarot_deck.png, width=100%fw]
+
+\end{document}

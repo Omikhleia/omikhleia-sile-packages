@@ -1,0 +1,37 @@
+\begin{document}
+\noheaders
+\nofolios
+% TWO BLANK PAGES
+\hbox{}\par
+\break
+\hbox{}\par
+\break
+\hbox{}
+% TITLE PAGE
+\skip[height=25%fw]
+\begin{center}
+\font[family=Argos George, size=30pt]{Contes & Légendes\break d’Almaq
+\bigskip
+\couyard[type=9,width=5em]}
+\vfill
+\font[family=Libertinus Serif, size=18pt, features=+smcp]{Premier Volume}
+\vfill
+\font[family=DS Zierschrift, size=14pt]{Omikhleia}
+\end{center}
+\break
+% COPYRIGHT PAGE
+\hbox{}
+\vfill
+\font[size=9pt]{%
+\noindent{}© 2022, Omikhleia, pour la présente édition.
+
+\noindent{}© Emma Lenski’s testamentary executors.
+
+\smallskip
+\font[size=8pt]{%
+\noindent{}Le Code de la propriété intellectuelle interdit les copies ou reproductions destinées à une utilisation
+collective. Toute représentation ou reproduction intégrale ou partielle faite par quelque procédé que ce soit,
+sans le consentement de l’auteur ou de ses ayants cause, est illicite et constitue une contrefaçon
+sanctionnée par les articles L.335-2 et suivants du Code de la propriété intellectuelle.\par}}%
+\break
+\end{document}
