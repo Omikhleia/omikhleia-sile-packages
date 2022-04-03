@@ -4,9 +4,9 @@
 -- License: MIT
 --
 SILE.scratch.labelrefs = {} -- references being collated in this SILE run
-local _labelrefs = {} -- references from the previous SILE run
-local _markers = {} -- reference labels collated so far (for existence check)
-local _missing = {} -- missing references
+local labelrefs_ = {} -- references from the previous SILE run
+local markers_ = {} -- reference labels collated so far (for existence check)
+local missing_ = {} -- missing references
 
 -- Collate label references.
 -- This method shall be called by supporting classes at the end of each page.
@@ -33,11 +33,11 @@ local writeLabelRefs = function (_)
   tocfile:write("return " .. tocdata)
   tocfile:close()
 
-  if not pl.tablex.deepcompare(SILE.scratch.labelrefs, _labelrefs) then
+  if not pl.tablex.deepcompare(SILE.scratch.labelrefs, labelrefs_) then
     io.stderr:write("\n! Warning: Label references have changed, please rerun SILE to update them.")
-  elseif #_missing > 0 then
+  elseif #missing_ > 0 then
     io.stderr:write("\n! Warning: There are unresolved label references ("
-      ..table.concat(_missing, ", ")..")")
+      ..table.concat(missing_, ", ")..")")
   end
 end
 
@@ -53,12 +53,12 @@ local readLabelRefs = function ()
   end
   local doc = reffile:read("*all")
   local labelrefs = assert(load(doc))()
-  _labelrefs = labelrefs
+  labelrefs_ = labelrefs
 end
 
 -- For sectioning packages:
 -- Leverage \tocentry (from the tableofcontents package) if available.
--- We do this do globally store the current section number.
+-- We do this to retrieve and store the current section number.
 -- This implies the user can only refer to sections actually entered in the
 -- TOC. We would need another method if users eventually want want to refer
 -- to a section not in the TOC, but is it sound?
@@ -105,16 +105,16 @@ end
 -- If a reference marker has already been met, it is above us (supra)
 -- else it must be after us (infra).
   local isSupra = function(marker)
-    return _markers[marker] ~= nil and true or false
+    return markers_[marker] ~= nil and true or false
   end
 
 -- LOW-LEVEL/INTERNAL COMMANDS
 
 SILE.registerCommand("refentry", function (options, content)
-  if _markers[options.marker] ~= nil then
+  if markers_[options.marker] ~= nil then
     SU.warn("Duplicate label '"..options.marker.."': this is possibly an error")
   end
-  _markers[options.marker] = true -- Just store seen markers
+  markers_[options.marker] = true -- Just store seen markers
 
   local dest
   if SILE.Commands["pdf:destination"] then
@@ -142,7 +142,7 @@ SILE.registerCommand("ref:unknown", function (options, _)
   -- the package documentation without the user being spammed...
   if SU.boolean(options.warn, true) then
     SU.warn("Label reference '"..marker.."' has not yet been resolved")
-    _missing[#_missing + 1] = marker
+    missing_[#missing_ + 1] = marker
   end
 end, "Warns the user and outputs ‹missing reference› for unresolved label references.")
 
@@ -169,7 +169,7 @@ SILE.registerCommand("ref", function (options, content)
   local marker = SU.required(options, "marker", "ref")
   local t = options.type or "default"
 
-  local node = _labelrefs[marker]
+  local node = labelrefs_[marker]
   if not node then
     SILE.call("ref:unknown", options)
   else

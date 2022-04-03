@@ -3,7 +3,7 @@
 -- Hooks are removed and replaced by styles, allowing for a fully customizable TOC
 --
 SILE.scratch.tableofcontents = {}
-local _tableofcontents = {}
+local tableofcontents_ = {}
 
 -- Styles
 local styles = SILE.require("packages/styles").exports
@@ -62,22 +62,22 @@ local moveToc = function (_)
   end
 end
 
-local writeToc = function ()
+local writeToc = function (_)
   local tocdata = pl.pretty.write(SILE.scratch.tableofcontents)
   local tocfile, err = io.open(SILE.masterFilename .. '.toc', "w")
   if not tocfile then return SU.error(err) end
   tocfile:write("return " .. tocdata)
   tocfile:close()
 
-  if not pl.tablex.deepcompare(SILE.scratch.tableofcontents, _tableofcontents) then
+  if not pl.tablex.deepcompare(SILE.scratch.tableofcontents, tableofcontents_) then
     io.stderr:write("\n! Warning: table of contents has changed, please rerun SILE to update it.")
   end
 end
 
 local loadToc = function()
-  if _tableofcontents and #_tableofcontents > 0 then
+  if tableofcontents_ and #tableofcontents_ > 0 then
     -- already loaded
-    return true
+    return tableofcontents_
   end
   local tocfile, _ = io.open(SILE.masterFilename .. '.toc')
   if not tocfile then
@@ -86,8 +86,8 @@ local loadToc = function()
   end
   local doc = tocfile:read("*all")
   local toc = assert(load(doc))()
-  _tableofcontents = toc
-  return true
+  tableofcontents_ = toc
+  return tableofcontents_
 end
 
 -- Warning for users of the legacy tableofcontents
@@ -100,7 +100,8 @@ SILE.registerCommand("tableofcontents", function (options, _)
   local start = SU.cast("integer", options.start or 0)
   local linking = SU.boolean(options.linking, true)
 
-  if loadToc() == false then
+  local toc = loadToc()
+  if toc == false then
     SILE.call("tableofcontents:notocmessage")
     return
   end
@@ -109,7 +110,6 @@ SILE.registerCommand("tableofcontents", function (options, _)
   local oldFt = SILE.Commands["footnote"]
   SILE.Commands["footnote"] = function () end
 
-  local toc = _tableofcontents
   for i = 1, #toc do
     local item = toc[i]
     if item.level >= start and item.level <= start + depth then
@@ -210,7 +210,8 @@ end, "Typeset the (section) number in a TOC entry - internal.")
 
 return {
   exports = { writeToc = writeToc, moveToc = moveToc,
-    moveTocNodes = moveToc -- for compatibility
+    moveTocNodes = moveToc, -- for compatibility
+    loadToc = loadToc,
   },
   init = function (self)
     self:loadPackage("infonode")
