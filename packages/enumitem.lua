@@ -2,7 +2,7 @@
 -- Lightweight enumerations and bullet lists
 -- License: MIT
 --
--- NOTE: So not described explicitely in the documentation, the package supports
+-- NOTE: Though not described explicitly in the documentation, the package supports
 -- two nesting techniques:
 -- The "simple" one
 --    \begin{itemize}
@@ -11,7 +11,7 @@
 --          \item{L2.1}
 --       \end{itemize}
 --    \end{itemize}
--- The "alternative" one, which consist in having the nested elements in an item:
+-- The "alternative" one, which consists in having the nested elements in an item:
 --    \begin{itemize}
 --       \item{L1.1
 --         \begin{itemize}
@@ -19,7 +19,7 @@
 --         \end{itemize}}
 --    \end{itemize}
 -- The latter might be less readable, but is of course more powerful, as other
--- contents can be added to the item, as in
+-- contents can be added to the item, as in:
 --    \begin{itemize}
 --       \item{L1.1
 --         \begin{itemize}
@@ -285,8 +285,8 @@ local doNestedList = function (listType, _, content)
   local variant = SILE.settings.get("list."..listType..".variant")
   local listAltStyleType = variant and listType.."-"..variant or listType
 
+  -- depth
   local depth = SILE.settings.get("list.current."..listType..".depth") + 1
-  SILE.settings.set("list.current."..listType..".depth", depth)
 
   -- styling
   local styleName = checkEnumStyleName("list:"..listAltStyleType..":"..depth, "list:"..listType..":"..depth)
@@ -301,6 +301,7 @@ local doNestedList = function (listType, _, content)
     SILE.call("par")
   end
   SILE.settings.temporarily(function ()
+    SILE.settings.set("list.current."..listType..".depth", depth)
     SILE.settings.set("current.parindent", SILE.nodefactory.glue())
     SILE.settings.set("document.parindent", SILE.nodefactory.glue())
     SILE.settings.set("document.parskip", SILE.settings.get("list.parskip"))
@@ -338,8 +339,6 @@ local doNestedList = function (listType, _, content)
       end
     end
   end)
-  depth = depth - 1
-  SILE.settings.set("list.current."..listType..".depth", depth)
 
   if not SILE.typesetter:vmode() then
       SILE.call("par")
