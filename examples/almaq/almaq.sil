@@ -7,6 +7,7 @@
 \script[src=packages/ptable]
 \script[src=packages/dropcaps]
 \script[src=packages/framebox]
+\script[src=packages/experimental/fancytoc]
 \language[main=fr]
 %\hyphenator:add-exceptions[lang=fr]{lo-go-gramme}%
 %\hyphenator:add-exceptions[lang=fr]{igno-rer}%
@@ -123,7 +124,7 @@ end, "Insert a partition.")
 % Override class default, so as not to clear the odd running header^^
 \define[command=sectioning:part:hook]{
 \noheaderthispage%
-\nofoliosthispage%
+\nofoliothispage%
 \even-running-header{}
 \set-counter[id=foonote, value=1]
 \set-multilevel-counter[id=sections, level=1, value=0]
@@ -170,6 +171,7 @@ end)
 \odd-running-header{Contes et légendes d’Almaq}%
 
 \include[src=examples/almaq/frontmatter_page.sil]
+%
 \part{Études & Essais}
 \include[src=examples/almaq/injonction_de_sifo_a.sil]
 \include[src=examples/almaq/injonction_de_sifo_b.sil]
@@ -181,6 +183,7 @@ end)
 \include[src=examples/almaq/code_de_keldre_b.sil]
 \include[src=examples/almaq/caraye_opalescence_critique.sil]
 \include[src=examples/almaq/reperes_chronologiques.sil]
+\include[src=examples/almaq/bouffon_illustration.sil]
 
 \part{Caractères}
 
@@ -212,5 +215,8 @@ end)
 \include[src=examples/almaq/prophetie.sil]
 \include[src=examples/almaq/jardin_des_luthiers.sil]
 \include[src=examples/almaq/anthone_de_longrines.sil]
+
+\include[src=examples/almaq/colophon.sil]
+\include[src=examples/almaq/endmatter_page.sil]
 
 \end{document}

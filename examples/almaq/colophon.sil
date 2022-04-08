@@ -1,0 +1,16 @@
+\begin{document}
+\script[src=packages/colophon]
+\open-on-any-page
+\nofoliothispage
+\noheaderthispage
+\hbox{}\vfill
+\set[parameter=linebreak.emergencyStretch, value=0.5em]{%
+\font[family=Cardinal Alternate, size=11pt, style=italic]{%
+\colophon[decoration=true,figure=decorative, ratio=1.025]{%
+C’est ainsi que s’achève le premier volet introductif des Contes et légendes d’Almaq,
+où le lecteur aura pu découvrir la cité aux mille tours et quelques acteurs de sa longue histoire.
+Dans un prochain volet à paraître, au temps de la neuvième guerre cyclique, nous
+suivrons la grande geste épique d’Alster Ptoliporthe et du bouffon Dongann,
+telle que le poète Keldre la rapporta.\par}}}
+
+\end{document}

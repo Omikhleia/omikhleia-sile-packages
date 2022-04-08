@@ -1,0 +1,13 @@
+\begin{document}
+\open-on-any-page
+\noheaders
+\neverindent
+\center{\font[size=14pt]{Contes & Légendes d’Almaq}}
+\smallskip
+\couyard[type=1, width=default]
+\smallskip
+\tableofcontents
+\medskip
+\couyard[type=3, width=default]
+
+\end{document}
