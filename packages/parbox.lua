@@ -152,6 +152,53 @@ local parseBorderOrPadding = function (rawspec, opt)
   return spec
 end
 
+local computeNaturalWidth = function (nodes)
+  -- Derived from typesetter:computeLineRatio()
+  -- See comment where used below: it could have been interesting for
+  -- the typesetter to store the natural width in the the line vbox...
+  local naturalTotals = SILE.length()
+  local skipping = true
+  for i, node in ipairs(nodes) do
+    if node.is_box then
+      skipping = false
+      naturalTotals:___add(node:lineContribution())
+    elseif node.is_penalty and node.penalty == -10000 then -- This -10000 is -inf_bad
+      skipping = false
+    elseif node.is_discretionary then
+      skipping = false
+      naturalTotals:___add(node:replacementWidth())
+    elseif not skipping then
+      naturalTotals:___add(node.width)
+    end
+  end
+  local i = #nodes
+  while i > 1 do
+    if nodes[i].is_glue or nodes[i].is_zero then
+      if nodes[i].value ~= "margin" then
+        naturalTotals:___sub(nodes[i].width)
+      end
+    elseif nodes[i].is_discretionary then
+      naturalTotals:___sub(nodes[i]:replacementWidth())
+      naturalTotals:___add(nodes[i]:prebreakWidth())
+      break
+    else
+      break
+    end
+    i = i - 1
+  end
+  if nodes[1].is_discretionary then
+    naturalTotals:___sub(nodes[1]:replacementWidth())
+    naturalTotals:___add(nodes[1]:postbreakWidth())
+  end
+  return naturalTotals
+end
+
+local recomputeLineRatio = function (targetWidth, naturalWidth)
+  local left = targetWidth:tonumber() - naturalWidth:tonumber()
+  local ratio = left / naturalWidth[left < 0 and "shrink" or "stretch"]:tonumber()
+  return math.max(ratio, -1)
+end
+
 SILE.registerCommand("parbox", function (options, content)
   local width = SU.required(options, "width", "parbox")
   local strut = options.strut or "none"
@@ -178,6 +225,7 @@ SILE.registerCommand("parbox", function (options, content)
 
   local wmax = SILE.length()
   local totalHeight = SILE.length()
+  local vboxWidths = {}
   for i = 1, #vboxes do
     -- Try to cancel vertical stretching/shrinking
     if vboxes[i].is_vglue then
@@ -190,30 +238,28 @@ SILE.registerCommand("parbox", function (options, content)
     totalHeight = totalHeight + vboxes[i].height:absolute() + vboxes[i].depth:absolute()
 
     if minimize then
-      -- We go through all nodes in the line to compute the maximal line width.
+      -- We go through all nodes in the line to (re)compute the maximal natural
+      -- line width.
       -- This is not so efficient, we could have modified the typesetter to
       -- compute it when it was processing the lines...But is is buried deep
-      -- in its breakpointsToLines() method, which some packages may moreover
-      -- overload, so we went for the easiest solution, albeit CPU-intensive.
+      -- in its breakpointsToLines() and typesetter:computeLineRatio() methods,
+      -- which some packages may moreover overload, so we went for the easiest
+      -- solution, albeit CPU-intensive and somewhat dirty.
       local w = SILE.length()
       if vboxes[i].nodes then
-        for n in ipairs(vboxes[i].nodes) do
-          if not vboxes[i].nodes[n].is_penalty then
-            w = w + vboxes[i].nodes[n].width:absolute()
-          end
-        end
+        w = computeNaturalWidth(vboxes[i].nodes)
+        if w > wmax then wmax = w end
       end
-      if w > wmax then wmax = w end
+      vboxWidths[i] = w
     end
   end
 
   if minimize then
-    -- Again not so effective: we recompute all line ratios based on the new
-    -- width...
+    -- We recompute all line ratios based on the new target width.
+    width = wmax.length
     for i = 1, #vboxes do
-      width = wmax.length -- ignore strech/shrink
       if vboxes[i].nodes and vboxes[i].ratio then
-        local r = SILE.typesetter:computeLineRatio(width, vboxes[i].nodes)
+        local r = recomputeLineRatio(width, vboxWidths[i])
         vboxes[i].ratio = r
       end
     end
