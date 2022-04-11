@@ -7,10 +7,18 @@ local loadToc = SILE.documentState.documentClass.loadToc
 if not loadToc then
   SU.error("The class does not export TOC loading")
 end
-  
+
+local linkWrapper = function (dest, func)
+  if dest and SILE.Commands["pdf:link"] then
+    SILE.call("pdf:link", { dest = dest }, func)
+  else
+    func()
+  end
+end
+
 SILE.registerCommand("tableofcontents", function (options, _)
-  local depth = SU.cast("integer", options.depth or 1)
-  local start = SU.cast("integer", options.start or 0)
+  -- local depth = SU.cast("integer", options.depth or 1)
+  -- local start = SU.cast("integer", options.start or 0)
   local linking = SU.boolean(options.linking, true)
 
   local toc = loadToc()
@@ -51,15 +59,16 @@ SILE.registerCommand("tableofcontents", function (options, _)
     SILE.call("bracebox", { bracewidth = "0.8em"}, function()
       SILE.call("parbox", { valign = "middle", width = "75%lw" }, function ()
         for _, c in ipairs(v.children) do
-          
           SILE.call("parbox", { valign = "top", strut = "rule", minimize = true, width = "80%lw" }, function ()
             SILE.settings.set("document.lskip", SILE.length("1em"))
-           SILE.settings.set("document.rskip", SILE.nodefactory.hfillglue())
+            SILE.settings.set("document.rskip", SILE.nodefactory.hfillglue())
             SILE.settings.set("document.parindent", SILE.length("-0.5em"))
             SILE.process(c.label)
           end)
           SILE.call("dotfill")
-          SILE.typesetter:typeset(c.pageno)
+          linkWrapper(linking and c.link, function ()
+            SILE.typesetter:typeset(c.pageno)
+          end)
           SILE.call("par")
         end
       end)
