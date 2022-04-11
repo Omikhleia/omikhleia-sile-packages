@@ -19,9 +19,11 @@ SILE.registerCommand("tableofcontents", function (options, _)
     return
   end
 
-  -- Temporarilly kill footnotes (fragile)
+  -- Temporarilly kill footnotes and labels (fragile)
   local oldFt = SILE.Commands["footnote"]
   SILE.Commands["footnote"] = function () end
+  local oldLbl = SILE.Commands["label"]
+  SILE.Commands["label"] = function () end
 
   local root = {}
   for i = 1, #toc do
@@ -66,4 +68,5 @@ SILE.registerCommand("tableofcontents", function (options, _)
   end
 
   SILE.Commands["footnote"] = oldFt
+  SILE.Commands["label"] = oldLbl
 end, "Output the table of contents.")
