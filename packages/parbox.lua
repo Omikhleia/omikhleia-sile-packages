@@ -10,9 +10,9 @@ SILE.require("packages/struts")
 
 -- PARBOXING FUNCTIONS
 
--- Function for build a new temporary frame which only constraint is to honor
--- the target width of the paragraph box. This frame does not have to be
--- registered in SILE.documentState.thisPageTemplate.frames since we will
+-- Function for building a new temporary frame which only constraint is to
+-- honor the target width of the paragraph box. This frame does not have to
+-- be registered in SILE.documentState.thisPageTemplate.frames since we will
 -- throw it out after boxing.
 local nb_ = 1
 local parboxTempFrame = function (options)
@@ -120,13 +120,13 @@ local insertStruts = function (vboxlist, strut)
   local h, d = SU.cast("length", strut.height), SU.cast("length", strut.depth)
   for i = 1, #vboxlist do
     if vboxlist[i].is_vbox and vboxlist[i].height < h then
-      vboxlist[i].height = h -- Hack height of first vbox
+      vboxlist[i].height = h -- Hack height of the first vbox
       break
     end
   end
   for i = #vboxlist, 1, - 1 do
     if vboxlist[i].is_vbox and vboxlist[i].depth < d then
-      vboxlist[i].depth = d -- Hack depth of first vbox
+      vboxlist[i].depth = d -- Hack depth of the last vbox
       break
     end
   end
@@ -182,7 +182,7 @@ SILE.registerCommand("parbox", function (options, content)
     -- Try to cancel vertical stretching/shrinking
     if vboxes[i].is_vglue then
       -- Important: many vglues are just the _same_ node, which will be "adjusted"
-      -- by the page builder. We cannot tweak directly its height or depth as we
+      -- by the page builder. We cannot tweak directly their height or depth as we
       -- sometimes do with other boxes, as it would have a side effect. So we have
       -- to re-create a new vglue with the appropriate fixed dimension.
       vboxes[i] = SILE.nodefactory.vglue(SILE.length(vboxes[i].height.length))
@@ -196,13 +196,13 @@ SILE.registerCommand("parbox", function (options, content)
       -- in its breakpointsToLines() method, which some packages may moreover
       -- overload, so we went for the easiest solution, albeit CPU-intensive.
       local w = SILE.length()
-        if vboxes[i].nodes then
-          for n in ipairs(vboxes[i].nodes) do
-            if vboxes[i].nodes[n].width > SILE.length(0) then
-              w = w + vboxes[i].nodes[n].width:absolute()
-            end
+      if vboxes[i].nodes then
+        for n in ipairs(vboxes[i].nodes) do
+          if not vboxes[i].nodes[n].is_penalty then
+            w = w + vboxes[i].nodes[n].width:absolute()
           end
         end
+      end
       if w > wmax then wmax = w end
     end
   end
@@ -211,12 +211,12 @@ SILE.registerCommand("parbox", function (options, content)
     -- Again not so effective: we recompute all line ratios based on the new
     -- width...
     for i = 1, #vboxes do
-      if vboxes[i].nodes then
-        local r = SILE.typesetter:computeLineRatio(wmax, vboxes[i].nodes)
+      width = wmax.length -- ignore strech/shrink
+      if vboxes[i].nodes and vboxes[i].ratio then
+        local r = SILE.typesetter:computeLineRatio(width, vboxes[i].nodes)
         vboxes[i].ratio = r
       end
     end
-    width = wmax
   end
 
   local z0 = SILE.length(0)
