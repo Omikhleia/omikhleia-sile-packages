@@ -106,9 +106,12 @@ SILE.registerCommand("tableofcontents", function (options, _)
     return
   end
 
-  -- Temporarilly kill footnotes (fragile)
+  -- Temporarilly kill footnotes and labels (fragile)
   local oldFt = SILE.Commands["footnote"]
   SILE.Commands["footnote"] = function () end
+  local oldLbl = SILE.Commands["label"]
+  SILE.Commands["label"] = function () end
+
 
   for i = 1, #toc do
     local item = toc[i]
@@ -123,6 +126,7 @@ SILE.registerCommand("tableofcontents", function (options, _)
   end
 
   SILE.Commands["footnote"] = oldFt
+  SILE.Commands["label"] = oldLbl
 end, "Output the table of contents.")
 
 -- Flatten a node list into just its string representation.
@@ -158,13 +162,16 @@ SILE.registerCommand("tocentry", function (options, content)
     dest = "dest" .. dc
     SILE.call("pdf:destination", { name = dest })
     SILE.typesetter:pushState()
-    -- Temporarilly kill footnotes (fragile)
+    -- Temporarilly kill footnotes and labels (fragile)
     local oldFt = SILE.Commands["footnote"]
     SILE.Commands["footnote"] = function () end
+    local oldLbl = SILE.Commands["label"]
+    SILE.Commands["label"] = function () end
 
     SILE.process(content)
 
     SILE.Commands["footnote"] = oldFt
+    SILE.Commands["label"] = oldLbl
 
     local title = nodesToText(SILE.typesetter.state.nodes)
     SILE.typesetter:popState()

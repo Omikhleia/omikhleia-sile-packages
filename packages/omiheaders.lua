@@ -57,15 +57,18 @@ return {
             SILE.settings.set("document.lskip", SILE.nodefactory.glue())
             SILE.settings.set("document.rskip", SILE.nodefactory.glue())
 
-            -- Temporarilly kill footnotes (fragile)
+            -- Temporarilly kill footnotes and labels (fragile)
             local oldFt = SILE.Commands["footnote"]
             SILE.Commands["footnote"] = function() end
+            local oldLbl = SILE.Commands["label"]
+            SILE.Commands["label"] = function () end
 
             SILE.process(headerContent)
 
             SILE.typesetter:leaveHmode()
 
             SILE.Commands["footnote"] = oldFt
+            SILE.Commands["label"] = oldLbl
             SILE.settings.popState()
 
             if SILE.scratch.headers.rule then
