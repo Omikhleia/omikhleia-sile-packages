@@ -1,3 +1,6 @@
+-- DISABLED: Apparently fixed with hack-1362.
+--
+--[[ 
 SILE.nodeMakers.unicode.handleWordBreak = function (self, item)
   -- self:makeToken() -- <---------------- HACK DIDIER REMOVED #1358
   if self:isSpace(item.text) then
@@ -8,3 +11,4 @@ SILE.nodeMakers.unicode.handleWordBreak = function (self, item)
     self:addToken(item.text, item)
   end
 end
+]]--

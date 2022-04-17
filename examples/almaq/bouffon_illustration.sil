@@ -5,6 +5,6 @@
 \nofoliothispage
 \hbox{}
 \vfill
-\center{\svg[src=examples/almaq/bouffon.svg, width=60%fw]}
+\center{\svg[src=examples/almaq/images/bouffon.svg, width=60%fw]}
 
 \end{document}

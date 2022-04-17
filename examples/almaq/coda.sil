@@ -1,0 +1,38 @@
+\begin{document}
+
+\open-on-any-page
+\hbox\vfill
+
+\begin{oldbookwrapper}
+\em{Je ne dis rien de ce rêve furtif, dont je m’étais éveillé avec une sensation de malaise.}
+
+\bigskip
+\svg[src=examples/almaq/images/manicule.svg, width=1.25em] Nuit noire et constellations inconnues…
+Quelqu’un m’appelait et je reconnus immédiatement sa voix.
+Il était là, près de la margelle du puits asséché. Sur ses bras nus luisaient les entrelacs de tatouages bleutés.
+Relevant sa capuche, il tourna vers moi son visage rond qu’un bandeau traversait, masquant son œil gauche.
+Une cicatrice lui barrait la joue droite. En dépit de cela, il était identique au vieil ami que j’avais connu jusqu’à
+ses derniers jours parmi nous. Cela devait être un rêve, forcément, pour que les longues années écoulées depuis notre
+dernière rencontre n’aient pas changé mon compagnon de taverne. Que dis-je, n’était-il pas mort ? Je devais rêver,
+oui, vraiment ! Le regard du bouffon s’arrêta sur moi un bref instant.
+
+—\nbsp{}Tes cheveux ont blanchi, rhapsode.
+
+Il se détourna tout aussitôt.
+
+—\nbsp{}Où est donc ce petit lac paisible, cette mare verdâtre emplie de tritons où je voulais m’abreuver,
+où je cherchais un repos avant le jour arbitré ?
+
+Il écarta les bras, brandissant un bâton gravés d’oghams qui brillait lui-aussi d’une lueur bleue.
+« Ah ! Sur cette Sente-là, toute prédestinée. »
+
+Une brume épaisse l’environna. Lorsqu’elle se dissipa, je me retrouvai seul dans les ruines de la cité.
+Une lune pleine monta au-dessus des collines et je fus pris d’une lassitude immense. Mes yeux se fermèrent ;
+lorsqu’ils se rouvrirent, le ciel et la saison étaient différents. J’étais bien dans ce qui restait d’Almaq
+et Sifo était allongée à mes côtés, dormant paisiblement.
+\par
+\end{oldbookwrapper}
+
+\vfill\hbox{}
+
+\end{document}

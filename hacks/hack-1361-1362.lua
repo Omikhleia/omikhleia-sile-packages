@@ -1,30 +1,30 @@
 SILE.defaultTypesetter.pushGlue = function(self, spec)
   -- if SU.type(spec) ~= "table" then SU.warn("Please use pushHorizontal() to pass a premade node instead of a spec") end
   local node = SU.type(spec) == "glue" and spec or SILE.nodefactory.glue(spec)
-  return self:pushHorizontal(node:absolute()) -- DIDIER absolutized #1361 HACK WORKAROUND (NOT A PROPER FIX!!!)
+  return self:pushHorizontal(node:absolute()) -- absolutized #1361 HACK WORKAROUND (NOT A PROPER FIX!!!)
 end
 
 SILE.defaultTypesetter.pushExplicitGlue = function(self, spec)
   local node = SU.type(spec) == "glue" and spec or SILE.nodefactory.glue(spec)
   node.explicit = true
   node.discardable = false
-  return self:pushHorizontal(node:absolute()) -- DIDIER absolutized #1361 HACK WORKAROUND (NOT A PROPER FIX!!!)
+  return self:pushHorizontal(node:absolute()) -- absolutized #1361 HACK WORKAROUND (NOT A PROPER FIX!!!)
 end
 
 SILE.defaultTypesetter.pushVglue = function(self, spec)
   local node = SU.type(spec) == "vglue" and spec or SILE.nodefactory.vglue(spec)
-  return self:pushVertical(node:absolute()) -- DIDIER absolutized #1361 HACK WORKAROUND (NOT A PROPER FIX!!!)
+  return self:pushVertical(node:absolute()) -- absolutized #1361 HACK WORKAROUND (NOT A PROPER FIX!!!)
 end
 
 SILE.defaultTypesetter.pushExplicitVglue = function(self, spec)
   local node = SU.type(spec) == "vglue" and spec or SILE.nodefactory.vglue(spec)
   node.explicit = true
   node.discardable = false
-  return self:pushVertical(node:absolute()) -- DIDIER absolutized #1361 HACK WORKAROUND (NOT A PROPER FIX!!!)
+  return self:pushVertical(node:absolute()) -- absolutized #1361 HACK WORKAROUND (NOT A PROPER FIX!!!)
 end
 
 SILE.defaultTypesetter.computeLineRatio = function(_, breakwidth, slice)
-  -- HACK DIDIER #1362 VERY PARTIAL WORKAROUND
+  -- HACK #1362 VERY PARTIAL WORKAROUND
   -- This is not a real solution...
   -- At least be consistent with the nnode output routine, though all is wrong...
   local naturalTotals = SILE.length()

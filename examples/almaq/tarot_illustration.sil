@@ -5,6 +5,6 @@
 \nofoliothispage
 \hbox{}
 \vfill
-\noindent\img[src=examples/almaq/tarot_deck.png, width=100%fw]
+\noindent\img[src=examples/almaq/images/tarot_deck.png, width=100%fw]
 
 \end{document}

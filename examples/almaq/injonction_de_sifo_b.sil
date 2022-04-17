@@ -11,7 +11,7 @@ Ses conventions typographiques sont de même une innovation selon l’usage d’
 \smallskip
 
 \begin{figure}
-\svg[src=examples/almaq/chadhrave_tyesed.svg, height=0.8cm]
+\svg[src=examples/almaq/images/chadhrave_tyesed.svg, height=0.8cm]
 \caption{%
 Le mot \em{tyesed} (« langue »)\footnote{%
 Emma Lenski, \em{op. cit.}, appendice D dans l’édition augmentée de 1962.
@@ -25,7 +25,7 @@ Si le système ne dispose pas de véritable notion de casse, les noms propres so
 l’encre rouge, ou d’un trait plus épais.
 
 \begin{figure}
-\svg[src=examples/almaq/chadhrave_e_sornas_agwinchasrin.svg, height=1cm]
+\svg[src=examples/almaq/images/chadhrave_e_sornas_agwinchasrin.svg, height=1cm]
 \caption{%
 Dans le même style décoratif, \em{e-sornas agwinchasrin} (« les hydres fabuleuses »),
 nom d’un fragment de conte mythologique\footnote{%
@@ -36,7 +36,7 @@ en va semblablement pour le /o/, le /gw/ et le /ch/.}
 \end{figure}
 
 \begin{figure}
-\svg[src=examples/almaq/chadhrave_na_sornas.svg, width=95%fw]
+\svg[src=examples/almaq/images/chadhrave_na_sornas.svg, width=95%fw]
 \caption{%
 \label[marker=na-sornas]%
 Extrait d’un bref texte reprenant ce titre dans le \em{Codex Monesterellum}, dans
@@ -68,7 +68,7 @@ Pour P. de Blancandre, c’est un \em{guillemet} ; pour Lenski, un \em{dash}, pl
 \smallskip
 
 \begin{figure}
-\svg[src=examples/almaq/chadhrave_table.svg, width=100%fw]
+\svg[src=examples/almaq/images/chadhrave_table.svg, width=100%fw]
 \caption{Reconstruction de la table des glyphes du \em{chadhrave} d’après E. Lenski\footnote{%
 Emma Lenski, \em{loc. cit.} La transcription latine retenue est normalisée par mes soins. Précisons
 néanmoins qu’elle est orthographique et non phonologique.
@@ -84,7 +84,7 @@ comme une variation non signifiante, d’usage assez libre encore que son utilis
 concerne principalement les déterminants et préfixes. La seconde série est employée
 pour les diphtongues de la langue d’Almaq. Le cas du /i/ est un peu différent. Le second symbole
 marquait une semi-consonne palatale dans le système impérial. Le mode d’Almaq l’emploie, par
-mimétisme, comme variante graphique du i devant une autre voyelle, bien que les sons soient
+mimétisme, comme variante graphique du /i/ devant une autre voyelle, bien que les sons soient
 prononcés distinctement. Il est parfois souscrit.
 
 Les lettres /n/, /l/ et /s/ possèdent des ligatures doublées.

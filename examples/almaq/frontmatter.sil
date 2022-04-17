@@ -22,8 +22,20 @@
 % COPYRIGHT PAGE
 \hbox{}
 \vfill
+\font[size=10pt]{%
+\noindent\svg[src=examples/almaq/images/dragon_de_brume_logo.svg, width=4.27cm]
+
+\noindent{}© 2022, \em{Le Dragon de Brume}
+
+\smallskip
+\noindent{}ISBN : 978-2-9539896-6-3\par}
+
+\smallskip
 \font[size=9pt]{%
-\noindent{}© 2022, Omikhleia, pour la présente édition.
+\noindent{}Le présent ouvrage est publié avec le soutien logistique et technique du Dragon de Brume.
+
+\smallskip
+\noindent{}© Omikhleia, pour la présente édition.
 
 \noindent{}© Emma Lenski’s testamentary executors.
 

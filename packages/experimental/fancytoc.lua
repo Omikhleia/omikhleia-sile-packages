@@ -47,34 +47,40 @@ SILE.registerCommand("tableofcontents", function (options, _)
     end
   end
 
-  -- Quick and dirty for now...
-  for _, v in ipairs(root) do
-    SILE.call("medskip")
-    SILE.call("parbox", { valign = "middle", width = "20%lw" }, function ()
-      SILE.call("raggedright", {}, function ()
-        SILE.call("font", { features="+smcp" }, v.item.label)
+  SILE.settings.temporarily(function()
+    SILE.settings.set("current.parindent", SILE.nodefactory.glue())
+    SILE.settings.set("document.parindent", SILE.nodefactory.glue())
+
+    -- Quick and dirty for now...
+    for _, v in ipairs(root) do
+      SILE.call("medskip")
+      SILE.call("parbox", { valign = "middle", width = "20%lw" }, function ()
+        SILE.call("raggedright", {}, function ()
+          SILE.call("font", { features="+smcp" }, v.item.label)
+        end)
       end)
-    end)
-    SILE.call("hfill")
-    SILE.call("bracebox", { bracewidth = "0.8em"}, function()
-      SILE.call("parbox", { valign = "middle", width = "75%lw" }, function ()
-        for _, c in ipairs(v.children) do
-          SILE.call("parbox", { valign = "top", strut = "rule", minimize = true, width = "80%lw" }, function ()
-            SILE.settings.set("document.lskip", SILE.length("1em"))
-            SILE.settings.set("document.rskip", SILE.nodefactory.hfillglue())
-            SILE.settings.set("document.parindent", SILE.length("-0.5em"))
-            SILE.process(c.label)
-          end)
-          SILE.call("dotfill")
-          linkWrapper(linking and c.link, function ()
-            SILE.typesetter:typeset(c.pageno)
-          end)
-          SILE.call("par")
-        end
+      SILE.call("hfill")
+      SILE.call("bracebox", { bracewidth = "0.8em"}, function()
+        SILE.call("parbox", { valign = "middle", width = "75%lw" }, function ()
+          for _, c in ipairs(v.children) do
+            SILE.call("parbox", { valign = "top", strut = "rule", minimize = true, width = "80%lw" }, function ()
+              SILE.settings.set("document.lskip", SILE.length("1em"))
+              SILE.settings.set("document.rskip", SILE.nodefactory.hfillglue())
+              SILE.settings.set("document.parindent", SILE.length("-0.5em"))
+              SILE.process(c.label)
+            end)
+            SILE.call("dotfill")
+            linkWrapper(linking and c.link, function ()
+              SILE.call("font", { features = "+onum"}, { c.pageno })
+              --SILE.typesetter:typeset(c.pageno)
+            end)
+            SILE.call("par")
+          end
+        end)
       end)
-    end)
-    SILE.call("par")
-  end
+      SILE.call("par")
+    end
+  end)
 
   SILE.Commands["footnote"] = oldFt
   SILE.Commands["label"] = oldLbl

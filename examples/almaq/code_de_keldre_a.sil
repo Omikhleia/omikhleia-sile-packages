@@ -68,7 +68,7 @@ incertaine, nous pensons pouvoir les résumer à cinq ou six glyphes de base, po
 inversés ; pour simplifier ensuite, nous parlerons de formes ouvrantes et fermantes.
 
 \begin{figure}
-\img[src=examples/almaq/musique_signes_consonantiques.png, width=3cm]
+\img[src=examples/almaq/images/musique_signes_consonantiques.png, width=3cm]
 \caption{%
 Dix signes. Le premier et le dernier sont ceux que Lenski rapproche du /s/ et du /r/ dans le
 système du \em{chadhruid}. Les derniers possèdent une variante « pointée ».}
@@ -79,7 +79,7 @@ d’un trait horizontal. Étant donné que ce trait n’apparaît pas isolé, ma
 composition, nous ne pensons pas qu’il puisse s’agir d’autre chose.
 
 \begin{figure}
-\img[src=examples/almaq/musique_variantes.png, width=3cm]
+\img[src=examples/almaq/images/musique_variantes.png, width=3cm]
 \caption{%
 Huit « variantes » avec tiret.}
 \end{figure}
@@ -90,7 +90,7 @@ En toute rigueur, nous en relevons en fait un cinquième, un peu moins fréquent
 ce qui explique sans doute son oubli.
 
 \begin{figure}
-\img[src=examples/almaq/musique_signes_vocaliques.png, width=3cm]
+\img[src=examples/almaq/images/musique_signes_vocaliques.png, width=3cm]
 \caption{%
 Dix autres signes. Les premiers évoquent peut-être les voyelles du \em{chadhruid}.}
 \end{figure}
@@ -113,7 +113,7 @@ successifs où des encoches peuvent s’intercaler. Leur nombre et leur forme ne
 nous n’en donnerons que quelques exemples.
 
 \begin{figure}
-\img[src=examples/almaq/musique_encoches.png, width=2cm]
+\img[src=examples/almaq/images/musique_encoches.png, width=2cm]
 \caption{%
 Exemples de segmentation de la porteuse (sans encoche, avec une et deux encoches).}
 \end{figure}

@@ -126,7 +126,7 @@ de variations, en hauteur et en tempo, d’une même séquence de base, que l’
 suivants et que j’appellerai, faute de mieux, le « destin d’Alster ».
 
 \begin[numbering=false]{partition}
-\novbreak\img[src=examples/almaq/opalescence_partition_1.png, width=97%fw]
+\novbreak\img[src=examples/almaq/images/opalescence_partition_1.png, width=97%fw]
 \caption{Premier mouvement (prélude)\novbreak{}}
 \end{partition}
 
@@ -165,7 +165,7 @@ des puissances ténébreuses qui auraient orienté ses actes et perverti son pro
 meilleur.
 
 \begin[numbering=false]{partition}
-\img[src=examples/almaq/opalescence_partition_2.png, width=97%fw]
+\img[src=examples/almaq/images/opalescence_partition_2.png, width=97%fw]
 \caption{Second mouvement (interlude entre sc. 1 et sc. 2)}
 \end{partition}
 
@@ -209,7 +209,7 @@ si la Chimère ne pouvait commencer ou finir ses phrases sans que le Dragon ne p
 notes qui semblent ignorer les autres parties — ou qui tentent de s’imposer à elles.
 
 \begin[numbering=false]{partition}
-\img[src=examples/almaq/opalescence_partition_3.png, width=97%fw]
+\img[src=examples/almaq/images/opalescence_partition_3.png, width=97%fw]
 \caption{Troisième mouvement (interlude entre sc. 2 et sc. 3)}
 \end{partition}
 
@@ -356,7 +356,7 @@ l’indicible est arrivé, emportant dans l’oubli un homme hors norme mais dé
 et, avec lui, une cité merveilleuse, voire un monde entier.
 
 \begin[numbering=false]{partition}
-\img[src=examples/almaq/opalescence_partition_4.png, width=97%fw]
+\img[src=examples/almaq/images/opalescence_partition_4.png, width=97%fw]
 \caption{Quatrième mouvement (final)}
 \end{partition}
 

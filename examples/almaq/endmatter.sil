@@ -1,0 +1,39 @@
+\begin{document}
+\open-on-odd-page
+\noheaders
+\nofolios
+\hbox{}\par
+\vfill
+
+\begin{center}
+\font[size=10pt]{%
+\em{Contes & Légendes d’Almaq}
+
+Premier volume
+
+\smallskip
+ISBN : 978-2-9539896-6-3
+
+\medskip
+\ean13[code=9782953989663]
+}
+
+\bigskip
+\font[size=9pt]{Édition : Le Dragon de Brume\par}
+\font[size=8.5pt]{31500 Toulouse, France\par}
+
+\medskip
+\font[size=9pt]{Impression : Lulu Press, Inc. (\em{Lulu.com}\kern[width=0.1em])\par}
+\font[size=8.5pt]{700 Park Offices Drive, Suite 250, Research Triangle\par
+NC, 27709, États-Unis\par}
+
+\medskip
+\font[size=9pt]{%
+Dépôt légal : juin 2022\par
+Achevé d’imprimer : juin 2022 (1\text:superscript{er} tirage)\par}
+
+\end{center}
+
+\break
+
+\end{document}

@@ -1,7 +1,7 @@
 \begin{document}
 
 \begin{figure}
-\img[src=examples/almaq/carte_sile_wiegger.png, width=99%fw]
+\img[src=examples/almaq/images/carte_sile_wiegger.png, width=99%fw]
 \caption{%
 Croquis d’Erich Wiegger dans sa préface de \em{Das Baum und der König} (1944) : « Étude sur la localisation de
 la terre siléenne mythique et des îles avoisinantes, d’après la carte des \em{Fabulae Alastri} et les indices

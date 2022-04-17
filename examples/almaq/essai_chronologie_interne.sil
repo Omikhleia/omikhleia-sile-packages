@@ -8,7 +8,7 @@ Qu’on se le dise, de nombreuses contradictions sont ici ignorées. La chronolo
 d’autre objectif que de donner aux lecteurs une idée assez générale de l’Histoire d’Almaq et, en particulier, des
 événements évoqués dans le présent recueil.
 
-\subsection[numbering=false]{Époques mythiques & histoire passée.}
+\section[numbering=false]{Époques mythiques & histoire passée.}
 
 \begin[cols=10%fw 90%fw, cellborder=0, cellpadding=0 4pt 0 0]{ptable}
 \begin{row}
@@ -52,13 +52,13 @@ d’autre objectif que de donner aux lecteurs une idée assez générale de l’
 \end{row}
 \begin{row}
   \cell[valign=top, style=narrow]{\abbr:siecle{ix} s.}
-  \cell[valign=top, style=narrow]{Huitième guerre cyclique (c. 805–815). 
-  Fin du Trosième Empire. Période dite de la Réforme à Almaq (c. 825).
+  \cell[valign=top, style=narrow]{Huitième guerre cyclique (c. 805–815).
+  Fin du Troisième Empire. Période dite de la Réforme à Almaq (c. 825).
   Les Grands Jardins sont fermés à l’En-Bas.}
 \end{row}
 \end{ptable}
 
-\subsection[numbering=false]{Le dixième siècle.}
+\section[numbering=false]{Le dixième siècle.}
 
 \begin[cols=10%fw 90%fw, cellborder=0, cellpadding=0 4pt 0 0]{ptable}
 \begin{row}
@@ -151,7 +151,7 @@ d’autre objectif que de donner aux lecteurs une idée assez générale de l’
 \end{row}
 \end{ptable}
 
-\subsection[numbering=false]{Après la Chute.}
+\section[numbering=false]{Après la Chute.}
 
 \begin[cols=10%fw 90%fw, cellborder=0, cellpadding=0 4pt 0 0]{ptable}
 \begin{row}

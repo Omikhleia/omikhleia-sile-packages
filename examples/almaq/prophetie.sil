@@ -59,16 +59,16 @@ toucher le sol, ses minces bras arqués peinaient à toucher les accoudoirs d’
 Safrian voulait disputer une joute verbale avec le vieux Fhir. Il était parti éprouver la sagesse en mots du
 tout-savant Gible. Il arriva donc à la salle du trône et en apostropha l’occupant.
 
-— Salut à toi, ô Fhir. Je suis venu me mesurer à ton mythe et voir si tu es aussi savant qu’on le prétend.
+—\nbsp{}Salut à toi, ô Fhir. Je suis venu me mesurer à ton mythe et voir si tu es aussi savant qu’on le prétend.
 
-— Quel est cet homme imprudent, dit Fhir d’un ton sépulcral, qui dans ma propre salle me lance de pareils
+—\nbsp{}Quel est cet homme imprudent, dit Fhir d’un ton sépulcral, qui dans ma propre salle me lance de pareils
 mots ? Tu ne sortiras pas vivant de la Cité-Piège, à moins que de nous deux tu ne sois le plus savant.
 Avance dans la halle et prends un siège ou tiens-toi droit au milieu, peu importe. Alors nous débattrons, quant
 à arbitrer lequel de nous en sait davantage que l’autre. Si tu l’emportes sur moi, nomme celles que tu veux de
 mes précieuses richesses. Tous ces coffres que tu vois ici sont emplis de rubis et d’émeraudes, de gemmes
 taillées ou de colliers d’ambre et d’or. Tu prendras la quantité qui te convient.
 
-— Si je gagne notre duel, je ne veux aucun trésor sinon l’un de ceux qui sont à ta ceinture.
+—\nbsp{}Si je gagne notre duel, je ne veux aucun trésor sinon l’un de ceux qui sont à ta ceinture.
 
 C’était un fait que le seigneur des lieux arborait, fixées à son ceinturon, plusieurs petites sacoches
 semblables à des cartouchières, d’où dépassaient des fioles en verre serti d’argent. Certaines luisaient
@@ -81,7 +81,7 @@ mienne, tu choisiras ta fiole. »
 Rendez-vous au \goto[marker=debut].
 
 \smallskip
-\center{\svg[src=examples/almaq/dices.svg, width=5em]}
+\center{\svg[src=examples/almaq/images/dices.svg, width=5em]}
 
 \gamebook[marker=debut]%--------------------------------------
 
@@ -174,7 +174,7 @@ la grande halle. « Moi-même offert à moi-même ! Que le destin m’est cruel.
 
 Celui que nous appelions Safrian s’étonna d’entendre son propre rire en écho.
 
-— Nous nous mentions en effet tous les deux, murmurèrent-ils de concert. Combien de fois nous étions-nous
+—\nbsp{}Nous nous mentions en effet tous les deux, murmurèrent-ils de concert. Combien de fois nous étions-nous
 déjà rencontrés et avions-nous tenu ces mêmes propos ? Combien de fois revivrons-nous la même scène,
 fût-elle dotée d’un décor différent ou d’autres acteurs ? Ce n’est pas grave, tout ceci n’est qu’un songe
 dont je m’éveillerai bientôt, un cauchemar que je ferai encore et encore. Je reprendrai tout depuis le début,
@@ -320,7 +320,7 @@ Rendez-vous au \goto[marker=devinette].
 
 Un ennui profond transparut dans le ton de Fhir.
 
-— N’ai-je pris pour de l’astuce, dans tes propos précédents, ce qui n’était en fait que de la bêtise
+—\nbsp{}N’ai-je pris pour de l’astuce, dans tes propos précédents, ce qui n’était en fait que de la bêtise
 ou de l’ignorance ? Tu n’as aucun plan précis. Tu confonds le Dragon et la Chimère. Tu parles au hasard
 en essayant de te faire passer pour plus docte que tu ne l’es en vérité…
 
@@ -339,9 +339,9 @@ Rendez-vous au \goto[marker=fin-mort].
 \smallskip
 Que peut répondre celui que nous appelions Safrian ?
 
-— Tu portes son nom. Tu es Fhir, le dernier sage Gible. Allez au \goto[marker=fin-fhir].
+—\nbsp{}Tu portes son nom. Tu es Fhir, le dernier sage Gible. Allez au \goto[marker=fin-fhir].
 
-— Estremorn, le seigneur des Nautes. Rendez-vous au \goto[marker=fin-double].
+—\nbsp{}Estremorn, le seigneur des Nautes. Rendez-vous au \goto[marker=fin-double].
 
 \gamebook[marker=sang-choix-alt]%--------------------------------------
 
@@ -368,11 +368,11 @@ sous le nom de Chimère. Nul n’en sait la teinte et la texture, mais il se dit
 est aussitôt corrompu.
 
 \begin{blockquote}
-Son ventre enfla jusqu'à s’ouvrir par le milieu et elle donna naissance à une progéniture nombreuse,
+Son ventre enfla jusqu’à s’ouvrir par le milieu et elle donna naissance à une progéniture nombreuse,
 à autant de fils que les cieux comptent d’étoiles, dans lesquels son sang était dispersé. Elle s’accoupla
 avec chacun d’eux et dévora ensuite, dans une folie bestiale, tant sa progéniture première que le fruit
 de ses incestes. L’infinie succession de ces festins de chair concentra en elle un pouvoir immense.
-C'est maintenant un interdit pour la Chimère de manger sa propre chair, et comme elle ne peut rien manger
+C’est maintenant un interdit pour la Chimère de manger sa propre chair, et comme elle ne peut rien manger
 d’autre qui appartienne au Dragon, elle est toujours affamée. Son sang corrosif est poison, même pour
 elle et même pour le puissant Dragon, à la fin.
 \end{blockquote}
@@ -401,7 +401,7 @@ S’il a prétendu être Estremorn, rendez-vous au \goto[marker=qui-est-fhir-est
 
 \gamebook[marker=geste-nautes]%--------------------------------------
 
-« Apprends, ô Safrian, ce que relatait la \em{Geste perdue des Seigneurs Nautes}… 
+« Apprends, ô Safrian, ce que relatait la \em{Geste perdue des Seigneurs Nautes}…
 
 \begin{blockquote}
 Estremorn des Nautes leva l’épée sacrificielle au-dessus de sa tête. « Il fut un temps où notre sang était
@@ -497,11 +497,11 @@ Sinon, notez le choix de Safrian et rendez-vous au \goto[marker=apres-choix-alt]
 \smallskip
 Que peut répondre celui que nous appelions Safrian ?
 
-— Tu portes son nom. Tu es le Fhir, le dernier sage Gible. Allez au \goto[marker=fin-fhir].
+—\nbsp{}Tu portes son nom. Tu es le Fhir, le dernier sage Gible. Allez au \goto[marker=fin-fhir].
 
-— Dongann, un bouffon baroudeur à la bedaine en barrique. Rendez-vous au \goto[marker=fin-double].
+—\nbsp{}Dongann, un bouffon baroudeur à la bedaine en barrique. Rendez-vous au \goto[marker=fin-double].
 
-— Estremorn, le seigneur des Nautes. Rendez-vous au \goto[marker=fin-estremorn-dongann].
+—\nbsp{}Estremorn, le seigneur des Nautes. Rendez-vous au \goto[marker=fin-estremorn-dongann].
 
 
 \gamebook[marker=apres-choix]%--------------------------------------
@@ -524,16 +524,16 @@ yeux terribles. Safrian poussa un cri et s’effondra sans vie.
 
 \gamebook[marker=conclusion-choix]%--------------------------------------
 
-Le vénérable Gible secoua pensivement la tête. 
+Le vénérable Gible secoua pensivement la tête.
 
-— Je serais presque tenté de te voir repartir en vie, afin de découvrir quel usage tu auras fait du Sang
+—\nbsp{}Je serais presque tenté de te voir repartir en vie, afin de découvrir quel usage tu auras fait du Sang
 Ancien sur lequel tu as jeté ton dévolu cette fois-ci. Ce ne sont, peut-être, que des fables ineptes,
 des illusions trompeuses ou les fragments déformés des superstitions insensées de nos ancêtres.
 Sans l’entrave de ce passé, les chemins de ton avenir auraient pu être illimités.
 
-— J’ai respecté ta règle et fait selon les choix proposés, rétorqua Safrian, sur la défensive.
+—\nbsp{}J’ai respecté ta règle et fait selon les choix proposés, rétorqua Safrian, sur la défensive.
 
-— Comme tous les autres, auparavant, confrontés à pareille situation…
+—\nbsp{}Comme tous les autres, auparavant, confrontés à pareille situation…
 
 Fhir sembla regretter son amertume. « Je ne cherche pas à t’abuser. Quoique cela ne soit pas sans risque,
 je te parlerai de la transgression des Nautes, si tel est ton désir. Quand bien même tu aurais déjà une vague
@@ -557,13 +557,13 @@ prétendu être. Révèle-moi ton véritable nom, sans mentir. »
 \smallskip
 Que peut répondre Safrian ?
 
-— Je ne suis que le Safrian que j’ai annoncé. Rendez-vous au \goto[marker=fin-safrian].
+—\nbsp{}Je ne suis que le Safrian que j’ai annoncé. Rendez-vous au \goto[marker=fin-safrian].
 
-— Alster, le destructeur de cités, venu accomplir sa part des prophéties. Rendez-vous au \goto[marker=fin-alster].
+—\nbsp{}Alster, le destructeur de cités, venu accomplir sa part des prophéties. Rendez-vous au \goto[marker=fin-alster].
 
-— Dongann, un bouffon baroudeur à la bedaine en barrique. Rendez-vous au \goto[marker=qui-est-fhir].
+—\nbsp{}Dongann, un bouffon baroudeur à la bedaine en barrique. Rendez-vous au \goto[marker=qui-est-fhir].
 
-— Estremorn, le seigneur des Nautes. Rendez-vous au \goto[marker=qui-est-fhir].
+—\nbsp{}Estremorn, le seigneur des Nautes. Rendez-vous au \goto[marker=qui-est-fhir].
 
 \gamebook[marker=fin-fhir]
 
@@ -577,7 +577,7 @@ de ses yeux terribles.
 
 Celui que nous appelions Safrian poussa un cri et s’effondra sans vie.
 
-— Nous nous mentions encore tous les deux, murmura tristement le seigneur d’Egrivain. Combien de fois
+—\nbsp{}Nous nous mentions encore tous les deux, murmura tristement le seigneur d’Egrivain. Combien de fois
 nous étions-nous déjà rencontrés et avions-nous tenu ces mêmes propos ? Combien de fois revivrons-nous
 la même scène, fût-elle dotée d’un décor différent ou d’autres acteurs ? Tu n’étais pas prêt encore à notre
 affrontement final. Ce n’est pas grave, tout ceci n’est qu’un songe dont tu t’éveilleras bientôt,
@@ -598,7 +598,7 @@ L’éclat d’une flamme éclaira les ténèbres. Celui qui était Fhir avait r
 de ses yeux terribles. Celui que nous appelions Safrian poussa un cri d’effroi, en découvrant son visage en
 miroir.
 
-— Prends à mon ceinturon la fiole qui t’est échue. Tout ceci n’est qu’un songe dont tu t’éveilleras bientôt,
+—\nbsp{}Prends à mon ceinturon la fiole qui t’est échue. Tout ceci n’est qu’un songe dont tu t’éveilleras bientôt,
 un cauchemar que tu feras plusieurs fois. À ton réveil, tu trouveras néanmoins le Sang Ancien. Si tu le peux,
 ne le bois jamais ! Nous savons tous les deux que tu ne tiendras pas compte de mon conseil… Alors, suis ton
 propre chemin. Reviens-moi autant de fois que tu le voudras, jusqu’à ce que toutes mes fioles soient
@@ -608,7 +608,7 @@ propre chemin. Reviens-moi autant de fois que tu le voudras, jusqu’à ce que t
 \em{Fin.}
 
 \smallskip
-\center{\svg[src=examples/almaq/dices.svg, width=5em]}
+\center{\svg[src=examples/almaq/images/dices.svg, width=5em]}
 
 \smallskip
 Enfin, camarades ! Il faudrait vous secouer… Vous êtes morts, encore une fois de trop. Dois-je vous dégourdir

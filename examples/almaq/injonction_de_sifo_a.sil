@@ -1,13 +1,13 @@
 \begin{document}
 
 \open-on-odd-page
-\noindent\img[src=examples/almaq/chadhruid_na_sifo_main.jpeg, width=99%fw]
+\noindent\img[src=examples/almaq/images/chadhruid_na_sifo_main.jpeg, width=99%fw]
 
 \eject
 \hbox{}\vfill
 
 \begin{figure}
-\img[src=examples/almaq/chadhruid_table_lenski.png, width=99%fw]
+\img[src=examples/almaq/images/chadhruid_table_lenski.png, width=99%fw]
 \caption{%
 Notes de la main d’Emma Lenski dans \em{The Chronicles of Alstre and Dongann by the poet Celdre},
 fac-similé inclus dans la première édition de 1937, p. 4. L’édition augmentée de 1962 reporte la
@@ -491,7 +491,7 @@ s’agirait que d’une adjonction maladroite dont on pourrait légitimement se 
 \eject
 
 \begin{figure}
-\img[src=examples/almaq/chadhruid_mss_K.jpeg, height=77%fh]
+\img[src=examples/almaq/images/chadhruid_mss_K.jpeg, height=77%fh]
 \caption{%
 Copie du manuscrit K de l’injonction de Sifo (collection privée). Les variantes par rapport au
 manuscrit M sont minimes. Les contours des lettres ont été repassés à l’encre, par-dessus une
@@ -505,7 +505,7 @@ d’authenticité.
 \eject
 
 \begin{figure}
-\svg[src=examples/almaq/chadhruid_polski.svg, height=55%fh]
+\svg[src=examples/almaq/images/chadhruid_polski.svg, height=55%fh]
 \caption{%
 Transcription d’une variante *P, figurant en frontispice de l’édition polonaise de la monographie
 de Pierre de Blancandre (\em{Kroniki niszczyciela miasta}, Łódź, 1924), présentant là encore quelques
@@ -516,7 +516,7 @@ l’exactitude de la copie.
 \end{figure}
 
 \begin{figure}
-\svg[src=examples/almaq/chadhrave_na_sifo.svg, width=95%fw]
+\svg[src=examples/almaq/images/chadhrave_na_sifo.svg, width=95%fw]
 \caption{%
 Le \em{Codex Monesterellum} contient la seule transcription connue de l’injonction de Sifo
 dans l’alphabet adapté du système impérial siléen, qui remplaça l’ancien système à partir du
@@ -527,7 +527,7 @@ dans l’alphabet adapté du système impérial siléen, qui remplaça l’ancie
 \eject
 
 \begin{figure}
-\svg[src=examples/almaq/chadhruid_boustrophedon.svg, height=75%fh]
+\svg[src=examples/almaq/images/chadhruid_boustrophedon.svg, height=75%fh]
 \caption{%
 \label[marker=illus-boustrophedon]%
 Fac-similé du très beau manuscrit S trouvé en 1995 dans un lot de vieilles archives à Saorge (Alpes-Maritimes).

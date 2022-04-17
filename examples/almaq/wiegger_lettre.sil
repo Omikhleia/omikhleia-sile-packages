@@ -32,7 +32,7 @@ In all honesty, it came as a surprise, but I am very thankful for your words, wh
 of their irony.
 Since you wrote in German, I’ll return the courtesy with a letter in English. Perhaps next time, for I dare
 there will be a next time, can we use the tyesed anevethrin, and I’ll call you "my dear Emma" again, as we
-used to, before our world fell apart in its second cyclic war? One may dream.\quad\rebox[width=0,height=0]{\lower[height=1bs]{\img[src=examples/almaq/wiegger_lettre_annotation_lenski_1.png, width=2.5cm]}}
+used to, before our world fell apart in its second cyclic war? One may dream.\quad\rebox[width=0,height=0]{\lower[height=1bs]{\img[src=examples/almaq/images/wiegger_lettre_annotation_lenski_1.png, width=2.5cm]}}
 
 As for your book, it is truly a great masterpiece and a landmark in our domain.
 
@@ -44,7 +44,7 @@ have much Hoffnung-Schicksal left...
 
 Yours sincerely,
 
-\qquad\qquad\img[src=examples/almaq/wiegger_signature.png, width=3cm]\break
+\qquad\qquad\img[src=examples/almaq/images/wiegger_signature.png, width=3cm]\break
 P.S. I recovered an old document that I thought lost or more presumably destroyed. I was part of an expedition
 in 1938 in Peru, where we found an engraved ivory casket (approx. 9 x 7 by 5 inches) with interesting
 inscrip-\break
@@ -56,21 +56,21 @@ Despite the bombings in \struck{XXXXX} and \struck{XXXXXX}, it survived the war.
 P.P.S. I am not the one who applied the unfortunate "stamps". Obviously, it is unsafe for me to keep such
 material here, so I’ll arrange these pages to pass through to you, to the West.
 
-Q.E.D. \roughbox{The Sword is not Aquila.} \lower[height=0.5bs]{\rebox[width=0,height=0]{\img[src=examples/almaq/wiegger_lettre_annotation_lenski_2.png, width=3cm]}}
+Q.E.D. \roughbox{The Sword is not Aquila.} \lower[height=0.5bs]{\rebox[width=0,height=0]{\img[src=examples/almaq/images/wiegger_lettre_annotation_lenski_2.png, width=3cm]}}
 
 \end{font}
 
 \hbox{}\vfill
 
 \begin{center}
-\img[src=examples/almaq/wiegger_coffre_a.png, height=90%fh]
+\img[src=examples/almaq/images/wiegger_coffre_a.png, height=90%fh]
 \end{center}
 
 \eject
 \hbox{}\vfill
 
 \begin{center}
-\img[src=examples/almaq/wiegger_coffre_b.png, width=90%fw]
+\img[src=examples/almaq/images/wiegger_coffre_b.png, width=90%fw]
 \end{center}
 
 \end{document}

@@ -2,7 +2,7 @@
 \chapter[numbering=false]{Repères chronologiques.}
 \define[command=onum]{\font[features=+onum]{\process}}%
 
-\subsection[numbering=false]{Sources et repères.}
+\section[numbering=false]{Sources et repères.}
 
 \begin[cols=10%fw 90%fw, cellborder=0, cellpadding=0 4pt 0 0]{ptable}
 \begin{row}
@@ -64,7 +64,7 @@ Manuscrit de Voynich.
 \end{row}
 \end{ptable}
 
-\subsection[numbering=false]{Acteurs contemporains et bibliographie sélective.}
+\section[numbering=false]{Acteurs contemporains et bibliographie sélective.}
 
 \begin[cols=10%fw 90%fw, cellborder=0, cellpadding=0 4pt 0 0]{ptable}
 \begin{row}

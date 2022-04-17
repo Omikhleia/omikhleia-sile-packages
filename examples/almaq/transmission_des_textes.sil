@@ -90,7 +90,7 @@ d’Orient, tout un corpus légendaire venu d’Asie lointaine, non sans le déf
 trouvé aucune trace d’une matière proche de celle des \em{Chroniques} en dehors d’Europe… Quant à l’usage
 de roues dentées au sein de mécanismes complexes, il n’étonne plus depuis la découverte, dans une antique
 épave antérieure au \abbr:siecle{i} siècle av. J.-C., de la machine d’Anticythère. Quand bien même la
-miniaturisation et le façonnement précis de tels dispositifs demanderait encore plusieurs siècles…
+miniaturisation et le façonnement précis de tels dispositifs demanderaient encore plusieurs siècles…
 Les histoires mentionnant des bateaux volants sont nombreuses, mais ceux-ci relèvent alors de la fable,
 comme dans la Luciade\footnote{%
 Les versions grecques empruntent très clairement leur vocabulaire à l’\em{Histoire véritable} de Lucien
@@ -133,7 +133,7 @@ S’il prit plus tard ses distances avec de telles inepties — au point de rall
 d’autres poursuivent aujourd’hui encore leur quête insensée d’une Hy-Brasil fabuleuse ou d’une Hyperborée
 fantasmée. Nous sortons là du raisonnable.
 
-Revenons-en, plus sérieusement, aux traductions qui nous firent connaître les \em{Chroniques}.
+Laissons cela et revenons-en, plus sérieusement, aux traductions qui nous firent connaître les \em{Chroniques}.
 
 \section[numbering=false]{La branche grecque : \language[main=el]{Tὸ βιϐλίον Ἀλστερίωνος τοῦ Πτολιπόρθιου καὶ Δογγάννου
  τοῦ Γελωτοποιοῦ}.}
@@ -372,7 +372,7 @@ Lettre à Emma Lenksi, qui me la transmit en 1991.
 \eject
 
 \begin{figure}
-\svg[src=examples/almaq/chadhruid_narg_an_sitar.svg, width=5cm]
+\svg[src=examples/almaq/images/chadhruid_narg_an_sitar.svg, width=5cm]
 \caption{%
 \label[marker=fig-narg-an-sitar]%
 Reproduction (empreinte) de gravures sur bois trouvées dans l’église en bois debout
@@ -396,7 +396,7 @@ et ses doutes sur les sources littéraires.}}
 \end{figure}
 
 \begin{figure}
-\img[src=examples/almaq/grec_onciale.png, width=7cm]
+\img[src=examples/almaq/images/grec_onciale.png, width=7cm]
 \caption{%
 \label[marker=fig-grec-onciale]%
 Onciale byzantine, début du \abbr:siecle{xiv} siècle : extrait d’une liste d’œuvres recencées par
@@ -407,7 +407,7 @@ Cf. \em{supra}, le titre complet \em{τὰ τοῦ Kελδρου χρονικά 
 \end{figure}
 
 \begin{figure}
-\img[src=examples/almaq/grec_titre.png, width=10cm]
+\img[src=examples/almaq/images/grec_titre.png, width=10cm]
 \caption{%
 \label[marker=fig-grec-titre]%
 Mention figurant en marge du commentaire (\em{scholia}\kern[width=0.1em]) d’une réédition du texte
@@ -433,14 +433,14 @@ et Lorenzo di Alopa.}
 \end{figure}
 
 \begin{figure}
-\img[src=examples/almaq/jean_desmarets.png, width=99%fw]
+\img[src=examples/almaq/images/jean_desmarets.png, width=99%fw]
 \caption{%
 \label[marker=fig-desmarets]%
 Extrait du manuscrit du journal de Jean Desmarets de Varzy. Bibliothèque nationale de France.}
 \end{figure}
 
 \begin{figure}
-\img[src=examples/almaq/carte_sile_vaticana.png, width=88%fw]
+\img[src=examples/almaq/images/carte_sile_vaticana.png, width=88%fw]
 \caption{%
 \label[marker=carte-vaticana]%
 Reproduction de la carte IV de la luxueuse édition des \em{Fabulae Alastri Urbium-Eversoris} conservée

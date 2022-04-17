@@ -23,4 +23,3 @@ SILE.nodeMakers.fr.makeUnbreakableSpace = function (self, parameter)
   self.lastnode = "glue"
   coroutine.yield(getSpaceGlue(self.options, parameter)) -- DIDIER HACK #1360
 end
-  
