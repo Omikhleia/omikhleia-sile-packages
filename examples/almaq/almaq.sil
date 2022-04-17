@@ -9,10 +9,10 @@
 \script[src=packages/framebox]
 \script[src=packages/experimental/fancytoc]
 \language[main=fr]
-%\hyphenator:add-exceptions[lang=fr]{lo-go-gramme}%
-%\hyphenator:add-exceptions[lang=fr]{igno-rer}%
-%\hyphenator:add-exceptions[lang=fr]{com-pa-gnon}%
-%\hyphenator:add-exceptions[lang=fr]{di-gres-sion}%
+%
+% HACKS/WORKAROUNDS FOR SILE 0.12.4 BUGS
+\script[src=hacks/hacks]
+%
 \font[family=Libertinus Serif, size=11pt]
 \style:redefine[name=sectioning:base, as=_secbase, inherit=true]{\paragraph[indentafter=true]}%
 \footnote:rule
