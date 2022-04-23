@@ -133,14 +133,15 @@ end, "Output the table of contents.")
 -- (Similar to SU.contentToString(), but allows passing typeset
 -- objects to functions that need plain strings).
 local nodesToText = function (nodes)
+  local spc = SILE.measurement("0.8spc"):tonumber()
   local string = ""
   for i = 1, #nodes do
     local node = nodes[i]
     if node.is_nnode or node.is_unshaped then
       string = string .. node:toText()
-    elseif node.is_glue then
+    elseif node.is_glue or node.is_kern then
       -- Not so sure about this one...
-      if node.width:tonumber() > 0 then
+      if node.width:tonumber() > spc then
         string = string .. " "
       end
     elseif not (node.is_zerohbox or node.is_migrating) then
@@ -161,22 +162,24 @@ SILE.registerCommand("tocentry", function (options, content)
   if SILE.Commands["pdf:destination"] then
     dest = "dest" .. dc
     SILE.call("pdf:destination", { name = dest })
-    SILE.typesetter:pushState()
-    -- Temporarilly kill footnotes and labels (fragile)
-    local oldFt = SILE.Commands["footnote"]
-    SILE.Commands["footnote"] = function () end
-    local oldLbl = SILE.Commands["label"]
-    SILE.Commands["label"] = function () end
+    if SU.boolean(options.bookmark, true) then
+      SILE.typesetter:pushState()
+      -- Temporarilly kill footnotes and labels (fragile)
+      local oldFt = SILE.Commands["footnote"]
+      SILE.Commands["footnote"] = function () end
+      local oldLbl = SILE.Commands["label"]
+      SILE.Commands["label"] = function () end
 
-    SILE.process(content)
+      SILE.process(content)
 
-    SILE.Commands["footnote"] = oldFt
-    SILE.Commands["label"] = oldLbl
+      SILE.Commands["footnote"] = oldFt
+      SILE.Commands["label"] = oldLbl
 
-    local title = nodesToText(SILE.typesetter.state.nodes)
-    SILE.typesetter:popState()
+      local title = nodesToText(SILE.typesetter.state.nodes)
+      SILE.typesetter:popState()
 
-    SILE.call("pdf:bookmark", { title = title, dest = dest, level = options.level })
+      SILE.call("pdf:bookmark", { title = title, dest = dest, level = options.level })
+    end
     dc = dc + 1
   end
   SILE.call("info", {

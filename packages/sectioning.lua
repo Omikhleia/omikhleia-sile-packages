@@ -18,6 +18,7 @@ local resolveSectionStyleDef = function (name)
       numberstyle = stylespec.sectioning.numberstyle,
       goodbreak = stylespec.sectioning.goodbreak,
       toclevel = stylespec.sectioning.toclevel,
+      bookmark = stylespec.sectioning.bookmark,
       hook = stylespec.sectioning.hook,
     }
   end
@@ -83,10 +84,11 @@ SILE.registerCommand("sectioning", function (options, content)
       )
     end
 
-    -- 3B. TOC entry
+    -- 3B. TOC entry)
     local toclevel = secStyle.toclevel and SU.cast("integer", secStyle.toclevel)
+    local bookmark = SU.boolean(secStyle.bookmark, true)
     if toclevel and toc then
-      SILE.call("tocentry", { level = toclevel, number = number }, SU.subContent(content))
+      SILE.call("tocentry", { level = toclevel, number = number, bookmark = bookmark }, SU.subContent(content))
     end
 
     -- 3C. Show entry number
@@ -327,6 +329,7 @@ With these first assumptions in mind, let’s summarize the requirements:
   and a display format at that level. Usually, we wrote, but we can consider it is even mandatory, or we do not really
   need to call this a section.}
 \item{Sections may go into a table of contents at some specified level.—It may hence have a TOC level.}
+\item{Sections going into a table of contents may as well possibly go in the PDF bookmarks (outline).}
 \item{Sections may trigger a page break and may even need to open on an odd page.}
 \item{Sections, especially those who do not cause a (forced) page break, may recommmend
   allowing a page break before them (so usual that it should default to true).}
@@ -350,6 +353,7 @@ package, the rest is new. Here is therefore the specification introduced in this
 \par\quad\\sectioning[
 \par\qquad{}counter=\doc:args{counter}, level=\doc:args{integer}, display=\doc:args{display},
 \par\qquad{}toclevel=\doc:args{integer},
+\par\qquad{}bookmark=\doc:args{true|false},
 \par\qquad{}open=\doc:args{unset|any|odd},
 \par\qquad{}goodbreak=\doc:args{true|false},
 \par\qquad{}numberstyle=\doc:args{style name},

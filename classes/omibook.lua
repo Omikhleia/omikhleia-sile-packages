@@ -327,7 +327,7 @@ styles.defineStyle("figure:caption", { inherit = "sectioning:base" }, {
                 align = "center",
                 skipafter = "medskip" },
   sectioning = { counter = "figures", level = 1, display = "arabic",
-                 toclevel = 5,
+                 toclevel = 5, bookmark = false,
                  goodbreak = false, numberstyle="figure:caption:number" },
 })
 styles.defineStyle("figure:caption:number", {}, {
@@ -342,7 +342,7 @@ styles.defineStyle("table:caption", {}, {
                 align = "center",
                 skipafter = "medskip" },
   sectioning = { counter = "table", level = 1, display = "arabic",
-                 toclevel = 6,
+                 toclevel = 6, bookmark = false,
                  goodbreak = false, numberstyle="table:caption:number" },
 })
 styles.defineStyle("table:caption:number", {}, {
