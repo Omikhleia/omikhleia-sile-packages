@@ -94,8 +94,8 @@ return {
   documentation = [[\begin{document}
 \script[src=packages/autodoc-extras]
 
-The \doc:keyword{textsubsuper} package provides two commands, \doc:code{\\text:superscript\{\doc:args{content}\}}
-and \doc:code{\\text:subscript\{\doc:args{content}\}}.
+The \autodoc:package{textsubsuper} package provides two commands, \autodoc:command{\text:superscript{<content>}}
+and \autodoc:command{\text:subscript{<content>}}.
 
 They will use the native superscript or subscript characters, respectively, in a font, when available, instead of
 scaling, raising or lowering characters, because most of the time the former will obviously look much better.

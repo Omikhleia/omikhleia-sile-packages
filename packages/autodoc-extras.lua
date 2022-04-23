@@ -1,6 +1,5 @@
 
 SILE.doTexlike([[%
-\define[command=doc:keyword]{\color[color=#16105a]{\font[family=Libertinus Sans, weight=600]{\process}}}
 \define[command=doc:code]{\font[family=Libertinus Sans, weight=600]{\process}}
 \define[command=doc:codes]{\par\smallskip\doc:code{\process}\par\smallskip}
 \define[command=doc:args]{⟨\em{\process}\kern[width=0.1em]⟩}
@@ -23,3 +22,14 @@ SILE.registerCommand("url", function (options, content)
 
   SILE.Commands["code"] = oldCode
 end)
+
+local oldAutodocStyle = SILE.Commands["autodoc:code:style"]
+SILE.registerCommand("autodoc:code:style", function (options, content)
+  SILE.Commands["code"] = SILE.Commands["doc:code"]
+
+  oldAutodocStyle(options, content)
+
+  SILE.Commands["code"] = oldCode
+end)
+
+SILE.settings.set("autodoc.highlighting", true)

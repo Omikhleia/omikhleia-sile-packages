@@ -193,9 +193,9 @@ touch”). The existence of colophons can be dated back to antiquity.
 
 It is quite common for colophons to be surrounded by some sort of ornament. While regular
 paragraphs are composed of square-shaped blocks, colophons may take various fancy shapes.
-This is where the \doc:keyword{colophon} package may come into action. As one could have
+This is where the \autodoc:package{colophon} package may come into action. As one could have
 guessed by its name, it provides
-a \doc:code{\\colophon} command that attempts shaping a paragraph into a circle,
+a \autodoc:command{\colophon} command that attempts shaping a paragraph into a circle,
 which radius is \em{automatically} computed so that the text fills the circle.
 
 Typesetting text in a circle, however, can be tough. The first and last lines do not have
@@ -227,7 +227,7 @@ the above estimation is likely too small, as stretching will occur with little
 doubts. So the implemention adjusts the estimated length by a ratio, with an
 \em{arbitrary} value of 1.01 (i.e. we expect the line stretchability
 to globally reach 1\% at most). There will still be cases where the paragraph
-cannot fit and will overflow outside the circle, so the option \doc:code{ratio}
+cannot fit and will overflow outside the circle, so the option \autodoc:parameter{ratio}
 can be used to manually provide a different value (e.g. 1.015 –the necessary
 adjustment may be fairly small).
 
@@ -239,14 +239,14 @@ at best, be applied to the last paragraph, each being circles on their
 own! Thus our third assumption is that the colophon contains only
 one single paragraph.
 
-To enable a decoration, set the \doc:code{decoration} option to true.
+To enable a decoration, set the \autodoc:parameter{decoration} option to true.
 The default ornament (logically called \doc:code{default}) is just
 a larger circle, i.e. with an extra amount of space. One can select
-another ornamental figure by specifying the \doc:code{figure} option,
+another ornamental figure by specifying the \autodoc:parameter{figure} option,
 with a figure name (see below). All of them vary on the amount of space
 they add around the circle, defined as a scaling ratio applied to the computed
 base radius. This value, somewhat arbitrary or to the taste of this
-author, can be overridden with the \doc:code{figurescale} option set to
+author, can be overridden with the \autodoc:parameter{figurescale} option set to
 some decimal number bigger than 1.
 
 The figure is computed after the paragraph is shaped, so as to know

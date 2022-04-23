@@ -278,78 +278,79 @@ return {
 \script[src=packages/autodoc-extras]
 \script[src=packages/parbox]
 
-As its name implies, the \doc:keyword{framebox} package provide several horizontal box framing goodies.
+As its name implies, the \autodoc:package{framebox} package provide several horizontal box framing goodies.
 
-The \doc:code{\\framebox} command frames its content in a \framebox{square box.}
+The \autodoc:command{\framebox} command frames its content in a \framebox{square box.}
 
 The frame border width relies on the
-\doc:code{framebox.borderwidth} setting (defaults to 0.4pt), unless the \doc:code{borderwidth} option
-is explicitly specified as command argument.
+\autodoc:setting{framebox.borderwidth} setting (defaults to 0.4pt), unless the
+\autodoc:parameter{borderwidth} option is explicitly specified as command argument.
 
 The padding distance between the content and the frame relies on the
-\doc:code{framebox.padding} setting (defaults to 2pt), again unless the \doc:code{padding} option
-is explicitly specified.
+\autodoc:setting{framebox.padding} setting (defaults to 2pt), again unless the
+\autodoc:parameter{padding} option is explicitly specified.
 
-If the \doc:code{shadow} option is set to true, a \framebox[shadow=true]{dropped shadow} is applied.
+If the \autodoc:parameter{shadow} option is set to true, a \framebox[shadow=true]{dropped shadow} is applied.
 
 The shadow width (or offset size) relies on the
-\doc:code{framebox.shadowsize} setting (defaults to 3pt), unless the \doc:code{shadowsize} option
-is explicitly specified.
+\autodoc:setting{framebox.shadowsize} setting (defaults to 3pt), unless the
+\autodoc:parameter{shadowsize} option is explicitly specified.
 
-With the well-named \doc:code{bordercolor}, \doc:code{fillcolor} and \doc:code{shadowcolor} options, one can
-also specify how the box is \framebox[shadow=true, bordercolor=#b94051, fillcolor=#ecb0b8, shadowcolor=220]{colored.}
-The color specifications are the same as defined in the \doc:keyword{color} package.
+With the well-named \autodoc:parameter{bordercolor}, \autodoc:parameter{fillcolor}
+and \autodoc:parameter{shadowcolor} options, one can also specify how the box
+is \framebox[shadow=true, bordercolor=#b94051, fillcolor=#ecb0b8, shadowcolor=220]{colored.}
+The color specifications are the same as defined in the \autodoc:package{color} package.
 
-The \doc:code{\\roundbox} command frames its content in a \roundbox{rounded box.}
+The \autodoc:command{\roundbox} command frames its content in a \roundbox{rounded box.}
 It supports the same options, so one can have a \roundbox[shadow=true]{dropped shadow} too.
 
 Or likewise, \roundbox[shadow=true, bordercolor=#b94051, fillcolor=#ecb0b8, shadowcolor=220]{apply colors.}
 
-The radius of the rounded corner arc relies on the \doc:code{framebox.cornersize} setting (defaults to 5pt),
-unless the \doc:code{cornersize} option, as usual, is explicitly specified as argument to the command.
+The radius of the rounded corner arc relies on the \autodoc:setting{framebox.cornersize} setting (defaults to 5pt),
+unless the \autodoc:parameter{cornersize} option, as usual, is explicitly specified as argument to the command.
 (If one of the sides of the boxed content is smaller than that, then the maximum allowed rounding effect
 will be computed instead.)
 
-For authors thriving for fancyness, there is the \doc:code{\\roughbox} command that frames its content
+For authors thriving for fancyness, there is the \autodoc:command{\roughbox} command that frames its content
 in a \em{sketchy}, hand-drawn-like style\footnote{The implementation is based on a partial port of
 the \em{rough.js} JavaScript library. It uses its own pseudo-random number generator, so that
 rough sketchs in your document all look different but remain the same when the document is rebuilt.}:
 \roughbox[bordercolor=#59b24c]{a rough box.}
 
-As above, the \doc:code{padding}, \doc:code{borderwidth} and \doc:code{bordercolor} options apply,
-as well as \doc:code{fillcolor}: \roughbox[bordercolor=#b94051,fillcolor=220]{rough \em{hachured} box.}
+As above, the \autodoc:parameter{padding}, \autodoc:parameter{borderwidth} and \autodoc:parameter{bordercolor} options apply,
+as well as \autodoc:parameter{fillcolor}: \roughbox[bordercolor=#b94051,fillcolor=220]{rough \em{hachured} box.}
 
-Sketching options are \doc:code{roughness} (numerical value indicating how rough the drawing is; 0 would
+Sketching options are \autodoc:parameter{roughness} (numerical value indicating how rough the drawing is; 0 would
 be a perfect  rectangle, the default value is 1 and there is no upper limit to this value but a value
-over 10 is mostly useless), \doc:code{bowing} (numerical value indicating how curvy the lines are when
+over 10 is mostly useless), \autodoc:parameter{bowing} (numerical value indicating how curvy the lines are when
 drawing a sketch; a value of 0 will cause straight lines and the default value is 1),
-\doc:code{preserve} (defaults to false; when set to true, the locations of the end points are not
-randomized) and \doc:code{singlestroke} (defaults to false; if set to true, a single stroke is applied
+\autodoc:parameter{preserve} (defaults to false; when set to true, the locations of the end points are not
+randomized) and \autodoc:parameter{singlestroke} (defaults to false; if set to true, a single stroke is applied
 to sketch the shape instead of multiple strokes).
 For instance, here is a single-stroked \roughbox[bordercolor=#59b24c, singlestroke=true]{rough box.}
 
 Compared to the previous box framing commands, rough boxes by default do not take up more horizontal
 and vertical space due to their padding, as if the sketchy box was indeed manually added
-upon an existing text, without altering line height and spacing. Set the \doc:code{enlarge}
+upon an existing text, without altering line height and spacing. Set the \autodoc:parameter{enlarge}
 option to true \roughbox[bordercolor=#22427c, enlarge=true]{to revert} this behavior (but also note
 that due to their rough style, these boxes may still sometimes overlap with surrounding content).
 
-The \doc:code{\\bracebox} commands draws a nice curly brace, by default on the left side of its
+The \autodoc:command{\bracebox} commands draws a nice curly brace, by default on the left side of its
 \bracebox{\strut{}content}.
-The \doc:code{side} options may be set to \bracebox[side=right]{\strut{}“right”} or
+The \autodoc:parameter{side} options may be set to \bracebox[side=right]{\strut{}“right”} or
 \bracebox[side=both]{\strut{}“both”}.
-As for fine-tuning options, \doc:code{padding} controls the space between the brace and the content
+As for fine-tuning options, \autodoc:parameter{padding} controls the space between the brace and the content
 (defaults to 0.25em),
-\doc:code{bracewidth} defines the widthof the whole brace (defaults to 0.25em),
-\doc:code{strokewidth} (defaults to 0.033em) and \doc:code{bracethickness} (0.05em) define
+\autodoc:parameter{bracewidth} defines the widthof the whole brace (defaults to 0.25em),
+\autodoc:parameter{strokewidth} (defaults to 0.033em) and \autodoc:parameter{bracethickness} (0.05em) define
 the drawing characteristics of the brace.
-Its color, black by default, can be changed with \doc:code{bracecolor}.
-Finally, \doc:code{curvyness} (defaults to 0.6) is a number between 0.5 and 1, defining how curvy
+Its color, black by default, can be changed with \autodoc:parameter{bracecolor}.
+Finally, \autodoc:parameter{curvyness} (defaults to 0.6) is a number between 0.5 and 1, defining how curvy
 is the brace: 0.5 is the “normal” value (quite straight) and higher values giving a more “expressive”
 brace (anything above 0.725 is probably quite useless). As can be seen with the default values,
 they should be in a unit relative to the current font, so as to fit best with its current size.
 The default values are rather arbitrary but were found decent for a variety of fonts. Wait,
-we do hear you, at this point. Why you would possibly want this \doc:code{\\bracebox} thing where you
+we do hear you, at this point. Why you would possibly want this \autodoc:command{\bracebox} thing where you
 could use a regular character? Because it adapts to its content height, and an example further below
 will show you its full potential.
 
@@ -357,12 +358,12 @@ As final notes, the box logic provided in this package applies to the natural si
 
 Thus \roundbox{a}, \roundbox{b} and \roundbox{p.}
 
-To avoid such an effect, one could for instance consider inserting a \doc:code{\\strut} in the content.
-This command is provided by the \doc:keyword{struts} package.
+To avoid such an effect, one could for instance consider inserting a \autodoc:command{\strut} in the content.
+This command is provided by the \autodoc:package{struts} package.
 
 Thus now \roundbox{\strut{}a}, \roundbox{\strut{}b} and \roundbox{\strut{}p.}
 
-The \doc:keyword{parbox} package can also be used to shape whole paragraphs into an horizontal box.
+The \autodoc:package{parbox} package can also be used to shape whole paragraphs into an horizontal box.
 It may make a good candidate if you want to use the commands provided here around paragraphs:
 
 \center{\framebox[shadow=true]{\parbox[valign=middle,width=4cm]{This is a long content as a boxed paragraph.}}}

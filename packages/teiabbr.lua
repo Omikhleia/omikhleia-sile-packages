@@ -432,7 +432,7 @@ return {
   documentation = [[\begin{document}
 \script[src=packages/autodoc-extras]
 
-This utility package is loaded by the \doc:keyword{teidict} package and
+This utility package is loaded by the \autodoc:package{teidict} package and
 provides it with a few localized strings (currently for English
 and French).
 

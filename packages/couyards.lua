@@ -53,18 +53,18 @@ Whether fonts support these glyphs and how they render them is another topic.
 hearts.)
 
 This author, however, wanted a bit more variety with some old-fashioned ornaments independent
-from the selected font. The present \doc:keyword{couyards} package
+from the selected font. The present \autodoc:package{couyards} package
 therefore defines a few such ornaments\footnote{The first seven were converted to SVG from
 designs by Tartila \url{https://fr.freepik.com/vecteurs-libre/diviseurs-fleurs-calligraphiques_10837974.htm},
 free for personal and commercial usage with proper attribution. Number 8 and 9 are public domain (CC0),
 from \url{https://freesvg.org}, and look better at fixed width rather than height. There are hundreds
 of similar designs there and this author does not intend to have more than what he requires. The last two were
 actually added on a second thought only.},
-with the command \doc:code{\\couyard[type=\doc:args{n}]}, where \em{n} is a number between 1 and 9.
+with the command \autodoc:command{\couyard[type=<n>]}, where \em{n} is a number between 1 and 9.
 
 Without any other option, the ornaments have a fixed height which can
-be overridden with the \doc:code{height=\doc:args{length}} option, the default
-being 0.9em (also corresponding to \doc:code{height=default}). Showing only the first
+be overridden with the \autodoc:parameter{height=<length>} option, the default
+being 0.9em (also corresponding to \autodoc:parameter{height=default}). Showing only the first
 seven:
 
 \smallskip
@@ -77,7 +77,7 @@ seven:
 \couyard[type=7]
 
 \smallskip
-Alternately, one can set a width with the \doc:code{width=\doc:args{length}} option,
+Alternately, one can set a width with the \autodoc:parameter{width=<length>} option,
 either to some length value or to \doc:code{default} (7em).
 
 \smallskip

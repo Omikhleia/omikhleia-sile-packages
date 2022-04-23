@@ -76,17 +76,17 @@ and depth, to help guaranteeing that an element has a certain minimal height and
 e.g. in tabular environments or in boxes.
 
 Two possible implementations are proposed, one based on a character, defined
-via the \doc:code{strut.character} setting, by default the vertical bar (|), and one relative to the
-current baseline skip, via the \doc:code{strut.ruledepth} and \doc:code{strut.ruleheight}
+via the \autodoc:setting{strut.character} setting, by default the vertical bar (|), and one relative to the
+current baseline skip, via the \autodoc:setting{strut.ruledepth} and \autodoc:setting{strut.ruleheight}
 settings, by default respectively 0.3bs and 1bs, following the same
 definition as in LaTeX. So they do not achieve exactly the same effect:
 the former should ideally be a character that covers the maximum ascender and descender
 heights in the current font; the latter uses an alignment at the baseline skip level
 assuming it is reasonably fixed.
 
-The standalone user command is \doc:code{\\strut[method=\doc:args{method}]},
+The standalone user command is \autodoc:command{\strut[method=<method>]},
 where the method can be “character” (default) or “rule”. It returns the dimensions (for possible use
-in Lua code). If needed, the \doc:code{show} option indicates whether the rule should inserted at this
+in Lua code). If needed, the \autodoc:parameter{show} option indicates whether the rule should inserted at this
 point (defaults to true, again this is mostly intended at Lua code, where you could want to compute
 the current strut dimensions without adding it to the text flow).
 

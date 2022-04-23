@@ -272,18 +272,18 @@ return {
   documentation = [[\begin{document}
 \script[src=packages/autodoc-extras]
 
-If this package is called \doc:keyword{omipoetry}, it is not only because
+If this package is called \autodoc:package{omipoetry}, it is not only because
 it belongs to Omikhleia’s packages. There are so many ways to compose
 poetry that one cannot, probably, cover them all. The art of
 typography is hard, but perhaps the art of poetry typography is
 even harder.
 
-This package defines a \doc:code{poetry} environment, which can
+This package defines a \autodoc:environment{poetry} environment, which can
 contain, for now\footnote{Other commands will raise an error
 and any text node is silently ignored. This may change in a
 future revision.}, only two types of
-elements: verses, each with the \doc:code{\\v} command, and
-a separator in the form of the \doc:code{\\stanza} command.
+elements: verses, each with the \autodoc:command[check=false]{\v} command, and
+a separator in the form of the \autodoc:command[check=false]{\stanza} command.
 The latter just inserts a small vertical skip between verses.
 The former, obviously, contains a single verse, though we will
 see it comes with a few extras.
@@ -317,7 +317,7 @@ using only the above-mentioned commands, without options.
 \end{language}
 
 As can be seen, verses are automatically numbered, by default. This feature can be disabled
-with the \doc:code{numbering} option set to false. The \doc:code{start} option
+with the \autodoc:parameter{numbering} option set to false. The \autodoc:parameter{start} option
 may also be provided, to define the number of the initial verse, would it be
 different from one. Quoting \em{Beowulf}, chapter XI, starting at verse 710:
 \script{
@@ -352,19 +352,19 @@ different from one. Quoting \em{Beowulf}, chapter XI, starting at verse 710:
 \v{heardran hæle,    \qquad      healðegnas fand.}
 \end{poetry}
 
-When numbering is left enabled, it goes by a \doc:code{step} of 5 by default.
+When numbering is left enabled, it goes by a \autodoc:parameter{step} of 5 by default.
 You can set the option by that name to any other value that suits you.\footnote{Before
-you ask, the large spaces \em{inside} verses in this example just use the standard \doc:code{\\qquad}
-command, so there is nothing special here.} The \doc:code{first} option may also be
+you ask, the large spaces \em{inside} verses in this example just use the standard \autodoc:command{\qquad}
+command, so there is nothing special here.} The \autodoc:parameter{first} option may also be
 set to true to enforce the first verse to always be numbered, even if it is not
 a multiple of the step value. This might be useful if you are quoting just a few
 verses and none would be numbered normally.
 
 This is all what we have to say about typesetting simple poetry so far, mostly.
-As an advanced feature, the \doc:code{poetry} environment also supports a \doc:code{prosody}
+As an advanced feature, the \autodoc:environment{poetry} environment also supports a autodoc:parameter{prosody}
 option, which increases the height (i.e. baseline skip) of verses so as to leave enough place
 for metrical or rhythmic annotations, which can then be provided between angle brackets,
-that is \doc:code{<…>}\footnote{As in the standard \doc:keyword{chordmode} package. We actually
+that is \doc:code{<…>}\footnote{As in the standard \autodoc:package{chordmode} package. We actually
 used the exact same logic.}. The annotation is placed above the (following) text.
 In English, typically, a 2-level notation is often used, as shown
 hereafter.\footnote{Arthur Golding, \em{Ovid’s Metamorphoses}, book II, lines 1–2,
@@ -394,7 +394,7 @@ Notice something else, here, too. Some prosodists are happy with the x, which is
 type, while others prefer an ×, i.e. a multiplication sign (as Unicode does not include
 a better glyph for it). Obviously, it works if you directly enter that character
 between the brackets, but this package also aims at simplifying your efforts:
-the \doc:code{mode=times} option will automatically turn the x characters
+the \autodoc:parameter{mode=times} option will automatically turn the x characters
 into ×.
 
 Let us check we can use other indicators without issue. In English, rhythmic patterns “arise
@@ -441,7 +441,7 @@ in \em{Change de forme. Biologie et prosodie}, \em{op. cit.}}
 In Old Greek or Latin metre, you may of course use the macron and breve glyphs
 directly. Again, to simplify your typesetting, you may prefer using
 a minus sign (-) for long syllables, a simple u for short syllables and a
-simple x for \em{anceps} or the \em{brevis in longo}. In that case, set the \doc:code{mode} option to
+simple x for \em{anceps} or the \em{brevis in longo}. In that case, set the \autodoc:parameter{mode} option to
 \doc:code{classical}. The abovementioned characters will then automatically be replaced
 by a macron, a breve and the multiplication sign, respectively, as shown
 in the following example.\footnote{Homer, \em{The Odyssey}, book I, v. 1–3 (my own scansion).}
@@ -475,7 +475,7 @@ the (lowered) breve.
 \v{π<->ολλ<->ῶν | δ᾽<->ἀνθρ<->ώ|π<->ων <u>ἴδ<u>εν | <->ἄστ<u>ε<u>α | κ<->αὶ ν<u>ό<u>ον | <->ἔγν<x>ω}
 \end{poetry}
 
-This package supports cross-references as defined for instance by the \doc:keyword{omirefs} package, if it is
+This package supports cross-references as defined for instance by the \autodoc:package{omirefs} package, if it is
 loaded by the document class. In the \em{Beowulf} extract on page \conditional:ref[marker=hrothgar, type=page],
 Hrothgar was mentioned in verse \conditional:ref[marker=hrothgar].
 

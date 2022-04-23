@@ -271,8 +271,8 @@ return {
 \script[src=packages/autodoc-extras]
 \script[src=packages/enumitem]
 
-The \doc:code{omitableofcontents} package is a re-implementation of the
-default \doc:keyword{tableofcontents} package from SILE. As its original ancestor,
+The \autodoc:package{omitableofcontents} package is a re-implementation of the
+default \autodoc:package{tableofcontents} package from SILE. As its original ancestor,
 it provides tools for classes to create tables of contents.
 
 It exports two Lua functions, \doc:code{moveToc()} and \doc:code{writeToc()}.
@@ -280,36 +280,36 @@ The former should be called at the end of each page to collate the table of
 contents.
 The latter should be called at the end of the document, to save the table of
 contents to a file which is read when the package is initialized. This is because
-a table of contents (written out with the \doc:code{\\tableofcontents} command)
+a table of contents (written out with the \autodoc:command{\tableofcontents} command)
 is usually found at the start of a document, before the entries have been processed.
 Because of this, documents with a table of contents need to be processed at least
 twice—once to collect the entries and work out which pages they are on,
 then to write the table of contents.
+
 At a low-level, when you are implementing sectioning commands such
-as \doc:code{\\chapter} or \doc:code{\\section}, your
-class should call the \doc:code{\\tocentry[level=\doc:args{integer},
-number=\doc:args{string}]\{\doc:args{section title}\}} command to register
-a table of contents entry. Or you can alleviate your work by using a package
-that does it all for you, such as \doc:keyword{sectioning}.
+as \autodoc:command[check=false]{\chapter} or \autodoc:command[check=false]{\section}, your
+class should call the \autodoc:command{\tocentry[level=<integer>, number=<string>]{<section title>}}
+command to register a table of contents entry. Or you can alleviate your work by using a package
+that does it all for you, such as \autodoc:package{sectioning}.
 
 From a document author perspective, this package just provides the above-mentioned
-\doc:code{\\tableofcontents} command.
+\autodoc:command{\tableofcontents} command.
 
-It accepts a \doc:code{depth} option to control the depth of the content added to the table
-(defaults to 3) and a \doc:code{start} option to control at which level the table
+It accepts a \autodoc:parameter{depth} option to control the depth of the content added to the table
+(defaults to 3) and a \autodoc:parameter{start} option to control at which level the table
 starts (defaults to 0)
 
-If the \doc:code{pdf} package is loaded before using sectioning commands,
+If the \autodoc:package{pdf} package is loaded before using sectioning commands,
 then a PDF document outline will be generated.
 Moreover, entries in the table of contents will be active links to the
-relevant sections. To disable the latter behavior, pass \doc:code{linking=false} to
-the \doc:code{\\tableofcontents} command.
+relevant sections. To disable the latter behavior, pass \autodoc:parameter{linking=false} to
+the \autodoc:command{\tableofcontents} command.
 
 As opposed to the original implementation, this package clears the table header
 and cancels the language-dependent title that the default implementation provides.
 This author thinks that such a package should only do one thing well: typesetting the table
 of contents, period. Any title (if one is even desired) should be left to the sole decision
-of the user, e.g. explicitely defined with a \doc:code{\\chapter[numbering=false]\{…\}}
+of the user, e.g. explicitely defined with a \autodoc:command[check=false]{\chapter[numbering=false]{…}}
 command or any other appropriate sectioning command, and with whatever additional content
 one may want in between. Even if LaTeX has a default title for the table of contents,
 there is no strong reason to do the same. It cannot be general: One could
@@ -319,7 +319,7 @@ it, while it is so simple to just add a consistently-styled section above the ta
 
 Moreover, this package does not support all the “hooks” that its ancestor had.
 Rather, the entry level formatting logic entirely relies on styles (using the
-\doc:keyword{styles} package), the styles used being
+\autodoc:package{styles} package), the styles used being
 \doc:code{toc:level0} to \doc:code{toc:level9}. They provides several
 specific options that the original package did not have, allowing you to customize
 nearly all aspects of your tables of contents.

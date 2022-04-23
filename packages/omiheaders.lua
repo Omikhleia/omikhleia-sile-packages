@@ -92,17 +92,17 @@ return {
 \script[src=packages/autodoc-extras]
 \script[src=packages/enumitem]
 
-The \doc:keyword{omiheaders} package provides a few basic commands for classes to
-better control the output of the page headers, in a way similar to the \doc:keyword{folio}
+The \autodoc:package{omiheaders} package provides a few basic commands for classes to
+better control the output of the page headers, in a way similar to the \autodoc:package{folio}
 package for page numbers. It also provides four commands to users:
 
 \begin{itemize}
-\item{\doc:code{\\noheaders}: turns page headers off.}
-\item{\doc:code{\\noheaderthispage}: turns page headers off for one page,
+\item{\autodoc:command{\noheaders}: turns page headers off.}
+\item{\autodoc:command{\noheaderthispage}: turns page headers off for one page,
   then on again afterward.}
-\item{\doc:code{\\headers}: turns page headers back on.}
-\item{\doc:code{\\header:rule[valign=\doc:args{top|bottom}, offset=\doc:args{length},
-  thickness=\doc:args{length}]}: draws a header rule when the page headers are active.
+\item{\autodoc:command{\headers}: turns page headers back on.}
+\item{\autodoc:command{\header:rule[valign=<top|bottom>, offset=<length>,
+  thickness=<length>]}: draws a header rule when the page headers are active.
   The default values for the options are, in order, top, 1bs and 0.8pt. The rule is drawn
   relative to the header frame; the offset is added if the alignement is to the top
   or substracted if it is to the bottom. This is the most generic solution, as header

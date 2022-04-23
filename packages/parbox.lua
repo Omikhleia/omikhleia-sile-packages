@@ -332,9 +332,9 @@ return {
 A paragraph box (“parbox”) is an horizontal box (so technically an “hbox”)
 that contains, as its name implies, one or more paragraphs (so the displayed content
 is actually made of vbox’es and vertical glues). The only mandatory
-option on the \doc:code{\\parbox} command is its \doc:code{width}.
+option on the \autodoc:command{\parbox} command is its \autodoc:parameter{width}.
 Most of the time, the parbox will be higher that a (regular) text line,
-so the option \doc:code{valign} allows to specify the vertical alignment: top, middle,
+so the option \autodoc:parameter{valign} allows to specify the vertical alignment: top, middle,
 bottom. Alignment is relative to the current baseline.
 
 Some important concepts and good stuff are described at the end of this documentation
@@ -369,8 +369,8 @@ used (as here) in a regular text flow: the interpretation of “baseline” is
 pretty strict, but perhaps unexpected; the line boxing is strict too
 and is affected depending on ascenders or descenders. To get what is
 logically a more expected output, one would need some vertical adjustment,
-which comes in the form of a “strut” (see the \doc:keyword{struts} package).
-Let us try again, but this time with the \doc:code{strut} option set to “character”
+which comes in the form of a “strut” (see the \autodoc:package{struts} package).
+Let us try again, but this time with the \autodoc:parameter{strut} option set to “character”
 (the default, which was used above, corresponds to “none”).
 
 \smallskip
@@ -444,7 +444,7 @@ from 4, right parbox.}
 
 \smallskip
 
-Another option is \doc:code{padding}, with a length applied on all sides of
+Another option is \autodoc:parameter{padding}, with a length applied on all sides of
 the parbox. Say, with 5pt.\footnote{If the padding does not seem to be the
 same on the sides and on the top and bottom, it is due to the strut.}
 
@@ -456,7 +456,7 @@ two}
 
 \smallskip
 
-And finally, all the above examples were all framed specifying a \doc:code{border} option
+And finally, all the above examples were all framed specifying a \autodoc:parameter{border} option
 (as a thickness length, here set to 0.5pt), but obviously the border is not enabled by default, i.e. set to zero.
 
 \smallskip
@@ -469,12 +469,12 @@ two}
 
 The border and the padding can be specified as a single length (applying on all sides) or a string
 containing a space-separated list of four lengths (“top bottom left right”). Additionaly, a
-unique \doc:code{bordercolor} can be specified, the color specification being as defined in the
-\doc:keyword{color} package.\footnote{These border and padding options were expecially designed
+unique \autodoc:parameter{bordercolor} can be specified, the color specification being as defined in the
+\autodoc:package{color} package.\footnote{These border and padding options were expecially designed
 with tables in mind. For casual box framing, consider using a better-suited solution,
-such as the \doc:keyword{framebox} package.}
+such as the \autodoc:package{framebox} package.}
 
-There is still one advanced option we haven’t described so far, \doc:code{minimize=true}. When passed,
+There is still one advanced option we haven’t described so far, \autodoc:parameter{minimize=true}. When passed,
 then the width of the parbox is considered as a maximum width, vould line-breaking have to occur,
 but otherwise the box is reduced to the minimum width it actually needs\footnote{Be aware,
 however, that the current implementation is not particularly well optimized.}. Compare:
@@ -539,7 +539,7 @@ them on the first level, but deeply nested elements might cause
 issues. It is a powerful tool and it can be a basis for advanced
 box models or for tabular elements\footnote{Cells in complex tables
 can be regarded as a good use case for paragraph boxes. See the
-\doc:keyword{ptable} package.}, etc.
+\autodoc:package{ptable} package.}, etc.
 But be warned there could be some edge-cases. Also, it is worth noting
 the current implementation has not been experimented yet in right-to-left
 or vertical writing direction.

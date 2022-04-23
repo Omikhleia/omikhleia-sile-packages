@@ -374,7 +374,7 @@ return {
 
 This package provides enumerations and bullet lists (a.k.a. \em{itemization}\kern[width=0.1em]), which can
 be styled\footnote{So you can for instance pick up a color and a font for the bullet
-symbol. Refer to our \doc:keyword{styles} package for details on how to set and configure
+symbol. Refer to our \autodoc:package{styles} package for details on how to set and configure
 style specifications.} and, of course, nested together.
 
 \smallskip
@@ -382,8 +382,8 @@ style specifications.} and, of course, nested together.
 \em{Bullet lists.}
 \novbreak
 
-The \doc:code{itemize} environment initiates a bullet list.
-Each item is, as could be guessed, wrapped in an \doc:code{\\item}
+The \autodoc:environment{itemize} environment initiates a bullet list.
+Each item is, as could be guessed, wrapped in an \autodoc:command{\item}
 command.
 
 The environment, as a structure or data model, can only contain item elements
@@ -406,7 +406,7 @@ text content is ignored with a warning.
 The current implementation supports up to 6 indentation levels, which
 are set according to the \doc:code{list:itemize:\doc:args{level}} styles.
 
-On each level, the indentation is defined by the \doc:code{list.itemize.leftmargin}
+On each level, the indentation is defined by the \autodoc:setting{list.itemize.leftmargin}
 setting (defaults to 1.5em) and the bullet is centered in that margin.
 
 Note that if your document has a paragraph indent enabled at this point, it
@@ -416,7 +416,7 @@ The good typographic rules sometimes mandate a certain form of representation.
 In French, for instance, the em-dash is far more common for the initial bullet
 level than the black circle. When one typesets a book in a multi-lingual
 context, changing all the style levels consistently would be appreciated.
-The package therefore exposes a \doc:code{list.itemize.variant}
+The package therefore exposes a \autodoc:setting{list.itemize.variant}
 setting, to switch to an alternate set of styles, such as the following.
 
 \set[parameter=list.itemize.variant, value=alternate]{%
@@ -443,8 +443,8 @@ has not been checked. Be a good typographer.
 \em{Enumerations.}
 \novbreak
 
-The \doc:code{enumerate} environment initiates an enumeration.
-Each item shall, again, be wrapped in an \doc:code{\\item}
+The \autodoc:environment{enumerate} environment initiates an enumeration.
+Each item shall, again, be wrapped in an \autodoc:command{\item}
 command. This environment too is regarded as a structure, so the same rules
 as above apply.
 
@@ -467,18 +467,18 @@ as above apply.
 The current implementation supports up to 5 indentation levels, which
 are set according to the \doc:code{list:enumerate:\doc:args{level}} styles.
 
-On each level, the indentation is defined by the \doc:code{list.enumerate.leftmargin}
+On each level, the indentation is defined by the \autodoc:setting{list.enumerate.leftmargin}
 setting (defaults to 2em). Note, again, that if your document has a paragraph indent enabled
 at this point, it is also added to the first list level. And… ah, at least something less
 repetitive than a raw list of features. \em{Quite obviously}, we cannot center the label.
-Roman numbers, folks, if any reason is required. The \doc:code{list.enumerate.labelindent}
+Roman numbers, folks, if any reason is required. The \autodoc:setting{list.enumerate.labelindent}
 setting specifies the distance between the label and the previous indentation level (defaults
 to 0.5em). Tune these settings at your convenience depending on your styles. If there is a more
 general solution to this subtle issue, this author accepts patches.\footnote{TeX typesets
 the enumeration label ragged left. Other Office software do not.}
 
 As for bullet lists, switching to an alternate set of styles is possible with,
-you certainly guessed it already, the \doc:code{list.enumerate.variant} setting.
+you certainly guessed it already, the \autodoc:setting{list.enumerate.variant} setting.
 
 \set[parameter=list.enumerate.variant, value=alternate]{%
 \begin{enumerate}
@@ -532,10 +532,10 @@ an example.
 
 The package tries to ensure a paragraph is enforced before and after a list.
 In most cases, this implies paragraph skips to be inserted, with the usual
-\doc:code{document.parskip} glue, whatever value it has at these points
+\autodoc:setting{document.parskip} glue, whatever value it has at these points
 in the surrounding context of your document.
 Between list items, however, the paragraph skip is switched to the value
-of the \doc:code{list.parskip} setting.
+of the \autodoc:setting{list.parskip} setting.
 
 \smallskip
 

@@ -281,7 +281,7 @@ return {
 \script[src=packages/enumitem]
 \script[src=packages/autodoc-extras]
 
-The \doc:keyword{styles} package aims at easily defining “styling specifications”.
+The \autodoc:package{styles} package aims at easily defining “styling specifications”.
 It is intended to be used by other packages or classes, rather than directly—though
 users might of course use the commands provided herein to customize some styling
 definitions according to their needs.
@@ -307,7 +307,8 @@ Something may seem wrong (though of course it is a matter of taste and could be 
 
 \begin{enumerate}
 \item{Many commands have “font hooks” indeed, with varying implementations,
-    such as \doc:code{pullquote:font} and \doc:code{book:right-running-head-font} to quote
+    such as \autodoc:environment[check=false]{pullquote:font} and
+    \autodoc:environment[check=false]{book:right-running-head-font} to quote
     just a few. None of these seem to have the same type of name. Their scope too is not
     always clear. But what if one also wants, for instance, to specify a color?
     Of course, in many cases, the hook could be redefined to apply that wanted color
@@ -318,8 +319,8 @@ Something may seem wrong (though of course it is a matter of taste and could be 
   always typeset in 10pt, 11pt or 12pt).}
 \item{Many commands, say book sectioning, rely on hard-coded vertical skips. But what if
   one wants a different vertical spacing? Two solutions come to mind, either redefining
-  the relevant commands (say \doc:code{\\chapter}), but we noted the flaws of that
-  method, or temporarily redefining the skips (say, \doc:code{\\bigskip})… In a way,
+  the relevant commands (say \autodoc:command[check=false]{\chapter}), but we noted the flaws of that
+  method, or temporarily redefining the skips (say, \autodoc:command{\bigskip})… In a way,
   it all sounds very clumsy, cumbersome, somehow \em{ad hoc}, and… here, LaTeX-like.
   Which is not necessarily wrong (there is no offense intended here), but why not try
   a different approach?}
@@ -367,6 +368,7 @@ elements being optional):
 }
 
 Can you guess how this \style:apply[name=style@example]{Style} was defined?
+
 Note that despite their command-like syntax, the elements in style
 specifications are not (necessarily) corresponding to actual commands.
 It just uses that familiar syntax as a convenience.\footnote{Technically-minded readers may
@@ -621,15 +623,15 @@ in \doc:args{saved-name}, and to clear the latter:
 \\style:redefine[name=\doc:args{name}, from=\doc:args{saved-name}]
 \end{doc:codes}
 
-So now on, \doc:code{\\\doc:args{name}} is restored to whatever was saved and \doc:code{\\\doc:args{saved-name}}
+So now on, \doc:code{\\doc:args{name}} is restored to whatever was saved and \doc:code{\\doc:args{saved-name}}
 is no longer defined.
 
 These style redefinion mechanisms are, obviously, at the core of customization.
 
 \P{Additional goodies.}
 
-The package also defines a \doc:code{\\style:font} command, which is basically the same as the
-standard \doc:code{\\font} command, but additionaly supports relative sizes with respect to
+The package also defines a \autodoc:command{\style:font} command, which is basically the same as the
+standard \autodoc:command{\font} command, but additionaly supports relative sizes with respect to
 the current \doc:code{font.size}. It is actually the command used when applying a font style
 specification. For the sake of illustration, let’s assume the following definitions:
 

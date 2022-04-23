@@ -116,7 +116,6 @@ SILE.registerCommand("epigraph", function (options, content)
     local skip = framew - epigraphw - margin
     local source = omikhleia.extractFromTree(content, "source")
     SILE.typesetter:leaveHmode()
-    SILE.typesetter:leaveHmode()
     SILE.typesetter:pushVglue(beforeskipamount)
 
     local l = ragged
@@ -163,14 +162,14 @@ return {
 \define[command=randomtext]{\lorem[words=18].}
 \define[command=randomsource]{The Lorem Ipsum Book.}
 
-The \doc:keyword{epigraph} package for SILE can be used to typeset a relevant quotation or
+The \autodoc:package{epigraph} package for SILE can be used to typeset a relevant quotation or
 saying as an epigraph, usually at either the start or end of
 a section. Various handles are provided to tweak the appearance.\footnote{This is
 very loosely inspired from the LaTeX package by the same name.}
 
-The \doc:keyword{epigraph} environment typesets an epigraph using the provided text.
+The \autodoc:environment{epigraph} environment typesets an epigraph using the provided text.
 An optional source (author, book name, etc.) can also be defined, with
-the \doc:keyword{\\source} command in the text block.
+the \autodoc:command[check=false]{\source} command in the text block.
 By default the epigraph is placed at the right hand side of the text block,
 and the source is typeset at the bottom right of the block.
 
@@ -185,8 +184,8 @@ Without source:
   \randomtext
 \end{epigraph}
 
-The default width for the epigraph block is \doc:keyword{epigraph.width}.
-A \doc:keyword{width} option is also provided to override it on a single
+The default width for the epigraph block is \autodoc:setting{epigraph.width}.
+A \autodoc:parameter{width} option is also provided to override it on a single
 epigraph\footnote{Basically, all global settings are also available as
 command options (or reciprocally!), with the same name but the namespace left
 out. For the sake of brevity, we will therefore omit the namespace from this
@@ -198,19 +197,19 @@ width:
   \randomtext
 \end{epigraph}
 
-Or, pretty obviously, with a fixed value, e.g. \doc:keyword{8cm}.
+Or, pretty obviously, with a fixed value, e.g. 8cm.
 
 \begin[width=8cm]{epigraph}
   \randomtext
 \end{epigraph}
 
-The vertical skips are controlled by \doc:keyword{beforeskipamount},
-\doc:keyword{afterskipamount}, \doc:keyword{sourceskipamount}. The latter is
+The vertical skips are controlled by \autodoc:parameter{beforeskipamount},
+\autodoc:parameter{afterskipamount}, \autodoc:parameter{sourceskipamount}. The latter is
 only applied if there is a source specified and the epigraph doesn’t
 show a rule (see further below).
 
 In the following example, the two first options are set to
-\doc:keyword{0.5cm} and the source skip is set to \doc:keyword{0}.
+0.5cm and the source skip is set to 0.
 
 \begin[beforeskipamount=0.5cm, afterskipamount=0.5cm, sourceskipamount=0]{epigraph}
   \randomtext
@@ -218,7 +217,7 @@ In the following example, the two first options are set to
 \end{epigraph}
 
 By default, paragraph indentation is inherited from the document. It can be tuned
-with \doc:keyword{parindent}, e.g. \doc:keyword{1em}.
+with \autodoc:parameter{parindent}, e.g. 1em.
 
 \begin[parindent=1em]{epigraph}
   \randomtext
@@ -228,8 +227,8 @@ with \doc:keyword{parindent}, e.g. \doc:keyword{1em}.
 
 A rule may be shown below the epigraph text (and above the source, if
 present — in that case, the vertical source skip amount does not
-apply). Its thickness is controlled with \doc:keyword{rule} being set
-to a non-null value, e.g. \doc:keyword{0.4pt}.
+apply). Its thickness is controlled with \autodoc:parameter{rule} being set
+to a non-null value, e.g. 0.4pt.
 
 \begin[rule=0.4pt]{epigraph}
   \randomtext
@@ -243,7 +242,7 @@ Likewise, without source:
 \end{epigraph}
 
 By default, the epigraph text is justified. This may be changed setting
-\doc:keyword{ragged} to \doc:keyword{true}.
+\autodoc:parameter{ragged} to true.
 
 The text is then ragged on the opposite side to the epigraph block,
 so on the left for a right-aligned block.
@@ -260,7 +259,7 @@ It would be ragged on the right for a left-aligned epigraph block.
   \source{\randomsource}
 \end{epigraph}
 
-Here, we introduced the \doc:keyword{align} option, set to \doc:keyword{left}.
+Here, we introduced the \autodoc:parameter{align} option, set to \doc:code{left}.
 All the settings previously mentioned also apply to left-aligned
 epigraphs, so we can of course tweak them at convenience.
 
@@ -270,7 +269,7 @@ epigraphs, so we can of course tweak them at convenience.
 \end{epigraph}
 
 It is also possible to offset the epigraph from the side (left or right) it is attached to, with the
-\doc:keyword{margin} option, e.g. \doc:keyword{0.5cm}:
+\autodoc:parameter{margin} option, e.g. 0.5cm:
 
 \begin[margin=0.5cm, rule=0.4pt]{epigraph}
   \randomtext
@@ -278,11 +277,11 @@ It is also possible to offset the epigraph from the side (left or right) it is a
 \end{epigraph}
 
 If you want to specify what styling the epigraph environment should use, you
-can redefine the \doc:keyword{epigraph:style} style. By default it will be the same
+can redefine the \doc:code{epigraph:style} style. By default it will be the same
 as the surrounding document, just smaller.
 The epigraph source is typeset in italic by default. It can be modified too,
-by redefining \doc:keyword{epigraph:source:style}.\footnote{Refer to our
-\doc:keyword{styles} package for details on how to set and configure style specifications.}
+by redefining \doc:code{epigraph:source:style}.\footnote{Refer to our
+\autodoc:package{styles} package for details on how to set and configure style specifications.}
 
 \style:redefine[name=epigraph:style, as=saved:epigraph:style]{\font[style=italic]}
 \style:redefine[name=epigraph:source:style, as=saved:epigraph:source:style]{\font[style=normal]}

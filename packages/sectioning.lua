@@ -267,7 +267,7 @@ return {
 \script[src=packages/enumitem]
 
 This package provides a generic framework for sectioning commands, expanding upon
-the concepts introduced in the \doc:keyword{styles} package. Class and package
+the concepts introduced in the \autodoc:package{styles} package. Class and package
 implementors are free to use the abstractions proposed here, if they find them
 sound with respect to their goals.
 
@@ -342,7 +342,7 @@ With these first assumptions in mind, let’s summarize the requirements:
 \end{enumerate}
 
 \smallskip
-With the exception of the two first elements, which are already covered by the \doc:keyword{styles}
+With the exception of the two first elements, which are already covered by the \autodoc:package{styles}
 package, the rest is new. Here is therefore the specification introduced in this package.
 
 \begin{doc:codes}
@@ -394,7 +394,7 @@ style system. But if implementors play the game and are concerned with separatio
 concerns, it will just do the minimum things it should—and in many cases, it may be so
 simple that one could even do it in SILE language rather than in Lua.
 
-You may remember, from the \doc:keyword{styles} package, that one of the
+You may remember, from the \autodoc:package{styles} package, that one of the
 rationale for introducing styles was to avoid command “hooks” with different names,
 unknown scopes and effects, and also to formalize our expectations with a
 regular format that one could easily tweak. Resorting to a such a complex specification and

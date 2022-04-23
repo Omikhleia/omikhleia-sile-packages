@@ -58,7 +58,7 @@ return {
 \script[src=packages/redefine]
 \script[src=packages/autodoc-extras]
 
-The \doc:keyword{redefine} package can be used to easily redefine a command under a new name.
+The \autodoc:package{redefine} package can be used to easily redefine a command under a new name.
 
 Sometimes one may want to redefine a command (e.g. a font switching hook for some other
 command, etc.), but would also want to restore the initial command definition afterwards

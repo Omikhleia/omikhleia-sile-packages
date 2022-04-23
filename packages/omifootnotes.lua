@@ -138,40 +138,37 @@ return {
   documentation = [[\begin{document}
 \script[src=packages/autodoc-extras]
 
-The \doc:keyword{omifootnotes} package is a re-implementation of the
-default \doc:keyword{footnotes} package from SILE.
+The \autodoc:package{omifootnotes} package is a re-implementation of the
+default \autodoc:package{footnotes} package from SILE.
 
-In addition to the \doc:code{\\footnote} command, it provides
-a \doc:code{\\footnote:rule} command as a convenient helper to set
+In addition to the \autodoc:command{\footnote} command, it provides
+a \autodoc:command{\footnote:rule} command as a convenient helper to set
 a footnote rule. It may be called, early on in your documents, without options,
 or one or several of the following:
 
-\begin{doc:codes}
-\\footnote:rule[length=\doc:args{length}, beforeskipamount=\doc:args{glue},\par
-afterskipamount=\doc:args{glue}, thickness=\doc:args{length}]
-\end{doc:codes}
+\autodoc:command{\footnote:rule[length=<length>, beforeskipamount=<glue>,
+  afterskipamount=<glue>, thickness=<length>]}
 
-The default values for these options are, in order, \doc:code{25\%fw},
-\doc:code{2ex}, \doc:code{1ex} and \doc:code{0.5pt}.
+The default values for these options are, in order, 25\%fw, 2ex, 1ex and 0.5pt.
 
 It also redefines the way the footnote reference is formatted in the
-footnote itself (that is, the internal \doc:code{\\footnote:counter} command),
+footnote itself (that is, the internal \autodoc:command{\footnote:counter} command),
 to use a superscript counter. Both the footnote reference and the footnote
-call (that is, the internal \doc:code{\\footnote:mark} command) are
+call (that is, the internal \autodoc:command{\footnote:mark} command) are
 configured to use actual superscript characters if supported by
-the current font (see the \doc:keyword{textsubsuper} package)\footnote{You
+the current font (see the \autodoc:package{textsubsuper} package)\footnote{You
 can see a typical footnote here.}.
 
-It also adds a new \doc:keyword{mark} option to the footnote command, which
+It also adds a new \autodoc:parameter{mark} option to the footnote command, which
 allows typesetting a footnote with a specific marker instead of
-a counter\footnote[mark=†]{As shown here, using \doc:code{\\footnote[mark=†]\{…\}}.}.
+a counter\footnote[mark=†]{As shown here, using \autodoc:command{\footnote[mark=†]{…}}.}.
 In that case, the footnote counter is not altered. Among other things, these custom
 marks can be useful for editorial footnotes.
 
-Finally, relying on the \doc:keyword{styles} package, the footnote content
-is typeset according to the \doc:keyword{footnote} style (and this re-implementation
-of the original footnote package, therefore, does not have a \doc:code{\\footnote:font}
-hook).
+Finally, relying on the \autodoc:package{styles} package, the footnote content
+is typeset according to the \autodoc:package{footnote} style (and this re-implementation
+of the original footnote package, therefore, does not have a
+\autodoc:command[check=false]{\footnote:font} hook).
 
 \end{document}]]
 }

@@ -246,45 +246,45 @@ return {
   documentation = [[\begin{document}
 \script[src=packages/autodoc-extras]
 
-The \label[marker=omirefs:head]\doc:keyword{omirefs} package provides tools for classes
+The \label[marker=omirefs:head]\autodoc:package{omirefs} package provides tools for classes
 and packages to support cross-references within a document.
 
-From a document author perspective, the commands \doc:code{\\label} and \doc:code{\\ref}
-are then available. Both take a \doc:code{marker} option, which can be any reference string.
+From a document author perspective, the commands \autodoc:command{\label} and \autodoc:command{\ref}
+are then available. Both take a \autodoc:parameter{marker} option, which can be any reference string.
 They do not expect any argument; if one is passed, though, it is just processed as-is.
 
-The \doc:code{\\label} command is used to reference a given point in a document. Let us
+The \autodoc:command{\label} command is used to reference a given point in a document. Let us
 do it just here\label[marker=myref]. It does not print anything, but we now have
 a reference, just before this sentence.
 
-The \doc:code{\\ref} command is used to refer to the point with the specified marker and
-print out a resolved value depending on the \doc:code{type} option.
+The \autodoc:command{\ref} command is used to refer to the point with the specified marker and
+print out a resolved value depending on the \autodoc:parameter{type} option.
 
-The page number is always available as \doc:code{\\ref[marker=\doc:args{marker}, type=page]}\footnote{The
-package also provides the \doc:code{\\pageref[marker=\doc:args{marker}]} command as a mere convenience
+The page number is always available as \autodoc:command{\ref[marker=<marker>, type=page]}\footnote{The
+package also provides the \autodoc:command{\pageref[marker=<marker>]} command as a mere convenience
 alias.}: our label is on page \pageref[marker=myref].
 
 In a book-like class, the current sectioning level (chapter, section, etc.) is also
-available\footnote{\label[marker=fn:example]Actually, the package currently leverages the \doc:code{\\tocentry}
+available\footnote{\label[marker=fn:example]Actually, the package currently leverages the \autodoc:command{\tocentry}
 command if it exists, so assumes section entries explicitly marked for being
 excluded from the table of contents will not be referred to. That’s a guess in the
 dark, so do not hesitate reporting an issue.}, by number or title.
-The current section number corresponds to \doc:code{\\ref[marker=\doc:args{marker}, type=section]}.
+The current section number corresponds to \autodoc:command{\ref[marker=<marker>, type=section]}.
 So here we should be in \ref[marker=myref,type=section], if this documentation is included
 in some sort of book.
-The current section title corresponds to \doc:code{\\ref[marker=\doc:args{marker}, type=title]}.
+The current section title corresponds to \autodoc:command{\ref[marker=<marker>, type=title]}.
 Here, “\ref[marker=myref,type=title]” (with us adding the quotes).
 
 If referencing a marker that does not exist or a section which is not
 available\footnote[mark=§]{\label[marker=fn:example:with-mark]Perhaps we are not even
 in a numbered section? Ok, this note is kind of obvious, not to say dumb.
 But it should be a footnote with a mark instead of a counter, if a footnote package
-supporting them (as this author’s \doc:keyword{omifootnotes} package) is active.
+supporting them (as this author’s \autodoc:package{omifootnotes} package) is active.
 If so, you will see why \ref[marker=omirefs:fn, type=relative].},
 a warning is reported and the printed output is \ref[marker=do:not:exist, warn=false].
 
 \label[marker=omirefs:fn]If this package is loaded after a footnote package, then we also get the footnote
-number for a label in a footnote, with \doc:code{\\ref[marker=\doc:args{marker}, type=default]}.
+number for a label in a footnote, with \autodoc:command{\ref[marker=<marker>, type=default]}.
 For instance, let’s pretend with want to refer the reader to notes \ref[marker=fn:example,type=default]
 and \ref[marker=fn:example:with-mark].
 
@@ -298,21 +298,21 @@ This author knows some editors are pedantic and actually confesses the same guil
 package therefore supports another type, \doc:code{relative}, which would not
 have needed such a machinery. Easy, this package description started \ref[marker=omirefs:head,
 type=relative] and ends \ref[marker=omirefs:foot, type=relative]. And it even accepts, on all
-the above-mentioned flavors of the \doc:code{\\ref} command, a \doc:code{relative} option
+the above-mentioned flavors of the \autodoc:command{\ref} command, a \autodoc:parameter{relative} option
 that may be set to true. So it started on page \pageref[marker=omirefs:head,relative=true] and
 ends on page \pageref[marker=omirefs:foot,relative=true]. Blatant pedantry, for sure, but
 a fault confessed is half redressed. Let’s pretend that \em{sometimes}, it might help
 obtaining better line breaks.
 
-As a final note, if the \doc:keyword{pdf} package is loaded before using label commands,
+As a final note, if the \autodoc:package{pdf} package is loaded before using label commands,
 then hyperlinks will be enabled on references. You may disable this behavior
-by setting the \doc:code{linking} option to false on the \doc:code{\\ref} command.
+by setting the \autodoc:parameter{linking} option to false on the \autodoc:command{\ref} command.
 
 \em{For class implementers:} The package exports two Lua methods, \doc:code{moveLabelRefs()} and
 \doc:code{writeLabelRefs()}. The former should be called at the end of each page to collate
 label references. The latter should be called at the end of the document, to save the
 references to a file which is read when the package is initialized. Also, this package has
-to be loaded after the table of contents package, as it updates its \doc:code{\\tocentry}
+to be loaded after the table of contents package, as it updates its \autodoc:command{\tocentry}
 command.
 
 \em{For packages implementers:} The package also exports two Lua methods, \doc:code{pushLabelRef()}
