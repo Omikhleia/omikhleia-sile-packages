@@ -226,6 +226,10 @@ These are standalone packages users can use in their own documents.
 
 \package-documentation[src=packages/framebox]
 
+\subsection{ean13: EAN-13 barcodes for ISBN etc.}
+
+\package-documentation[src=packages/barcodes/ean13]
+
 \section{Technical packages}
 
 These packages are not intended to be used alone, but provide utilities
