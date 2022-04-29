@@ -76,18 +76,20 @@ end, "Creates a rectangular blob of ink of width <width>, height <height> and de
 SILE.registerCommand("ean13", function (options, _)
   local code = SU.required(options, "code", "valid EAN-13 code")
   local scale = options.scale or "SC2"
+  local corr = SU.boolean(options.correction, true) -- bar offset correction?
   local module = SC[scale]
   if not module then SU.error("Invalid EAN scale (SC0 to SC9): "..scale) end
   local pattern = ean13(code)
   local X = SILE.length(module.."mm")
   local H = 69.242424242 -- As per the standard, a minimal 22.85mm at standard X
+  local offsetcorr = corr and SILE.length("0.020mm") or SILE.length()
   local hb = SILE.call("hbox", {}, function()
     SILE.call("kern", { width = 11 * X }) -- Quiet zone left = minimal 11X
     for i = 1, #pattern do
       local sz = tonumber(pattern[i]) * X
       if i%2 == 0 then
         -- space
-        SILE.call("kern", { width = sz })
+        SILE.call("kern", { width = sz + offsetcorr })
       else
         -- bar
         local numline = (i+1)/2
@@ -95,9 +97,12 @@ SILE.registerCommand("ean13", function (options, _)
         if numline == 1 or numline == 2 or numline == 15 or numline == 16 or numline == 29 or numline == 30 then
           d = 5 -- longer bars are 5X higher than shorter bars
         end
-        SILE.call("hrule:fixed", { height = H * X, depth = d * X, width = sz }) -- bar
+        SILE.call("hrule:fixed", { height = H * X, depth = d * X, width = sz - offsetcorr }) -- bar
       end
     end
+    SILE.call("kern", { width = offsetcorr }) -- Not really requested by the standard but felt preferable,
+                                              -- so that whatever the correction is, the look is globally
+                                              -- the same.
     -- The recommended typeface for the human readable interpretation is OCR-B
     -- at a height of 2.75mm at standard X
     -- Only an approximation here: we assume the font size corresponds to 9X...
@@ -135,6 +140,14 @@ recommended scale for a “consumer item” (SC2, with a “module” of 0.33mm)
 can be changed by setting the \autodoc:parameter{scale} option to any of the standard
 scales from SC0 to SC9. For the record, SC6 is the minimum recommended scale for an
 “outer packaging” (SC9 being the default recommended scale for it).
+
+By default the bar width is reduced by 0.020mm and the white spaces are enlarged by the
+same amount (so as to preserve the global distance between bars.)
+The standard indeed recommends making each rule thinner than what is exactly implied
+by the multiple of the module, due the ink behavior during the actual printing. The
+bar correction value used here is suitable for offset process technology. You can
+disable that offset correction by specifying the \autodoc:parameter{correction=false}
+option.
 
 The human readable interpretation below the barcode expects the font to be OCR-B. A free
 implementation of this font is Matthew Skala’s July 2021 version,
