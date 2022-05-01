@@ -6,11 +6,15 @@
 SILE.require("packages/rules")
 SILE.require("packages/raiselower")
 
--- https://tug.org/TUGboat/Articles/tb15-4/tb45olsa.pdf
--- https://tsukurimashou.osdn.jp/ocr.php.en (Matthew Skala, July 1, 2021)
+-- References:
+-- GS1 specifications
+--   https://www.gs1.org/docs/barcodes/GS1_General_Specifications.pdf
+-- TUGBoat article:
+--   https://tug.org/TUGboat/Articles/tb15-4/tb45olsa.pdf
+-- OCR-B font:
+--   https://tsukurimashou.osdn.jp/ocr.php.en (Matthew Skala, July 1, 2021)
 
 -- Tables for encoding the EAN-13 bars
--- See e.g. https://tug.org/TUGboat/Articles/tb15-4/tb45olsa.pdf for inspiration.
 local tableA = { "3211", "2221", "2122", "1411", "1132", "1231", "1114", "1312", "1213", "3112" }
 local tableB = { "1123", "1222", "2212", "1141", "2311", "1321", "4111", "2131", "3121", "2113" }
 local tableSelector = { "AAAAAA", "AABABB", "AABBAB", "AABBBA", "ABAABB", "ABBAAB", "ABBBAA", "ABABAB", "ABABBA", "ABBABA" }
@@ -73,6 +77,30 @@ SILE.registerCommand("hrule:fixed", function (options, _) -- FIXME HACK #1382
   })
 end, "Creates a rectangular blob of ink of width <width>, height <height> and depth <depth>")
 
+SILE.scratch.ean13 = {
+  font = {
+    family = "OCR B",
+  }
+}
+SILE.call("font", { family = SILE.scratch.ean13.font.family, size = 10 }, function()
+  local c = SILE.shaper:measureChar("0") -- Here we assume a mononospace font...
+  -- The recommended typeface for the human readable interpretation is OCR-B
+  -- at a height of 2.75mm at standard X, i.e. approx. 8.3333X.
+  -- The minimum space between the top of the digits and the bottom of the bars
+  -- SHALL however be 0.5X. We could therefore make the font height 7.8333X, but
+  -- that could be two wide, and a digit shall not be wider than 7X...
+  -- The size of the human readable interpretation is not that important,
+  -- according to the standard... So we just compute a decent ratio based on the
+  -- above rules, and checked it looked correct with OCR B, FreeMono, etc. :D
+  --
+  local maxHRatio = 7.8333
+  local rh = c.height / maxHRatio -- height ratio to 7.8333
+  local rw = c.width / 7 -- width ratio to 7
+  local ratio = (rh < rw) and maxHRatio * rh / rw or maxHRatio
+  SILE.scratch.ean13.font.size = 10 * ratio / c.height
+  SILE.scratch.ean13.font.width = c.width / 10 * SILE.scratch.ean13.font.size
+end)
+
 SILE.registerCommand("ean13", function (options, _)
   local code = SU.required(options, "code", "valid EAN-13 code")
   local scale = options.scale or "SC2"
@@ -103,29 +131,32 @@ SILE.registerCommand("ean13", function (options, _)
     SILE.call("kern", { width = offsetcorr }) -- Not really requested by the standard but felt preferable,
                                               -- so that whatever the correction is, the look is globally
                                               -- the same.
-    -- The recommended typeface for the human readable interpretation is OCR-B
-    -- at a height of 2.75mm at standard X
-    -- Only an approximation here: we assume the font size corresponds to 9X...
-    -- And honestly the kerning is somewhat random too, just good-looking with
-    -- Matthew Skala's OCR B font.
-    SILE.call("font", { family = "OCR B", size = X * 9 }, function()
-      SILE.call("lower", { height = 8.3333 * X }, function()
-        SILE.call("kern", { width = -103 * X })
-        SILE.call("hbox", {}, { code[1] }) -- first digit
-        SILE.call("kern", { width = 6.5 * X })
-        SILE.call("hbox", {}, { code:sub(2,7) }) -- first sequence
-        SILE.call("kern", { width = 6.5 * X })
-        SILE.call("hbox", {}, { code:sub(8,13) }) -- last sequence
-        SILE.call("kern", { width = 6.5 * X })
-        local l = SILE.call("hbox", {}, { ">" }) -- closing bracket
-        l.width = SILE.length() -- width cancelled not to affect the quiet right zone
+    if SU.boolean(options.showdigits, true) then
+      -- N.B. Option showdigits undocumented (just used for testing)
+      SILE.call("font", { family = SILE.scratch.ean13.font.family, size = SILE.scratch.ean13.font.size * X }, function()
+        local x = SILE.call("lower", { height = 8.3333 * X }, function()
+          SILE.call("kern", { width = -106 * X })
+          local h = SILE.call("hbox", {}, { code[1] }) -- first digit, at the start of the quiet left zone
+          h.width = SILE.length()
+          SILE.call("kern", { width = 14.5 * X })
+          h = SILE.call("hbox", {}, { code:sub(2,7) }) -- first sequence
+          h.width = SILE.length()
+          SILE.call("kern", { width = 46 * X })
+          h = SILE.call("hbox", {}, { code:sub(8,13) }) -- last sequence
+          h.width = SILE.length()
+          local l = SILE.length((52.5 - SILE.scratch.ean13.font.width) * X)
+          SILE.call("kern", { width = l })
+          h = SILE.call("hbox", {}, { ">" }) -- closing bracket, aligned to the end of the quiet right zone
+          h.width = SILE.length()
+          SILE.call("kern", { width = (SILE.scratch.ean13.font.width - 7) * X  })
+        end)
       end)
-    end)
-    SILE.call("kern", { width = 7 * X }) -- Quiet zone right = minimal 7X
+    end
   end)
+  SILE.call("kern", { width = 7 * X }) -- Quiet zone right = minimal 7X
   -- Barcode height (including the number) = according to the standard, 25.93mm at standard X
   -- It means there's 9.3333X below the bars but we already took 5X for the longer bars.
-  hb.depth = hb.depth + (4.3333) * X
+  hb.depth = hb.depth + 4.3333 * X
 end, "Typesets an EAN-13 barcode.")
 
 return {
