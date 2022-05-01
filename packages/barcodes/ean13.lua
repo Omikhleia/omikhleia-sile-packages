@@ -19,9 +19,27 @@ local tableA = { "3211", "2221", "2122", "1411", "1132", "1231", "1114", "1312",
 local tableB = { "1123", "1222", "2212", "1141", "2311", "1321", "4111", "2131", "3121", "2113" }
 local tableSelector = { "AAAAAA", "AABABB", "AABBAB", "AABBBA", "ABAABB", "ABBAAB", "ABBBAA", "ABABAB", "ABABBA", "ABBABA" }
 
+local verifyEan13 = function (text)
+  local evens = 0
+  local odds = 0
+  for i = 1, 12, 2 do
+    local digit = tonumber(text[i])
+    if not digit then SU.error("Invalid EAN-13 (shall contain only digits)") end
+    odds = odds + digit
+  end
+  for i = 2, 12, 2 do
+    local digit = tonumber(text[i])
+    if not digit then SU.error("Invalid EAN-13 (shall contain only digits)") end
+    evens = evens + digit
+  end
+  local tot = 3 * evens + odds
+  local n = math.ceil(tot/10) * 10
+  if (n - tot) ~= tonumber(text[13]) then SU.error("Invalid EAN-13 check digit (expected "..(n-tot)..")") end
+end
+
 local ean13 = function (text)
   if type(text) ~= "string" or #text ~= 13 then SU.error("Invalid EAN-13 "..text) end
-  -- TODO Here we should check consistency = it contains only digits and the control code is correct!
+  verifyEan13(text)
   local pattern = "111"
   local selector = tableSelector[tonumber(text[1]) + 1]
   for i = 2, 7 do
