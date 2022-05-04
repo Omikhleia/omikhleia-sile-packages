@@ -97,11 +97,14 @@ return {
 The \autodoc:package{textsubsuper} package provides two commands, \autodoc:command{\text:superscript{<content>}}
 and \autodoc:command{\text:subscript{<content>}}.
 
-They will use the native superscript or subscript characters, respectively, in a font, when available, instead of
-scaling, raising or lowering characters, because most of the time the former will obviously look much better.
+They will use the native superscript or subscript characters, respectively,
+in a font, when available, instead of scaling, raising or lowering characters,
+because most of the time the former will obviously look much better.
 
-As of superscripts, that could for a number (e.g. in footnote calls), but also for letters (e.g. in century references in French,
-\font[features=+smcp]{iv}\text:superscript{e}; or likewise in sequences in English, 12\text:superscript{th}).
+As of superscripts, it could be used for a number (e.g. in footnote calls),
+but also for letters (e.g. in century references in French,
+\font[features=+smcp]{iv}\text:superscript{e}; or likewise in sequences
+in English, 12\text:superscript{th}).
 
 As of subscripts, the most familiar example is in chemical formulas, for example
 H\text:subscript{2}O or C\text:subscript{6}H\text:subscript{12}O\text:subscript{6}.

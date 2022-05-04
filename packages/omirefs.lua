@@ -316,7 +316,7 @@ to be loaded after the table of contents package, as it updates its \autodoc:com
 command.
 
 \em{For packages implementers:} The package also exports two Lua methods, \doc:code{pushLabelRef()}
-and \doc:code{popLabelRefs()}. The former takes a formatted number as argument. To enable
+and \doc:code{popLabelRef()}. The former takes a formatted number as argument. To enable
 cross-referencing in your own package, whatever your numbering scheme is, you may test for their
 availability in your supporting class
 (e.g. checking \doc:code{SILE.documentState.documentClass.pushLabelRef} exists)

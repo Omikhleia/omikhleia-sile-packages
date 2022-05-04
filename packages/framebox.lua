@@ -341,7 +341,7 @@ The \autodoc:parameter{side} options may be set to \bracebox[side=right]{\strut{
 \bracebox[side=both]{\strut{}“both”}.
 As for fine-tuning options, \autodoc:parameter{padding} controls the space between the brace and the content
 (defaults to 0.25em),
-\autodoc:parameter{bracewidth} defines the widthof the whole brace (defaults to 0.25em),
+\autodoc:parameter{bracewidth} defines the width of the whole brace (defaults to 0.25em),
 \autodoc:parameter{strokewidth} (defaults to 0.033em) and \autodoc:parameter{bracethickness} (0.05em) define
 the drawing characteristics of the brace.
 Its color, black by default, can be changed with \autodoc:parameter{bracecolor}.
