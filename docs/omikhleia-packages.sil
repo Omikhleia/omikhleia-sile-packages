@@ -260,6 +260,12 @@ class writers.
 
 \package-documentation[src=packages/omiheaders]
 
+\section{Experimental packages}
+
+\subsection{fancytoc: alternative table of contents}
+
+\package-documentation[src=packages/experimental/fancytoc]
+
 \section{Specialized packages}
 
 \subsection{teidict: XML TEI P4 print dictionaries}
