@@ -266,6 +266,10 @@ class writers.
 
 \package-documentation[src=packages/experimental/fancytoc]
 
+\subsection{printoptions: tools for professional printers}
+
+\package-documentation[src=packages/experimental/printoptions]
+
 \section{Specialized packages}
 
 \subsection{teidict: XML TEI P4 print dictionaries}
