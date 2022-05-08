@@ -183,9 +183,9 @@ SILE.doTexlike([[%
 \end{font}}%
 %
 \define[command=colophonwrapper]{%
+\font[family=Cardinal Alternate, size=11pt]{%
+\colophon[decoration=true,figure=decorative, ratio=1.03]{%
 \set[parameter=linebreak.emergencyStretch, value=0.5em]{%
-\font[family=Cardinal Alternate, size=11pt, style=italic]{%
-\colophon[decoration=true,figure=decorative, ratio=1.025]{%
 % HACK. SILE is wrong on so many ways...
 \set[parameter=shaper.spaceenlargementfactor, value=1.0]%
 % And so we must also recompute our French mess. DARN.

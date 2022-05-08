@@ -5,6 +5,53 @@
 \hbox{}\par
 \break
 \hbox{}\par
+\skip[height=1cm]
+\begin[size=9pt]{font}
+\begin{center}
+\smallcaps{Le Dragon de Brume}
+
+\raise[height=0.5ex]{\hrule[height=0.4pt, width=5em]}
+
+Association loi de 1901
+
+R.N.A. W313014934
+
+\medskip
+\couyard[type=8]
+\end{center}
+
+\medskip
+\center{Collection Études Tolkieniennes}
+
+\medskip
+\em{Tolkien, le façonnement d’un monde}, vol. 1, \em{Botanique & Astronomie}, 2011, 276 p.
+
+\quad Essais et articles réunis par Didier \smallcaps{Willis}.
+
+\medskip
+\em{Tolkien, le façonnement d’un monde}, vol. 2, \em{Astronomie & Géographie}, 2014, 356 p.
+
+\quad Essais et articles réunis par Didier \smallcaps{Willis}.
+
+\medskip
+\em{Pour la gloire de ce monde. Recouvrements et consolations en Terre du Milieu}, 2016, 416 p.
+
+\quad Essais et articles réunis par Jean-Philippe \smallcaps{Qadri} & Jérôme \smallcaps{Sainton}.
+
+\medskip
+\em{Fées, navigateurs & autres miscellanées en Terre du Milieu}, 2017, 174 p.
+
+\quad Essais réunis par R. \smallcaps{Casademont}, D. \smallcaps{Willis},
+M. \smallcaps{Brecq} & L. \smallcaps{Carruthers}.
+
+\bigskip
+\center{Collection Fiction}
+
+\medskip
+\em{Contes & Légendes d’Almaq}, premier volume, 2022, 362 p.
+
+\quad Roman.
+\par\end{font}
 \break
 \hbox{}
 % TITLE PAGE
@@ -16,7 +63,7 @@
 \vfill
 \font[family=Libertinus Serif, size=18pt, features=+smcp]{Premier Volume}
 \vfill
-\font[family=DS Zierschrift, size=14pt]{Omikhleia}
+\font[family=DS Zierschrift, size=15pt]{Omikhleia}
 \end{center}
 \break
 % COPYRIGHT PAGE

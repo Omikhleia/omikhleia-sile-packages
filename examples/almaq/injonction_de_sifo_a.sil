@@ -7,7 +7,7 @@
 \hbox{}\vfill
 
 \begin{figure}
-\img[src=examples/almaq/images/chadhruid_table_lenski.png, width=99%fw]
+\svg[src=examples/almaq/images/chadhruid_table_lenski.svg, width=99%fw]
 \caption{%
 Notes de la main d’Emma Lenski dans \em{The Chronicles of Alstre and Dongann by the poet Celdre},
 fac-similé inclus dans la première édition de 1937, p. 4. L’édition augmentée de 1962 reporte la
@@ -347,7 +347,7 @@ etc. Je ne prétends pas conclure, mais c’est dire que nous n’avons sans dou
 l’herméneutique du personnage.
 }, quant à ce qu’il convient ou non de révéler au grand jour (voir \em{infra}\kern[width=0.1em]).
 
-Je peux à présent aborder à nouveau compte les expressions \em{mathanian an barnas} et \em{nemed ethlan almaq}.
+Je peux aborder derechef les expressions \em{mathanian an barnas} et \em{nemed ethlan almaq}.
 Elles présentent une inversion inattendue, dont Wiegger se défiait. Alster, dans toutes nos autres
 sources, est toujours le Ptoliporthe\footnote{%
 Soit \em{Hurvedan}, forme transposée depuis la langue de l’empire, « celui qui détruit les foyers »
