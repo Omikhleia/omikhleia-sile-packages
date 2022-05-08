@@ -166,12 +166,13 @@ local _drawSVG = function (filename, svgdata, width, height, density)
   width = SILE.measurement(svgwidth * scalefactor)
   height = SILE.measurement(svgheight * scalefactor)
   scalefactor = scalefactor * density / 72
-  
+
   local resolution = SILE.settings.get("printoptions.resolution")
   if resolution and resolution > 0 then
     local targetw = math.ceil(SU.cast("number", width) * resolution / 72)
     local converted = svgRasterizer(filename, targetw, resolution)
     if converted then
+      SILE.require("packages/image")
       SILE.call("img", { src = converted, width = width })
       return -- We are done replacing the SVG by a raster image
     end
