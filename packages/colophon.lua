@@ -1,23 +1,48 @@
 --
 -- Circle-shaped colophons
--- 2021, Didier Willis
+-- 2021-2022, Didier Willis
 -- License: MIT
 --
 SILE.require("packages/svg")
 SILE.require("packages/rebox")
 SILE.require("packages/raiselower")
+SILE.require("packages/parbox")
 
 SILE.scratch.colophon = {
   circle = {
     decorations = {
-      debug = { src = "packages/colophons/circle-debug.svg", scale = 1 },
-      default = { src = "packages/colophons/circle.svg", scale = 1.25 },
-      decorative = { src = "packages/colophons/circle-decorative.svg", scale = 1.5 },
-      floral = { src = "packages/colophons/circle-floral.svg", scale = 1.66 },
-      ornamental = { src = "packages/colophons/circle-ornament.svg", scale = 1.42 },
-      elegant = { src = "packages/colophons/circle-elegant.svg", scale = 1.5 },
-      delicate = { src = "packages/colophons/circle-floral-delicate.svg", scale = 1.66 },
-      cornered = { src = "packages/colophons/circle-squared-corners.svg", scale = 1.33 }
+      debug = {
+        src = "packages/colophons/circle-debug.svg",
+        scale = 1
+      },
+      default = {
+        src = "packages/colophons/circle.svg",
+        scale = 1.25
+      },
+      decorative = {
+        src = "packages/colophons/circle-decorative.svg",
+        scale = 1.5
+      },
+      floral = {
+        src = "packages/colophons/circle-floral.svg",
+        scale = 1.66
+      },
+      ornamental = {
+        src = "packages/colophons/circle-ornament.svg",
+        scale = 1.42
+      },
+      elegant = {
+        src = "packages/colophons/circle-elegant.svg",
+        scale = 1.5
+      },
+      delicate = {
+        src = "packages/colophons/circle-floral-delicate.svg",
+        scale = 1.66
+      },
+      cornered = {
+        src = "packages/colophons/circle-squared-corners.svg",
+        scale = 1.33
+      }
     }
   }
 }
@@ -29,7 +54,7 @@ local function circleSetupLineLengths(options, oldSetupLineLengths)
   local bs = SILE.measurement("1bs"):tonumber()
   local ex = SILE.measurement("1ex"):tonumber()
 
-  local setupLineLengths = function (self)
+  local setupLineLengths = function(self)
     -- Estimate the width this would reach if set all on a single line.
     local estimatedWidth = 0
     for i = 1, #self.nodes do
@@ -60,7 +85,9 @@ local function circleSetupLineLengths(options, oldSetupLineLengths)
       local h = radius - (line - 1) * bs - 0.5 * ex
       local c = radius * radius - h * h
       local chord = c >= 0 and math.sqrt(c) or radius
-      if chord > that.hsize then SU.error("Circle-shaped paragraph to big to fit the frame width") end
+      if chord > that.hsize then
+        SU.error("Circle-shaped paragraph to big to fit the frame width")
+      end
 
       local indent = that.hsize / 2 - chord
       return indent:tonumber(), SILE.measurement(2 * chord), indent:tonumber()
@@ -69,115 +96,138 @@ local function circleSetupLineLengths(options, oldSetupLineLengths)
     -- Store the computed radius for decorations, which will be computed
     -- at the very end...
     internalScratch.radius = radius
+    internalScratch.offset = 0.5 * ex
     oldSetupLineLengths(self)
   end
   return setupLineLengths
 end
 
+local function getFigureScale(options)
+  -- Get the figure and its scaling ratio.
+  local figure = options.figure or "default"
+  local decoration = SILE.scratch.colophon.circle.decorations[figure] or
+                          SU.error("Unknown decoration '" .. figure .. "'")
+  local scale = options.figurescale and SU.cast("number", options.figurescale) or decoration.scale
+  if scale < 1 then
+    SU.error("figurescale must be greater than 1")
+  end
+  return scale
+end
+
 local function circleDecoration(options)
-  local bs = SILE.measurement("1bs"):tonumber()
-  local ex = SILE.measurement("1ex"):tonumber()
   -- Retrieve the things we stored when line breaking occurred.
   local radius = internalScratch.radius or SU.error("Oops, broken implementation")
-  local nbLines = internalScratch.nbLines or SU.error("Oops, broken implementation")
-
-  -- Remember the extra ratio etc. we used when computing the circle radius, and all the
-  -- discussion on stretching and shrinking? So we may not end up exactly with the
-  -- theoretical radius. Let's compute how much we missed (positive or negative).
-  local missingHeight = bs * nbLines - 2 * radius
 
   -- Get the figure and its scaling ratio.
   local figure = options.figure or "default"
-  local decoration = SILE.scratch.colophon.circle.decorations[figure] or SU.error("Unknown decoration '"..figure.."'")
+  local decoration = SILE.scratch.colophon.circle.decorations[figure] or
+                         SU.error("Unknown decoration '" .. figure .. "'")
   local scale = options.figurescale and SU.cast("number", options.figurescale) or decoration.scale
-  if scale < 1 then SU.error("figurescale must be greater than 1") end
-
-  -- We are just on the line below the shaped paragraph. So we have 1bs too much, and also
-  -- that 0.5ex we added to be sure the first line would have some width. In addition
-  -- to the missing height, we have to take them into account.
-  local raise = 0.5 * (bs - 0.5 * ex) + missingHeight
+  if scale < 1 then
+    SU.error("figurescale must be greater than 1")
+  end
+  -- We are vertically aligned with the paragraph. In addition to a scaled radius raise,
+  -- we have also that 0.5ex or so offset that we added to be sure the first line would
+  -- have some width...
+  local raise = - internalScratch.offset - 2 * radius + radius * (1 - scale)
 
   -- Now we should have everything to push the decoration as a zero-sized box,
   -- scaled and moved over the shaped paragraph.
-  SILE.typesetter:leaveHmode()
-  -- That is, centered...
-  SILE.call("kern", { width= SILE.length("50%fw"):tonumber() - radius * scale })
-  SILE.call("rebox", { height = 0, width = 0 }, function ()
+  SILE.call("rebox", {
+    height = 0,
+    width = 0
+  }, function()
+        -- That is, centered...
+    SILE.call("kern", {
+      width = SILE.length("50%fw"):tonumber() - radius * scale -- - internalScratch.offset
+    })
+
     -- Raised by the correction
-    SILE.call("raise", { height = raise }, function ()
-      -- Lowered according to the scaling ratio (yes we could have done that
-      -- and the above in a single command, it just more legible this way
-      -- though).
-      SILE.call("lower", { height = (scale - 1) * radius }, function ()
-        SILE.call("svg", { src = decoration.src, height = scale * 2 * radius })
-      end)
+    SILE.call("raise", {
+      height = raise
+    }, function()
+        SILE.call("svg", {
+          src = decoration.src,
+          height = scale * 2 * radius
+        })
     end)
   end)
-  SILE.typesetter:leaveHmode();
-
-  -- And finally add a vertical glue after the paragraph, to take into
-  -- account the extra space needed by the decoration.
-  local offset = (scale - 1) * (radius - missingHeight / 2) - ex
-  SILE.typesetter:pushExplicitVglue(SILE.nodefactory.vglue(SILE.length(offset)))
 end
 
 SILE.registerCommand("colophon", function (options, content)
   local oldT_breakIntoLines = SILE.typesetter.breakIntoLines
   local oldLB_setupLineLengths = SILE.linebreak.setupLineLengths
   local oldLB_parShape = SILE.linebreak.parShape
+  local fontOpts = SILE.font.loadDefaults({})
 
+  -- Ok, this first version of this package didn't use a parbox.
+  -- Let's explain, then. If the decoration is flattened with
+  -- transparency removed, it has to be _below_ the actual text.
+  -- Yet, we only know the requested space (and radius) after
+  -- typesetting the text. So we are gonna use a parbox for that,
+  -- steal it back, add the decoration, and then re-add the parbox
+  -- afterwards...
   SILE.typesetter:leaveHmode()
-  SILE.settings.temporarily(function()
-    -- Increase a bit the tolerance, typesetting in circle is tough.
-    SILE.settings.set("linebreak.tolerance", 2000)
-    -- Clear paragraph indent and ensure baselineskip has no stretch.
-    SILE.settings.set("document.baselineskip", "1.2em")
-    SILE.settings.set("document.parindent", 0)
-    -- Activate parshaping
-    SILE.settings.set("linebreak.parShape", true)
+  local pbox = SILE.call("parbox", {
+    width = "100%fw",
+    valign = "top",
+    strut = "none",
+  }, function()
+    SILE.settings.temporarily(function()
+      -- Reapply out font in the parbox
+      SILE.call("font", fontOpts)
+      -- Increase a bit the tolerance, typesetting in circle is tough.
+      SILE.settings.set("linebreak.tolerance", 2000)
+      -- Clear paragraph indent
+      SILE.settings.set("document.parindent", 0)
+      -- Ensure baselineskip has no stretch:
+      --  We do not need it now that we used a parbox
+      -- Activate parshaping
+      SILE.settings.set("linebreak.parShape", true)
 
-    -- Override some default methods...
-    local leadingGlue = true
-    SILE.linebreak.setupLineLengths = circleSetupLineLengths(options, oldLB_setupLineLengths)
-    SILE.typesetter.breakIntoLines = function (self, nodelist, breakWidth)
-      local lines = oldT_breakIntoLines(self, nodelist, breakWidth)
-      if SU.boolean(options.decoration, false) then
-        if leadingGlue == false then SU.warn("Breaking more than one colophon paragraph with decoration?") end
-        -- Here we do two additional things, once a paragraph has been broken into lines.
-        -- 1. We store the number of lines, which will be needed to compute the decoration
-        --    later. Caution: it bluntly assumes the content is made of exactly one single
-        --    paragraph. The warning above should maybe be an error.
-        -- 1. We also insert a vertical glue corresponding to the extra space needed for
-        --    the decoration.
-        internalScratch.nbLines = #lines
-        local ex = SILE.measurement("1ex"):tonumber()
-        local figure = options.figure or "default"
-        local decoration = SILE.scratch.colophon.circle.decorations[figure] or SU.error("Unknown decoration '"..figure.."'")
-        local scale = decoration.scale
-        local offset = (scale - 1) * internalScratch.radius / 2 + ex
-        local node = SILE.nodefactory.vglue(SILE.length(offset))
-        node.explicit = true
-        node.discardable = false
-        table.insert(lines[1].nodes, 1, node)
-        leadingGlue = false
+      -- Override some default methods...
+      local leadingGlue = true
+      SILE.linebreak.setupLineLengths = circleSetupLineLengths(options, oldLB_setupLineLengths)
+      SILE.typesetter.breakIntoLines = function(self, nodelist, breakWidth)
+        local lines = oldT_breakIntoLines(self, nodelist, breakWidth)
+        if SU.boolean(options.decoration, false) then
+          if leadingGlue == false then SU.warn("Breaking more than one colophon paragraph with decoration?") end
+          -- Here we do two additional things, once a paragraph has been broken into lines.
+          -- We store the number of lines, which will be needed to compute the decoration
+          -- later. Caution: it bluntly assumes the content is made of exactly one single
+          -- paragraph. The warning above should maybe be an error.
+          internalScratch.nbLines = #lines
+          leadingGlue = false
+        end
+        return lines
       end
-      return lines
-    end
-    SILE.process(content)
-    SILE.typesetter:leaveHmode();
 
-    -- Restore the original typesetter and linebreak.
-    SILE.typesetter.breakIntoLines = oldT_breakIntoLines
-    -- Also do not forget to deactivate the parShape method.
-    SILE.linebreak.setupLineLengths = oldLB_setupLineLengths
-    SILE.linebreak.parShape = oldLB_parShape
-    SILE.settings.set("linebreak.parShape", false)
-
-    -- When all is done, we construct the decoration...
-    if SU.boolean(options.decoration, false) then
-      circleDecoration(options)
-    end
+      SILE.process(content)
+      SILE.typesetter:leaveHmode()
+      -- Restore the original typesetter and linebreak.
+      SILE.typesetter.breakIntoLines = oldT_breakIntoLines
+      -- Also do not forget to deactivate the parShape method.
+      SILE.linebreak.setupLineLengths = oldLB_setupLineLengths
+      SILE.linebreak.parShape = oldLB_parShape
+      SILE.settings.set("linebreak.parShape", false)
+    end)
   end)
+  table.remove(SILE.typesetter.state.nodes) -- steal it back
+
+  local scale = getFigureScale(options)
+  local ex = SILE.measurement("1ex"):tonumber()
+  local offset = (scale - 1) * internalScratch.radius
+
+  if SU.boolean(options.decoration, false) then
+    SILE.typesetter:pushExplicitVglue(SILE.nodefactory.vglue(SILE.length(offset)))
+    circleDecoration(options)
+  end
+
+  SILE.typesetter:pushHbox(pbox)
+  SILE.typesetter:leaveHmode()
+  if SU.boolean(options.decoration, false) then
+    SILE.typesetter:pushExplicitVglue(SILE.nodefactory.vglue(SILE.length(offset + ex)))
+  end
 end, "Formats shaped paragraphs")
 
 return {
