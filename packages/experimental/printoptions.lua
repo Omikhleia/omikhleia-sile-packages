@@ -15,10 +15,17 @@ SILE.settings.declare({
 })
 
 SILE.settings.declare({
-  parameter = "printoptions.rasterize",
-  type = "integer",
+  parameter = "printoptions.vector.rasterize",
+  type = "boolean",
   default = true,
-  help = "When true and printoptions.resolution is set, SVG vectors are rasterized."
+  help = "When true and resolution is set, SVG vectors are rasterized."
+})
+
+SILE.settings.declare({
+  parameter = "printoptions.image.flatten",
+  type = "boolean",
+  default = false,
+  help = "When true and resolution is set, images are flattened (transparency removed)."
 })
 
 local handlePath = function (filename)
@@ -51,9 +58,14 @@ end
 --   return filename
 -- end
 
-local imageResolutionConverter = function (filename, width, resolution)
+local imageResolutionConverter = function (filename, widthInPx, resolution)
   local base, ext = handlePath(filename)
-  local targetFilename = base .. "-img"..width.."_"..resolution..ext
+  local flatten = SILE.settings.get("printoptions.image.flatten")
+  local targetFilename = base .. "-img".. widthInPx .. "_" .. resolution
+  if flatten then
+    targetFilename = targetFilename .. "-flat"
+  end
+  targetFilename = targetFilename .. ext
 
   local sourceTime = pl.path.getmtime(filename)
   if sourceTime == nil then
@@ -67,17 +79,30 @@ local imageResolutionConverter = function (filename, width, resolution)
     return targetFilename
   end
 
-  local command = table.concat({
-    "convert",
-    filename,
-    "-units PixelsPerInch",
-    "-resize "..width.."x\\>",
-    "-density "..resolution,
-    "-background white",
-    "-flatten",
-    "-colorspace LinearGray",
-    targetFilename,
-  }, " ")
+  local command
+  if flatten then
+    command = table.concat({
+      "convert",
+      filename,
+      "-units PixelsPerInch",
+      "-resize "..widthInPx.."x\\>",
+      "-density "..resolution,
+      "-background white",
+      "-flatten",
+      "-colorspace LinearGray",
+      targetFilename,
+    }, " ")
+  else
+    command = table.concat({
+      "convert",
+      filename,
+      "-units PixelsPerInch",
+      "-resize "..widthInPx.."x\\>",
+      "-density "..resolution,
+      "-colorspace LinearGray",
+      targetFilename,
+    }, " ")
+  end
 
   local result = os.execute(command)
   if type(result) ~= "boolean" then result = (result == 0) end
@@ -95,10 +120,10 @@ local imageResolutionConverter = function (filename, width, resolution)
   end
 end
 
-local svgRasterizer = function (filename, width, _)
+local svgRasterizer = function (filename, widthInPx, _)
   local base, ext = handlePath(filename)
   if ext ~= ".svg" then SU.error("Expected SVG file for "..filename) end
-  local targetFilename = base .. "-svg"..width..".png"
+  local targetFilename = base .. "-svg"..widthInPx..".png"
 
   local sourceTime = pl.path.getmtime(filename)
   if sourceTime == nil then
@@ -118,7 +143,7 @@ local svgRasterizer = function (filename, width, _)
   local toSvg = table.concat({
     "inkscape",
     filename,
-    "-w "..width,
+    "-w "..widthInPx,
     "-o",
     targetFilename,
   }, " ")
@@ -136,8 +161,8 @@ local outputter = SILE.outputter.drawImage
 SILE.outputter.drawImage = function (self, filename, x, y, width, height)
   local resolution = SILE.settings.get("printoptions.resolution")
   if resolution and resolution > 0 then
-    local targetw = math.ceil(SU.cast("number", width) * resolution / 72)
-    local converted = imageResolutionConverter(filename, targetw, resolution)
+    local targetWidthInPx = math.ceil(SU.cast("number", width) * resolution / 72)
+    local converted = imageResolutionConverter(filename, targetWidthInPx, resolution)
     if converted then
       outputter(self, converted, x, y, width, height)
       return -- We are done replacing the original image by its resampled version.
@@ -168,9 +193,10 @@ local _drawSVG = function (filename, svgdata, width, height, density)
   scalefactor = scalefactor * density / 72
 
   local resolution = SILE.settings.get("printoptions.resolution")
-  if resolution and resolution > 0 then
-    local targetw = math.ceil(SU.cast("number", width) * resolution / 72)
-    local converted = svgRasterizer(filename, targetw, resolution)
+  local rasterize = SILE.settings.get("printoptions.vector.rasterize")
+  if resolution and resolution > 0 and rasterize then
+    local targetWidthInPx = math.ceil(SU.cast("number", width) * resolution / 72)
+    local converted = svgRasterizer(filename, targetWidthInPx, resolution)
     if converted then
       SILE.require("packages/image")
       SILE.call("img", { src = converted, width = width })
@@ -211,15 +237,18 @@ The \autodoc:setting{printoptions.resolution} setting, when set to an integer
 value, defines the expected image resolution in dpi (dots per inch).
 It could be set to 300 or 600 for final offset print or, say, to 150
 or lower for a low-resolution PDF for reviewers and proofreaders.
-Not only images are resampled to the target resolution (if they have
-a higher resolution), but they are also converted to grayscale and
-flattened with a white background. (Most professional printers require
-the PDF to be flattened without transparency, which is not addressed here,
-but the assumption here is that you might check what could happen
-if transparency is improperly managed by your printer and/or you have
-layered contents incorrectly ordered.)
+Images are resampled to the target resolution (if they have
+a higher resolution and are converted to grayscale.
 
-The \autodoc:setting{printoptions.rasterize} setting defaults to true. If a
+Moreover, if the \autodoc:setting{printoptions.image.flatten} setting is
+turned to true (its default being false), not only images are resampled,
+but they are also flattened with a white background.
+(Most professional printers require the whole PDF to be flattened without
+transparency, which is not addressed here; but the assumption is that you might
+check what could happen if transparency is improperly managed by your printer
+and/or you have layered contents incorrectly ordered.)
+
+The \autodoc:setting{printoptions.vector.rasterize} setting defaults to true. If a
 target image resolution is defined and this setting is left enabled,
 then vector images are rasterized. It currently applies to SVG files,
 redefining the \autodoc:command{\svg} command.
