@@ -238,7 +238,7 @@ value, defines the expected image resolution in dpi (dots per inch).
 It could be set to 300 or 600 for final offset print or, say, to 150
 or lower for a low-resolution PDF for reviewers and proofreaders.
 Images are resampled to the target resolution (if they have
-a higher resolution and are converted to grayscale.
+a higher resolution) and are converted to grayscale.
 
 Moreover, if the \autodoc:setting{printoptions.image.flatten} setting is
 turned to true (its default being false), not only images are resampled,

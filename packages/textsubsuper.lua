@@ -61,8 +61,8 @@ local scriptSubOffset = "0.33ex"
 local scriptSupOffset = "0.77ex"
 local scriptSize = "1.414ex"
 
-SILE.registerCommand("text:superscript", function (_, content)
-  if type(content) ~= "table" then SU.error("Expected a table content in text:superscript") end
+SILE.registerCommand("textsuperscript", function (_, content)
+  if type(content) ~= "table" then SU.error("Expected a table content in textsuperscript") end
   if checkFontFeatures("+sups", content) then
     SILE.call("font", { features="+sups" }, content)
   else
@@ -74,8 +74,8 @@ SILE.registerCommand("text:superscript", function (_, content)
   end
 end, "Typeset in superscript.")
 
-SILE.registerCommand("text:subscript", function (_, content)
-  if type(content) ~= "table" then SU.error("Expected a table content in text:subscript") end
+SILE.registerCommand("textsubscript", function (_, content)
+  if type(content) ~= "table" then SU.error("Expected a table content in textsubscript") end
   if checkFontFeatures("+subs", content) then
     SILE.call("font", { features="+subs" }, content)
   elseif checkFontFeatures("+sinf", content) then
@@ -94,8 +94,8 @@ return {
   documentation = [[\begin{document}
 \script[src=packages/autodoc-extras]
 
-The \autodoc:package{textsubsuper} package provides two commands, \autodoc:command{\text:superscript{<content>}}
-and \autodoc:command{\text:subscript{<content>}}.
+The \autodoc:package{textsubsuper} package provides two commands, \autodoc:command{\textsuperscript{<content>}}
+and \autodoc:command{\textsubscript{<content>}}.
 
 They will use the native superscript or subscript characters, respectively,
 in a font, when available, instead of scaling, raising or lowering characters,
@@ -103,11 +103,11 @@ because most of the time the former will obviously look much better.
 
 As of superscripts, it could be used for a number (e.g. in footnote calls),
 but also for letters (e.g. in century references in French,
-\font[features=+smcp]{iv}\text:superscript{e}; or likewise in sequences
-in English, 12\text:superscript{th}).
+\font[features=+smcp]{iv}\textsuperscript{e}; or likewise in sequences
+in English, 12\textsuperscript{th}).
 
 As of subscripts, the most familiar example is in chemical formulas, for example
-H\text:subscript{2}O or C\text:subscript{6}H\text:subscript{12}O\text:subscript{6}.
+H\textsubscript{2}O or C\textsubscript{6}H\textsubscript{12}O\textsubscript{6}.
 
 These commands do so by trying the \doc:code{+sups} font feature for superscripts, and the \doc:code{+subs}
 or \doc:code{+sinf} feature for subscripts.

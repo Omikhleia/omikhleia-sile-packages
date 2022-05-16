@@ -180,8 +180,8 @@ This table example is in the LaTeX ctable package, let us try to reproduce it.
 \begin[cols=20%fw 40%fw 40%fw, cellborder=0]{ptable}
   \begin{row}
     \cell[border=0.8pt 0.4pt 0 0]{}
-    \cell[border=0.8pt 0.4pt 0 0, style=center]{H(Mu) + F\text:subscript{2}}
-    \cell[border=0.8pt 0.4pt 0 0, style=center]{H(Mu) + Cl\text:subscript{2}}
+    \cell[border=0.8pt 0.4pt 0 0, style=center]{H(Mu) + F\textsubscript{2}}
+    \cell[border=0.8pt 0.4pt 0 0, style=center]{H(Mu) + Cl\textsubscript{2}}
   \end{row}
   \begin{row}
     \cell{\em{β}\kern[width=0.1em](H)}
@@ -302,8 +302,8 @@ Test 7 = re-doing 4 without the enclosing parbox, which could be regarded as an 
 \begin[cols=8%fw 16%fw 16%fw, cellborder=0]{ptable}
   \begin{row}
     \cell[border=0.8pt 0.4pt 0 0]{}
-    \cell[border=0.8pt 0.4pt 0 0, style=center]{H(Mu) + F\text:subscript{2}}
-    \cell[border=0.8pt 0.4pt 0 0, style=center]{H(Mu) + Cl\text:subscript{2}}
+    \cell[border=0.8pt 0.4pt 0 0, style=center]{H(Mu) + F\textsubscript{2}}
+    \cell[border=0.8pt 0.4pt 0 0, style=center]{H(Mu) + Cl\textsubscript{2}}
   \end{row}
   \begin{row}
     \cell{\em{β}\kern[width=0.1em](H)}
