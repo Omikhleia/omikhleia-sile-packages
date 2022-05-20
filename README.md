@@ -10,6 +10,23 @@ fit my needs.
 The [PDF documentation](./docs/omikhleia-packages.pdf) serves both as documentation and as
 main showcase. A few other examples are provided too.
 
+## Prerequisites
+
+The packages, classes and examples provided here currently require SILE **v0.12.5**.
+
+- They rely on a number of fixes introduced in earlier releases and are therefore
+  not guaranteed to still work with anything older than this version.
+- They sometimes rely on low-level "hacks" or workarounds to avoid issues present in that release.
+  (That's especially true for examples, a bit less for packages and classes.)
+- Breaking changes are to be expected in later releases...
+
+The packages and classes provided here are tested with Lua **5.2**.
+
+- SILE uses the version of Lua installed on your host system, and other Lua versions
+  may have different behaviors (regarding type casts, etc.).
+- Lua 5.2 is my current setup, and the time or effort to check each Lua version
+  from 5.1 to 5.4, JIT-enabled or not, is not within my (current) concerns.
+
 ## License
 
 All code is under the MIT License.
