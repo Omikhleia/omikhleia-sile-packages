@@ -12,8 +12,8 @@ local oldUrl = SILE.Commands["url"]
 SILE.registerCommand("url", function (options, content)
   -- Kill code formatting in URLs, it's ugly.
   -- We restore the \code command afterwards, in case someone needs it however.
-  SILE.Commands["code"] = function(_, content)
-    SILE.process(content)
+  SILE.Commands["code"] = function(_, ccontent)
+    SILE.process(ccontent)
   end
 
   SILE.typesetter:typeset("<")

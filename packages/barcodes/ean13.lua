@@ -152,7 +152,7 @@ SILE.registerCommand("ean13", function (options, _)
     if SU.boolean(options.showdigits, true) then
       -- N.B. Option showdigits undocumented (just used for testing)
       SILE.call("font", { family = SILE.scratch.ean13.font.family, size = SILE.scratch.ean13.font.size * X }, function()
-        local x = SILE.call("lower", { height = 8.3333 * X }, function()
+        SILE.call("lower", { height = 8.3333 * X }, function()
           SILE.call("kern", { width = -106 * X })
           local h = SILE.call("hbox", {}, { code[1] }) -- first digit, at the start of the quiet left zone
           h.width = SILE.length()
