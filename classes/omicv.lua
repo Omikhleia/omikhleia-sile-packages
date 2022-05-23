@@ -85,8 +85,6 @@ omicv.nextFrameset = {
   },
 }
 
-local firstPage = true
-
 function omicv:init ()
   self:loadPackage("masters")
   self:defineMaster({
@@ -231,7 +229,7 @@ local function C(command, options, content)
   return result
 end
 
-local doEntry = function (rows, _, content)
+local function doEntry (rows, _, content)
   local topic = extractFromTree(content, "topic")
   local description = extractFromTree(content, "description")
   local titleRow = C("row", { }, {
@@ -282,7 +280,7 @@ local doSection = function (rows, _, content)
   end
 end
 
-SILE.registerCommand("resume", function (options, content)
+SILE.registerCommand("resume", function (_  , content)
   local firstname = extractFromTree(content, "firstname") or SU.error("firstname is mandatory")
   local lastname = extractFromTree(content, "lastname") or SU.error("lastname is mandatory")
   local picture = extractFromTree(content, "picture") or SU.error("picture is mandatory")
@@ -373,15 +371,15 @@ local charFromUnicode = function (str)
   return "*"
 end
 
-SILE.registerCommand("ranking", function (options, content)
+SILE.registerCommand("ranking", function (options, _)
   local value = SU.cast("integer", options.value or 0)
   local scale = SU.cast("integer", options.scale or 5)
   SILE.call("style:apply", { name = "cv:dingbats" }, function ()
-    for i = 1, value do
+    for _ = 1, value do
       SILE.typesetter:typeset(charFromUnicode("U+25CF"))
       SILE.call("kern", { width = "0.1em" })
     end
-    for i = value + 1, scale do
+    for _ = value + 1, scale do
       SILE.typesetter:typeset(charFromUnicode("U+25CB"))
       SILE.call("kern", { width = "0.1em" })
     end
