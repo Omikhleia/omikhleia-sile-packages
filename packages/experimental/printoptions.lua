@@ -85,9 +85,14 @@ local imageResolutionConverter = function (filename, widthInPx, resolution)
       "convert",
       filename,
       "-units PixelsPerInch",
+      -- disable antialiasing
+      "+antialias",
+      "-filter point",
+      -- resize
       "-resize "..widthInPx.."x\\>",
       "-density "..resolution,
-      "-background white",
+      -- make grayscale + flattened
+      "-background white", -- FIXME we should take the page background color...
       "-flatten",
       "-colorspace LinearGray",
       targetFilename,
@@ -97,8 +102,13 @@ local imageResolutionConverter = function (filename, widthInPx, resolution)
       "convert",
       filename,
       "-units PixelsPerInch",
+      -- disable antialiasing
+      "+antialias",
+      "-filter point",
+      -- resize
       "-resize "..widthInPx.."x\\>",
       "-density "..resolution,
+      -- make grayscale
       "-colorspace LinearGray",
       targetFilename,
     }, " ")
@@ -143,7 +153,10 @@ local svgRasterizer = function (filename, widthInPx, _)
   local toSvg = table.concat({
     "inkscape",
     filename,
-    "-w "..widthInPx,
+    "-w ".. 2 * widthInPx, -- FIXME. I could find a proper way to disable antialiasing...
+                           -- So target twice the actual size, and the image conversion
+                           -- later with ImageMagick will also downsize without antialiasing.
+                           -- This is far from perfect, but minimizes the antialiasing a bit...
     "-o",
     targetFilename,
   }, " ")
