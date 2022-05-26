@@ -2,7 +2,7 @@
 \chapter[numbering=false]{De la transmission des textes.}
 
 \em{Le lecteur qui a suivi les récents progrès de la recherche universitaire quant à la matière
-d’Almaq n’appendra rien de vraiment neuf ci-après ; mais j’ai conscience que celle-ci est encore
+d’Almaq n’apprendra rien de vraiment neuf ci-après ; mais j’ai conscience que celle-ci est encore
 méconnue du grand public et qu’une présentation de nos sources et des difficultés qu’elles suscitent
 encore serait bienvenue.}
 
@@ -24,12 +24,12 @@ le \em{chadhrave anorgerin} (voir \em{supra}\kern[width=0.1em]) et ne comprennen
 inconnues jusqu’alors : (a) la langue d’Almaq ou \em{almaqerin} ; (b) le \em{traghe}, sorte de vernaculaire
 qui dériverait des langues de l’empire siléen voisin ; et (c) de manière moindre, une troisième langue que
 l’on pense être celle de Keldre lui-même, mais dont on sait fort peu de choses au demeurant\footnote{%
-On la nomme, faute de mieux, \em{langue merluine} — du fait que Keldre se décrit comme un natif de l’« archipel
+On la nomme, faute de mieux, \em{langue merluine} — du fait que Keldre se décrit comme un natif de « l’archipel
 des Merluines ».
 }. Si les langues (a) et (b) ont pu être étudiées et largement interprétées, grâce aux traductions
 ultérieures — nous y reviendrons plus bas — les rares textes du groupe (c) résistent encore à l’analyse,
 faute de savoir ce qu’ils relatent. Quant à leur répartition, elle est à la mesure des écrits disparates
-qui constituent les \em{Chroniques}. Les contes mythiques, les œuvres de Fesed Lerani et les œuvres attribuées
+qui constituent les \em{Chroniques}. Les contes mythiques, les œuvres de Fesed Lerani et les fabliaux attribués
 à Dongann sont ainsi en \em{almaqerin} ; les autres, majoritairement, en \em{traghe}\footnote{%
 Cela inclut donc l’essentiel des textes attribués à Keldre, les lettres de Deiraval, le rêve d’Elleth, etc.
 Tout porte à considérer qu’à l’époque de Keldre, la langue traghe était d’usage dans la partie médiane
@@ -331,7 +331,7 @@ d’étudier les influences de la geste d’Alstre sur nos vieux poètes, afin d
 trop ostensible la sensibilité des modernes… Canning fait fort évidemment partie des premiers, ce qui
 n’échapperait peut-être pas aux lecteurs attentifs ! C’est dans ces dispositions d’esprit que me trouva
 la comtesse de J*** quand elle me rendit visite à l’heure du thé. C’était une femme cultivée et pleine
-d’intelligence, à qui je confiais sans hésiter mon nouveau projet. « Et bien ! Malgré votre modestie,
+d’intelligence, à qui je confiai sans hésiter mon nouveau projet. « Et bien ! Malgré votre modestie,
 vous êtes un parti à ne pas négliger ! » dit-elle en me donnant une petite tape sous le menton. « Viendrez-vous
 à Almack ce soir ? » Je sursautai à ce nom, encore perdu dans mes songes littéraires, ce qui la fit rire.
 Bien entendu, elle me parlait des réceptions dont elle était l’une des patronnesses, dans cet établissement
@@ -399,7 +399,7 @@ et ses doutes sur les sources littéraires.}}
 \img[src=examples/almaq/images/grec_onciale.png, width=7cm]
 \caption{%
 \label[marker=fig-grec-onciale]%
-Onciale byzantine, début du \abbr:siecle{xiv} siècle : extrait d’une liste d’œuvres recencées par
+Onciale byzantine, début du \abbr:siecle{xiv} siècle : extrait d’une liste d’œuvres recensées par
 Grégoire Choniadès (c. 1240–1320) et présumées perdues après le morcellement de l’Empire byzantin
 lors de la quatrième croisade. On peut relever, sur la seconde ligne de cet extrait, la mention
 \em{χρονικά Kελδρου}, très probablement les « Chroniques de Keldre »\footnote{%
@@ -433,14 +433,15 @@ et Lorenzo di Alopa.}
 \end{figure}
 
 \begin{figure}
-\img[src=examples/almaq/images/jean_desmarets.png, width=99%fw]
+% Some tweaks to make this bad image a bit bigger in print...
+\kern[width=-2cm]\rebox[width=95%fw]{\img[src=examples/almaq/images/jean_desmarets.png, width=110%fw]}
 \caption{%
 \label[marker=fig-desmarets]%
 Extrait du manuscrit du journal de Jean Desmarets de Varzy. Bibliothèque nationale de France.}
 \end{figure}
 
 \begin{figure}
-\img[src=examples/almaq/images/carte_sile_vaticana.png, width=88%fw]
+\img[src=examples/almaq/images/carte_sile_vaticana.png, width=85%fw]
 \caption{%
 \label[marker=carte-vaticana]%
 Reproduction de la carte IV de la luxueuse édition des \em{Fabulae Alastri Urbium-Eversoris} conservée

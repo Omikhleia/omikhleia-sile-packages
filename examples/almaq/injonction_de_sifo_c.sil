@@ -22,7 +22,7 @@ fois « une porte » (sens premier) et « une peinture ou gravure (sur panneau d
 extension, « un récit ». Sur les enseignes des commerçants : au charbon ou au ciseau chauffé.
 }, tissées ou cro­chetées sur des tapisseries ou encore des vêtements.
 
-Les signes s’écrivent le long de lignes aux extrémités incurvées, dite « porteuses » ou « support »
+Les signes s’écrivent le long de lignes aux extrémités incurvées, dites « porteuses » ou « support »
 (\em{tegeith}\kern[width=0.1em]). La portée de ces lignes correspond plus ou moins aux mots — préfixes
 ou déterminants sont cependant parfois accolés au mot qu’ils caractérisent. Les porteuses se suivent
 généralement les unes après les autres. L’usage varie du tout au tout quant à l’emploi du signe général
@@ -129,7 +129,7 @@ levé.}}
   \cell[style=center, valign=middle]{\img[src=examples/almaq/images/chadhruid_n05.png]}
   \cell[style=narrow, valign=middle]{5. Le Prêtre.
 
-Carte du Tarot. Homme chauve, avec des clefs à la ceinture.}
+\smaller{Carte du Tarot. Homme chauve, avec des clefs à la ceinture.}}
 \end{row}
 \begin{row}
   \cell[style=center, valign=middle]{\img[src=examples/almaq/images/chadhruid_n06.png]}

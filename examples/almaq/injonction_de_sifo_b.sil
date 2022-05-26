@@ -36,7 +36,7 @@ en va semblablement pour le /o/, le /gw/ et le /ch/.}
 \end{figure}
 
 \begin{figure}
-\svg[src=examples/almaq/images/chadhrave_na_sornas.svg, width=95%fw]
+\svg[src=examples/almaq/images/chadhrave_na_sornas.svg, width=99%fw]
 \caption{%
 \label[marker=na-sornas]%
 Extrait d’un bref texte reprenant ce titre dans le \em{Codex Monesterellum}, dans
@@ -100,7 +100,7 @@ les termes étrangers qui le nécessiteraient.
 \begin[width=80%lw]{epigraph}
 « À propos des hydres — Les hydres fabuleuses sont : \em{Sigreine} la très-vieille ; \em{Sigrain} l’hydre-mâle bréhaigne.
 En ces temps-là, \hbox{\em{Sigreine}}, l’hydre vénérable, considéra la puissance du dragon. Lors, elle ressentit la
-peur. De ses fils, \em{Sigreine} épargna son favori, \em{Sigrain} l’incestueux ; elle en fit son amant pour
+peur. De tous ses fils, \em{Sigreine} épargna son favori, \em{Sigrain} l’incestueux ; elle en fit son amant pour
 perpétuer sa race et ne pas affaiblir sa propre puissance. »\footnote{%
 Je cite la traduction fr. de Pierre de Blancandre, \em{op. cit.}, pour l’extrait donné en figure \ref[marker=na-sornas].
 La partie grattée à la ponce donnerait : « du dragon < des dragons, opposée à celle des dieux. » — L’hydre

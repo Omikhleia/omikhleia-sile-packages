@@ -1,6 +1,6 @@
 \begin[papersize=6in x 9in, class=omibook]{document}
 \script[src=packages/experimental/printoptions]
-\set[parameter=printoptions.resolution, value=300]
+\set[parameter=printoptions.resolution, value=400]
 \script[src=examples/almaq/almaq-bookstyles]
 %
 \language[main=fr]

@@ -6,7 +6,7 @@
 \vfill
 
 \begin{figure}
-\img[src=examples/almaq/images/carte_sile_regionale.png, width=99%fw]
+\svg[src=examples/almaq/images/carte_sile_regionale.svg, width=90%fw]
 \caption{%
 Carte régionale établie par Giovanni di Diomira (\em{Le città inconsce}, 1570) sur la base de celle,
 plus sommaire, figurant dans le \em{Liber de fabulis Alastri Urbium-Eversoris} dans l’édition de la
