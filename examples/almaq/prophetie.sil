@@ -92,9 +92,9 @@ antiques, la demeure lézardée ? »
 Safrian réfléchit à la manière de formuler sa réponse en peu de mots.
 
 \smallskip
-Si Safrian répond « C’est en raison du Dragon », rendez-vous au \goto[marker=monde-dragon].
+Si Safrian répond : « C’est en raison du Dragon », rendez-vous au \goto[marker=monde-dragon].
 
-S’il répond « C’est à cause de la Chimère », rendez-vous au \goto[marker=monde-chimere].
+S’il répond : « C’est à cause de la Chimère », rendez-vous au \goto[marker=monde-chimere].
 
 S’il pense qu’une autre réponse moins sommaire serait plus raisonnable, rendez-vous au \goto[marker=fin-mort].
 
@@ -118,7 +118,7 @@ les mains vides auprès de ses troupes qui l’attendaient sur la côte de l’�
 
 \gamebook[marker=histoire-choix]%--------------------------------------
 
-Fhir caressa de la main sur son ceinturon garni de fioles. « L’essence des mythes n’a guère de secrets pour
+Fhir caressa de la main son ceinturon garni de fioles. « L’essence des mythes n’a guère de secrets pour
 toi, ô Safrian, pour que de tous les trésors de mon palais, tu aies préféré parier sur celui-ci,
 le plus cher à mon âme. Tu as dit être parvenu à ma halle pour éprouver ma connaissance des choses.
 Tu es très perspicace ou bien malicieux. J’entends le non-dit, ta question implicite. Suis-je encore digne,
@@ -133,7 +133,7 @@ le fondement d’une chose, en vérité, interroge sa finalité. Alors, réfléc
 t’importe. Car je te juge, moi aussi, au travers de ce que tu me diras. »
 
 Le vieux Sage pointa un doigt décharné vers l’aventurier. « Je te parlerai, évidemment, d’une
-Guerre et de ses cycles. Alors, jusqu’où veux-tu que nous remontions le fleuve du temps ? Aux origines
+guerre et de ses cycles. Alors, jusqu’où veux-tu que nous remontions le long fleuve du temps ? Aux origines
 profondes du mythe, si tant est que cela soit possible ? Ou à la transgression des Nautes et aux neuf
 guerres prophétiques ? À la nuit des temps, ou au temps d’une seule nuit ? »
 
@@ -170,7 +170,7 @@ Sinon, rendez-vous au \goto[marker=fin-mort].
 \gamebook[marker=fin-double]%--------------------------------------
 
 Un silence pesant s’ensuivit. Puis la voix de crécelle de l’habitant d’Egrivain résonna puissamment dans
-la grande halle. « Moi-même offert à moi-même ! Que le destin m’est cruel. »
+la grande halle. « Moi-même offert à moi-même ! Que le destin m’est cruel ! »
 
 Celui que nous appelions Safrian s’étonna d’entendre son propre rire en écho.
 
@@ -261,7 +261,7 @@ Notez que Safrian a obtenu un jeton de doute et rendez-vous au \goto[marker=hist
 
 Le silence qui s’ensuivit était lourd de reproches.
 
-« Je suis fort déçu que tu ne saches pas même cela. Tu pérores en vain propos et je ne m’abaisserai pas
+« Je suis fort déçu que tu ne saches pas même cela. Tu pérores en vains propos et je ne m’abaisserai pas
 à ton médiocre niveau plus longtemps. Tu m’en vois désolé, petit Safrian ignorant, mais notre joute verbale
 aura été bien décevante. Tu n’es pas encore à la hauteur de ma longue attente. »
 
@@ -295,7 +295,7 @@ alors toute la connaissance du passé et de l’avenir. Ils gouvernaient avec l�
 et pourtant ils ne surent voir la fragmentation arriver.
 \end{blockquote}
 
-Ainsi que tu le devines, si tu ne le savais pas déjà, les Arcanes disent qu’il y eut une guerre
+Ainsi que tu le devines, si tu ne le savais pas déjà, les \em{Arcanes} disent qu’il y eut une guerre
 dévastatrice entre ces trois-là, dont la fragmentation des mondes découla… Rares et précieuses sont
 les fioles à ma ceinture, contenant chacune l’essence distillée d’un sang mythique. Si nous devions
 en gager une, laquelle aurait ta faveur, Safrian ? »
@@ -541,7 +541,7 @@ idée de sa teneur, tu la comprendras probablement mieux avec ce que tu sais mai
 les raisons de ta venue, alors finissons-en avec ce futile théâtre d’ombres. »
 
 \smallskip
-Si Safrian prend le risque d’en apprendre davantage la transgression des Nautes, rendez-vous
+Si Safrian prend le risque d’en apprendre davantage sur la transgression des Nautes, rendez-vous
 au \goto[marker=histoire-nautes]. Sinon, poursuivez en \goto[marker=devinette].
 
 \gamebook[marker=devinette]%--------------------------------------
@@ -569,7 +569,7 @@ Que peut répondre Safrian ?
 
 Le vieux Gible grinça : « J’ai eu bien des noms au cours des âges. Dans un autre éon, ai-je été Fhir,
 le dernier des Sages, qui vit son peuple et ses espoirs, en dépit de toute sa prescience, anéantis
-lors de la fragmentation des mondes ? Peut-être, mais tu n’as guère écouté que je te demandai mon nom
+lors de la fragmentation des mondes ? Peut-être, mais tu n’as guère écouté que je te demandais mon nom
 présent. »
 
 L’éclat d’une flamme éclaira les ténèbres. Fhir avait rabattu sa capuche, dévoilant l’éclat meurtrier
