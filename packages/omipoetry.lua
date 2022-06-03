@@ -361,11 +361,12 @@ a multiple of the step value. This might be useful if you are quoting just a few
 verses and none would be numbered normally.
 
 This is all what we have to say about typesetting simple poetry so far, mostly.
-As an advanced feature, the \autodoc:environment{poetry} environment also supports a autodoc:parameter{prosody}
-option, which increases the height (i.e. baseline skip) of verses so as to leave enough place
-for metrical or rhythmic annotations, which can then be provided between angle brackets,
-that is \doc:code{<…>}\footnote{As in the standard \autodoc:package{chordmode} package. We actually
-used the exact same logic.}. The annotation is placed above the (following) text.
+As an advanced feature, the \autodoc:environment{poetry} environment also supports a
+\autodoc:parameter{prosody} option, which increases the height (i.e. baseline skip)
+of verses so as to leave enough place for metrical or rhythmic annotations, which can
+then be provided between angle brackets, that is \doc:code{<…>}\footnote{As in the
+standard \autodoc:package{chordmode} package. We actually used the exact same logic.}.
+The annotation is placed above the (following) text.
 In English, typically, a 2-level notation is often used, as shown
 hereafter.\footnote{Arthur Golding, \em{Ovid’s Metamorphoses}, book II, lines 1–2,
 scansion from Wikipedia.}

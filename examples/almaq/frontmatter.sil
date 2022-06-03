@@ -1,0 +1,96 @@
+\begin{document}
+\noheaders
+\nofolios
+% TWO BLANK PAGES
+\hbox{}\par
+\break
+\hbox{}\par
+\skip[height=1cm]
+\begin[size=9pt]{font}
+\begin{center}
+\smallcaps{Le Dragon de Brume}
+
+\raise[height=0.5ex]{\hrule[height=0.4pt, width=5em]}
+
+Association loi de 1901
+
+R.N.A. W313014934
+
+\medskip
+\couyard[type=8]
+\end{center}
+
+\medskip
+\center{Collection Études Tolkieniennes}
+
+\medskip
+\em{Tolkien, le façonnement d’un monde}, vol. 1, \em{Botanique & Astronomie}, 2011, 276 p.
+
+\quad Essais et articles réunis par Didier \smallcaps{Willis}.
+
+\medskip
+\em{Tolkien, le façonnement d’un monde}, vol. 2, \em{Astronomie & Géographie}, 2014, 356 p.
+
+\quad Essais et articles réunis par Didier \smallcaps{Willis}.
+
+\medskip
+\em{Pour la gloire de ce monde. Recouvrements et consolations en Terre du Milieu}, 2016, 416 p.
+
+\quad Essais et articles réunis par Jean-Philippe \smallcaps{Qadri} & Jérôme \smallcaps{Sainton}.
+
+\medskip
+\em{Fées, navigateurs & autres miscellanées en Terre du Milieu}, 2017, 174 p.
+
+\quad Essais réunis par R. \smallcaps{Casademont}, D. \smallcaps{Willis},
+M. \smallcaps{Brecq} & L. \smallcaps{Carruthers}.
+
+\bigskip
+\center{Collection Fiction}
+
+\medskip
+\em{Contes & Légendes d’Almaq}, premier volume, 2022, 362 p.
+
+\quad Roman.
+\par\end{font}
+\break
+\hbox{}
+% TITLE PAGE
+\skip[height=25%fw]
+\begin{center}
+\font[family=Argos George, size=30pt]{Contes & Légendes\break d’Almaq
+\bigskip
+\couyard[type=9,width=5em]}
+\vfill
+\font[family=Libertinus Serif, size=18pt, features=+smcp]{Premier Volume}
+\vfill
+\font[family=DS Zierschrift, size=15pt]{Omikhleia}
+\end{center}
+\break
+% COPYRIGHT PAGE
+\hbox{}
+\vfill
+\font[size=10pt]{%
+\noindent\svg[src=examples/almaq/images/dragon_de_brume_logo.svg, width=4.27cm]
+
+\noindent{}© 2022, \em{Le Dragon de Brume}
+
+\smallskip
+\noindent{}ISBN : 978-2-9539896-6-3\par}
+
+\smallskip
+\font[size=9pt]{%
+\noindent{}Le présent ouvrage est publié avec le soutien logistique et technique du Dragon de Brume.
+
+\smallskip
+\noindent{}© Omikhleia, pour la présente édition.
+
+\noindent{}© Emma Lenski’s testamentary executors.
+
+\smallskip
+\font[size=8pt]{%
+\noindent{}Le Code de la propriété intellectuelle interdit les copies ou reproductions destinées à une utilisation
+collective. Toute représentation ou reproduction intégrale ou partielle faite par quelque procédé que ce soit,
+sans le consentement de l’auteur ou de ses ayants cause, est illicite et constitue une contrefaçon
+sanctionnée par les articles L.335-2 et suivants du Code de la propriété intellectuelle.\par}}%
+\break
+\end{document}

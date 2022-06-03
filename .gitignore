@@ -3,3 +3,4 @@
 *.autodoc.*
 tests/*.pdf
 tests/*.debug
+**/converted/*

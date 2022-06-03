@@ -211,7 +211,7 @@ end, "Text to appear on the top of the odd page(s).")
 
 -- Sectionning hooks and commands
 
-SILE.registerCommand("sectioning:part:hook", function (options, content)
+SILE.registerCommand("sectioning:part:hook", function (_, _)
   -- Parts cancel headers and folios
   SILE.call("noheaderthispage")
   SILE.call("nofoliothispage")
@@ -223,7 +223,7 @@ SILE.registerCommand("sectioning:part:hook", function (options, content)
   SILE.call("set-multilevel-counter", { id = "sections", level = 1, value = 0 })
 end, "Apply part hooks (counter resets, footers and headers, etc.)")
 
-SILE.registerCommand("sectioning:chapter:hook", function (options, content)
+SILE.registerCommand("sectioning:chapter:hook", function (_, content)
   -- Chapters re-enable folios, have no header, and reset the footnote counter.
   SILE.call("noheaderthispage")
   SILE.call("folios")
@@ -282,7 +282,7 @@ SILE.settings.declare({
   help = "Left margin (indentation) for enumerations"
 })
 
-SILE.registerCommand("blockindent", function (options, content)
+SILE.registerCommand("blockindent", function (_, content)
   SILE.settings.temporarily(function ()
     local indent = SILE.settings.get("book.blockquote.margin"):absolute()
     local lskip = SILE.settings.get("document.lskip") or SILE.nodefactory.glue()
@@ -302,7 +302,7 @@ styles.defineStyle("blockquote", {}, {
                 align = "block" }
 })
 
-SILE.registerCommand("blockquote", function (options, content)
+SILE.registerCommand("blockquote", function (_, content)
   SILE.call("style:apply:paragraph", { name = "blockquote" }, content)
 end, "Typeset its contents in a styled blockquote.")
 
@@ -380,7 +380,7 @@ SILE.registerCommand("table", function (options, content)
   end
 end, "Insert a captioned table.")
 
-SILE.registerCommand("listoffigures", function (_, content)
+SILE.registerCommand("listoffigures", function (_, _)
   local figSty = styles.resolveStyle("figure:caption")
   local start = figSty.sectioning and figSty.sectioning.toclevel
     or SU.error("Figure style does not specify a TOC level sectioning")
@@ -388,7 +388,7 @@ SILE.registerCommand("listoffigures", function (_, content)
   SILE.call("tableofcontents", { start = start, depth = 0 })
 end, "Output the list of figures.")
 
-SILE.registerCommand("listoftables", function (_, content)
+SILE.registerCommand("listoftables", function (_, _)
   local figSty = styles.resolveStyle("table:caption")
   local start = figSty.sectioning and figSty.sectioning.toclevel
     or SU.error("Figure style does not specify a TOC level sectioning")

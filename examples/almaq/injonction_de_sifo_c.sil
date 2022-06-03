@@ -22,7 +22,7 @@ fois « une porte » (sens premier) et « une peinture ou gravure (sur panneau d
 extension, « un récit ». Sur les enseignes des commerçants : au charbon ou au ciseau chauffé.
 }, tissées ou cro­chetées sur des tapisseries ou encore des vêtements.
 
-Les signes s’écrivent le long de lignes aux extrémités incurvées, dite « porteuses » ou « support »
+Les signes s’écrivent le long de lignes aux extrémités incurvées, dites « porteuses » ou « support »
 (\em{tegeith}\kern[width=0.1em]). La portée de ces lignes correspond plus ou moins aux mots — préfixes
 ou déterminants sont cependant parfois accolés au mot qu’ils caractérisent. Les porteuses se suivent
 généralement les unes après les autres. L’usage varie du tout au tout quant à l’emploi du signe général
@@ -40,7 +40,7 @@ en spirale, ou encore rayonnante dans diverses directions à partir du centre de
 
 \begin[cols=25%fw 75%fw, cellborder=0, cellpadding=2pt 2pt 0 0]{ptable}
 \begin{row}
-  \cell[style=center, valign=middle]{\svg[src=examples/almaq/chadhruid_structure.svg, width=95%fw]}
+  \cell[style=center, valign=middle]{\svg[src=examples/almaq/images/chadhruid_structure.svg, width=95%fw]}
   \cell[style=narrow, valign=middle]{%
 La figure simplifiée ci-contre illustre la structure générale d’une inscription en \em{chadhruid} :\par
 \quad{}(a) porteur (\em{bearer}\kern[width=0.1em])\par
@@ -71,10 +71,10 @@ de type alphabétique, et un jeu de glyphes (\em{nedhras}\kern[width=0.1em]), de
 Les premières n’appellent pas de difficulté particulière. L’on se reportera à la table de Lenski, que j’ai
 reprise \em{supra}, pour la forme la plus usuelle des signes\footnote{%
 Quelques remarques pour actualiser cette table selon l’usage actuellement admis :
-Le /c\text:superscript{w}/ se transcrit /q/.
-Le /ç\text:superscript{2}/ et /ç\text:superscript{3}/ de Lenski se transcrivent aujourd’hui /hy/ et /x/ ; ces deux formes sont étymologiques
+Le /c\textsuperscript{w}/ se transcrit /q/.
+Le /ç\textsuperscript{2}/ et /ç\textsuperscript{3}/ de Lenski se transcrivent aujourd’hui /hy/ et /x/ ; ces deux formes sont étymologiques
 mais correspondent à un même son dans la langue d’Almaq. Dans le \em{chadhruid}, elles se sont confondues
-en /ç\text:superscript{1}/ à l’époque de Sifo, qui vaut donc aussi pour /x/. Notons que le \em{chadhrave} a conservé cette
+en /ç\textsuperscript{1}/ à l’époque de Sifo, qui vaut donc aussi pour /x/. Notons que le \em{chadhrave} a conservé cette
 distinction étymologique.
 }. Remarquons simplement que la plupart des signes vocaliques sont détachés du porteur, à la façon d’accents,
 et que les consonnes s’organisent assez bien en familles phonémiques de mêmes traits, bien qu’il y ait des
@@ -98,21 +98,21 @@ travaux d’Emma Lenski, numérotation ajustée.
 
 \begin[cols=20%fw 80%fw, cellborder=0, cellpadding=2pt 2pt 0 0]{ptable}
 \begin{row}
-  \cell[style=center, valign=middle]{\img[src=examples/almaq/chadhruid_n01.png]}
+  \cell[style=center, valign=middle]{\img[src=examples/almaq/images/chadhruid_n01.png]}
   \cell[style=narrow, valign=middle]{1. Le Bateleur.
 
 \smaller{Carte du Tarot. La représentation classique de l’arcane figure un escamoteur avec un pan de veste noir,
 l’autre blanc, devant une table de jeu. [Logogramme ressemblant à un navire, le signe des Nautes ?]}}
 \end{row}
 \begin{row}
-  \cell[style=center, valign=middle]{\img[src=examples/almaq/chadhruid_n02.png]}
+  \cell[style=center, valign=middle]{\img[src=examples/almaq/images/chadhruid_n02.png]}
   \cell[style=narrow, valign=middle]{2. La Prêtresse.
 
 \smaller{Carte du Tarot. Femme portant une sorte de tiare conique, des clefs à la ceinture, un anneau au doigt
 levé.}}
 \end{row}
 \begin{row}
-  \cell[style=center, valign=middle]{\img[src=examples/almaq/chadhruid_n03.png]}
+  \cell[style=center, valign=middle]{\img[src=examples/almaq/images/chadhruid_n03.png]}
   \cell[style=narrow, valign=middle]{3. L’Impératrice.
 
 \smaller{Carte du Tarot. Femme portant une couronne, un sceptre en main, un anneau au doigt baissé.
@@ -120,19 +120,19 @@ levé.}}
 }}
 \end{row}
 \begin{row}
-  \cell[style=center, valign=middle]{\img[src=examples/almaq/chadhruid_n04.png]}
+  \cell[style=center, valign=middle]{\img[src=examples/almaq/images/chadhruid_n04.png]}
   \cell[style=narrow, valign=middle]{4. L’Empereur.
 
 \smaller{Carte du Tarot. Homme portant une couronne, sceptre en main.}}
 \end{row}
 \begin{row}
-  \cell[style=center, valign=middle]{\img[src=examples/almaq/chadhruid_n05.png]}
+  \cell[style=center, valign=middle]{\img[src=examples/almaq/images/chadhruid_n05.png]}
   \cell[style=narrow, valign=middle]{5. Le Prêtre.
 
-Carte du Tarot. Homme chauve, avec des clefs à la ceinture.}
+\smaller{Carte du Tarot. Homme chauve, avec des clefs à la ceinture.}}
 \end{row}
 \begin{row}
-  \cell[style=center, valign=middle]{\img[src=examples/almaq/chadhruid_n06.png]}
+  \cell[style=center, valign=middle]{\img[src=examples/almaq/images/chadhruid_n06.png]}
   \cell[style=narrow, valign=middle]{6. Les Jumeaux.
 
 \smaller{Carte du Tarot. Chien noir et biche blanche se tenant dos à dos. La proie et son chasseur ?
@@ -143,13 +143,13 @@ E. Poplavsky, \em{op. cit.}
 }.}}
 \end{row}
 \begin{row}
-  \cell[style=center, valign=middle]{\img[src=examples/almaq/chadhruid_n07.png]}
+  \cell[style=center, valign=middle]{\img[src=examples/almaq/images/chadhruid_n07.png]}
   \cell[style=narrow, valign=middle]{7. Le Corbeau.
 
 \smaller{Carte du Tarot. C’est aussi l’emblème des Corbeaux de Bethaine, une troupe de soldats.}}
 \end{row}
 \begin{row}
-  \cell[style=center, valign=middle]{\img[src=examples/almaq/chadhruid_n08.png]}
+  \cell[style=center, valign=middle]{\img[src=examples/almaq/images/chadhruid_n08.png]}
   \cell[style=narrow, valign=middle]{8. La Juge.
 
 \smaller{Carte du Tarot. Femme tenant dans une main une couronne vers le haut, dans l’autre un sceptre abaissé.
@@ -157,14 +157,14 @@ E. Poplavsky, \em{op. cit.}
 en page \pageref[marker=illus-boustrophedon] — Un signe d’inversion des valeurs ?]}}
 \end{row}
 \begin{row}
-  \cell[style=center, valign=middle]{\img[src=examples/almaq/chadhruid_n09.png]}
+  \cell[style=center, valign=middle]{\img[src=examples/almaq/images/chadhruid_n09.png]}
   \cell[style=narrow, valign=middle]{9. Le Borgne.
 
 \smaller{Carte du Tarot. Vieil homme borgne, lance en main. Le bâton de la lance est gravé ; la pointe pourrait porter
 un œil stylisé.}}
 \end{row}
 \begin{row}
-  \cell[style=center, valign=middle]{\img[src=examples/almaq/chadhruid_n10.png]}
+  \cell[style=center, valign=middle]{\img[src=examples/almaq/images/chadhruid_n10.png]}
   \cell[style=narrow, valign=middle]{10. Le Destin.
 
 \smaller{Carte du Tarot. Représentation classique : moulin à vent, dont les ailes portent divers objets (cube
@@ -172,27 +172,27 @@ pouvant être un coffre, une croix ou une épée, un vase ou une coupe, un losan
 peut-être un cerf-volant). Le pictogramme ne semble pas l’évoquer. Voir (33).}}
 \end{row}
 \begin{row}
-  \cell[style=center, valign=middle]{\img[src=examples/almaq/chadhruid_n11.png]}
+  \cell[style=center, valign=middle]{\img[src=examples/almaq/images/chadhruid_n11.png]}
   \cell[style=narrow, valign=middle]{11. La Chasseresse.
 
 \smaller{Carte du Tarot. Femme armée, tenant fermement un cerf par les bois. Le pictogramme du cerf (24, 25)
 est ici très reconnaissable.}}
 \end{row}
 \begin{row}
-  \cell[style=center, valign=middle]{\img[src=examples/almaq/chadhruid_n12.png]}
+  \cell[style=center, valign=middle]{\img[src=examples/almaq/images/chadhruid_n12.png]}
   \cell[style=narrow, valign=middle]{12. Le Pendu.
 
 \smaller{Carte du Tarot. Individu pendu à un arbre par le pied gauche. Le pictogramme rappelle ceux de
 l’arbre (23) et l’homme (29).}}
 \end{row}
 \begin{row}
-  \cell[style=center, valign=middle]{\img[src=examples/almaq/chadhruid_n13.png]}
+  \cell[style=center, valign=middle]{\img[src=examples/almaq/images/chadhruid_n13.png]}
   \cell[style=narrow, valign=middle]{13. La Mort.
 
 \smaller{Carte du Tarot. Le symbole attaché sous le losange est clairement celui de l’épée (26).}}
 \end{row}
 \begin{row}
-  \cell[style=center, valign=middle]{\img[src=examples/almaq/chadhruid_n14.png]}
+  \cell[style=center, valign=middle]{\img[src=examples/almaq/images/chadhruid_n14.png]}
   \cell[style=narrow, valign=middle]{14. L’Artisan.
 
 \smaller{Carte du Tarot. Personnage de sexe indéterminé, forgeant clefs et sceptres, un livre ouvert devant lui.
@@ -200,14 +200,14 @@ Ou façonnant aussi le livre ? Ce pourrait être une encyclopédie des mondes, c
 qui comporte un élément similaire.}}
 \end{row}
 \begin{row}
-  \cell[style=center, valign=middle]{\img[src=examples/almaq/chadhruid_n15.png]}
+  \cell[style=center, valign=middle]{\img[src=examples/almaq/images/chadhruid_n15.png]}
   \cell[style=narrow, valign=middle]{15. Le Monstre.
 
 \smaller{Carte du Tarot. Dans la représentation classique, être à une seule jambe humaine, mais doté de quatre
 bras à mains griffues, et de trois yeux à pupilles verticales.}}
 \end{row}
 \begin{row}
-  \cell[style=center, valign=middle]{\img[src=examples/almaq/chadhruid_n16.png]}
+  \cell[style=center, valign=middle]{\img[src=examples/almaq/images/chadhruid_n16.png]}
   \cell[style=narrow, valign=middle]{16. La Cité.
 
 \smaller{Carte du Tarot. Dans sa représentation classique, simplement figurée par une tour fortifiée.
@@ -215,88 +215,88 @@ Le pictogramme pourrait-il évoquer de hauts remparts percés de portes ? Cf. le
 d’Almaq (28).}}
 \end{row}
 \begin{row}
-  \cell[style=center, valign=middle]{\img[src=examples/almaq/chadhruid_n17.png]}
+  \cell[style=center, valign=middle]{\img[src=examples/almaq/images/chadhruid_n17.png]}
   \cell[style=narrow, valign=middle]{17. La Lune.
 
 Carte du Tarot. Cf. aussi (23).}
 \end{row}
 \begin{row}
-  \cell[style=center, valign=middle]{\img[src=examples/almaq/chadhruid_n18.png]}
+  \cell[style=center, valign=middle]{\img[src=examples/almaq/images/chadhruid_n18.png]}
   \cell[style=narrow, valign=middle]{18. La Chimère.
 
 \smaller{Carte du Tarot. Vieille femme à deux têtes, des ailes au dos. Le logogramme du Tarot diffère
 légèrement de celui de la chimère mythologique (27).}}
 \end{row}
 \begin{row}
-  \cell[style=center, valign=middle]{\img[src=examples/almaq/chadhruid_n19.png]}
+  \cell[style=center, valign=middle]{\img[src=examples/almaq/images/chadhruid_n19.png]}
   \cell[style=narrow, valign=middle]{19. Le Dragon.
 
 \smaller{Carte du Tarot. Monstre ailé, à queue longue. Le glyphe est aussi utilisé pour l’être mythologique,
 encore que le cercle soit peut-être alors plus petit.}}
 \end{row}
 \begin{row}
-  \cell[style=center, valign=middle]{\img[src=examples/almaq/chadhruid_n20.png]}
+  \cell[style=center, valign=middle]{\img[src=examples/almaq/images/chadhruid_n20.png]}
   \cell[style=narrow, valign=middle]{20. Le Soleil.
 
 \smaller{Carte du Tarot. Le pictogramme figure peut-être ses rayons ? Cf. aussi (24).}}
 \end{row}
 \begin{row}
-  \cell[style=center, valign=middle]{\img[src=examples/almaq/chadhruid_n21.png]}
+  \cell[style=center, valign=middle]{\img[src=examples/almaq/images/chadhruid_n21.png]}
   \cell[style=narrow, valign=middle]{21. Le Monde.
 
 \smaller{Carte du Tarot. Objet de structure sphérique, peut-être une sphère armillaire — mais le peuple d’Almaq
 avait-il de telles connaissances ? La sphère est hors-ligne : comme étrangère à la cité ?}}
 \end{row}
 \begin{row}
-  \cell[style=center, valign=middle]{\img[src=examples/almaq/chadhruid_n22.png]}
+  \cell[style=center, valign=middle]{\img[src=examples/almaq/images/chadhruid_n22.png]}
   \cell[style=narrow, valign=middle]{22. Le Bouffon.
 
 \smaller{Carte du Tarot. Personnage tête levée, qui jongle avec une balle noire et une blanche, pendant qu’un renard
 lui mord les braies.}}
 \end{row}
 \begin{row}
-  \cell[style=center, valign=middle]{\img[src=examples/almaq/chadhruid_n23.png]}
+  \cell[style=center, valign=middle]{\img[src=examples/almaq/images/chadhruid_n23.png]}
   \cell[style=narrow, valign=middle]{23. Arbre.
 
 \smaller{Probablement figuratif du tronc et des branches. Variante de carte du Tarot remplaçant la Lune (17),
 sous le nom d’Arbre d’Or. Sans doute présent aussi sur (12).}}
 \end{row}
 \begin{row}
-  \cell[style=center, valign=middle]{\img[src=examples/almaq/chadhruid_n24.png]}
+  \cell[style=center, valign=middle]{\img[src=examples/almaq/images/chadhruid_n24.png]}
   \cell[style=narrow, valign=middle]{24. Grand cerf.
 
 \smaller{Figuratif d’un cerf à grands cors ; voir aussi (25) pour un glyphe proche. Variante de carte du Tarot
 dans certains jeux, remplaçant le Soleil (20).}}
 \end{row}
 \begin{row}
-  \cell[style=center, valign=middle]{\img[src=examples/almaq/chadhruid_n25.png]}
+  \cell[style=center, valign=middle]{\img[src=examples/almaq/images/chadhruid_n25.png]}
   \cell[style=narrow, valign=middle]{25. Animal.
 
 \smaller{Utilisé sur les enseignes des bouchers. Figuratif d’un animal à corne ? Il ressemble beaucoup au cerf,
 cf. (11) dans le même sens.}}
 \end{row}
 \begin{row}
-  \cell[style=center, valign=middle]{\img[src=examples/almaq/chadhruid_n26.png]}
+  \cell[style=center, valign=middle]{\img[src=examples/almaq/images/chadhruid_n26.png]}
   \cell[style=narrow, valign=middle]{26. Épée.
 
 \smaller{Voir la Mort (13) pour un motif similaire. Figurant un sabre à lame courbe ? L’Epée désigne aussi une
 constellation — Je pense qu’il s’agit de l’Aigle chez nous.}}
 \end{row}
 \begin{row}
-  \cell[style=center, valign=middle]{\img[src=examples/almaq/chadhruid_n27.png]}
+  \cell[style=center, valign=middle]{\img[src=examples/almaq/images/chadhruid_n27.png]}
   \cell[style=narrow, valign=middle]{27. Chimère.
 
 \smaller{Être mythologique, voir aussi (18).}}
 \end{row}
 \begin{row}
-  \cell[style=center, valign=middle]{\img[src=examples/almaq/chadhruid_n28.png]}
+  \cell[style=center, valign=middle]{\img[src=examples/almaq/images/chadhruid_n28.png]}
   \cell[style=narrow, valign=middle]{28. Almaq.
 
 \smaller{L’extension latérale qui distingue ce glyphe de celui de la cité (16) pourrait être l’accès au port,
 ou alors évoquer la rivière souterraine qui traverse la ville ?}}
 \end{row}
 \begin{row}
-  \cell[style=center, valign=middle]{\img[src=examples/almaq/chadhruid_n29.png]}
+  \cell[style=center, valign=middle]{\img[src=examples/almaq/images/chadhruid_n29.png]}
   \cell[style=narrow, valign=middle]{29. Homme (ou Femme ?).
 
 \smaller{Pierre pensait, comme Wiegger, qu’il allait de pair avec (30)… Il se peut
@@ -304,7 +304,7 @@ que ce soit un être humain sans distinction de genre — Cf. son emploi en (12)
 cartes dessinées n’est pas clairement sexué.}}
 \end{row}
 \begin{row}
-  \cell[style=center, valign=middle]{\img[src=examples/almaq/chadhruid_n30.png]}
+  \cell[style=center, valign=middle]{\img[src=examples/almaq/images/chadhruid_n30.png]}
   \cell[style=narrow, valign=middle]{30. Prophétesse.
 
 \smaller{Variante de carte du Tarot, remplaçant l’Empereur (4), et dont le nom commun est la Femme. On a cru que c’était son sens. Sa représentation, une femme avec un tambourin, y invitait
@@ -312,7 +312,7 @@ aussi. Wiegger pense qu’il désigne une matriarche. C’est oublier que Fesed 
 appelait Prophétesse l’un des arcanes du jeu qu’il connaissait.}}
 \end{row}
 \begin{row}
-  \cell[style=center, valign=middle]{\img[src=examples/almaq/chadhruid_n31.png]}
+  \cell[style=center, valign=middle]{\img[src=examples/almaq/images/chadhruid_n31.png]}
   \cell[style=narrow, valign=middle]{31. Princesse.
 
 \smaller{Variante de carte du Tarot, remplaçant le Prêtre (5). Le nom de la carte est pris au même texte de Fesed Lerani.
@@ -320,13 +320,13 @@ Jeune femme avec une flûte, ce qui correspond à la carte du jeu que le poète 
 n’est pas aisé à déchiffrer. Cf. celui de la cité (16) ?}}
 \end{row}
 \begin{row}
-  \cell[style=center, valign=middle]{\img[src=examples/almaq/chadhruid_n32.png]}
+  \cell[style=center, valign=middle]{\img[src=examples/almaq/images/chadhruid_n32.png]}
   \cell[style=narrow, valign=middle]{32. Épouvantail.
 
 \smaller{On le brode sur le vêtement sommaire dont on habille l’épouvantail. Des doigts crochus ?}}
 \end{row}
 \begin{row}
-  \cell[style=center, valign=middle]{\img[src=examples/almaq/chadhruid_n33.png]}
+  \cell[style=center, valign=middle]{\img[src=examples/almaq/images/chadhruid_n33.png]}
   \cell[style=narrow, valign=middle]{33. Cerf volant.
 
 \smaller{Nom d’une petite constellation, probablement notre Dauphin. Aussi une variante de carte du Tarot,
@@ -356,7 +356,7 @@ Pensée attribuée à Keldre l’Obscur. Je cite là encore la traduction fr. de
 \vfill
 
 \begin{figure}
-\svg[src=examples/almaq/chadhruid_signes_numeriques.svg, width=95%fw]
+\svg[src=examples/almaq/images/chadhruid_signes_numeriques.svg, width=95%fw]
 \caption{%
 Recensement de caractères de type logographique dans le \em{Codex Monesterellum},
 effectué par Emma Lenski. Bien que rédigé en \em{chadhrave} quant au corps de son texte,

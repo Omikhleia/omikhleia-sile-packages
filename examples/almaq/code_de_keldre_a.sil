@@ -25,7 +25,7 @@ sur la forme comme sur le fond ?
 L’inscription très dense qui figure à sa suite a longtemps laissé les spécialistes dubitatifs,
 quand ils ne l’ont pas simplement ignorée. Laissons parler Emma Lenski\footnote{%
 Emma Lenski, \em{The Chronicles of Alstre and Dongann by the poet Celdre}, Londres,
-2\text:superscript{e} éd. augm., 1962, app. A (notre traduction).
+2\textsuperscript{e} éd. augm., 1962, app. A (notre traduction).
 Si Lenski semble critique sur ses hypothèses passées, elle n’en émet pas de nouvelles.
 } :
 
@@ -52,7 +52,7 @@ sans doute, avec la mise en ordre et la publication de la matière d’Almaq !
 
 En outre, ils omettent de l’équation une section encore non déchiffrée du \em{Codex Monesterellum},
 à laquelle on a parfois prêté le nom d’« excursus linguistique en langue merluine »\footnote{%
-(N.d. E.) On pourra se reporter, pour une contextualisation sommaire du \em{Codex Monesterellum}, à notre
+(N. d. É.) On pourra se reporter, pour une contextualisation sommaire du \em{Codex Monesterellum}, à notre
 article « De la transmission des textes » dans le présent recueil. La première partie
 de cette « section merluine », où apparaissent des termes en langue d’Almaq, pourrait être un glossaire.
 De la deuxième, on ne sait toujours rien dire, mais la troisième, dont on a suggéré qu’elle puisse constituer
@@ -68,7 +68,7 @@ incertaine, nous pensons pouvoir les résumer à cinq ou six glyphes de base, po
 inversés ; pour simplifier ensuite, nous parlerons de formes ouvrantes et fermantes.
 
 \begin{figure}
-\img[src=examples/almaq/musique_signes_consonantiques.png, width=3cm]
+\img[src=examples/almaq/images/musique_signes_consonantiques.png, width=3cm]
 \caption{%
 Dix signes. Le premier et le dernier sont ceux que Lenski rapproche du /s/ et du /r/ dans le
 système du \em{chadhruid}. Les derniers possèdent une variante « pointée ».}
@@ -79,7 +79,7 @@ d’un trait horizontal. Étant donné que ce trait n’apparaît pas isolé, ma
 composition, nous ne pensons pas qu’il puisse s’agir d’autre chose.
 
 \begin{figure}
-\img[src=examples/almaq/musique_variantes.png, width=3cm]
+\img[src=examples/almaq/images/musique_variantes.png, width=3cm]
 \caption{%
 Huit « variantes » avec tiret.}
 \end{figure}
@@ -90,7 +90,7 @@ En toute rigueur, nous en relevons en fait un cinquième, un peu moins fréquent
 ce qui explique sans doute son oubli.
 
 \begin{figure}
-\img[src=examples/almaq/musique_signes_vocaliques.png, width=3cm]
+\img[src=examples/almaq/images/musique_signes_vocaliques.png, width=3cm]
 \caption{%
 Dix autres signes. Les premiers évoquent peut-être les voyelles du \em{chadhruid}.}
 \end{figure}
@@ -113,7 +113,7 @@ successifs où des encoches peuvent s’intercaler. Leur nombre et leur forme ne
 nous n’en donnerons que quelques exemples.
 
 \begin{figure}
-\img[src=examples/almaq/musique_encoches.png, width=2cm]
+\img[src=examples/almaq/images/musique_encoches.png, width=2cm]
 \caption{%
 Exemples de segmentation de la porteuse (sans encoche, avec une et deux encoches).}
 \end{figure}
@@ -124,7 +124,7 @@ par rapport à la présentation (classique) du \em{chadhruid}.
 
 Aux aléas près d’un déchiffrement parfois hasardeux, nous pouvons nous livrer, reportée en annexe
 à cette étude\footnote{%
-(N. d. E.) Annexe omise dans la présente édition, au profit de la transposition plus récente
+(N. d. É.) Annexe omise dans la présente édition, au profit de la transposition plus récente
 élaborée par Y. Caraye.
 }, à une retranscription au propre de l’illustration du \em{Liber}, de façon à en améliorer la lecture,
 épurée des maladresses de tracé et des dégradations des encres ou du support au fil du temps.

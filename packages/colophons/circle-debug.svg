@@ -37,7 +37,7 @@
   <circle
      cx="500.5"
      cy="500.5"
-     stroke-width="0.5"
+     stroke-width="2"
      stroke="#808080"
      fill="none"
      id="circle2"
@@ -48,7 +48,7 @@
      y="0.5"
      width="1000"
      height="1000"
-     stroke-width="1"
+     stroke-width="4"
      stroke="#000000"
      fill="none"
      id="rect4" />
@@ -57,15 +57,17 @@
      y1="500.5"
      x2="1000.5"
      y2="500.5"
-     stroke-width="1"
+     stroke-width="2"
      stroke="black"
      id="line6"
-     style="stroke:#969696;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:1, 1;stroke-dashoffset:0;stroke-opacity:1" />
+     style="stroke-miterlimit:4;stroke-dasharray:1, 1;stroke-dashoffset:0" />
   <line
      x1="500.5"
      y1="0.5"
      x2="500.5"
      y2="1000.5"
-     style="stroke:#969696;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:1, 1;stroke-dashoffset:0;stroke-opacity:1"
+     stroke-width="2"
+     stroke="black"
+     style="stroke-miterlimit:4;stroke-dasharray:1, 1;stroke-dashoffset:0"
      id="line8" />
 </svg>

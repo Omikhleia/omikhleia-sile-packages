@@ -1,4 +1,6 @@
 \begin[papersize=6in x 9in, class=omibook]{document}
+%\script[src=packages/experimental/printoptions]
+%\set[parameter=printoptions.resolution, value=300]
 \script[src=packages/lorem]
 \script[src=packages/colophon]
 \language[main=en]
@@ -112,8 +114,6 @@ As once said a poet, “every scribe who writes has fun, for writing scribes are
 happy ones.” ― This book was composed with all our dedication
 and passion. We hope you will enjoy its reading as much
 as we did writing it.}}
-
-\eject
 
 As Franz Kafka wrote in \em{Josephine the Singer, or the Mouse Folk}…
 

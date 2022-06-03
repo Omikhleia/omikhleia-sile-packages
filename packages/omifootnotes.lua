@@ -3,7 +3,7 @@
 -- 2021, Didier Willis
 --
 SILE.require("packages/abbr") -- for abbr:nbsp - MAYBE WE'LL CHANGE THIS
-SILE.require("packages/textsubsuper") -- for text:superscript
+SILE.require("packages/textsubsuper") -- for textsuperscript
 SILE.require("packages/counters") -- used for counter formatting
 SILE.require("packages/raiselower") -- NOT NEEDED NOW, NO?
 SILE.require("packages/rebox") -- used by footnote:rule
@@ -43,10 +43,10 @@ end, "Small helper command (wrapper around footnote:separator) to set a footnote
 
 SILE.registerCommand("footnote:mark", function (options, _)
   if options.mark then
-      SILE.call("text:superscript", {}, { options.mark })
+      SILE.call("textsuperscript", {}, { options.mark })
   else
     local counter = SILE.formatCounter(SILE.scratch.counters.footnote)
-    SILE.call("text:superscript", {}, { counter })
+    SILE.call("textsuperscript", {}, { counter })
   end
 end, "Command internally called to typeset the footnote call reference in the text flow.")
 
@@ -56,10 +56,10 @@ SILE.registerCommand("footnote:counter", function (options, _)
   -- FIXME We should rather honor a style \numbering[after kern, super=true/false]
   SILE.call("noindent")
   if options.mark then
-    SILE.call("text:superscript", {}, { options.mark })
+    SILE.call("textsuperscript", {}, { options.mark })
   else
     local counter = SILE.formatCounter(SILE.scratch.counters.footnote)
-    SILE.call("text:superscript", {}, { counter })
+    SILE.call("textsuperscript", {}, { counter })
   end
   SILE.call("abbr:nbsp", { fixed = true })
 end, "Command internally called to typeset the footnote counter in the footnote itself.")

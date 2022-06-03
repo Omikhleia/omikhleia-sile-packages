@@ -8,6 +8,10 @@
 %
 \language[main=fr]
 \font[family=Libertinus Serif]
+\set[parameter=linebreak.emergencyStretch, value=15%lw]%
+%
+% HACKS/WORKAROUNDS FOR SILE 0.12.x BUGS
+\script[src=hacks/hacks]
 %
 % UGLY: We don't want URLs to be typeset using a typewriter font :)
 % Just cancel the \code command so the default text font is used.
@@ -69,7 +73,7 @@ Le Dragon de Brume, 2011, \abbr:page{211–216} — avec la permission de l’au
     Mais un souffle de vent ayant sifflé, elle s’éteignit aussitôt. Quelqu’un la ralluma et
     lui dit : « Éclaire, lampe, et tais-toi : l’éclat des astres ne s’éclipse jamais. »
     \source{\em{Fables d’Ésope}, « La Lampe », trad. Émile Chambry\footnote{Ésope, \em{Fables}, trad. d’Émile Chambry,
-    Les Belles Lettres, 1927, 5\text:superscript{e} partie, 232 : « \foreign:gr{Μεθύων λύχνος ἐλαίῳ καὶ φέγγων ἐκαυχᾶτο ὡς ὑπὲρ
+    Les Belles Lettres, 1927, 5\textsuperscript{e} partie, 232 : « \foreign:gr{Μεθύων λύχνος ἐλαίῳ καὶ φέγγων ἐκαυχᾶτο ὡς ὑπὲρ
     ἥλιον πλέον λάμπει. Ἀνέμου δὲ πνοῆς συρισάσης, εὐθὺς ἐσβέσθη. Ἐκ δευτέρου δὲ ἅπτων τις εἶπεν αὐτῷ· Φαῖνει, λύχνε,
     καὶ σίγα· τῶν ἀστέρων τὸ φέγγος οὔποτε ἐκλείπει. Ὅτι οὐ δεῖ τινα ἐν ταῖς δόξαις καὶ τοῖς λαμπροῖς τοῦ βίου
     τυφοῦσθαι· ὅσα γὰρ ἂν κτήσηταί τις, ξένα τυγχάνει.} »

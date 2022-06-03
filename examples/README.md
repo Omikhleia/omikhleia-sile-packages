@@ -18,11 +18,32 @@ They are used as "sample tests" for the **omibook** class and related packages.
 - Conan Doyle's "A Scandal in Bohemia", just because SILE used it in its own
   showcase, so why not check out it could look here. (License: public domain)
 
+## Complete book
+
+I also included the complete sources of "Contes et légendes d'Almaq", a 362-page novel
+in French, in the _fantasy_ genre. (License: copyrighted material)
+
+I remain the sole owner of this material.
+
+Reproduction and/or distribution of the PDF or any derivative work in any form
+(including modified versions or printed copies) is NOT allowed without
+proper authorization.
+
+Nevertheless, the core idea here is to show how I used SILE to make that book a reality,
+relying on (almost) all the packages I created on that journey. It works as a "real-case"
+full example, so that you may look at its sources and understand how I addressed
+my typesetting needs for that project. Therefore, you may obviously build the PDF version
+of the book for yourself and keep a private copy.
+
 ## Decorated colophons
 
 A demonstration of the **colophon** package, as we did not want to show all these
 big examples in the main documentation. The text is somewhat nonsensical, with
 bits of actual explanations mixed with random quotes. (License: MIT)
+
+## Framed and braced boxes
+
+A demonstration of the **framebox** package (License: MIT).
 
 ## Sample curriculum vitae
 

@@ -6,7 +6,7 @@ Set font 	Gentium Plus;12;800;;normal;;LTR
 T	20 w=5.6309	(1)
 Mx 	65.1584
 T	17 w=2.7480	(.)
-Mx 	70.5490
+Mx 	71.1346
 T	50 81 72 w=19.3652	(One)
 Mx 	59.5276
 My 	123.2178
@@ -32,7 +32,7 @@ Mx 	59.5276
 My 	147.2178
 Set font 	Gentium Plus;12;800;;normal;;LTR
 T	21 w=5.6309	(2)
-Mx 	67.8010
+Mx 	68.3867
 T	55 90 82 w=21.1172	(Two)
 Mx 	59.5276
 My 	165.2178

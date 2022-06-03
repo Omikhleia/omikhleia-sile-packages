@@ -26,6 +26,12 @@ local resolveSectionStyleDef = function (name)
   SU.error("Style '"..name.."' is not a sectioning style")
 end
 
+local interWordSpace = function ()
+  -- Returns a glue corresponding to the current interword space (depending on settings).
+  local fontOpts = SILE.font.loadDefaults({})
+  return SILE.shaper:makeSpaceNode(fontOpts, { width = "1spc"}) -- FIXME not sure of the 1spc here.
+end
+
 SILE.registerCommand("sectioning", function (options, content)
   local name = SU.required(options, "style", "sectioning")
   local numbering = SU.boolean(options.numbering, true)
@@ -97,7 +103,7 @@ SILE.registerCommand("sectioning", function (options, content)
         local numSty = styles.resolveStyle(secStyle.numberstyle)
         local pre = numSty.numbering and numSty.numbering.before
         local post = numSty.numbering and numSty.numbering.after
-        local kern = numSty.numbering and numSty.numbering.kern or "1spc"
+        local kern = numSty.numbering and numSty.numbering.kern or interWordSpace()
 
         SILE.call("style:apply", { name = secStyle.numberstyle }, function ()
           if pre and pre ~= "false" then SILE.typesetter:typeset(pre) end
@@ -111,7 +117,7 @@ SILE.registerCommand("sectioning", function (options, content)
         end
       else
         SILE.typesetter:typeset(number)
-        SILE.typesetter:typeset(" ") -- Should it be a 1spc kern?
+        SILE.call("kern", { width = interWordSpace() })
       end
     end
     -- 3D. Section (title) content
@@ -373,7 +379,8 @@ regular character style elements, how to actually present the section number.
 \begin{itemize}
 \item{The text to prepend to the number,}
 \item{The text to append to the number,}
-\item{The kerning space added after it (defaults to 1spc).}
+\item{The kerning space added after it (defaults to an inter-word space, i.e. usually
+      stretchable and shrinkable, depending on the relevant SILE settings).}
 \item{And an additional option, here, whether the formatted number has to be on a standalone
   line rather than just before the section title.—Chapters and parts, for instance,
   may often use it.}

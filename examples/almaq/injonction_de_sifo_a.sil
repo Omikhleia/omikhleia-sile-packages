@@ -1,13 +1,13 @@
 \begin{document}
 
 \open-on-odd-page
-\noindent\img[src=examples/almaq/chadhruid_na_sifo_main.jpeg, width=99%fw]
+\noindent\img[src=examples/almaq/images/chadhruid_na_sifo_main.jpeg, width=99%fw]
 
 \eject
 \hbox{}\vfill
 
 \begin{figure}
-\img[src=examples/almaq/chadhruid_table_lenski.png, width=99%fw]
+\svg[src=examples/almaq/images/chadhruid_table_lenski.svg, width=99%fw]
 \caption{%
 Notes de la main d’Emma Lenski dans \em{The Chronicles of Alstre and Dongann by the poet Celdre},
 fac-similé inclus dans la première édition de 1937, p. 4. L’édition augmentée de 1962 reporte la
@@ -18,7 +18,9 @@ soixante-treize logogrammes sont étudiés en appendice C.
 
 \vfill
 \noindent\style:font[size=-0.5]{Page précédente : manuscrit M de l’injonction de Sifo (collection personnelle).}
-
+\par\break
+% WARN: Do not remove the comment here or the page breaks won't work as expected
+%
 \chapter[numbering=false]{À propos de l’injonction de Sifo.}
 
 Le bref texte que l’on nomme communément « l’injonction de dame Sifo » figure en tête des principales
@@ -79,7 +81,7 @@ Je suis Sifo… une exigence… Je suis née Beneth, Sifo de la maison Saran… 
 grâce au poète Celdre… J’ai exigé… Sur Alstre Hurvedan… disperseur de cités… Sur Dongann… la cause de la
 ruine d’Almaq… le farceur… petit-roi des fées.
 
-[\em{I am Sifo… a requirement… I am born Beneth, Sifo of house Saran… by the obscure Celdre… an account…
+[\foreign:en{I am Sifo… a requirement… I am born Beneth, Sifo of house Saran… by the obscure Celdre… an account…
 thanks to poet Celdre… I required… Of Alstre Hurvedan… scatterer of cities… Of Dongann… the cause of
 the ruin of Almaq…  the jester… little-king of fairies.}]
 \end{blockquote}
@@ -117,7 +119,7 @@ cette allocution — quoi que l’on pense de sa terminologie pour les connecteu
 B \em{broadcast}, O \em{outer}, N \em{neuter}, I \em{inner}, — \em{quote}.
 } :
 
-\begin[cols=10%fw 3%fw 10%fw 3.5%fw 31.5%fw 22%fw 20%fw, cellborder=0, cellpadding=2]{ptable}
+\begin[cols=10%fw 3%fw 10%fw 3.5%fw 31.25%fw 22%fw 20.25%fw, cellborder=0, cellpadding=2]{ptable}
 \row{
   \cell[style=narrow, border=0 0 0 0.4pt]{\smaller{\em{na sifo}}}
   \cell[border=0 0 0 0.4pt]{}
@@ -222,7 +224,7 @@ certainement pas un hasard si l’essentiel des éditions débute par une introd
 d’importance un ouvrage qu’il lui reste encore à transmettre : une Encyclopédie des Mondes
 (\em{Herchallas e-Veiris}\kern[width=0.1em]) complétée par ses soins, mais dont il a aussi perdu des
 feuillets au cours de ses tribulations. Le genre même de ce type d’ouvrage, une forme littéraire souple
-et flexible qui tient autant du récit historique que de l’almanach, semble avoir été très prisée de la
+et flexible qui tient autant du récit historique que de l’almanach, semble avoir été très prisé de la
 société d’Almaq ; mais aussi, je le crois volontiers, des peuples voisins. Sont conviés des textes
 qui parlent, au sens large, du monde connu (et dans le cas présent, principalement du point de vue de
 la cité d’Almaq), mais aussi des mythes ou des légendes, que le lecteur attentif est supposé apprécier
@@ -236,7 +238,7 @@ que tout cela ne doit cependant rien ni au hasard, ni aux lubies des compositeur
 propre de ce type spécifique d’œuvre que constituent les \em{Herchallasen} — littéralement, dans le parler
 d’Almaq, les « Livres de Choses ». Dans l’économie de ces peuples, tous ces textes participent au fond
 d’un même \em{Herchallas e-Veiris} fantasmé : une somme unique, un Grand Tout ultime de la connaissance
-auquel seul les initiés, peut-être, ont accès dans sa totalité du moment\footnote{%
+auquel seuls les initiés, peut-être, ont accès dans sa totalité du moment\footnote{%
 Voire, au bout d’un long moment, dans sa complétude absolue — puisque dans la pensée des gens d’Almaq,
 le temps est de nature cyclique et l’Histoire ne fait que se répéter autour de mêmes éléments centraux.
 La question est cependant fort complexe et dépasse très largement le cadre de cette modeste introduction.
@@ -244,7 +246,7 @@ La question est cependant fort complexe et dépasse très largement le cadre de 
 ses continuateurs\footnote{%
 Aussi bien que Keldre et ses sources : pour la part du recueil qui lui revient, ses sources sont
 tout aussi multiples, et rien ne démontre qu’il se soit arrêté sur une sélection donnée. Bien au
-contraire, les feuillets qu’il reconnaît avoir perdu demandaient à être remplacés ; de sorte que le
+contraire, les feuillets qu’il reconnaît avoir perdus demandaient à être remplacés ; de sorte que le
 recueil qu’il lègue à son retour diffère probablement déjà des versions qui nous sont parvenues par
 d’autres biais, quand bien même toutes porteraient sa marque.
 } n’ont eu d’autre choix que de multiplier leurs approches.
@@ -345,7 +347,7 @@ etc. Je ne prétends pas conclure, mais c’est dire que nous n’avons sans dou
 l’herméneutique du personnage.
 }, quant à ce qu’il convient ou non de révéler au grand jour (voir \em{infra}\kern[width=0.1em]).
 
-Je peux à présent aborder à nouveau compte les expressions \em{mathanian an barnas} et \em{nemed ethlan almaq}.
+Je peux aborder derechef les expressions \em{mathanian an barnas} et \em{nemed ethlan almaq}.
 Elles présentent une inversion inattendue, dont Wiegger se défiait. Alster, dans toutes nos autres
 sources, est toujours le Ptoliporthe\footnote{%
 Soit \em{Hurvedan}, forme transposée depuis la langue de l’empire, « celui qui détruit les foyers »
@@ -368,7 +370,7 @@ en vertu de sa population venant de tout le continent ; le plus haut point de la
 nuages », etc. Quelques pages plus haut, il y voit aussi des points de rapprochement avec le mythe de
 l’Atlantide : « la chute d’une culture jadis très avancée » (\em{der Untergang einer einst sehr
 fortgeschrittenen Kultur}\kern[width=0.1em]) dont le peuple « fut dispersé, tels les Atlantes, à travers
-le globe. » (\em{Das almakische Volk war wie die Atlanter über die ganze Erde verstreut}).
+le globe. » (\em{Das almakische Volk war wie die Atlanter über die ganze Erde verstreut}\kern[width=0.1em]).
 }.
 
 Pierre de Blancandre rétablit les qualificatifs dans leur ordre attendu, ainsi que Wiegger à sa suite.
@@ -380,7 +382,7 @@ qui parle. La particule d’emphase \em{na}\kern[width=0.1em]\footnote{%
 La langue d’Almaq possède trois \em{na} distincts : une négation verbale et adverbiale, une coordination
 apparaissant notamment dans les noms personnels (ainsi qu’on la trouve ailleurs dans l’injonction) et
 une particule d’emphase. Seule devant un nom, c’est toujours de cette dernière dont il s’agit.
-\em{Na nyesem}, formule appuyée de salutation. \em{Na Sornas}, titre d’un fragment légendaire,.
+\em{Na nyesem}, formule appuyée de salutation. \em{Na Sornas}, titre d’un fragment légendaire.
 \em{Na phanuid}, « c’est du vol ! ». \em{Na Sorn, na Nuvch}, « ô Chimère, ô Dragon »,
 début de prière. \em{Na Miro caledhian}, titre d’une autobiographie que l’on peut parfaitement rendre
 par « Moi Miro, marchand ». C’est peut-être cet exemple qui a inspiré P. de Blancandre, mais il serait
@@ -407,7 +409,7 @@ lignes, pourrait-on même dire sans vraiment jouer sur les mots.
 En la matière, Emma Lenski a très tôt fait preuve d’une intuition remarquable\footnote{%
 Emma Lenski, « \language[main=en]{Re-reading Sifo: hidden truth & unveiled secrets in the
 chronicles of Alstre} » (1939),
-article repris en version complétée dans sa 2\text:superscript{e} éd. de 1962, \em{op. cit}.
+article repris en version complétée dans sa 2\textsuperscript{e} éd. de 1962, \em{op. cit}.
 } :
 
 \begin{blockquote}
@@ -421,7 +423,7 @@ d’étrange apparaît. C’est soudain Dongann, plutôt qu’Alstre, qui devien
 Et c’est encore le bouffon roi des fées qui est associé à la cause de la ruine d’Almaq. Absurdités ?
 Certains le diraient. Mais pourtant, qu’en savons-nous vraiment ?
 
-[\em{The parallel lines also invite to a transversal reading. It is because she is Sifo of house Saran
+[\foreign:en{The parallel lines also invite to a transversal reading. It is because she is Sifo of house Saran
 that she is entitled to impose her will. Celdre is then put into perspective with the rest of the
 text, implying that all that follows is made possible by the grace of the poet. And so forth. Alstre
 is commissioned to write an account about the deeds of Alstre. This is kind of expected, as he was
@@ -489,7 +491,7 @@ s’agirait que d’une adjonction maladroite dont on pourrait légitimement se 
 \eject
 
 \begin{figure}
-\img[src=examples/almaq/chadhruid_mss_K.jpeg, height=77%fh]
+\img[src=examples/almaq/images/chadhruid_mss_K.jpeg, height=77%fh]
 \caption{%
 Copie du manuscrit K de l’injonction de Sifo (collection privée). Les variantes par rapport au
 manuscrit M sont minimes. Les contours des lettres ont été repassés à l’encre, par-dessus une
@@ -503,7 +505,7 @@ d’authenticité.
 \eject
 
 \begin{figure}
-\svg[src=examples/almaq/chadhruid_polski.svg, height=55%fh]
+\svg[src=examples/almaq/images/chadhruid_polski.svg, height=55%fh]
 \caption{%
 Transcription d’une variante *P, figurant en frontispice de l’édition polonaise de la monographie
 de Pierre de Blancandre (\em{Kroniki niszczyciela miasta}, Łódź, 1924), présentant là encore quelques
@@ -514,7 +516,7 @@ l’exactitude de la copie.
 \end{figure}
 
 \begin{figure}
-\svg[src=examples/almaq/chadhrave_na_sifo.svg, width=95%fw]
+\svg[src=examples/almaq/images/chadhrave_na_sifo.svg, width=95%fw]
 \caption{%
 Le \em{Codex Monesterellum} contient la seule transcription connue de l’injonction de Sifo
 dans l’alphabet adapté du système impérial siléen, qui remplaça l’ancien système à partir du
@@ -525,7 +527,7 @@ dans l’alphabet adapté du système impérial siléen, qui remplaça l’ancie
 \eject
 
 \begin{figure}
-\svg[src=examples/almaq/chadhruid_boustrophedon.svg, height=75%fh]
+\svg[src=examples/almaq/images/chadhruid_boustrophedon.svg, height=75%fh]
 \caption{%
 \label[marker=illus-boustrophedon]%
 Fac-similé du très beau manuscrit S trouvé en 1995 dans un lot de vieilles archives à Saorge (Alpes-Maritimes).

@@ -1,0 +1,10 @@
+\begin{document}
+
+\open-on-any-page
+\noheaderthispage
+\nofoliothispage
+\hbox{}
+\vfill
+\center{\svg[src=examples/almaq/images/bouffon.svg, width=60%fw]}
+
+\end{document}

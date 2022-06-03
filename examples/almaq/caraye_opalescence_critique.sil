@@ -5,7 +5,7 @@
 \hbox{}\vfill
 
 \noheaderthispage
-\center{\img[src=examples/almaq/opalescence_cd_cover.png, width=85%fw]}
+\center{\img[src=examples/almaq/images/opalescence_cd_cover.jpeg, width=85%fw]}
 
 \bigskip
 
@@ -34,7 +34,7 @@ Ensemble, Arkham Records, 2020.
 Musicology as a science requires both thorough study and a humble attitude.
 As an art, it also requires courage to bridge the remaining gap to recreate
 music nobody heard for centuries. Yet courage alone doesn’t do the trick, it
-rather become overboldness. More often than not, the result owes more to
+rather becomes overboldness. More often than not, the result owes more to
 the musical talent of the interpreter than to the original composition.
 
 Such is the case with Yann Caraye’s latest creation, \em{Opalescence}, which aimed
@@ -64,7 +64,7 @@ is available. Here Caraye creativity happily shows up, as his CD provides variat
 taking –as is his right– the Lydian mode as the basic one. His choices of harp and oboe for the main tunes
 of all three scenes are hardly more than guesses, but they definitely sound right. Caraye displays his
 experience as a former assistant to Howard Shore when he decides to give the two additional melodies
-of the second scenes to a male and female choirs rather than further stringed instruments. His modernistic
+of the subsequent scenes to male and female choirs rather than further stringed instruments. His modernistic
 scenic depictions here strongly influence his choices, despite the fact that the themes of \em{The Opalescent
 Mask} probably shouldn’t be treated as a contemporary film score.
 
@@ -80,7 +80,7 @@ these variations. What the old poet Celdre might have thought of it is another m
 \bigskip
 
 \style:font[size=-1.5]{%
-Polyphony in four movements based on a work from the 12\text:superscript{th} century –
+Polyphony in four movements based on a work from the 12\textsuperscript{th} century –
 Track list.
 
 \em{Opalescent Mask variation \abbr:no{1}} (Lydian scale, acoustic session) \hfill 2:00

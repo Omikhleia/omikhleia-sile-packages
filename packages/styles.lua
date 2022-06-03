@@ -623,7 +623,7 @@ in \doc:args{saved-name}, and to clear the latter:
 \\style:redefine[name=\doc:args{name}, from=\doc:args{saved-name}]
 \end{doc:codes}
 
-So now on, \doc:code{\\doc:args{name}} is restored to whatever was saved and \doc:code{\\doc:args{saved-name}}
+So now on, \doc:code{\\\doc:args{name}} is restored to whatever was saved and \doc:code{\\\doc:args{saved-name}}
 is no longer defined.
 
 These style redefinion mechanisms are, obviously, at the core of customization.
