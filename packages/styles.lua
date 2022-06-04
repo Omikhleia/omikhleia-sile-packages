@@ -22,6 +22,12 @@ SILE.scratch.styles = {
     medskip = SILE.settings.get("plain.medskipamount"),
     bigskip = SILE.settings.get("plain.bigskipamount"),
   },
+  -- Known position options, with the command implementing them
+  -- Users can register extra options in this table.
+  positions = {
+    super = "textsuperscript",
+    sub = "textsubscript",
+  }
 }
 
 SILE.registerCommand("style:font", function (options, content)
@@ -51,11 +57,24 @@ SILE.registerCommand("style:define", function (options, content)
 end, "Defines a named style.")
 
 -- Very naive cascading...
-local styleForColor = function (style, content)
-  if style.color then
-    SILE.call("color", style.color, content)
+local styleForProperties = function (style, content)
+  if style.properties and style.properties.position and style.properties.position ~= "normal" then
+    local positionCommand = SILE.scratch.styles.positions[style.properties.position]
+    if not positionCommand then
+      SU.error("Invalid style position '"..style.position.position.."'")
+    end
+    SILE.call(positionCommand, {}, content)
   else
     SILE.process(content)
+  end
+end
+local styleForColor = function (style, content)
+  if style.color then
+    SILE.call("color", style.color, function ()
+      styleForProperties(style, content)
+    end)
+  else
+    styleForProperties(style, content)
   end
 end
 local styleForFont = function (style, content)
