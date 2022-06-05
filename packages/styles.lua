@@ -22,6 +22,12 @@ SILE.scratch.styles = {
     medskip = SILE.settings.get("plain.medskipamount"),
     bigskip = SILE.settings.get("plain.bigskipamount"),
   },
+  -- Known position options, with the command implementing them
+  -- Users can register extra options in this table.
+  positions = {
+    super = "textsuperscript",
+    sub = "textsubscript",
+  }
 }
 
 SILE.registerCommand("style:font", function (options, content)
@@ -51,11 +57,24 @@ SILE.registerCommand("style:define", function (options, content)
 end, "Defines a named style.")
 
 -- Very naive cascading...
-local styleForColor = function (style, content)
-  if style.color then
-    SILE.call("color", style.color, content)
+local styleForProperties = function (style, content)
+  if style.properties and style.properties.position and style.properties.position ~= "normal" then
+    local positionCommand = SILE.scratch.styles.positions[style.properties.position]
+    if not positionCommand then
+      SU.error("Invalid style position '"..style.position.position.."'")
+    end
+    SILE.call(positionCommand, {}, content)
   else
     SILE.process(content)
+  end
+end
+local styleForColor = function (style, content)
+  if style.color then
+    SILE.call("color", style.color, function ()
+      styleForProperties(style, content)
+    end)
+  else
+    styleForProperties(style, content)
   end
 end
 local styleForFont = function (style, content)
@@ -359,6 +378,7 @@ elements being optional):
 \\style:define[name=\doc:args{name}]\{
 \par\quad\\font[\doc:args{font specification}]
 \par\quad\\color[color=\doc:args{color}]
+\par\quad\\properties[position=\doc:args{normal|super|sub}]
 \par\}
 \end{doc:codes}
 
@@ -374,6 +394,9 @@ specifications are not (necessarily) corresponding to actual commands.
 It just uses that familiar syntax as a convenience.\footnote{Technically-minded readers may
 also note it is also very simple to implement that way, just relying
 on SILE’s standard parser and its underlying AST.}
+
+Additional user-defined positioning properties can be registered by name and
+command in \doc:code{SILE.scratch.styles.positions}.
 
 A style can also inherit from a previously-defined style:
 
@@ -473,6 +496,22 @@ It obviously requires the font to have these characters, and due to the way how 
 done, the enumeration to stay within a range corresponding to expected characters.
 
 The other character formatting commands should of course apply to the full label.
+
+\P{Character styles for footnote markers.}
+
+As for other styles above, the character style for foonoter markers (i.e. the footnote
+symbol or counter in the note itself) should support the "numbering" specification.
+
+\begin{doc:codes}
+\quad{}\\numbering[before=\doc:args{string}, after=\doc:args{string}, kern=\doc:args{length}]
+\end{doc:codes}
+
+For consistency, footnote references (i.e. the footnote call in the main text body) should support
+at least the first properties, that is:
+
+\begin{doc:codes}
+\quad{}\\numbering[before=\doc:args{string}, after=\doc:args{string}]
+\end{doc:codes}
 
 \P{Paragraph styles.}
 

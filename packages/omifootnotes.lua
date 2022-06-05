@@ -13,6 +13,12 @@ SILE.scratch.counters.footnote = { value= 1, display= "arabic" }
 
 local styles = SILE.require("packages/styles").exports
 styles.defineStyle("footnote", {}, { font = { size = "-1" } })
+styles.defineStyle("footnote-reference", {}, { properties = { position = "super" } })
+styles.defineStyle("footnote-reference-mark", { inherit = "footnote-reference" }, {})
+styles.defineStyle("footnote-reference-counter", { inherit = "footnote-reference" }, {})
+styles.defineStyle("footnote-marker", {}, { properties = { position = "super" } })
+styles.defineStyle("footnote-marker-mark", { inherit = "footnote-marker" }, {})
+styles.defineStyle("footnote-marker-counter", { inherit = "footnote-marker" }, {})
 
 -- Footnote separator and rule
 
@@ -42,26 +48,34 @@ end, "Small helper command (wrapper around footnote:separator) to set a footnote
 -- Footnote reference call (within the text flow)
 
 SILE.registerCommand("footnote:mark", function (options, _)
-  if options.mark then
-      SILE.call("textsuperscript", {}, { options.mark })
-  else
-    local counter = SILE.formatCounter(SILE.scratch.counters.footnote)
-    SILE.call("textsuperscript", {}, { counter })
-  end
+  local fnStyName = options.mark and "footnote-reference-mark" or "footnote-reference-counter"
+  local fnSty = styles.resolveStyle(fnStyName)
+  local pre = fnSty.numbering and fnSty.numbering.before or ""
+  local post = fnSty.numbering and fnSty.numbering.after or ""
+  local kern = fnSty.numbering and fnSty.numbering.kern
+  if kern then SU.warn("footnote marker style should not have a kern (numbering) - ignored") end
+  local text = pre .. (options.mark or SILE.formatCounter(SILE.scratch.counters.footnote)) .. post
+
+  SILE.call("style:apply", { name = fnStyName }, { text })
 end, "Command internally called to typeset the footnote call reference in the text flow.")
 
 -- Footnote reference counter (within the footnote)
 
 SILE.registerCommand("footnote:counter", function (options, _)
-  -- FIXME We should rather honor a style \numbering[after kern, super=true/false]
+  local fnStyName = options.mark and "footnote-marker-mark" or "footnote-marker-counter"
+  local fnSty = styles.resolveStyle(fnStyName)
+  local pre = fnSty.numbering and fnSty.numbering.before or ""
+  local post = fnSty.numbering and fnSty.numbering.after or ""
+  local kern = fnSty.numbering and fnSty.numbering.kern and SU.cast("length", fnSty.numbering.kern)
+  local text = pre .. (options.mark or SILE.formatCounter(SILE.scratch.counters.footnote)) .. post
+
   SILE.call("noindent")
-  if options.mark then
-    SILE.call("textsuperscript", {}, { options.mark })
+  SILE.call("style:apply", { name = fnStyName }, { text })
+  if not kern then
+    SILE.call("abbr:nbsp", { fixed = true })
   else
-    local counter = SILE.formatCounter(SILE.scratch.counters.footnote)
-    SILE.call("textsuperscript", {}, { counter })
+    SILE.call("kern", { width = kern })
   end
-  SILE.call("abbr:nbsp", { fixed = true })
 end, "Command internally called to typeset the footnote counter in the footnote itself.")
 
 -- Footnote insertion block max height and inter-skip tuning
@@ -151,24 +165,31 @@ or one or several of the following:
 
 The default values for these options are, in order, 25\%fw, 2ex, 1ex and 0.5pt.
 
-It also redefines the way the footnote reference is formatted in the
-footnote itself (that is, the internal \autodoc:command{\footnote:counter} command),
-to use a superscript counter. Both the footnote reference and the footnote
-call (that is, the internal \autodoc:command{\footnote:mark} command) are
-configured to use actual superscript characters if supported by
-the current font (see the \autodoc:package{textsubsuper} package)\footnote{You
-can see a typical footnote here.}.
-
 It also adds a new \autodoc:parameter{mark} option to the footnote command, which
 allows typesetting a footnote with a specific marker instead of
 a counter\footnote[mark=†]{As shown here, using \autodoc:command{\footnote[mark=†]{…}}.}.
 In that case, the footnote counter is not altered. Among other things, these custom
 marks can be useful for editorial footnotes.
 
-Finally, relying on the \autodoc:package{styles} package, the footnote content
-is typeset according to the \autodoc:package{footnote} style (and this re-implementation
-of the original footnote package, therefore, does not have a
+The package relies on the \autodoc:package{styles} package for styling the elements.
+
+The footnote content is typeset according to the \doc:code{footnote} style
+(and this re-implementation of the original footnote package, therefore, does not have a
 \autodoc:command[check=false]{\footnote:font} hook).
+
+It also redefines the way the marker in the footnote itself
+(that is, the internal \autodoc:command{\footnote:counter} command) and
+the footnote reference call in the main text flow (that is, the internal
+\autodoc:command{\footnote:mark} command) are formatted.
+The relevant styles are \doc:code{footnote-reference} for the reference call,
+and \doc:code{footnote-marker} for the footnote marker. By default,
+both the footnote marker and the footnote reference call are configured to use actual
+superscript characters if supported by the current font (see the \autodoc:package{textsubsuper}
+package)\footnote{You can see a typical footnote here.}. These two styles also
+both have \doc:code{-mark} and \doc:code{-counter} derived styles, would you need to specialize
+them differently for custom marks and automated numberic counters, respectively.
+This may be interesting, for instance, with a \autodoc:command[check=false]{\numbering} style
+specification to define prepended and appended elements or kerning.
 
 \end{document}]]
 }
