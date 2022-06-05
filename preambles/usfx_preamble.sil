@@ -1,0 +1,28 @@
+\begin[papersize=7.44in x 9.68in, class=omibook]{document}
+\script[src=packages/xmltricks]
+\script[src=packages/textsubsuper]
+\script[src=packages/color]
+\script[src=packages/parbox]
+\script[src=packages/dropcaps]
+\script[src=packages/experimental/usfx]
+%
+% This is a preamble for (XML) USFX
+% Usage: sile -I preambles/usfx_preamble.sil examples/segond/fraLSG_usfx.xml
+% Where "usfx_preamble.sil" is this very file
+%
+% Kill SILE's ugly default. 
+% Before enabling French, so punctuation spacing is correctly computed...
+\set[parameter=shaper.spaceenlargementfactor, value=1.0]
+\language[main=fr]
+%
+\font[family=Libertinus Serif, size=10.5pt]
+%
+% DOH Kills lot's of stretch/shrink ability (close to a grid typesetting...).
+% To be improved later.
+\set[parameter=document.parindent, value=1.25em]
+\set[parameter=document.baselineskip, value=12.5pt]
+\set[parameter=document.lineskip, value=0pt]
+%\set[parameter=document.parskip, value=1bs]% We could to this and avoid the parbox mess in "p" elements
+\set[parameter=document.parskip, value=0]%
+%
+\end{document}
