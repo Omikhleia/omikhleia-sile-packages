@@ -26,7 +26,7 @@
 %
 % Wrapper around the dropcaps...
 % Rationale: The text shows nicer if we keep the default baselineskip stretchability
-% in the whole document, IMHP. It does not play well with the dropped capitals, though,
+% in the whole document, IMHO. It does not play well with the dropped capitals, though,
 % as it has a fixed height not taking into account the effect of that stretchability.
 % We therefore wrap the concerned paragraph in a temporary environment where the
 % stretchability is canceled...
@@ -40,7 +40,7 @@ SILE.registerCommand("initial", function (options, content)
     SILE.process(content)
     SILE.typesetter:leaveHmode()
   end)
-end, "FIXME waiting for dropcap(s) to be released")
+end, "Wrapper around dropcap, for baselineskip adjustment")
 }%
 %
 \style:redefine[name=header:odd, as=_hdodd, inherit=true]{
