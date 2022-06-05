@@ -5,6 +5,7 @@
 --
 SILE.require("packages/rules")
 SILE.require("packages/raiselower")
+SILE.require("hacks/hack-1382") -- HACK FOR SILE 0.12.5 HRULE BUG
 
 -- References:
 -- GS1 specifications
@@ -71,30 +72,6 @@ local SC = {
   SC9 = 0.660, -- SC9 (200%) (recommended on an "outer packaging")
 }
 
-SILE.registerCommand("hrule:fixed", function (options, _) -- FIXME HACK #1382
-  local width = SU.cast("length", options.width)
-  local height = SU.cast("length", options.height)
-  local depth = SU.cast("length", options.depth)
-  SILE.typesetter:pushHbox({
-    width = width:absolute(),
-    height = height:absolute(),
-    depth = depth:absolute(),
-    value = options.src,
-    outputYourself= function (self, typesetter, line)
-      local outputWidth = SU.rationWidth(self.width, self.width, line.ratio)
-      typesetter.frame:advancePageDirection(-self.height)
-      local oldx = typesetter.frame.state.cursorX
-      local oldy = typesetter.frame.state.cursorY
-      typesetter.frame:advanceWritingDirection(outputWidth)
-      typesetter.frame:advancePageDirection(self.height + self.depth)
-      local newx = typesetter.frame.state.cursorX
-      local newy = typesetter.frame.state.cursorY
-      SILE.outputter:drawRule(oldx, oldy, newx - oldx, newy - oldy)
-      typesetter.frame:advancePageDirection(-self.depth) --- DARN HERE IS A FIX FOR #1382
-    end
-  })
-end, "Creates a rectangular blob of ink of width <width>, height <height> and depth <depth>")
-
 SILE.scratch.ean13 = {
   font = {
     family = "OCR B",
@@ -143,7 +120,7 @@ SILE.registerCommand("ean13", function (options, _)
         if numline == 1 or numline == 2 or numline == 15 or numline == 16 or numline == 29 or numline == 30 then
           d = 5 -- longer bars are 5X higher than shorter bars
         end
-        SILE.call("hrule:fixed", { height = H * X, depth = d * X, width = sz - offsetcorr }) -- bar
+        SILE.call("hrule", { height = H * X, depth = d * X, width = sz - offsetcorr }) -- bar
       end
     end
     SILE.call("kern", { width = offsetcorr }) -- Not really requested by the standard but felt preferable,

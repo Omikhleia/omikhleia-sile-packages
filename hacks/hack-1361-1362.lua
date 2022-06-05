@@ -56,14 +56,11 @@ SILE.defaultTypesetter.computeLineRatio = function(_, breakwidth, slice)
       skipping = false
 
       if node.parent and not node.parent.hyphenated then
-        --  print("PPP", node.parent.used)
         if not node.parent.xx then
-          -- print("  PARENT", node.parent, node.parent.xx)
           naturalTotals:___add(node.parent:lineContribution())
         end
         node.parent.xx = true
       else
-        -- print("   N", node)
         naturalTotals:___add(node:lineContribution())
       end
     elseif node.is_penalty and node.penalty == -10000 then -- -inf_bad
@@ -71,13 +68,10 @@ SILE.defaultTypesetter.computeLineRatio = function(_, breakwidth, slice)
     elseif node.is_discretionary then
       skipping = false
       if node.used then
-        -- print("@  ", node:replacementWidth(), node:prebreakWidth())
         naturalTotals:___add(node:replacementWidth())
         slice[i].height = slice[i]:replacementHeight():absolute()
       end
-      -- node.used = not node.parent.xx
     elseif not skipping then
-      -- print(node)
       naturalTotals:___add(node.width)
     end
   end
