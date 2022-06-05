@@ -21,7 +21,7 @@ They are used as "sample tests" for the **omibook** class and related packages.
 ## Complete book
 
 I also included the complete sources of "Contes et légendes d'Almaq", a 362-page novel
-in French, in the _fantasy_ genre. (License: copyrighted material)
+in French, in the _fantasy_ genre. (License: **copyrighted** material)
 
 I remain the sole owner of this material.
 
@@ -34,6 +34,9 @@ relying on (almost) all the packages I created on that journey. It works as a "r
 full example, so that you may look at its sources and understand how I addressed
 my typesetting needs for that project. Therefore, you may obviously build the PDF version
 of the book for yourself and keep a private copy.
+
+For pictures and more information on the printed book, refer to [its web page](https://sites.google.com/site/dragonbrumeux/contes-et-l%C3%A9gendes-dalmaq). **Disclaimer**: This is not an incentive for you to buy it.
+On the contrary, I will even suggest here you should not do such a thing, unless you are sure this is a kind of things you would enjoy reading.
 
 ## Decorated colophons
 
