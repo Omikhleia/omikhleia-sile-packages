@@ -5,3 +5,4 @@
 SILE.require("hacks/hack-1358")
 SILE.require("hacks/hack-1360")
 SILE.require("hacks/hack-1361-1362")
+-- hacks/hack-1382 is directly loaded by the backcodes/ean13 package.
