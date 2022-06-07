@@ -1,0 +1,723 @@
+\begin[papersize=a5, class=omibook]{document}
+\script[src=packages/enumitem]
+\script[src=packages/font-fallback]
+\script[src=packages/textsubsuper]
+\script[src=packages/ptable]
+\script[src=packages/image]
+\script[src=packages/url]
+\script[src=packages/rules]
+\script[src=packages/verbatim]
+\script[src=packages/svg]
+\script[src=packages/experimental/codehighlighter]
+\script[src=hacks/rules-strike-fill]% HACK
+\script[src=examples/markdown-custom]
+\footnote:rule
+\neverindent
+\language[main=en]
+\font[family=Libertinus Serif]
+\font:add-fallback[family=Symbola]
+\chapter[numbering=false, marker=markdown-to-sile-conversion-with-pandoc]{Markdown to SILE conversion with Pandoc}
+
+\begin[name=EmphaticRight, discardable=true]{style:apply:paragraph}
+First version, June 2022.
+\end{style:apply:paragraph}
+
+The source of this document is written in Markdown. A PDF may be generated with the following
+instructions, provided “Omikhleia’s classes & packages for SILE” are installed\footnote{\href[src=https://github.com/Omikhleia/omikhleia-sile-packages]{https://github.com/Omikhleia/omikhleia-sile-packages}}.
+
+\begin[type=codehighlight, format=bash]{raw}
+pandoc -t pandoc/omimarkdown.lua examples/markdown-sample.md > examples/markdown-sample.sil; sile examples/markdown-sample.sil
+\end{raw}
+
+
+\section[marker=introducing-the-challenge]{Introducing the challenge}
+
+Markdown processing with SILE has been, at least, an open question since 2016, if not even
+earlier\footnote{\href[src=https://github.com/sile-typesetter/sile/issues/413]{https://github.com/sile-typesetter/sile/issues/413}}.
+
+At least three routes for converting Mardown to SILE can be considered, and are summarized
+below. All these approaches have legitimate \em{pros} and \em{cons}.
+Be aware that the views presented here are somewhat opinionated!
+
+\subsection[marker=developing-a-native-converter]{Developing a native converter}
+
+The “native” way would be to interpret Mardown from SILE iteself.
+
+This is what the SILE \font[weight=700]{markdown} class is trying to achieve, based on the Lua \code{lunamark} module for
+parsing Mardown. As of March 2022, the results are still very unconvincing\footnote{\href[src=https://github.com/sile-typesetter/sile/issues/1336]{https://github.com/sile-typesetter/sile/issues/1336}}. It has lots
+of bugs and is very incomplete.
+
+The very idea of using SILE and Lua to process Markdown is not unsound. But besides its highly broken
+\em{proof of concept} status, the fact that this attempt comes as a \em{class} is also questionable.
+Class designers can implement lots of cool classes for books, articles, etc., but what does it tell
+about including Mardown \em{content} in a document based on these?
+
+Would it be done another way, the \em{pros} are that SILE would have its own logic, open for customization,
+to process Markdown without the need of a third party solution. The \em{cons} are that it requires
+a good Markdown processing library, that has to be maintained, with a tight integration in SILE.
+
+\subsection[marker=developing-a-pandoc-based-converter]{Developing a Pandoc-based converter}
+
+Here, we refer to the standard Pandoc use, with that software providing a dedicated writer,
+likely written in Haskell and integrated in the software, as it does for other output formats.
+
+Some efforts have been done in that direction. It requires a Pandoc fork\footnote{\href[src=https://github.com/alerque/pandoc/commits/sile4]{https://github.com/alerque/pandoc/commits/sile4}}, which is
+not yet (as of June 2022) merged upstream. It also requires the SILE \font[weight=700]{pandoc} package to be used, which has still plenty of \code{TODO} comments…
+
+Again, the idea is not unsound. The apparent choice made in the current proprosal, though, is to
+(more or less) expose the Pandoc AST to SILE, which would the implement then necessary actions.
+This author does believe this approach to be kind of flawn — There could have been ways for the
+output to look more like it was written with the available tools and packages, rather than in weird
+Pandoc low-level constructs that might change as the software evolves. Anyhow, would the Pandoc fork
+be merged into the product, without any other effort in SILE itself, the result could be fairly
+deceptive too, at this date, for reasons explained later.
+
+Nothwithstanding the conversion output format, the \em{cons}, in my humble opinion, are that it
+puts the burden of maintaining it on both the Pandoc and the SILE teams. The Pandoc AST is somewhat stable at this date, but changes are likely to be expected anyway. Relying on Pandoc’s releases also means that getting things done is likely to take more time.
+
+\subsection[marker=developing-a-pandoc-custom-writer-in-lua]{Developing a Pandoc “custom writer” in Lua}
+
+Pandoc, in the meantime, has evolved and it now supports creating custom “Writers”
+in Lua\footnote{\href[src=https://pandoc.org/custom-writers.html]{https://pandoc.org/custom-writers.html}}.
+
+While such custom writers may have some rough edges, the idea is quite appealing. After all,
+SILE is mostly written in Lua, so the skills are there in the community. It has not
+been considered until a recent date, though. As can be guessed from our introductory
+note, it is the purpose of the present document to experiment and document that
+third “route”.
+
+The \em{pros} are that it is written in the same language as SILE and that it offers an
+interesting alternative which doesn’t imply modifications of Pandoc or a special build.
+It also allows us to move fast, somewhat independently from Pandoc. The \em{cons} is that
+this custom writer API is fairly recent and might change. Actually, besides what is
+called the “Classic style”, there’s now even a “New style”…
+
+\section[marker=the-proposed-converter]{The proposed converter}
+
+After all this overlong introductory text, it’s time to have a glance at the proposed
+converter, written as a custom writer in Lua…
+But, before proceeding further, let’s also try to understand what may have failed in the
+two first cases.
+
+The main problem, in this author’s opinion, is that they both tried something \em{without
+having the necessary yet building blocks} in SILE, and thus, without a clear design and
+vision. Underline and strikethrough? Bullet lists and enumerations? Cross-references?
+Tables? Code hightlighting? Custom styles? None of them were really available, and some
+of these features are still missing from SILE’s standard distribution, as of version
+v0.12.5.\footnote{This author has dabbled into bullet lists and enumerations, tables,
+styling, cross-references, strikethrough, etc. with some proposals made to the
+core distribution. I do not say this for “bragging”, but rather to reinforce the
+idea that when one gets all the building blocks available at hand, things then come
+in a more natural fashion and the pieces of the puzzle start to assemble.}
+
+Lessons learnt\footnote{The above comments might sound harsh to the individuals who made
+the previous attempts. Let’s not be unfair, though: their efforts paved the way
+to the new attempt discussed here. Also, my own approach can be wrong too. It’s
+an \style:apply[name=Warning, discardable=true]{opinionated} viewpoint, after all!}, I tried to proceed the other way round, first implementing
+the building blocks found necessary, until \em{at last} tackling with Markdown. And since
+we now have this Pandoc “custom Lua writer” route, I went for it (using, for what is
+worth, their “Classic” API).
+
+Eventually, the SILE-native route might be preferable in the long term. However,
+I do believe that one has to seek the low-hanging fruits first. Some of the choices
+made here are therefore debatable\footnote{E.g. syntax highlighting is currently based on a somehow
+deprecated solution.}, but in the end, the \em{user}
+needs a solution that produces quality results. The internal implementation can change
+later and be improved, one way or another. In other terms, I thrive for functionality
+over an ideal implementation that might never be reachable.
+What \em{end-users} need is a working solution to process their Markdown content into
+a neat PDF. That’s one of the key point in \em{software adoption} —that is decently does
+what you would expect, without having to dabble into obscure details\footnote{I cannot even imagine the efforts that would be required
+to fix the existing \code{lunamark}-based attempt and ensure it is good at supporting
+all of the rich Pandoc-flavor of Markdown… As for installing a Pandoc fork,
+this is pushing too much strain on the user, in my opinion.}.
+
+\section[marker=supported-elements]{Supported elements}
+
+Obviously sectioning works.
+
+\subsection[numbering=false, marker=more-or-sectioning]{More or sectioning}
+
+Unnumbered sections work too.
+
+\subsection[marker=basic-typesetting]{Basic typesetting}
+
+Paragraphs are of course supported. Lorem ipsum dolor, sit amet consetetur, sadipscing elitr,
+sed diam non umy eirmod tempor, invidunt ut labor.
+
+As of formatting, \em{italic}, \font[weight=700]{bold}, and \code{monospace} all work as expected.
+
+Unicode is supported. ☺
+
+Pandoc comes natively with smart typography: 3 dashes in Markdown are converted to an em-dash (—),
+2 dashes to en en-dash for ranges (ex., “it’s all in chapters 12–14”). Note that Pandoc also provides the necessary support for smart quotes and apostrophes. Three dots are converted to an ellipsis (…)
+
+Just to test that text sequences that need to be escaped in SILE language are
+properly managed, here is some text with \%, \\ and \{ \} characters.
+
+A backslash or two spaces at the end of the line in the Markdown source\cr
+force a line break.
+
+Superscripted or subscripted text: H\textsubscript{2}O is a liquid, 2\textsuperscript{10} is 1024.
+
+Some \strikethrough{deleted text}, some \underline{underlined text},
+and some \font[features=+smcp]{Small Caps}.
+
+\subsection[marker=lists]{Lists}
+
+\subsubsection[marker=enumerations-and-bullet-lists]{Enumerations and bullet lists}
+
+Itemized list:
+
+\begin{itemize}
+\item{Item 1}
+\item{Item 2}
+\end{itemize}
+
+Numbered lists:
+
+\begin[start=1, display=arabic, after=.]{enumerate}
+\item{First item}
+\item{Second item}
+\end{enumerate}
+
+List nesting:
+
+\begin[start=1, display=arabic, after=.]{enumerate}
+\item{Item
+
+\begin{itemize}
+\item{Hello
+
+\begin[start=1, display=alpha, after=.]{enumerate}
+\item{Hey}
+\item{Ho}
+\end{enumerate}}
+\item{World}
+\end{itemize}}
+\item{Item…
+
+… With several paragraphs
+
+\begin{itemize}
+\item{Fruits
+
+\begin{itemize}
+\item{Apple}
+\item{Orange}
+\end{itemize}}
+\item{Vegetables
+
+\begin{itemize}
+\item{Carrot}
+\item{Potato}
+\end{itemize}}
+\end{itemize}
+
+And here we go back to that item.}
+\end{enumerate}
+
+\subsubsection[marker=task-lists]{Task lists}
+
+\begin{itemize}
+\item[bullet=☐]{Unchecked item}
+\item[bullet=☑]{Checked item}
+\end{itemize}
+
+\subsubsection[marker=numbered-example-lists]{Numbered example lists}
+
+Also known as continuous lists.
+
+\begin[start=1, display=arabic, before=(, after=)]{enumerate}
+\item{First example}
+\item{Second example}
+\end{enumerate}
+
+Some paragraph text…
+
+\begin[start=3, display=arabic, before=(, after=)]{enumerate}
+\item{Third example}
+\item{Fourth example is good.}
+\end{enumerate}
+
+As the good example (4) illustrates, numbered list work well.
+
+\subsubsection[marker=definition-lists]{Definition lists}
+
+Let’s be honest, the current implemention is sort of a hack for now.
+
+\font[weight=800]{apples}
+\blockquote{Good for making applesauce.}
+\font[weight=800]{oranges}
+\blockquote{Citrus!}
+
+\subsection[marker=block-quotes]{Block quotes}
+
+\begin{blockquote}
+Block quotes are
+written like so.
+
+They can span multiple paragraphs,
+if you like.
+
+\begin{blockquote}
+And can be nested.
+\end{blockquote}
+\end{blockquote}
+
+More nesting…
+
+\begin{blockquote}
+This is a block quote.
+
+\begin[start=1, display=arabic, after=.]{enumerate}
+\item{This is a list inside a block quote.}
+\item{Second item.}
+\end{enumerate}
+\end{blockquote}
+
+\subsection[marker=line-blocks]{Line blocks}
+
+In “line blocks”, this converter interprets the indentation as quad kerns.
+For instance:
+
+Line one.\par
+\kern[width=1em]Line too.\par
+\kern[width=2em]Line three.\par
+Line four.\par
+
+\subsection[marker=rules]{Rules}
+
+An horizontal rule:
+
+\fullrule[raise=0.4em]
+
+Just to check how it spans over the line, here is an orizontal rule in a block quote:
+
+\begin{blockquote}
+\fullrule[raise=0.4em]
+
+Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet
+\end{blockquote}
+
+\subsection[marker=links-and-footnotes]{Links and footnotes}
+
+Here is a link to \href[src=https://sile-typesetter.org/]{the SILE website}.
+
+Here is link to a \pdf:link[dest=ref:basic-typesetting]{section heading in the current document} (\ref[marker=basic-typesetting]{}) and
+to \pdf:link[dest=ref:tables-are-cool]{another} (\ref[marker=tables-are-cool]{}) with custom identifier
+
+They might not be visible in the PDF output, but hover them and click. They work.
+
+I am not sure yet what a link to a \href[src=local-doc.md]{local document} should do.
+
+Here’s a footnote\footnote{Some footnote text.}.
+
+\subsection[marker=languages]{Languages}
+
+Beside the global language setting in the \pdf:link[dest=ref:metadata-preamble]{metadata preamble} (\ref[marker=metadata-preamble]{}),
+language changes within the text are supported, either around blocks or inline
+elements. It is is not much visible below, obviously, but the language setting
+affects the hyphenation and other properties. In the case of French, for instance,
+you can see the special thin space before the exclamation point.
+
+\begin[main=fr]{language}
+\begin{blockquote}
+Cette citation est en français !
+\end{blockquote}
+\end{language}
+
+Or inline in text: \language[main=fr]{«Encore du français!»}
+
+\subsection[marker=images]{Images}
+
+Here is an image: \img[src=./examples/sherlock.png, width=1cm]
+
+An image has a legend if it stands on its own paragraph.
+
+\begin{figure}
+\img[src=./examples/sherlock.png]
+\caption{Sherlock Holmes}
+\end{figure}
+
+\svg[src=./examples/almaq/images/manicule.svg, height=0.6em] SVG is supported too.
+
+You can specify the required image width and height, as done just above actually,
+the SVG image being resized at \code{height=0.6em} — Note that it accepts any unit
+system supported by SILE.
+
+\begin{figure}
+\svg[src=./examples/almaq/images/manicule.svg]
+\caption{A “manicule” ornament}
+\end{figure}
+
+\subsection[marker=tables-are-cool]{Tables}
+
+Pandoc extends Markdown with several methods for declaring table. Obviously,
+it’s a question of input syntax, and the converter shouldn’t have to bother.
+Let us check anyway the generated tables look good in all cases.
+
+\subsection[marker=simple-table]{Simple table}
+
+\begin{table}
+\begin[cols=25%lw 25%lw 25%lw 25%lw, header=true]{ptable}
+\begin[background=#eee]{row}
+\cell[valign=middle, halign=right]{Right}
+\cell[valign=middle, halign=left]{Left}
+\cell[valign=middle, halign=center]{Center}
+\cell[valign=middle, halign=left]{Default}
+\end{row}
+\begin{row}
+\cell[valign=top, halign=right]{12}
+\cell[valign=top, halign=left]{12}
+\cell[valign=top, halign=center]{12}
+\cell[valign=top, halign=left]{12}
+\end{row}
+\begin{row}
+\cell[valign=top, halign=right]{123}
+\cell[valign=top, halign=left]{123}
+\cell[valign=top, halign=center]{123}
+\cell[valign=top, halign=left]{123}
+\end{row}
+\begin{row}
+\cell[valign=top, halign=right]{1}
+\cell[valign=top, halign=left]{1}
+\cell[valign=top, halign=center]{1}
+\cell[valign=top, halign=left]{1}
+\end{row}
+\end{ptable}
+\caption{Demonstration of a simple table.}
+\end{table}
+
+Simple headerless table without caption:
+
+\begin[cols=25%lw 25%lw 25%lw 25%lw]{ptable}
+\begin{row}
+\cell[valign=top, halign=right]{12}
+\cell[valign=top, halign=left]{12}
+\cell[valign=top, halign=center]{12}
+\cell[valign=top, halign=right]{12}
+\end{row}
+\begin{row}
+\cell[valign=top, halign=right]{123}
+\cell[valign=top, halign=left]{123}
+\cell[valign=top, halign=center]{123}
+\cell[valign=top, halign=right]{123}
+\end{row}
+\begin{row}
+\cell[valign=top, halign=right]{1}
+\cell[valign=top, halign=left]{1}
+\cell[valign=top, halign=center]{1}
+\cell[valign=top, halign=right]{1}
+\end{row}
+\end{ptable}
+
+\subsubsection[marker=multiline-table]{Multiline table}
+
+\begin{table}
+\begin[cols=19%lw 13%lw 26%lw 42%lw, header=true]{ptable}
+\begin[background=#eee]{row}
+\cell[valign=middle, halign=center]{Centered
+Header}
+\cell[valign=middle, halign=left]{Default}
+\cell[valign=middle, halign=right]{Right
+Aligned}
+\cell[valign=middle, halign=left]{Left
+Aligned}
+\end{row}
+\begin{row}
+\cell[valign=top, halign=center]{First}
+\cell[valign=top, halign=left]{row}
+\cell[valign=top, halign=right]{12.0}
+\cell[valign=top, halign=left]{Example of a row that
+spans multiple lines.}
+\end{row}
+\begin{row}
+\cell[valign=top, halign=center]{Second}
+\cell[valign=top, halign=left]{row}
+\cell[valign=top, halign=right]{5.0}
+\cell[valign=top, halign=left]{Here’s another one. Note
+it also spans multiple
+lines.}
+\end{row}
+\end{ptable}
+\caption{Here is the caption.\cr
+It, too, may span multiple lines.}
+\end{table}
+
+Multiline headerless table:
+
+\begin{table}
+\begin[cols=19%lw 13%lw 26%lw 42%lw]{ptable}
+\begin{row}
+\cell[valign=top, halign=center]{First}
+\cell[valign=top, halign=left]{row}
+\cell[valign=top, halign=right]{12.0}
+\cell[valign=top, halign=left]{Example of a row that
+spans multiple lines.}
+\end{row}
+\begin{row}
+\cell[valign=top, halign=center]{Second}
+\cell[valign=top, halign=left]{row}
+\cell[valign=top, halign=right]{5.0}
+\cell[valign=top, halign=left]{Here’s another one
+that also spans multiple
+lines.}
+\end{row}
+\end{ptable}
+\caption{Here’s a multiline table without a header.}
+\end{table}
+
+\subsubsection[marker=grid-tables]{Grid tables}
+
+\begin{table}
+\begin[cols=30%lw 30%lw 40%lw, header=true]{ptable}
+\begin[background=#eee]{row}
+\cell[valign=middle, halign=left]{Fruit}
+\cell[valign=middle, halign=left]{Price}
+\cell[valign=middle, halign=left]{Advantages}
+\end{row}
+\begin{row}
+\cell[valign=top, halign=left]{Bananas}
+\cell[valign=top, halign=left]{$1.34}
+\cell[valign=top, halign=left]{\begin{itemize}
+\item{built-in wrapper}
+\item{bright color}
+\end{itemize}}
+\end{row}
+\begin{row}
+\cell[valign=top, halign=left]{Oranges}
+\cell[valign=top, halign=left]{$2.10}
+\cell[valign=top, halign=left]{\begin{itemize}
+\item{cures scurvy}
+\item{tasty}
+\end{itemize}}
+\end{row}
+\end{ptable}
+\caption{Sample grid table.}
+\end{table}
+
+Grid table with alignments:
+
+\begin[cols=30%lw 30%lw 40%lw, header=true]{ptable}
+\begin[background=#eee]{row}
+\cell[valign=middle, halign=right]{Right}
+\cell[valign=middle, halign=left]{Left}
+\cell[valign=middle, halign=center]{Centered}
+\end{row}
+\begin{row}
+\cell[valign=top, halign=right]{Bananas}
+\cell[valign=top, halign=left]{$1.34}
+\cell[valign=top, halign=center]{built-in wrapper}
+\end{row}
+\end{ptable}
+
+Headerless grid table with alignments.
+
+\begin[cols=30%lw 30%lw 40%lw]{ptable}
+\begin{row}
+\cell[valign=top, halign=right]{Right}
+\cell[valign=top, halign=left]{Left}
+\cell[valign=top, halign=center]{Centered}
+\end{row}
+\end{ptable}
+
+\subsubsection[marker=pipe-tables]{Pipe tables}
+
+\begin{table}
+\begin[cols=25%lw 25%lw 25%lw 25%lw, header=true]{ptable}
+\begin[background=#eee]{row}
+\cell[valign=middle, halign=right]{Right}
+\cell[valign=middle, halign=left]{Left}
+\cell[valign=middle, halign=left]{Default}
+\cell[valign=middle, halign=center]{Center}
+\end{row}
+\begin{row}
+\cell[valign=top, halign=right]{12}
+\cell[valign=top, halign=left]{12}
+\cell[valign=top, halign=left]{12}
+\cell[valign=top, halign=center]{12}
+\end{row}
+\begin{row}
+\cell[valign=top, halign=right]{123}
+\cell[valign=top, halign=left]{123}
+\cell[valign=top, halign=left]{123}
+\cell[valign=top, halign=center]{123}
+\end{row}
+\begin{row}
+\cell[valign=top, halign=right]{1}
+\cell[valign=top, halign=left]{1}
+\cell[valign=top, halign=left]{1}
+\cell[valign=top, halign=center]{1}
+\end{row}
+\end{ptable}
+\caption{Demonstration of a pipe table.}
+\end{table}
+
+\subsection[marker=raw-blocks]{Raw blocks}
+
+Raw blocks are Pandoc’s way to pass native content to the underlying processor.
+This converter therefore supports a \code{\{=sile\}} annotation on code blocks, to pass
+through their content in SILE language, as shown below.
+
+For instance, this sentence is typeset in a \em{raw block}, in SILE language.
+
+Likewise, on an inline content: \em{idem.}
+
+It also supports \code{\{=sile-lua\}} to pass Lua code, as in a SILE \code{\\script}. This is just
+a convenience compared to the preceding one, but it allows you to exactly type
+its content as if it was in a code block (i.e. without having to bother wrapping
+it in a script).
+
+\script{SILE.call("em", {}, { 'This' })
+SILE.typesetter:typeset(" is called from Lua.")}
+
+\subsection[marker=code]{Code}
+
+Here’s a Lua code sample:
+
+\begin[type=codehighlight, format=lua]{raw}
+SILE.registerCommand("section", function (options, content)
+  -- Registering a sectioning command is as simple as that with
+  -- our styles and sectioning packages.
+  options.style = "sectioning:section"
+  SILE.call("sectioning", options, content)
+end, "Begin a new section.")
+\end{raw}
+
+
+And a Python one:
+
+\begin[type=codehighlight, format=python]{raw}
+import time
+# Quick, count to ten!
+for i in range(10):
+    # (but not *too* quick)
+    time.sleep(0.5)
+    print(i)
+\end{raw}
+
+
+\subsection[marker=custom-styles]{Custom styles}
+
+The converter support the \code{\{custom-style="..."\}} syntax for custom styles.
+If such a named style exists, it is applied.
+
+Here is some line block marked as “Poetry”:
+
+\begin[name=Poetry, discardable=true]{style:apply:paragraph}
+I met a lady in the meads,\par
+\kern[width=1em]Full beautiful—a faery’s child,\par
+Her hair was long, her foot was light,\par
+\kern[width=1em]And her eyes were wild.\par
+\end{style:apply:paragraph}
+
+And some inline \style:apply[name=Warning, discardable=true]{message}, marked as “Warning”.
+
+Obviously, these styles do not exist by default, so you have to provide a “style
+declaration” in some external script, and ensure it is loaded when SILE processes
+the document. Refer to the \code{scripts} entry in the \pdf:link[dest=ref:metadata-preamble]{metadata preamble} (\ref[marker=metadata-preamble]{}).
+
+\subsection[marker=bibliography-citations]{Bibliography citations}
+
+Support is minimal in this version. At some later stage, we may want to
+consider using SILE’s bibliography package… For now, the converter just
+extracts the information and tries to present it decently.
+
+Here is a “cite” (Doe 2011, 67), another (Doe 2011) and
+yet another (Doe 2011, 67; Smith 2012, 234–256).
+
+\subsection[marker=metadata-preamble]{Metadata preamble}
+
+Pandoc provides various ways to specify document metadata (e.g., with a YAML metadata block).
+This converter supports the following properties.
+
+\subsubsection[marker=general-properties]{General properties}
+
+These document-wise properties are common with other converters:
+
+\begin{itemize}
+\item{\code{papersize}: defaults to “a4”;}
+\item{\code{lang}: a BCP 47 language identifier such as “en-US”; only the country code is used by SILE and defaults to “en”;}
+\item{\code{dir}: writing direction (either “ltr” or “rtl”, ignored otherwise, and left absent if unspecified —implying “ltr”).}
+\end{itemize}
+
+\subsubsection[marker=pdf-metadata-properties]{PDF metadata properties}
+
+These properties, also supported by several other converters, will here be used as PDF metadata.
+
+\begin{itemize}
+\item{\code{title}: a string;}
+\item{\code{author}: a string or list;}
+\item{\code{subject}: a string;}
+\item{\code{keywords}: a string or list.}
+\end{itemize}
+
+\subsubsection[marker=sile-specific-properties]{SILE-specific properties}
+
+SILE-specific formatting and layout settings are structured in a \code{sile} object property,
+which can contain:
+
+\begin{itemize}
+\item{\code{class}: the SILE class to use (for now, defaulting to \code{omibook})}
+\item{\code{font-family}: the main font family, as a string or a list —in the latter case, the
+additional fonts are declared as fallbacks for characters that would not be found in
+the main font;}
+\item{\code{font-size}: the main font size, as a number or string (which can refer to a SILE unit);}
+\item{\code{scripts}: a list of additional scripts that SILE will load after the main packages
+—so that you can override some definitions, provide custom styles, etc.}
+\end{itemize}
+
+There are several reasons for introducing a \code{sile} namespace, rather than using the same
+options as other Pandoc writers (e.g. a \code{mainfont} entry, as used by HTML or LaTeX):
+
+\begin{itemize}
+\item{To avoid cluttering inappropriate properties at a global level..}
+\item{To support more things than some writers (e.g. font fallbacks),}
+\item{To be able to select different settings for SILE and other writers (e.g. \code{documentclass} for LaTeX
+and \code{sile.class} have no reason to contain the same thing… That could occur for very basic
+class names which are likely to exist in both solutions —say, perhaps “book”— but that’s all);}
+\item{To avoid the mess with the loose \em{ad hoc} properties from some other writers (e.g. LaTeX’s \code{monofont},
+\code{sansfont}, etc. are somewhat ill-designed). We use the class and style paradigms with more elegance.}
+\end{itemize}
+
+\section[marker=unsupported-elements]{Unsupported elements}
+
+\subsection[marker=math-equations]{Math equations}
+
+Inline math equation: NO SUPPORT YET (\\omega = d\\phi / dt).
+Display math should get its own line like so:
+
+NO SUPPORT YET (I = \\int \\rho R^\{2\} dV)
+
+\subsection[marker=extensions-and-other-features]{Extensions and other features…}
+
+Several topics are left to a later version of this converter:
+
+\begin{itemize}
+\item{Pandoc templates, so we can make some Pandoc CLI options work, such as \code{-s} (standalone), \code{--toc}, etc.}
+\item{“Standalone mode” will actually be necessary to better control some features, e.g. metatada etc.
+should not be overridden is the output is intended to be used not as a standalone document but as
+an include file in some other document.}
+\item{Table of contents (and probably too, lists of figures/tables).}
+\item{Paragraph indents. The converter currently sets \code{\\neverindent}. Paragraph skips too should
+probably be addressed. There are some (small but annoying) challenges there, so we went on
+without them —it’s all about reaching the low-hanging fruits again, see \em{supra}.}
+\end{itemize}
+
+\section[marker=towards-a-conclusion]{Towards a conclusion?}
+
+\begin[name=FramedPara, discardable=true]{style:apply:paragraph}
+This is but a quick proof of concept…
+
+So, what should we do now?
+\end{style:apply:paragraph}
+
+If you read so far, it’s maybe up to you, my gentle reader, to provide feedback
+and help pushing this experiment farther.
+\pdf:metadata[key=Title, value="Markdown to SILE conversion with Pandoc"]%
+\pdf:metadata[key=Subject, value="Converters"]%
+\pdf:metadata[key=Author, value="Didier Willis; John Doe"]%
+\pdf:metadata[key=Keywords, value="SILE; Markdown; Pandoc"]%
+\end{document}
+
