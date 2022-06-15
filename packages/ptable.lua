@@ -1,7 +1,7 @@
 --
 -- A table package for SILE
 -- Or rather "parbox-based tables", using the parbox package as a building block.
--- 2021 Didier Willis
+-- 2021-2022 Didier Willis
 -- License: MIT
 --
 SILE.require("packages/parbox")
@@ -411,15 +411,10 @@ SILE.registerCommand("ptable", function (options, content)
   SILE.call("medskip")  -- Also I don't like much hard-coded skips...
 end)
 
--- WORKAROUND FIXME
--- ptable:cell:hook was intended (as documented) to be a no-op hook
--- for user parties to adapt.
--- E.g. styles-enabled class or packages could use it to implement
--- cell styles, eventually.
--- For Markdown conversion, however, we'd like to at least support cell
--- horizontal alignement: we provide here basic support for an "halign"
--- attribute in line with the "valign" vertical cell/row alignment
--- THIS IS A SHORT TERM SOLUTION
+-- The default implementation adds an "halign" option for horizontal
+-- cell alignment, which is handy e.g. for Markdown support.
+-- Other packages and classes could redefine this hook to support
+-- their own options (such as cell styles etc.)
 SILE.registerCommand("ptable:cell:hook", function(options, content)
   if options.halign == "center" then
     SILE.call("center", {}, content)
@@ -455,7 +450,7 @@ influenced by some of them, does not try to mimic a specific one in particular.
 \novbreak
 
 The tables proposed here are based on pre-determined column widths, provided
-via the mandatory \autodoc:parameter{cols} option of the \autodoc:command{\ptable} environment.
+via the mandatory \autodoc:parameter{cols} option of the \autodoc:environment{ptable} environment.
 It implies that the column widths do not automatically adapt to the content,
 but inversely that the content will be line-broken etc. to horizontally fit in
 fixed-width cells.
@@ -675,8 +670,7 @@ Each cell being a mini-frame, it resets its settings to their top-level (i.e. do
 Cell content and options, though, are passed to a \autodoc:command{\ptable:cell:hook}.
 Would you want to define specific styling for some cells, you can re-define that command to
 achieve it\footnote{The default implementation supports an \autodoc:parameter{halign}
-option for horizontal cell alignement (left, right or center, or justified if not set),
-but this may change in a future release.}.
+option for horizontal cell alignement (left, right or center, or justified if not set).}.
 
 \smallskip
 
