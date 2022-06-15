@@ -411,8 +411,27 @@ SILE.registerCommand("ptable", function (options, content)
   SILE.call("medskip")  -- Also I don't like much hard-coded skips...
 end)
 
-SILE.registerCommand("ptable:cell:hook", function (_, content)
-  SILE.process(content)
+-- WORKAROUND FIXME
+-- ptable:cell:hook was intended (as documented) to be a no-op hook
+-- for user parties to adapt.
+-- E.g. styles-enabled class or packages could use it to implement
+-- cell styles, eventually.
+-- For Markdown conversion, however, we'd like to at least support cell
+-- horizontal alignement: we provide here basic support for an "halign"
+-- attribute in line with the "valign" vertical cell/row alignment
+-- THIS IS A SHORT TERM SOLUTION
+SILE.registerCommand("ptable:cell:hook", function(options, content)
+  if options.halign == "center" then
+    SILE.call("center", {}, content)
+  elseif options.halign == "left" then
+    SILE.call("noindent")
+    SILE.call("raggedright", {}, content)
+  elseif options.halign == "right" then
+    SILE.call("noindent")
+    SILE.call("raggedleft", {}, content)
+  else
+    SILE.process(content)
+  end
 end)
 
 return {
@@ -653,9 +672,11 @@ merged?}
 \novbreak
 
 Each cell being a mini-frame, it resets its settings to their top-level (i.e. document) values.
-Cell content and options, though, are passed to a \autodoc:command{\ptable:cell:hook} which is just
-a pass-through command by default. Would you want to define specific styling for some cells,
-you can re-define that command to achieve it.
+Cell content and options, though, are passed to a \autodoc:command{\ptable:cell:hook}.
+Would you want to define specific styling for some cells, you can re-define that command to
+achieve it\footnote{The default implementation supports an \autodoc:parameter{halign}
+option for horizontal cell alignement (left, right or center, or justified if not set),
+but this may change in a future release.}.
 
 \smallskip
 
