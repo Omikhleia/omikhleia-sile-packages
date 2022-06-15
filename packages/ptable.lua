@@ -395,6 +395,9 @@ SILE.registerCommand("ptable", function (options, content)
           end
           -- end header row logic.
           SILE.typesetter:leaveHmode() -- Now we should be allowed to output to page, if it wants to.
+          if SU.boolean(options.header, false) and iRow == 1 then
+            SILE.call("novbreak") -- We wouldn't a page break just after the initial header only.
+          end
           iRow = iRow + 1
         else
             SU.error("Unexpected '"..content[i].command.."' in table")
