@@ -135,7 +135,9 @@ SILE.registerCommand("footnote", function (options, content)
   SILE.settings.popState()
   SILE.typesetter = oldT
   insertions.exports:insert("footnote", material)
-  SILE.scratch.counters.footnote.value = SILE.scratch.counters.footnote.value + 1
+  if not (options.mark) then
+    SILE.scratch.counters.footnote.value = SILE.scratch.counters.footnote.value + 1
+  end
 end, "Typeset a footnote (main command for end-users)")
 
 return {
