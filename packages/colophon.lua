@@ -114,7 +114,7 @@ local function getFigureScale(options)
   return scale
 end
 
-local function circleDecoration(options)
+local function circleDecoration(options, pbox)
   -- Retrieve the things we stored when line breaking occurred.
   local radius = internalScratch.radius or SU.error("Oops, broken implementation")
 
@@ -126,10 +126,10 @@ local function circleDecoration(options)
   if scale < 1 then
     SU.error("figurescale must be greater than 1")
   end
-  -- We are vertically aligned with the paragraph. In addition to a scaled radius raise,
+  -- We are vertically aligned with the box baseline. In addition to a scaled radius raise,
   -- we have also that 0.5ex or so offset that we added to be sure the first line would
   -- have some width...
-  local raise = - internalScratch.offset - 2 * radius + radius * (1 - scale)
+  local raise = pbox.height - internalScratch.offset - 2 * radius + radius * (1 - scale)
 
   -- Now we should have everything to push the decoration as a zero-sized box,
   -- scaled and moved over the shaped paragraph.
@@ -220,7 +220,7 @@ SILE.registerCommand("colophon", function (options, content)
 
   if SU.boolean(options.decoration, false) then
     SILE.typesetter:pushExplicitVglue(SILE.nodefactory.vglue(SILE.length(offset)))
-    circleDecoration(options)
+    circleDecoration(options, pbox)
   end
 
   SILE.typesetter:pushHbox(pbox)
