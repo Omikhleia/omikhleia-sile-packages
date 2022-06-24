@@ -1,5 +1,6 @@
 \begin[papersize=6in x 9in, class=omibook]{document}
-\script[src=hacks/hack-1361-1362]% HACKS/WORKAROUNDS FOR SILE 0.12.x BUGS
+\script[src=hacks/hack-1361]% HACKS/WORKAROUNDS FOR SILE 0.12.x BUGS
+\script[src=hacks/hack-1362]% HACKS/WORKAROUNDS FOR SILE 0.12.x BUGS
 \script[src=packages/autodoc]
 \script[src=packages/autodoc-extras]
 \script[src=packages/url]
