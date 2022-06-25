@@ -56,7 +56,7 @@ A paragraph after a skip.
 
 % Proper vertical baseline aligment check when the parbox content is bigger
 % that the strut (due to font change, images, etc. = emulated here with hrules).
-6.
+5.
 \parbox[valign=top, strut=character, width=25%fw, border=0.5pt]{Lorem
   ipsum \hrule[height=2em, width=2pt]\hrule[depth=1em, width=2pt]\par
   Sit \hrule[height=1em, width=2pt]\hrule[depth=1.5em, width=2pt]}%

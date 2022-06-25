@@ -1,10 +1,10 @@
-\begin{document}
+\begin[papersize=a6]{document}
 \nofolios
 \script[src=packages/ptable]
 % Table with cell border and padding configuration at cell level:
 % This table example is in the LaTeX booktabs package, let us try to reproduce it.
 
-\center{\parbox[width=40%fw, strut=character]{%
+\center{\parbox[width=80%fw, strut=character]{%
 \begin[cols=34%fw 33%fw 33%fw, cellborder=0]{ptable}
   \begin{row}
     \cell[span=2,border=0.8pt 0.4pt 0 0]{\center{Item}}
