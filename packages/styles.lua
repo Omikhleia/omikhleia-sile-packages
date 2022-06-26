@@ -161,12 +161,15 @@ local function dumpStyle (name)
   return textspec
 end
 
-local function resolveStyle (name)
+local function resolveStyle (name, discardable)
   local stylespec = SILE.scratch.styles.specs[name]
-  if not stylespec then SU.error("Style '"..name.."' does not exist") end
+  if not stylespec then
+    if not SU.boolean(discardable, false) then SU.error("Style '"..name.."' does not exist") end
+    return {}
+  end
 
   if stylespec.inherit then
-    local inherited = resolveStyle(stylespec.inherit)
+    local inherited = resolveStyle(stylespec.inherit, discardable)
     -- Deep merging the specification options
     local sty = pl.tablex.deepcopy(stylespec.style)
     for k, v in pairs(inherited) do
@@ -185,7 +188,7 @@ end
 
 SILE.registerCommand("style:apply", function (options, content)
   local name = SU.required(options, "name", "style:apply")
-  local styledef = resolveStyle(name)
+  local styledef = resolveStyle(name, options.discardable)
 
   styleForFont(styledef, content)
 end, "Applies a named style to the content.")
@@ -194,7 +197,7 @@ end, "Applies a named style to the content.")
 
 SILE.registerCommand("style:apply:paragraph", function (options, content)
   local name = SU.required(options, "name", "style:apply:paragraph")
-  local styledef = resolveStyle(name)
+  local styledef = resolveStyle(name, options.discardable)
   local parSty = styledef.paragraph
 
   if parSty then
@@ -604,6 +607,10 @@ To apply a character style to some content, one just has to do:
 \\style:apply[name=\doc:args{name}]\{\doc:args{content}\}
 \end{doc:codes}
 
+The command raises an error if the named style (or an inherited style) does
+not exist. You can specify \autodoc:parameter{discardable=true} if you wish
+it to be ignored, without error.
+
 \P{Applying a paragraph style.}
 
 Likewise, the following command applies the whole paragraph style to its content, that is:
@@ -638,7 +645,7 @@ of style \doc:args{name} to new \doc:args{content}, but saving the previous defi
 From now on, style {\\\doc:args{name}} corresponds to the new definition,
 while \doc:code{\\\doc:args{saved-name}} corresponds to previous definition, whatever it was.
 
-Another option is to add the \doc:code{inherit} option to true, as show below:
+Another option is to add the \doc:code{inherit} option to true, as shown below:
 \begin{doc:codes}
 \\style:redefine[name=\doc:args{name}, as=\doc:args{saved-name}, inherit=true]\{\doc:args{content}\}
 \end{doc:codes}

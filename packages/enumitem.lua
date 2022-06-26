@@ -218,7 +218,7 @@ local unichar = function (str)
   return nil
 end
 
-local doItem = function (_, content)
+local doItem = function (options, content)
   local enumStyle = content._enumitem_.style
   local styleName = content._enumitem_.styleName
   local counter = content._enumitem_.counter
@@ -243,11 +243,12 @@ local doItem = function (_, content)
           SILE.typesetter:typeset(enumStyle.after)
         end
       else
-        local cp = unichar(enumStyle.bullet)
+        local bullet = options.bullet or enumStyle.bullet
+        local cp = unichar(bullet)
         if cp then
           SILE.typesetter:typeset(luautf8.char(cp))
         else
-          SILE.typesetter:typeset(enumStyle.bullet)
+          SILE.typesetter:typeset(bullet)
         end
       end
     end)
@@ -280,7 +281,7 @@ local doItem = function (_, content)
   SILE.process(content)
 end
 
-local doNestedList = function (listType, _, content)
+local doNestedList = function (listType, options, content)
   -- variant
   local variant = SILE.settings.get("list."..listType..".variant")
   local listAltStyleType = variant and listType.."-"..variant or listType
@@ -291,6 +292,17 @@ local doNestedList = function (listType, _, content)
   -- styling
   local styleName = checkEnumStyleName("list:"..listAltStyleType..":"..depth, "list:"..listType..":"..depth)
   local enumStyle = resolveEnumStyleDef(styleName)
+  -- options may override the enumeration style
+  if enumStyle.display then
+    if options.before or options.after then
+      -- for before/after, don't mix default style and options
+      enumStyle.before = options.before or ""
+      enumStyle.after = options.after or ""
+    end
+    if options.display then enumStyle.display = options.display end
+  else
+    enumStyle.bullet = options.bullet or enumStyle.bullet
+  end
 
   -- indent
   local baseIndent = (depth == 1) and SILE.settings.get("document.parindent").width:absolute() or SILE.measurement("0pt")
@@ -308,7 +320,7 @@ local doNestedList = function (listType, _, content)
     local lskip = SILE.settings.get("document.lskip") or SILE.nodefactory.glue()
     SILE.settings.set("document.lskip", SILE.nodefactory.glue(lskip.width + (baseIndent + listIndent)))
 
-    local counter = 0
+    local counter = options.start and (SU.cast("integer", options.start) - 1) or 0
     for i = 1, #content do
       if type(content[i]) == "table" then
         if content[i].command == "item" then
@@ -438,6 +450,12 @@ and the package comes along with a pre-defined “alternate” variant using the
 obviously French…} A good typographer is not expected to switch variants in the middle of a list, so the effect
 has not been checked. Be a good typographer.
 
+Besides using styles, you can explicitly select a bullet symbol of your choice to be used, by specifying
+the options \autodoc:parameter{bullet=<character>}, on the \autodoc:environment{itemize} environment.
+
+You can also force a specific bullet character to be used on a specific item with
+\autodoc:command{\item[bullet=<character>]}.
+
 \smallskip
 
 \em{Enumerations.}
@@ -447,6 +465,9 @@ The \autodoc:environment{enumerate} environment initiates an enumeration.
 Each item shall, again, be wrapped in an \autodoc:command{\item}
 command. This environment too is regarded as a structure, so the same rules
 as above apply.
+
+The enumeration starts at one, unless you specify the \autodoc:parameter{start=<integer>}
+option (a numeric value, regardless of the display format).
 
 \begin{enumerate}
     \item{Lorem}
@@ -499,6 +520,11 @@ you certainly guessed it already, the \autodoc:setting{list.enumerate.variant} s
 
 The alternate styles are expected to be \doc:code{list:enumerate-\doc:args{variant}:\doc:args{level}},
 how imaginative, and the package comes along with a pre-defined “alternate” variant, just because.
+
+Besides using styles (or defaulting to them), you can also explicitly select the display type
+(format) of the values (as “arabic”, “roman”, etc.), the text prepended or appended
+to them, by specifying the options \autodoc:parameter{display=<display>}, \autodoc:parameter{before=<string>},
+and \autodoc:parameter{after=<string>} to the \autodoc:environment{enumerate} environment.
 
 \smallskip
 

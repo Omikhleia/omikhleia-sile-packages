@@ -1,5 +1,7 @@
-\begin{document}
+\begin[papersize=a6]{document}
 \nofolios
+\neverindent
+\font[size=9pt]
 \script[src=packages/ptable]
 % Simple table (same as test 002) with additional cell hooks
 
@@ -14,7 +16,7 @@
   end)
 }
 
-\begin[cols=20%fw 15%fw 15%fw 50%fw]{ptable}
+\begin[cols=20%fw 16%fw 16%fw 48%fw]{ptable}
   \begin[background=#ddd]{row}
     \cell{Day}
     \begin[span=3]{celltable}

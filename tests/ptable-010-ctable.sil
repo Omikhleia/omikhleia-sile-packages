@@ -1,4 +1,4 @@
-\begin{document}
+\begin[papersize=a6]{document}
 \nofolios
 \script[src=packages/ptable]
 \script[src=packages/raiselower]
@@ -7,7 +7,7 @@
 
 \define[command=mysuper]{\raise[height=0.77ex]{\font[size=1.414ex]{\process}}}
 
-\center{\parbox[width=40%fw, strut=character]{%
+\center{\parbox[width=80%fw, strut=character]{%
 \begin[cols=20%fw 40%fw 40%fw, cellborder=0]{ptable}
   \begin{row}
     \cell[border=0.8pt 0.4pt 0 0]{}
@@ -30,7 +30,7 @@
 % Again done differently.
 
 \center{%
-\begin[cols=8%fw 16%fw 16%fw, cellborder=0]{ptable}
+\begin[cols=16%fw 32%fw 32%fw, cellborder=0]{ptable}
   \begin{row}
     \cell[border=0.8pt 0.4pt 0 0]{}
     \cell[border=0.8pt 0.4pt 0 0, style=center]{H(Mu) + F\mysuper{2}}
