@@ -1,0 +1,31 @@
+\begin[papersize=a6]{document}
+\nofolios
+\script[src=packages/experimental/charts]
+
+\noindent{}1.
+\font[family=Lato, weight=300]{\charts:bargraph[csvfile=examples/data1.csv]} %
+\font[family=Amatic SC]{\charts:bargraph[csvfile=examples/data1.csv, rough=true]}
+
+\noindent{}2.
+\font[family=Amatic SC]{\charts:bargraph[csvfile=examples/data1.csv, sort=ascending, rough=true]} %
+\font[family=Lato, weight=300]{\charts:bargraph[csvfile=examples/data1.csv, sort=descending, rough=false]}
+
+\noindent{}3A.
+\font[family=Lato, weight=300]{\charts:bargraph[csvfile=examples/data2.csv, sort=descending, rough=false]}
+
+\noindent{}3B.
+\font[family=Amatic SC]{\charts:bargraph[csvfile=examples/data2.csv, rough=true]}
+
+\noindent{}4A.
+\font[family=Amatic SC]{\charts:bargraph[csvfile=examples/data3.csv, rough=true]}
+
+\noindent{}4B.
+\font[family=Lato, weight=300]{\charts:bargraph[csvfile=examples/data3.csv]}
+
+\noindent{}5.
+\font[family=Amatic SC]{\charts:bargraph[csvfile=examples/data-elections.csv, rough=true, sort=descending]}
+
+\noindent{}6.
+\font[family=Amatic SC]{\charts:bargraph[csvfile=examples/data4.csv, rough=true, sort=none]}
+
+\end{document}
