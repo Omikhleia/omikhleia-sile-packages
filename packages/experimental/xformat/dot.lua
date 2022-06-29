@@ -4,7 +4,7 @@ local function init(class, _)
     SILE.require("packages/converters")
     SILE.doTexlike([[%
 \converters:register[from=.dot,to=.png,command=dot -Tpng -Gdpi=300 $SOURCE -o$TARGET]
-    ]])
+]])
   else
     class:loadPackage("image")
     class:loadPackage("converters")
