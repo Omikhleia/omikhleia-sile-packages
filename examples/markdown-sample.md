@@ -465,6 +465,32 @@ for i in range(10):
     print(i)
 ~~~
 
+### DOT graphs
+
+All the above examples specified the programming language after the fenced code block marker (e.g. `lua`).
+For the DOT graph language, this converter also supports an extended syntax `{.dot width=... height=...}`.
+When a width and/or a height are specified, the graph is included as an image, instead of the corresponding
+code.
+
+```{.dot width=50%pw}
+graph {
+    rankdir=LR;
+    a -- { b c d }; b -- { c e }; c -- { e f }; d -- { f g }; e -- h;
+    f -- { h i j g }; g -- k; h -- { o l }; i -- { l m j }; j -- { m n k };
+    k -- { n r }; l -- { o m }; m -- { o p n }; n -- { q r };
+    o -- { s p }; p -- { s t q }; q -- { t r }; r -- t; s -- z; t -- z;
+    { rank=same; b, c, d }
+    { rank=same; e, f, g }
+    { rank=same; h, i, j, k }
+    { rank=same; l, m, n }
+    { rank=same; o, p, q, r }
+    { rank=same; s, t }
+}
+```
+
+Of course, this feature requires the `dot` converter to be available on your host system, and it also
+creates image versions of the graph in your document directory.
+
 ### Custom styles
 
 The converter support the `{custom-style="..."}` syntax for custom styles.

@@ -113,6 +113,7 @@ function Doc (body, metadata, variables)
   add('\\script[src=packages/verbatim]')
   add('\\script[src=packages/svg]')
   add('\\script[src=packages/experimental/codehighlighter]')
+  add('\\script[src=packages/experimental/xformat/dot]')
   add('\\script[src=hacks/rules-strike-fill]% HACK') -- HACK
 
   local scripts = type(metadata.sile) == "table" and metadata.sile.scripts
@@ -332,8 +333,17 @@ function LineBlock (ls)
 end
 
 function CodeBlock (s, attr)
+  -- if fenced block is marked ".dot render=true", use the dot to image converter
+  if attr.class == "dot" and (attr.width or attr.height) then
+    local size = (attr.width and ", width="..attr.width or "") 
+       .. (attr.height and ", width="..attr.height or "")
+    return "\\begin{center}\n\\begin[type=dot"..size.."]{raw}\n"
+      .. s
+      .. "\n\\end{raw}\n\\end{center}\n"
+  end
+  -- Othewise, show the code using syntax highlighting
   return "\\begin[type=codehighlight, format=".. attr.class.."]{raw}\n" --
-    .. s --.. escape(s) ..
+    .. s
     .. "\n\\end{raw}\n"
 end
 
