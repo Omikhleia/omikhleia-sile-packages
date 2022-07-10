@@ -17,8 +17,8 @@ local RoughGenerator = SILE.require("packages/graphics/rough").RoughGenerator
 
 local _r = function(number)
   -- Lua 5.3+ formats floats as 1.0 and integers as 1
-  -- This is annoying.
-  return math.floor(number) == number and math.floor(number) or number
+  -- Also some PDF readers do not like double precision.
+  return math.floor(number) == number and math.floor(number) or tonumber(string.format("%.5f", number))
 end
 
 -- Builds a PDF graphics color (stroke or fill) from a SILE parsed color.
