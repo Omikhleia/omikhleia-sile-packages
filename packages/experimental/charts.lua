@@ -165,7 +165,7 @@ local function measureBiggestValueDimens (data)
   local maxHeight = SILE.length()
   local minValue, maxValue
   local numberOfCols = 0
-
+  local totalValue = 0 -- FIXME only needed for pie charts + wrong for it if there are multiple columns :(
   SILE.typesetter:pushState()
   SILE.settings.temporarily(function ()
     SILE.settings.set("current.parindent", SILE.length())
@@ -189,11 +189,12 @@ local function measureBiggestValueDimens (data)
         if not maxValue or v > maxValue then
           maxValue = v
         end
+        totalValue = totalValue + v
       end
     end
     SILE.typesetter:popState()
   end)
-  return maxWidth, maxHeight, minValue, maxValue, numberOfCols
+  return maxWidth, maxHeight, minValue, maxValue, numberOfCols, totalValue
 end
 
 -- DATA READING
@@ -209,7 +210,7 @@ local function readCsvFile (file)
   end
 
   local numberOfBars = #data
-  local maxValueWidth, maxValueHeight, minValue, maxValue, numberOfCols = measureBiggestValueDimens(data)
+  local maxValueWidth, maxValueHeight, minValue, maxValue, numberOfCols, totalValue = measureBiggestValueDimens(data)
   local maxCatWidth, maxCatHeight = measureBiggestCategoryDimens(data)
   local maxHeadWidth, maxHeadHeight = measureBiggestHeadersDimens(data)
   local props = {
@@ -223,6 +224,7 @@ local function readCsvFile (file)
     maxValueHeight = maxValueHeight,
     minValue = minValue,
     maxValue = maxValue,
+    totalValue = totalValue
   }
   return data, props
 end
@@ -438,9 +440,6 @@ SILE.registerCommand("charts:bargraph:internal", function(options, _)
   -- FIXME Ugly PoC... This needs a good refactoring!!!
   local block = props.numberOfCols > 2 and bargraphCategoryBlock or function(_,_,fn) fn() end
   for row, v in ipairs(data) do
-    SILE.call("hbox", {
-      padding = 0
-    }, function()
       block(v[1], props, function()
         SILE.call("hbox", {
           padding = 0
@@ -477,11 +476,106 @@ SILE.registerCommand("charts:bargraph:internal", function(options, _)
           end
         end)
       end)
-    end)
     if row ~= props.numberOfBars then
       SILE.call("kern", { width = barOutterSep })
     end
   end
+end)
+
+SILE.registerCommand("charts:piechart:internal", function(options, _)
+  local csvfile = SU.required(options, "csvfile", "piechart")
+  local data, props = readCsvFile(csvfile)
+
+  local graphHeight = SILE.length("4em") -- FIXME
+
+  -- Sorting and coloring
+  local colorFn
+  if options.sort == "nxone" then
+    -- no sorting
+    colorFn = function(h, s, l, _)
+      return hslToRgb(h, s, l)
+    end
+  elseif not options.sort or options.sort == "none" then
+    table.sort(data, function(a, b)
+      return (tonumber(a[props.numberOfCols]) or 0) > (tonumber(b[props.numberOfCols]) or 0)
+    end)
+    colorFn = function(h, s, l, index)
+      local cscale = (1.0 - l) / props.numberOfBars
+      return hslToRgb(h, s, l + cscale * (index - 1))
+    end
+  elseif options.sort == "ascending" then
+    table.sort(data, function(a, b)
+      return (tonumber(a[props.numberOfCols]) or 0) < (tonumber(b[props.numberOfCols]) or 0)
+    end)
+    colorFn = function(h, s, l, index)
+      local cscale = (1.0 - l) / props.numberOfBars
+      return hslToRgb(h, s, l + cscale * (props.numberOfBars - index))
+    end
+  else
+    SU.error("Invalid sort option '" .. options.sort .. "' for bargraph")
+  end
+
+  props.valueMaxRange = props.maxValue - props.minValue
+  if props.valueMaxRange == 0 then
+    SU.error("Data value range for graph is null")
+  end
+
+  local bordercolor = SILE.colorparser(options.bordercolor or "#a0a0a0")
+
+  local block = props.numberOfCols > 2 and bargraphCategoryBlock or function(_,_,fn) fn() end
+
+  local start = math.pi/7
+
+  SILE.typesetter:pushHbox({
+    width = graphHeight:absolute(),
+    height = graphHeight:absolute(),
+    depth = SILE.length(),
+    outputYourself = function(self, typesetter, line)
+      local outputWidth = SU.rationWidth(self.width, self.width, line.ratio)
+      local saveX = typesetter.frame.state.cursorX
+      local saveY = typesetter.frame.state.cursorY
+
+    local paths = {}
+    for row, v in ipairs(data) do
+      for col = 2, 2 do -- props.numberOfCols do
+        local hue = 1 / 3
+        local fillcolor = colorFn(hue, 0.4, 0.5, row)
+        local value = tonumber(v[col]) or 0
+        local key
+        local maxKeyHeight, maxKeyWidth
+        if props.numberOfCols < 3 then
+          key = v[1]
+          maxKeyHeight = props.maxCatHeight
+          maxKeyWidth = props.maxCatWidth
+        else
+          key = data.original_fieldnames[col]
+          maxKeyHeight = props.maxHeadHeight
+          maxKeyWidth = props.maxHeadWidth
+        end
+
+        local painter = PathRenderer(options.rough and RoughPainter() or nil)
+
+        local angle = value / props.totalValue * 2 * math.pi
+        local ro = row == 1 and 1 or 0
+        local midA = (start+angle/2)
+            local path = painter:pieSector(ro * math.cos(midA), -ro*math.sin(midA), outputWidth:tonumber(), outputWidth:tonumber(), start, angle, {
+              fill = fillcolor,
+              stroke = bordercolor,
+              strokeWidth = 0.3,
+              preserveVertices = true
+              -- disableMultiStroke = true,
+            })
+            paths[#paths+1] = path
+
+        start = start + angle
+      end
+    SILE.outputter:drawSVG(table.concat(paths, " "), saveX+outputWidth/2, saveY-outputWidth/2, outputWidth, 0, 1)
+    typesetter.frame.state.cursorX = saveX
+    typesetter.frame.state.cursorY = saveY
+    typesetter.frame:advanceWritingDirection(outputWidth)
+    end
+  end
+})
 end)
 
 local function frameWrapper (framed, rough, func)
@@ -501,6 +595,14 @@ SILE.registerCommand("charts:bargraph", function (options, _)
   local framed = SU.boolean(options.framed, true)
   frameWrapper(framed, rough, function ()
     SILE.call("charts:bargraph:internal", options)
+  end)
+end)
+
+SILE.registerCommand("charts:piechart", function (options, _)
+  local rough = SU.boolean(options.rough, false)
+  local framed = SU.boolean(options.framed, true)
+  frameWrapper(framed, rough, function ()
+    SILE.call("charts:piechart:internal", options)
   end)
 end)
 

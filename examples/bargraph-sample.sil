@@ -30,4 +30,7 @@
 \noindent{}6.
 \font[family=Amatic SC]{\charts:bargraph[csvfile=examples/data4.csv, rough=true, sort=none]}
 
+\noindent{}7.
+\font[family=Roboto Condensed, weight=300]{\charts:piechart[csvfile=examples/data-pie.csv]}
+
 \end{document}

@@ -13,6 +13,8 @@
 
 local RoughGenerator = SILE.require("packages/graphics/rough").RoughGenerator
 
+local arcToBezierCurves = require("packages.graphics.arcs")
+
 -- HELPERS
 
 local _r = function(number)
@@ -32,7 +34,7 @@ local makeColorHelper = function(color, stroke)
     colspec = table.concat({ _r(color.c), _r(color.m), _r(color.y), _r(color.k) }, " ")
     colop = stroke and "K" or "k"
   elseif color.l then -- Grayscale
-    colspec = color.l
+    colspec = _r(color.l)
     colop = stroke and "G" or "g"
   else
     SU.error("Invalid color specification")
@@ -44,7 +46,7 @@ end
 -- and a set of relative segments which can be either lines (2 coords)
 -- or bezier curves (6 segments).
 local makePathHelper = function(x, y, segments)
-  local paths = { { x, y, "m" } }
+  local paths = { { _r(x), _r(y), "m" } }
   for i = 1, #segments do
     local s = segments[i]
     if #s == 2 then
@@ -59,6 +61,29 @@ local makePathHelper = function(x, y, segments)
       y = s[6] + y
     end
   end
+  for i, v in ipairs(paths) do
+    paths[i] = table.concat(v, " ")
+  end
+  return table.concat(paths, " ")
+end
+
+-- FIXME a bit redundant with the previous function, can't we simplify?
+-- Builds a PDF graphics path from a starting position (x, y)
+-- and a set of absolute segments which can be either lines (2 coords)
+-- or bezier curves (6 segments).
+local makeAbsPathHelper = function(x, y, segments)
+  local paths = { { _r(x), _r(y), "m" } }
+  for i = 1, #segments do
+    local s = segments[i]
+    if #s == 2 then
+      -- line
+      paths[#paths + 1] = { _r(s[1]), _r(s[2]), "l" }
+    else
+      -- bezier curve
+      paths[#paths + 1] = { _r(s[1] ), _r(s[2]), _r(s[3]), _r(s[4]), _r(s[5]), _r(s[6]), "c" }
+    end
+  end
+  paths[#paths + 1] =  { _r(x), _r(y), "l" } -- close
   for i, v in ipairs(paths) do
     paths[i] = table.concat(v, " ")
   end
@@ -173,6 +198,19 @@ local DefaultPainter = pl.class({
       options = options
     }
   end,
+  -- Path for a pie sector arc centered on(x, y), with given width,
+  -- height, start angle and angle
+  -- FIXME too specific, we need arcs too without being pie sectors ;)
+  pieSector = function (self, x, y, width, height, startAngle, arcAngle, options)
+    options = options and pl.tablex.union(self.defaultOptions, options) or self.defaultOptions
+    local segments = arcToBezierCurves(x, y, width, height, startAngle, arcAngle)
+
+    return {
+      path = makeAbsPathHelper(x, y, segments),
+      options = options,
+    }
+  end,
+
   draw = function (_, drawable)
     local o = drawable.options
     if o.stroke == "none" then
@@ -222,6 +260,9 @@ local RoughPainter = pl.class({
   end,
   curlyBrace = function ()
     SU.error("Rounded rectangle not implemented in RoughPainter")
+  end,
+  pieSector = function ()
+    SU.error("Pie sector not implemented in RoughPainter")
   end,
   draw = function (self, drawable)
     local sets = drawable.sets or {}
@@ -288,6 +329,10 @@ local PathRenderer = pl.class({
   end,
   curlyBrace = function (self, x1, y1 , x2 , y2, width, thickness, curvyness, options)
     local drawable = self.adapter:curlyBrace( x1, y1 , x2 , y2, width, thickness, curvyness, options)
+    return self.adapter:draw(drawable)
+  end,
+  pieSector = function (self, x, y , w , h, startAngle, arcAngle, options)
+    local drawable = self.adapter:pieSector(x, y, w, h, startAngle, arcAngle, options)
     return self.adapter:draw(drawable)
   end,
 })
