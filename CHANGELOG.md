@@ -17,3 +17,25 @@ Of course, there are several areas that still need some work:
 Yet, a decent-looking 362-page book was produced and published. The milestone thus
 reached has to be marked! Also, from now on, I'll try to respect semantic versioning,
 rather than the wild development we had here before.
+
+## version 1.1.0 - August 17, 2022
+
+This release addresses a few fixes:
+- Typos in documentation or in code and various small refactors.
+- Less hazardous placement of the human readable interpretation in EAN-13 barcodes.
+- Strut character size overlooked in caching (struts)
+- Adjust strut and minimization in parboxing logic (ptable, parbox)
+- Avoid page break just after a table header (ptable)
+
+It also brings a few compatible improvements:
+- Support for EAN-13 supplemental part (and other small goodies)
+- Enhanced fake sub/super scripts (textsubsuper packages)
+- More options for custom list styling (enumitem)
+- Basic horiz. cell alignment in default hook (ptable)
+- Experimental dot graph converter package
+- Experimental syntax highlighting package
+- Experimental custom Pandoc Lua writer to SILE converter
+
+This will likely be the last 1.x release. I have started working on upgrading
+to a more recent version of SILE than 0.12.5 - and whatever form it takes, this
+will be the main focus for a 2.0 release.
