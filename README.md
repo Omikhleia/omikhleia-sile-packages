@@ -17,8 +17,8 @@ _This repository is pending deprecation._
 One year after its inception, more or less, it's time to move on, re-assuming what we achieved and expanding the
 vision in new directions.
 
-Release 1.1.0 from August, 17 2022 is therefore likely the last one here. Unless some people still using SILE v0.12
-for any reaons want to give it a shot, but meet unexpected issues, I have no plan for upgrading this repository.
+Release 1.1.0 from August 17, 2022 is therefore likely the last one here. Unless some people still using SILE v0.12
+for any reasons want to give it a shot, but meet unexpected issues, I have no plan for upgrading this repository.
 At best, it may receive bug-fixes, in "maintenance mode" only, until its probable archiving.
 
 Development towards a v2.0 is ongoing in a [new repository](https://github.com/Omikhleia/resilient.sile), targetting SILE v0.14 or
@@ -26,7 +26,7 @@ upper and using the new package management for SILE introduced in v0.13 (based o
 will surely help package and class designers to distribute their work and spread the word. Alerque _et al._ did a great job
 there.
 
-I'd like to thank all those who visited this repoository, followed it or starred the project. Even if you were few,
+I'd like to thank all those who visited this repository, followed it or starred the project. Even if you were few,
 and many didn't even say a word, hey, it's always nice to see other minds possibly interested in similar things.
 You all rock! - And are obviously welcome on the new repository too. 
 
