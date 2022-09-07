@@ -1,4 +1,4 @@
-\begin{document}
+\begin[papersize=a6]{document}
 \script[src=packages/framebox]
 \script[src=packages/struts]
 \nofolios

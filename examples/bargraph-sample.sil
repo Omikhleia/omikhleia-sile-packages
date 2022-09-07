@@ -1,0 +1,36 @@
+\begin[papersize=a6]{document}
+\nofolios
+\script[src=packages/experimental/charts]
+
+\noindent{}1.
+\font[family=Roboto Condensed, weight=300]{\charts:bargraph[csvfile=examples/data1.csv]} %
+\font[family=Amatic SC]{\charts:bargraph[csvfile=examples/data1.csv, rough=true]}
+
+\noindent{}2.
+\font[family=Amatic SC]{\charts:bargraph[csvfile=examples/data1.csv, sort=ascending, rough=true]} %
+\font[family=Roboto Condensed, weight=300]{\charts:bargraph[csvfile=examples/data1.csv, sort=descending, rough=false]}
+
+\noindent{}3A.
+\font[family=Roboto Condensed, weight=300]{\charts:bargraph[csvfile=examples/data2.csv, sort=descending, rough=false]}
+
+\noindent{}3B.
+\font[family=Amatic SC]{\charts:bargraph[csvfile=examples/data2.csv, rough=true]}
+
+\supereject
+
+\noindent{}4A.
+\font[family=Amatic SC]{\charts:bargraph[csvfile=examples/data3.csv, rough=true, barwidth=1em]}
+
+\noindent{}4B.
+\font[family=Roboto Condensed, weight=300]{\charts:bargraph[csvfile=examples/data3.csv, barwidth=1em]}
+
+\noindent{}5.
+\font[family=Amatic SC]{\charts:bargraph[csvfile=examples/data-elections.csv, rough=true, sort=descending]}
+
+\noindent{}6.
+\font[family=Amatic SC]{\charts:bargraph[csvfile=examples/data4.csv, rough=true, sort=none]}
+
+\noindent{}7.
+\font[family=Roboto Condensed, weight=300]{\charts:piechart[csvfile=examples/data-pie.csv]}
+
+\end{document}
